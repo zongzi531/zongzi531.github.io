@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>走进CSS世界 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+五月天，工作忙也好，双休日忙也好，总之，《CSS世界》并没有在五月份读完 :)。也好，算是给自己一个短暂...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?9051508">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    走进CSS世界
+                    <div class="post-meta">
+                        <time datetime="2018-06-10T02:12:02.000Z" itemprop="datePublished">
+                            2018-06-10 10:12
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/CSS/'>CSS</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/CSS/'>CSS</a>, 
+                        
+                        <a href='/tags/Vue/'>Vue</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>五月天，工作忙也好，双休日忙也好，总之，《CSS世界》并没有在五月份读完 :)。<br>也好，算是给自己一个短暂的放松吧。<br>《CSS世界》也快读完了，可以说，我对CSS2.1的了解在这本书中更加深入了，然而CSS3却是一片全新的世界……<br>在学习前端之初，我读了《CSS揭秘》，我相信我会反复读这两本书以及去实践。<br>当然啦，下一本书安排是《深入浅出node.js》，也在近期，node之父ry启动了新的项目deno。<br>对我而言，饭当然是要一口一口吃啦，不着急，脚下的砖一块一块砌。<br>接下来，来分享下这一个多月的收获：</p>
+</blockquote>
+<h2 id="margin合并"><a href="#margin合并" class="headerlink" title="margin合并"></a>margin合并</h2><p>之前写移动端项目的时候，一直不理解子元素的<code>margin-top</code>属性会影响到父元素这一现象，一直是使用<code>padding-top</code>解决的。当然这也可以解决问题，但是如果我将子元素封装成组件，在某些视觉场景上确实有些不妥，<code>margin</code>属性确实应该在子元素上。</p>
+<p>margin合并的3种场景：</p>
+<ol>
+<li>相邻兄弟元素margin合并。</li>
+<li>父级和第一个/最后一个子元素。</li>
+<li>空块级元素的margin合并。</li>
+</ol>
+<p>我遇到的是场景2，我采用的解决方案是将父元素设置为块状格式化上下文元素，设置<code>overflow: hidden;</code>。</p>
+<p>正确的理解margin合并现象，减少了我不少困扰。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">	<span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="与众不同的min-height"><a href="#与众不同的min-height" class="headerlink" title="与众不同的min-height"></a>与众不同的min-height</h2><p>移动端开发，我会在最外层设置一个<code>.wrapper</code>父元素，用于包裹页面。关于<code>height: 100%;</code>这个问题，要涉及到需要设置<code>html, body</code>的<code>height</code>属性值，真的要讲要涉及到文档流，建议还是看书吧，所以我选择使用<code>min-height: 100vh;</code>来实现容器高度为屏幕高度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="神奇的box-sizing"><a href="#神奇的box-sizing" class="headerlink" title="神奇的box-sizing"></a>神奇的box-sizing</h2><p>移动端开发中会有很多情况，按钮固定在屏幕底部或是底部固定着其他的视觉元素。多数采用<code>position: fixed;</code>，会造成如果内容超过屏幕高度，会被该固定元素遮挡。我这里采用的解决方案是为<code>.wrapper</code>父元素添加<code>box-sizing: border-box; padding-bottom: ?px;</code>属性来解决此问题。利用属性的天然优势，可以解决当内容不超过屏幕高度时，不会有<code>padding-bottom: ?px;</code>超过屏幕高度。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bottom-btn"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">	<span class="attribute">padding-bottom</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.bottom-btn</span> &#123;</span><br><span class="line">	<span class="attribute">position</span>: fixed;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="padding和border提升用户体验"><a href="#padding和border提升用户体验" class="headerlink" title="padding和border提升用户体验"></a>padding和border提升用户体验</h2><p>有些icon在设计时会有些小，在移动端上用户点击时，会很难点，这时使用<code>padding: ?px</code>来扩大元素尺寸来提升用户体验，说到这里，其实还有另外一种实现方式是设置<code>border</code>属性，要让其和<code>padding</code>一样“隐形”的话，可以设置<code>border-color: transparent;</code>。</p>
+<h2 id="两栏——单栏自适应"><a href="#两栏——单栏自适应" class="headerlink" title="两栏——单栏自适应"></a>两栏——单栏自适应</h2><p>这样的视觉场景无处不在，书中提及的CSS2.1解决方案，使用<code>float</code>浮动属性来实现，但是我使用<code>flex</code>属性来实现。</p>
+<h2 id="更多的利用伪元素实现页面视觉效果"><a href="#更多的利用伪元素实现页面视觉效果" class="headerlink" title="更多的利用伪元素实现页面视觉效果"></a>更多的利用伪元素实现页面视觉效果</h2><p>比如<code>1px</code>的<code>border</code>，在这次移动端项目开发中，我使用<code>::after</code>和<code>::before</code>，实现凹槽效果，为父元素添加<code>overflow: hidden;</code>，伪元素利用绝对定位<code>position: absolute;</code>属性实现覆盖。</p>
+<h2 id="background的奥秘"><a href="#background的奥秘" class="headerlink" title="background的奥秘"></a>background的奥秘</h2><p>利用<code>background</code>可以接受多参数的特性实现有背景色下的icon居中视觉效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">	<span class="attribute">display</span>: block;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">42px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">42px</span>;</span><br><span class="line">	<span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">'/gallery/icon.png'</span>),</span><br><span class="line">	            <span class="built_in">rgba</span>(250,251,252,1);</span><br><span class="line">	<span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">	<span class="attribute">background-size</span>: <span class="number">18px</span>;</span><br><span class="line">	<span class="attribute">background-position</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="制作圆点-圆环小图标"><a href="#制作圆点-圆环小图标" class="headerlink" title="制作圆点+圆环小图标"></a>制作圆点+圆环小图标</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="built_in">rgba</span>(7, 92, 247, 1);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(7, 92, 247, 1);</span><br><span class="line">    <span class="attribute">background-clip</span>: content-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="animation的乐趣"><a href="#animation的乐趣" class="headerlink" title="animation的乐趣"></a>animation的乐趣</h2><p>这里是Vue组件相关代码，逻辑没有什么亮点之处，只是记录下当页面进入时，我将<code>animation</code>动画延时设置为0的一段代码内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; 'cc-detail': true, 'cc-detail-s': !visable, 'cc-detail-b': visable &#125;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"click-wrapper"</span> @<span class="attr">click</span>=<span class="string">"handleClick"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;CarCellDetailTitle&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">:class</span>=<span class="string">"&#123; 'cc-unfold': true, 'cc-ani-off': first &#125;"</span> <span class="attr">v-if</span>=<span class="string">"!visable"</span> <span class="attr">:src</span>=<span class="string">"carCellDetailIconDown"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">:class</span>=<span class="string">"&#123; 'cc-packup': true, 'cc-ani-off': first &#125;"</span> <span class="attr">v-if</span>=<span class="string">"visable"</span> <span class="attr">:src</span>=<span class="string">"carCellDetailIconUp"</span> /&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- if you want anything --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; CarCellDetailTitle, carCellDetailIconUp, carCellDetailIconDown &#125; <span class="keyword">from</span> <span class="string">'@/config'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      first: <span class="literal">true</span>,</span><br><span class="line">      visable: <span class="literal">false</span>,</span><br><span class="line">      CarCellDetailTitle,</span><br><span class="line">      carCellDetailIconUp,</span><br><span class="line">      carCellDetailIconDown</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleClick () &#123;</span><br><span class="line">      <span class="keyword">this</span>.visable = !<span class="keyword">this</span>.visable</span><br><span class="line">      <span class="keyword">this</span>.first = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.cc-detail</span> &#123;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">	<span class="attribute">margin</span>: -<span class="number">30px</span> <span class="number">20px</span> <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">padding-top</span>: <span class="number">20px</span>;</span><br><span class="line">	<span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">	<span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">2px</span> <span class="number">6px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(0,0,0,0.04);</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">	<span class="attribute">color</span>: <span class="built_in">rgba</span>(177, 174, 181, 1);</span><br><span class="line">	<span class="attribute">transition</span>: all <span class="number">0.4s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-detail-s</span> &#123;</span><br><span class="line">	<span class="attribute">transition</span>: all <span class="number">0.4s</span> ease-out <span class="meta">!important</span>;</span><br><span class="line">	<span class="attribute">max-height</span>: <span class="number">60px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-detail-b</span> &#123;</span><br><span class="line">	<span class="attribute">max-height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.click-wrapper</span> &#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.click-wrapper</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">	<span class="attribute">margin-left</span>: <span class="number">8px</span>;</span><br><span class="line">	<span class="attribute">vertical-align</span>: -<span class="number">4px</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-small-cell</span>  &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> <span class="meta">!important</span>;</span><br><span class="line">	<span class="attribute">border</span>: none <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-ani-on</span> &#123;</span><br><span class="line">	<span class="attribute">animation-play-state</span>: running;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-ani-off</span> &#123;</span><br><span class="line">	<span class="comment">/* animation-play-state: paused !important; */</span></span><br><span class="line">	<span class="comment">/* hank rotate */</span></span><br><span class="line">	<span class="attribute">animation</span>: <span class="number">0s</span> unfold <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-unfold</span> &#123;</span><br><span class="line">	<span class="attribute">animation</span>: <span class="number">0.4s</span> unfold;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.cc-packup</span> &#123;</span><br><span class="line">	<span class="attribute">animation</span>: <span class="number">0.4s</span> packup;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">keyframes</span> unfold &#123;</span><br><span class="line">	<span class="selector-tag">from</span> &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(180deg); &#125;</span><br><span class="line">	<span class="selector-tag">to</span>   &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg); &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">keyframes</span> packup &#123;</span><br><span class="line">	<span class="selector-tag">from</span> &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(-180deg); &#125;</span><br><span class="line">	<span class="selector-tag">to</span>   &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Vue开发相关"><a href="#Vue开发相关" class="headerlink" title="Vue开发相关"></a>Vue开发相关</h2><ol>
+<li>组件化发送短信按钮，将内部封装的倒计时函数使用<code>$emit</code>传入回调函数参数，这样可以通过组件外层调用时，来判断是否需要启用这个倒计时函数，需要注意的是，倒计时函数需要<code>bind</code>前组件的<code>this</code>。</li>
+<li>组件化单选框按钮，利用<code>this.$emit(&#39;update:value&#39;, !this.value)</code>更新<code>props</code>的<code>value</code>值，在使用组件时，需要使用<code>:value.sync</code>即可。</li>
+<li>学习开源项目，约定<code>type</code>或<code>small</code>（<code>large</code>）属性来控制组件样式。</li>
+<li>此次移动端项目开发，我未使用vuex，而是将一些数据存至sessionStorage，考虑到用户体验上的话还是有区别的，我会认为vuex会更好。</li>
+<li>项目中多次涉及到Vue组件生命周期问题，问题在于子组件与父组件的生命周期，未来开发切记，便于发现问题。</li>
+</ol>
+<h2 id="适配相关"><a href="#适配相关" class="headerlink" title="适配相关"></a>适配相关</h2><p>涉及到移动端开发，考虑到适配，我选用rem解决适配问题，之前项目都是采用编辑器插件，直接在编写代码的时候转换为rem单位，但是问题在于转换后的rem单位在代码审查或者修改时，可读性极低，根本没办法直接知道值是多少，所以本次采用webpack打包时自动编译成rem单位技术。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/gallery/static/js/amfe-flexible.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="comment">// const px2rem = require('postcss-px2rem')</span></span><br><span class="line"><span class="comment">// 因为无法兼容vux，所以选用下面这个</span></span><br><span class="line"><span class="keyword">const</span> px2rem = <span class="built_in">require</span>(<span class="string">'postcss-plugin-px2rem'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> webpackConfig = &#123;</span><br><span class="line">  ...,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">	  ...,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(css|less|scss)(\?.*)?$/</span>,</span><br><span class="line">        loader: <span class="string">'style-loader!css-loader!sass-loader!less-loader!postcss-loader'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.LoaderOptionsPlugin(&#123;</span><br><span class="line">      vue: &#123;</span><br><span class="line">        postcss: [</span><br><span class="line">          px2rem(&#123; <span class="attr">rootValue</span>: <span class="number">37.5</span>, <span class="attr">propWhiteList</span>: [] &#125;)</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="PR贡献之路"><a href="#PR贡献之路" class="headerlink" title="PR贡献之路"></a>PR贡献之路</h2><ol>
+<li><a href="https://github.com/liuxing/node-abc/pull/2" target="_blank" rel="noopener">node-abc #2</a></li>
+<li><a href="https://github.com/ElemeFE/v-charts/pull/338" target="_blank" rel="noopener">v-charts #338</a></li>
+</ol>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2018/07/04/2018-%E5%A4%8F%E5%A4%A9/">
+        上一篇<br>2018 / 夏天
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/05/08/TypeScript%E5%88%9D%E5%AD%A6%E4%B9%8B%E8%B7%AF/">
+        下一篇<br>TypeScript 初学之路
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?37800871"></script>
+
+
+
+</body>
+</html>

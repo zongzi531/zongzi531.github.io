@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>初试VUX - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+借机，重写单位项目，那么挑了一些框架，最终决定用VUX。讲真，文档看起来有点吃力，要不断尝试。有趣，可以...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?69015564">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    初试VUX
+                    <div class="post-meta">
+                        <time datetime="2017-07-01T04:22:47.000Z" itemprop="datePublished">
+                            2017-07-01 12:22
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Vue/'>Vue</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Vue/'>Vue</a>, 
+                        
+                        <a href='/tags/Vux/'>Vux</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>借机，重写单位项目，那么挑了一些框架，最终决定用VUX。<br>讲真，文档看起来有点吃力，要不断尝试。<br>有趣，可以自己扯UI。<br>费时，真的费时。<br>那么，来分享下吧。</p>
+</blockquote>
+<h2 id="vux-loader"><a href="#vux-loader" class="headerlink" title="vux-loader"></a>vux-loader</h2><p>在<code>build/webpack.base.conf.js</code>进行单独配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vuxLoader = <span class="built_in">require</span>(<span class="string">'vux-loader'</span>)</span><br><span class="line"><span class="keyword">const</span> webpackConfig = originalConfig <span class="comment">// 原来的 module.exports 代码赋值给变量 webpackConfig</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = vuxLoader.merge(webpackConfig, &#123;</span><br><span class="line">  plugins: [<span class="string">'vux-ui'</span>,<span class="string">'duplicate-style'</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><h3 id="编程式的导航"><a href="#编程式的导航" class="headerlink" title="编程式的导航"></a>编程式的导航</h3><h4 id="router-push-location"><a href="#router-push-location" class="headerlink" title="router.push(location)"></a><code>router.push(location)</code></h4><table>
+<thead>
+<tr>
+<th>声明式</th>
+<th>编程式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;router-link :to=&quot;...&quot;&gt;</code></td>
+<td><code>router.push(...)</code></td>
+</tr>
+</tbody></table>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>重定向也是通过 <code>routes</code> 配置来完成，下面例子是从 <code>/a</code> 重定向到 <code>/b</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/a'</span>, <span class="attr">redirect</span>: <span class="string">'/b'</span> &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="XIcon"><a href="#XIcon" class="headerlink" title="XIcon"></a>XIcon</h2><p><strong>深坑！</strong></p>
+<p>根本不需要写这句：</p>
+<p><code>import { XIcon } from &#39;vux&#39;</code></p>
+<p>直接用就好了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">x-icon</span> <span class="attr">type</span>=<span class="string">"ios-arrow-up"</span> <span class="attr">class</span>=<span class="string">"icon-red"</span>&gt;</span><span class="tag">&lt;/<span class="name">x-icon</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">x-icon</span> <span class="attr">type</span>=<span class="string">"ios-arrow-up"</span> <span class="attr">size</span>=<span class="string">"30"</span>&gt;</span><span class="tag">&lt;/<span class="name">x-icon</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="VUEG"><a href="#VUEG" class="headerlink" title="VUEG"></a>VUEG</h2><p>来添加转场动画，配置<code>src/main.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'/gallery/router'</span></span><br><span class="line"><span class="keyword">import</span> vueg <span class="keyword">from</span> <span class="string">'vueg'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'vueg/css/transition-min.css'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  duration: <span class="string">'0.3'</span>,</span><br><span class="line">  firstEntryDisable: <span class="literal">false</span>,</span><br><span class="line">  firstEntryDuration: <span class="string">'.6'</span>,</span><br><span class="line">  forwardAnim: <span class="string">'fadeInRight'</span>,</span><br><span class="line">  backAnim: <span class="string">'fadeInLeft'</span>,</span><br><span class="line">  sameDepthDisable: <span class="literal">false</span>,</span><br><span class="line">  tabs: [&#123;<span class="attr">name</span>: <span class="string">'Home'</span>&#125;, &#123;<span class="attr">name</span>: <span class="string">'OwnerInfo'</span>&#125;],</span><br><span class="line">  tabsDisable: <span class="literal">false</span>,</span><br><span class="line">  disable: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Vue.use(vueg, router, options)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/jaweii/vueg#配置项--config" target="_blank" rel="noopener">配置项详解</a></p>
+<p>也可以用<code>animate.css</code>自己写一个……</p>
+<h2 id="vue-dropzone"><a href="#vue-dropzone" class="headerlink" title="vue-dropzone"></a>vue-dropzone</h2><p>一个上传文件的插件，由于文档内容比较多，没有深入去读，已经写在源码里，但是被我注释掉了。后续再去了解吧。</p>
+<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><p><img src="/gallery/%E5%88%9D%E8%AF%95vux/demo1.gif" alt=""><br><a href="https://github.com/zongzi531/vux-demo-test" target="_blank" rel="noopener">源码</a></p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2017/08/07/hug-fe-in1year/">
+        上一篇<br>迎接学习FE一周年
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2017/06/26/%E5%85%B3%E4%BA%8Evuerouter%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D%E7%9A%84%E8%B8%A9%E5%9D%91%E4%BA%8B%E4%BB%B6/">
+        下一篇<br>关于vue-router路由匹配的踩坑事件
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?91159834"></script>
+
+
+
+</body>
+</html>

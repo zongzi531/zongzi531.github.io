@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>移动端自适应单位 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+主要介绍下移动端自适应的一些常用单位，比如：rem、vw、vh，配合传统的px、百分比、&amp;lt;viewp...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?11566253">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    移动端自适应单位
+                    <div class="post-meta">
+                        <time datetime="2017-04-09T14:01:06.000Z" itemprop="datePublished">
+                            2017-04-09 22:01
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/CSS/'>CSS</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/HTML-CSS/'>HTML/CSS</a>, 
+                        
+                        <a href='/tags/CSS3/'>CSS3</a>, 
+                        
+                        <a href='/tags/自适应/'>自适应</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<p>主要介绍下移动端自适应的一些常用单位，比如：rem、vw、vh，配合传统的px、百分比、<code>&lt;viewport&gt;</code>标签，兼容适配移动端的各种分辨率的手机端。</p>
+<h2 id="单位介绍"><a href="#单位介绍" class="headerlink" title="单位介绍"></a>单位介绍</h2><ul>
+<li><code>rem</code>：root emphasize，根元素的font-size。</li>
+<li><code>vw</code>：1vw = 1%屏幕宽度。</li>
+<li><code>vh</code>：1vh = 1%屏幕高度。</li>
+<li><code>vmin</code>、<code>vmax</code>：关于视口高度和宽度两者的最小值或者最大值。</li>
+</ul>
+<img src="移动端自适应单位/pic1.jpg" class="full-image" />
+
+<h2 id="适配"><a href="#适配" class="headerlink" title="适配"></a>适配</h2><p>以下假定已经存在一个使用px单位，且完全适配320xp宽度手机的页面。</p>
+<h3 id="1-改变viewport的initial-scale的数值"><a href="#1-改变viewport的initial-scale的数值" class="headerlink" title="1.改变viewport的initial-scale的数值"></a>1.改变viewport的initial-scale的数值</h3><p>比如适配的目标的宽度为400px</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initial-scale=1.25 // 400/320=1.25</span><br></pre></td></tr></table></figure>
+
+<p>但这里有个缺点，就是得提前知道所适配的设备的尺寸,然后服务端根据userAgent来判断。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">device</span> === <span class="string">1)&#123;</span> %&gt;</span>         <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=no"</span> /&gt;</span>     <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">device</span> === <span class="string">2)&#123;</span> %&gt;</span>         <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.5,maximum-scale=2.0,user-scalable=no"</span> /&gt;</span>     <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者使用js计算缩放比例 ,然后替换initial-scale的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scale =  screen.width/<span class="number">320</span>,</span><br><span class="line">    viewport =  <span class="built_in">document</span>.querySelector(<span class="string">'meta[name=viewport]'</span>);</span><br><span class="line">    viewport.setAttribute(<span class="string">'content'</span>, viewport.getAttribute(<span class="string">'content'</span>).replace(<span class="regexp">/(initial-scale)=[\d\.]?\d/</span>,<span class="string">'$1='</span>+scale));</span><br></pre></td></tr></table></figure>
+
+<p>但使用js会有滞后性，页面会多渲染一次，且会导致页面闪烁</p>
+<blockquote>
+<p>首屏渲染 -&gt; js改变initial-scale -&gt; 二次渲染，页面放大(闪烁)</p>
+</blockquote>
+<h3 id="2-替换px转而使用rem"><a href="#2-替换px转而使用rem" class="headerlink" title="2.替换px转而使用rem"></a>2.替换px转而使用rem</h3><p><img src="/gallery/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%87%AA%E9%80%82%E5%BA%94%E5%8D%95%E4%BD%8D/pic2.png" alt=""></p>
+<p>设定父盒子的css为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">父盒子&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">320px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置根元素的font-size为屏幕的某个比例</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么父盒子的css为</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">父盒子&#123;</span><br><span class="line">  width: 20rem; //换算为320px，充满屏幕宽度</span><br><span class="line">  height: 10rem; //换算为160px，盒子比例达到1:1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是css的替换以及rem的计算还是比较繁琐的，这里建议使用sass的函数然后使用正则替换</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="regexp">/(\d+[\.\d+]?px)/g</span>,<span class="string">'rem($1)'</span>)</span><br><span class="line">$baiscRem:<span class="number">320</span>px / <span class="number">20</span> <span class="comment">//这里假定为页面做20个等分 </span></span><br><span class="line">@<span class="function"><span class="keyword">function</span> <span class="title">rem</span>(<span class="params">$px</span>) @<span class="title">return</span> (<span class="params">$px <span class="regexp">/ $basicRem) * 1rem </span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="regexp">父盒子</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="regexp">	width: rem(320px);</span></span></span></span><br></pre></td></tr></table></figure>
+
+<p>然后，使用css @media查询，确定rem的值。这里就比较具体了，需要根据实际的业务需求来决定所要适配的设备尺寸</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* media.css */</span> </span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">320px</span>) and (max-width:<span class="number">320px</span>) &#123;</span><br><span class="line">	<span class="selector-tag">html</span>&#123;</span><br><span class="line">		<span class="attribute">font-size</span>: <span class="number">320</span> / <span class="number">320</span> * $basicRem;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">400px</span>) and (max-width:<span class="number">400px</span>) &#123;</span><br><span class="line">	<span class="selector-tag">html</span>&#123;</span><br><span class="line">		<span class="attribute">font-size</span>: <span class="number">400</span> / <span class="number">320</span> * $basicRem;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tips：如果不知道要兼容什么样的设备。可以再用户访问后，javascript收集该设备的相关信息，然后在服务端自动更新该文件的内容，加入新的@media规则。</p>
+</blockquote>
+<h3 id="3-关于vw，vh"><a href="#3-关于vw，vh" class="headerlink" title="3.关于vw，vh"></a>3.关于vw，vh</h3><p><img src="/gallery/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%87%AA%E9%80%82%E5%BA%94%E5%8D%95%E4%BD%8D/pic3.png" alt=""></p>
+<p>宽高的1%，建议使用在各种布局的容器上，如上图的父盒子和子盒子。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">父盒子 &#123;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">10vw</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">50vw</span>;  <span class="comment">/* 妥妥的2:1比例 */</span></span><br><span class="line">	<span class="attribute">letter-spacing</span>: -<span class="number">4px</span>; <span class="comment">/*消除行内元素的4px的空白间隔 */</span></span><br><span class="line">&#125; </span><br><span class="line">子盒子1,子盒子2 &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> <span class="number">5vw</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">30vw</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">30vw</span>;  <span class="comment">/* 妥妥的1:1的比例 */</span></span><br><span class="line">	<span class="attribute">display</span>:inline-block ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相比rem，使用vw和wh是非常直观的，让其他人看到就能知道，该界面是以怎么样的结构进行布局，利于维护。</p>
+<p>但在具体深入到表现的地方，建议转而使用rem来配合。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中涉及的单位和元素较多，其实如果仅仅为了达成相同的页面效果，它们之间都可以相互替代。甚至使用最原始的px，配合js的计算，也能够做到相同的事情。</p>
+<p>这是一个探索的过程，每个人喜好不一致，采用的方式也不尽相同。基于浏览器提供了丰富的方法，针对具体问题，具体分析，不停地尝试，最终找到最合适的方案。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2017/04/13/%E7%90%86%E8%A7%A3javascript%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%80%BC/">
+        上一篇<br>理解Javascript基本类型值和引用类型值
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2017/04/09/os-yosemite%E4%B8%8B%E6%9B%B4%E6%96%B0imovie%E4%BA%A7%E7%94%9F%E4%B8%A4%E4%B8%AA%E5%9B%BE%E6%A0%87%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+        下一篇<br>OS Yosemite下更新iMovie产生两个图标的解决方法
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?279966"></script>
+
+
+
+</body>
+</html>

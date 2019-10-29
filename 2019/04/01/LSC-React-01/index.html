@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>React 源码学习（一）：HTML 元素渲染 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。在考虑到...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?45740285">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    React 源码学习（一）：HTML 元素渲染
+                    <div class="post-meta">
+                        <time datetime="2019-04-01T13:10:31.000Z" itemprop="datePublished">
+                            2019-04-01 21:10
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/React/'>React</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/React/'>React</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。<br>在考虑到读哪个版本的时候，我想先接触到源码早期的思想可能会更轻松一些，最终我选择阅读 <code>0.3-stable</code> 。<br>那么接下来，我将从几个方面来解读这个版本的源码。</p>
+</blockquote>
+<ol>
+<li><a href="https://zongzi531.com/2019/04/01/LSC-React-01/">React 源码学习（一）：HTML 元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/02/LSC-React-02/">React 源码学习（二）：HTML 子元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/03/LSC-React-03/">React 源码学习（三）：CSS 样式及 DOM 属性</a></li>
+<li><a href="https://zongzi531.com/2019/04/04/LSC-React-04/">React 源码学习（四）：事务机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/05/LSC-React-05/">React 源码学习（五）：事件机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/06/LSC-React-06/">React 源码学习（六）：组件渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/07/LSC-React-07/">React 源码学习（七）：生命周期</a></li>
+<li><a href="https://zongzi531.com/2019/04/08/LSC-React-08/">React 源码学习（八）：组件更新</a></li>
+</ol>
+<h2 id="React-DOM"><a href="#React-DOM" class="headerlink" title="React.DOM.*"></a>React.DOM.*</h2><p>直接步入正题，在官方的例子中可以看到 <code>render</code> 函数会返回类似这样一段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// #examples</span></span><br><span class="line"><span class="keyword">return</span> React.DOM.h1(<span class="literal">null</span>, <span class="string">'Zong is learning the source code of React.'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>type=&quot;text/jsx&quot;</code> 的形式编写：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** @jsx React.DOM */</span></span><br><span class="line"><span class="comment">// #examples</span></span><br><span class="line"><span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Zong is learning the source code of React.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>JSXTransformer.js</code> 会将 <code>type=&quot;text/jsx&quot;</code> 的形式转换成 <code>React.DOM.h1</code> 的函数形式。</p>
+<p>结合 <code>React.renderComponent</code> 将 <code>&lt;h1&gt;</code> 标签最终渲染在指定的元素下，这段代码最终渲染至 DOM 下可能如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">".reactRoot[0]"</span>&gt;</span>Zong is learning the source code of React.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="如何实现-HTML-元素的渲染"><a href="#如何实现-HTML-元素的渲染" class="headerlink" title="如何实现 HTML 元素的渲染"></a>如何实现 HTML 元素的渲染</h2><p>那么， React 是如何实现 HTML 元素的渲染呢？</p>
+<h3 id="工厂函数-objMapKeyVal-js"><a href="#工厂函数-objMapKeyVal-js" class="headerlink" title="工厂函数 objMapKeyVal.js"></a>工厂函数 objMapKeyVal.js</h3><p>objMapKeyVal 是个工厂函数，他最终会返回一个“键”与 <code>obj</code> 对应的对象“值”则是 <code>func</code> 的执行结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/objMapKeyVal.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objMapKeyVal</span>(<span class="params">obj, func, context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!obj) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> ret = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(key)) &#123;</span><br><span class="line">      ret[key] = func.call(context, key, obj[key], i++);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-React-DOM-方法"><a href="#创建-React-DOM-方法" class="headerlink" title="创建 React.DOM.* 方法"></a>创建 React.DOM.* 方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactDOM.js</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于创建 DOM 组件的类，其原型连接 ReactNativeComponent</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createDOMComponentClass</span>(<span class="params">tag, omitClose</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Constructor = <span class="function"><span class="keyword">function</span>(<span class="params">initialProps, children</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.construct(initialProps, children);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Constructor.prototype = <span class="keyword">new</span> ReactNativeComponent(tag, omitClose);</span><br><span class="line">  Constructor.prototype.constructor = Constructor;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">props, children</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Constructor(props, children);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ReactDOM = objMapKeyVal(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// Danger: this gets monkeypatched! See ReactDOMForm for more info.</span></span><br><span class="line">  form: <span class="literal">false</span>,</span><br><span class="line">  img: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;, createDOMComponentClass);</span><br></pre></td></tr></table></figure>
+
+<p><code>ReactDOM</code> 对象中的“键”并非包含目前所有的 HTML 元素，若你需要加入新的 HTML 元素，在此对象中添加即可。但，若你需要同时支持 <code>type=&quot;text/jsx&quot;</code> 的编写形式，则同时需要在 <code>JSXTransformer.js</code> 进行添加，以实现转换。</p>
+<p>在经过 <code>objMapKeyVal</code> 工厂函数的执行后， <code>ReactDOM</code> 得到的值已经并非是之前的布尔值，键值以 <code>tag, omitClose</code> 的形式作为参数供 <code>ReactNativeComponent</code> 进行实例化了。返回的则是接受 <code>props, children</code> 参数的函数，用于实例化这个 <code>Constructor</code> 。</p>
+<p>所以例子中是以 <code>props = null, children = &#39;Zong is learning the source code of React.&#39;</code> 的形式来接受的参数，并实例化 <code>Constructor</code> 。</p>
+<h3 id="原型-React-原生组件"><a href="#原型-React-原生组件" class="headerlink" title="原型 React 原生组件"></a>原型 React 原生组件</h3><p>当然，这里同样需要提到，<code>ReactNativeComponent</code> 实例化时操作了什么：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactNativeComponent.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ReactNativeComponent</span>(<span class="params">tag, omitClose</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>._tagOpen = <span class="string">'&lt;'</span> + tag + <span class="string">' '</span>;</span><br><span class="line">  <span class="keyword">this</span>._tagClose = omitClose ? <span class="string">''</span> : <span class="string">'&lt;/'</span> + tag + <span class="string">'&gt;'</span>;</span><br><span class="line">  <span class="keyword">this</span>.tagName = tag.toUpperCase();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如，键值对 <code>form: false</code> 返回的对象为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ReactNativeComponent &#123;</span><br><span class="line">  "_tagOpen": "&lt;form ",</span><br><span class="line">  "_tagClose": "&lt;/form&gt;",</span><br><span class="line">  "tagName": "FORM",</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="工具函数-混合"><a href="#工具函数-混合" class="headerlink" title="工具函数 - 混合"></a>工具函数 - 混合</h3><p>就这么点东西吗？当然不是，你需要注意到 <code>ReactNativeComponent.js</code> 末端的几行代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/mixInto.js</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Simply copies properties to the prototype.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> mixInto = <span class="function"><span class="keyword">function</span>(<span class="params">constructor, methodBag</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> methodName;</span><br><span class="line">  <span class="keyword">for</span> (methodName <span class="keyword">in</span> methodBag) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!methodBag.hasOwnProperty(methodName)) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">constructor</span>.prototype[methodName] = methodBag[methodName];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里依次将 3 个对象混合到 <code>ReactNativeComponent.prototype</code> 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactNativeComponent.js</span></span><br><span class="line">mixInto(ReactNativeComponent, ReactComponent.Mixin);</span><br><span class="line">mixInto(ReactNativeComponent, ReactNativeComponent.Mixin);</span><br><span class="line">mixInto(ReactNativeComponent, ReactMultiChild.Mixin);</span><br></pre></td></tr></table></figure>
+
+<p><code>mixInto</code> 方法的功能其实就是 <code>Object.assign</code> 的功能，上方的代码也可以这样写： <code>Object.assign(ReactNativeComponent.prototype, ReactComponent.Mixin)</code> 。</p>
+<p>那么，接下来我们来看看 <code>this.construct(initialProps, children)</code> 这里到底做了什么，逆向寻找发现这个方法在 <code>ReactComponent.Mixin</code> 中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactComponent.js</span></span><br><span class="line"><span class="keyword">var</span> ReactComponent = &#123;</span><br><span class="line">  Mixin: &#123;</span><br><span class="line">    construct: <span class="function"><span class="keyword">function</span>(<span class="params">initialProps, children</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.props = initialProps || &#123;&#125;;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> children !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.props.children = children;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// Record the component responsible for creating this component.</span></span><br><span class="line">      <span class="keyword">this</span>.props[OWNER] = ReactCurrentOwner.current;</span><br><span class="line">      <span class="comment">// All components start unmounted.</span></span><br><span class="line">      <span class="keyword">this</span>._lifeCycleState = ComponentLifeCycle.UNMOUNTED;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将-React-组件实例挂载至-DOM"><a href="#将-React-组件实例挂载至-DOM" class="headerlink" title="将 React 组件实例挂载至 DOM"></a>将 React 组件实例挂载至 DOM</h2><p>到此为止，我们改如何将这个实例渲染到 DOM 上呢？我们来看到这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// #examples</span></span><br><span class="line">React.renderComponent(</span><br><span class="line">  React.DOM.h1(<span class="literal">null</span>, <span class="string">'Zong is learning the source code of React.'</span>),</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="注册-React-实例"><a href="#注册-React-实例" class="headerlink" title="注册 React 实例"></a>注册 React 实例</h3><p>是 <code>React.renderComponent</code> 方法将实例渲染到 DOM 上的，我们来看看这个方法究竟做了些什么，此次先忽略其他逻辑（组件更新/事件注册）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactMount.js</span></span><br><span class="line"><span class="comment">// 用于统计公共挂载的数量</span></span><br><span class="line"><span class="keyword">var</span> globalMountPointCounter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Mapping from reactRoot DOM ID to React component instance. */</span></span><br><span class="line"><span class="comment">// React 组件实例基于 ReactRootID 的映射</span></span><br><span class="line"><span class="keyword">var</span> instanceByReactRootID = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Mapping from reactRoot DOM ID to `container` nodes. */</span></span><br><span class="line"><span class="comment">// container 基于 ReactRootID 的映射</span></span><br><span class="line"><span class="keyword">var</span> containersByReactRootID = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;DOMElement&#125; container DOM element that may contain a React component.</span></span><br><span class="line"><span class="comment"> * @return &#123;?string&#125; A "reactRoot" ID, if a React component is rendered.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getReactRootID</span>(<span class="params">container</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> container.firstChild &amp;&amp; container.firstChild.id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ReactMount = &#123;</span><br><span class="line">  renderComponent: <span class="function"><span class="keyword">function</span>(<span class="params">nextComponent, container</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 上面逻辑包含组件更新及事件注册</span></span><br><span class="line">    <span class="comment">// 获得/生成 reactRootID</span></span><br><span class="line">    <span class="keyword">var</span> reactRootID = ReactMount.registerContainer(container);</span><br><span class="line">    <span class="comment">// 映射 React 组件</span></span><br><span class="line">    instanceByReactRootID[reactRootID] = nextComponent;</span><br><span class="line">    <span class="comment">// 调用组件自身方法</span></span><br><span class="line">    nextComponent.mountComponentIntoNode(reactRootID, container);</span><br><span class="line">    <span class="keyword">return</span> nextComponent;</span><br><span class="line">  &#125;,</span><br><span class="line">  registerContainer: <span class="function"><span class="keyword">function</span>(<span class="params">container</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获得 reactRootID</span></span><br><span class="line">    <span class="keyword">var</span> reactRootID = getReactRootID(container);</span><br><span class="line">    <span class="keyword">if</span> (reactRootID) &#123;</span><br><span class="line">      <span class="comment">// 若存在的情况下确认 ID 是否为 "reactRoot" ID，否则返回 null</span></span><br><span class="line">      <span class="comment">// If one exists, make sure it is a valid "reactRoot" ID.</span></span><br><span class="line">      reactRootID = ReactInstanceHandles.getReactRootIDFromNodeID(reactRootID);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!reactRootID) &#123;</span><br><span class="line">      <span class="comment">// No valid "reactRoot" ID found, create one.</span></span><br><span class="line">      <span class="comment">// 若 ID 不存在，则返回新的 ID</span></span><br><span class="line">      reactRootID = ReactInstanceHandles.getReactRootID(</span><br><span class="line">        globalMountPointCounter++</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 映射 container</span></span><br><span class="line">    containersByReactRootID[reactRootID] = container;</span><br><span class="line">    <span class="keyword">return</span> reactRootID;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactInstanceHandles.js</span></span><br><span class="line"><span class="keyword">var</span> ReactInstanceHandles = &#123;</span><br><span class="line">  getReactRootID: <span class="function"><span class="keyword">function</span>(<span class="params">mountPointCount</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'.reactRoot['</span> + mountPointCount + <span class="string">']'</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  getReactRootIDFromNodeID: <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> regexResult = <span class="regexp">/\.reactRoot\[[^\]]+\]/</span>.exec(id);</span><br><span class="line">    <span class="keyword">return</span> regexResult &amp;&amp; regexResult[<span class="number">0</span>];</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="将组件挂载至-DOM-节点方法"><a href="#将组件挂载至-DOM-节点方法" class="headerlink" title="将组件挂载至 DOM 节点方法"></a>将组件挂载至 DOM 节点方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactComponent.js</span></span><br><span class="line"><span class="keyword">var</span> ReactComponent = &#123;</span><br><span class="line">  Mixin: &#123;</span><br><span class="line">    mountComponent: <span class="function"><span class="keyword">function</span>(<span class="params">rootID, transaction</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 组件生命周期和 ref 相关暂不做解读</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>._rootNodeID = rootID;</span><br><span class="line">    &#125;,</span><br><span class="line">    mountComponentIntoNode: <span class="function"><span class="keyword">function</span>(<span class="params">rootID, container</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 这里牵扯到 React 事务，后续再做解读</span></span><br><span class="line">      <span class="keyword">var</span> transaction = ReactComponent.ReactReconcileTransaction.getPooled();</span><br><span class="line">      <span class="comment">// 本次讨论，你只需简单理解为：</span></span><br><span class="line">      <span class="comment">// this._mountComponentIntoNode.call(this, rootID, container, transaction)</span></span><br><span class="line">      transaction.perform(</span><br><span class="line">        <span class="keyword">this</span>._mountComponentIntoNode,</span><br><span class="line">        <span class="keyword">this</span>,</span><br><span class="line">        rootID,</span><br><span class="line">        container,</span><br><span class="line">        transaction</span><br><span class="line">      );</span><br><span class="line">      ReactComponent.ReactReconcileTransaction.release(transaction);</span><br><span class="line">    &#125;,</span><br><span class="line">    _mountComponentIntoNode: <span class="function"><span class="keyword">function</span>(<span class="params">rootID, container, transaction</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 这里包含这一些时间计算，不做解读</span></span><br><span class="line">      <span class="keyword">var</span> renderStart = <span class="built_in">Date</span>.now();</span><br><span class="line">      <span class="comment">// markup 即为返回的 HTML 标记</span></span><br><span class="line">      <span class="comment">// this.mountComponent 则为 ReactNativeComponent.Mixin.mountComponent</span></span><br><span class="line">      <span class="keyword">var</span> markup = <span class="keyword">this</span>.mountComponent(rootID, transaction);</span><br><span class="line">      ReactMount.totalInstantiationTime += (<span class="built_in">Date</span>.now() - renderStart);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> injectionStart = <span class="built_in">Date</span>.now();</span><br><span class="line">      <span class="comment">// Asynchronously inject markup by ensuring that the container is not in</span></span><br><span class="line">      <span class="comment">// the document when settings its `innerHTML`.</span></span><br><span class="line">      <span class="comment">// 以下代码是用来判断 markup 需要被如何插入值 DOM 节点。</span></span><br><span class="line">      <span class="keyword">var</span> parent = container.parentNode;</span><br><span class="line">      <span class="keyword">if</span> (parent) &#123;</span><br><span class="line">        <span class="keyword">var</span> next = container.nextSibling;</span><br><span class="line">        parent.removeChild(container);</span><br><span class="line">        container.innerHTML = markup;</span><br><span class="line">        <span class="keyword">if</span> (next) &#123;</span><br><span class="line">          parent.insertBefore(container, next);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          parent.appendChild(container);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        container.innerHTML = markup;</span><br><span class="line">      &#125;</span><br><span class="line">      ReactMount.totalInjectionTime += (<span class="built_in">Date</span>.now() - injectionStart);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成-Markup-标记"><a href="#生成-Markup-标记" class="headerlink" title="生成 Markup 标记"></a>生成 Markup 标记</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactNativeComponent.js</span></span><br><span class="line"><span class="comment">// For quickly matching children type, to test if can be treated as content.</span></span><br><span class="line"><span class="keyword">var</span> CONTENT_TYPES = &#123;<span class="string">'string'</span>: <span class="literal">true</span>, <span class="string">'number'</span>: <span class="literal">true</span>&#125;;</span><br><span class="line"></span><br><span class="line">ReactNativeComponent.Mixin = &#123;</span><br><span class="line">  mountComponent: <span class="function"><span class="keyword">function</span>(<span class="params">rootID, transaction</span>) </span>&#123;</span><br><span class="line">    ReactComponent.Mixin.mountComponent.call(<span class="keyword">this</span>, rootID, transaction);</span><br><span class="line">    <span class="comment">// 参数校验不做解读</span></span><br><span class="line">    assertValidProps(<span class="keyword">this</span>.props);</span><br><span class="line">    <span class="comment">// 返回的就是 HTML 标记</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="keyword">this</span>._createOpenTagMarkup() +</span><br><span class="line">      <span class="keyword">this</span>._createContentMarkup(transaction) +</span><br><span class="line">      <span class="keyword">this</span>._tagClose</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">  _createOpenTagMarkup: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> ret = <span class="keyword">this</span>._tagOpen;</span><br><span class="line">    <span class="comment">// 暂时不解读（事件注册/ CSS 样式/ DOM 属性）</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret + <span class="string">' id="'</span> + <span class="keyword">this</span>._rootNodeID + <span class="string">'"&gt;'</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  _createContentMarkup: <span class="function"><span class="keyword">function</span>(<span class="params">transaction</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 这里忽略 dangerouslySetInnerHTML 的情况</span></span><br><span class="line">    <span class="keyword">var</span> contentToUse = <span class="keyword">this</span>.props.content != <span class="literal">null</span> ? <span class="keyword">this</span>.props.content :</span><br><span class="line">      CONTENT_TYPES[<span class="keyword">typeof</span> <span class="keyword">this</span>.props.children] ? <span class="keyword">this</span>.props.children : <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> childrenToUse = contentToUse != <span class="literal">null</span> ? <span class="literal">null</span> : <span class="keyword">this</span>.props.children;</span><br><span class="line">    <span class="keyword">if</span> (contentToUse != <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// content == null 并且 children 为 string / number 的情况</span></span><br><span class="line">      <span class="comment">// 直接返回 Zong is learning the source code of React.</span></span><br><span class="line">      <span class="keyword">return</span> escapeTextForBrowser(contentToUse);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (childrenToUse != <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// 多个 children 的情况</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.mountMultiChild(</span><br><span class="line">        flattenChildren(childrenToUse),</span><br><span class="line">        transaction</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/escapeTextForBrowser.js</span></span><br><span class="line"><span class="keyword">var</span> ESCAPE_LOOKUP = &#123;</span><br><span class="line">  <span class="string">"&amp;"</span>: <span class="string">"&amp;amp;"</span>,</span><br><span class="line">  <span class="string">"&gt;"</span>: <span class="string">"&amp;gt;"</span>,</span><br><span class="line">  <span class="string">"&lt;"</span>: <span class="string">"&amp;lt;"</span>,</span><br><span class="line">  <span class="string">"\""</span>: <span class="string">"&amp;quot;"</span>,</span><br><span class="line">  <span class="string">"'"</span>: <span class="string">"&amp;#x27;"</span>,</span><br><span class="line">  <span class="string">"/"</span>: <span class="string">"&amp;#x2f;"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escaper</span>(<span class="params">match</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> ESCAPE_LOOKUP[match];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> escapeTextForBrowser = <span class="function"><span class="keyword">function</span> (<span class="params">text</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> type = <span class="keyword">typeof</span> text;</span><br><span class="line">  <span class="keyword">var</span> invalid = type === <span class="string">'object'</span>;</span><br><span class="line">  <span class="keyword">if</span> (text === <span class="string">''</span> || invalid) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">'string'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> text.replace(<span class="regexp">/[&amp;&gt;&lt;"'\/]/g</span>, escaper);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> (<span class="string">''</span>+text).replace(<span class="regexp">/[&amp;&gt;&lt;"'\/]/g</span>, escaper);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么到此为止，实现 HTML 元素渲染功能。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/04/02/LSC-React-02/">
+        上一篇<br>React 源码学习（二）：HTML 子元素渲染
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/03/01/%E5%8D%97%E6%96%B9%E7%9A%84%E5%86%AC%E5%A4%A9/">
+        下一篇<br>南方的冬天
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?82239605"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>迎接学习FE一周年 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+好久不见，本篇博客内容将延续上一篇博客内容《初试VUX》，我将总结在完成此项目中学习到的一些有趣的事情。
+...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?54429417">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    迎接学习FE一周年
+                    <div class="post-meta">
+                        <time datetime="2017-08-07T13:43:25.000Z" itemprop="datePublished">
+                            2017-08-07 21:43
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Vue/'>Vue</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Vue/'>Vue</a>, 
+                        
+                        <a href='/tags/Vux/'>Vux</a>, 
+                        
+                        <a href='/tags/axios/'>axios</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<p>好久不见，本篇博客内容将延续上一篇博客内容<a href="http://zongzi531.com/2017/07/01/%E5%88%9D%E8%AF%95vux/">《初试VUX》</a>，我将总结在完成此项目中学习到的一些有趣的事情。</p>
+<blockquote>
+<p>阅读记录：<br>6月份，我阅读了《图解HTTP》<br>7月份，我阅读了《JavaScript语言精粹》<br>8月份，我正在阅读《CSS SECRETS》——很高兴的是，至今年8月底，我学习FE一年了<br>9月份，我已经准备好迎接《ECMAScript 6 入门》以及《深入理解ES6》啦，已经阅读电子版的《ECMAScript 6 入门》，对ES6有些简单的认识，并慢慢实践中</p>
+</blockquote>
+<p>7月初，分析公司业务需求后，我选择使用VUX完成项目，项目也很顺利的在7月底上线了。</p>
+<p>那么以下内容都是通过我查阅我的Commits日志产出。</p>
+<p>首先介绍下，本项目中使用到的技术栈：</p>
+<ul>
+<li><a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vue</a></li>
+<li><a href="https://github.com/vuejs/vue-router/blob/dev/docs/zh-cn/SUMMARY.md" target="_blank" rel="noopener">vue-router</a></li>
+<li><a href="https://github.com/vuejs/vuex/blob/dev/docs/zh-cn/SUMMARY.md" target="_blank" rel="noopener">vuex</a></li>
+<li><a href="https://github.com/ElemeFE/vue-infinite-scroll" target="_blank" rel="noopener">vue-infinite-scroll</a></li>
+<li><a href="https://vux.li/" target="_blank" rel="noopener">vux</a></li>
+<li><a href="https://github.com/mzabriskie/axios" target="_blank" rel="noopener">axios</a></li>
+<li><a href="https://github.com/Tencent/weui.js" target="_blank" rel="noopener">weui.js</a></li>
+</ul>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p>axios不需要过多介绍了吧，Vue更新至2.0版本后，作者就宣告不再对vue-resource更新，而是推荐的axios。</p>
+<h3 id="URLSearchParams-API-解决CORS预检请求"><a href="#URLSearchParams-API-解决CORS预检请求" class="headerlink" title="URLSearchParams API 解决CORS预检请求"></a>URLSearchParams API 解决CORS预检请求</h3><p>问题出在，非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）。</p>
+<p>那么URLSearchParams API就是axios官方提供的解决方案。<a href="https://github.com/mzabriskie/axios#using-applicationx-www-form-urlencoded-format" target="_blank" rel="noopener">使用方法传送门&gt;&gt;</a></p>
+<p>以及浏览器发起XHR的两种请求：简单请求和非简单请求。可以参阅<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">《阮老师 - 跨域资源共享 CORS 详解》</a></p>
+<h3 id="实现文件上传"><a href="#实现文件上传" class="headerlink" title="实现文件上传"></a>实现文件上传</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/*"</span> @<span class="attr">change</span>=<span class="string">"upload"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">upload (event) &#123;</span><br><span class="line">  <span class="keyword">let</span> file = event.target.files[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> param = <span class="keyword">new</span> FormData()  <span class="comment">//  创建form对象</span></span><br><span class="line">  param.append(<span class="string">'upLoad'</span>, file, file.name)  <span class="comment">//  通过append向form对象添加数据</span></span><br><span class="line">  <span class="keyword">let</span> config = &#123;<span class="attr">headers</span>: &#123;<span class="string">'Content-Type'</span>: <span class="string">'multipart/form-data'</span>&#125;&#125;  <span class="comment">//  添加请求头</span></span><br><span class="line">  axios.post(url, param, config)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><h3 id="导航钩子"><a href="#导航钩子" class="headerlink" title="导航钩子"></a><a href="https://github.com/vuejs/vue-router/blob/dev/docs/zh-cn/advanced/navigation-guards.md" target="_blank" rel="noopener">导航钩子</a></h3><p>因为业务逻辑需要，在载入某个路由后执行某些事。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h3 id="props"><a href="#props" class="headerlink" title="props"></a><a href="https://cn.vuejs.org/v2/api/#props" target="_blank" rel="noopener">props</a></h3><p>props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义校验和设置默认值。</p>
+<p>项目开发过程中，我将数据存在父组件中，由于某些业务场景，需要在子组件A中修改父组件数据，从而更新至子组件B中，最后统一移除props，使用vuex管理数据。</p>
+<h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><p>每一个 Vuex 应用的核心就是 store（仓库）。”store” 基本上就是一个容器，它包含着你的应用中大部分的状态(state)。Vuex 和单纯的全局对象有以下两点不同：</p>
+<ol>
+<li><p>Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</p>
+</li>
+<li><p>你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地提交(commit) mutations。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。</p>
+</li>
+</ol>
+<p>Vuex 应用的核心完全契合项目开发。</p>
+<h2 id="组件化开发"><a href="#组件化开发" class="headerlink" title="组件化开发"></a>组件化开发</h2><p><strong><a href="https://cn.vuejs.org/v2/guide/components.html" target="_blank" rel="noopener">什么是组件？</a></strong></p>
+<p>组件 (Component) 是 Vue.js 最强大的功能之一。组件可以扩展 HTML 元素，封装可重用的代码。在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 HTML 元素的形式，以 <code>is</code> 特性扩展。</p>
+<p>我认为使用组件是有必要的，其必要性在于：</p>
+<ol>
+<li>代码复用</li>
+<li>代码解耦</li>
+</ol>
+<p><img src="https://cn.vuejs.org/images/props-events.png" alt=""></p>
+<h2 id="HTML5范围样式-scoped"><a href="#HTML5范围样式-scoped" class="headerlink" title="HTML5范围样式 scoped"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/style" target="_blank" rel="noopener">HTML5范围样式 scoped</a></h2><h2 id="CSS属性-fill"><a href="#CSS属性-fill" class="headerlink" title="CSS属性 fill"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/fill" target="_blank" rel="noopener">CSS属性 fill</a></h2><h2 id="for-…of"><a href="#for-…of" class="headerlink" title="for …of"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank" rel="noopener">for …of</a></h2><p><strong>for …of 循环有以下几个特征：</strong></p>
+<ul>
+<li>这是最简洁、最直接的遍历数组元素的语法。</li>
+<li>这个方法避开了 for …in 循环的所有缺陷。</li>
+<li>与 forEach 不同的是，它可以正确响应 break、continue 和 return 语句。</li>
+<li>其不仅可以遍历数组，还可以遍历类数组对象和其他可迭代对象。</li>
+</ul>
+<p><strong>那 for …of 到底可以干什么呢？</strong></p>
+<ul>
+<li>跟 forEach 相比，可以正确响应 break, continue, return。</li>
+<li>for …of 循环不仅支持数组，还支持大多数类数组对象，例如 DOM nodelist 对象。</li>
+<li>for …of 循环也支持字符串遍历，它将字符串视为一系列 Unicode 字符来进行遍历。</li>
+<li>for …of 也支持 Map 和 Set （两者均为 ES6 中新增的类型）对象遍历。</li>
+</ul>
+<p>参考： <a href="https://zhuanlan.zhihu.com/p/23812134" target="_blank" rel="noopener">《知乎 - 深入了解 JavaScript 中的 for 循环》</a></p>
+<h2 id="过场动画"><a href="#过场动画" class="headerlink" title="过场动画"></a>过场动画</h2><p>参考vux源码：</p>
+<ul>
+<li><a href="https://github.com/airyland/vux/blob/v2/src/main.js" target="_blank" rel="noopener">main.js</a></li>
+<li><a href="https://github.com/airyland/vux/blob/v2/src/App.vue" target="_blank" rel="noopener">App.vue</a></li>
+</ul>
+<p>以下为提取内容：</p>
+<p>main.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> store = <span class="keyword">new</span> Vuex.Store(&#123;&#125;)</span><br><span class="line"></span><br><span class="line">store.registerModule(<span class="string">'vux'</span>, &#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    demoScrollTop: <span class="number">0</span>,</span><br><span class="line">    isLoading: <span class="literal">false</span>,</span><br><span class="line">    direction: <span class="string">'forward'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    updateDemoPosition (state, payload) &#123;</span><br><span class="line">      state.demoScrollTop = payload.top</span><br><span class="line">    &#125;,</span><br><span class="line">    updateLoadingStatus (state, payload) &#123;</span><br><span class="line">      state.isLoading = payload.isLoading</span><br><span class="line">    &#125;,</span><br><span class="line">    updateDirection (state, payload) &#123;</span><br><span class="line">      state.direction = payload.direction</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    updateDemoPosition (&#123;commit&#125;, top) &#123;</span><br><span class="line">      commit(&#123;<span class="attr">type</span>: <span class="string">'updateDemoPosition'</span>, <span class="attr">top</span>: top&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// simple history management</span></span><br><span class="line"><span class="keyword">const</span> history = <span class="built_in">window</span>.sessionStorage</span><br><span class="line">history.clear()</span><br><span class="line"><span class="keyword">let</span> historyCount = history.getItem(<span class="string">'count'</span>) * <span class="number">1</span> || <span class="number">0</span></span><br><span class="line">history.setItem(<span class="string">'/'</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">router.beforeEach(<span class="function"><span class="keyword">function</span> (<span class="params">to, from, next</span>) </span>&#123;</span><br><span class="line">  store.commit(<span class="string">'updateLoadingStatus'</span>, &#123;<span class="attr">isLoading</span>: <span class="literal">true</span>&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> toIndex = history.getItem(to.path)</span><br><span class="line">  <span class="keyword">const</span> fromIndex = history.getItem(<span class="keyword">from</span>.path)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (toIndex) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!fromIndex || <span class="built_in">parseInt</span>(toIndex, <span class="number">10</span>) &gt; <span class="built_in">parseInt</span>(fromIndex, <span class="number">10</span>) || (toIndex === <span class="string">'0'</span> &amp;&amp; fromIndex === <span class="string">'0'</span>)) &#123;</span><br><span class="line">      store.commit(<span class="string">'updateDirection'</span>, &#123;<span class="attr">direction</span>: <span class="string">'forward'</span>&#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      store.commit(<span class="string">'updateDirection'</span>, &#123;<span class="attr">direction</span>: <span class="string">'reverse'</span>&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ++historyCount</span><br><span class="line">    history.setItem(<span class="string">'count'</span>, historyCount)</span><br><span class="line">    to.path !== <span class="string">'/'</span> &amp;&amp; history.setItem(to.path, historyCount)</span><br><span class="line">    store.commit(<span class="string">'updateDirection'</span>, &#123;<span class="attr">direction</span>: <span class="string">'forward'</span>&#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="regexp">/\/http/</span>.test(to.path)) &#123;</span><br><span class="line">    <span class="keyword">let</span> url = to.path.split(<span class="string">'http'</span>)[<span class="number">1</span>]</span><br><span class="line">    <span class="built_in">window</span>.location.href = <span class="string">`http<span class="subst">$&#123;url&#125;</span>`</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  store,</span><br><span class="line">  router,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>App.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">:name</span>=<span class="string">"'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- @direction 判断动画样式为in或者out --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">class</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">'vuex'</span>   <span class="comment">//  用引入vuex的mapState</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  name: <span class="string">'app'</span>,</span></span><br><span class="line"><span class="actionscript">  computed: &#123; <span class="comment">//  vuex管理页面</span></span></span><br><span class="line">    ...mapState(&#123;</span><br><span class="line"><span class="javascript">      direction: <span class="function"><span class="params">state</span> =&gt;</span> state.vux.direction</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">'less'</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-out-enter-active</span>,</span></span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-out-leave-active</span>,</span></span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-in-enter-active</span>,</span></span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-in-leave-active</span> &#123;</span></span><br><span class="line">  will-change: transform;</span><br><span class="line">  transition: all 250ms;</span><br><span class="line">  height: 100%;</span><br><span class="line">  top: 0;</span><br><span class="line">  position: absolute;</span><br><span class="line">  backface-visibility: hidden;</span><br><span class="line">  perspective: 1000;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-out-enter</span> &#123;</span></span><br><span class="line">  opacity: 0;</span><br><span class="line">  transform: translate3d(-100%, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-out-leave-active</span> &#123;</span></span><br><span class="line">  opacity: 0;</span><br><span class="line">  transform: translate3d(100%, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-in-enter</span> &#123;</span></span><br><span class="line">  opacity: 0;</span><br><span class="line">  transform: translate3d(100%, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.vux-pop-in-leave-active</span> &#123;</span></span><br><span class="line">  opacity: 0;</span><br><span class="line">  transform: translate3d(-100%, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.weui-btn</span><span class="selector-pseudo">:after</span> &#123;</span></span><br><span class="line">  border: none !important;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Webpack-轻度调整"><a href="#Webpack-轻度调整" class="headerlink" title="Webpack 轻度调整"></a>Webpack 轻度调整</h2><p>vue-cli已经集成Webpack，执行<code>npm run build</code>后，想实现直接运行index.html即可运行页面。修改以下参数即可实现：</p>
+<p>build/utils.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ExtractTextPlugin.extract(&#123;</span><br><span class="line">  publicPath: <span class="string">'/gallery/gallery//gallery/gallery/'</span>  <span class="comment">//  解决CSS样式导出路径问题</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>config/index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  assetsPublicPath: <span class="string">'/gallery/'</span>  <span class="comment">//  解决JS、CSS路径问题</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改后<code>src = &quot;&quot;</code>，或者<code>url (...)</code>使用相对路径即可。</p>
+<h2 id="vue-infinite-scroll-下拉加载"><a href="#vue-infinite-scroll-下拉加载" class="headerlink" title="vue-infinite-scroll - 下拉加载"></a><a href="https://github.com/ElemeFE/vue-infinite-scroll" target="_blank" rel="noopener">vue-infinite-scroll - 下拉加载</a></h2><h2 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a><a href="http://eslint.org/" target="_blank" rel="noopener">ESLint</a></h2><p>这里要提到ESLint是因为，他可以帮助开发者减少开发中一些不必要的错误（除了逻辑），并且在合作开发时，起到大大的作用，所以请拥抱ESLint。</p>
+<hr>
+<p>好了，先这样吧，我要抓紧学习去了~</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2017/10/12/%E8%BF%9B%E9%98%B6es6/">
+        上一篇<br>进阶ES6
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2017/07/01/%E5%88%9D%E8%AF%95vux/">
+        下一篇<br>初试VUX
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?1674911"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>用Vue实现一个To Do List项目 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+看再多不如多动手，那么先从简单的项目做起。
+走，抄起键盘干。
+今天给大家带来就是用Vue2.3 实现一个T...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?61537854">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    用Vue实现一个To Do List项目
+                    <div class="post-meta">
+                        <time datetime="2017-06-02T14:49:10.000Z" itemprop="datePublished">
+                            2017-06-02 22:49
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Vue/'>Vue</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Vue/'>Vue</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<p>看再多不如多动手，那么先从简单的项目做起。</p>
+<p>走，抄起键盘干。</p>
+<p>今天给大家带来就是用Vue2.3 实现一个To Do List项目。</p>
+<p>在这里只分享学习过程中的接触到的点，其他请看源码。可以直接点击访问到官网API节点，以下提到的API官网会有更详细的介绍。</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="data"><a href="#data" class="headerlink" title="data"></a><a href="https://cn.vuejs.org/v2/api/#data" target="_blank" rel="noopener">data</a></h3><p>Vue 实例的数据对象</p>
+<h3 id="methods"><a href="#methods" class="headerlink" title="methods"></a><a href="https://cn.vuejs.org/v2/api/#methods" target="_blank" rel="noopener">methods</a></h3><p>methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 <code>this</code> 自动绑定为 Vue 实例。</p>
+<h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a><a href="https://cn.vuejs.org/v2/api/#v-model" target="_blank" rel="noopener">v-model</a></h3><p>在data中定义变量，监听<code>&lt;input&gt;</code>标签的值。</p>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a><a href="https://cn.vuejs.org/v2/api/#v-on" target="_blank" rel="noopener">v-on</a></h3><p>绑定事件监听器。</p>
+<p>可以用<code>@</code>代替。</p>
+<p><code>v-on:keyup.enter</code>：指按回车键事件</p>
+<p><code>@click</code>：指鼠标点击事件</p>
+<p>值得一提的是我在码的过程中遇到了冒泡，Vue提供了一个很好的解决方案，那就是<code>.stop</code>，直接跟在后面使用即可。</p>
+<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a><a href="https://cn.vuejs.org/v2/api/#v-show" target="_blank" rel="noopener">v-show</a></h3><p>根据表达式之真假值，切换元素的 <code>display</code> CSS 属性。</p>
+<p><code>v-show</code>和<code>v-if</code>的区别和使用场景官网有介绍，有兴趣可以去阅读。<a href="http://v1-cn.vuejs.org/guide/conditional.html#v-if-vs-v-show" target="_blank" rel="noopener">传送门</a></p>
+<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a><a href="https://cn.vuejs.org/v2/api/#v-for" target="_blank" rel="noopener">v-for</a></h3><p>此指令之值，必须使用特定语法 alias in expression ，为当前遍历的元素提供别名。</p>
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a><a href="https://cn.vuejs.org/v2/api/#v-bind" target="_blank" rel="noopener">v-bind</a></h3><p>用于动态地绑定一个或多个特性，或一个组件 prop 到表达式。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="template"><a href="#template" class="headerlink" title="template"></a>template</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123; To Do List &#125;<span class="tag">&lt;<span class="name">small</span> <span class="attr">class</span>=<span class="string">"by"</span>&gt;</span>by Zong<span class="tag">&lt;/<span class="name">small</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"list"</span> <span class="attr">v-model</span>=<span class="string">"newTodo"</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">"addTodo"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-addon"</span> @<span class="attr">click</span>=<span class="string">"addTodo"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-plus btn-add"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"help-block help-note"</span>&gt;</span>来添加你的备忘录吧！<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav nav-pills list-title"</span> <span class="attr">role</span>=<span class="string">"tablist"</span> @<span class="attr">click</span>=<span class="string">"reversetodo(todoflag)"</span>&gt;</span><span class="tag">&lt;<span class="name">li</span> <span class="attr">role</span>=<span class="string">"presentation"</span> <span class="attr">class</span>=<span class="string">"active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>未完成 <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"badge"</span>&gt;</span>&#123;&#123;todos.length&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-show</span>=<span class="string">"todoflag"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(todo, index) in todos"</span> <span class="attr">class</span>=<span class="string">"list-item"</span> @<span class="attr">click.stop</span>=<span class="string">"haveDo(index)"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"list-text"</span> <span class="attr">v-bind:title</span>=<span class="string">"todo.text"</span>&gt;</span>&#123;&#123;todo.text&#125;&#125;<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-remove btn-del"</span> @<span class="attr">click.stop</span>=<span class="string">"removeTodo(index)"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav nav-pills list-title"</span> <span class="attr">role</span>=<span class="string">"tablist"</span> @<span class="attr">click</span>=<span class="string">"reversehavedo(havedoflag)"</span>&gt;</span><span class="tag">&lt;<span class="name">li</span> <span class="attr">role</span>=<span class="string">"presentation"</span> <span class="attr">class</span>=<span class="string">"active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>已完成 <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"badge"</span>&gt;</span>&#123;&#123;havedos.length&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-show</span>=<span class="string">"havedoflag"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(todo, index) in havedos"</span> <span class="attr">class</span>=<span class="string">"list-item"</span> @<span class="attr">click.stop</span>=<span class="string">"unDo(index)"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"list-text"</span> <span class="attr">v-bind:title</span>=<span class="string">"todo.text"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"through"</span>&gt;</span>&#123;&#123;todo.text&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-remove btn-del"</span> @<span class="attr">click.stop</span>=<span class="string">"removeUndo(index)"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      newTodo: <span class="string">''</span>,</span><br><span class="line">      things: <span class="string">''</span>,</span><br><span class="line">      todoflag: <span class="literal">true</span>,</span><br><span class="line">      havedoflag: <span class="literal">false</span>,</span><br><span class="line">      todos: [],</span><br><span class="line">      havedos: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addTodo: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> text = <span class="keyword">this</span>.newTodo.trim()</span><br><span class="line">      <span class="keyword">if</span> (text) &#123;</span><br><span class="line">        <span class="keyword">this</span>.todos.push(&#123;<span class="attr">text</span>: text&#125;)</span><br><span class="line">        <span class="keyword">this</span>.newTodo = <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    removeTodo: <span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.todos.splice(index, <span class="number">1</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    removeUndo: <span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.havedos.splice(index, <span class="number">1</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    haveDo: <span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.things = <span class="keyword">this</span>.todos[index].text</span><br><span class="line">      <span class="keyword">this</span>.todos.splice(index, <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">this</span>.havedos.push(&#123;<span class="attr">text</span>: <span class="keyword">this</span>.things&#125;)</span><br><span class="line">      <span class="keyword">this</span>.things = <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    unDo: <span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.things = <span class="keyword">this</span>.havedos[index].text</span><br><span class="line">      <span class="keyword">this</span>.havedos.splice(index, <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">this</span>.todos.push(&#123;<span class="attr">text</span>: <span class="keyword">this</span>.things&#125;)</span><br><span class="line">      <span class="keyword">this</span>.things = <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    reversetodo: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.todoflag = !val</span><br><span class="line">    &#125;,</span><br><span class="line">    reversehavedo: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.havedoflag = !val</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">import</span> <span class="string">'/gallery/gallery/static/normalize-css/normalize.css'</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">'/gallery/gallery/static/bootstrap/dist/css/bootstrap.min.css'</span>;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这里引入CSS并不是使用<code>&lt;style&gt;</code>标签，而是依赖于css-loader，直接使用<code>@import</code>即可。</p>
+<p>代码真的很节俭，很干净易懂。</p>
+<p><strong><a href="https://github.com/zongzi531/vue-to-do-list" target="_blank" rel="noopener">GitHub仓库地址</a></strong></p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2017/06/04/%E7%94%A8vue%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAtodolist%E9%A1%B9%E7%9B%AE2/">
+        上一篇<br>用Vue实现一个To Do List项目（二）
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2017/05/29/Pro/">
+        下一篇<br>入手 MacBook Pro
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?68460373"></script>
+
+
+
+</body>
+</html>

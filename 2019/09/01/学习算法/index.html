@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>学习算法 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+回想起大学时，学习 C 语言，参加 ACM 竞赛。其实那时候的我对编程就是感兴趣的，当然源于高中学习 Vi...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?94187167">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    学习算法
+                    <div class="post-meta">
+                        <time datetime="2019-09-01T02:22:07.000Z" itemprop="datePublished">
+                            2019-09-01 10:22
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Algorithms/'>Algorithms</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/算法/'>算法</a>, 
+                        
+                        <a href='/tags/Algorithms/'>Algorithms</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<p>回想起大学时，学习 C 语言，参加 ACM 竞赛。其实那时候的我对编程就是感兴趣的，当然源于高中学习 Visual Basic 也是一样的，充满了乐趣。这个月我选择学习算法，通过<a href="https://leetcode-cn.com/" target="_blank" rel="noopener">力扣</a>开始我的初学（<em>重回</em>）算法之路。</p>
+<p>当初<em>离开</em>算法之路的原因也是因为自认为高等数学没有学好导致的，那么毕业也就没有直接参加开发相关的工作，而是进入银行。</p>
+<p>算法，重在解题思路、勤练、融会贯通，那么在我的前端工程师之路上，我也会尽我所能的掌握起来。</p>
+<h2 id="算法基本概念介绍"><a href="#算法基本概念介绍" class="headerlink" title="算法基本概念介绍"></a><a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">算法基本概念介绍</a></h2><p><strong>算法</strong>（algorithm），在数学（算学）和计算机科学之中，为任何良定义的具体计算步骤的一个序列，常用于计算、数据处理和自动推理。精确而言，算法是一个表示为有限长列表的有效方法。算法应包含清晰定义的指令用于计算函数。</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a><a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E6%B3%95#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6" target="_blank" rel="noopener">时间复杂度</a></h3><blockquote>
+<p>认识<a href="https://zh.wikipedia.org/wiki/%E5%A4%A7O%E7%AC%A6%E5%8F%B7" target="_blank" rel="noopener">大O符号<em>Big O notation</em></a></p>
+</blockquote>
+<p>算法的时间复杂度是指算法需要消耗的时间资源。一般来说，计算机算法是问题规模 \(n\) 的函数 \(f(n)\) ，算法的时间复杂度也因此记做</p>
+<p>$$T(n) = O(f(n))$$</p>
+<p>算法执行时间的增长率与 \(f(n)\) 的增长率正相关，称作渐近时间复杂度，简称时间复杂度。</p>
+<h4 id="常见时间复杂度"><a href="#常见时间复杂度" class="headerlink" title="常见时间复杂度"></a><a href="https://zh.wikipedia.org/wiki/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6#%E5%B8%B8%E8%A7%81%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%97%E8%A1%A8" target="_blank" rel="noopener">常见时间复杂度</a></h4><p>我整理了一些常见的时间复杂度依次从小到大排序：</p>
+<p>$$O(1) &lt; O(log_2n)&lt; O(n) &lt; O(n^2)&lt; O(n^k)$$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a><a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E6%B3%95#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6" target="_blank" rel="noopener">空间复杂度</a></h3><p>算法的空间复杂度是指算法需要消耗的空间资源。其计算和表示方法与时间复杂度类似，一般都用复杂度的渐近性来表示。同时间复杂度相比，空间复杂度的分析要简单得多。</p>
+<h3 id="关于最优解"><a href="#关于最优解" class="headerlink" title="关于最优解"></a>关于最优解</h3><p>关于最优解的概念我通过 Google 并没有搜到一个比较合适的答案，但是我理解的最优解就是保证时间复杂度最小的情况下，寻求空间复杂度最小，这才是最优解，并且没有绝对最优解，只有相对最优解。</p>
+<h3 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a>比较器</h3><p>算法比较器用于检测你写的算法是否正确，他的优点是比测试用例更接近正确，前提建立在这个比较器是“正确”的。毕竟测试用例的数量是有限的，没有被穷举的。比较器最不容易出错的解法就是暴力解法，最为直接，最为致命。当然你在做算法题的时候，能用暴力解法做出来的题，你的时间复杂度肯定很糟糕，记得避开这一点。</p>
+<h3 id="支配理论（英语：master-theorem）"><a href="#支配理论（英语：master-theorem）" class="headerlink" title="支配理论（英语：master theorem）"></a><a href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">支配理论<em>（英语：master theorem）</em></a></h3><p>在算法分析中，支配理论（英语：master theorem）提供了用渐近符号（大O符号）表示许多由分治法得到的递回关系式的方法。这种方法最初由Jon Bentlery，Dorothea Haken和James B. Saxe在1980年提出，在那里被描述为解决这种递回的“天下无敌法”(master method)。此方法经由经典算法教科书Cormen，Leiserson，Rivest和Stein的《算法导论》 (introduction to algorithm) 推广而为人熟知。</p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">排序算法</a></h2><h3 id="稳定的排序"><a href="#稳定的排序" class="headerlink" title="稳定的排序"></a>稳定的排序</h3><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">冒泡排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">插入排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">归并排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%A1%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">桶排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">基数排序</a></li>
+</ul>
+<h3 id="不稳定的排序"><a href="#不稳定的排序" class="headerlink" title="不稳定的排序"></a>不稳定的排序</h3><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">选择排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F#%E4%BA%82%E6%95%B8%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%9A%84%E6%9C%9F%E6%9C%9B%E8%A4%87%E9%9B%9C%E5%BA%A6" target="_blank" rel="noopener">随机数快速排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">堆排序</a></li>
+</ul>
+<h2 id="字符串算法"><a href="#字符串算法" class="headerlink" title="字符串算法"></a><a href="https://zh.wikipedia.org/wiki/Category:%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">字符串算法</a></h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2" target="_blank" rel="noopener">最长回文子串<em>Manacher算法</em></a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">克努斯-莫里斯-普拉特算法<em>KMP算法</em></a></li>
+</ul>
+<h2 id="BFPTR算法"><a href="#BFPTR算法" class="headerlink" title="BFPTR算法"></a>BFPTR算法</h2><p>这里介绍一个比较好的算法，叫做BFPTR算法，又称为中位数的中位数算法，它的最坏时间复杂度为 \(O(n)\) ，它是由Blum、Floyd、Pratt、Rivest、Tarjan提出。该算法的思想是修改快速选择算法的主元选取方法，提高算法在最坏情况下的时间复杂度。</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/31498036" target="_blank" rel="noopener">BFPRT算法原理</a></li>
+<li><a href="https://segmentfault.com/a/1190000008322873" target="_blank" rel="noopener">BFPRT 算法（TOP-K 问题）</a></li>
+</ul>
+<h2 id="搜索算法"><a href="#搜索算法" class="headerlink" title="搜索算法"></a><a href="https://zh.wikipedia.org/wiki/Category:%E6%90%9C%E5%B0%8B%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">搜索算法</a></h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2" target="_blank" rel="noopener">广度优先搜索<em>BFS</em></a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2" target="_blank" rel="noopener">深度优先搜索<em>DFS</em></a></li>
+</ul>
+<h2 id="图算法"><a href="#图算法" class="headerlink" title="图算法"></a><a href="https://zh.wikipedia.org/wiki/Category:%E5%9B%BE%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">图算法</a></h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%93%E6%92%B2%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">拓扑排序</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%85%8B%E9%B2%81%E6%96%AF%E5%85%8B%E5%B0%94%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">克鲁斯克尔算法<em>Kruskal算法</em></a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%99%AE%E6%9E%97%E5%A7%86%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">普里姆算法<em>Prim算法</em></a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">戴克斯特拉算法<em>Dijkstra算法</em></a></li>
+</ul>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://zh.wikipedia.org/wiki/Category:%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank" rel="noopener">数据结构</a></h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91" target="_blank" rel="noopener">二叉树</a><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86" target="_blank" rel="noopener">树的遍历</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91#%E5%89%8D%28%E5%85%88%29%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E3%80%81%E5%BE%8C%E5%BA%8F%E9%81%8D%E6%AD%B7" target="_blank" rel="noopener">二叉树<em>前(先)序、中序、后序遍历</em></a></li>
+<li>思考折纸问题：<a href="https://blog.csdn.net/freeelinux/article/details/53735719" target="_blank" rel="noopener">折纸问题与二叉树</a>，<a href="https://www.nowcoder.com/questionTerminal/430180b66a7547e1963b69b1d0efbd3c" target="_blank" rel="noopener">[编程题]折纸问题 - 牛客网</a></li>
+</ul>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86" target="_blank" rel="noopener">并查集</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8" target="_blank" rel="noopener">布隆过滤器</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E4%B8%80%E8%87%B4%E5%93%88%E5%B8%8C" target="_blank" rel="noopener">一致哈希</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B8" target="_blank" rel="noopener">散列函数<em>哈希函数</em></a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8" target="_blank" rel="noopener">散列表<em>哈希表</em></a></li>
+<li><a href="https://zh.wikipedia.org/wiki/Trie" target="_blank" rel="noopener">前缀树<em>Trie</em></a><ul>
+<li>思考如何生成前缀树</li>
+</ul>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%82%BB%E6%8E%A5%E8%A1%A8" target="_blank" rel="noopener">邻接表</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5" target="_blank" rel="noopener">邻接矩阵</a><ul>
+<li>思考如何表达图</li>
+<li>思考如何生成图</li>
+</ul>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84" target="_blank" rel="noopener">数组</a><ul>
+<li>思考如何用数组结构实现队列和栈</li>
+</ul>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%98%9F%E5%88%97" target="_blank" rel="noopener">队列</a><ul>
+<li>思考如何用队列实现栈</li>
+<li>思考如何实现猫狗队列 - Google 搜索 猫狗队列</li>
+</ul>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%A0%88" target="_blank" rel="noopener">堆栈<em>栈</em></a><ul>
+<li>思考如何用栈实现队列</li>
+<li>思考如何实现一个特殊栈，提供获得栈中最小元素的方法</li>
+<li>思考如何实现随时找到数据流的中位数：<a href="https://zhuanlan.zhihu.com/p/40627318" target="_blank" rel="noopener">[剑指offer] 数据流中的中位数</a></li>
+</ul>
+</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%93%BE%E8%A1%A8" target="_blank" rel="noopener">链表</a><ul>
+<li>思考如何打印两个有序链表的公共部分</li>
+<li>判断一个链表是否为回文结构</li>
+<li>思考如何将单向链表按某值划分成左边小、中间相等、右边大的形式</li>
+<li>思考如何复制含有随机指针节点的链表</li>
+<li>思考两个单链表相交的一系列问题</li>
+<li>思考如何反转单向和双向链表</li>
+</ul>
+</li>
+</ul>
+<h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a><a href="https://zh.wikipedia.org/wiki/Category:%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8" target="_blank" rel="noopener">线性代数</a></h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5" target="_blank" rel="noopener">矩阵</a><ul>
+<li>思考如何实现转圈打印矩阵</li>
+<li>思考如何“之”字形打印矩阵</li>
+<li>思考如何在行列都排好序的矩阵中找数</li>
+</ul>
+</li>
+</ul>
+<p>不得不感叹，数学家和科学家的厉害之处，我也加油咯！多刷题。</p>
+<blockquote>
+<p>附：我的力扣<a href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener">主页</a>，以放置在博客底部外链栏。</p>
+</blockquote>
+<h2 id="面试资深前端工程师总结"><a href="#面试资深前端工程师总结" class="headerlink" title="面试资深前端工程师总结"></a>面试资深前端工程师总结</h2><p>本着面试也是一种学习的过程，当然进入面试需要精心准备简历，准备简历的时候能把自己看的“相对”比较的透彻，在这2年里自己掌握了什么，经历了什么，用精炼的语句把她们写在我的简历中。而且每次写简历都会发现，对自己以前写的简历不怎么满意，这一次的简历是更上一层楼的版本，我相信这也是一个进步的过程。</p>
+<p>那么最后通过面试来真正的认识自己的能力，找到自己想要的方向。千万记住别沉浸在自己公司安逸的环境中，这样找突破点会有些困难，试着跳出这个环境来看看，外面的世界是如何的，越是安逸，越要逼着自己去看看外面。</p>
+<p>回顾一下面试的问题：</p>
+<ul>
+<li>Webpack 热更新是如何实现的？</li>
+<li>什么是 CORS ？有多少种方法可以实现？</li>
+<li>OPTION 请求是如何产生的？</li>
+<li>如何自己实现一个 <code>new</code> ？</li>
+<li>什么是原型链？</li>
+<li>什么是 EVENT LOOP ？</li>
+<li>介绍一下 <code>box-sizing</code> 属性？</li>
+<li>什么是 BFC ？</li>
+<li>什么是盒模型？</li>
+<li>浏览器缓存机制有哪些？</li>
+<li>有哪些首屏加载优化策略？</li>
+<li>实现按需加载的方式有哪些？</li>
+<li>什么是 React Fiber ？</li>
+<li>什么是 React Hook ？</li>
+<li>React Diff 做了哪些优化？</li>
+<li><em>……记不起来了</em></li>
+</ul>
+<p>总之，经过面试，我也找到了自己的欠缺点，自己的弱项。对前端的基础知识点深度抓的还不够深、 CSS 方面基础和广度的欠缺，这是我首要需要解决的问题。当然了，按照我自己的计划继续努力即可，一天比一天强，加油。</p>
+<h2 id="React-源码阅读计划"><a href="#React-源码阅读计划" class="headerlink" title="React 源码阅读计划"></a>React 源码阅读计划</h2><p>截止 8 月底，从 <code>ReactFiberBeginWork.js</code> 穿插至 <code>ReactDOMComponent.js</code> 回到一些跟 <code>0.3-stable</code> 熟悉的位置。</p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/10/01/%E5%96%9C%E8%BF%8E%E5%9B%BD%E5%BA%86/">
+        上一篇<br>喜迎国庆
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/08/01/%E6%80%80%E5%BF%B5%E6%9A%91%E5%81%87%E7%9A%84%E7%BE%8E%E5%A5%BD%E6%97%B6%E5%85%89/">
+        下一篇<br>怀念暑假的美好时光
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?74900249"></script>
+
+
+
+</body>
+</html>
