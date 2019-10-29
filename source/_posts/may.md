@@ -3,7 +3,7 @@ title: May
 date: 2019-06-02 21:54:01
 categories: "React"
 comments: true
-thumbnail: /gallery/may/may.jpeg
+featured_image: may.jpeg
 tags:
 - React
 ---

@@ -3,7 +3,7 @@ title: The Web Is Not Tomorrow But Today
 date: 2017-05-11 13:24:35
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/Today/the-web-is-not-tomorrow-but-today.png
+featured_image: the-web-is-not-tomorrow-but-today.png
 tags:
 - JavaScript
 - Web

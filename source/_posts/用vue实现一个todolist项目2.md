@@ -3,7 +3,7 @@ title: 用Vue实现一个To Do List项目（二）
 date: 2017-06-04 15:34:05
 categories: "Vue"
 comments: true
-thumbnail: /gallery/用vue实现一个todolist项目2/demo3.gif
+featured_image: demo3.gif
 tags:
 - Vue
 ---

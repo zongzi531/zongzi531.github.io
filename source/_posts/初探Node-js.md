@@ -3,7 +3,7 @@ title: 初探Node.js
 date: 2018-08-03 19:11:32
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/初探Node-js/pic0.jpeg
+featured_image: pic0.jpeg
 tags:
 - Node.js
 - JavaScript
@@ -21,7 +21,7 @@ tags:
 
 ## 巧用Autoprefixer自动管理CSS属性前缀
 
-![Autoprefixer logo](/gallery/初探Node-js/pic1.png)
+![Autoprefixer logo](pic1.png)
 
 公司移动端项目需要做兼容，首先JavaScript相关的兼容可以考虑使用`babel-polyfill`来解决。那么CSS自然就考虑到使用PostCSS Autoprefixer。
 
@@ -29,7 +29,7 @@ tags:
 
 ### 如何配置browserslist？
 
-![browserslist logo](/gallery/初探Node-js/pic2.png)
+![browserslist logo](pic2.png)
 
 以下内容来自官网README
 
@@ -104,7 +104,7 @@ Names are case insensitive:
 
 当`<canvas>`标签遇上IE，CSS样式问题也就出来了。还好社区有个库是用来专门解决这个问题，当当当当！html5shiv了解一下。
 
-![Babel logo](/gallery/初探Node-js/pic3.png)
+![Babel logo](pic3.png)
 
 因为项目已经完成，只做兼容性调整，那么临时选择的解决方案就是手动进行语法降级，手动语法降级好痛苦 :( ，相当于人工`babel-polyfill`（事后灵机一动，可以直接去Babel官网转换），所以后续我打算使用Webpack来支持前后端不分离项目，使用node工程化来提升开发体验。
 
@@ -112,7 +112,7 @@ Names are case insensitive:
 
 前后端不分离情况下，项目开发需要执行`mvn tomcat7:run`命令来启动（以下简称tomcat模式）。
 
-![Thymeleaf logo](/gallery/初探Node-js/pic4.png)
+![Thymeleaf logo](pic4.png)
 
 简单介绍一下Thymeleaf模板引擎，展示一段示例代码：
 
@@ -178,7 +178,7 @@ function domManip( collection, args, callback, ignored ) {
 
 ### 开发模式改造
 
-![Webpack logo](/gallery/初探Node-js/pic5.png)
+![Webpack logo](pic5.png)
 
 起初我选择的是模块化开发模式，因为项目的文件采用PAJAX方式加载，可以理解为子页面单独加载的模式。
 
@@ -344,7 +344,7 @@ class Register extends Component<FormComponentProps & RouterProps, IRegisterStat
 
 ## Pull requests
 
-![releases 3.7.2](/gallery/初探Node-js/pic6.png)
+![releases 3.7.2](pic6.png)
 
 [releases 3.7.2](https://github.com/ant-design/ant-design/releases/tag/3.7.2)
 

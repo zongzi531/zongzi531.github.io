@@ -3,7 +3,7 @@ title: 入手 MacBook Pro
 date: 2017-05-29 20:57:59
 categories: "MAC"
 comments: true
-thumbnail: /gallery/Pro/pic.jpeg
+featured_image: pic.jpeg
 tags:
 - Apple
 - MAC OS
@@ -21,7 +21,7 @@ tags:
 
 **要问为什么？**
 
-![](/gallery/Pro/pic2.jpeg)
+![](pic2.jpeg)
 
 哈哈哈，应该可以笑很久吧。OK，我笑点低。
 
@@ -34,9 +34,9 @@ tags:
 但是在启动本地`hexo server`的时候又报错了，天呐。
 
 ```bash
-{ [Error: Cannot find module '/gallery/build/Release/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
-{ [Error: Cannot find module '/gallery/build/default/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
-{ [Error: Cannot find module '/gallery/build/Debug/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
+{ [Error: Cannot find module './build/Release/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
+{ [Error: Cannot find module './build/default/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
+{ [Error: Cannot find module './build/Debug/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
 ```
 
 尝试了网上各种解决方法，都不行。当然出现这个问题应该是我直接`npm install`造成的，虽然`hexo`暂时并没有用到`dtrace-prodider`，但是对于有强迫症的我，看到报错真的很心烦。
@@ -47,7 +47,7 @@ tags:
 
 还有就是我发布的时候遇到的问题`Failure: XXX is not a recognized Liquid tag.`  ， 记得 `hexo clean`一下，可能是因为以前Windows的数据导致上GitHub页面生成失败三次的。
 
-![](/gallery/Pro/pic3.jpeg)
+![](Pro/pic3.jpeg)
 
 这样，基本的一台可以科学上网的MacBook躺在怀里了，我可以拿来撸代码了。
 

@@ -3,7 +3,6 @@ title: React 源码学习（三）：CSS 样式及 DOM 属性
 date: 2019-04-03 00:02:37
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---

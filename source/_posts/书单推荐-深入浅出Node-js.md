@@ -3,7 +3,7 @@ title: ［书单推荐］《深入浅出Node.js》
 date: 2019-01-01 22:11:43
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/书单推荐-深入浅出Node-js/Node.js_logo.svg
+featured_image: Node.js_logo.svg
 tags:
 - JavaScript
 - Node.js
@@ -39,7 +39,7 @@ Node.js得以从后端领域崛起的原因之一是依靠事件驱动这一优�
 
 首先要面对的问题是单线程，毕竟 Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。OK，那么单线程有什么问题呢？有个最致命的问题，一但线程出错，整个线程就会退出……捞不捞？说捞也捞，说不捞也不捞，要怪就怪开发没把抛异常写好，导致线程退出。单线程还有什么问题呢，你看，现在都是多核 CPU 单线程开着一个进程在跑， CPU 资源是不是浪费了，有一张很搞笑的图。
 
-![pic-1](/gallery/书单推荐-深入浅出Node-js/pic-1.jpg)
+![pic-1](pic-1.jpg)
 
 那么如何利用起其他的核呢？ Node.js 提供了 child_process（子进程）的功能，你可以启动跟你服务器 CPU 内核数相同的进程来提供服务，来提升你的服务能力，关于进程自动重启，进程监听同一端口，负载均衡等等实践可以看书或自己尝试。
 

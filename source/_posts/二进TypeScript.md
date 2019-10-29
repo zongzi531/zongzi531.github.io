@@ -3,7 +3,7 @@ title: 二进TypeScript
 date: 2018-12-01 00:07:48
 categories: "TypeScript"
 comments: true
-thumbnail: /gallery/二进TypeScript/foreground_bluprint.svg
+featured_image: foreground_bluprint.svg
 tags:
 - TypeScript
 ---

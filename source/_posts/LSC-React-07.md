@@ -3,7 +3,6 @@ title: React 源码学习（七）：生命周期
 date: 2019-04-07 10:04:50
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---
@@ -282,4 +281,4 @@ var ReactCompositeComponentInterface = {
 
 来看一下生命周期图：
 
-![生命周期图](/gallery/LSC-React/07-01.png)
+![生命周期图](07-01.png)

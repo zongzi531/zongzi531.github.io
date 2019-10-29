@@ -3,7 +3,7 @@ title: React学习笔记（一）
 date: 2017-05-22 21:06:26
 categories: "React"
 comments: true
-thumbnail: /gallery/react-notes-01/pic.jpg
+featured_image: pic.jpg
 tags:
 - React
 ---
@@ -49,7 +49,7 @@ $ npm start
 
 ## 4.Hello World
 
-修改`/gallery/src/index.js`
+修改`./src/index.js`
 
 ```javascript
 ReactDOM.render(<App />, document.getElementById('root'));

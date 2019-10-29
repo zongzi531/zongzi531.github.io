@@ -3,7 +3,7 @@ title: 参加FCC上海前端技术群线下Meetup
 date: 2018-09-19 20:48:59
 categories: "CSS"
 comments: true
-thumbnail: /gallery/参加FCC上海前端技术群线下Meetup/fcc-meetup4.JPG
+featured_image: fcc-meetup4.JPG
 tags:
 - CSS
 - FCC
@@ -19,7 +19,7 @@ tags:
 
 ## [1、Layers: a case study of CSS optimization - 🐑🐑🐑(吴名扬)；](https://docs.google.com/presentation/d/e/2PACX-1vRIsRF2Kz0to_0OJ_vrS4MODvj__SLtRWlXGdqt38VbahxXMHmGHyd5QvsxSCRlxM0ZWjV-szjI3qEy/pub?start=false&loop=false&delayms=3000&slide=id.p7)
 
-![pic1-1](/gallery/参加FCC上海前端技术群线下Meetup/pic1-1.png)
+![pic1-1](pic1-1.png)
 
 ### CSS 文件大小
 
@@ -60,9 +60,9 @@ GPU 加速可以不仅应用于3D，而且也可以应用于2D，通常可以应
 
 再次提一下浏览器渲染流程：JavaScript -> Style -> **Layout** -> Paint -> Composite
 
-![pic1-2](/gallery/参加FCC上海前端技术群线下Meetup/pic1-2.png)
-![pic1-3](/gallery/参加FCC上海前端技术群线下Meetup/pic1-3.png)
-![pic1-4](/gallery/参加FCC上海前端技术群线下Meetup/pic1-4.png)
+![pic1-2](pic1-2.png)
+![pic1-3](pic1-3.png)
+![pic1-4](pic1-4.png)
 
 如何对症下药：减少Layer的生成和扩散
 
@@ -71,11 +71,11 @@ GPU 加速可以不仅应用于3D，而且也可以应用于2D，通常可以应
 * contain: content
 * CSS filter
 
-![pic1-5](/gallery/参加FCC上海前端技术群线下Meetup/pic1-5.png)
-![pic1-6](/gallery/参加FCC上海前端技术群线下Meetup/pic1-6.png)
-![pic1-7](/gallery/参加FCC上海前端技术群线下Meetup/pic1-7.png)
-![pic1-8](/gallery/参加FCC上海前端技术群线下Meetup/pic1-8.png)
-![pic1-9](/gallery/参加FCC上海前端技术群线下Meetup/pic1-9.png)
+![pic1-5](pic1-5.png)
+![pic1-6](pic1-6.png)
+![pic1-7](pic1-7.png)
+![pic1-8](pic1-8.png)
+![pic1-9](pic1-9.png)
 
 要解决性能问题，先理解问题根源。
 

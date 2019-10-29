@@ -3,7 +3,7 @@ title: GitHub自定义域名解析
 date: 2017-04-16 00:46:20
 categories: "Git"
 comments: true
-thumbnail: /gallery/github自定义域名解析/pic.jpg
+featured_image: pic.jpg
 tags:
 - GitHub
 ---

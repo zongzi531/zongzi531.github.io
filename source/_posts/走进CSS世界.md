@@ -110,7 +110,7 @@ margin合并的3种场景：
 	display: block;
 	width: 42px;
 	height: 42px;
-	background: url('/gallery/icon.png'),
+	background: url('./icon.png'),
 	            rgba(250,251,252,1);
 	background-repeat: no-repeat;
 	background-size: 18px;
@@ -251,7 +251,7 @@ export default {
 涉及到移动端开发，考虑到适配，我选用rem解决适配问题，之前项目都是采用编辑器插件，直接在编写代码的时候转换为rem单位，但是问题在于转换后的rem单位在代码审查或者修改时，可读性极低，根本没办法直接知道值是多少，所以本次采用webpack打包时自动编译成rem单位技术。
 
 ```html
-<script src="/gallery/static/js/amfe-flexible.min.js"></script>
+<script src="./static/js/amfe-flexible.min.js"></script>
 ```
 
 ```javascript

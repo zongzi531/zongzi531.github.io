@@ -3,7 +3,6 @@ title: React 源码学习（四）：事务机制
 date: 2019-04-04 00:01:36
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---

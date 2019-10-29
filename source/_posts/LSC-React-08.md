@@ -3,7 +3,6 @@ title: React 源码学习（八）：组件更新
 date: 2019-04-08 19:15:34
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---

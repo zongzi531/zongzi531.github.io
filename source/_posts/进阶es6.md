@@ -3,7 +3,7 @@ title: 进阶ES6
 date: 2017-10-12 21:57:25
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/进阶es6/pic.jpeg
+featured_image: pic.jpeg
 tags:
 - JavaScript
 - ECMAScript 6

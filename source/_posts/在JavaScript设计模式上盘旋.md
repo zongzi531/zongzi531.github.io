@@ -3,7 +3,7 @@ title: 在 JavaScript 设计模式上盘旋
 date: 2018-09-06 19:53:24
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/在JavaScript设计模式上盘旋/pic1.jpg
+featured_image: pic1.jpg
 tags:
 - JavaScript
 ---
@@ -110,7 +110,7 @@ rule.selector.indexOf(':before') === -1
       owner.md5File(file).then(function(md5) {
         $.ajax({
           type: 'POST',
-          url: '/gallery/uploadCheck',
+          url: './uploadCheck',
           data: {
             md5: md5
           },
@@ -139,8 +139,8 @@ rule.selector.indexOf(':before') === -1
 
   var uploader = WebUploader.create({
     auto: true,
-    swf: '/gallery/Uploader.swf',
-    server: '/gallery/upload',
+    swf: './Uploader.swf',
+    server: './upload',
     pick: '#filePicker',
     chunked: true,
     threads: 1,

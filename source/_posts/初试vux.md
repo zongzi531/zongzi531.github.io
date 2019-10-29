@@ -3,7 +3,7 @@ title: 初试VUX
 date: 2017-07-01 12:22:47
 categories: "Vue"
 comments: true
-thumbnail: /gallery/初试vux/logo.jpeg
+featured_image: logo.jpeg
 tags:
 - Vux
 - Vue
@@ -75,7 +75,7 @@ const router = new VueRouter({
 
 ```javascript
 import Vue from 'vue'
-import router from '/gallery/router'
+import router from './router'
 import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
 
@@ -104,5 +104,5 @@ Vue.use(vueg, router, options)
 
 ## DEMO
 
-![](/gallery/初试vux/demo1.gif)
+![](demo1.gif)
 [源码](https://github.com/zongzi531/vux-demo-test)

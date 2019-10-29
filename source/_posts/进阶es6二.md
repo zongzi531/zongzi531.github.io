@@ -3,7 +3,7 @@ title: 进阶ES6（二）
 date: 2017-11-25 18:22:55
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/进阶es6二/pic.jpeg
+featured_image: pic.jpeg
 tags:
 - JavaScript
 - ECMAScript 6
@@ -86,7 +86,7 @@ init()
 /**
  * HOW TO USE
  *
- * 1.import ca from '/gallery/element-ui-Cascader-china-address-v3.js'
+ * 1.import ca from './element-ui-Cascader-china-address-v3.js'
  * 2.<el-cascader :options="ca" ... > ... </el-cascader>
  */
 ```

@@ -3,7 +3,7 @@ title: 认识Object.assign以及JavaScript中的浅拷贝和深拷贝
 date: 2017-04-24 21:25:07
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/认识Object-assign以及JavaScript中的浅拷贝和深拷贝/pic.jpeg
+featured_image: pic.jpeg
 tags:
 - JavaScript
 ---

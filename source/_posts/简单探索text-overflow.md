@@ -3,7 +3,7 @@ title: 简单探索text-overflow
 date: 2017-04-19 19:46:39
 categories: "CSS"
 comments: true
-thumbnail: /gallery/简单探索text-overflow/pic.jpg
+featured_image: pic.jpg
 tags:
 - HTML/CSS
 - CSS3
@@ -29,7 +29,7 @@ text-overflow: ellipsis
 
 我将一段内容设置了文字溢出后截断溢出内容，并显示省略号，以下为出入：
 
-![](/gallery/简单探索text-overflow/test1.jpeg)
+![](test1.jpeg)
 
 溢出的省略号内容的出入的确很让人头痛。
 
@@ -37,7 +37,7 @@ text-overflow: ellipsis
 
 然后去MDN仔细看了看[text-overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow)
 
-![](/gallery/简单探索text-overflow/text-overflow.png)
+![](text-overflow.png)
 
 看到了一个很有意思的参数：Custom string ""。但是很遗憾的是大部分浏览器**不支持**。
 
@@ -52,7 +52,7 @@ text-overflow: "···"
 用Firefox试了一试：
 >移动端Firefox版本未达到9.0
 
-![](/gallery/简单探索text-overflow/test2.jpeg)
+![](test2.jpeg)
 
 # 总结
 

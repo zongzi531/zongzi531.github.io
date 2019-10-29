@@ -3,7 +3,7 @@ title: 用Vue实现一个To Do List项目
 date: 2017-06-02 22:49:10
 categories: "Vue"
 comments: true
-thumbnail: /gallery/用vue实现一个todolist项目/demo.gif
+featured_image: demo.gif
 tags:
 - Vue
 ---
@@ -141,8 +141,8 @@ export default {
 ### CSS
 
 ```css
-@import '/gallery/gallery/static/normalize-css/normalize.css';
-@import '/gallery/gallery/static/bootstrap/dist/css/bootstrap.min.css';
+@import '../static/normalize-css/normalize.css';
+@import '../static/bootstrap/dist/css/bootstrap.min.css';
 
 ...
 ```

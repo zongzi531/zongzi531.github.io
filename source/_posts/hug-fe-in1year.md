@@ -286,7 +286,7 @@ build/utils.js
 
 ```javascript
 ExtractTextPlugin.extract({
-  publicPath: '/gallery/gallery//gallery/gallery/'  //  解决CSS样式导出路径问题
+  publicPath: '../../'  //  解决CSS样式导出路径问题
 })
 ```
 
@@ -294,7 +294,7 @@ config/index.js
 
 ```javascript
 build: {
-  assetsPublicPath: '/gallery/'  //  解决JS、CSS路径问题
+  assetsPublicPath: './'  //  解决JS、CSS路径问题
 }
 ```
 

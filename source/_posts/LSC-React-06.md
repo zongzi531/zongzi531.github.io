@@ -3,7 +3,6 @@ title: React 源码学习（六）：组件渲染
 date: 2019-04-06 09:52:00
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---

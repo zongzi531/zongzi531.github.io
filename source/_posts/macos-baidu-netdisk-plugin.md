@@ -3,7 +3,7 @@ title: macOS Mojave 系统中启动程序变卡
 date: 2019-07-02 09:34:48
 categories: "MAC"
 comments: true
-thumbnail: /gallery/macos-baidu-netdisk-plugin/Apple-OS-Mojave1020x660.jpg
+featured_image: Apple-OS-Mojave1020x660.jpg
 tags:
 - Apple
 - MAC OS

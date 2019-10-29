@@ -3,7 +3,7 @@ title: Vue实战经验分享
 date: 2017-06-17 20:57:11
 categories: "Vue"
 comments: true
-thumbnail: /gallery/vue实战经验分享/logo.png
+featured_image: logo.png
 tags:
 - Vue
 ---

@@ -3,7 +3,7 @@ title: 面经总结
 date: 2019-05-05 21:03:47
 categories: "Blog"
 comments: true
-thumbnail: /gallery/interview/pic.jpg
+featured_image: pic.jpg
 tags:
 - 算法
 - React

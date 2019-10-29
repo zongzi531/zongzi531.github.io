@@ -3,7 +3,7 @@ title: 浅析 jQuery （一）
 date: 2018-09-22 00:51:18
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/浅析jQuery（一）/jQuery.png
+featured_image: jQuery.png
 tags:
 - JavaScript
 - jQuery

@@ -4,7 +4,7 @@ date: 2018-11-24 17:45:28
 update: 2018-11-30 19:55:37
 categories: "Vue"
 comments: true
-thumbnail: /gallery/vueconf-hangzhou-2018/logo.svg
+featured_image: logo.svg
 tags:
 - Vue
 ---
@@ -421,7 +421,7 @@ SFC (Single File Component) 将 Template 、 Style 、 Script 分离，分离后
 
 对 Electron 是有所耳闻，知道 VSCode 、 GitHub Desktop 是使用 Electron 开发的。借机先学习下 Electron 的原理：
 
-![Electron-Vue-1](/gallery/vueconf-hangzhou-2018/Electron-Vue-1.png)
+![Electron-Vue-1](Electron-Vue-1.png)
 
 ### 1.如何解耦业务逻辑
   
@@ -434,7 +434,7 @@ SFC (Single File Component) 将 Template 、 Style 、 Script 分离，分离后
 
 看不懂的时候就做个勤劳的搬运工吧
 
-![Electron-Vue-2](/gallery/vueconf-hangzhou-2018/Electron-Vue-2.png)
+![Electron-Vue-2](Electron-Vue-2.png)
 
 ### 3.如何完成签名、⾃动更新
 
@@ -455,7 +455,7 @@ SFC (Single File Component) 将 Template 、 Style 、 Script 分离，分离后
 
 其实就是在应用中设置埋点，上报监控系统
 
-![Electron-Vue-3](/gallery/vueconf-hangzhou-2018/Electron-Vue-3.png)
+![Electron-Vue-3](Electron-Vue-3.png)
 
 ---
 
@@ -483,7 +483,7 @@ SFC (Single File Component) 将 Template 、 Style 、 Script 分离，分离后
 
 多端统一方案背景介绍
 
-![Hippy-Vue-1](/gallery/vueconf-hangzhou-2018/Hippy-Vue-1.png)
+![Hippy-Vue-1](Hippy-Vue-1.png)
 
 Hippy SDK 采⽤三层设计，其中：
 
@@ -495,7 +495,7 @@ Hippy Buffer：⼆进制传输协议，编解码性能更好。
 X5 V8：X5 团队特供 V8 引擎。
 Hippy Layout：iOS、Android 共享布局引擎，纯 C 开发，只有 50kb。
 
-![Hippy-Vue-2](/gallery/vueconf-hangzhou-2018/Hippy-Vue-2.png)
+![Hippy-Vue-2](Hippy-Vue-2.png)
 
 ## 应用多端统一的实践
 
@@ -510,10 +510,10 @@ Hippy Layout：iOS、Android 共享布局引擎，纯 C 开发，只有 50kb。
 
 看起来多端统一方案都基本差不多，就是具体实现上有差异，接下来看看阿里的
 
-![rax-1](/gallery/vueconf-hangzhou-2018/rax-1.png)
-![rax-2](/gallery/vueconf-hangzhou-2018/rax-2.png)
-![rax-3](/gallery/vueconf-hangzhou-2018/rax-3.png)
-![rax-4](/gallery/vueconf-hangzhou-2018/rax-4.png)
+![rax-1](rax-1.png)
+![rax-2](rax-2.png)
+![rax-3](rax-3.png)
+![rax-4](rax-4.png)
 
 介绍几个阿里已经开源的仓库：
 
@@ -571,7 +571,7 @@ Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏�
 
 >“状态管理，等同于状态结构及其变化过程，你可以从描述状态⼊⼿，以某个时刻的状态为侧重点，淡化其变迁过程，也可以从变迁过程⼊⼿，侧重某个过程对数据的变动”
 
-![Vue-SSR-1](/gallery/vueconf-hangzhou-2018/Vue-SSR-1.png)
+![Vue-SSR-1](Vue-SSR-1.png)
 
 利用 Observable 实现：
 
@@ -582,7 +582,7 @@ Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏�
 
 Vue 帮我们解决了同步响应式， Observable 帮我们解决了异步响应式
 
-![Vue-SSR-2](/gallery/vueconf-hangzhou-2018/Vue-SSR-2.png)
+![Vue-SSR-2](Vue-SSR-2.png)
 
 ## how CRDT improves Vue apps
 
@@ -598,10 +598,10 @@ Vue 帮我们解决了同步响应式， Observable 帮我们解决了异步响�
 
 看视频感觉大佬做的 slides 挺好懂的。大佬介绍了 CRDT 与其他 AJAX 的体验区别，猜测 CRDT 是趋势，但是这和 Vue 有什么关系，我在 slides 中也没看出来。 CRDT 的全称是 [Conflict-free replicated data type](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type) 。接下来我分享几张通俗易懂的 slides。
 
-![crdt-1](/gallery/vueconf-hangzhou-2018/crdt-1.png)
-![crdt-2](/gallery/vueconf-hangzhou-2018/crdt-2.png)
-![crdt-3](/gallery/vueconf-hangzhou-2018/crdt-3.png)
-![crdt-4](/gallery/vueconf-hangzhou-2018/crdt-4.png)
-![crdt-5](/gallery/vueconf-hangzhou-2018/crdt-5.png)
-![crdt-6](/gallery/vueconf-hangzhou-2018/crdt-6.png)
-![crdt-7](/gallery/vueconf-hangzhou-2018/crdt-7.png)
+![crdt-1](crdt-1.png)
+![crdt-2](crdt-2.png)
+![crdt-3](crdt-3.png)
+![crdt-4](crdt-4.png)
+![crdt-5](crdt-5.png)
+![crdt-6](crdt-6.png)
+![crdt-7](crdt-7.png)

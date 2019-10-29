@@ -3,7 +3,7 @@ title: this & setTimeout
 date: 2017-06-20 22:05:55
 categories: "JavaScript"
 comments: true
-thumbnail: /gallery/thisandsetTimeout/pic.jpeg
+featured_image: pic.jpeg
 tags:
 - JavaScript
 ---

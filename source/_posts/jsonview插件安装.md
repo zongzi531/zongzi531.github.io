@@ -3,7 +3,7 @@ title: JSONView插件安装
 date: 2017-04-17 21:25:24
 categories: "Tools"
 comments: true
-thumbnail: /gallery/jsonview插件安装/p1.jpeg
+featured_image: p1.jpeg
 tags:
 - JSON
 - Chrome
@@ -20,5 +20,5 @@ tags:
 4. 选择对应的解压目录。
 5. 安装完成，可以用了。
 
-![](/gallery/jsonview插件安装/p2.jpeg)
+![](p2.jpeg)
 

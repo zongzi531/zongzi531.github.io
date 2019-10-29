@@ -3,7 +3,6 @@ title: React 源码学习（五）：事件机制
 date: 2019-04-05 08:25:52
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---
@@ -29,7 +28,7 @@ tags:
 
 我们先来看到整体逻辑图：
 
-![事件机制](/gallery/LSC-React/05-01.png)
+![事件机制](05-01.png)
 
 React 采用将事件挂载至 `document` 或者 `window` 上来实现顶级事件。接下来我们会一一来介绍事件的实现过程。
 

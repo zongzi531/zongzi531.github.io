@@ -3,7 +3,6 @@ title: React 源码学习（一）：HTML 元素渲染
 date: 2019-04-01 21:10:31
 categories: "React"
 comments: true
-thumbnail: /gallery/LSC-React/logo.png
 tags:
 - React
 ---

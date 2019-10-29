@@ -3,7 +3,7 @@ title: 深入React
 date: 2018-02-05 21:53:17
 categories: "React"
 comments: true
-thumbnail: /gallery/深入react/logo.svg
+featured_image: logo.svg
 tags:
 - React
 - JavaScript

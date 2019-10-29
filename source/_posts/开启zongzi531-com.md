@@ -2,7 +2,7 @@
 title: 开启zongzi531.com
 date: 2017-04-16 14:27:59
 categories: "Blog"
-thumbnail: /gallery/开启zongzi531-com/pic.png
+featured_image: pic.png
 comments: true
 ---
 
