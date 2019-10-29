@@ -23,7 +23,7 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?92887022">
+<link rel="stylesheet" href="/css/journal.css?22766353">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -58,7 +58,8 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-</head>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -70,8 +71,24 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
                 首页
             </a>
             
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+            
 
             
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                关于
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friendslinks/index.html">
+                友情链接
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                通勤那点事
+            </a>
             
 
             
@@ -113,15 +130,31 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
 
     <div class="nav-link-list">
         
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+        
 
         
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            关于
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friendslinks/index.html">
+            友情链接
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/commuting/index.html">
+            通勤那点事
+        </a>
         
 
         
     </div>
 
     <div class="nav-footer">
-        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+        &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -178,16 +211,43 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
 <p>To Do List一直是我学习框架开始的地方，最早写To Do List这个demo是在初学Vue的时候。<br>时间过得很快，在我学习React的时候，我直接将这个Vue demo进行了改写。<br>现在我重新将这个demo从JavaScript改写成TypeScript，在此分享一些学习总结。</p>
 </blockquote>
 <p>此次，仍然使用create-react-app脚手架创建React项目，按照TypeScript官网推荐，你可以使用以下命令完成项目创建。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install create-react-app</span></span><br><span class="line">$ npm install -g create-react-app</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create our new project</span></span><br><span class="line">$ create-react-app my-app --scripts-version=react-scripts-ts</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Install create-react-app</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> -g create-react-app
 
+<span class="token comment" spellcheck="true"># Create our new project</span>
+$ create-react-app my-app --scripts-version<span class="token operator">=</span>react-scripts-ts<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>更多详细操作可以参见<a href="https://github.com/Microsoft/TypeScript-React-Starter" target="_blank" rel="noopener">TypeScript-React-Starter</a>。</p>
 <h2 id="泛型参数"><a href="#泛型参数" class="headerlink" title="泛型参数"></a>泛型参数</h2><p>泛型参数类型是用来约束类的成员/方法参数类型。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Component&lt;P = &#123;&#125;, S = &#123;&#125;, SS = <span class="built_in">any</span>&gt; <span class="keyword">extends</span> ComponentLifecycle&lt;P, S, SS&gt; &#123; &#125;</span><br><span class="line"><span class="keyword">class</span> Component&lt;P, S&gt; &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">props: P, context?: <span class="built_in">any</span></span>);</span><br><span class="line"></span><br><span class="line">    // We MUST keep setState(<span class="params"></span>) as a unified signature because it allows proper checking of the method return type.</span><br><span class="line">    // See: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365#issuecomment-351013257</span><br><span class="line">    // Also, the ` | S` allows intellisense to not be dumbisense</span><br><span class="line">    setState&lt;K extends keyof S&gt;(<span class="params"></span></span><br><span class="line"><span class="params">        state: ((prevState: Readonly&lt;S&gt;, props: P) =&gt; (Pick&lt;S, K&gt; | S | <span class="literal">null</span>)) | (Pick&lt;S, K&gt; | S | <span class="literal">null</span>),</span></span><br><span class="line"><span class="params">        callback?: () =&gt; <span class="built_in">void</span></span></span><br><span class="line"><span class="params">    </span>): void;</span><br><span class="line"></span><br><span class="line">    forceUpdate(<span class="params">callBack?: () =&gt; <span class="built_in">void</span></span>): void;</span><br><span class="line">    render(<span class="params"></span>): ReactNode;</span><br><span class="line"></span><br><span class="line">    // React.Props&lt;T&gt; is now deprecated, which means that the `children`</span><br><span class="line">    // property is not available on `P` by default, even though you can</span><br><span class="line">    // always pass children as variadic arguments to `createElement`.</span><br><span class="line">    // In the future, if we can define its call signature conditionally</span><br><span class="line">    // on the existence of `children` in `P`, then we should remove this.</span><br><span class="line">    props: Readonly&lt;&#123; children?: ReactNode &#125;&gt; &amp; Readonly&lt;P&gt;;</span><br><span class="line">    state: Readonly&lt;S&gt;;</span><br><span class="line">    context: <span class="built_in">any</span>;</span><br><span class="line">    refs: &#123;</span><br><span class="line">        [key: <span class="built_in">string</span>]: ReactInstance</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> S <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> SS <span class="token operator">=</span> <span class="token keyword">any</span><span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">ComponentLifecycle</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token punctuation">,</span> SS<span class="token operator">></span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">:</span> P<span class="token punctuation">,</span> context<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+    <span class="token comment" spellcheck="true">// We MUST keep setState() as a unified signature because it allows proper checking of the method return type.</span>
+    <span class="token comment" spellcheck="true">// See: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365#issuecomment-351013257</span>
+    <span class="token comment" spellcheck="true">// Also, the ` | S` allows intellisense to not be dumbisense</span>
+    setState<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> S<span class="token operator">></span><span class="token punctuation">(</span>
+        state<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>prevState<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span>S<span class="token operator">></span><span class="token punctuation">,</span> props<span class="token punctuation">:</span> P<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>Pick<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> K<span class="token operator">></span> <span class="token operator">|</span> S <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>Pick<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> K<span class="token operator">></span> <span class="token operator">|</span> S <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        callback<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span>
+    <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+
+    <span class="token function">forceUpdate</span><span class="token punctuation">(</span>callBack<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> ReactNode<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// React.Props&lt;T> is now deprecated, which means that the `children`</span>
+    <span class="token comment" spellcheck="true">// property is not available on `P` by default, even though you can</span>
+    <span class="token comment" spellcheck="true">// always pass children as variadic arguments to `createElement`.</span>
+    <span class="token comment" spellcheck="true">// In the future, if we can define its call signature conditionally</span>
+    <span class="token comment" spellcheck="true">// on the existence of `children` in `P`, then we should remove this.</span>
+    props<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span><span class="token punctuation">{</span> children<span class="token operator">?</span><span class="token punctuation">:</span> ReactNode <span class="token punctuation">}</span><span class="token operator">></span> <span class="token operator">&amp;</span> Readonly<span class="token operator">&lt;</span>P<span class="token operator">></span><span class="token punctuation">;</span>
+    state<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span>S<span class="token operator">></span><span class="token punctuation">;</span>
+    context<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">;</span>
+    refs<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">[</span>key<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> ReactInstance
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>查看<code>Component</code>源码你会发现泛型参数<code>P</code>对应的就是<code>props</code>，泛型参数<code>S</code>对应的就是<code>state</code>。</p>
 <p>所以在写<code>class</code>组件时，都会以以下格式进行定义：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> App <span class="keyword">extends</span> Component&lt;IPropTypes, IStateTypes&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>IPropTypes<span class="token punctuation">,</span> IStateTypes<span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>来回顾一下，之前我们写React会使用<code>prop-types</code>来约束<code>props</code>的参数类型，但是现在我们可以放弃他，尽情发挥TypeScript的类型检查功能。</p>
 <p>我们可以使用接口来约束<code>props</code>的类型，这同样也受用于<code>state</code>。</p>
 <p>同样在写组件时，你会发现通用组件下会存在可选参数，那么写接口时就会使用到可选属性来解决这个问题。那么如果某些组件没有可选属性时候，你就不需要再使用<code>defaultProps</code>来设置<code>props</code>的默认值了，因为TypeScript的类型会直接抛出错误。</p>
@@ -196,8 +256,33 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
 <p>我尝试着去把所有的不确定都换成确定。想想如果将所有的数据类型都定义成<code>any</code>，那么就失去了TypeScript的类型检查功能了，非常糟糕。</p>
 <p>所以我在写泛型参数<code>props</code>和<code>state</code>时，如果存在没有属性的情况下，我会选择使用空对象类型<code>{}</code>，使得我的程序更可控。</p>
 <h2 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h2><p>在写到表单内容时，会有一些需要使用到<code>event</code>的地方，这次我使用了React提供的事件类型。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> SyntheticEvent&lt;T&gt; &#123;</span><br><span class="line">    bubbles: <span class="built_in">boolean</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * A reference to the element on which the event listener is registered.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    currentTarget: EventTarget &amp; T;</span><br><span class="line">    cancelable: <span class="built_in">boolean</span>;</span><br><span class="line">    defaultPrevented: <span class="built_in">boolean</span>;</span><br><span class="line">    eventPhase: <span class="built_in">number</span>;</span><br><span class="line">    isTrusted: <span class="built_in">boolean</span>;</span><br><span class="line">    nativeEvent: Event;</span><br><span class="line">    preventDefault(): <span class="built_in">void</span>;</span><br><span class="line">    isDefaultPrevented(): <span class="built_in">boolean</span>;</span><br><span class="line">    stopPropagation(): <span class="built_in">void</span>;</span><br><span class="line">    isPropagationStopped(): <span class="built_in">boolean</span>;</span><br><span class="line">    persist(): <span class="built_in">void</span>;</span><br><span class="line">    <span class="comment">// If you thought this should be `EventTarget &amp; T`, see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/12239</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * A reference to the element from which the event was originally dispatched.</span></span><br><span class="line"><span class="comment">     * This might be a child element to the element on which the event listener is registered.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @see currentTarget</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    target: EventTarget;</span><br><span class="line">    timeStamp: <span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">type</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">SyntheticEvent</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    bubbles<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     * A reference to the element on which the event listener is registered.
+     */</span>
+    currentTarget<span class="token punctuation">:</span> EventTarget <span class="token operator">&amp;</span> T<span class="token punctuation">;</span>
+    cancelable<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    defaultPrevented<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    eventPhase<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    isTrusted<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    nativeEvent<span class="token punctuation">:</span> Event<span class="token punctuation">;</span>
+    <span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token function">isDefaultPrevented</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token function">isPropagationStopped</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token function">persist</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// If you thought this should be `EventTarget &amp; T`, see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/12239</span>
+    <span class="token comment" spellcheck="true">/**
+     * A reference to the element from which the event was originally dispatched.
+     * This might be a child element to the element on which the event listener is registered.
+     *
+     * @see currentTarget
+     */</span>
+    target<span class="token punctuation">:</span> EventTarget<span class="token punctuation">;</span>
+    timeStamp<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    type<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>以上是<code>SyntheticEvent&lt;T&gt;</code>接口源码，React已经将原生事件需要部分进行了合成，在此基础上有更细化的接口：<code>FocusEvent&lt;T&gt;</code>、<code>ChangeEvent&lt;T&gt;</code>、<code>KeyboardEvent&lt;T&gt;</code>。</p>
 <p>这里必须要很强势的安利一波VSCode，他让我的TypeScript开发体验变得如此之优雅，让我能够更好的学习TypeScript。</p>
 <h2 id="TSLint"><a href="#TSLint" class="headerlink" title="TSLint"></a>TSLint</h2><p>代码舒适区这个问题，我选择适当的妥协，我选择适当的适应规则让我成长，而不是一味的寻找舒适区。</p>
@@ -244,7 +329,7 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
         </div>
     </div>
     <div class="single-column-footer">
-    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
 </div>
 </div>
 
@@ -259,7 +344,7 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?86241787"></script>
+<script src="/js/journal.js?94681320"></script>
 
 
 

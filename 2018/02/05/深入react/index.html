@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?27051769">
+<link rel="stylesheet" href="/css/journal.css?4766017">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -58,7 +58,8 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-</head>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -70,8 +71,24 @@
                 首页
             </a>
             
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+            
 
             
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                关于
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friendslinks/index.html">
+                友情链接
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                通勤那点事
+            </a>
             
 
             
@@ -113,15 +130,31 @@
 
     <div class="nav-link-list">
         
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+        
 
         
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            关于
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friendslinks/index.html">
+            友情链接
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/commuting/index.html">
+            通勤那点事
+        </a>
         
 
         
     </div>
 
     <div class="nav-footer">
-        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+        &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -199,30 +232,85 @@
 <li>……</li>
 </ul>
 <p>新项目ESlint配置如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  root: <span class="literal">true</span>,</span><br><span class="line">  parser: <span class="string">'babel-eslint'</span>,</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    sourceType: <span class="string">'module'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  env: &#123;</span><br><span class="line">    browser: <span class="literal">true</span>,</span><br><span class="line">    node: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  extends: <span class="string">'standard'</span>,</span><br><span class="line">  <span class="string">'globals'</span>: &#123;</span><br><span class="line">    React: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    ecmaFeatures: &#123;</span><br><span class="line">      jsx: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="string">'react'</span>,</span><br><span class="line">    <span class="string">'import'</span>,</span><br><span class="line">    <span class="string">'jsx-a11y'</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">//  https://github.com/yannickcr/eslint-plugin-react</span></span><br><span class="line">  <span class="string">'rules'</span>: &#123;</span><br><span class="line">    <span class="comment">//  https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md</span></span><br><span class="line">    <span class="string">'react/jsx-uses-react'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="comment">//  https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md</span></span><br><span class="line">    <span class="string">'react/jsx-uses-vars'</span>: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  root<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  parser<span class="token punctuation">:</span> <span class="token string">'babel-eslint'</span><span class="token punctuation">,</span>
+  parserOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    sourceType<span class="token punctuation">:</span> <span class="token string">'module'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  env<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    browser<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    node<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token keyword">extends</span><span class="token punctuation">:</span> <span class="token string">'standard'</span><span class="token punctuation">,</span>
+  <span class="token string">'globals'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    React<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  parserOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    ecmaFeatures<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      jsx<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'react'</span><span class="token punctuation">,</span>
+    <span class="token string">'import'</span><span class="token punctuation">,</span>
+    <span class="token string">'jsx-a11y'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">//  https://github.com/yannickcr/eslint-plugin-react</span>
+  <span class="token string">'rules'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//  https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md</span>
+    <span class="token string">'react/jsx-uses-react'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">//  https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md</span>
+    <span class="token string">'react/jsx-uses-vars'</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>有些遗憾的是，没有实践出像Vue那样的ESlint浏览器提示，只是在VSCode中提示，我查看Vue配置文件找到相关插件<a href="https://github.com/geowarin/friendly-errors-webpack-plugin" target="_blank" rel="noopener">Friendly-errors-webpack-plugin</a>，待后续再试。</p>
 <p>有关Jest，暂时未在React实践，只是暂时在自己的项目<a href="https://github.com/zongzi531/vue-to-do-list" target="_blank" rel="noopener">vue-to-do-list</a>进行尝试，但是由于配置问题。输出关于统计的内容并不理想，待后续再试。</p>
 <h3 id="特别要提到的setState"><a href="#特别要提到的setState" class="headerlink" title="特别要提到的setState"></a>特别要提到的setState</h3><p>我相信大家都很熟悉<code>setState()</code>方法，但是他的工作机制确实比较有意思，因为他不是同步更新的，而是异步的。</p>
 <p>每次使用<code>setState()</code>方法更新数据时，其实是将本次要更新的内容提交至一个事务，然后进行批量更新，也就是说是异步的，而非同步。</p>
 <p>那么问题来了，为什么要搞懂这个呢，因为他和组件的生命周期息息相关，否则可能导致你的代码产生意想不到的问题，所以知其然，更要知其所以然。</p>
 <p>来看一段书中的示例代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> (props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">val</span>: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount () &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">val</span>: <span class="keyword">this</span>.state.val + <span class="number">1</span> &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.val)  <span class="comment">// 第一次输出</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">val</span>: <span class="keyword">this</span>.state.val + <span class="number">1</span> &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.val)  <span class="comment">// 第二次输出</span></span><br><span class="line"></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.setState(&#123; <span class="attr">val</span>: <span class="keyword">this</span>.state.val + <span class="number">1</span> &#125;)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.val)  <span class="comment">// 第三次输出</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.setState(&#123; <span class="attr">val</span>: <span class="keyword">this</span>.state.val + <span class="number">1</span> &#125;)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.val)  <span class="comment">// 第四次输出</span></span><br><span class="line">    &#125;, <span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  constructor <span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span> val<span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
+  componentDidMount <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> val<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 第一次输出</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> val<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 第二次输出</span>
+
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> val<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 第三次输出</span>
+
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> val<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>val<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 第四次输出</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最终输出的结果，我相信大家已经实践出来了，确实很出乎意料。</p>
 <p>我建议可以阅读一下<a href="https://reactjs.org/docs/react-component.html#setstate" target="_blank" rel="noopener">setState()</a>。</p>
 <p>这段内容我相信对你理解代码会有很大的帮助：</p>
 <blockquote>
 <p>This form of setState() is also asynchronous, and multiple calls during the same cycle may be batched together. For example, if you attempt to increment an item quantity more than once in the same cycle, that will result in the equivalent of:</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(</span><br><span class="line">  previousState,</span><br><span class="line">  &#123;<span class="attr">quantity</span>: state.quantity + <span class="number">1</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">quantity</span>: state.quantity + <span class="number">1</span>&#125;,</span><br><span class="line">  ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-javascript"><code class="language-javascript">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>
+  previousState<span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>quantity<span class="token punctuation">:</span> state<span class="token punctuation">.</span>quantity <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>quantity<span class="token punctuation">:</span> state<span class="token punctuation">.</span>quantity <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当然官方也提供了解决方案：</p>
 <blockquote>
 <p>Subsequent calls will override values from previous calls in the same cycle, so the quantity will only be incremented once. If the next state depends on the previous state, we recommend using the updater function form, instead:</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">quantity</span>: prevState.quantity + <span class="number">1</span>&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">(</span>prevState<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>quantity<span class="token punctuation">:</span> prevState<span class="token punctuation">.</span>quantity <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><a href="https://reactjs.org/docs/faq-state.html" target="_blank" rel="noopener">FAQ State</a></p>
 <h2 id="重新认识JavaScript"><a href="#重新认识JavaScript" class="headerlink" title="重新认识JavaScript"></a>重新认识JavaScript</h2><p>截止目前，《你不知道的JavaScript 上卷》学习到的内容，我认为我正在重新认识JavaScript。</p>
 <p>简单提一下，目前我认为有必要掌握的知识点：</p>
@@ -257,7 +345,7 @@
         </div>
     </div>
     <div class="single-column-footer">
-    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
 </div>
 </div>
 
@@ -272,7 +360,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?67423991"></script>
+<script src="/js/journal.js?88637148"></script>
 
 
 

@@ -21,7 +21,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?5882798">
+<link rel="stylesheet" href="/css/journal.css?5433365">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -56,7 +56,8 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-</head>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -68,8 +69,24 @@
                 首页
             </a>
             
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+            
 
             
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                关于
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friendslinks/index.html">
+                友情链接
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                通勤那点事
+            </a>
             
 
             
@@ -111,15 +128,31 @@
 
     <div class="nav-link-list">
         
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+        
 
         
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            关于
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friendslinks/index.html">
+            友情链接
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/commuting/index.html">
+            通勤那点事
+        </a>
         
 
         
     </div>
 
     <div class="nav-footer">
-        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+        &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -193,38 +226,38 @@
 <li>对 <code>z-index</code> 、 <code>position: relative/absolute/fixed;</code> 有了一些新的认识，他们可以实现很多同一区域的动画效果</li>
 </ul>
 <p>同时尝试自己编写了一个放大镜工具：</p>
-<pre><code class="javascript">$(<span class="string">"#goods-img-zoom"</span>).hover(
-    <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>{
-        $(<span class="string">"#goods-img-zoom"</span>).append(<span class="string">'&lt;div class="jqzoompup"&gt;&lt;/div&gt;'</span>);
-                <span class="comment">//创建图片鼠标跟踪区域</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hover</span><span class="token punctuation">(</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'&lt;div class="jqzoompup">&lt;/div>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//创建图片鼠标跟踪区域</span>
 
-        $(<span class="string">".goods-preview"</span>).append(<span class="string">'&lt;div class="imgzoomdiv"&gt;&lt;/div&gt;'</span>);
-                <span class="comment">//创建放大镜显示区域</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">".goods-preview"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'&lt;div class="imgzoomdiv">&lt;/div>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//创建放大镜显示区域</span>
 
-        $(<span class="string">"#goods-img-zoom"</span>).mousemove(
-            <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>{
-                <span class="keyword">var</span> goods_img_zoom_jq_x = event.pageX - $(<span class="string">"#goods-img-zoom"</span>).offset().left - <span class="number">87.5</span>;
-                <span class="keyword">var</span> goods_img_zoom_jq_y = event.pageY - $(<span class="string">"#goods-img-zoom"</span>).offset().top - <span class="number">87.5</span>;
-                <span class="keyword">if</span> (goods_img_zoom_jq_x &lt; <span class="number">0</span>) {goods_img_zoom_jq_x = <span class="number">0</span>;};
-                <span class="keyword">if</span> (goods_img_zoom_jq_x &gt; <span class="number">175</span>) {goods_img_zoom_jq_x = <span class="number">175</span>;};
-                <span class="keyword">if</span> (goods_img_zoom_jq_y &lt; <span class="number">0</span>) {goods_img_zoom_jq_y = <span class="number">0</span>;};
-                <span class="keyword">if</span> (goods_img_zoom_jq_y &gt; <span class="number">175</span>) {goods_img_zoom_jq_y = <span class="number">175</span>;};
-                    <span class="comment">//控制鼠标移动的区域</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">mousemove</span><span class="token punctuation">(</span>
+            <span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">var</span> goods_img_zoom_jq_x <span class="token operator">=</span> event<span class="token punctuation">.</span>pageX <span class="token operator">-</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>left <span class="token operator">-</span> <span class="token number">87.5</span><span class="token punctuation">;</span>
+                <span class="token keyword">var</span> goods_img_zoom_jq_y <span class="token operator">=</span> event<span class="token punctuation">.</span>pageY <span class="token operator">-</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top <span class="token operator">-</span> <span class="token number">87.5</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>goods_img_zoom_jq_x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>goods_img_zoom_jq_x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>goods_img_zoom_jq_x <span class="token operator">></span> <span class="token number">175</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>goods_img_zoom_jq_x <span class="token operator">=</span> <span class="token number">175</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>goods_img_zoom_jq_y <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>goods_img_zoom_jq_y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>goods_img_zoom_jq_y <span class="token operator">></span> <span class="token number">175</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>goods_img_zoom_jq_y <span class="token operator">=</span> <span class="token number">175</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                    <span class="token comment" spellcheck="true">//控制鼠标移动的区域</span>
 
-                $(<span class="string">".jqzoompup"</span>).attr(<span class="string">"style"</span>,<span class="string">"top:"</span> + goods_img_zoom_jq_y + <span class="string">"px; left:"</span>+ goods_img_zoom_jq_x +<span class="string">"px;"</span>);
-                    <span class="comment">//根据鼠标移动位置动态调整区域位置</span>
+                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">".jqzoompup"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"style"</span><span class="token punctuation">,</span><span class="token string">"top:"</span> <span class="token operator">+</span> goods_img_zoom_jq_y <span class="token operator">+</span> <span class="token string">"px; left:"</span><span class="token operator">+</span> goods_img_zoom_jq_x <span class="token operator">+</span><span class="token string">"px;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment" spellcheck="true">//根据鼠标移动位置动态调整区域位置</span>
 
-                $(<span class="string">".imgzoomdiv"</span>).attr(<span class="string">"style"</span>,<span class="string">"background:url("</span> + $(<span class="string">"#goods-img-zoom img"</span>).attr(<span class="string">"data-img"</span>) +<span class="string">") no-repeat; background-position:"</span>+ -(goods_img_zoom_jq_x/<span class="number">175</span>*<span class="number">400</span>) + <span class="string">"px "</span> + -(goods_img_zoom_jq_y/<span class="number">175</span>*<span class="number">400</span>) + <span class="string">"px;"</span>);
-                    <span class="comment">//根据跟踪区域显示放大镜内的区域</span>
-            }
-        );
-    },
-    <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-        $(<span class="string">"#goods-img-zoom .jqzoompup"</span>).remove();
-        $(<span class="string">".imgzoomdiv"</span>).remove();
-                <span class="comment">//鼠标移开消失</span>
-    }
-);</code></pre>
+                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">".imgzoomdiv"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"style"</span><span class="token punctuation">,</span><span class="token string">"background:url("</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom img"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"data-img"</span><span class="token punctuation">)</span> <span class="token operator">+</span><span class="token string">") no-repeat; background-position:"</span><span class="token operator">+</span> <span class="token operator">-</span><span class="token punctuation">(</span>goods_img_zoom_jq_x<span class="token operator">/</span><span class="token number">175</span><span class="token operator">*</span><span class="token number">400</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"px "</span> <span class="token operator">+</span> <span class="token operator">-</span><span class="token punctuation">(</span>goods_img_zoom_jq_y<span class="token operator">/</span><span class="token number">175</span><span class="token operator">*</span><span class="token number">400</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"px;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment" spellcheck="true">//根据跟踪区域显示放大镜内的区域</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#goods-img-zoom .jqzoompup"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">".imgzoomdiv"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//鼠标移开消失</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>更多其他代码可以前往我的GitHub查看。因为时隔几个月，感谢Github帮助我回忆之前学习到的内容，更细的内容可以查看更新Commits。 需要提到一点，我的主页是使用Bootstrap制作的。 将来的项目中，我会将更细内容写的更加具体，让我可以更好地总结和分享给大家。</p>
 <h2 id="推荐读物"><a href="#推荐读物" class="headerlink" title="推荐读物"></a>推荐读物</h2><p><a href="https://book.douban.com/subject/2308234/" target="_blank" rel="noopener">《CSS权威指南》</a></p>
 <p><a href="https://book.douban.com/subject/10549733/" target="_blank" rel="noopener">《JavaScript权威指南》</a></p>
@@ -258,7 +291,7 @@
         </div>
     </div>
     <div class="single-column-footer">
-    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
 </div>
 </div>
 
@@ -273,7 +306,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?6428127"></script>
+<script src="/js/journal.js?63802047"></script>
 
 
 

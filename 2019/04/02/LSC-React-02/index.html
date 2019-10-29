@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?78533393">
+<link rel="stylesheet" href="/css/journal.css?4283758">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -58,7 +58,8 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-</head>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -70,8 +71,24 @@
                 首页
             </a>
             
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+            
 
             
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                关于
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friendslinks/index.html">
+                友情链接
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                通勤那点事
+            </a>
             
 
             
@@ -113,15 +130,31 @@
 
     <div class="nav-link-list">
         
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+        
 
         
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            关于
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friendslinks/index.html">
+            友情链接
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/commuting/index.html">
+            通勤那点事
+        </a>
         
 
         
     </div>
 
     <div class="nav-footer">
-        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+        &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -188,18 +221,134 @@
 <li><a href="https://zongzi531.com/2019/04/08/LSC-React-08/">React 源码学习（八）：组件更新</a></li>
 </ol>
 <h2 id="生成-Markup-标记时如何生成多重子元素"><a href="#生成-Markup-标记时如何生成多重子元素" class="headerlink" title="生成 Markup 标记时如何生成多重子元素"></a>生成 Markup 标记时如何生成多重子元素</h2><p>接下来，我们来解读如何实现 HTML 子元素渲染：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactNativeComponent.js</span></span><br><span class="line"><span class="comment">// For quickly matching children type, to test if can be treated as content.</span></span><br><span class="line"><span class="keyword">var</span> CONTENT_TYPES = &#123;<span class="string">'string'</span>: <span class="literal">true</span>, <span class="string">'number'</span>: <span class="literal">true</span>&#125;;</span><br><span class="line"></span><br><span class="line">ReactNativeComponent.Mixin = &#123;</span><br><span class="line">  _createContentMarkup: <span class="function"><span class="keyword">function</span>(<span class="params">transaction</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 这里忽略 dangerouslySetInnerHTML 的情况</span></span><br><span class="line">    <span class="keyword">var</span> contentToUse = <span class="keyword">this</span>.props.content != <span class="literal">null</span> ? <span class="keyword">this</span>.props.content :</span><br><span class="line">      CONTENT_TYPES[<span class="keyword">typeof</span> <span class="keyword">this</span>.props.children] ? <span class="keyword">this</span>.props.children : <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> childrenToUse = contentToUse != <span class="literal">null</span> ? <span class="literal">null</span> : <span class="keyword">this</span>.props.children;</span><br><span class="line">    <span class="keyword">if</span> (contentToUse != <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// content == null 并且 children 为 string / number 的情况</span></span><br><span class="line">      <span class="comment">// 直接返回 Zong is learning the source code of React.</span></span><br><span class="line">      <span class="keyword">return</span> escapeTextForBrowser(contentToUse);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (childrenToUse != <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// 多个 children 的情况</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.mountMultiChild(</span><br><span class="line">        flattenChildren(childrenToUse),</span><br><span class="line">        transaction</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactNativeComponent.js</span>
+<span class="token comment" spellcheck="true">// For quickly matching children type, to test if can be treated as content.</span>
+<span class="token keyword">var</span> CONTENT_TYPES <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'string'</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">'number'</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
+ReactNativeComponent<span class="token punctuation">.</span>Mixin <span class="token operator">=</span> <span class="token punctuation">{</span>
+  _createContentMarkup<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 这里忽略 dangerouslySetInnerHTML 的情况</span>
+    <span class="token keyword">var</span> contentToUse <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>content <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>content <span class="token punctuation">:</span>
+      CONTENT_TYPES<span class="token punctuation">[</span><span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children <span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> childrenToUse <span class="token operator">=</span> contentToUse <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>contentToUse <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// content == null 并且 children 为 string / number 的情况</span>
+      <span class="token comment" spellcheck="true">// 直接返回 Zong is learning the source code of React.</span>
+      <span class="token keyword">return</span> <span class="token function">escapeTextForBrowser</span><span class="token punctuation">(</span>contentToUse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>childrenToUse <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// 多个 children 的情况</span>
+      <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">mountMultiChild</span><span class="token punctuation">(</span>
+        <span class="token function">flattenChildren</span><span class="token punctuation">(</span>childrenToUse<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        transaction
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="扁平化工具方法-flattenChildren"><a href="#扁平化工具方法-flattenChildren" class="headerlink" title="扁平化工具方法 flattenChildren"></a>扁平化工具方法 flattenChildren</h3><p>首先，我们来看看 <code>flattenChildren</code> 函数做了什么：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils/flattenChildren.js</span></span><br><span class="line"><span class="keyword">var</span> ONLY_CHILD_NAME = <span class="string">'0'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flattenChildrenImpl = <span class="function"><span class="keyword">function</span>(<span class="params">res, children, nameSoFar</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 如果 children 是个数组的话，遍历进行压扁</span></span><br><span class="line">  <span class="comment">// 数组的情况下，nameSoFar 会加上 [number]</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(children)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; children.length; i++) &#123;</span><br><span class="line">      flattenChildrenImpl(res, children[i], nameSoFar + <span class="string">'['</span> + i + <span class="string">']'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 这里是非数组的情况分支</span></span><br><span class="line">    <span class="keyword">var</span> type = <span class="keyword">typeof</span> children;</span><br><span class="line">    <span class="keyword">var</span> isOnlyChild = nameSoFar === <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> storageName = isOnlyChild ? ONLY_CHILD_NAME : nameSoFar;</span><br><span class="line">    <span class="keyword">if</span> (children === <span class="literal">null</span> || children === <span class="literal">undefined</span> || type === <span class="string">'boolean'</span>) &#123;</span><br><span class="line">      res[storageName] = <span class="literal">null</span>;</span><br><span class="line">      <span class="comment">// 若 children 还有 mountComponentIntoNode 方法，则直接认定为组件</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (children.mountComponentIntoNode) &#123;</span><br><span class="line">      <span class="comment">/* We found a component instance */</span></span><br><span class="line">      res[storageName] = children;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (type === <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="comment">// 若是对象的情况下，也是进行遍历压扁</span></span><br><span class="line">        <span class="comment">// 并且 nameSoFar 会加上 &#123;key&#125;</span></span><br><span class="line">        throwIf(children &amp;&amp; children.nodeType === <span class="number">1</span>, INVALID_CHILD);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> children) &#123;</span><br><span class="line">          <span class="keyword">if</span> (children.hasOwnProperty(key)) &#123;</span><br><span class="line">            flattenChildrenImpl(</span><br><span class="line">              res,</span><br><span class="line">              children[key],</span><br><span class="line">              nameSoFar + <span class="string">'&#123;'</span> + escapeTextForBrowser(key) + <span class="string">'&#125;'</span></span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="comment">// 若是 string 或 number 则返回 ReactTextComponent 的实例化对象</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type === <span class="string">'string'</span>) &#123;</span><br><span class="line">        res[storageName] = <span class="keyword">new</span> ReactTextComponent(children);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type === <span class="string">'number'</span>) &#123;</span><br><span class="line">        res[storageName] = <span class="keyword">new</span> ReactTextComponent(<span class="string">''</span> + children);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flattenChildren</span>(<span class="params">children</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (children === <span class="literal">null</span> || children === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> children;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// children 存在的情况下，对其进行压扁处理</span></span><br><span class="line">  <span class="keyword">var</span> result = &#123;&#125;;</span><br><span class="line">  flattenChildrenImpl(result, children, <span class="string">''</span>);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// utils/flattenChildren.js</span>
+<span class="token keyword">var</span> ONLY_CHILD_NAME <span class="token operator">=</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
 
+<span class="token keyword">var</span> flattenChildrenImpl <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> children<span class="token punctuation">,</span> nameSoFar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 如果 children 是个数组的话，遍历进行压扁</span>
+  <span class="token comment" spellcheck="true">// 数组的情况下，nameSoFar 会加上 [number]</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>children<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> children<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">flattenChildrenImpl</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> children<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nameSoFar <span class="token operator">+</span> <span class="token string">'['</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">']'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 这里是非数组的情况分支</span>
+    <span class="token keyword">var</span> type <span class="token operator">=</span> <span class="token keyword">typeof</span> children<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> isOnlyChild <span class="token operator">=</span> nameSoFar <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> storageName <span class="token operator">=</span> isOnlyChild <span class="token operator">?</span> ONLY_CHILD_NAME <span class="token punctuation">:</span> nameSoFar<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>children <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">||</span> children <span class="token operator">===</span> undefined <span class="token operator">||</span> type <span class="token operator">===</span> <span class="token string">'boolean'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      res<span class="token punctuation">[</span>storageName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 若 children 还有 mountComponentIntoNode 方法，则直接认定为组件</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>children<span class="token punctuation">.</span>mountComponentIntoNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">/* We found a component instance */</span>
+      res<span class="token punctuation">[</span>storageName<span class="token punctuation">]</span> <span class="token operator">=</span> children<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'object'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 若是对象的情况下，也是进行遍历压扁</span>
+        <span class="token comment" spellcheck="true">// 并且 nameSoFar 会加上 {key}</span>
+        <span class="token function">throwIf</span><span class="token punctuation">(</span>children <span class="token operator">&amp;&amp;</span> children<span class="token punctuation">.</span>nodeType <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">,</span> INVALID_CHILD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> key <span class="token keyword">in</span> children<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>children<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">flattenChildrenImpl</span><span class="token punctuation">(</span>
+              res<span class="token punctuation">,</span>
+              children<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span>
+              nameSoFar <span class="token operator">+</span> <span class="token string">'{'</span> <span class="token operator">+</span> <span class="token function">escapeTextForBrowser</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'}'</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token comment" spellcheck="true">// 若是 string 或 number 则返回 ReactTextComponent 的实例化对象</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'string'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        res<span class="token punctuation">[</span>storageName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReactTextComponent</span><span class="token punctuation">(</span>children<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'number'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        res<span class="token punctuation">[</span>storageName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReactTextComponent</span><span class="token punctuation">(</span><span class="token string">''</span> <span class="token operator">+</span> children<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">flattenChildren</span><span class="token punctuation">(</span>children<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>children <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">||</span> children <span class="token operator">===</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> children<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// children 存在的情况下，对其进行压扁处理</span>
+  <span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token function">flattenChildrenImpl</span><span class="token punctuation">(</span>result<span class="token punctuation">,</span> children<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="针对-String-或-Number-类型生成的文本组件"><a href="#针对-String-或-Number-类型生成的文本组件" class="headerlink" title="针对 String 或 Number 类型生成的文本组件"></a>针对 String 或 Number 类型生成的文本组件</h3><p>看到这里，我们先需要了解下，什么是 <code>ReactTextComponent</code> ：</p>
 <p>这里的内容，我相信大家看的都很眼熟吧，这和 <code>ReactDOM.js</code> 中的 <code>Constructor</code> 一样，只不过这里不接受 <code>children</code> 参数，而是只接受一个 <code>text</code> 参数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// core/ReactTextComponent.js</span></span><br><span class="line"><span class="keyword">var</span> ReactTextComponent = <span class="function"><span class="keyword">function</span>(<span class="params">initialText</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.construct(&#123;<span class="attr">text</span>: initialText&#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">mixInto(ReactTextComponent, ReactComponent.Mixin);</span><br><span class="line">mixInto(ReactTextComponent, &#123;</span><br><span class="line">  <span class="comment">// 这个我相信大家也不陌生，在 React.renderComponent 时候，会被调用到。</span></span><br><span class="line">  <span class="comment">// 将 string 或 number 以 &lt;span&gt; 标签的形式进行返回</span></span><br><span class="line">  mountComponent: <span class="function"><span class="keyword">function</span>(<span class="params">rootID</span>) </span>&#123;</span><br><span class="line">    ReactComponent.Mixin.mountComponent.call(<span class="keyword">this</span>, rootID);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">'&lt;span id="'</span> + rootID + <span class="string">'"&gt;'</span> +</span><br><span class="line">        escapeTextForBrowser(<span class="keyword">this</span>.props.text) +</span><br><span class="line">      <span class="string">'&lt;/span&gt;'</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactTextComponent.js</span>
+<span class="token keyword">var</span> ReactTextComponent <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialText<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span><span class="token punctuation">{</span>text<span class="token punctuation">:</span> initialText<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
+<span class="token function">mixInto</span><span class="token punctuation">(</span>ReactTextComponent<span class="token punctuation">,</span> ReactComponent<span class="token punctuation">.</span>Mixin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">mixInto</span><span class="token punctuation">(</span>ReactTextComponent<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 这个我相信大家也不陌生，在 React.renderComponent 时候，会被调用到。</span>
+  <span class="token comment" spellcheck="true">// 将 string 或 number 以 &lt;span> 标签的形式进行返回</span>
+  mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ReactComponent<span class="token punctuation">.</span>Mixin<span class="token punctuation">.</span>mountComponent<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> rootID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token string">'&lt;span id="'</span> <span class="token operator">+</span> rootID <span class="token operator">+</span> <span class="token string">'">'</span> <span class="token operator">+</span>
+        <span class="token function">escapeTextForBrowser</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>text<span class="token punctuation">)</span> <span class="token operator">+</span>
+      <span class="token string">'&lt;/span>'</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="多重子元素生成-Markup-标记"><a href="#多重子元素生成-Markup-标记" class="headerlink" title="多重子元素生成 Markup 标记"></a>多重子元素生成 Markup 标记</h3><p>那么在压扁之后，我们调用的是 <code>ReactMultiChild.Mixin.mountMultiChild</code> 方法，至于为什么会调用到这里去，回忆 <code>ReactNativeComponent.js</code> 末端的几行代码，你就会想起为什么。那么接下来我们话不多说，来看到 <code>ReactMultiChild.js</code> 的相关源码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ReactMultiChildMixin = &#123;</span><br><span class="line">  <span class="comment">// 渲染子元素</span></span><br><span class="line">  mountMultiChild: <span class="function"><span class="keyword">function</span>(<span class="params">children, transaction</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> accum = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> name <span class="keyword">in</span> children) &#123;</span><br><span class="line">      <span class="keyword">var</span> child = children[name];</span><br><span class="line">      <span class="keyword">if</span> (children.hasOwnProperty(name) &amp;&amp; child) &#123;</span><br><span class="line">        <span class="comment">// 依次渲染元素 markup 标记，并且拼接</span></span><br><span class="line">        accum += child.mountComponent(</span><br><span class="line">          <span class="keyword">this</span>._rootNodeID + <span class="string">'.'</span> + name,</span><br><span class="line">          transaction</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 标记 DOM 索引，用于更新组件时使用。</span></span><br><span class="line">        child._domIndex = index;</span><br><span class="line">        index++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>._renderedChildren = children; <span class="comment">// children are in just the right form!</span></span><br><span class="line">    <span class="comment">// 初始化 DOM 操作的数组，这个用于组件更新时。</span></span><br><span class="line">    <span class="keyword">this</span>.domOperations = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> accum;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ReactMultiChild = &#123;</span><br><span class="line">  Mixin: ReactMultiChildMixin</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> ReactMultiChildMixin <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 渲染子元素</span>
+  mountMultiChild<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>children<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> accum <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> name <span class="token keyword">in</span> children<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> child <span class="token operator">=</span> children<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>children<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> child<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 依次渲染元素 markup 标记，并且拼接</span>
+        accum <span class="token operator">+</span><span class="token operator">=</span> child<span class="token punctuation">.</span><span class="token function">mountComponent</span><span class="token punctuation">(</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>_rootNodeID <span class="token operator">+</span> <span class="token string">'.'</span> <span class="token operator">+</span> name<span class="token punctuation">,</span>
+          transaction
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 标记 DOM 索引，用于更新组件时使用。</span>
+        child<span class="token punctuation">.</span>_domIndex <span class="token operator">=</span> index<span class="token punctuation">;</span>
+        index<span class="token operator">++</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_renderedChildren <span class="token operator">=</span> children<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// children are in just the right form!</span>
+    <span class="token comment" spellcheck="true">// 初始化 DOM 操作的数组，这个用于组件更新时。</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>domOperations <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> accum<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
+<span class="token keyword">var</span> ReactMultiChild <span class="token operator">=</span> <span class="token punctuation">{</span>
+  Mixin<span class="token punctuation">:</span> ReactMultiChildMixin
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么到此，实现 HTML 子元素渲染。</p>
 
                 </div>
@@ -226,7 +375,7 @@
         </div>
     </div>
     <div class="single-column-footer">
-    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
 </div>
 </div>
 
@@ -241,7 +390,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?44380571"></script>
+<script src="/js/journal.js?61119659"></script>
 
 
 

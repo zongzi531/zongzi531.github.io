@@ -46,19 +46,19 @@ button {
 
 code {
   color: #7a422c;
-  background: rgba(159, 86, 58, 0.07) !important;
+  /* background: rgba(159, 86, 58, 0.07) !important; */
   padding: 2px 5px;
   border-radius: 3px;
   font-family: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro", monospace; }
 
 pre {
-  background: rgba(159, 86, 58, 0.07) !important;
+  /* background: rgba(159, 86, 58, 0.07) !important; */
   color: #7a422c;
   padding: 12px 15px;
   border-radius: 5px;
   font-family: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro", monospace; }
   pre * {
-    background: none !important;
+    /* background: none !important; */
     font-family: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro", monospace !important; }
   pre code {
     padding: 0; }

@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?38131258">
+<link rel="stylesheet" href="/css/journal.css?42464241">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -57,7 +57,8 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-</head>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -69,8 +70,24 @@
                 首页
             </a>
             
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+            
 
             
+            
+            <a class="a-block drawer-menu-item false" href="/about/index.html">
+                关于
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/friendslinks/index.html">
+                友情链接
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                通勤那点事
+            </a>
             
 
             
@@ -112,15 +129,31 @@
 
     <div class="nav-link-list">
         
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+        
 
         
+        
+        <a class="a-block nav-link-item false" href="/about/index.html">
+            关于
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/friendslinks/index.html">
+            友情链接
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/commuting/index.html">
+            通勤那点事
+        </a>
         
 
         
     </div>
 
     <div class="nav-footer">
-        &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+        &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -177,8 +210,9 @@
 
 <h1 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h1><p>“ text-overflow” 属性用于确定告知用户此处有因溢出而无法显示的内容的方式。它可以截断（clipped）掉溢出的内容，也可以显示一个省略号（ ‘…’, U+2026 HORIZONTAL ELLIPSIS，水平省略号），或者显示一个自定义的字符串。 </p>
 <h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>在练习vue-eleme时，遇到了这么一个奇妙的问题，设置这段CSS后，PC端显示内容与移动端显示内容稍有不符。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span></span><br><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span></span><br><span class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span></span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">white-space</span><span class="token punctuation">:</span> nowrap
+<span class="token property">overflow</span><span class="token punctuation">:</span> hidden
+<span class="token property">text-overflow</span><span class="token punctuation">:</span> ellipsis<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>我将一段内容设置了文字溢出后截断溢出内容，并显示省略号，以下为出入：</p>
 <p><img src="test1.jpeg" alt=""></p>
 <p>溢出的省略号内容的出入的确很让人头痛。</p>
@@ -186,8 +220,9 @@
 <p><img src="text-overflow.png" alt=""></p>
 <p>看到了一个很有意思的参数：Custom string “”。但是很遗憾的是大部分浏览器<strong>不支持</strong>。</p>
 <p>带着测试的心态，我修改了下代码内容：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span></span><br><span class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span></span><br><span class="line"><span class="selector-tag">text-overflow</span>: "···"</span><br></pre></td></tr></table></figure>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">white-space</span><span class="token punctuation">:</span> nowrap
+<span class="token property">overflow</span><span class="token punctuation">:</span> hidden
+<span class="token property">text-overflow</span><span class="token punctuation">:</span> <span class="token string">"···"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>用Firefox试了一试：</p>
 <blockquote>
 <p>移动端Firefox版本未达到9.0</p>
@@ -219,7 +254,7 @@
         </div>
     </div>
     <div class="single-column-footer">
-    &copy; 2019 <a href="http://zongzi531.com">Zong</a>
+    &copy; 2017 - 2019 <a href="http://zongzi531.com">Zong</a>
 </div>
 </div>
 
@@ -234,7 +269,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?87125637"></script>
+<script src="/js/journal.js?1128982"></script>
 
 
 
