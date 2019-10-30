@@ -1,4 +1,4 @@
-$color-accent: #9f563a;
+$color-accent: #9FA8DA;
 $back-container-background: #fcfcfc;
 $front-container-background: #ffffff;
 
@@ -110,14 +110,14 @@ button {
 
 code {
   color: $dark-accent;
-  background: rgba($color-accent, 0.07) !important;
+  // background: rgba($color-accent, 0.07) !important;
   padding: 2px 5px;
   border-radius: 3px;
   font-family: $mono-font-list;
 }
 
 pre {
-  background: rgba($color-accent, 0.07) !important;
+  // background: rgba($color-accent, 0.07) !important;
   color: $dark-accent;
   padding: 12px 15px;
   border-radius: 5px;
