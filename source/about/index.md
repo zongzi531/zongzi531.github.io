@@ -20,14 +20,18 @@ title: 关于
 
 あの、私（わたし）は大好（だいす）きロボット，例（たと）えば：ガンダム、マジンガーZ、ゲッター，もっともっと・・・
 
+![ガンダム](/images/logo.png)
+
 あの、私（わたし）は大好（だいす）きエスエフ映画、例（たと）えば：スターウォーズ、Marvel，もっともっと・・・
 
 あの、私（わたし）は大好（だいす）き加藤惠。
 
+![加藤惠](/images/logo1.png)
+
 ## 更新日志
 
-- 2019年10月29日：**[更新进行中……]**选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)
-- 2018年11月29日：新增Friends Links，~Disqus~
+- 2019年10月29日：选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)
+- 2018年11月29日：新增Friends Links，Disqus
 - 2018年11月28日：选用主题[~Icarus~](https://github.com/ppoffice/hexo-theme-icarus)
 - 2018年10月09日：开启HTTPS，访问博客变为[https://zongzi531.com](https://zongzi531.com)
 - 2018年02月21日：选用主题[~PolarBear~](https://github.com/frostfan/hexo-theme-polarbear)
