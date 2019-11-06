@@ -7,7 +7,7 @@ title: 通勤那点事
 >- 2019年09月09日，四个月下来了，似乎阅读也变成了一种习惯，继续加油！
 >- 2019年09月12日，想学**日语**
 >
->*更新时间：* **2019年10月25日**
+>*更新时间：* **2019年11月06日**
 
 ### 前端早读课
 
@@ -211,6 +211,18 @@ title: 通勤那点事
 - [【第1753期】React Hooks异步操作二三事](https://mp.weixin.qq.com/s/myWdeq1Lq_b3vNgApcVB0A)
 - [【第1754期】CSS第四级选择器](https://mp.weixin.qq.com/s/fc6-n1QC997Mj4u3sFyCKA)
 - [【第1755期】浅谈：前端如何赋能业务](https://mp.weixin.qq.com/s/-dSCQgWeXedJ1vuhviiTAA)
+- [【第1756期】「Shape Up」 适合中小团队的一种工作方式](https://mp.weixin.qq.com/s/bocJwWcgUvDcUaLbVTYqPg)
+- [【第1757期】Server-X：一款可能提升你十倍工作效率的工具](https://mp.weixin.qq.com/s/df_76D-OKOzKTFyJJh2CJw)
+- [【第1758期】面向传统，Serverless 进化之路](https://mp.weixin.qq.com/s/DSFms7ovOMMuhe914Z7vcw)
+- [【第1759期】现代 Web 开发的现状与未来](https://mp.weixin.qq.com/s/YWbCGevP85aTb4_-dOEYtA)
+- [【第1760期】ReactJS 中的代码注入](https://mp.weixin.qq.com/s/6faX0-SxFhdNX7-9a1ZKHg)
+- [【第1761期】一个前端的 functor,applicative functor,monad 初探](https://mp.weixin.qq.com/s/rns6N3TUrTM4i9HQWRVFEw)
+- [【第1762期】揭开NoahV智能运维前端框架的神秘面纱](https://mp.weixin.qq.com/s/Mg7ndqKH6jwRU0z4_mBfzA)
+- [【第1763期】kbone，十分钟让Vue项目同时支持小程序](https://mp.weixin.qq.com/s/6LV3fPy4Y_GV_kkTVrRghw)
+- [【第1764期】小程序工程化探索：大规模场景下的问题和解决方案](https://mp.weixin.qq.com/s/O-J2mbxIWKG5dUXP0IBAcw)
+- [【第1765期】微信官方小程序同构新方案Kbone全解析](https://mp.weixin.qq.com/s/47UmvrNVFdXWo6YpXE_G9A)
+- [【第1766期】蚂蚁金服@玉伯：我的前端成长之路](https://mp.weixin.qq.com/s/1-rXIRKsPIvpZc9dtm6MAw)
+- [【第1767期】微信小程序工程化之持续集成方案](https://mp.weixin.qq.com/s/JtwX3SJ4xnvrAQal4MT4wA)
 
 ---
 
@@ -361,6 +373,14 @@ title: 通勤那点事
 - [【前端可视化】 OpenGL / WebGL 入门和实践](https://mp.weixin.qq.com/s/A2o-ueiBf8dXBYfCY2LIRQ)
 - [TypeScript 的类型检查和类型保护](https://mp.weixin.qq.com/s/uD_vwU5Yf5z4yZ3eqX9Vtg)
 - [解读HTTP/2与HTTP/3 的新特性（推荐）](https://mp.weixin.qq.com/s/sakIv-NidqkO1tviBHxtWQ)
+- [现代浏览器观察者 Observer API 指南](https://mp.weixin.qq.com/s/I-p-pcfPDhAUKot6pdLSRg)
+- [CSS Display属性的双值写法](https://mp.weixin.qq.com/s/vREgwh-T7RiuQaAqyil0Og)
+- [教你在 Node.js 项目中接入 Sign with Apple 第三方登录](https://mp.weixin.qq.com/s/KQB_1dXJT4NkU5zV7_lExQ)
+- [微信小程序工程化之持续集成方案](https://mp.weixin.qq.com/s/k16SjTN7__iRB_7q78hldg)
+- [Typescript 严格模式有多严格？](https://mp.weixin.qq.com/s/eiTLdmDzeFbYKf9C3wO11A)
+- [子元素数量和遍历子元素](https://mp.weixin.qq.com/s/O1OE07Av4HWlqoAzbgAXyw)
+- [如何通过WebRTC开发实时互动AI视频应用](https://mp.weixin.qq.com/s/9k0CR_niaNorgBWDPQWgmQ)
+- [W3C万维物联网标准解析：架构篇](https://mp.weixin.qq.com/s/xUANOpmJ22GmYWJcs4fgvQ)
 
 ### 前端桃园
 
@@ -426,3 +446,8 @@ title: 通勤那点事
 - [JavaScript执行（二）：闭包和执行上下文到底是怎么回事？](https://time.geekbang.org/column/article/cfdbd93ec0ac3d7ba002c3d6a6e9202b/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
 - [JavaScript执行（三）：你知道现在有多少种函数吗？](https://time.geekbang.org/column/article/5343ebc510efd3f039ca1ef870746617/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D&from=singlemessage&isappinstalled=0)
 - [JavaScript执行（四）：try里面放return，finally还会执行吗？](https://time.geekbang.org/column/article/41c321ddf0affea71781bdc58fef01e3/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D&from=singlemessage&isappinstalled=0)
+
+### 早道日语
+
+- [日语N5~N1到底代表了什么样的日语水平？](https://mp.weixin.qq.com/s/jZeAizVLsY2zC0FxXyL58A)
+- [“马萨卡”在日语中是什么意思？](https://mp.weixin.qq.com/s/mfC8B04i_6Wb-GIvAl9AXA)
