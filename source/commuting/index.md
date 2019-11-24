@@ -6,8 +6,9 @@ title: 通勤那点事
 >- 2019年07月08日，两个月下来了，感觉就和看新闻报纸一样，积累着一些大佬们分享的经验，慢慢加深我脑中的印象。
 >- 2019年09月09日，四个月下来了，似乎阅读也变成了一种习惯，继续加油！
 >- 2019年09月12日，想学**日语**
+>- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >
->*更新时间：* **2019年11月06日**
+>*更新时间：* **2019年11月24日**
 
 ### 前端早读课
 
@@ -223,6 +224,24 @@ title: 通勤那点事
 - [【第1765期】微信官方小程序同构新方案Kbone全解析](https://mp.weixin.qq.com/s/47UmvrNVFdXWo6YpXE_G9A)
 - [【第1766期】蚂蚁金服@玉伯：我的前端成长之路](https://mp.weixin.qq.com/s/1-rXIRKsPIvpZc9dtm6MAw)
 - [【第1767期】微信小程序工程化之持续集成方案](https://mp.weixin.qq.com/s/JtwX3SJ4xnvrAQal4MT4wA)
+- [【第1768期】Node.js 在微医的应用场景及实践](https://mp.weixin.qq.com/s/WlohR2xEPi1ZdJs5uhqJvg)
+- [【第1769期】JavaScript 运行原理](https://mp.weixin.qq.com/s/c3YxHwuPv0tSQmBYVQ4VAg)
+- [【第1770期】利用 React 组件的“黄金法则"让代码更优雅之如何发挥钩子的作用](https://mp.weixin.qq.com/s/GWcJlYWLtz-vysV16b_ZcA)
+- [【第1771期】Winter在政采云分享实录《前端团队的成长》](https://mp.weixin.qq.com/s/vkyoCFciiIOtoWag5sVpQQ)
+- [【第1772期】从拉面店的贩卖机理解什么是 API](https://mp.weixin.qq.com/s/YebFoEVlRkbx5stWW_IkcQ)
+- [【第1773期】19 个来自 2019 React Conf 的总结](https://mp.weixin.qq.com/s/60Op8WRV1mJmxHZskz3HWw)
+- [【第1774期】详细preact hook源码逐行解析](https://mp.weixin.qq.com/s/hO3Ig38znAWwScZw-J58Xw)
+- [【第1775期】TypeScript：拥有超能力的 JavaScript (上)](https://mp.weixin.qq.com/s/XnfOkZHOYtLk2LS-8S8rPw)
+- [【第1776期】2019年，是否可以抛弃 CSS 预处理器？](https://mp.weixin.qq.com/s/tqLlWuKPrpp-fyU5PPXveA)
+- [【第1777期】阿里舒文：从应届生到双11前端PM](https://mp.weixin.qq.com/s/PLpd1U2CDaOGlvEn_F67XQ)
+- [【第1778期】 TypeScript：拥有超能力的 JavaScript（下）](https://mp.weixin.qq.com/s/iKgvJB54bsb2_dUoRPpR0g)
+- [【第1779期】使用TypeScript两年后,值得吗？](https://mp.weixin.qq.com/s/UQLV49GVFL3LsPZB1r254g)
+- [【第1780期】来聊聊面向模板的前端开发](https://mp.weixin.qq.com/s/_jltRnfySNlVAje3XogxkA)
+- [【第1781期】MobX 简明教程](https://mp.weixin.qq.com/s/zoKtUTX3lQ3M4piof4HTeQ)
+- [【第1782期】前端智能漫谈 - 写给前端的AI白皮书](https://mp.weixin.qq.com/s/K7MAceTNiMeVI_vnjET_mg)
+- [【第1783期】蚂蚁前端研发最佳实践](https://mp.weixin.qq.com/s/0cMQtOpljIfwx0ACcBpM1A)
+- [【第1784期】React + Typescript 工程化治理实践](https://mp.weixin.qq.com/s/elt3cH-TTDYnI5ZsHAbVYg)
+- [【第1785期】JS与数](https://mp.weixin.qq.com/s/3M96mvdivHQEQZwLjpBd_w)
 
 ---
 
@@ -381,6 +400,17 @@ title: 通勤那点事
 - [子元素数量和遍历子元素](https://mp.weixin.qq.com/s/O1OE07Av4HWlqoAzbgAXyw)
 - [如何通过WebRTC开发实时互动AI视频应用](https://mp.weixin.qq.com/s/9k0CR_niaNorgBWDPQWgmQ)
 - [W3C万维物联网标准解析：架构篇](https://mp.weixin.qq.com/s/xUANOpmJ22GmYWJcs4fgvQ)
+- [TC39提案-function implementation hiding](https://mp.weixin.qq.com/s/j82PsP84f3c0UbP5aDTBPg)
+- [你想知道的关于 Refs 的知识都在这了](https://mp.weixin.qq.com/s/8cC-xqI749Yz7f8N-242hQ)
+- [关于代码评审（Code Review）](https://mp.weixin.qq.com/s/2Fpqlhl2XLuk7dFXCPUD-A)
+- [把你的NodeJS程序给没有NodeJS的人运行](https://mp.weixin.qq.com/s/azmnUFgrHvuxZVpmqb1swA)
+- [CSS的未来已来](https://mp.weixin.qq.com/s/hxqa1uw61bi5H2j-nwNohg)
+- [一文搞懂Web中暗藏的密码学](https://mp.weixin.qq.com/s/SEsD2M8ZjNeqQsfEQGiBTQ)
+- [iOS 13 新增了哪些无障碍功能？](https://mp.weixin.qq.com/s/VoJf8-iaWGIflZgLS0fGNg)
+- [前端代码质量-圈复杂度原理和实践](https://mp.weixin.qq.com/s/qnJMGAUIFc8CDk8OAYOJeQ)
+- [一名【合格】前端工程师的自检清单](https://mp.weixin.qq.com/s/BGOAGSS6spPxpTPIMDvzww)
+- [Vue友最爱的10个开箱即用的开源项目 | ~建议收藏~](https://mp.weixin.qq.com/s/I_domIun6d1mTSYeRrlm2Q)
+- [TypeScript真香系列——接口篇](https://mp.weixin.qq.com/s/KfOAu983zg8d0Uc-jhM84w)
 
 ### 前端桃园
 
