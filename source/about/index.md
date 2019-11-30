@@ -30,7 +30,7 @@ title: 关于
 
 ## 更新日志
 
-- 2019年10月29日：选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)
+- 2019年10月29日：选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)（*tags 问题暂未修复*）
 - 2018年11月29日：新增Friends Links，Disqus
 - 2018年11月28日：选用主题[~Icarus~](https://github.com/ppoffice/hexo-theme-icarus)
 - 2018年10月09日：开启HTTPS，访问博客变为[https://zongzi531.com](https://zongzi531.com)

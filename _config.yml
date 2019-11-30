@@ -106,6 +106,17 @@ tag_generator:
   per_page: 10
   order_by: -date
 
+emoji:
+  enable: true
+  className: github-emoji
+  styles:
+  customEmojis:
+
+mathjax:
+  single_dollars: true
+  cjk_char_width: 16
+  svg: true
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:

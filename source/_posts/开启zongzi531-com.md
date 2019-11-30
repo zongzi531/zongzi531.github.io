@@ -16,4 +16,4 @@ comments: true
 
 :congratulations:那么继续加油吧！
 
->[emoji小抄](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
+>[2019年11月29日更新 emoji-cheat-sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md)

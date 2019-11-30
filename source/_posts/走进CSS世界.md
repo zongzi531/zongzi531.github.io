@@ -146,7 +146,7 @@ margin合并的3种场景：
 <template>
   <div :class="{ 'cc-detail': true, 'cc-detail-s': !visable, 'cc-detail-b': visable }">
     <div class="click-wrapper" @click="handleClick">
-      <span>{{CarCellDetailTitle}}</span>
+      <span>{ {CarCellDetailTitle} }</span>
       <img :class="{ 'cc-unfold': true, 'cc-ani-off': first }" v-if="!visable" :src="carCellDetailIconDown" />
       <img :class="{ 'cc-packup': true, 'cc-ani-off': first }" v-if="visable" :src="carCellDetailIconUp" />
       <!-- if you want anything -->

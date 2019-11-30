@@ -73,16 +73,16 @@ methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些
         <span class="input-group-addon" @click="addTodo"><span class="glyphicon glyphicon-plus btn-add"></span></span>
       </div>
       <p class="help-block help-note">来添加你的备忘录吧！</p>
-      <ul class="nav nav-pills list-title" role="tablist" @click="reversetodo(todoflag)"><li role="presentation" class="active"><a href="#">未完成 <span class="badge">{{todos.length}}</span></a></li></ul>
+      <ul class="nav nav-pills list-title" role="tablist" @click="reversetodo(todoflag)"><li role="presentation" class="active"><a href="#">未完成 <span class="badge">{ {todos.length} }</span></a></li></ul>
       <ul v-show="todoflag">
         <li v-for="(todo, index) in todos" class="list-item" @click.stop="haveDo(index)">
-          <p class="list-text" v-bind:title="todo.text">{{todo.text}}<span class="glyphicon glyphicon-remove btn-del" @click.stop="removeTodo(index)"></span></p>
+          <p class="list-text" v-bind:title="todo.text">{ {todo.text} }<span class="glyphicon glyphicon-remove btn-del" @click.stop="removeTodo(index)"></span></p>
         </li>
       </ul>
-      <ul class="nav nav-pills list-title" role="tablist" @click="reversehavedo(havedoflag)"><li role="presentation" class="active"><a href="#">已完成 <span class="badge">{{havedos.length}}</span></a></li></ul>
+      <ul class="nav nav-pills list-title" role="tablist" @click="reversehavedo(havedoflag)"><li role="presentation" class="active"><a href="#">已完成 <span class="badge">{ {havedos.length} }</span></a></li></ul>
       <ul v-show="havedoflag">
         <li v-for="(todo, index) in havedos" class="list-item" @click.stop="unDo(index)">
-          <p class="list-text" v-bind:title="todo.text"><span class="through">{{todo.text}}</span><span class="glyphicon glyphicon-remove btn-del" @click.stop="removeUndo(index)"></span></p>
+          <p class="list-text" v-bind:title="todo.text"><span class="through">{ {todo.text} }</span><span class="glyphicon glyphicon-remove btn-del" @click.stop="removeUndo(index)"></span></p>
         </li>
       </ul>
     </div>
@@ -90,6 +90,7 @@ methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些
 ```
 
 ### JavaScript
+
 ```javascript
 export default {
   data () {

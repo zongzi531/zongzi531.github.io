@@ -64,7 +64,7 @@ render() {
 
 ```html Template
 <Comp>
-  <div>{{ hello }}</div>
+  <div>{ { hello } }</div>
 </Comp>
 ```
 

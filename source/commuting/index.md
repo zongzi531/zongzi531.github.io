@@ -8,7 +8,7 @@ title: 通勤那点事
 >- 2019年09月12日，想学**日语**
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >
->*更新时间：* **2019年11月24日**
+>*更新时间：* **2019年11月30日**
 
 ### 前端早读课
 
@@ -242,6 +242,11 @@ title: 通勤那点事
 - [【第1783期】蚂蚁前端研发最佳实践](https://mp.weixin.qq.com/s/0cMQtOpljIfwx0ACcBpM1A)
 - [【第1784期】React + Typescript 工程化治理实践](https://mp.weixin.qq.com/s/elt3cH-TTDYnI5ZsHAbVYg)
 - [【第1785期】JS与数](https://mp.weixin.qq.com/s/3M96mvdivHQEQZwLjpBd_w)
+- [【第1786期】代码质量：注释](https://mp.weixin.qq.com/s/QjaviyNFoxKAhLO9-edCzQ)
+- [【第1787期】深入理解：React hooks是如何工作的](https://mp.weixin.qq.com/s/hvdaknxICmbFEti0lrj8Ag)
+- [【第1788期】React Hooks: 没有魔法，只是数组](https://mp.weixin.qq.com/s/a3l7ZyAHMlSPicjmexW-Yw)
+- [【第1789期】使用 Angular 打造微前端架构的 ToB 企业级应用](https://mp.weixin.qq.com/s/ochbPM5f84u-1BcNRXVOLA)
+- [【第1790期】图解Event Loop](https://mp.weixin.qq.com/s/g7ZyyBkD5PKP4j0Hw4eTvw)
 
 ---
 
@@ -252,6 +257,7 @@ title: 通勤那点事
 - [【PPT】Vue.js 团队成员蒋豪群：现代前端框架如何提高你的效率](https://mp.weixin.qq.com/s/OQq-HLUs5glhgL88fo2B0w)
 - [【PPT】快手前端架构师@俞天翔：从网页到应用 - 所经历的前端发展史](https://mp.weixin.qq.com/s/y1SX8CQmc8WROBrSBGbpgw)
 - [【PPT】白鹭引擎首席架构师@王泽：框架开发中的基础设施搭建](https://mp.weixin.qq.com/s/tkqasAV1lE-wRWDShWLczQ)
+- [【PPT】尤雨溪：Vue 3.0的设计原则](https://mp.weixin.qq.com/s/T6yu2VWJkVlXbhXeDzKH9g)
 
 ### 小哈公社
 
@@ -411,6 +417,9 @@ title: 通勤那点事
 - [一名【合格】前端工程师的自检清单](https://mp.weixin.qq.com/s/BGOAGSS6spPxpTPIMDvzww)
 - [Vue友最爱的10个开箱即用的开源项目 | ~建议收藏~](https://mp.weixin.qq.com/s/I_domIun6d1mTSYeRrlm2Q)
 - [TypeScript真香系列——接口篇](https://mp.weixin.qq.com/s/KfOAu983zg8d0Uc-jhM84w)
+- [A*搜索算法概述](https://mp.weixin.qq.com/s/oB6BbxpsSrK7CwIepQKYBA)
+- [使用 Hooks 优化 React 组件](https://mp.weixin.qq.com/s/X5QdA4e75CWFBTTQ4A5d3g)
+- [『 Vue小Case 』- Vue Prop中的 null vs undefined](https://mp.weixin.qq.com/s/Bj7eYeg8ITNxUSp6H2A18A)
 
 ### 前端桃园
 
@@ -481,3 +490,6 @@ title: 通勤那点事
 
 - [日语N5~N1到底代表了什么样的日语水平？](https://mp.weixin.qq.com/s/jZeAizVLsY2zC0FxXyL58A)
 - [“马萨卡”在日语中是什么意思？](https://mp.weixin.qq.com/s/mfC8B04i_6Wb-GIvAl9AXA)
+- [“买买买”用日语怎么说？](https://mp.weixin.qq.com/s/J23yoMgU4fsCrEioKVf8Tg)
+- [“胖”用日语怎么说？](https://mp.weixin.qq.com/s/tNS7a3NNGLF71rDwcqnbqw)
+- [如何用日语「表达感谢」？](https://mp.weixin.qq.com/s/rurjBIgqyH5POjLENYrPTg)
