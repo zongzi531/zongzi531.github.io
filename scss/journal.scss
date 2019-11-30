@@ -2,9 +2,8 @@ $color-accent: #9FA8DA;
 $back-container-background: #fcfcfc;
 $front-container-background: #ffffff;
 
-$default-font-list: "Lora", "source-han-serif-tc", serif;
-$mono-font-list: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro",
-  monospace;
+$default-font-list: "Lora", "source-han-serif-tc", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$mono-font-list: "Fira Mono", "Cousine", Monaco, Menlo, "Source Code Pro", $default-font-list;
 $sans-preferred-font-list: "Montserrat", "Roboto", "Source Sans Pro",
   "Helvetica", "Arial", $default-font-list;
 //$default-font-list: "Cousine", Monaco, Menlo, "Source Code Pro", sans-serif;
@@ -52,7 +51,14 @@ $h1: 30px;
 $h-diff: 3px;
 
 ::-webkit-scrollbar {
-  display: none;
+  background: rgba($color-accent, 0.05);
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba($color-accent, 0.2);
+  border-radius: 10px;
 }
 
 body {
@@ -69,7 +75,8 @@ body {
 * {
   color: $deep-dark-accent;
   line-height: 1.5em;
-  word-wrap: break-word;
+  // fix pre break-word in mobile
+  // word-wrap: break-word;
 }
 
 h1 {
@@ -113,7 +120,7 @@ code {
   // background: rgba($color-accent, 0.07) !important;
   padding: 2px 5px;
   border-radius: 3px;
-  font-family: $mono-font-list;
+  font-family: $mono-font-list !important;
 }
 
 pre {
@@ -121,13 +128,30 @@ pre {
   color: $dark-accent;
   padding: 12px 15px;
   border-radius: 5px;
-  font-family: $mono-font-list;
+  font-family: $mono-font-list !important;
   * {
     background: none !important;
     font-family: $mono-font-list !important;
   }
   code {
     padding: 0;
+  }
+  // hank material-oceanic
+  span {
+    color: #c3e88d;
+  }
+  span[class*="language-"], pre[class*="language-"] {
+    color: #c3cee3;
+  }
+}
+
+
+// fix material-oceanic line-height ui bug
+#app {
+  pre {
+    &[class*="language-"] {
+      line-height: 16px;
+    }
   }
 }
 
@@ -811,9 +835,10 @@ a {
       .post-body {
         font-size: $post-body-size;
         line-height: 1.5em;
-        * {
-          word-wrap: break-word;
-        }
+        // fix pre break-word in mobile
+        // * {
+        //   word-wrap: break-word;
+        // }
         img {
           max-width: 100%;
           border-radius: 5px;
