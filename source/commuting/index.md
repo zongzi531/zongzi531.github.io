@@ -7,18 +7,62 @@ title: 通勤那点事
 >- 2019年09月09日，四个月下来了，似乎阅读也变成了一种习惯，继续加油！
 >- 2019年09月12日，想学**日语**
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
+>- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2019年11月30日**
+>*更新时间：* **2019年12月14日**
+
+### 站点
+
+- [carbon - Create and share beautiful images of your source code\.](https://carbon.now.sh/)
 
 ### 前端早读课
 
 - [【第930期】支付宝前端构建工具的发展和未来的选择](https://mp.weixin.qq.com/s/cIDR8ZIBHYcw5PeJ66UL1A)
 - ...
+- [【第1028期】理解 JavaScript 的 async/await](https://mp.weixin.qq.com/s/LGtU1rgxP7YobQf2CYueUg)
+- ...
+- [【第1041期】关键请求](https://mp.weixin.qq.com/s/1nPML_J_4v4h6Rn_sCW5rA)
+- ...
+- [【第1049期】如何用 js 获取虚拟键盘高度？（适用所有平台）](https://mp.weixin.qq.com/s/JJCgLXm7wI527DEz3UhqVA)
+- ...
 - [【第1069期】你知道「编译」与「解释」的区别吗？](https://mp.weixin.qq.com/s/Z0uldTCJehk4SQR-98fvNA)
+- ...
+- [【第1094期】图与例解读Async/Await](https://mp.weixin.qq.com/s/Tkx3gCtYz1J_U2_uMxmWUg)
+- ...
+- [【第1130期】JavaScript 的时间消耗](https://mp.weixin.qq.com/s/75M4ZvPEXd8ScItG4shFsA)
+- ...
+- [【第1133期】构建离线web应用二](https://mp.weixin.qq.com/s/T7PaVlmpveESlOShBPydbA)
+- ...
+- [【第1220期】关于 HTML 语义和前端架构](https://mp.weixin.qq.com/s/_-kR_weLYgnYRg5OO4s8lQ)
 - ...
 - [【第1222期】十倍效能提升——Web 基础研发体系的建立](https://mp.weixin.qq.com/s/IZLcBj4P7YODwdNKRmbm7A)
 - ...
 - [【第1302期】基于 MobX 构建视图框架无关的数据层-与 Vue 的结合](https://mp.weixin.qq.com/s/Or-aacPjEYfXnwg3g2VfEg)
+- ...
+- [【第1322期】Vue CLI 3 配置中 Modern mode 是什么](https://mp.weixin.qq.com/s/pzAK6Rxe8iHnWimQw2W5tg)
+- [【第1323期】揭开JS无埋点技术的神秘面纱](https://mp.weixin.qq.com/s/pGP5Oohcban0P1GAzPlAgg)
+- ...
+- [【第1326期】WebView缓存原理分析和应用](https://mp.weixin.qq.com/s/q-4NzWJLimPSK9oaXOWUlA)
+- ...
+- [【第1328期】八幅漫画理解使用JSON Web Token设计单点登录系统](https://mp.weixin.qq.com/s/7Ze6P77X4iFCUEz9LQHxrQ)
+- ...
+- [【第1334期】组件开发的单元素模式](https://mp.weixin.qq.com/s/0ehjOhqkD3VHevVGU5-XOg)
+- ...
+- [【第1337期】JavaScript 是如何工作的：用 MutationObserver 追踪 DOM 的变化](https://mp.weixin.qq.com/s/qeWkKsxH8eyqKlCZDeGUwA)
+- ...
+- [【第1339期】如何不择手段提升scroll事件的性能](https://mp.weixin.qq.com/s/ggVkc9iWLgeLGS1ZiJb8Dw)
+- [【第1340期】希望是最浅显易懂的RxJS教程](https://mp.weixin.qq.com/s/6RRK4Gb__cvCwg6CjykFrQ)
+- ...
+- [【第1343期】GraphQL 在微服务架构中的实践](https://mp.weixin.qq.com/s/sU8PPwFhM0IcVBB2GJF8Kw)
+- ...
+- [【第1345期】解析 GraphQL 的查询语法](https://mp.weixin.qq.com/s/nim-KSqO3n2d2qwbTHKBJA)
+- ...
+- [【第1347期】15分钟成为 GIT 专家](https://mp.weixin.qq.com/s/VMSwJIuk1BbcZerVopUWhQ)
+- ...
+- [【第1353期】用户体验法则](https://mp.weixin.qq.com/s/mGjtX1frBiHQoCGVNpDE9g)
+- [【第1354期】精读 The Cost of JavaScript](https://mp.weixin.qq.com/s/M7m-eAXtssct2B7nh19S0g)
+- ...
+- [【第1357期】狙杀页面卡顿 —— PERFORMANCE 指南](https://mp.weixin.qq.com/s/14Eq-8lAyVUhdFMvpD0wdw)
 - ...
 - [【第1381期】前端插拔式 SPA 应用架构实现方案](https://mp.weixin.qq.com/s/9Qjoqs_jitwZE_KbfEOucA)
 - ...
@@ -27,6 +71,13 @@ title: 通勤那点事
 - [【第1402期】云开发初探 —— 更简便的小程序开发模式](https://mp.weixin.qq.com/s/JoWELCugqzLITDIDVX8G4w)
 - ...
 - [【第1404期】使用小程序做交互的技巧](https://mp.weixin.qq.com/s/wukb02PaZfRXzhqHzfGMBQ)
+- ...
+- [【第1499期】d.ts](https://mp.weixin.qq.com/s/LzSw8fxCko2Pl2wilaLIvg)
+- ...
+- [【第1529期】GraphQL入门指南](https://mp.weixin.qq.com/s/Cx3xxPbqhb_Zx7mjyS3Tyg)
+- [【第1530期】React Fiber架构](https://mp.weixin.qq.com/s/K_VoVm731W1Cb-fGiyjXww)
+- ...
+- [【第1552期】深入React fiber 链表和DFS](https://mp.weixin.qq.com/s/Tp05MoV1bQi7rgpYnz1Xhg)
 - ...
 - [【第1561期】5款小程序框架全面测评](https://mp.weixin.qq.com/s/uKAIqrnjZ75_Mbsm_ArUVg)
 - ...
@@ -247,6 +298,21 @@ title: 通勤那点事
 - [【第1788期】React Hooks: 没有魔法，只是数组](https://mp.weixin.qq.com/s/a3l7ZyAHMlSPicjmexW-Yw)
 - [【第1789期】使用 Angular 打造微前端架构的 ToB 企业级应用](https://mp.weixin.qq.com/s/ochbPM5f84u-1BcNRXVOLA)
 - [【第1790期】图解Event Loop](https://mp.weixin.qq.com/s/g7ZyyBkD5PKP4j0Hw4eTvw)
+- [【第1791期】网易云音乐前端模块动态下发系统](https://mp.weixin.qq.com/s/mtBmeljz-Pe6n4u_LAgwwQ)
+- [【第1792期】使用 mocha 进行自动化测试](https://mp.weixin.qq.com/s/ILbU5Wr7uCIAxEnsOcTFKw)
+- [【第1793期】理解 React 的下一步：Concurrent Mode 与 Suspense](https://mp.weixin.qq.com/s/JF6jm70l5U3btUdLsgnCNg)
+- [【第1794期】一文详解Sass新特性 - 模块](https://mp.weixin.qq.com/s/jB0paekxf9jCn6ds58ESiw)
+- [【第1795期】SWR：最具潜力的 React Hooks 数据请求库](https://mp.weixin.qq.com/s/9RBoZbca2Qowcclo44w35Q)
+- [【第1796期】小程序同构方案 kbone 分析与适配](https://mp.weixin.qq.com/s/V0um8ViD77S7FwcsxzkrdQ)
+- [【第1797期】京喜首页跨端开发与优化实践](https://mp.weixin.qq.com/s/pEwNZjRitSeHEUwAJW_NmQ)
+- [**【第1798期】JavaScript 中的数据结构：写给前端软件工程师**](https://mp.weixin.qq.com/s/EVSHopIZov8KJ-W0JHkLFg)
+- [【第1799期】前端模块化的前世今生](https://mp.weixin.qq.com/s/88q3P-rRDxVSD7HJxYAigg)
+- [【第1800期】利用过渡动效打造沉浸式的体验 —【Web篇】](https://mp.weixin.qq.com/s/NnJWUdAUHn5Ks7tKau5rEg)
+- [【第1801期】高德APP全链路源码依赖分析工程](https://mp.weixin.qq.com/s/Dx7xVe3It7E1HEOCVLMc0Q)
+- [【第1802期】你不知道的map](https://mp.weixin.qq.com/s/mnADLhgib1obA_b4zrJZfA)
+- [【第1803期】如何在 Web 上构建一个插件系统](https://mp.weixin.qq.com/s/oDeiUhvBvEMjXhAtIAHAvw)
+- [【第1804期】Web内容如何影响电池的使用](https://mp.weixin.qq.com/s/EPhsY0LZ5qNuUtBbKny9Bw)
+- [【第1805期】一种前端灰度发布方案](https://mp.weixin.qq.com/s/IT65m3VwlAhXusipB6wa2g)
 
 ---
 
@@ -420,6 +486,15 @@ title: 通勤那点事
 - [A*搜索算法概述](https://mp.weixin.qq.com/s/oB6BbxpsSrK7CwIepQKYBA)
 - [使用 Hooks 优化 React 组件](https://mp.weixin.qq.com/s/X5QdA4e75CWFBTTQ4A5d3g)
 - [『 Vue小Case 』- Vue Prop中的 null vs undefined](https://mp.weixin.qq.com/s/Bj7eYeg8ITNxUSp6H2A18A)
+- [深入浅出 JavaScript 原型链](https://mp.weixin.qq.com/s/LHskWkAPYnIbRvaXry8bqg)
+- [如何将你的 ThinkJS 项目部署到 ZEIT 上](https://mp.weixin.qq.com/s/InaoDci28DMVUeGoX-OpCw)
+- [不容错过的 Babel7 知识](https://mp.weixin.qq.com/s/oBMXONRssx7HvqZVJFQeaQ)
+- [一个鲜为人知的高性能组件注册及实现组件排序技巧](https://mp.weixin.qq.com/s/nilCa5HW0jbiw5cTTxCN8Q)
+- [前端中的二进制以及相关操作与转换](https://mp.weixin.qq.com/s/93hbyHV_mow6RcgPr-5syA)
+- [W3C万维物联网解析：物描述篇](https://mp.weixin.qq.com/s/0dZfn-BKGiPXGGvgqnqedQ)
+- [Web性能领域常见的专业术语](https://mp.weixin.qq.com/s/GIpmZIY6yxGRBpkTDHuJuw)
+- [花椒web端实时互动流媒体播放器](https://mp.weixin.qq.com/s/Mde-zS0oLVGQfdjEVdaAjA)
+- [通读 HTML Standard](https://mp.weixin.qq.com/s/eyxI6g6YjXfpDIJE3A5evg)
 
 ### 前端桃园
 
