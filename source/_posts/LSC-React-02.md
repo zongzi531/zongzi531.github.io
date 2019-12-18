@@ -1,7 +1,7 @@
 ---
 title: React 源码学习（二）：HTML 子元素渲染
 date: 2019-04-02 23:03:50
-categories: "React"
+categories: "React 源码学习"
 comments: true
 tags:
 - React
@@ -23,6 +23,10 @@ tags:
 6. [React 源码学习（六）：组件渲染](https://zongzi531.com/2019/04/06/LSC-React-06/)
 7. [React 源码学习（七）：生命周期](https://zongzi531.com/2019/04/07/LSC-React-07/)
 8. [React 源码学习（八）：组件更新](https://zongzi531.com/2019/04/08/LSC-React-08/)
+9. [React 源码学习（九）：“脱胎换骨”](https://zongzi531.com/2019/12/18/LSC-React-09/)
+10. [React 源码学习（十）：Fiber](https://zongzi531.com/2019/12/19/LSC-React-10/)
+11. [React 源码学习（十一）：Scheduling](https://zongzi531.com/2019/12/20/LSC-React-11/)
+12. [React 源码学习（十二）：Reconciliation](https://zongzi531.com/2019/12/21/LSC-React-12/)
 
 ## 生成 Markup 标记时如何生成多重子元素
 
