@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2019年12月14日**
+>*更新时间：* **2019年12月21日**
 
 ### 站点
 
@@ -229,7 +229,7 @@ title: 通勤那点事
 - [【第1719期】简明 JavaScript 函数式编程-入门篇](https://mp.weixin.qq.com/s/PUblSsxKrIAJfGMhBesGsw)
 - [【第1720期】走进小程序·云开发](https://mp.weixin.qq.com/s/lFjQA6W4SZMyf9froIqqWQ)
 - [【第1721期】Element-UI 技术揭秘 — Layout布局组件的设计与实现](https://mp.weixin.qq.com/s/uiKdQsRzFqRm89JlGxD1Xg)
-- [【第1722期】京东 PC 首页 2019 改版前端总结](https://mp.weixin.qq.com/s/prgpYTSVrBKTsO1JDrgh3Q)
+- [**【第1722期】京东 PC 首页 2019 改版前端总结**](https://mp.weixin.qq.com/s/prgpYTSVrBKTsO1JDrgh3Q)
 - [【第1723期】不要再问React Hooks能否取代Redux了](https://mp.weixin.qq.com/s/sonaMf34_ZZHKbaGZqz8yg)
 - [【第1724期】用React Hooks与Web Animation API实现动效组件](https://mp.weixin.qq.com/s/UsCit3TDf224YPQW-4o8dw)
 - [【第1725期】浅析Typescript设计模式](https://mp.weixin.qq.com/s/vZRqWgeT69YAQ2L3brQT-w)
@@ -313,6 +313,12 @@ title: 通勤那点事
 - [【第1803期】如何在 Web 上构建一个插件系统](https://mp.weixin.qq.com/s/oDeiUhvBvEMjXhAtIAHAvw)
 - [【第1804期】Web内容如何影响电池的使用](https://mp.weixin.qq.com/s/EPhsY0LZ5qNuUtBbKny9Bw)
 - [【第1805期】一种前端灰度发布方案](https://mp.weixin.qq.com/s/IT65m3VwlAhXusipB6wa2g)
+- [【第1806期】高德JS依赖分析工程及关键原理](https://mp.weixin.qq.com/s/vbp_tXErSKe23oO2xmzc0Q)
+- [【第1807期】高质量前端快照方案：来自页面的「自拍」](https://mp.weixin.qq.com/s/RV0Yp0JG5NqYheDoIvY1Gw)
+- [【第1808期】2019年终云时代的Node FaaS技术展望](https://mp.weixin.qq.com/s/N-XwPTVPDBHUKaaZ5mrAtA)
+- [【第1809期】2019年前端事件回顾](https://mp.weixin.qq.com/s/T30oUQE2y9yAgd2s-2UYXA)
+- [【第1810期】前端2019年调查报告](https://mp.weixin.qq.com/s/Ci15hMLil1T_Kwl7IV91lQ)
+- [【第1811期】如何成为 ECharts 的 Committer？](https://mp.weixin.qq.com/s/j3pYvHYrhZG37cy3UpK5HA)
 
 ---
 
@@ -495,6 +501,10 @@ title: 通勤那点事
 - [Web性能领域常见的专业术语](https://mp.weixin.qq.com/s/GIpmZIY6yxGRBpkTDHuJuw)
 - [花椒web端实时互动流媒体播放器](https://mp.weixin.qq.com/s/Mde-zS0oLVGQfdjEVdaAjA)
 - [通读 HTML Standard](https://mp.weixin.qq.com/s/eyxI6g6YjXfpDIJE3A5evg)
+- [中不中奖，都是抽奖程序的锅？](https://mp.weixin.qq.com/s/iQDfLPYRxNCJ3rDL3TYD-g)
+- [读 koa2 源码后的一些思考与实践](https://mp.weixin.qq.com/s/tSMZLEieDVIP_Kqy78AHHw)
+- [W3Cx新推出的在线课程《Web无障碍》](https://mp.weixin.qq.com/s/qWXETUi6V2skxjJJxytzHw)
+- [国内首家！360加入 Ecma 参与 JavaScript 语言标准制定](https://mp.weixin.qq.com/s/SwAbs_CY3il6u27DgKwrXQ)
 
 ### 前端桃园
 
@@ -568,3 +578,5 @@ title: 通勤那点事
 - [“买买买”用日语怎么说？](https://mp.weixin.qq.com/s/J23yoMgU4fsCrEioKVf8Tg)
 - [“胖”用日语怎么说？](https://mp.weixin.qq.com/s/tNS7a3NNGLF71rDwcqnbqw)
 - [如何用日语「表达感谢」？](https://mp.weixin.qq.com/s/rurjBIgqyH5POjLENYrPTg)
+- [“吃瓜”用日语怎么说？](https://mp.weixin.qq.com/s/U53itZuhK0CwmKSY-DGDfQ)
+- [“圣诞快乐”用日语怎么说？](https://mp.weixin.qq.com/s/hkwod89sJe39IiwMC8XfUw)
