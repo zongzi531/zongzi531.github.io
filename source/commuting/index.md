@@ -9,11 +9,14 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2019年12月21日**
+>*更新时间：* **2020年01月01日**
 
 ### 站点
 
 - [carbon - Create and share beautiful images of your source code\.](https://carbon.now.sh/)
+- [UnusedCSS - Cleanse Your CSS](https://unused-css.com/)
+- [Storybook - Storybook is an open source tool for developing UI components in isolation for React, Vue, and Angular.](https://storybook.js.org/)
+- [NGINX Config](https://www.digitalocean.com/community/tools/nginx)
 
 ### 前端早读课
 
@@ -80,6 +83,8 @@ title: 通勤那点事
 - [【第1552期】深入React fiber 链表和DFS](https://mp.weixin.qq.com/s/Tp05MoV1bQi7rgpYnz1Xhg)
 - ...
 - [【第1561期】5款小程序框架全面测评](https://mp.weixin.qq.com/s/uKAIqrnjZ75_Mbsm_ArUVg)
+- ...
+- [【第1568期】CSS 火焰](https://mp.weixin.qq.com/s/bn23VciYKUsWYXTP0NGNgw)
 - ...
 - [【第1574期】浏览器帧原理剖析](https://mp.weixin.qq.com/s/yn4GiU3me-A_tVfQEVU9cQ)
 - [【第1575期】JavaScript中的算法](https://mp.weixin.qq.com/s/4rPt7T59ifVTxg4dxCF50w)
@@ -319,6 +324,17 @@ title: 通勤那点事
 - [【第1809期】2019年前端事件回顾](https://mp.weixin.qq.com/s/T30oUQE2y9yAgd2s-2UYXA)
 - [【第1810期】前端2019年调查报告](https://mp.weixin.qq.com/s/Ci15hMLil1T_Kwl7IV91lQ)
 - [【第1811期】如何成为 ECharts 的 Committer？](https://mp.weixin.qq.com/s/j3pYvHYrhZG37cy3UpK5HA)
+- [【第1812期】如何设计出访问性更佳的搜索栏](https://mp.weixin.qq.com/s/WzTTdUoIy02bBK_nhQ-NZQ)
+- [【第1813期】什么是抽象语法树](https://mp.weixin.qq.com/s/RNGEh5cf8RvxwNf5qCPSSA)
+- [【第1814期】函数式编程起源-Lambda演算(es2015描述)](https://mp.weixin.qq.com/s/cCCyowKnhJptxBaJOe72Dg)
+- [【第1815期】利用 JS 实现多种图片相似度算法](https://mp.weixin.qq.com/s/4hu9NOx7yw7Kwzubbsv3lQ)
+- [【第1816期】巧用 CSS 实现酷炫的充电动画](https://mp.weixin.qq.com/s/4hu9NOx7yw7Kwzubbsv3lQ)
+- [【第1817期】小程序没有 DOM 接口，原因竟然是……？](https://mp.weixin.qq.com/s/4UVgOs7xQ8UXFjOxHtko1g)
+- [【第1818期】网站无障碍化简介](https://mp.weixin.qq.com/s/fsGUdGh-RedAeyMKqtd7oQ)
+- [【第1819期】Web 视频播放前前后后](https://mp.weixin.qq.com/s/wrZ50f2CNQrvxlcZ8mUj-g)
+- [【第1820期】nohost — 远程环境配置及抓包调试最佳实践](https://mp.weixin.qq.com/s/EbMfcBPF13Vta4fko05haA)
+- [【第1821期】前端内存优化的探索与实践](https://mp.weixin.qq.com/s/iRHiu404yYXqCO_PGiJ7yA)
+- [【第1822期】黑暗模式的过去、现在和未来](https://mp.weixin.qq.com/s/0fXQqFx_CrjfTOEwnD7Kiw)
 
 ---
 
@@ -331,6 +347,10 @@ title: 通勤那点事
 - [【PPT】白鹭引擎首席架构师@王泽：框架开发中的基础设施搭建](https://mp.weixin.qq.com/s/tkqasAV1lE-wRWDShWLczQ)
 - [【PPT】尤雨溪：Vue 3.0的设计原则](https://mp.weixin.qq.com/s/T6yu2VWJkVlXbhXeDzKH9g)
 
+---
+
+- [前端图书精选店@前端早读课](https://mp.weixin.qq.com/s/0XlMtKwJSGuMLL0uNTtMsw)
+
 ### 小哈公社
 
 - [甲骨文中国研发中心裁员已定，首批裁员补偿为N+6](https://mp.weixin.qq.com/s/JQf3naf_e-8XVYcx1RQsfw)
@@ -341,6 +361,7 @@ title: 通勤那点事
 
 ### FENews
 
+- [「译」Orinoco: V8的垃圾回收器](https://mp.weixin.qq.com/s/OzfhR5N7IQlmrDI-2LUcJQ)
 - [React 新特性：调度系统](https://mp.weixin.qq.com/s/qjTlvyZhY_6qjvEMbD5NJw)
 - [JavaScript 的工作原理：Shadow DOM 的内部结构以及如何构建可封装的组件](https://mp.weixin.qq.com/s/-jkmCrNe35qD5vUizuv16g)
 - [TypeScript 2.9+ 的几个知识点](https://mp.weixin.qq.com/s/QtZ0E94Wv0vxLUPP3us-Vg)
@@ -348,7 +369,12 @@ title: 通勤那点事
 
 ### 知乎
 
-- [What's New in JavaScript](https://zhuanlan.zhihu.com/p/65409226?utm_source=wechat_session&utm_medium=social&s_r=0&wechatShare=1&from=timeline&isappinstalled=0)
+- [React v16.7 "Hooks" - What to Expect](https://zhuanlan.zhihu.com/p/47684983)
+- [今天在VueConf杭州上的闪电分享](https://zhuanlan.zhihu.com/p/50781272)
+- [Deno (Ryan Dahl 2018年11月台北JSDC演讲PPT翻译版)](https://zhuanlan.zhihu.com/p/51017778)
+- [TypeScript Type-Level Programming](https://zhuanlan.zhihu.com/p/54182787)
+- [为 Luy 实现 React Fiber 架构](https://zhuanlan.zhihu.com/p/37098539)
+- [What's New in JavaScript](https://zhuanlan.zhihu.com/p/65409226)
 
 ### 清醒贪心记
 
@@ -356,6 +382,10 @@ title: 通勤那点事
 
 ### 奇舞周刊
 
+- [[译] 那些好玩却尚未被 ECMAScript 2017 采纳的提案](https://mp.weixin.qq.com/s/3omu3rH2OOI6cIz1hd1f4A)
+- [嗨，送你一张Web性能优化地图](https://mp.weixin.qq.com/s/C2Zx3KPNPkgj-aHnOY43Iw)
+- [Vuex工作原理详解](https://mp.weixin.qq.com/s/xkOQB9EMejz24nkI4Q-NuQ)
+- [CSS的“层”峦“叠”翠](https://mp.weixin.qq.com/s/7YPt5-9J46R83ouola0Trw)
 - [函数式编程，真香（二）](https://mp.weixin.qq.com/s/8tVdIUd7rIQRKjbDRRP6Ug)
 - [**剖析 React 源码：先热个身**](https://mp.weixin.qq.com/s/nw5d7vFQ1pmXYPL1YkHzIg)
 - [剖析 React 源码：render 流程（一）](https://mp.weixin.qq.com/s/-9mmMUNYr5EsjueFWiW5Rw)
@@ -505,6 +535,15 @@ title: 通勤那点事
 - [读 koa2 源码后的一些思考与实践](https://mp.weixin.qq.com/s/tSMZLEieDVIP_Kqy78AHHw)
 - [W3Cx新推出的在线课程《Web无障碍》](https://mp.weixin.qq.com/s/qWXETUi6V2skxjJJxytzHw)
 - [国内首家！360加入 Ecma 参与 JavaScript 语言标准制定](https://mp.weixin.qq.com/s/SwAbs_CY3il6u27DgKwrXQ)
+- [浏览器缓存策略与 webpack 持久化缓存](https://mp.weixin.qq.com/s/B9gV3ahTMG4dFhWsEJsDqA)
+- [『 Vue小Case 』- 如何动态绑定多个事件（内附源码解析）](https://mp.weixin.qq.com/s/w_IZcBgZ-P_K75O-7FP7qA)
+- [记一次webpack构建提速](https://mp.weixin.qq.com/s/ajIvJWyvjnWMYTxHjooErQ)
+- [使用 React 为 Chimee 开发插件](https://mp.weixin.qq.com/s/hrxMb-kGdhT_MJ-ufD848w)
+- [Hybird动态布局，提升3倍开发效率的玩法！](https://mp.weixin.qq.com/s/uWgYqStbmnN4hw9q2wSBYw)
+- [从 React 历史的长河里聊虚拟DOM及其价值](https://mp.weixin.qq.com/s/1xZkyuKOu8dTWJihY7cmkg)
+- [SpriteJS 3.0 正式发布 —— 针对可视化大屏渲染优化性能提升10倍+](https://mp.weixin.qq.com/s/NnXQW8OwSaqUOAdHxK57lQ)
+- [Ecma 118th GA会议手记](https://mp.weixin.qq.com/s/1AZGJV_udFSSBnEMShTlRg)
+- [如何用 Decorator 装饰你的 Typescript？](https://mp.weixin.qq.com/s/0JTvJJNX4zwE3-Kl6dMvrA)
 
 ### 前端桃园
 
@@ -535,6 +574,12 @@ title: 通勤那点事
 
 ### 语雀
 
+- [前端性能优化の备忘录 2019 版](https://www.yuque.com/w3ctech/front-end-performance-checklist-2019)
+- [1个div，CSS也可以实现酷炫效果](https://www.yuque.com/itchina110/goodfe/nzdclr)
+- [CSS-trip](https://www.yuque.com/robinson/css-trip)
+- [《精通CSS》第3版，抢先看！](https://www.yuque.com/itchina110/goodfe/xga7rc)
+- [Facebook 对前端工程师的要求是啥？一起来看看](https://www.yuque.com/itchina110/goodfe/xczbgl)
+- [前端开发者手册2019](https://www.yuque.com/ysfe/ykx/fedhb)
 - [杭州 P7+/P8 前端可去公司排名](https://www.yuque.com/iscott/uuzxk4/avsr1r)
 
 ### 前端圈
@@ -551,6 +596,7 @@ title: 通勤那点事
 
 ### 局座召忠
 
+- [美、英联手发动第三轮贸易战！瞄准中国这两个领域](https://mp.weixin.qq.com/s/exTJLb5LPr9Ji4S-8NnChw)
 - [冷战还是核战？美国今日正式退出中导条约！](https://mp.weixin.qq.com/s/hk751ie3Y_NiHlFAB_2L2A)
 
 ### 架构师之巅
@@ -559,17 +605,94 @@ title: 通勤那点事
 
 ### 极客时间 - winter 重学前端
 
-- [开篇词 | 从今天起，重新理解前端](https://time.geekbang.org/column/article/928bfa855fe6c1d7a2757266487c31ed/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D&oss_token=3a2b62c657769fa4)
-- [明确你的前端学习路线与方法](https://time.geekbang.org/column/article/4b26a85a2f794cf96fed02f626c8499a/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [列一份前端知识架构图](https://time.geekbang.org/column/article/99a3d778d39c433c680573499b2dfd63/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript类型：关于类型，有哪些你不知道的细节？](https://time.geekbang.org/column/article/d013941493bf16885952b9df04c88dec/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript对象：面向对象还是基于对象？](https://time.geekbang.org/column/article/40f1d6b749edb13aa1fed6e0c85b87df/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript对象：我们真的需要模拟类吗？](https://time.geekbang.org/column/article/87f0f2c6e24d981b55c084b3b83f329e/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript对象：你知道全部的对象分类吗？](https://time.geekbang.org/column/article/36de82cb8fd5a1e2c3c0cdde552165e5/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript执行（一）：Promise里的代码为什么比setTimeout先执行？](https://time.geekbang.org/column/article/93d860d19e781d65507e0975c46eb5ba/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript执行（二）：闭包和执行上下文到底是怎么回事？](https://time.geekbang.org/column/article/cfdbd93ec0ac3d7ba002c3d6a6e9202b/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D)
-- [JavaScript执行（三）：你知道现在有多少种函数吗？](https://time.geekbang.org/column/article/5343ebc510efd3f039ca1ef870746617/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D&from=singlemessage&isappinstalled=0)
-- [JavaScript执行（四）：try里面放return，finally还会执行吗？](https://time.geekbang.org/column/article/41c321ddf0affea71781bdc58fef01e3/share?code=iRfuY8uvJhmZ6X5mzcWoHlxHy0-uskAhhxJEwWXQrrc%3D&from=singlemessage&isappinstalled=0)
+- [开篇词 | 从今天起，重新理解前端](https://time.geekbang.org/column/article/928bfa855fe6c1d7a2757266487c31ed/share)
+- [明确你的前端学习路线与方法](https://time.geekbang.org/column/article/4b26a85a2f794cf96fed02f626c8499a/share)
+- [列一份前端知识架构图](https://time.geekbang.org/column/article/99a3d778d39c433c680573499b2dfd63/share)
+- [JavaScript类型：关于类型，有哪些你不知道的细节？](https://time.geekbang.org/column/article/d013941493bf16885952b9df04c88dec/share)
+- [JavaScript对象：面向对象还是基于对象？](https://time.geekbang.org/column/article/40f1d6b749edb13aa1fed6e0c85b87df/share)
+- [JavaScript对象：我们真的需要模拟类吗？](https://time.geekbang.org/column/article/87f0f2c6e24d981b55c084b3b83f329e/share)
+- [JavaScript对象：你知道全部的对象分类吗？](https://time.geekbang.org/column/article/36de82cb8fd5a1e2c3c0cdde552165e5/share)
+- [JavaScript执行（一）：Promise里的代码为什么比setTimeout先执行？](https://time.geekbang.org/column/article/93d860d19e781d65507e0975c46eb5ba/share)
+- [JavaScript执行（二）：闭包和执行上下文到底是怎么回事？](https://time.geekbang.org/column/article/cfdbd93ec0ac3d7ba002c3d6a6e9202b/share)
+- [JavaScript执行（三）：你知道现在有多少种函数吗？](https://time.geekbang.org/column/article/5343ebc510efd3f039ca1ef870746617/share)
+- [JavaScript执行（四）：try里面放return，finally还会执行吗？](https://time.geekbang.org/column/article/41c321ddf0affea71781bdc58fef01e3/share)
+
+### 张鑫旭-鑫空间-鑫生活
+
+- [currentColor-CSS3超高校级好用CSS变量](https://www.zhangxinxu.com/wordpress/2014/10/currentcolor-css3-powerful-css-keyword/)
+
+### Node全栈
+
+- [前端工程师的技术进阶点在哪里?](https://mp.weixin.qq.com/s/-CLEXb_-xkm43dqKSJbFCQ)
+
+### topgeek
+
+- [一个程序员的成长之路 - 剖析别人，总结自己](https://mp.weixin.qq.com/s/zWPjfHiYxx0HH9lE99Yijw)
+
+### UC国际技术
+
+- [React 官方发布性能分析插件Profiler](https://mp.weixin.qq.com/s/k-icCIEOHkGmV-cBJ0HUGQ)
+- [2019年前端面试都聊啥？一起来看看](https://mp.weixin.qq.com/s/e-IC588SZPJK2QRBm3KuHA)
+- [一文让你轻松掌握 HTTPS](https://mp.weixin.qq.com/s/52n5RB0Kf5wSKuNPs_LYZQ)
+
+### 简书
+
+- [前端工程师学习Nginx入门篇](https://www.jianshu.com/p/e24d676060c1)
+
+### gitbooks
+
+- [JS 函数式编程指南](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
+
+### justjavac
+
+- [月下载量千万的 npm 包被黑客篡改，Vue 开发者可能正在遭受攻击](https://mp.weixin.qq.com/s/IaOWxG0XLvn2znvvP1dmwA)
+
+### 彬彬有理
+
+- [和三观一致的人谈恋爱，真的很可爱](https://mp.weixin.qq.com/s/MTqOQ5kBYdAV-k1xJ4AS6Q)
+
+### OhBoyDaily
+
+- [请珍惜那个对你好的天蝎座](https://mp.weixin.qq.com/s/VE7FxgQtD8AwXe_BmeH1yg)
+
+### *其他*
+
+- [谈谈CRDT](http://liyu1981.github.io/what-is-CRDT/)
+- [聊聊 2018 年我所不了解的技术](https://overreacted.io/zh-hans/things-i-dont-know-as-of-2018/)
+
+### GitHub
+
+- [How to enable Istanbul code coverage for the mocha plugin? #1363](https://github.com/vuejs/vue-cli/issues/1363)
+
+### GoPro
+
+- [来自 GoPro 资深创意总监的史上最详细 HERO7 教学 <上>](https://mp.weixin.qq.com/s/rqEUwBswabZZoY_8jMKVdA)
+- [用 GoPro 拍摄星轨，就是这么简单](https://mp.weixin.qq.com/s/alCtqqccjyuqhBmi2N1lZA)
+
+### 前端大全
+
+- [React Router v5发布，更好地支持React 16](https://mp.weixin.qq.com/s/2VKN51Xn2B5byfCp67Wsvw)
+- [GraphQL-前端开发的利剑与桥梁](https://mp.weixin.qq.com/s/7di8WG9xSc_TAh1zbls4zQ)
+
+### JavaScript
+
+- [【译】ES10功能完全指南](https://mp.weixin.qq.com/s/l8qGkZt5oUwdxKbbd6GoCA)
+
+### 掘金
+
+- [我在淘宝做前端的这三年 — 第一年](https://juejin.im/post/5c74d4b9e51d4512c37ea03b)
+
+### InfoQ
+
+- [2019年大前端技术趋势深度解读](https://mp.weixin.qq.com/s/lf55_ujbhOx4i3PrdCwihg)
+
+### 图灵教育
+
+- [CSS捡屎记](https://mp.weixin.qq.com/s/MNl1omFUg4-Dm0_LQVNt6w)
+
+### 有赞
+
+- [浅谈React 16中的Fiber机制](https://tech.youzan.com/react-fiber/)
 
 ### 早道日语
 
