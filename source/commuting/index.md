@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年01月01日**
+>*更新时间：* **2020年02月01日**
 
 ### 站点
 
@@ -335,6 +335,25 @@ title: 通勤那点事
 - [【第1820期】nohost — 远程环境配置及抓包调试最佳实践](https://mp.weixin.qq.com/s/EbMfcBPF13Vta4fko05haA)
 - [【第1821期】前端内存优化的探索与实践](https://mp.weixin.qq.com/s/iRHiu404yYXqCO_PGiJ7yA)
 - [【第1822期】黑暗模式的过去、现在和未来](https://mp.weixin.qq.com/s/0fXQqFx_CrjfTOEwnD7Kiw)
+- [【第1823期】Git子仓库深入浅出](https://mp.weixin.qq.com/s/_drTFU9FoOkYkQDDEikTHA)
+- [【第1824期】Serverless 函数应用架构升级](https://mp.weixin.qq.com/s/uWX6zdG7EFc43orrzAdWpA)
+- [【第1825期】了解什么是微前端](https://mp.weixin.qq.com/s/AeJrrvXGTOiIvOcxEQLHrQ)
+- [【第1826期】HTML5 之跨域通讯（postMessage）](https://mp.weixin.qq.com/s/sW1D4_1ZKI5SoocAT9uCeg)
+- [【第1827期】小程序跨框架开发的探索与实践](https://mp.weixin.qq.com/s/JbQ-9io3ATBdPk08AboeWw)
+- [【第1828期】种草 ES2020 新特性](https://mp.weixin.qq.com/s/pHcWwx1h_oOrh9-SVgvHEQ)
+- [【第1829期】复制黏贴上传图片和跨浏览器自动化测试](https://mp.weixin.qq.com/s/C3Sp5kDH0c00BRC4OPfPCw)
+- [【第1830期】2019年京东PLUS会员前端开发之路](https://mp.weixin.qq.com/s/A06oNHyftxUzrkUd-6Rrig)
+- [【第1831期】React团队的技术准则](https://mp.weixin.qq.com/s/morEGraim7OZ2mmHTHb6lg)
+- [【第1832期】从敲下一行JS代码到这行代码被执行，中间发生了什么？](https://mp.weixin.qq.com/s/eha397dtDBnG-rZo0H9gew)
+- [【第1833期】“云”端的语雀：用 JavaScript 全栈打造商业级应用](https://mp.weixin.qq.com/s/cKZzEOJxXpvcEK1QNIYzdA)
+- [【第1834期】DCloud@崔红保：我眼中小程序的当下和未来可能](https://mp.weixin.qq.com/s/cxrSVtGRx67Xo-aLSoANUw)
+- [【第1835期】llhttp是如何使Node.js性能翻倍的？](https://mp.weixin.qq.com/s/WmLwBKBT5j81mHgtczAClA)
+- [【第1836期】Remax - 使用 React 开发小程序](https://mp.weixin.qq.com/s/K-DkTjElM-QQkwCHTP8Ndg)
+- [【第1837期】未来可期的TypeScript](https://mp.weixin.qq.com/s/a-k0HPU5pXzTvmByA8aS-g)
+- [【第1838期】TypeScript 3.8 Beta](https://mp.weixin.qq.com/s/-spafHGmS9rZIxCRbzb8iw)
+- [【第1839期】微保大型小程序的工程化实践](https://mp.weixin.qq.com/s/b0FCCWOs0RIyi8JJjOqjGA)
+- [【第1840期】标准微前端架构在蚂蚁的落地实践](https://mp.weixin.qq.com/s/98NiFELS8oXX6m9FphVD0g)
+- [**【第1841期】Ant Design 4.0：创造快乐工作**](https://mp.weixin.qq.com/s/1HT7VYGWOwPvTKPFee1fVQ)
 
 ---
 
@@ -544,6 +563,21 @@ title: 通勤那点事
 - [SpriteJS 3.0 正式发布 —— 针对可视化大屏渲染优化性能提升10倍+](https://mp.weixin.qq.com/s/NnXQW8OwSaqUOAdHxK57lQ)
 - [Ecma 118th GA会议手记](https://mp.weixin.qq.com/s/1AZGJV_udFSSBnEMShTlRg)
 - [如何用 Decorator 装饰你的 Typescript？](https://mp.weixin.qq.com/s/0JTvJJNX4zwE3-Kl6dMvrA)
+- [W3C万维物联网解析：编程API篇](https://mp.weixin.qq.com/s/Tt7Zd7wUZhaIEeKMgltLMQ)
+- [Docker 搭建你的第一个 Node 项目到服务器](https://mp.weixin.qq.com/s/KcPp1rCxj6UioIGTqNo-Ow)
+- [npm install 原理分析](https://mp.weixin.qq.com/s/d4v4c6MM7sWepDO0PbiNLQ)
+- [Largest Contentful Paint (LCP)](https://mp.weixin.qq.com/s/pFXTBZNAkNcKT09nnRzcyA)
+- [如何答一道惊艳面试官的数组去重问题？](https://mp.weixin.qq.com/s/ipxCQRZ1rj6VJXIP659IBg)
+- [谈谈农历](https://mp.weixin.qq.com/s/LlRoE7XRGqW2SlJVidyL8w)
+- [面试官：你怎么优雅写 CSS？](https://mp.weixin.qq.com/s/i0x9r-17hW_7KAaZdXbK-g)
+- [一张图认识 WCAG Level A, Level AA, Level AAA](https://mp.weixin.qq.com/s/16TM7HM5NMIssqQ2UzgJHg)
+- [深入浅出 JavaScript 模块化](https://mp.weixin.qq.com/s/Uxtm-z48FnhK13Zbm15Tcw)
+- [那些年我们“跨”过的“域”（接口篇）](https://mp.weixin.qq.com/s/Qt_oAGKwsP4K7GjiPYfwNQ)
+- [SpriteJS的3D渲染能力 Up, Up, Up!](https://mp.weixin.qq.com/s/2rSNkI7XHiEm2QfxYmF2_Q)
+- [前端安全—你必须要注意的依赖安全漏洞](https://mp.weixin.qq.com/s/ADn3xtcc8EyPqWx6CbGL5Q)
+- [从koa/redux看如何设计中间件](https://mp.weixin.qq.com/s/iFFBjagQX1ujzeeg0D-tDg)
+- [高质量前端快照方案：来自页面的「自拍」](https://mp.weixin.qq.com/s/ebxO5MtkQHi-U21MO6LIuA)
+- [武汉实时疫情来了 | 你想知道的这都有](https://mp.weixin.qq.com/s/lPHV3CN5czlqmdbTnN_ZiA)
 
 ### 前端桃园
 
@@ -598,6 +632,12 @@ title: 通勤那点事
 
 - [美、英联手发动第三轮贸易战！瞄准中国这两个领域](https://mp.weixin.qq.com/s/exTJLb5LPr9Ji4S-8NnChw)
 - [冷战还是核战？美国今日正式退出中导条约！](https://mp.weixin.qq.com/s/hk751ie3Y_NiHlFAB_2L2A)
+- [伊朗反击来了，将美军及五角大楼列为“恐怖组织”](https://mp.weixin.qq.com/s/gTm9wE-R0d7_hMk1tkWXVw)
+- [战争离伊朗有多远：以色列会突袭伊朗吗？](https://mp.weixin.qq.com/s/WDzsyMc0B8o5Pn4nLWnA4g)
+- [终于动手了！伊朗多枚导弹齐发，美军基地接连爆炸](https://mp.weixin.qq.com/s/J8daXhHc9hFBGzRq0LqcIg)
+- [特朗普深夜溜粉，第三次世界大战还没开始就已落幕？](https://mp.weixin.qq.com/s/j32N2K-RzfVvmtjMTA76tA)
+- [美军竟叫嚣将在钓鱼岛部署导弹？因果律准备！](https://mp.weixin.qq.com/s/N4LY6eZ4PJ6BjKEnRHZdHw)
+- [美国还能发动一场对伊朗的战争吗？](https://mp.weixin.qq.com/s/-WPlbu0hHDbd3Lh9gqqiww)
 
 ### 架构师之巅
 
@@ -703,3 +743,17 @@ title: 通勤那点事
 - [如何用日语「表达感谢」？](https://mp.weixin.qq.com/s/rurjBIgqyH5POjLENYrPTg)
 - [“吃瓜”用日语怎么说？](https://mp.weixin.qq.com/s/U53itZuhK0CwmKSY-DGDfQ)
 - [“圣诞快乐”用日语怎么说？](https://mp.weixin.qq.com/s/hkwod89sJe39IiwMC8XfUw)
+- [“新年快乐”用日语怎么说？](https://mp.weixin.qq.com/s/rq7MYS4cXhmpW_IPqtTVuA)
+- [日本成人礼原来这么过？](https://mp.weixin.qq.com/s/YJNXHfvwIjlHECHNYteAaA)
+
+### 美团技术团队
+
+- [美团开源Logan Web：前端日志在Web端的实现](https://mp.weixin.qq.com/s/j_8_kSQ4BrYR-UzIEIEIbw)
+
+### 邵逸夫医院
+
+- [癌细胞的自述：世界那么大，想出去看看](https://mp.weixin.qq.com/s/2xCq_iQlQJt4Vl_KFh2PBg)
+
+### 杭州现代外语专修学校
+
+- [行かなければならない理由——ジブリ美術館見学感想（初上班作文）](https://mp.weixin.qq.com/s/siraK-FLGnvlXHAnXu4KJw)
