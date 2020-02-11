@@ -117,6 +117,10 @@ mathjax:
   cjk_char_width: 16
   svg: true
 
+# All in one. Minifier & Optimization plugin for Hexo.
+# https://www.npmjs.com/package/hexo-all-minifier
+all_minifier: true
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
