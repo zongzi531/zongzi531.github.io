@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年02月27日**
+>*更新时间：* **2020年03月15日**
 
 ### 站点
 
@@ -18,6 +18,7 @@ title: 通勤那点事
 - [Storybook - Storybook is an open source tool for developing UI components in isolation for React, Vue, and Angular.](https://storybook.js.org/)
 - [NGINX Config](https://www.digitalocean.com/community/tools/nginx)
 - [CSS灵感](https://chokcoco.github.io/CSS-Inspiration/)
+- [JS 函数式编程指南](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 
 ### 前端早读课
 
@@ -382,6 +383,23 @@ title: 通勤那点事
 - [【第1866期】React Hooks的体系设计之二 - 状态粒度](https://mp.weixin.qq.com/s/pa90j4WZIj2yK3Op-1eVHg)
 - [【第1867期】Node.js CLI 工具最佳实践](https://mp.weixin.qq.com/s/DwDw0vShAqegXCoAVpZPJQ)
 - [【第1868期】闲话 CDN](https://mp.weixin.qq.com/s/DIo9l2My2h3WxRHeQYy0oQ)
+- [【第1869期】CSS 工具类和“关注点分离”](https://mp.weixin.qq.com/s/nZ2pY_9_CCeG3ZHwXA05Dw)
+- [【第1870期】巧妙实现带圆角的渐变边框](https://mp.weixin.qq.com/s/Fs7rpplWU8at7Y7w1No9JQ)
+- [【第1871期】Ant Design 4.0 正式版来了！](https://mp.weixin.qq.com/s/FtuMU2uxl0WUGn8NHagOYA)
+- [【第1872期】React Hooks的体系设计之三 - 什么是ref](https://mp.weixin.qq.com/s/wI8AfwyAIWgv5Ad3YJSIuA)
+- [【第1873期】设计体系的响应式设计](https://mp.weixin.qq.com/s/K7rBl13xOoAzhogaHMACew)
+- [【第1874期】阿里国际-redirect性能优化实践](https://mp.weixin.qq.com/s/7YS3e76if4Y9Bre5bammFQ)
+- [【第1875期】如何在页面极速渲染3D模型](https://mp.weixin.qq.com/s/O36v1gNvOyi5BiI22tAzFw)
+- [【第1876期】从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://mp.weixin.qq.com/s/ixvDg1Bl9bSfDXQh33xMYA)
+- [【第1877期】理解ECMAScript规范（一）](https://mp.weixin.qq.com/s/qUnJBe3r_f78c5DcUZJF3g)
+- [【第1878期】网站性能优化之度量篇](https://mp.weixin.qq.com/s/oJaUIk20i72M2UgVTGgEzA)
+- [【第1879期】《Web 3D来了！体验不一样的春节活动》技术篇](https://mp.weixin.qq.com/s/kzV_ubIFb1gSYeX4PaDo7A)
+- [【第1880期】React Hooks的体系设计之四 - 玩坏ref](https://mp.weixin.qq.com/s/7c6zncb5ZIef9xgaAvt9uw)
+- [【第1881期】修复Web应用程序中的内存泄漏](https://mp.weixin.qq.com/s/2cgZewQAiayUWpU7QjTnjQ)
+- [【第1882期】基于Unix Socket的可靠Node.js HTTP代理实现（支持WebSocket协议）](https://mp.weixin.qq.com/s/SiBVU3NzrSCcd_clpeOXfw)
+- [【第1883期】Rax，完美融合编译时与运行时的双引擎小程序框架](https://mp.weixin.qq.com/s/uIYssujm8rRPUxFx0HraxQ)
+- [【第1884期】NutUI3.0 中单元测试的探索和实践](https://mp.weixin.qq.com/s/AdzgSEXI6910p8puNrxqUQ)
+- [【第1885期】基于 React 的可视化编辑平台实践](https://mp.weixin.qq.com/s/lOLX_VZhwhBENnchEoLu_A)
 
 ---
 
@@ -426,6 +444,8 @@ title: 通勤那点事
 - [TypeScript Type-Level Programming](https://zhuanlan.zhihu.com/p/54182787)
 - [为 Luy 实现 React Fiber 架构](https://zhuanlan.zhihu.com/p/37098539)
 - [What's New in JavaScript](https://zhuanlan.zhihu.com/p/65409226)
+- [如何开发一个可爱的CLI（一）](https://zhuanlan.zhihu.com/p/34520943)
+- [如何开发一个可爱的CLI（二）](https://zhuanlan.zhihu.com/p/35013393)
 
 ### 清醒贪心记
 
@@ -629,6 +649,15 @@ title: 通勤那点事
 - [一个白学家眼里的 WebAssembly](https://mp.weixin.qq.com/s/pAToxVekgWvg9I47OBw1fA)
 - [前端高级进阶：如何更好地优化打包资源](https://mp.weixin.qq.com/s/Gh4VJSk33OqHKM3FIIkERw)
 - [Webpack 插件开发如此简单！](https://mp.weixin.qq.com/s/nimOuftziXCWHV61FfjWog)
+- [辩证的眼光搞懂 JWT 这个知识点](https://mp.weixin.qq.com/s/_f5MZa30VhmaqwDs_sx6vA)
+- [Rome：Facebook最新JS工具上手](https://mp.weixin.qq.com/s/CzKO1I_pr6gKjGb2uAOTmA)
+- [一文道尽软件架构及前端架构演进](https://mp.weixin.qq.com/s/Y0ZT4De0rQHARU21chazJg)
+- [《精通CSS》第5章 漂亮的盒子](https://mp.weixin.qq.com/s/SgRvjsBG8TDg1rfrgPT97w)
+- [忍法，scroll 翻滚之术！](https://mp.weixin.qq.com/s/4qo629BO6bgVJ7TB8R77Iw)
+- [疫情专题之ECharts 经验总结](https://mp.weixin.qq.com/s/kQ1bJjpvb0b6080Yv8HOBA)
+- [从 JS 引擎到 JS 运行时（上）](https://mp.weixin.qq.com/s/6tc-NE1k82RLRCDWN0SK8Q)
+- [webpack 中实现自动识别 CSS Modules](https://mp.weixin.qq.com/s/DqsXf-4iOfI0-pk4twsUIQ)
+- [【前端冷知识】动画：你知道的和你不知道的](https://mp.weixin.qq.com/s/yrj7GdD0T-EwCTYqFWyeBw)
 
 ### 前端桃园
 
@@ -711,6 +740,15 @@ title: 通勤那点事
 ### 张鑫旭-鑫空间-鑫生活
 
 - [currentColor-CSS3超高校级好用CSS变量](https://www.zhangxinxu.com/wordpress/2014/10/currentcolor-css3-powerful-css-keyword/)
+- [CSS深入理解vertical-align和line-height的基友关系](https://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/)
+- [字母’x’在CSS世界中的角色和故事](https://www.zhangxinxu.com/wordpress/2015/06/about-letter-x-of-css/)
+- [display:inline-block/text-align:justify下列表的两端对齐布局](https://www.zhangxinxu.com/wordpress/2011/03/displayinline-blocktext-alignjustify%e4%b8%8b%e5%88%97%e8%a1%a8%e7%9a%84%e4%b8%a4%e7%ab%af%e5%af%b9%e9%bd%90%e5%b8%83%e5%b1%80/)
+- [CSS float浮动的深入研究、详解及拓展(一)](https://www.zhangxinxu.com/wordpress/2010/01/css-float%e6%b5%ae%e5%8a%a8%e7%9a%84%e6%b7%b1%e5%85%a5%e7%a0%94%e7%a9%b6%e3%80%81%e8%af%a6%e8%a7%a3%e5%8f%8a%e6%8b%93%e5%b1%95%e4%b8%80/)
+- [拜拜了,浮动布局-基于display:inline-block的列表布局](https://www.zhangxinxu.com/wordpress/2010/11/%e6%8b%9c%e6%8b%9c%e4%ba%86%e6%b5%ae%e5%8a%a8%e5%b8%83%e5%b1%80-%e5%9f%ba%e4%ba%8edisplayinline-block%e7%9a%84%e5%88%97%e8%a1%a8%e5%b8%83%e5%b1%80/)
+- [css行高line-height的一些深入理解及应用](https://www.zhangxinxu.com/wordpress/2009/11/css%e8%a1%8c%e9%ab%98line-height%e7%9a%84%e4%b8%80%e4%ba%9b%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3%e5%8f%8a%e5%ba%94%e7%94%a8/)
+- [CSS float浮动的深入研究、详解及拓展(二)](https://www.zhangxinxu.com/wordpress/2010/01/css-float%e6%b5%ae%e5%8a%a8%e7%9a%84%e6%b7%b1%e5%85%a5%e7%a0%94%e7%a9%b6%e3%80%81%e8%af%a6%e8%a7%a3%e5%8f%8a%e6%8b%93%e5%b1%95%e4%ba%8c/)
+- [网页制作辅助工具-jQuery标尺参考线插件](https://www.zhangxinxu.com/wordpress/2010/08/%e7%bd%91%e9%a1%b5%e5%88%b6%e4%bd%9c%e8%be%85%e5%8a%a9%e5%b7%a5%e5%85%b7-jquery%e6%a0%87%e5%b0%ba%e5%8f%82%e8%80%83%e7%ba%bf%e6%8f%92%e4%bb%b6/)
+- [大小不固定的图片、多行文字的水平垂直居中](https://www.zhangxinxu.com/wordpress/2009/08/%e5%a4%a7%e5%b0%8f%e4%b8%8d%e5%9b%ba%e5%ae%9a%e7%9a%84%e5%9b%be%e7%89%87%e3%80%81%e5%a4%9a%e8%a1%8c%e6%96%87%e5%ad%97%e7%9a%84%e6%b0%b4%e5%b9%b3%e5%9e%82%e7%9b%b4%e5%b1%85%e4%b8%ad/)
 
 ### Node全栈
 
@@ -729,6 +767,7 @@ title: 通勤那点事
 ### 简书
 
 - [前端工程师学习Nginx入门篇](https://www.jianshu.com/p/e24d676060c1)
+- [圣杯布局和双飞翼布局的理解与思考](https://www.jianshu.com/p/81ef7e7094e8)
 
 ### gitbooks
 
@@ -772,6 +811,9 @@ title: 通勤那点事
 ### 掘金
 
 - [我在淘宝做前端的这三年 — 第一年](https://juejin.im/post/5c74d4b9e51d4512c37ea03b)
+- [面试完50个人后我写下这篇总结](https://juejin.im/post/5df1e312f265da33d039d06d)
+- [从零实现一套属于自己的UI框架-发布到npm](https://juejin.im/post/5e200ee86fb9a02fdd38986d)
+- [[译] 什么是模块化 CSS？](https://juejin.im/post/5bb6c5195188255c9e02e6f3)
 
 ### InfoQ
 
@@ -800,6 +842,8 @@ title: 通勤那点事
 - [日本人的“元宵节”原来这么过?（还有灯谜等你来猜哦）](https://mp.weixin.qq.com/s/vzBgBFofZY2duuuFVPmcfA)
 - [情人节福利 | “温柔甜美型男教师”在线指导告白](https://mp.weixin.qq.com/s/2WiokxOfCEj-y67UKigTGg)
 - [喵咪日来了！日语中关于猫咪谚语有哪些？](https://mp.weixin.qq.com/s/HlCOiOQxBnfFhUeRHQjiiA)
+- [新冠肺炎的相关的日语词汇、短语](https://mp.weixin.qq.com/s/N8jgMhCN0DHT4npz3n8P7g)
+- [复工复学后，如何做好自我防护？](https://mp.weixin.qq.com/s/qiULzWs9KYLCf5BYwMwcPQ)
 
 ### 美团技术团队
 
@@ -812,3 +856,31 @@ title: 通勤那点事
 ### 杭州现代外语专修学校
 
 - [行かなければならない理由——ジブリ美術館見学感想（初上班作文）](https://mp.weixin.qq.com/s/siraK-FLGnvlXHAnXu4KJw)
+
+### 九十年代的码农
+
+- [理解 ECMAScript 规范（一）](https://mp.weixin.qq.com/s/HFb9MohJWp4fZnxYiS1emw)
+
+### LeicaCamera徕卡相机
+
+- [实用构图技巧：最简单也最困难！](https://mp.weixin.qq.com/s/Jlud_KLu2tKmDLmLxKDGRQ)
+
+### 程序员成长指北
+
+- [基于 Vue 技术栈的微前端方案实践](https://mp.weixin.qq.com/s/y_gPdEZ0lRdquxqRd_7kPQ)
+
+### 人民网
+
+- [2019年美国侵犯人权报告](http://politics.people.com.cn/n1/2020/0313/c1001-31631336.html)
+
+### SegmentFault
+
+- [不要再问我跨域的问题了](https://segmentfault.com/a/1190000015597029)
+
+### 哔哩哔哩
+
+- [【计算机科学速成课】[40集全/精校] - Crash Course Computer Science](https://www.bilibili.com/video/av21376839?p=1)
+
+### 歪码行空
+
+- [CSS实现背景图片右侧定位的5种小技巧](https://mp.weixin.qq.com/s/B76OGbU44fqjRLQfl9ec6g)

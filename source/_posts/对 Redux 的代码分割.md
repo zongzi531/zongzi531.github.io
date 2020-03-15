@@ -75,7 +75,7 @@ import { lazy } from 'react';
 import { injectReducer } from '@/store/configureStore';
 
 export default {
-  DictManager: lazy(async () => {
+  Something: lazy(async () => {
     await import(/* webpackChunkName: 'Something' */'@/reducers/something').then(res => {
       injectReducer('something', res.default);
     });

@@ -16,20 +16,26 @@ title: 关于
 
 ### アボウト
 
-こんいじは、私（わたし）はZongです。
+皆さん、こんにちは、Zongです。
 
-あの、私（わたし）は大好（だいす）きロボット，例（たと）えば：ガンダム、マジンガーZ、ゲッター，もっともっと・・・
+僕は大好きロボット，例えば：ガンダム、マジンガーZ、ゲッター，もっともっと・・・
 
-![ガンダム](/images/logo.png)
+<!-- ![ガンダム](/images/logo.png) -->
 
-あの、私（わたし）は大好（だいす）きエスエフ映画、例（たと）えば：スターウォーズ、Marvel，もっともっと・・・
+僕は大好きエスエフ映画、例えば：スターウォーズ、Marvel，もっともっと・・・
 
-あの、私（わたし）は大好（だいす）き加藤惠。
+僕は大好き加藤惠。
 
-![加藤惠](/images/logo1.png)
+<!-- ![加藤惠](/images/logo1.png) -->
+
+## 友情链接
+
+- [亿林](https://minemine.cc)
+- [三毛](https://jkchao.cn)
 
 ## 更新日志
 
+- 2020年03月15日：Friends Links 移步至关于
 - 2019年10月29日：选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)（*tags 问题暂未修复*）
 - 2018年11月29日：新增Friends Links，Disqus
 - 2018年11月28日：选用主题[~Icarus~](https://github.com/ppoffice/hexo-theme-icarus)
