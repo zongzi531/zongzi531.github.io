@@ -120,6 +120,8 @@ mathjax:
 # All in one. Minifier & Optimization plugin for Hexo.
 # https://www.npmjs.com/package/hexo-all-minifier
 all_minifier: true
+html_minifier:
+  enable: false
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
