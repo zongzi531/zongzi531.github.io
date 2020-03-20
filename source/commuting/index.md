@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年03月15日**
+>*更新时间：* **2020年03月20日**
 
 ### 站点
 
@@ -400,6 +400,11 @@ title: 通勤那点事
 - [【第1883期】Rax，完美融合编译时与运行时的双引擎小程序框架](https://mp.weixin.qq.com/s/uIYssujm8rRPUxFx0HraxQ)
 - [【第1884期】NutUI3.0 中单元测试的探索和实践](https://mp.weixin.qq.com/s/AdzgSEXI6910p8puNrxqUQ)
 - [【第1885期】基于 React 的可视化编辑平台实践](https://mp.weixin.qq.com/s/lOLX_VZhwhBENnchEoLu_A)
+- [【第1886期】Ant Design暗黑模式设计解析](https://mp.weixin.qq.com/s/_Pb0hCtfnpExHiwhKp-3Vw)
+- [【第1887期】Async Generators 作为状态管理的替代方案](https://mp.weixin.qq.com/s/k6YjBPG-GGClqY_7vUoygQ)
+- [【第1888期】「异」曲同工 —— Generator](https://mp.weixin.qq.com/s/Ma6-nbC0SwseYAO-3s_V_g)
+- [【第1889期】提升流利说图片生产10倍效率的方法](https://mp.weixin.qq.com/s/AsoFWolkNyldLft5ZNvn5Q)
+- [【第1890期】看懂 Serverless SSR，这一篇就够了！](https://mp.weixin.qq.com/s/xcxoCUzzruVSm15TLLOs-Q)
 
 ---
 
@@ -658,6 +663,10 @@ title: 通勤那点事
 - [从 JS 引擎到 JS 运行时（上）](https://mp.weixin.qq.com/s/6tc-NE1k82RLRCDWN0SK8Q)
 - [webpack 中实现自动识别 CSS Modules](https://mp.weixin.qq.com/s/DqsXf-4iOfI0-pk4twsUIQ)
 - [【前端冷知识】动画：你知道的和你不知道的](https://mp.weixin.qq.com/s/yrj7GdD0T-EwCTYqFWyeBw)
+- [Vuex调用接口的三个阶段](https://mp.weixin.qq.com/s/bZmDHrteUsaHx6EHflz99Q)
+- [从构建进程间缓存设计谈Webpack5 优化和工作原理](https://mp.weixin.qq.com/s/rLwxVGVsEoyTTEFKYQNZbA)
+- [深入理解Javacript从作用域作用域链开始](https://mp.weixin.qq.com/s/vSz5BYf1wd5p-6c9EwboHQ)
+- [前端高级进阶：网站的缓存控制策略最佳实践及注意事项](https://mp.weixin.qq.com/s/6uNeFgUZzVR84zuizdjjxg)
 
 ### 前端桃园
 
@@ -703,6 +712,7 @@ title: 通勤那点事
 ### 高级前端进阶
 
 - [【进阶 6-7 期】浅出篇 | 7 个角度吃透 Lodash 防抖节流原理](https://mp.weixin.qq.com/s/IDh1JK7F6gFoF7kUD9PjqA)
+- [点满 webpack 技能点，让你的打包速度提效 90%](https://mp.weixin.qq.com/s/_qp4JDDwWwliEBr1IXKd8g)
 
 ### 前端技术优选
 
@@ -844,6 +854,7 @@ title: 通勤那点事
 - [喵咪日来了！日语中关于猫咪谚语有哪些？](https://mp.weixin.qq.com/s/HlCOiOQxBnfFhUeRHQjiiA)
 - [新冠肺炎的相关的日语词汇、短语](https://mp.weixin.qq.com/s/N8jgMhCN0DHT4npz3n8P7g)
 - [复工复学后，如何做好自我防护？](https://mp.weixin.qq.com/s/qiULzWs9KYLCf5BYwMwcPQ)
+- [日语太难了，让我脸都白了](https://mp.weixin.qq.com/s/8quB03_ESN5jZLJiXFra1g)
 
 ### 美团技术团队
 
