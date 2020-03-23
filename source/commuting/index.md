@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年03月20日**
+>*更新时间：* **2020年03月23日**
 
 ### 站点
 
@@ -405,6 +405,9 @@ title: 通勤那点事
 - [【第1888期】「异」曲同工 —— Generator](https://mp.weixin.qq.com/s/Ma6-nbC0SwseYAO-3s_V_g)
 - [【第1889期】提升流利说图片生产10倍效率的方法](https://mp.weixin.qq.com/s/AsoFWolkNyldLft5ZNvn5Q)
 - [【第1890期】看懂 Serverless SSR，这一篇就够了！](https://mp.weixin.qq.com/s/xcxoCUzzruVSm15TLLOs-Q)
+- [【第1891期】iOS 键盘难题与可见视口（VisualViewport）API](https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw)
+- [【第1892期】GPU加速在前端的应用](https://mp.weixin.qq.com/s/T8g8uSn6K_5gz2DiPBWk9Q)
+- [【第1893期】TypedArray 还是 DataView: 理解字节序](https://mp.weixin.qq.com/s/njoMH4vfztDPFZjSSsKpfA)
 
 ---
 
@@ -667,6 +670,8 @@ title: 通勤那点事
 - [从构建进程间缓存设计谈Webpack5 优化和工作原理](https://mp.weixin.qq.com/s/rLwxVGVsEoyTTEFKYQNZbA)
 - [深入理解Javacript从作用域作用域链开始](https://mp.weixin.qq.com/s/vSz5BYf1wd5p-6c9EwboHQ)
 - [前端高级进阶：网站的缓存控制策略最佳实践及注意事项](https://mp.weixin.qq.com/s/6uNeFgUZzVR84zuizdjjxg)
+- [CSS 的“层”峦“叠”翠 - 一文掌握z-index用法](https://mp.weixin.qq.com/s/cbeN51u8Rn9Ta7WjRdE9hg)
+- [简单实用的webpack-html-include-loader（附开发详解）](https://mp.weixin.qq.com/s/-16C302cU6bgFuk-Y9U5Tg)
 
 ### 前端桃园
 
