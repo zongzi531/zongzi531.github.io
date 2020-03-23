@@ -1,3 +1,4 @@
 # All in one. Minifier & Optimization plugin for Hexo.
 # https://www.npmjs.com/package/hexo-all-minifier
-all_minifier: false
+image_minifier:
+  enable: false
