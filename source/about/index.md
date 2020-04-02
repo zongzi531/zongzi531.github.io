@@ -25,6 +25,7 @@ title: 关于
 
 ## 更新日志
 
+- 2020年04月02日：新增番組
 - 2020年03月15日：Friends Links 移步至关于
 - 2019年10月29日：选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)
 - 2018年11月29日：新增Friends Links，Disqus

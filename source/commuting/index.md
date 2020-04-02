@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年03月23日**
+>*更新时间：* **2020年04月02日**
 
 ### 站点
 
@@ -408,6 +408,16 @@ title: 通勤那点事
 - [【第1891期】iOS 键盘难题与可见视口（VisualViewport）API](https://mp.weixin.qq.com/s/ERBxrGXYfcAHdlZTWWw0Aw)
 - [【第1892期】GPU加速在前端的应用](https://mp.weixin.qq.com/s/T8g8uSn6K_5gz2DiPBWk9Q)
 - [【第1893期】TypedArray 还是 DataView: 理解字节序](https://mp.weixin.qq.com/s/njoMH4vfztDPFZjSSsKpfA)
+- [【第1894期】NutUI CLI源码解析](https://mp.weixin.qq.com/s/eliCMt10Y-3sMk_3waMuAA)
+- [【第1895期】React组件开发的十条最佳实践](https://mp.weixin.qq.com/s/u2_SU6QFAAupGRCjtWuQvQ)
+- [【第1896期】深色模式设计的8个小技巧](https://mp.weixin.qq.com/s/BojZgGS6MEol51Zan4_gDQ)
+- [【第1897期】Wireshark抓包使用指南](https://mp.weixin.qq.com/s/M0D5wZ7xi8PGh8_TDk_4rw)
+- [【第1898期】前端智能化—思维转变之路](https://mp.weixin.qq.com/s/odRF84Uw7B6_8zTGXGO3xw)
+- [【第1899期】调研 Federated Modules，应用秒开，应用集方案，微前端加载方案改进等](https://mp.weixin.qq.com/s/sdIVsfmRlhDtT6DF2dmsJQ)
+- [【第1900期】Storage Access API 介绍](https://mp.weixin.qq.com/s/9qFjCmqPrqHaysclyk1-rA)
+- [【第1901期】Webpack 5 Module Federation: JavaScript 架构的变革者](https://mp.weixin.qq.com/s/PFKxQgZPER_XHUSbk_SQJA)
+- [【第1902期】京喜小程序的高性能打造之路](https://mp.weixin.qq.com/s/-do0FqFuzpDHauJlcJOJbw)
+- [【第1903期】深入浅出动态化 SSR 服务（一）：开发工具篇](https://mp.weixin.qq.com/s/n9zMvzZZRiXIwIrfCU-CHQ)
 
 ---
 
@@ -672,6 +682,13 @@ title: 通勤那点事
 - [前端高级进阶：网站的缓存控制策略最佳实践及注意事项](https://mp.weixin.qq.com/s/6uNeFgUZzVR84zuizdjjxg)
 - [CSS 的“层”峦“叠”翠 - 一文掌握z-index用法](https://mp.weixin.qq.com/s/cbeN51u8Rn9Ta7WjRdE9hg)
 - [简单实用的webpack-html-include-loader（附开发详解）](https://mp.weixin.qq.com/s/-16C302cU6bgFuk-Y9U5Tg)
+- [JavaScript 深入系列之浮点数精度](https://mp.weixin.qq.com/s/YOQ_Vei77O76RQXPpum1Yw)
+- [Service Worker初探](https://mp.weixin.qq.com/s/cNgC0uDrILaFY5TFL_Bglw)
+- [一篇搞定移动端适配](https://mp.weixin.qq.com/s/JJTa1DxYrn4gjA8Y0BuFAQ)
+- [数据结构基础之掌握5个常见的链表操作](https://mp.weixin.qq.com/s/XpqUo1AZG27B4RRc0PSZuA)
+- [Web标准：前端的原力](https://mp.weixin.qq.com/s/ZfJquYGCqi2GfAYW8omLFw)
+- [二营长，快掏个CSS出来给我画个井字棋游戏](https://mp.weixin.qq.com/s/pTO0NJY9BWr8b4OakhQpVw)
+- [OMG！ 这款大屏可视化神器公测了](https://mp.weixin.qq.com/s/NknOyTCFOM22ghneIHjk9Q)
 
 ### 前端桃园
 
@@ -733,6 +750,7 @@ title: 通勤那点事
 - [特朗普深夜溜粉，第三次世界大战还没开始就已落幕？](https://mp.weixin.qq.com/s/j32N2K-RzfVvmtjMTA76tA)
 - [美军竟叫嚣将在钓鱼岛部署导弹？因果律准备！](https://mp.weixin.qq.com/s/N4LY6eZ4PJ6BjKEnRHZdHw)
 - [美国还能发动一场对伊朗的战争吗？](https://mp.weixin.qq.com/s/-WPlbu0hHDbd3Lh9gqqiww)
+- [联邦政府对纽约宣战？美国总统和州长闹翻了！](https://mp.weixin.qq.com/s/1FwJvtLYqZqqsEKzEdiesw)
 
 ### 架构师之巅
 
@@ -860,6 +878,7 @@ title: 通勤那点事
 - [新冠肺炎的相关的日语词汇、短语](https://mp.weixin.qq.com/s/N8jgMhCN0DHT4npz3n8P7g)
 - [复工复学后，如何做好自我防护？](https://mp.weixin.qq.com/s/qiULzWs9KYLCf5BYwMwcPQ)
 - [日语太难了，让我脸都白了](https://mp.weixin.qq.com/s/8quB03_ESN5jZLJiXFra1g)
+- [“樱花”用日语怎么说？](https://mp.weixin.qq.com/s/Bcl7mZWgmQAIgNnjLhk96g)
 
 ### 美团技术团队
 
