@@ -464,6 +464,7 @@ title: 通勤那点事
 - [What's New in JavaScript](https://zhuanlan.zhihu.com/p/65409226)
 - [如何开发一个可爱的CLI（一）](https://zhuanlan.zhihu.com/p/34520943)
 - [如何开发一个可爱的CLI（二）](https://zhuanlan.zhihu.com/p/35013393)
+- [网页上用 Rust 渲染十万个待办事项有多快？](https://zhuanlan.zhihu.com/p/112223727)
 
 ### 清醒贪心记
 
