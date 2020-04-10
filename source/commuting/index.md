@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年04月02日**
+>*更新时间：* **2020年04月10日**
 
 ### 站点
 
@@ -418,6 +418,13 @@ title: 通勤那点事
 - [【第1901期】Webpack 5 Module Federation: JavaScript 架构的变革者](https://mp.weixin.qq.com/s/PFKxQgZPER_XHUSbk_SQJA)
 - [【第1902期】京喜小程序的高性能打造之路](https://mp.weixin.qq.com/s/-do0FqFuzpDHauJlcJOJbw)
 - [【第1903期】深入浅出动态化 SSR 服务（一）：开发工具篇](https://mp.weixin.qq.com/s/n9zMvzZZRiXIwIrfCU-CHQ)
+- [【第1904期】小程序框架运行时性能大测评](https://mp.weixin.qq.com/s/7Pl22aDEecoznrNe78DBGQ)
+- [【第1905期】JSON.stringify() 的 5 个秘密特性](https://mp.weixin.qq.com/s/X7pzcNo_CTM-syS-sfHwwg)
+- [【第1906期】考拉前端骨架屏生成技术揭秘](https://mp.weixin.qq.com/s/hMDC-NEJ-AyUqO6hM4fkaw)
+- [【第1907期】前端性能优化实践 之 百度App个人主页优化](https://mp.weixin.qq.com/s/jAWC4HE-n2qFnNwOGEa-Kw)
+- [【第1908期】使用TypeScript开发Web应用的最佳实践](https://mp.weixin.qq.com/s/oDuK4t1wQECPZfu5S5wZ5g)
+- [【第1909期】Service Worker运用与实践](https://mp.weixin.qq.com/s/vI2bxaFsFSB5rGC4Bkr8vQ)
+- [【第1910期】如何设计实现 h5 页面搭建-数据模型](https://mp.weixin.qq.com/s/Fyl3SMHjv3ROw9QUBdwutA)
 
 ---
 
@@ -690,6 +697,11 @@ title: 通勤那点事
 - [Web标准：前端的原力](https://mp.weixin.qq.com/s/ZfJquYGCqi2GfAYW8omLFw)
 - [二营长，快掏个CSS出来给我画个井字棋游戏](https://mp.weixin.qq.com/s/pTO0NJY9BWr8b4OakhQpVw)
 - [OMG！ 这款大屏可视化神器公测了](https://mp.weixin.qq.com/s/NknOyTCFOM22ghneIHjk9Q)
+- [一文读懂 JS 装饰器，这是一个会打扮的装饰器](https://mp.weixin.qq.com/s/lnFEahdeZv34DS-StABTQQ)
+- [Docker 搭建你的第一个 Node 项目到服务器](https://mp.weixin.qq.com/s/86ez7lVT2-OFbQ_wIQFPMg)
+- [《CSS揭秘》实用技巧总结](https://mp.weixin.qq.com/s/_sood9AqSeMl4H2hrlFiyQ)
+- [说说小程序自动化](https://mp.weixin.qq.com/s/EIUEDWslSOBQBQwRLuOlKg)
+- [【干货】从零实现 react-redux](https://mp.weixin.qq.com/s/8_Usur3IDUIxTRf0yL53uQ)
 
 ### 前端桃园
 
@@ -880,6 +892,7 @@ title: 通勤那点事
 - [复工复学后，如何做好自我防护？](https://mp.weixin.qq.com/s/qiULzWs9KYLCf5BYwMwcPQ)
 - [日语太难了，让我脸都白了](https://mp.weixin.qq.com/s/8quB03_ESN5jZLJiXFra1g)
 - [“樱花”用日语怎么说？](https://mp.weixin.qq.com/s/Bcl7mZWgmQAIgNnjLhk96g)
+- [“再见”用日语怎么说？](https://mp.weixin.qq.com/s/4RBq3Pqx2q1DyZoTGTk0tg)
 
 ### 美团技术团队
 
