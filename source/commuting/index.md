@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年04月10日**
+>*更新时间：* **2020年05月01日**
 
 ### 站点
 
@@ -425,6 +425,26 @@ title: 通勤那点事
 - [【第1908期】使用TypeScript开发Web应用的最佳实践](https://mp.weixin.qq.com/s/oDuK4t1wQECPZfu5S5wZ5g)
 - [【第1909期】Service Worker运用与实践](https://mp.weixin.qq.com/s/vI2bxaFsFSB5rGC4Bkr8vQ)
 - [【第1910期】如何设计实现 h5 页面搭建-数据模型](https://mp.weixin.qq.com/s/Fyl3SMHjv3ROw9QUBdwutA)
+- [【第1911期】图解常用的 Git 指令含义](https://mp.weixin.qq.com/s/oKMdlo6jsIcMcZW8nzoAUg)
+- [【第1912期】探索 webpack5 新特性Module federation在腾讯文档的应用](https://mp.weixin.qq.com/s/iS-prT1xZPV6cpH7MHRRdQ)
+- [【第1913期】Math.sign：在Javascript中如何检查一个数字是正数还是负数](https://mp.weixin.qq.com/s/DsO4jazl2z4zXn279BmLhw)
+- [【第1914期】JavaScript 20 年中文版 - 语言诞生](https://mp.weixin.qq.com/s/eRne5EIQGDbE0-JclAzNAA)
+- [【第1915期】如何监控网页崩溃？](https://mp.weixin.qq.com/s/EscBLM3hAoCrYn9r9zFmng)
+- [【第1916期】Chrome 远程调试协议分析与实战](https://mp.weixin.qq.com/s/GQjp9fwbgmNAjPClTi7SeA)
+- [【第1917期】微前端在小米 CRM 系统的实践](https://mp.weixin.qq.com/s/5qwgZ9aNKFC3naWRUGajmA)
+- [【第1918期】微前端在企业级应用中的实践(上)](https://mp.weixin.qq.com/s/tutFXv6djecT6lnL9Je71Q)
+- [【第1919期】有效的用户引导策略&排坑](https://mp.weixin.qq.com/s/0xdojrKFevuQQkuv5P7ttQ)
+- [【第1920期】如何监控网页的卡顿？](https://mp.weixin.qq.com/s/d-v7QgmP9aGnQr2nbpfzjQ)
+- [【第1921期】React 16.8.6 版本存在内存泄露](https://mp.weixin.qq.com/s/ucVZ55LF-XuOgznQz7_j5Q)
+- [【第1922期】从vue-router看前端路由的两种实现](https://mp.weixin.qq.com/s/h6rKfXINQKB0499ZK5beTQ)
+- [【第1923期】如何用CSS绘制饼图](https://mp.weixin.qq.com/s/7KeK-021KEKeDaYiLD_Itg)
+- [【第1924期】换个思路换个方法，让圆环进度条实现方式得到一点改变](https://mp.weixin.qq.com/s/y2_1gN-4FEYQqJ7_9PK7EA)
+- [【第1925期】阿里云@城池：如何做职业规划](https://mp.weixin.qq.com/s/U206IFHpxa_ZCi50eDtz6g)
+- [【第1926期】缓存控制中的 stale-while-revalidate](https://mp.weixin.qq.com/s/oWhoTTLaevcrB6jU1NXjkA)
+- [【第1927期】Web上的图片技巧](https://mp.weixin.qq.com/s/1BKevavo_2bQiu6Sas61KQ)
+- [【第1928期】JavaScript 20 年中文版 - 合纵连横](https://mp.weixin.qq.com/s/qMtm6VlryP44REArCkR6yA)
+- [【第1929期】目标是最完善的微前端解决方案 - qiankun 2.0](https://mp.weixin.qq.com/s/bMzRr-SiA_UNEX1r05sm7g)
+- [【第1930期】运用 NutUI - 快捷开发京东企业业务之酷兜](https://mp.weixin.qq.com/s/tQIZOXOW0JuWCJraf_3z3g)
 
 ---
 
@@ -440,6 +460,7 @@ title: 通勤那点事
 ---
 
 - [前端图书精选店@前端早读课](https://mp.weixin.qq.com/s/0XlMtKwJSGuMLL0uNTtMsw)
+- [ECMAScript 2020新增特性](https://mp.weixin.qq.com/s/CALZnes54YaY9R51HebDZg)
 
 ---
 
@@ -702,6 +723,17 @@ title: 通勤那点事
 - [《CSS揭秘》实用技巧总结](https://mp.weixin.qq.com/s/_sood9AqSeMl4H2hrlFiyQ)
 - [说说小程序自动化](https://mp.weixin.qq.com/s/EIUEDWslSOBQBQwRLuOlKg)
 - [【干货】从零实现 react-redux](https://mp.weixin.qq.com/s/8_Usur3IDUIxTRf0yL53uQ)
+- [React-Router v6 新特性解读及迁移指南](https://mp.weixin.qq.com/s/9-t0e-CJOuap2iOxVTJdUQ)
+- [理解transform中的matrix](https://mp.weixin.qq.com/s/twJQHWpqMC-6TYzK03Dciw)
+- [WebGL工作流程解读，一个三角形的诞生](https://mp.weixin.qq.com/s/P_l86DcbJElshjYuPNwWgg)
+- [ES6 Proxy 可以做哪些有意思的事情？](https://mp.weixin.qq.com/s/Z3_AfTy84h-ojhljnQJqIg)
+- [CML 源码剖析系列-前言](https://mp.weixin.qq.com/s/JtLDTtHT_6xzymIw0Q4oeg)
+- [围观“33行代码的React”](https://mp.weixin.qq.com/s/dIG7QxHyP-EKWH0Fq98dGQ)
+- [《JavaScript 20 年》中文版之语言诞生](https://mp.weixin.qq.com/s/gB1rLGiDqiYjjG-MPh9Tyg)
+- [~~从0实现React 系列(一)：React的架构设计~~](https://mp.weixin.qq.com/s/of1ulUPtz7c8Evc9A8cYdw)
+- [一起围观由React Hooks防抖引发的面试翻车现场](https://mp.weixin.qq.com/s/vCXnTXDOTflxooPudnM6Hw)
+- [前端最佳实践之可维护性](https://mp.weixin.qq.com/s/XjlddiMNQbExB0vtTLWThA)
+- [JavaScript ES2020必知必会新特性](https://mp.weixin.qq.com/s/xOSYDn_zriuKbwOJkWQGDw)
 
 ### 前端桃园
 
@@ -893,6 +925,9 @@ title: 通勤那点事
 - [日语太难了，让我脸都白了](https://mp.weixin.qq.com/s/8quB03_ESN5jZLJiXFra1g)
 - [“樱花”用日语怎么说？](https://mp.weixin.qq.com/s/Bcl7mZWgmQAIgNnjLhk96g)
 - [“再见”用日语怎么说？](https://mp.weixin.qq.com/s/4RBq3Pqx2q1DyZoTGTk0tg)
+- [“断舍离”用日语怎么说？](https://mp.weixin.qq.com/s/swVYTC2jfV1J-Vq6u1SVLA)
+- [除了卡哇伊，日语还可以这么“夸人”](https://mp.weixin.qq.com/s/T656hF5NDie5o8HozRwLag)
+- [这些中文名字千万别用日语念出来，笑死人](https://mp.weixin.qq.com/s/O7oQoAQQqT90nlo4otMLvQ)
 
 ### 美团技术团队
 
@@ -933,3 +968,14 @@ title: 通勤那点事
 ### 歪码行空
 
 - [CSS实现背景图片右侧定位的5种小技巧](https://mp.weixin.qq.com/s/B76OGbU44fqjRLQfl9ec6g)
+- [讲讲 js 的内存泄漏、如何监控和分析](https://mp.weixin.qq.com/s/8dA1H-GOM9bDFkI0zRCckA)
+
+### 前端劝退师
+
+- [抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…](https://mp.weixin.qq.com/s/MQues_aqTBeQ_6g8uVT9Tw)
+
+### 网页设计精选
+
+- [初学者如何快速上手数据可视化设计](https://mp.weixin.qq.com/s/DYdob8KQUbd6GcyREsJGzg)
+- [以Ant Design为例来说说B端设计的基本套路](https://mp.weixin.qq.com/s/Zwlzv-xmSt7Z-U-9HkF_2A)
+- [数据可视化大屏案例分析](https://mp.weixin.qq.com/s/On0oE3VLq2B4CWZNAbzRAQ)
