@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年05月01日**
+>*更新时间：* **2020年05月29日**
 
 ### 站点
 
@@ -428,7 +428,7 @@ title: 通勤那点事
 - [【第1911期】图解常用的 Git 指令含义](https://mp.weixin.qq.com/s/oKMdlo6jsIcMcZW8nzoAUg)
 - [【第1912期】探索 webpack5 新特性Module federation在腾讯文档的应用](https://mp.weixin.qq.com/s/iS-prT1xZPV6cpH7MHRRdQ)
 - [【第1913期】Math.sign：在Javascript中如何检查一个数字是正数还是负数](https://mp.weixin.qq.com/s/DsO4jazl2z4zXn279BmLhw)
-- [【第1914期】JavaScript 20 年中文版 - 语言诞生](https://mp.weixin.qq.com/s/eRne5EIQGDbE0-JclAzNAA)
+- [*【第1914期】JavaScript 20 年中文版 - 语言诞生*](https://mp.weixin.qq.com/s/eRne5EIQGDbE0-JclAzNAA)
 - [【第1915期】如何监控网页崩溃？](https://mp.weixin.qq.com/s/EscBLM3hAoCrYn9r9zFmng)
 - [【第1916期】Chrome 远程调试协议分析与实战](https://mp.weixin.qq.com/s/GQjp9fwbgmNAjPClTi7SeA)
 - [【第1917期】微前端在小米 CRM 系统的实践](https://mp.weixin.qq.com/s/5qwgZ9aNKFC3naWRUGajmA)
@@ -442,9 +442,38 @@ title: 通勤那点事
 - [【第1925期】阿里云@城池：如何做职业规划](https://mp.weixin.qq.com/s/U206IFHpxa_ZCi50eDtz6g)
 - [【第1926期】缓存控制中的 stale-while-revalidate](https://mp.weixin.qq.com/s/oWhoTTLaevcrB6jU1NXjkA)
 - [【第1927期】Web上的图片技巧](https://mp.weixin.qq.com/s/1BKevavo_2bQiu6Sas61KQ)
-- [【第1928期】JavaScript 20 年中文版 - 合纵连横](https://mp.weixin.qq.com/s/qMtm6VlryP44REArCkR6yA)
+- [*【第1928期】JavaScript 20 年中文版 - 合纵连横*](https://mp.weixin.qq.com/s/qMtm6VlryP44REArCkR6yA)
 - [【第1929期】目标是最完善的微前端解决方案 - qiankun 2.0](https://mp.weixin.qq.com/s/bMzRr-SiA_UNEX1r05sm7g)
 - [【第1930期】运用 NutUI - 快捷开发京东企业业务之酷兜](https://mp.weixin.qq.com/s/tQIZOXOW0JuWCJraf_3z3g)
+- [【第1931期】注重产品思维的软件工程师](https://mp.weixin.qq.com/s/89NCik7xsS4zaDEvRHZdOA)
+- [【第1932期】2020前端性能优化清单之一](https://mp.weixin.qq.com/s/iIbm1pVPYsOvpAeAjVziiQ)
+- [**【第1933期】钉钉前端团队负责人@贵重：技术团队 TL 如何培养人才？**](https://mp.weixin.qq.com/s/gfFgpjn12VCfbIk4tzTKOA)
+- [【第1934期】前端最佳实践之可维护性](https://mp.weixin.qq.com/s/C0rO3YflCgR_TJhb0k8h_w)
+- [【第1935期】2020前端性能优化清单之二](https://mp.weixin.qq.com/s/Y2osbl9CZggA0poci9rv3w)
+- [【第1936期】2020前端性能优化清单之三](https://mp.weixin.qq.com/s/ohCDUyo8xqtKhYfbSs5wuQ)
+- [【第1937期】Continuation 在 JS 中的应用](https://mp.weixin.qq.com/s/oFAbFw9eD6ICRWgXeNnLEQ)
+- [【第1938期】2020前端性能优化清单之四](https://mp.weixin.qq.com/s/i5fNnTnmfAx7CufC00oaKQ)
+- [【第1939期】2020前端性能优化清单之五](https://mp.weixin.qq.com/s/VDARTCShm0KivV_ouYvVGA)
+- [【第1940期】2020前端性能优化清单之六](https://mp.weixin.qq.com/s/GHUMw2RFK-sXklJTPqoMdg)
+- [【第1941期】为新的Facebook.com重建我们的技术栈](https://mp.weixin.qq.com/s/Tsl3KEDKja0-5P_NPvVz-g)
+- [【第1942期】Vue SSR 即时编译技术](https://mp.weixin.qq.com/s/t1h5KLBb7qW_9s9Qhd-0oA)
+- [【第1943期】Node使用火焰图优化CPU爆涨](https://mp.weixin.qq.com/s/yoOUrf_Kw2Znr4RG4Fb3Cg)
+- [【第1944期】HTTP/3原理与实践](https://mp.weixin.qq.com/s/Y7v738Zeir3cZMxthjUY_Q)
+- [【第1945期】彻底搞懂React源码调度原理（Concurrent模式）](https://mp.weixin.qq.com/s/xHfhMqa5Nsw_5i6MkK2X0A)
+- [【第1946期】NutUI官网开发关键技术揭秘](https://mp.weixin.qq.com/s/4IJQN1GhNQw8FjYquH5d1A)
+- [【第1947期】Node接入层可视化逻辑编排，还可以这样做？](https://mp.weixin.qq.com/s/u5JZ7vnXchDU2x8m-dYB5Q)
+- [【第1948期】从前端角度彻底搞懂 DIP、IoC、DI、JS](https://mp.weixin.qq.com/s/ApAK6MrXIDud4Nfj89tEYQ)
+- [【第1949期】 代码之上：落地 GraphQL 背后的故事](https://mp.weixin.qq.com/s/G45Vl93vU6y1zeLeMWhnPg)
+- [【第1950期】从 ES2015 开始，JavaScript 对象属性顺序变得可以预测](https://mp.weixin.qq.com/s/wblWUgiwDFZbd97_Wcn0Ew)
+- [【第1951期】Lighthouse 测试内幕](https://mp.weixin.qq.com/s/I8DYY4oY_uJ_6IpIQNLSYQ)
+- [【第1952期】Lighthouse 6.0 新功能](https://mp.weixin.qq.com/s/7Q_CTnOkXGH_8QCDhmvh1A)
+- [【第1953期】十分钟快速上手NutUI](https://mp.weixin.qq.com/s/32nGE15dkmCxDQeVz8dN2A)
+- [【第1954期】 图解ChunkSplitPlugin](https://mp.weixin.qq.com/s/IHJoPUa5G8ENU3lbZBFE7A)
+- [【第1955期】前端组件库本地开发调试的自动化流程实现](https://mp.weixin.qq.com/s/nOFKKCwUDCYW1HAGH25W-Q)
+- [【第1956期】JavaScript可视化：Promise和Async/Await](https://mp.weixin.qq.com/s/oxGdVPLfkBH0vZ575tefhg)
+- [*【第1957期】JavaScript 20 年中文版 - 改革遗恨*](https://mp.weixin.qq.com/s/h3uvL-L1SKuSx17QG7M0cg)
+- [【第1958期】前端状态管理设计——优雅与妥协的艺术](https://mp.weixin.qq.com/s/FZMvr42OX9cv2gPP3gsKUA)
+- [【第1959期】面向 Model 编程的前端架构设计](https://mp.weixin.qq.com/s/peLNXa_PLQTfhTtLya3cpg)
 
 ---
 
@@ -734,6 +763,21 @@ title: 通勤那点事
 - [一起围观由React Hooks防抖引发的面试翻车现场](https://mp.weixin.qq.com/s/vCXnTXDOTflxooPudnM6Hw)
 - [前端最佳实践之可维护性](https://mp.weixin.qq.com/s/XjlddiMNQbExB0vtTLWThA)
 - [JavaScript ES2020必知必会新特性](https://mp.weixin.qq.com/s/xOSYDn_zriuKbwOJkWQGDw)
+- [Nginx 从入门到实践，万字详解！](https://mp.weixin.qq.com/s/JUOyAe1oEs-WwmEmsHRn8w)
+- [当前端基建任务落到你身上，该如何推动协作？](https://mp.weixin.qq.com/s/AV-MkgjDS0JhEWNHu20LqQ)
+- [前端性能优化之谈谈常见的性能指标及上报策略](https://mp.weixin.qq.com/s/zE2ZUMJHZ4jzUyeGYwMumA)
+- [Serverless 掀起新的前端技术变革](https://mp.weixin.qq.com/s/Aygcakz8bIDNhkevpkVv0w)
+- [Deno 1.0，来了解一下](https://mp.weixin.qq.com/s/1XhH7ycze3zENJJBrH9bmA)
+- [花式解说防抖函数debounce的实现](https://mp.weixin.qq.com/s/JqEXJCmp3WNhm6qICpq4Ww)
+- [世界尽收一屏，即视3D地球应约而来](https://mp.weixin.qq.com/s/aG--9FiWYXiUYDh6w3cUWw)
+- [Node.js 中的 stream 模块详解](https://mp.weixin.qq.com/s/N6U-Lj7ts2aLiv4KC22DAw)
+- [犀牛书作者：最该忘记的JavaScript特性](https://mp.weixin.qq.com/s/guAN1Cz2gYfKdBhmUpLyVA)
+- [10个案例让你彻底理解React hooks的渲染逻辑](https://mp.weixin.qq.com/s/-Ao9DATp2B3Qgefbc1XN0g)
+- [从0实现React 系列(二)：组件更新](https://mp.weixin.qq.com/s/2S1CCrSyrSM4lHACLW_irA)
+- [深入解析 EventLoop 和浏览器渲染、帧动画、空闲回调的关系](https://mp.weixin.qq.com/s/ynLq8MjRLqX6uaYbK17n_Q)
+- [React源码揭秘(三)：Diff算法详解](https://mp.weixin.qq.com/s/e0fDbM5pp9bX1YuYBSXhLA)
+- [《JavaScript 20 年》中文版之创立标准](https://mp.weixin.qq.com/s/OY2d2A1aKPlY1QgNwjweZw)
+- [前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/_m_rf7xlSeVZO1NK58Z7lQ)
 
 ### 前端桃园
 
@@ -780,6 +824,7 @@ title: 通勤那点事
 
 - [【进阶 6-7 期】浅出篇 | 7 个角度吃透 Lodash 防抖节流原理](https://mp.weixin.qq.com/s/IDh1JK7F6gFoF7kUD9PjqA)
 - [点满 webpack 技能点，让你的打包速度提效 90%](https://mp.weixin.qq.com/s/_qp4JDDwWwliEBr1IXKd8g)
+- [Vue + Koa从零打造一个H5页面可视化编辑器——Quark-h5](https://mp.weixin.qq.com/s/SG9ZYIivbpbXOOTlal9Akw)
 
 ### 前端技术优选
 
@@ -928,6 +973,10 @@ title: 通勤那点事
 - [“断舍离”用日语怎么说？](https://mp.weixin.qq.com/s/swVYTC2jfV1J-Vq6u1SVLA)
 - [除了卡哇伊，日语还可以这么“夸人”](https://mp.weixin.qq.com/s/T656hF5NDie5o8HozRwLag)
 - [这些中文名字千万别用日语念出来，笑死人](https://mp.weixin.qq.com/s/O7oQoAQQqT90nlo4otMLvQ)
+- [纳尼，日本竟然有3个儿童节！](https://mp.weixin.qq.com/s/7zgqezNvPdjKdu-TVtbhPg)
+- [在日本，人们从来不说“母亲节快乐”](https://mp.weixin.qq.com/s/-rFuqZY_brNG5hVaB3dvRA)
+- [“想你”用日语怎么说？](https://mp.weixin.qq.com/s/qyzvQnl3KG-VwbAwxYd0GA)
+- [为什么日本人打电话时要说「么西么西」？](https://mp.weixin.qq.com/s/ZKK9Jxc9XACKhZ-B3oqwXA)
 
 ### 美团技术团队
 
@@ -979,3 +1028,15 @@ title: 通勤那点事
 - [初学者如何快速上手数据可视化设计](https://mp.weixin.qq.com/s/DYdob8KQUbd6GcyREsJGzg)
 - [以Ant Design为例来说说B端设计的基本套路](https://mp.weixin.qq.com/s/Zwlzv-xmSt7Z-U-9HkF_2A)
 - [数据可视化大屏案例分析](https://mp.weixin.qq.com/s/On0oE3VLq2B4CWZNAbzRAQ)
+
+### Alibaba F2E
+
+- [**前端之未来**](https://mp.weixin.qq.com/s/Y94UZ_AOK3HoVh9GJPYEjw)
+
+### 个推技术学院
+
+- [个推图可视化应用实践](https://mp.weixin.qq.com/s/uT4_NVEdTw6o9XddJDUwJA)
+- [又炫又酷又炸的数据可视化前端开发揭秘（上篇）](https://mp.weixin.qq.com/s/fRwiKhAyNU-DM7ZChiAVxA)
+- [又炫又酷又炸的数据可视化前端开发揭秘（下篇）](https://mp.weixin.qq.com/s/RGx12nqgGKPdKR2Wg5MTGw)
+- [数据可视化：浅谈热力图如何在前端实现](https://mp.weixin.qq.com/s/cQHJf8Ru4PuvkoaiNgoqLQ)
+- [数据可视化之下发图实践](https://mp.weixin.qq.com/s/y2AK6HkKjXwQt57c1UI2lA)
