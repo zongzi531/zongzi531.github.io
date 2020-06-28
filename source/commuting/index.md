@@ -9,7 +9,7 @@ title: 通勤那点事
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年05月29日**
+>*更新时间：* **2020年06月28日**
 
 ### 站点
 
@@ -19,10 +19,19 @@ title: 通勤那点事
 - [NGINX Config](https://www.digitalocean.com/community/tools/nginx)
 - [CSS灵感](https://chokcoco.github.io/CSS-Inspiration/)
 - [JS 函数式编程指南](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
+- [GAMES101: 现代计算机图形学入门](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html)
 
 ### 前端早读课
 
+- [【第499期】从四个方面帮你做好移动页面性能优化](https://mp.weixin.qq.com/s/ff0SyHcmwtsWZwOX9rya9Q)
+- ...
+- [【第532期】不是领导，如何影响他人、指导团队？](https://mp.weixin.qq.com/s/A-ZKPK3y9bgm3cQ6HOUyXQ)
+- ...
 - [【第930期】支付宝前端构建工具的发展和未来的选择](https://mp.weixin.qq.com/s/cIDR8ZIBHYcw5PeJ66UL1A)
+- ...
+- [【第988期】我接触过的前端数据结构与算法](https://mp.weixin.qq.com/s/Eq3dNNDp1yR5nLGSOC4bWg)
+- ...
+- [【第1005期】从移动端click到摇一摇](https://mp.weixin.qq.com/s/NBSPIKpRQH3Re3P6rDykFA)
 - ...
 - [【第1028期】理解 JavaScript 的 async/await](https://mp.weixin.qq.com/s/LGtU1rgxP7YobQf2CYueUg)
 - ...
@@ -41,6 +50,8 @@ title: 通勤那点事
 - [【第1220期】关于 HTML 语义和前端架构](https://mp.weixin.qq.com/s/_-kR_weLYgnYRg5OO4s8lQ)
 - ...
 - [【第1222期】十倍效能提升——Web 基础研发体系的建立](https://mp.weixin.qq.com/s/IZLcBj4P7YODwdNKRmbm7A)
+- ...
+- [【第1238期】如何做一名有能力的专业人士](https://mp.weixin.qq.com/s/iagARhn-N82_Mv-coDzpGg)
 - ...
 - [【第1302期】基于 MobX 构建视图框架无关的数据层-与 Vue 的结合](https://mp.weixin.qq.com/s/Or-aacPjEYfXnwg3g2VfEg)
 - ...
@@ -77,12 +88,20 @@ title: 通勤那点事
 - ...
 - [【第1404期】使用小程序做交互的技巧](https://mp.weixin.qq.com/s/wukb02PaZfRXzhqHzfGMBQ)
 - ...
+- [【第1426期】代码优化策略 — Idle Until Urgent](https://mp.weixin.qq.com/s/N_4av_FOE4KBQiHXRI6_Tw)
+- ...
+- [【第1429期】详解JavaScript中的this](https://mp.weixin.qq.com/s/Y9cs7pyQBI5NUyxPujZFWQ)
+- ...
+- [【第1483期】前端如何去设计架构能力 - 双十二在星巴克消息开放从点到面的思考实践](https://mp.weixin.qq.com/s/Vbnld_QogVDNpxdazzUAHQ)
+- ...
 - [【第1499期】d.ts](https://mp.weixin.qq.com/s/LzSw8fxCko2Pl2wilaLIvg)
 - ...
 - [【第1529期】GraphQL入门指南](https://mp.weixin.qq.com/s/Cx3xxPbqhb_Zx7mjyS3Tyg)
 - [【第1530期】React Fiber架构](https://mp.weixin.qq.com/s/K_VoVm731W1Cb-fGiyjXww)
 - ...
 - [【第1552期】深入React fiber 链表和DFS](https://mp.weixin.qq.com/s/Tp05MoV1bQi7rgpYnz1Xhg)
+- ...
+- [【第1555期】Web渲染概述](https://mp.weixin.qq.com/s/iOqO8CgmtvMH-YqzzjSSNg)
 - ...
 - [【第1561期】5款小程序框架全面测评](https://mp.weixin.qq.com/s/uKAIqrnjZ75_Mbsm_ArUVg)
 - ...
@@ -474,6 +493,33 @@ title: 通勤那点事
 - [*【第1957期】JavaScript 20 年中文版 - 改革遗恨*](https://mp.weixin.qq.com/s/h3uvL-L1SKuSx17QG7M0cg)
 - [【第1958期】前端状态管理设计——优雅与妥协的艺术](https://mp.weixin.qq.com/s/FZMvr42OX9cv2gPP3gsKUA)
 - [【第1959期】面向 Model 编程的前端架构设计](https://mp.weixin.qq.com/s/peLNXa_PLQTfhTtLya3cpg)
+- [【第1960期】解读新一代 Web 性能体验和质量指标](https://mp.weixin.qq.com/s/S1EmL7dLCe2-RU222K3VlQ)
+- [【第1961期】如何用Canvas拍出JDer's工作照](https://mp.weixin.qq.com/s/2nA_9iff2x_9dlPal_TWyQ)
+- [【第1962期】巧用 display: contents 增强页面语义](https://mp.weixin.qq.com/s/7aOxWsN6v-vU00ML1Mhu_A)
+- [**【第1963期】探索 React 的内在 — Fiber & Algebraic Effects**](https://mp.weixin.qq.com/s/7MQp1CrZFwNd4dQ3y2C-UA)
+- [【第1964期】从React Hooks看React的本质](https://mp.weixin.qq.com/s/t0CLAb7CCZY-paEJque1RA)
+- [【第1965期】前端架构 101：在谈论它们之前我们需要达成的共识](https://mp.weixin.qq.com/s/iupP8wiJzUjJJ2cqSDDFLQ)
+- [【第1966期】前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/CbFDgZqhnHRM6tN3vvjStw)
+- [【第1967期】前端架构 101： MVC 初探](https://mp.weixin.qq.com/s/8ILlKiZIGCqqVoKhH4VDtA)
+- [【第1968期】前端架构101：MVC启示录 - 模块的职责，作用域和通信](https://mp.weixin.qq.com/s/w24UUSl_kosclM_ct8Hk3w)
+- [【第1969期】NutUI 视频组件开发心得](https://mp.weixin.qq.com/s/sjO8oEmrUqNQklhp25eHNg)
+- [【第1970期】作用域与闭包 - 最简解释器实现](https://mp.weixin.qq.com/s/GUID0Nfbpn87dsykgDUL0Q)
+- [【第1971期】可扩展的前端 -- 架构基础](https://mp.weixin.qq.com/s/AYf8CkwY1NjBvv_HzggmZw)
+- [【第1972期】可扩展的前端 -- 常见模式](https://mp.weixin.qq.com/s/6LJH6Myr4ulrYByIAaq_XQ)
+- [【第1973期】SVG 图标制作指南](https://mp.weixin.qq.com/s/Uoq3DygxAG2uBmiPG_jLJg)
+- [【第1974期】前端架构101：MVC的不足与Flux的崛起](https://mp.weixin.qq.com/s/BB1VUmtQ5uBJ7VSnRf11ZQ)
+- [【第1975期】前端要懂的色域知识](https://mp.weixin.qq.com/s/pgD_16s78hvbuaefR2tyYw)
+- [【第1976期】滴滴出行小程序体积优化实践](https://mp.weixin.qq.com/s/E8iBnQtpZloQHIYlgNLFHg)
+- [**【第1977期】探索 React 的内在 - postMessage 和 Scheduler**](https://mp.weixin.qq.com/s/x4HvKm6w_nc02CZcOiwTTA)
+- [【第1978期】运用 Taro - 快捷开发企业业务之小易小程序](https://mp.weixin.qq.com/s/d5KzQfy1CQFSk0L2p51z2Q)
+- [【第1979期】深入理解 Vue3 Reactivity API](https://mp.weixin.qq.com/s/mnsI8MxBmhomttV0UXWSyg)
+- [【第1980期】CSS 幻术 - 抗锯齿](https://mp.weixin.qq.com/s/dHomapNrLAgZLwhIsM5qdw)
+- [【第1981期】前端开发与架构师](https://mp.weixin.qq.com/s/HJhNCVzmUNA47lySi_4LrQ)
+- [【第1982期】前端架构101：从 Flux 进化到 Model-View-Presenter](https://mp.weixin.qq.com/s/jB3POItNJ-MjI_Ubeu_Dfw)
+- [【第1983期】如何挑选数据可视化框架及平台 - 前端篇](https://mp.weixin.qq.com/s/m-OXIUwNKSsHPNK4x1cNig)
+- [【第1984期】浅析 NodeJs 的几种文件路径](https://mp.weixin.qq.com/s/DzdpQgAZoRnwA3ncq44wwQ)
+- [【第1985期】webpack与rollup背后的acorn](https://mp.weixin.qq.com/s/0dAXSXcw0nIFlgqt6j84nA)
+- [【第1986期】使用 Figma + GitHub Actions 完成 SVG 图标的完全自动化交付](https://mp.weixin.qq.com/s/SBZgjA0tn9gk106ULwDUhg)
 
 ---
 
@@ -485,6 +531,7 @@ title: 通勤那点事
 - [【PPT】快手前端架构师@俞天翔：从网页到应用 - 所经历的前端发展史](https://mp.weixin.qq.com/s/y1SX8CQmc8WROBrSBGbpgw)
 - [【PPT】白鹭引擎首席架构师@王泽：框架开发中的基础设施搭建](https://mp.weixin.qq.com/s/tkqasAV1lE-wRWDShWLczQ)
 - [【PPT】尤雨溪：Vue 3.0的设计原则](https://mp.weixin.qq.com/s/T6yu2VWJkVlXbhXeDzKH9g)
+- [【PPT】Vue.js 团队成员@蒋豪群：谈谈技术项目的可维护性](https://mp.weixin.qq.com/s/FIwjKM5D3Y1QF793bEWcyQ)
 
 ---
 
@@ -778,6 +825,20 @@ title: 通勤那点事
 - [React源码揭秘(三)：Diff算法详解](https://mp.weixin.qq.com/s/e0fDbM5pp9bX1YuYBSXhLA)
 - [《JavaScript 20 年》中文版之创立标准](https://mp.weixin.qq.com/s/OY2d2A1aKPlY1QgNwjweZw)
 - [前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/_m_rf7xlSeVZO1NK58Z7lQ)
+- [解读新一代 Web 性能体验和质量指标](https://mp.weixin.qq.com/s/7Ubwd1TTQ6OojfzaDa2mNw)
+- [未来的JavaScript记录与元组](https://mp.weixin.qq.com/s/uR6M2Rx_iMVH5GAbNpsxVA)
+- [Chrome DevTools中的这些骚操作，你都知道吗？](https://mp.weixin.qq.com/s/CfzKwfiJ7AVnv6m7CEhAVg)
+- [CSR、SSR、NSR、ESR傻傻分不清楚，一文帮你理清前端渲染方案！](https://mp.weixin.qq.com/s/XGwMVhT1mpC8R72-DQaodA)
+- [你不知道的 Blob](https://mp.weixin.qq.com/s/ismyY2EOUMwFqBuen5EUUg)
+- [【前端冷知识】如何写一个用GPU来抽奖的程序](https://mp.weixin.qq.com/s/9Lt7LdTjc6LlQg8PIrqExA)
+- [狄洛尼三角剖分](https://mp.weixin.qq.com/s/iYSTC113BBaHrKlW7ouh9g)
+- [TypeScript 期中考试现在开始](https://mp.weixin.qq.com/s/fWUQcbzryoZuCnF2lVeuzA)
+- [一文读懂 TypeScript 泛型及应用](https://mp.weixin.qq.com/s/whjL0P0CqOUdAXyEu6_jWw)
+- [精读《snowpack》](https://mp.weixin.qq.com/s/BKS3g47Im1imrkI55JjWSg)
+- [说说对 options 请求的理解](https://mp.weixin.qq.com/s/zHxpII3LeePfTl4EOjcgCQ)
+- [Virtual Dom提升页面渲染效率的原理](https://mp.weixin.qq.com/s/Ak-ZSIWR1AfYKHw5sbxgtw)
+- [了不起的 Webpack HMR 学习指南](https://mp.weixin.qq.com/s/d5MjW48-Zg8hO0QygG3z5w)
+- [微内核架构在前端的应用](https://mp.weixin.qq.com/s/VJhPe5O9m_o9tqTqaAgZrA)
 
 ### 前端桃园
 
@@ -977,6 +1038,8 @@ title: 通勤那点事
 - [在日本，人们从来不说“母亲节快乐”](https://mp.weixin.qq.com/s/-rFuqZY_brNG5hVaB3dvRA)
 - [“想你”用日语怎么说？](https://mp.weixin.qq.com/s/qyzvQnl3KG-VwbAwxYd0GA)
 - [为什么日本人打电话时要说「么西么西」？](https://mp.weixin.qq.com/s/ZKK9Jxc9XACKhZ-B3oqwXA)
+- [每天要对日本人说三次“你好”](https://mp.weixin.qq.com/s/ijuJRHtqUty1AHgJx1SQ6A)
+- [父女共浴？日本“兴风作浪”的父亲节习俗](https://mp.weixin.qq.com/s/Q_QlsQMKcLrvjT-4wC2M1Q)
 
 ### 美团技术团队
 
@@ -1040,3 +1103,7 @@ title: 通勤那点事
 - [又炫又酷又炸的数据可视化前端开发揭秘（下篇）](https://mp.weixin.qq.com/s/RGx12nqgGKPdKR2Wg5MTGw)
 - [数据可视化：浅谈热力图如何在前端实现](https://mp.weixin.qq.com/s/cQHJf8Ru4PuvkoaiNgoqLQ)
 - [数据可视化之下发图实践](https://mp.weixin.qq.com/s/y2AK6HkKjXwQt57c1UI2lA)
+
+### 全栈修仙之路
+
+- [Deno bytes 模块全解析](https://mp.weixin.qq.com/s/VsuPz2DC0DjtEzWqC0tJXA)
