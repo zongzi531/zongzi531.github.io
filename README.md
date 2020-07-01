@@ -11,10 +11,13 @@
 
 ## 更新日志
 
-- 2020年04月02日：新增番組
-- 2020年03月15日：Friends Links 移步至关于
+- 2020年07月01日：调整「通勤那点事」以分组形式展示（未优化交互）
+- 2020年06月28日：将「关于」更名为「紹介」（读作syoukai）
+- 2020年04月02日：新增「番組」
+- 2020年03月15日：「Friends Links」移步至「关于」
 - 2019年10月29日：选用主题[Journal](https://github.com/SumiMakito/hexo-theme-Journal)
-- 2018年11月29日：新增Friends Links，Disqus
+- 2019年05月05日：新增「通勤那点事」
+- 2018年11月29日：新增「Friends Links」，Disqus 评论系统
 - 2018年11月28日：选用主题[~Icarus~](https://github.com/ppoffice/hexo-theme-icarus)
 - 2018年10月09日：开启HTTPS，访问博客变为[https://zongzi531.com](https://zongzi531.com)
 - 2018年02月21日：选用主题[~PolarBear~](https://github.com/frostfan/hexo-theme-polarbear)
