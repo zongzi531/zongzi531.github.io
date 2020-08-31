@@ -11,7 +11,7 @@ no_comments: true
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2020年07月31日**
+>*更新时间：* **2020年08月31日**
 
 ### 站点
 
@@ -22,3 +22,7 @@ no_comments: true
 - [CSS灵感](https://chokcoco.github.io/CSS-Inspiration/)
 - [JS 函数式编程指南](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 - [GAMES101: 现代计算机图形学入门](https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html)
+- [SEIN.JS](https://seinjs.com/cn/overview)
+- [现代 JavaScript 教程](https://zh.javascript.info/)
+- [Hackery, Math & Design — Acko.net](http://acko.net/)
+- [数据可视化工具目录](https://datavizcatalogue.com/ZH/index.html)
