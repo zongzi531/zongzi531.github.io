@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?94317405">
+<link rel="stylesheet" href="/css/journal.css?52039539">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -141,13 +141,13 @@
                 
             
                 
-            
-                
-            
-                
                     <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
                         紹介
                     </a>
+                
+            
+                
+            
                 
             
                 
@@ -266,13 +266,13 @@
             
         
             
-        
-            
-        
-            
                 <a class="a-block nav-link-item false" href="/syoukai/index.html">
                     紹介
                 </a>
+            
+        
+            
+        
             
         
             
@@ -356,14 +356,17 @@
 <h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong></p>
 <p>计划尽快完成学习进度，实战前端可视化领域。</p>
 <p>希望本次计算机图形学可以让我更好的理解可视化领域。</p>
-<h5 id="2-脱离业务"><a href="#2-脱离业务" class="headerlink" title="2. 脱离业务"></a>2. 脱离业务</h5><h6 id="1-解释器开发"><a href="#1-解释器开发" class="headerlink" title="1. 解释器开发"></a>1. 解释器开发</h6><p>负责内部可视化平台蓝图编辑器 JavaScript 解释器开发工作，解释器实现对流程节点的触发、传递，执行、抛出功能，同时配套支持节点快照、错误捕获功能。</p>
-<p>整个解释器内部基于 RxJS 的 Subject 主题订阅实现，利用其多播的特性实现“一点触发、多点抛出”的传播特性，即一个观察者实例可以被多个观察者进行订阅。</p>
-<p>解释器内的执行即执行用户输入的低代码内容，利用节点池进行数据的传递并在规定条件下抛出。</p>
-<p>起初编写代码使用 <code>switch</code> 进行编写，但是随着节点类型的增加，代码随之变得逐渐臃肿，逻辑复杂可读性差，为了避免更深化此问题，在紧迫的开发时间内挤出时间对解释器进行彻底重构。</p>
+<h5 id="2-脱离业务"><a href="#2-脱离业务" class="headerlink" title="2. 脱离业务"></a>2. 脱离业务</h5><h6 id="1-「低代码执行器」开发"><a href="#1-「低代码执行器」开发" class="headerlink" title="1. 「低代码执行器」开发"></a>1. 「低代码执行器」开发</h6><blockquote>
+<p>2020年11月 将「解释器」修改为「低代码执行器」，因为原名称含义并不贴切，关于「解释器」可以参阅维基百科解释。新名称则更符合更为贴切。</p>
+</blockquote>
+<p>负责内部可视化平台「星图」编辑器（节点编程） JavaScript 「低代码执行器」开发工作，「低代码执行器」实现对流程节点的触发、传递，执行、抛出功能，同时配套支持节点快照、错误捕获功能。</p>
+<p>整个「低代码执行器」内部基于 RxJS 的 Subject 主题订阅实现，利用其多播的特性实现“一点触发、多点抛出”的传播特性，即一个观察者实例可以被多个观察者进行订阅。</p>
+<p>「低代码执行器」内的执行即执行用户输入的低代码内容，利用节点池进行数据的传递并在规定条件下抛出。</p>
+<p>起初编写代码使用 <code>switch</code> 进行编写，但是随着节点类型的增加，代码随之变得逐渐臃肿，逻辑复杂可读性差，为了避免更深化此问题，在紧迫的开发时间内挤出时间对「低代码执行器」进行彻底重构。</p>
 <p>重构采用依赖<strong>注入</strong>的设计模式，将各个节点的环节逻辑进行抽象、剥离。</p>
-<p>重构后，很明显可以看到解释器的核心代码逻辑更为清晰，也让核心变得更为稳定；节点自身的逻辑也与外界互不干扰，并且也很容易支持新的节点注入。</p>
+<p>重构后，很明显可以看到「低代码执行器」的核心代码逻辑更为清晰，也让核心变得更为稳定；节点自身的逻辑也与外界互不干扰，并且也很容易支持新的节点注入。</p>
 <p><em>设计模式的重要性就此体现了！</em></p>
-<p>并且使用依赖注入的设计模式更好的支持了单元测试，让解释器核心逻辑和节点更易测试、和排错。</p>
+<p>并且使用依赖注入的设计模式更好的支持了单元测试，让「低代码执行器」核心逻辑和节点更易测试、和排错。</p>
 <p>关于节点快照和错误捕获功能，快照则基于队列实现，配合边（节点连接边）控制，在需要抛出时展示整个节点流向及快照，错误捕获也一同抛出。</p>
 <h6 id="2-栈存取工具库开发"><a href="#2-栈存取工具库开发" class="headerlink" title="2. 栈存取工具库开发"></a>2. 栈存取工具库开发</h6><p>同时负责基于 IndexedDB 实现的栈存取工具库的开发工作，很不错的是目前公司的 TypeScript 仓库也非常多。考虑到发包的情况，直接就上 TypeScript 了，即实现一个完整的栈功能（回退方案支持 <code>localStorage</code> ），配套编写单元测试（测试覆盖率 100% ）。</p>
 <blockquote>
@@ -429,7 +432,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?87675091"></script>
+<script src="/js/journal.js?23916982"></script>
 
 
 <script>

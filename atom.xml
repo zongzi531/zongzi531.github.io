@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zongzi531.com/"/>
-  <updated>2020-09-30T01:00:22.220Z</updated>
+  <updated>2020-10-30T08:31:45.513Z</updated>
   <id>http://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>入秋的感受</title>
+    <link href="http://zongzi531.com/2020/11/01/%E5%85%A5%E7%A7%8B%E7%9A%84%E6%84%9F%E5%8F%97/"/>
+    <id>http://zongzi531.com/2020/11/01/入秋的感受/</id>
+    <published>2020-11-01T02:19:23.000Z</published>
+    <updated>2020-10-30T08:31:45.513Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><a id="more"></a><blockquote><p>感觉非常不喜欢这个季节，原因是因为昼夜温差太大，容易感冒（年纪大了，只能多穿些）。<br>对于早出晚归的我来说，出门必定得多穿些，然后到了中午下午就开始热了。<br>服装上面来说，会比较讨厌吧。<br>或许是，杭州的这个季节……</p></blockquote><h2 id="x1f4d4-日本語学習計画"><a href="#x1f4d4-日本語学習計画" class="headerlink" title="&#x1f4d4; 日本語学習計画"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習計画</h2><p>截至目前《新版 中日交流标准日本语 初级上、下》完成第 10 单元学习。就现阶段存在的问题，词汇量远远不够，并且业余时间变少了。</p><h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong> <strong>学习进度停滞</strong></p><p>简单尝试了 <code>Three.js</code> 的几何。</p><h5 id="2-可视化团队"><a href="#2-可视化团队" class="headerlink" title="2. 可视化团队"></a>2. 可视化团队</h5><p>月底的月会上，我可算才知道我目前的岗位定位，属于技术预研团队，目前支持可视化团队工作。</p><p>接着上个月剩余的工作，完成核心单元测试覆盖率达 70% 以上，编写「平台专属调度器」，和一些类型订正修复。</p><p>回顾重构感受，重构过程确实痛苦，但是在订正类型的过程中会发现，你对平台的数据结构会变得越来越熟悉，毕竟每一个 <code>interface</code> 都是和同事一起整理出来的。</p><p>对不熟悉的函数方法，通过类型的帮助，也渐渐知道他们存在的目的以及用途。可以说 TypeScript 是越写越上瘾的，虽然在 Vue 2.x 环境下的开发体验并不是那么好，但是我已经尽可能的在为切换到 Vue 3 在做准备，比如抽离更多的方法函数、使用 <code>@vue/composition-api</code> 、等等。</p><p>关于「平台专属调度器」的开发工作，目前因为整个实现逻辑是我自己设计的，功能难免有些简单和片面，当前实现功能如下：</p><ol><li>以可视化平台组件为工作单元，实现同步挂载渲染和异步挂载渲染。</li><li>在同步挂载渲染模式下实现分组同步挂载功能。</li><li>基于目前「平台专属调度器」实现逻辑添加了一些基础的防御性代码。</li><li>支持工作单元优先级分配调整功能。</li></ol><p>目前「平台专属调度器」的功能还是属于试验性阶段，后续会为配合平台会做适当调整。</p><blockquote><p>补充一下关于「低代码执行器」 使用到的设计模式，观察者模式，依赖注入模式，模板方法模式。</p></blockquote><h5 id="3-技术分享"><a href="#3-技术分享" class="headerlink" title="3. 技术分享"></a>3. 技术分享</h5><p>在一次分享预演的会议上，同事们纷纷发表自己的意见，让我第一次感受到要想把分享讲好还是一门很重要的学问。</p><p>在制作分享前思考，分享时的听众是哪些群体，在制作时则要相应的转换表达方式，比如不能把对开发讲的技术内容生硬的讲给销售听等等。</p><p>建立在这个基础上后，可以罗列整个分享的大纲内容，围绕着大纲去展开更多的内容。</p><p>再一个是比如你在讲一些宣传类型的分享时，内容、用词应当积极向上，避免使用一些复面的词语，可以参考苹果官网的用词，真的特别装逼，这很苹果。</p><p>等等，我相信还有很多分享时的技巧，但是我现在还没有领悟到。</p><p>最后在月底，他组的领导邀请我做有关代码质量/规范相关主题的技术分享，这算是我第二次做技术分享的机会，我毫不犹豫的接受了此次挑战，我希望可以把我学到的内容运用进去，敬请期待吧！</p><h2 id="x1f3c7-锻炼身体"><a href="#x1f3c7-锻炼身体" class="headerlink" title="&#x1f3c7; 锻炼身体"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</h2><p>又开始松懈，惰性气质散发的淋漓精致啊！想……如何才能持续坚持，毕竟贵在坚持，好难！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- no node --&gt;
+    
+    </summary>
+    
+    
+      <category term="Blog" scheme="http://zongzi531.com/categories/Blog/"/>
+    
+    
+      <category term="Blog" scheme="http://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>一步一步向前走</title>
@@ -44,9 +67,9 @@
     <link href="http://zongzi531.com/2020/09/01/%E8%84%B1%E7%A6%BB%E4%B8%9A%E5%8A%A1/"/>
     <id>http://zongzi531.com/2020/09/01/脱离业务/</id>
     <published>2020-09-01T02:31:09.000Z</published>
-    <updated>2020-08-27T02:04:45.013Z</updated>
+    <updated>2020-10-29T01:02:01.127Z</updated>
     
-    <content type="html"><![CDATA[<!-- no node --><a id="more"></a><blockquote><p>8 月，正式脱离公司业务团队，参与可视化团队项目，为公司赋能。<br>可以说，脱离业务团队后，工作变得比以前更忙了，更充实了。（会议也变多了）<br>整个 8 月甚至 9 月被工作安排的满满当当的</p></blockquote><h2 id="x1f4d4-日本語学習計画"><a href="#x1f4d4-日本語学習計画" class="headerlink" title="&#x1f4d4; 日本語学習計画"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習計画</h2><p>截至目前《新版 中日交流标准日本语 初级上、下》完成第 8 单元学习，由于第 7 单元的进度在上个月未完成，所以本月已加快进度学习。</p><p>「日本語のコーナー」学习停滞。当然了，还是非常王様给我带来了那么多的帮助，所以在恢复之前我还是会继续前行，继续加油（虽然恢复也是未知的）。</p><p>在此计划加快完成单元学习进度，学习语法基础，加油！</p><h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong></p><p>计划尽快完成学习进度，实战前端可视化领域。</p><p>希望本次计算机图形学可以让我更好的理解可视化领域。</p><h5 id="2-脱离业务"><a href="#2-脱离业务" class="headerlink" title="2. 脱离业务"></a>2. 脱离业务</h5><h6 id="1-解释器开发"><a href="#1-解释器开发" class="headerlink" title="1. 解释器开发"></a>1. 解释器开发</h6><p>负责内部可视化平台蓝图编辑器 JavaScript 解释器开发工作，解释器实现对流程节点的触发、传递，执行、抛出功能，同时配套支持节点快照、错误捕获功能。</p><p>整个解释器内部基于 RxJS 的 Subject 主题订阅实现，利用其多播的特性实现“一点触发、多点抛出”的传播特性，即一个观察者实例可以被多个观察者进行订阅。</p><p>解释器内的执行即执行用户输入的低代码内容，利用节点池进行数据的传递并在规定条件下抛出。</p><p>起初编写代码使用 <code>switch</code> 进行编写，但是随着节点类型的增加，代码随之变得逐渐臃肿，逻辑复杂可读性差，为了避免更深化此问题，在紧迫的开发时间内挤出时间对解释器进行彻底重构。</p><p>重构采用依赖<strong>注入</strong>的设计模式，将各个节点的环节逻辑进行抽象、剥离。</p><p>重构后，很明显可以看到解释器的核心代码逻辑更为清晰，也让核心变得更为稳定；节点自身的逻辑也与外界互不干扰，并且也很容易支持新的节点注入。</p><p><em>设计模式的重要性就此体现了！</em></p><p>并且使用依赖注入的设计模式更好的支持了单元测试，让解释器核心逻辑和节点更易测试、和排错。</p><p>关于节点快照和错误捕获功能，快照则基于队列实现，配合边（节点连接边）控制，在需要抛出时展示整个节点流向及快照，错误捕获也一同抛出。</p><h6 id="2-栈存取工具库开发"><a href="#2-栈存取工具库开发" class="headerlink" title="2. 栈存取工具库开发"></a>2. 栈存取工具库开发</h6><p>同时负责基于 IndexedDB 实现的栈存取工具库的开发工作，很不错的是目前公司的 TypeScript 仓库也非常多。考虑到发包的情况，直接就上 TypeScript 了，即实现一个完整的栈功能（回退方案支持 <code>localStorage</code> ），配套编写单元测试（测试覆盖率 100% ）。</p><blockquote><p>后续：和兄弟部门同事讨论关于 IndexedDB 存取性能问题、存储空间问题。可能会调整工具库的内部逻辑，不过需求暂时待审核。</p></blockquote><h6 id="3-文章推荐"><a href="#3-文章推荐" class="headerlink" title="3. 文章推荐"></a>3. 文章推荐</h6><ul><li><a href="https://mp.weixin.qq.com/s/42r-HqT8UOvQV-mLgkYHpA" target="_blank" rel="noopener">【第2028期】What I’m thinking about: JS疲劳、招聘</a></li><li><a href="https://mp.weixin.qq.com/s/eQjKG6wrvt2zy-O5mF6F1g" target="_blank" rel="noopener">如何写技术文章</a></li><li><a href="https://mp.weixin.qq.com/s/FHbHhjtfJOc2NPfge6xw2Q" target="_blank" rel="noopener">【第2033期】核心稳定、易扩展——开放关闭原则（The Open-Closed Principle）</a><blockquote><p>摘抄：要知道，世界上没有一劳永逸的技术方案，也没有一成不变的业务可以取得成功。理想状态下，业务应当驱使着技术的进步，同时技术的进步也促使业务有更多的可能，二者应当呈现为一种相辅相成并充满活力的状态。</p></blockquote></li><li><a href="https://mp.weixin.qq.com/s/8-SMIe-9wdwsmxYwavhDdw" target="_blank" rel="noopener">【第2042期】程序员如何把控自己的职业</a></li></ul><h2 id="x1f3c7-锻炼身体"><a href="#x1f3c7-锻炼身体" class="headerlink" title="&#x1f3c7; 锻炼身体"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</h2><p>没坚持住……感觉整个 8 月都没锻炼……没法搞没法搞啊。</p>]]></content>
+    <content type="html"><![CDATA[<!-- no node --><a id="more"></a><blockquote><p>8 月，正式脱离公司业务团队，参与可视化团队项目，为公司赋能。<br>可以说，脱离业务团队后，工作变得比以前更忙了，更充实了。（会议也变多了）<br>整个 8 月甚至 9 月被工作安排的满满当当的</p></blockquote><h2 id="x1f4d4-日本語学習計画"><a href="#x1f4d4-日本語学習計画" class="headerlink" title="&#x1f4d4; 日本語学習計画"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習計画</h2><p>截至目前《新版 中日交流标准日本语 初级上、下》完成第 8 单元学习，由于第 7 单元的进度在上个月未完成，所以本月已加快进度学习。</p><p>「日本語のコーナー」学习停滞。当然了，还是非常王様给我带来了那么多的帮助，所以在恢复之前我还是会继续前行，继续加油（虽然恢复也是未知的）。</p><p>在此计划加快完成单元学习进度，学习语法基础，加油！</p><h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong></p><p>计划尽快完成学习进度，实战前端可视化领域。</p><p>希望本次计算机图形学可以让我更好的理解可视化领域。</p><h5 id="2-脱离业务"><a href="#2-脱离业务" class="headerlink" title="2. 脱离业务"></a>2. 脱离业务</h5><h6 id="1-「低代码执行器」开发"><a href="#1-「低代码执行器」开发" class="headerlink" title="1. 「低代码执行器」开发"></a>1. 「低代码执行器」开发</h6><blockquote><p>2020年11月 将「解释器」修改为「低代码执行器」，因为原名称含义并不贴切，关于「解释器」可以参阅维基百科解释。新名称则更符合更为贴切。</p></blockquote><p>负责内部可视化平台「星图」编辑器（节点编程） JavaScript 「低代码执行器」开发工作，「低代码执行器」实现对流程节点的触发、传递，执行、抛出功能，同时配套支持节点快照、错误捕获功能。</p><p>整个「低代码执行器」内部基于 RxJS 的 Subject 主题订阅实现，利用其多播的特性实现“一点触发、多点抛出”的传播特性，即一个观察者实例可以被多个观察者进行订阅。</p><p>「低代码执行器」内的执行即执行用户输入的低代码内容，利用节点池进行数据的传递并在规定条件下抛出。</p><p>起初编写代码使用 <code>switch</code> 进行编写，但是随着节点类型的增加，代码随之变得逐渐臃肿，逻辑复杂可读性差，为了避免更深化此问题，在紧迫的开发时间内挤出时间对「低代码执行器」进行彻底重构。</p><p>重构采用依赖<strong>注入</strong>的设计模式，将各个节点的环节逻辑进行抽象、剥离。</p><p>重构后，很明显可以看到「低代码执行器」的核心代码逻辑更为清晰，也让核心变得更为稳定；节点自身的逻辑也与外界互不干扰，并且也很容易支持新的节点注入。</p><p><em>设计模式的重要性就此体现了！</em></p><p>并且使用依赖注入的设计模式更好的支持了单元测试，让「低代码执行器」核心逻辑和节点更易测试、和排错。</p><p>关于节点快照和错误捕获功能，快照则基于队列实现，配合边（节点连接边）控制，在需要抛出时展示整个节点流向及快照，错误捕获也一同抛出。</p><h6 id="2-栈存取工具库开发"><a href="#2-栈存取工具库开发" class="headerlink" title="2. 栈存取工具库开发"></a>2. 栈存取工具库开发</h6><p>同时负责基于 IndexedDB 实现的栈存取工具库的开发工作，很不错的是目前公司的 TypeScript 仓库也非常多。考虑到发包的情况，直接就上 TypeScript 了，即实现一个完整的栈功能（回退方案支持 <code>localStorage</code> ），配套编写单元测试（测试覆盖率 100% ）。</p><blockquote><p>后续：和兄弟部门同事讨论关于 IndexedDB 存取性能问题、存储空间问题。可能会调整工具库的内部逻辑，不过需求暂时待审核。</p></blockquote><h6 id="3-文章推荐"><a href="#3-文章推荐" class="headerlink" title="3. 文章推荐"></a>3. 文章推荐</h6><ul><li><a href="https://mp.weixin.qq.com/s/42r-HqT8UOvQV-mLgkYHpA" target="_blank" rel="noopener">【第2028期】What I’m thinking about: JS疲劳、招聘</a></li><li><a href="https://mp.weixin.qq.com/s/eQjKG6wrvt2zy-O5mF6F1g" target="_blank" rel="noopener">如何写技术文章</a></li><li><a href="https://mp.weixin.qq.com/s/FHbHhjtfJOc2NPfge6xw2Q" target="_blank" rel="noopener">【第2033期】核心稳定、易扩展——开放关闭原则（The Open-Closed Principle）</a><blockquote><p>摘抄：要知道，世界上没有一劳永逸的技术方案，也没有一成不变的业务可以取得成功。理想状态下，业务应当驱使着技术的进步，同时技术的进步也促使业务有更多的可能，二者应当呈现为一种相辅相成并充满活力的状态。</p></blockquote></li><li><a href="https://mp.weixin.qq.com/s/8-SMIe-9wdwsmxYwavhDdw" target="_blank" rel="noopener">【第2042期】程序员如何把控自己的职业</a></li></ul><h2 id="x1f3c7-锻炼身体"><a href="#x1f3c7-锻炼身体" class="headerlink" title="&#x1f3c7; 锻炼身体"></a><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</h2><p>没坚持住……感觉整个 8 月都没锻炼……没法搞没法搞啊。</p>]]></content>
     
     <summary type="html">
     
@@ -460,31 +483,6 @@
     
     
       <category term="日本語" scheme="http://zongzi531.com/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
-    
-    
-      <category term="React" scheme="http://zongzi531.com/tags/React/"/>
-    
-      <category term="日本語" scheme="http://zongzi531.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>喜迎国庆</title>
-    <link href="http://zongzi531.com/2019/10/01/%E5%96%9C%E8%BF%8E%E5%9B%BD%E5%BA%86/"/>
-    <id>http://zongzi531.com/2019/10/01/喜迎国庆/</id>
-    <published>2019-10-01T02:00:00.000Z</published>
-    <updated>2020-02-27T11:52:12.286Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><a id="more"></a><blockquote><p>马上要国庆了，迎来建国 70 周年，打算国庆旅游回来以后去看下《我和我的祖国》，光是看宣传片就感动的不行，感受建国以来祖国的飞速发展，特别的自豪。<br>这个月心已经飞去日本了，基本都在制定复核日本自由行攻略了……所以，没有什么内容可分享的。</p></blockquote><h2 id="React-源码阅读计划"><a href="#React-源码阅读计划" class="headerlink" title="React 源码阅读计划"></a>React 源码阅读计划</h2><p>截止 9 月底，16.8.6 的学习基本上以及完成，以及开展的是尝试模仿这个版本使用 TypeScript 编写一个 React 。由于官方使用的是 Flow ，我在阅读的过程中对 Flow 的印象就不是那么的好，所以最后选择 TypeScript 。计划模仿完成后，继<a href="https://zongzi531.com/2019/04/08/LSC-React-08/">React 源码学习（八）：组件更新</a>后继续编写，敬请期待。希望年前可以完成 React 源码阅读计划。</p><h2 id="关于制定日语学习计划"><a href="#关于制定日语学习计划" class="headerlink" title="关于制定日语学习计划"></a>关于制定日语学习计划</h2><p>9 月初，通过机缘巧合在外语教育机构获得了 3 次免费外语课的体验资格，当然毫不犹豫的选择日语啦， 3 次免费课程教学了日语 50 音图的基本内容，通过此次学习，我发现我对日语是充满着一定或者一点兴趣的，所以再后续的时间里，我会打算尝试自学日语。为什么要选择日学呢？有点意思，因为我觉得教育机构课程进度安排过快，在 3 次体验课后我需要课后复习才能跟上课程进度，不然你懂的，就完了。其次是我的前端开发也是自学的，所以我想着趁着还年轻，多尝试一下，试试自己感兴趣的，切身感受一下兴趣的力量。</p><hr><p>祝大家国庆节快乐，祝祖国生日快乐！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;!-- no node --&gt;
-    
-    </summary>
-    
-    
-      <category term="React" scheme="http://zongzi531.com/categories/React/"/>
     
     
       <category term="React" scheme="http://zongzi531.com/tags/React/"/>
