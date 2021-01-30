@@ -1,6 +1,7 @@
 ---
 title: <img> 使用 svg 后如何改变颜色
 date: 2020-12-16 17:06:56
+categories: "CSS"
 comments: true
 featured_image: pic1.jpeg
 tags:
