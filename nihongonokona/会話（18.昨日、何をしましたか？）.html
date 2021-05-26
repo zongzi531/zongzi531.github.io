@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>会話（18.昨日、何をしましたか？） - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="会话（18. 昨天做什么？）中村（なかむら）：張さんは昨日何をしましたか。张，你昨天做了什么？張：私は仕事に行って...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?64117373">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item active" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item active" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        
+
+        
+        <div class="post-item-wrapper post-item-wrapper-no-hover">
+            <div class="post-item post-item-no-gaps">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title  post-item-title-small">
+                        <a href="/nihongonokona/">日本語のコーナー</a> / 会話（18.昨日、何をしましたか？）
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="post">
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <p><code>会话（18. 昨天做什么？）</code><br>中村（なかむら）：張さんは昨日何をしましたか。<br><code>张，你昨天做了什么？</code><br>張：私は仕事に行って、お昼ご飯を食べました。<br><code>我昨天去上班，然后吃午饭。</code><br>中村（なかむら）：技術（ぎじゅつ）の本を読みましたか。<br><code>读技术书了吗？</code><br>張：いいえ、読みませんでした。 私は友達と出かけて、映画（えいが）を見ました。 中村さんはどうですか。昨日、仕事に行きましたか。<br><code>不，没有读。我和朋友去看电影了。中村，你呢？昨天上班吗？</code><br>中村（なかむら）：いいえ、私は先週末（せんしゅうまつ）仕事に行きました。<br><code>不，我上周末上班。</code><br>張：昨日は何（なに）をしましたか。<br><code>那你昨天做了什么？</code><br>中村（なかむら）：私はお昼ご飯を食べて、競馬を見ましたよ。 それから飲みに行きました。<br><code>我吃午饭，看赛马呢，然后喝了一点。</code><br>張：いいですね。<br><code>不错呢。</code></p>
+<h3 id="語彙："><a href="#語彙：" class="headerlink" title="語彙："></a>語彙：</h3><ul>
+<li>昨日（きのう）: 【名词】昨天</li>
+<li>仕事（しごと）：【名词】工作</li>
+<li>昼ご飯（ひるごはん）: 【名词】午饭</li>
+<li>食べる（たべる）: 【他动词一段二类】吃</li>
+<li>技術（ぎじゅつ）:【名词】技术，工艺</li>
+<li>読む（よむ）：【他动词五段一类】读，阅读</li>
+<li>友達（ともだち）：【名词】朋友，友人</li>
+<li>出かける（でかける）：【自动词一段二类】外出，到外面去</li>
+<li>映画（えいが）：【名词】电影</li>
+<li>見る（みる）：【他动词一段二类】看，观看</li>
+<li>先週末（せんしゅうまつ）：【名词】上周末</li>
+<li>競馬（けいば）：【名词】赛马，赌马</li>
+<li>それから：【接续词】还有，其次，之后，后来</li>
+<li>飲み（のみ）：【名词】喝</li>
+</ul>
+<h3 id="文法："><a href="#文法：" class="headerlink" title="文法："></a>文法：</h3><ol>
+<li><p>动词变形：2.た型: た型为动词的过去时，表示过去的时态或者动作已经完成：</p>
+<p>(１)た型是与ます型的过去时ました相对应的，た型是ました的普通型</p>
+<p>これは去年買ったカメラです。这是去年买的相机</p>
+<p>私は玄関のドアを開けた。我打开了玄关的大门</p>
+<p>变形规则：基本与て型的变形规则相同</p>
+<ol>
+<li>1类动词： <ol>
+<li>促音变：う、つ、る变为 っ，后接た</li>
+<li>拔音变：む、ぬ、ぶ变为 ん，后接だ</li>
+<li>い音变：く变为 い，后接た，ぐ变为い，后接だ（⚠️注意： 行く这个词很特别，它变为行った）</li>
+<li>词尾为す时， 则す变为 し，后接た</li>
+</ol>
+</li>
+<li>2类动词：去掉词尾る之后接た</li>
+<li>3类动词： （～）する 变成（～）し，之后接 た。来る（くる）变为 来（き）之后接 た</li>
+</ol>
+<p>练习：把下列单词标上假名发音与几类动词，并根据要求从普通型变为た型</p>
+<p>例： 食べる　（たべる）（2类动词）（食べた）</p>
+<ol>
+<li>飛ぶ （<code>とぶ</code>）（<code>1类动词</code>）（<code>飛んだ</code>）</li>
+<li>言う （<code>いう</code>）（<code>1类动词</code>）（<code>言った</code>）</li>
+<li>住む （<code>すむ</code>）（<code>1类动词</code>）（<code>住んだ</code>）</li>
+<li>書く （<code>かく</code>）（<code>1类动词</code>）（<code>書いた</code>）</li>
+<li>押す （<code>おす</code>）（<code>1类动词</code>）（<code>押した</code>）</li>
+<li>見る （<code>みる</code>）（<code>2类动词</code>）（<code>見た</code>）</li>
+<li>死ぬ （<code>しぬ</code>）（<code>1类动词</code>）（<code>死んだ</code>）</li>
+<li>来る （<code>くる</code>）（<code>3类动词</code>）（<code>来た</code>）</li>
+<li>表れる （<code>あらわれる</code>）（<code>2类动词</code>）（<code>表れた</code>）</li>
+<li>増える （<code>ふえる</code>）（<code>2类动词</code>）（<code>増えた</code>）</li>
+<li>減らす （<code>へらす</code>）（<code>1类动词</code>）（<code>減らした</code>）</li>
+<li>広まる （<code>ひろまる</code>）（<code>1类动词</code>）（<code>広まった</code>）</li>
+<li>注ぐ （<code>そそぐ</code>）（<code>1类动词</code>）（<code>注いだ</code>）</li>
+<li>蹴る （<code>ける</code>）（<code>1类动词</code>）（<code>蹴った</code>）</li>
+<li>寝る （<code>ねる</code>）（<code>2类动词</code>）（<code>寝た</code>）</li>
+<li>起きる （<code>おきる</code>）（<code>2类动词</code>）（<code>起きた</code>）</li>
+</ol>
+</li>
+</ol>
+
+                </div>
+            </div>
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?39464611"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/nihongonokona/会話（18.昨日、何をしましたか？）.html';
+        this.page.identifier = '/nihongonokona/会話（18.昨日、何をしましたか？）.html';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

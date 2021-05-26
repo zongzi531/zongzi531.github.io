@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>怀念暑假的美好时光 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+杭州的梅雨季节也过去了，迎来了炎热的夏天，每天通勤路上就和蒸桑拿一样，汗水滴滴的往下流，每当进入地铁、公...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?6886271">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2019/08/01/怀念暑假的美好时光/pic1.jpeg')">
+                <div class="post-title">
+                    怀念暑假的美好时光
+                    <div class="post-meta">
+                        <time datetime="2019-08-01T09:15:55.000Z" itemprop="datePublished">
+                            2019-08-01 09:15
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/React/'>React</a>, 
+                        
+                        <a href='/tags/中心化/'>中心化</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>杭州的梅雨季节也过去了，迎来了炎热的夏天，每天通勤路上就和蒸桑拿一样，汗水滴滴的往下流，每当进入地铁、公交的时候，吹着凉爽的空调，那这真是通勤路上的一处阴凉。</p>
+<p>感觉在哪里都离不开空调，早上起床听到窗外蝉（知了）叫声，深深的感受到了夏天的降临，时常会回想起暑假那惬意的时光，多么的美好，可惜已经没有了……</p>
+<p>在炎热的夏天，吹着空调，躺在沙发上，看着电视，玩着电脑，吃着冰西瓜，喝着冰可乐，玩累了吃累了可以睡睡觉，这样的暑假生活已经没了</p>
+<p>毕竟自己已经不再是学生，需要赚钱养活自己，所以不管是夏天或是寒冷的冬天，打住。</p>
+<p>话说我什么时候才能摇到车牌呀？我都已经参加了 <strong>53</strong> 次了！ 虽然中间漏了几次，或许在这样的季节或是天气恶劣的情况，我想在车里感受似曾相识的暑假时光 :)</p>
+</blockquote>
+<h2 id="React-源码阅读计划"><a href="#React-源码阅读计划" class="headerlink" title="React 源码阅读计划"></a>React 源码阅读计划</h2><p>截止 7 月底，阅读源码任重而道远。 对 React Fiber 的认识还是比较浅薄，另一个比较难理解的就是 React Fiber <strong>Scheduler</strong> 和 React Fiber <strong>Reconciler</strong> ，目前阅读进度在 <code>ReactFiberLazyComponent.js</code> 和 <code>ReactFiberClassComponent.js</code> 他们都在 <code>ReactFiberBeginWork.js</code> 下，在此之前为了更好的理解源码，重新又去看了一遍 React 官网文档，学习了新的 Hook API （<a href="https://www.youtube.com/watch?v=dpw9EHDh2bM&feature=youtu.be" target="_blank" rel="noopener">React Today and Tomorrow and 90% Cleaner React With Hooks</a>），虽然阅读源码时有部分跳过。目前来说，对于源码中<strong>时间</strong>方面的理解还是很浅层次的，组件逻辑就比较清晰，毕竟现在都是用 React 在写代码，希望通过这次阅读体验让我对抽象的理解更上一层，加油。</p>
+<h2 id="中心化之路"><a href="#中心化之路" class="headerlink" title="中心化之路"></a>中心化之路</h2><p>这个月在实践中心化的路上，考虑到公司前端后台项目业务组件使用频繁，并且具有一定的通用性，同时之前我已经在公司内部搭建了私有 NPM 服务，那么中心化之路迫在眉睫。在此，我为公司开始编写一套后台通用性组件以及工具包。通用性组件其实很好理解，就是结合我公司业务需求抽象出来的通用性较强的组件，配合我编写的 API 文档进行使用，工具包也是顾名思义，这里就不多做解释了。</p>
+<p>那么来说说这个过程中遇到了一些问题，以及考虑如何解决。</p>
+<p>在提供组件和工具包时，先暂时是在我的项目中优先使用，覆盖我的项目中所有存在的情况以及我设想到的可能出现的情况进行编写。编写代码其实是简单的事情，难就难在设计 <code>props</code> 和 API ，我得考虑组件未来的扩展性、迭代问题，其实这就是命名问题，这是一个深远的问题。关于命名网上也可以搜一堆建议出来，按照合理性采用即可。</p>
+<p>OK ，在上面的问题得到解决后，问题接踵而至，比如说组员们用的工具也不同，<code>yarn</code> <code>npm</code> 各式各样，因为 NPM 服务搭建在内网，那台服务器不怎么行，你懂得吧，用 <code>npm</code> 速度特别慢，经常超时。因为我用的是 <code>yarn</code> 就会好点，但是不能让每一位同学都装 <code>yarn</code> 吧，这是一个问题，也没有解决，所以让每一位同学都装了 <code>yarn</code> 哈哈。但是这一问题衍生出来的就是，这个工具是否应该也需要统一，毕竟如果一个项目经过两个同学之手，仓库内可能会同时出现  yarn.lock 和  package-lock.json ，会很奇怪吧，这是我的猜想。</p>
+<p>再来说说维护问题，如果说我在使用到该组件或者工具中遇到了 BUG ，那么我该怎么办？假设我们已经发现了 BUG 的位置并知道如何修复，我们需要先修复代码或提 PR 给我进行合并，然后提交代码或需要更新文档，再发版，发版完后，项目统一更新至最新版本。很繁琐对吧，这就是中心化的问题之一，去中心化就会带来不错的效果，但是带来的问题就是项目大大大，但是结合我公司目前的状况，我认为中心化任然是一个优于去中心化的选择。</p>
+<p>问题又来了，我该如何通知其他项目的同学去更新这个库呢？很难吧，就像你用 NPM 的库一样，只有你发现问题时，去查看他的 issues 才会发现，需要更新版本，并且你在更新版本的同时可能会带来不必要的问题，比如中间产生了破坏性更新？这些都是你不知道的，暗藏在那边的坑，虽然说我们都是在坑里长大的，但是这也太坑了吧。暂时的，也没想到什么很好的方案，或许写出更好的文档才是更好的选择吧。</p>
+<p>文档的维护，真的好麻烦，都没有一键生成的工具吗？算了，我没找到。这个过程太漫长了，老老实实写吧。同时我还需要向同学们分享库的更新内容。</p>
+<p>确实在这一路实践下来，成本还是有点的，但是效果也是值得的，统一抽离公共内容来提升同学们的开发体验也是很有价值的一件事情。</p>
+<p>但是这些库在我公司内部发布后，并无法直接提供给大家使用，考虑到为了不带来不必要的麻烦，我们采用灰度升级，只在新的代码中使用到，这又需要一个培训的过程，就像是项目交接，毕竟工具生产出来，不是一上手就会用的，所以我编写了一套代码演变的过程，告诉同学这套工具是用来解决什么问题痛点，使用了她后会带来多少便利，我相信这一切都是值得的。</p>
+<p>目前我公司库内暂时还没写单侧，仅做代码检查，考虑到后续要交给其他同学维护，我也先尝试了 Git Hook <a href="https://github.com/typicode/husky" target="_blank" rel="noopener">husky</a> 来帮助同学检查代码，在每次提交前都会检查代码，若不通过则无法进行提交。这是我目前为后面考虑的。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2019/08/01/%E6%80%80%E5%BF%B5%E6%9A%91%E5%81%87%E7%9A%84%E7%BE%8E%E5%A5%BD%E6%97%B6%E5%85%89/" title="怀念暑假的美好时光">https://zongzi531.com/2019/08/01/%E6%80%80%E5%BF%B5%E6%9A%91%E5%81%87%E7%9A%84%E7%BE%8E%E5%A5%BD%E6%97%B6%E5%85%89/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/09/01/%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/">
+        上一篇<br>学习算法
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/07/02/macos-baidu-netdisk-plugin/">
+        下一篇<br>macOS Mojave 系统中启动程序变卡
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?96368278"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2019/08/01/怀念暑假的美好时光/';
+        this.page.identifier = '/2019/08/01/怀念暑假的美好时光/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>新环境 新开始 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+《你不知道的JavaScript 下卷》 =&amp;gt; 完成
+可以说这个月比较废（忙，所以决定在月底把下卷...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?47012282">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    新环境 新开始
+                    <div class="post-meta">
+                        <time datetime="2018-04-24T21:31:33.000Z" itemprop="datePublished">
+                            2018-04-24 21:31
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/TypeScript/'>TypeScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/JavaScript/'>JavaScript</a>, 
+                        
+                        <a href='/tags/TypeScript/'>TypeScript</a>, 
+                        
+                        <a href='/tags/ECMAScript-6/'>ECMAScript 6</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>《你不知道的JavaScript 下卷》 =&gt; 完成</p>
+<p>可以说这个月比较废（<code>忙</code>，所以决定在月底把下卷读完，当然也可能鸽一波（<code>逃</code></p>
+<p>所以下一本书是《CSS世界》，不谈。</p>
+<p>书债快还完了，所以《深入浅出Node.js》？TypeScript？……？（纠结中……）</p>
+</blockquote>
+<h2 id="TypeScript初体验"><a href="#TypeScript初体验" class="headerlink" title="TypeScript初体验"></a>TypeScript初体验</h2><p>月初利用空余时间，尝试将<a href="https://github.com/zongzi531/react-to-do-list" target="_blank" rel="noopener">react-to-do-list</a>改写成TypeScript。</p>
+<p>体验<strong>接口</strong>：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">Color</span> <span class="token punctuation">{</span>
+  color<span class="token punctuation">:</span> <span class="token keyword">string</span>
+  flag<span class="token punctuation">:</span> <span class="token keyword">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> colors<span class="token punctuation">:</span> <span class="token keyword">Array</span><span class="token operator">&lt;</span>Color<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span> color<span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span> flag<span class="token punctuation">:</span> <span class="token string">'active'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编写过程中发现会很多的使用到<code>any</code>和<code>&lt;any, any&gt;</code>，尽管知道需要尽量明确类型，所以未来需要提升自己TS代码的优雅。</p>
+<p>编写过程中遇到的待解决问题：</p>
+<ul>
+<li>[react-dnd]使用修饰器会导致代码报错，但是使用高阶组件的写法就不会。 相关issues： <a href="https://github.com/react-dnd/react-dnd/issues/782" target="_blank" rel="noopener">#782</a>  <a href="https://github.com/react-dnd/react-dnd/issues/785" target="_blank" rel="noopener">#785</a></li>
+</ul>
+<h2 id="体验前后端不分离开发模式"><a href="#体验前后端不分离开发模式" class="headerlink" title="体验前后端不分离开发模式"></a>体验前后端不分离开发模式</h2><ul>
+<li><p>本月工作内容：</p>
+<ol>
+<li>参与基建开发</li>
+<li>维护业务系统</li>
+</ol>
+</li>
+<li><p>基建开发采用两套方案：</p>
+<ol>
+<li>jQuery + Handlebars.js</li>
+<li>Vue + Element-UI</li>
+</ol>
+</li>
+<li><p>学习一手：</p>
+<ol>
+<li>模板引擎：doT.js、Nunjucks</li>
+<li>Node.js 框架：ThinkJS</li>
+<li>树结构</li>
+</ol>
+</li>
+</ul>
+<p><strong>学习过程中能感受到前端发展至今的演变过程。</strong></p>
+<p>然后故事开始了，开发过程中发现了一个element-ui css styles bug。</p>
+<h2 id="The-First-Pull-Request-was-Approved-10808"><a href="#The-First-Pull-Request-was-Approved-10808" class="headerlink" title="The First Pull Request was Approved #10808"></a>The First Pull Request was Approved <a href="https://github.com/ElemeFE/element/pull/10808" target="_blank" rel="noopener">#10808</a></h2><p><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">&#x1f389;</span><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">&#x1f389;</span><span class="github-emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">&#x1f389;</span></p>
+<p><img src="pic.jpeg" alt=""></p>
+<h2 id="先来谈谈下卷的感受"><a href="#先来谈谈下卷的感受" class="headerlink" title="先来谈谈下卷的感受"></a>先来谈谈下卷的感受</h2><p>在这里我真的要吐槽一下了，下卷真的没什么惊喜。真的是我的锅，我不应该自己先去读ES6，让我有这样的落差感。</p>
+<p>当然我现在还没有读完，暂且不想后面有什么惊喜了。</p>
+<blockquote>
+<p><strong>weibo</strong><br>ok 没有鸽 读完下卷也写了月记 可以说这个月挺摸的 下卷这本书里写的最多的一句话：“这里不做深入介绍，可以参见本系列中的《你不知道的 JavaScript（上/中卷）》的第 N 部分” 谈谈读后感 确实这本书内容很水 但是还有些值得提到的地方的 比如元编程这个关键词 比如es6+更值得我们去关注 借助babel的力量去多使用这个样子 读完本系列上中下 确实收益匪浅 确实解惑了我不知道的JavaScript 我同时也相信还有很多我不知道的JavaScript 所以学习之路并没有停止 5月开始探索css世界 node应该会成为下一个节点 同启typescript学习 那么到5月 我的前端工作生涯也1年了 加油</p>
+</blockquote>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2018/04/24/%E6%96%B0%E7%8E%AF%E5%A2%83-%E6%96%B0%E5%BC%80%E5%A7%8B/" title="新环境 新开始">https://zongzi531.com/2018/04/24/%E6%96%B0%E7%8E%AF%E5%A2%83-%E6%96%B0%E5%BC%80%E5%A7%8B/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2018/05/08/TypeScript%E5%88%9D%E5%AD%A6%E4%B9%8B%E8%B7%AF/">
+        上一篇<br>TypeScript 初学之路
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/03/27/%E9%87%91%E4%B8%89%E9%93%B6%E5%9B%9B/">
+        下一篇<br>金三银四
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?15784274"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2018/04/24/新环境-新开始/';
+        this.page.identifier = '/2018/04/24/新环境-新开始/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

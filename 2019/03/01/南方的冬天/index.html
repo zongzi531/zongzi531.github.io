@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>南方的冬天 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+以前觉得杭州的冬天，也就这样过去了，今年春节去了下北京，感受了一下北方的冬天，回来后发现南方的冬天是真的冷...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?99909815">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2019/03/01/南方的冬天/pic-1.jpeg')">
+                <div class="post-title">
+                    南方的冬天
+                    <div class="post-meta">
+                        <time datetime="2019-03-01T02:48:10.000Z" itemprop="datePublished">
+                            2019-03-01 02:48
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/TypeScript/'>TypeScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/TypeScript/'>TypeScript</a>, 
+                        
+                        <a href='/tags/SSR/'>SSR</a>, 
+                        
+                        <a href='/tags/GraphQL/'>GraphQL</a>, 
+                        
+                        <a href='/tags/Next-js/'>Next.js</a>, 
+                        
+                        <a href='/tags/WebView/'>WebView</a>, 
+                        
+                        <a href='/tags/Parcel/'>Parcel</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<p>以前觉得杭州的冬天，也就这样过去了，今年春节去了下北京，感受了一下北方的冬天，回来后发现南方的冬天是真的冷……</p>
+<p>北京的冷是由外而内的，虽然我已经穿的很厚了，但是风一刮，就觉得格外的冷</p>
+<p>杭州的冷是由内而外的，不刮风你也觉得冻 jio ，冷就完事了</p>
+<p>熬过这个冬天，又是下一个冬天呀……</p>
+<h2 id="吃-UIWebView-一记亏"><a href="#吃-UIWebView-一记亏" class="headerlink" title="吃 UIWebView 一记亏"></a>吃 UIWebView 一记亏</h2><p>我司 React 移动端项目，运行在宇宙大行 APP 内，上预发环境后，发现在路由切换进入有 <code>&lt;input&gt;</code> 标签的页面时，键盘会自动唤起。这就很难受，那么开始寻找问题之路，先确认问题出现的场景，查看生产环境未存在此现象，其他环境（<em>Chrome</em>, <em>Safari</em>, <em>WeChat</em>…）也未存在此现象， <em>Android</em> 并未存在此现象，仅 <em>iOS</em> 存在此现象，确认后，尝试将生产环境代码移至预发环境发现此现象已消失，开始查找自身代码问题，因这个项目做过库升级和 Webpack 升级，所以尝试恢复之前版本确认，并非升级所导致问题。因考虑到此问题必须得解决，所以下手从代码角度去解决此问题，尝试使用 <code>document.activeElement.blur</code> 解决此问题，但是 <code>activeElement</code> 并非能完全解决此问题，仍然会出现之前情况，只能解决在用户手动激活 <code>&lt;input&gt;</code> 标签后，用这段代码去缩回键盘的场景。之后联系我司 <em>iOS</em> 开发者配合调试发现，此问题仅出现于 <strong>UIWebView</strong> ，而 WKWebView 并不会存在此问题，查阅相关资料后，也实践修改 <code>keyboardDisplayRequiresUserAction</code> 参数并无效果，从逻辑上讲 <a href="https://developer.apple.com/documentation/uikit/uiwebview/1617967-keyboarddisplayrequiresuseractio?language=objc" target="_blank" rel="noopener">keyboardDisplayRequiresUserAction - UIWebView | Apple Developer Documentation</a> 的默认值是符合业务的，所以无需修改。最后开始仔细检查自身代码后发现是之前同事使用 <strong><code>react-fastclick</code></strong> 所致，将其替换成 <strong><code>fastclick</code></strong> 解决问题。比较坑的是，我接手代码后，并不知情线上版本未使用到 <code>react-fastclick</code> ，使问题找了半天。在 <code>react-fastclick</code> 上也开有相关 issues ：<a href="https://github.com/JakeSidSmith/react-fastclick/issues/54#issuecomment-337529134" target="_blank" rel="noopener">Cannot disable fastclick on a particular element #54</a>，当然在替换为 <code>fastclick</code> 也遇到了新的问题，在 UIWebView 下 <code>&lt;input&gt;</code> 标签需要双击才能获得焦点。为此，重写其 <code>focus</code> 方法。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">FastClick<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>focus <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>targetElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 抢先逻辑，当 tagName 为 INPUT，直接 focus</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>targetElement<span class="token punctuation">.</span>tagName <span class="token operator">===</span> <span class="token string">'INPUT'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> targetElement<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//...</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Next-To-Do-List"><a href="#Next-To-Do-List" class="headerlink" title="Next To Do List"></a>Next To Do List</h2><p>以学习 Next.js 来实践 SSR ，从此起直接换用 Yarn ， Yarn 的优点这里也不再提了，下面来介绍下我的学习过程，在阅读完文档后，按照文档教程进行项目初始化，涉及到的 Antd 库的问题成为了首先要解决的事情，那么参照蚂蚁金服官方给出的解决方案 <a href="https://www.yuque.com/steven-kkr5g/aza/ig3x9w" target="_blank" rel="noopener">《Next.js 配合使用antd、less (Integration with Antd)》</a> 解决即可，需要个性化修改的是，我这个 Demo 并没有使用到 CSS Modules 而只是使用普通的 CSS 罢了，所以呢我单独修改了他的配置文件，与解决方案有些出入，手动添加规则。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 其余代码在此省略</span>
+config<span class="token punctuation">.</span>module<span class="token punctuation">.</span>rules<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  test<span class="token punctuation">:</span> <span class="token regex">/\.css/</span><span class="token punctuation">,</span>
+  exclude<span class="token punctuation">:</span> <span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
+  use<span class="token punctuation">:</span> <span class="token function">cssLoaderConfig</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    extensions<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'css'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    cssModules<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    cssLoaderOptions<span class="token punctuation">,</span>
+    postcssLoaderOptions<span class="token punctuation">,</span>
+    dev<span class="token punctuation">,</span>
+    isServer
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后呢，将 React To Do List 项目源码全部移入即可，在这之后我想到将服务端代码也一同移入，比较好的是官方也给出了例子，也感谢社区的强大 <a href="https://github.com/zeit/next.js/tree/canary/examples/with-sitemap-and-robots-express-server-typescript" target="_blank" rel="noopener">with-sitemap-and-robots-express-server-typescript</a> 。参照此，我将 Express Mongo To Do List Server 项目移入，将 <code>tsconfig.*.json</code> 和 <code>tslint.*.json</code> 分开处理，仍然是依照原先项目，并且对 <code>package.json</code> 中的 <code>&quot;dependencies&quot;</code> 和 <code>&quot;devDependencies&quot;</code> 进行了合理的分配。</p>
+<p>那么 SSR 项目算是得到了初步的实践，从此 Demo 中很明显的感受到， SSR 项目适合去做什么，不适合去做什么，比如这个 Demo 其实并不适合做 SSR 。所以公司中项目是否需要使用 SSR 得按照实际情况考虑，满足要求再使用即可。</p>
+<p>在这之后，想着借势学习 GraphQL ，用来替换本身服务端代码的 RESTful API ，来感受下 GraphQL 之潮。起初因为想避开使用 <code>.graphql</code> 的文件形式，使用 <code>GraphQLSchema</code> 来编写，使用这样的形式编写时，我遇到了些问题，若两个兄弟字段查询的过程都一致，只是分别返回不同的内容的情况下，我暂且不知道如何节省查询，而是将此类兄弟字段塞入一个对象中，由对象去操作 <code>resolve</code> 方法，而非 <code>fields</code> 本身，但是我后来还是选择了使用 <code>buildSchema</code> 来编写，虽然这样无法使用 Lint 来检查代码书写格式，但是我可以直接使用 <code>rootValue</code> 实现查询，对于约定的操作规则或者流程，我自然使用 <code>operationName</code> 来控制，用 <code>switch</code> 来辨别进哪个分支进行处理，当然这样会操作这个函数非常之庞大，逻辑之复杂。现在想起来，感觉 <code>GraphQLSchema</code> 是不是也可以使用这样的形式来编写，虽然当时使用 <code>rootValue</code> 是用来返回 <code>variables</code> 和 <code>operationName</code> 的，（我是这样猜想）不过没关系，若后续还有机会的话，再去实践也不是什么问题。</p>
+<p>学习 GraphQL 后认为，GraphQL 存在于 RESTful API 之上会更好，底层多数业务仍然需要 RESTful API ，根据业务需求调整 RESTful API 查询数据为全量查询，通过 GraphQL 再来定制更细化的查询结果为更佳。</p>
+<p>整个实践过程中，为了将 debug 对象保存（利用 fs 模块）至本地文件进行查看，而非终端查看（很繁琐，不能搜索），将数据使用 <code>JSON.stringify</code> 转换后存入，但是过程中会报错，提示对象中有循环引用 <a href="https://stackoverflow.com/questions/11616630/json-stringify-avoid-typeerror-converting-circular-structure-to-json" target="_blank" rel="noopener">JSON.stringify, avoid TypeError: Converting circular structure to JSON</a> ，最终借用 <a href="https://github.com/WebReflection/circular-json" target="_blank" rel="noopener">circular-json</a> 库来解决此问题。 Node.js 上的调试之路，我还是没了解多少。</p>
+<h2 id="用-Parcel-感受零配置"><a href="#用-Parcel-感受零配置" class="headerlink" title="用 Parcel 感受零配置"></a>用 Parcel 感受零配置</h2><p>Parcel 是以零配置出现的，那么来学习一下吧，体验了一把 Parcel 来构建 React 项目，确实比起 Webpack 配置少了许多，但是当我阅读到 <a href="https://parceljs.org/api.html" target="_blank" rel="noopener">API</a> 这章时，我笑了。零配置的概念选用的是社区最佳，但是在个性化上，这个问题上还是 Webpack 更胜一筹，在开发项目时，有多少项目时开箱即用不需要个性化配置的，我想这是少之又少的，你要真比起这，回想一下 <code>create-react-app</code> 构建出来的项目，隐藏了所有配置。这么说来 Vue CLI 3.x 做的也不错，他提供了一套 GUI 图形化界面，让开发者省去学习文档时间，这才是真正的开箱即用吧。所以工程化这件事上，该学的还是得学，一样不能少。</p>
+<h2 id="源码阅读计划"><a href="#源码阅读计划" class="headerlink" title="源码阅读计划"></a>源码阅读计划</h2><p>这个月简单的阅读了 Immutable.js 和 Lodash ，这两个库。来简单说说，我学到的东西吧，虽然没有完完整整的阅读。</p>
+<ul>
+<li>Immutable.js 中非常有用的方法： <code>mergeDeep</code>, <code>getIn</code>, <code>setIn</code>, <code>updateIn</code> 。 <code>withMutations</code> 方法用来解决多次克隆的性能问题。</li>
+<li>Lodash 可以让数组的操作更简单。</li>
+</ul>
+<p><strong>重点来了！！！</strong> 计划阅读 React 源码，查看 GitHub 仓库发现最早期版本是 <code>0.3-stable</code> ，那么就决定从这个版本开始阅读，同时开始模仿写轮子。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2019/03/01/%E5%8D%97%E6%96%B9%E7%9A%84%E5%86%AC%E5%A4%A9/" title="南方的冬天">https://zongzi531.com/2019/03/01/%E5%8D%97%E6%96%B9%E7%9A%84%E5%86%AC%E5%A4%A9/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/04/01/LSC-React-01/">
+        上一篇<br>React 源码学习（一）：HTML 元素渲染
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/02/01/%E6%9D%A5%E6%99%9A%E4%BA%86%E7%9A%842018%E5%B9%B4%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
+        下一篇<br>来晚了的2018年年终总结
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?32371188"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2019/03/01/南方的冬天/';
+        this.page.identifier = '/2019/03/01/南方的冬天/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

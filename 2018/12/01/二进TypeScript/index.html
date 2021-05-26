@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>二进TypeScript - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+其实从国庆假期前就开始慢慢二读 TypeScript 了。只不过那时因为计划安排，先学习了面试经验。之后决...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?31260222">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2018/12/01/二进TypeScript/foreground_bluprint.svg')">
+                <div class="post-title">
+                    二进TypeScript
+                    <div class="post-meta">
+                        <time datetime="2018-12-01T00:07:48.000Z" itemprop="datePublished">
+                            2018-12-01 00:07
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/TypeScript/'>TypeScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/TypeScript/'>TypeScript</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<p>其实从国庆假期前就开始慢慢二读 TypeScript 了。只不过那时因为计划安排，先学习了面试经验。之后决定二读是在11月。</p>
+<p>在二读前，我选择先阅读了<a href="https://github.com/jkchao/typescript-book-chinese" target="_blank" rel="noopener">《深入理解 TypeScript》</a>，因为我很清楚的知道，自己对 TypeScript 的了解并不是很深。在阅读完后，我认为需要重新去阅读 TypeScript 。当然我的英语水平并不是那么的好，所以为了减轻我的阅读压力，我选择阅读<a href="https://github.com/zhongsp/TypeScript" target="_blank" rel="noopener">《TypeScript 使用手册》</a>。二读让我对 TypeScript 了解了更多。当然我相信，这两本书我会读第三次。</p>
+<blockquote>
+<p>阅读过程中，相继对以上两个仓库进行了不通程度的贡献，比如：错误更正，帮助翻译。<em>相关PR我会列在文章尾部</em></p>
+</blockquote>
+<p>那么为了验证我二读的效果，我开始对我 GitHub 原有的 JavaScript 项目进行 TypeScript 重写。分别对以下仓库开立 <code>ts</code> 分支，进行重写：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://github.com/zongzi531/react-to-do-list" target="_blank" rel="noopener">zongzi531/react-to-do-list</a></li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://github.com/zongzi531/vue-to-do-list" target="_blank" rel="noopener">zongzi531/vue-to-do-list</a></li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://github.com/zongzi531/express-mongo-to-do-list-server" target="_blank" rel="noopener">zongzi531/express-mongo-to-do-list-server</a></li>
+</ul>
+<p>那么接下来分享我的学习经验：</p>
+<h2 id="关于-type-关键字"><a href="#关于-type-关键字" class="headerlink" title="关于 type 关键字"></a>关于 <code>type</code> 关键字</h2><p>其实之前我一直不理解 <code>type</code> 关键字到底是做什么用的，直到二读时，我发现它和 <code>interface</code> 很相像，但是又有细微的不同。</p>
+<p>首先来介绍下 <code>type</code> ：</p>
+<p>它在 TypeScript 1.4 被发布，称它为<strong>类型别名</strong>。</p>
+<p>你现在可以使用 <code>type</code> 关键字来为类型定义一个“别名”：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type PrimitiveArray <span class="token operator">=</span> <span class="token keyword">Array</span><span class="token operator">&lt;</span><span class="token keyword">string</span><span class="token operator">|</span><span class="token keyword">number</span><span class="token operator">|</span><span class="token keyword">boolean</span><span class="token operator">></span><span class="token punctuation">;</span>
+type MyNumber <span class="token operator">=</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+type NgScope <span class="token operator">=</span> ng<span class="token punctuation">.</span>IScope<span class="token punctuation">;</span>
+type Callback <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>类型别名与其原始的类型完全一致；它们只是简单的替代名。接下来看看它与 <code>interface</code> 的不同之处。</p>
+<p>其一，接口创建了一个新的名字，可以在其它任何地方使用。 类型别名并不创建新名字—比如，错误信息就不会使用别名。 在下面的示例代码里，在编译器中将鼠标悬停在 <code>interfaced</code> 上，显示它返回的是 <code>Interface</code> ，但悬停在 <code>aliased</code> 上时，显示的却是对象字面量类型。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type Alias <span class="token operator">=</span> <span class="token punctuation">{</span> num<span class="token punctuation">:</span> <span class="token keyword">number</span> <span class="token punctuation">}</span>
+<span class="token keyword">interface</span> <span class="token class-name">Interface</span> <span class="token punctuation">{</span>
+    num<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">aliased</span><span class="token punctuation">(</span>arg<span class="token punctuation">:</span> Alias<span class="token punctuation">)</span><span class="token punctuation">:</span> Alias<span class="token punctuation">;</span>
+<span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">interfaced</span><span class="token punctuation">(</span>arg<span class="token punctuation">:</span> Interface<span class="token punctuation">)</span><span class="token punctuation">:</span> Interface<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另一个重要区别是类型别名不能被 <code>extends</code> 和 <code>implements</code> （自己也不能 <code>extends</code> 和 <code>implements</code> 其它类型）。 因为软件中的对象应该对于扩展是开放的，但是对于修改是封闭的，你应该尽量去使用接口代替类型别名。</p>
+<p>另一方面，如果你无法通过接口来描述一个类型并且需要使用联合类型或元组类型，这时通常会使用类型别名。</p>
+<h2 id="关于-keyof-关键字"><a href="#关于-keyof-关键字" class="headerlink" title="关于 keyof 关键字"></a>关于 <code>keyof</code> 关键字</h2><p>这个关键字就比较厉害了，我一读的时候根本就没有注意到！！！为什么没注意到其实也有一定的原因，那时阅读的是<a href="https://www.tslang.cn/" target="_blank" rel="noopener">《TypeScript中文网》</a>，在该网站中直接缺失 <code>&lt;T, K extends keyof T&gt;</code> 。气不气！！！而且没地方提PR……捞不捞！！！所以还是推荐阅读官网文档啦。</p>
+<p>二读时，我产生疑惑的位置在这里：</p>
+<h3 id="在泛型约束中使用类型参数"><a href="#在泛型约束中使用类型参数" class="headerlink" title="在泛型约束中使用类型参数"></a>在泛型约束中使用类型参数</h3><p>你可以声明一个类型参数，且它被另一个类型参数所约束。 比如，现在我们想要用属性名从对象里获取这个属性。 并且我们想要确保这个属性存在于对象 <code>obj</code> 上，因此我们需要在这两个类型之间使用约束。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> getProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> c<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> d<span class="token punctuation">:</span> <span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// okay</span>
+<span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: Argument of type 'm' isn't assignable to 'a' | 'b' | 'c' | 'd'.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>来介绍下 <code>keyof</code> ：</p>
+<p>它在 TypeScript 2.1 被发布，称它为<strong>查找类型</strong>。</p>
+<p>在 JavaScript 中属性名称作为参数的API是相当普遍的，但是到目前为止还没有表达在那些API中出现的类型关系。</p>
+<p>输入索引类型查询或 <code>keyof</code> ，索引类型查询 <code>keyof T</code> 产生的类型是 <code>T</code> 的属性名称。 <code>keyof T</code> 的类型被认为是 <code>string</code> 的子类型。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+    age<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    location<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+type K1 <span class="token operator">=</span> keyof Person<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// "name" | "age" | "location"</span>
+type K2 <span class="token operator">=</span> keyof Person<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// "length" | "push" | "pop" | "concat" | ...</span>
+type K3 <span class="token operator">=</span> keyof <span class="token punctuation">{</span> <span class="token punctuation">[</span>x<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Person <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>与之相对应的是<em>索引访问类型</em>，也称为<em>查找类型</em>。在语法上，它们看起来像元素访问，但是写成类型：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type P1 <span class="token operator">=</span> Person<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span>
+type P2 <span class="token operator">=</span> Person<span class="token punctuation">[</span><span class="token string">"name"</span> <span class="token operator">|</span> <span class="token string">"age"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string | number</span>
+type P3 <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token string">"charAt"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// (pos: number) => string</span>
+type P4 <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"push"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// (...items: string[]) => number</span>
+type P5 <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> getProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 推断类型是T[K]</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> setProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">,</span> value<span class="token punctuation">:</span> T<span class="token punctuation">[</span>K<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span> foo<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> bar<span class="token punctuation">:</span> <span class="token string">"hello!"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// number</span>
+<span class="token keyword">let</span> bar <span class="token operator">=</span> <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"bar"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// string</span>
+
+<span class="token keyword">let</span> oops <span class="token operator">=</span> <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"wargarbl"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误！"wargarbl"不存在"foo" | "bar"中</span>
+
+<span class="token function">setProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"foo"</span><span class="token punctuation">,</span> <span class="token string">"string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 错误！, 类型是number而非string</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="React-To-Do-List"><a href="#React-To-Do-List" class="headerlink" title="React To Do List"></a>React To Do List</h2><p>对之前的 TypeScript 版本进行了相应的优化，出于某种原因，将 <code>.ts</code> 改为 <code>.tsx</code> 文件。</p>
+<p>将部分组件替换为无状态组件，书写方式基本如下（以 <code>App.tsx</code> 为例）：</p>
+<pre class="line-numbers language-jsx"><code class="language-jsx"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/react-to-do-list/blob/master/src/App.tsx</span>
+
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> Routes <span class="token keyword">from</span> <span class="token string">'./routes'</span>
+
+type App <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> JSX<span class="token punctuation">.</span>Element
+
+<span class="token keyword">const</span> App<span class="token punctuation">:</span> App <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Routes</span> <span class="token punctuation">/></span></span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> App<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>将之前申明的静态变量替换为枚举：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/react-to-do-list/blob/master/src/config/index.ts</span>
+
+<span class="token keyword">export</span> <span class="token keyword">enum</span> COLOR <span class="token punctuation">{</span>
+  DEFAULT <span class="token operator">=</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ICOLOR</span> <span class="token punctuation">{</span>
+  color<span class="token punctuation">:</span> COLOR
+  flag<span class="token punctuation">:</span> COLORFLAG
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> type COLORS <span class="token operator">=</span> ICOLOR<span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> COLORS<span class="token punctuation">:</span> COLORS <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span> color<span class="token punctuation">:</span> COLOR<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">,</span> flag<span class="token punctuation">:</span> COLORFLAG<span class="token punctuation">.</span>ACTIVE <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>更多的使用类型别名：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/react-to-do-list/blob/master/src/interfaces/index.ts</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> RouterProps <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-router'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> FormComponentProps <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'antd/lib/form'</span>
+
+<span class="token keyword">export</span> type AntdFormAndRouterProps <span class="token operator">=</span> FormComponentProps <span class="token operator">&amp;</span> RouterProps<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Vue-To-Do-List"><a href="#Vue-To-Do-List" class="headerlink" title="Vue To Do List"></a><a href="https://zongzi531.com/vue-to-do-list">Vue To Do List</a></h2><p>使用 <code>Emit</code> 装饰器实现以前的 <code>this.$emit</code> 方法：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/vue-to-do-list/blob/master/src/components/Navigation.vue</span>
+
+<span class="token comment" spellcheck="true">/**
+ * &lt;template>
+ *   &lt;v-navigation-drawer light v-model="currentShow" />
+ * &lt;/template>
+ */</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> Prop<span class="token punctuation">,</span> Emit<span class="token punctuation">,</span> Vue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span><span class="token punctuation">;</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Navigation</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">// show 为组件外传入参数</span>
+  <span class="token comment" spellcheck="true">// 因为 v-model 会直接修改值</span>
+  <span class="token comment" spellcheck="true">// 所以我们定义一个 currentShow 的 getter 和 setter</span>
+  @<span class="token function">Prop</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token keyword">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">private</span> show<span class="token operator">!</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// getter 当然是获取外部传入的 show</span>
+  <span class="token keyword">private</span> <span class="token keyword">get</span> <span class="token function">currentShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>show<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">// setter 因为没有办法 return ，所以这里我们只需一个内部方法 setCurrentShow 将 value 传入</span>
+  <span class="token keyword">private</span> <span class="token keyword">set</span> <span class="token function">currentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setCurrentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">// 这里使用 Emit decorator 在方法内使用 return 将 value 传出</span>
+  <span class="token comment" spellcheck="true">// 这样在组件外就可以使用 @on-change 绑定方法， 方法内第一参数就是 value</span>
+  @<span class="token function">Emit</span><span class="token punctuation">(</span><span class="token string">'on-change'</span><span class="token punctuation">)</span>
+  <span class="token keyword">private</span> <span class="token function">setCurrentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在 <code>.vue</code> 中 <code>import *.svg</code> 的解决方法：</p>
+<p>在 <code>shims-vue.d.ts</code> 中添加以下代码：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">'*.svg'</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> value<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">;</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在使用 GitHub Pages 时遇到的问题，有关于 Vue CLI 3：</p>
+<p>部署应用包时的基本 URL。用法和 webpack 本身的 <code>output.publicPath</code> 一致，但是 Vue CLI 在一些其他地方也需要用到这个值，所以<strong>请始终使用 <code>baseUrl</code> 而不要直接修改 webpack 的 <code>output.publicPath</code></strong> 。</p>
+<p>默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上，例如 <code>https://www.my-app.com/</code> 。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 <code>https://www.my-app.com/my-app/</code>，则设置 <code>baseUrl</code> 为 <code>/my-app/</code>。</p>
+<p>这个值也可以被设置为空字符串 (<code>&#39;&#39;</code>) 或是相对路径 (<code>&#39;./&#39;</code>)，这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径，也可以用在类似 Cordova hybrid 应用的文件系统中。</p>
+<blockquote>
+<p><strong>相对 baseUrl 的限制</strong></p>
+<p>相对路径的 <code>baseUrl</code> 有一些使用上的限制。在以下情况下，应当避免使用相对 <code>baseUrl</code>:</p>
+<ul>
+<li>当使用基于 HTML5 <code>history.pushState</code> 的路由时；</li>
+<li>当使用 <code>pages</code> 选项构建多页面应用时。</li>
+</ul>
+</blockquote>
+<p>这个值在开发环境下同样生效。如果你想把开发服务器架设在根路径，你可以使用一个条件式的值：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/vue-to-do-list/blob/master/vue.config.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  baseUrl<span class="token punctuation">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>NODE_ENV <span class="token operator">===</span> <span class="token string">'production'</span>
+    <span class="token operator">?</span> <span class="token string">'/vue-to-do-list/'</span>
+    <span class="token punctuation">:</span> <span class="token string">'/'</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="执行-git-push-u-origin-master-提示-remote-Invalid-username-or-password"><a href="#执行-git-push-u-origin-master-提示-remote-Invalid-username-or-password" class="headerlink" title="执行 git push -u origin master 提示 remote: Invalid username or password."></a>执行 <code>git push -u origin master</code> 提示 <code>remote: Invalid username or password.</code></h2><p>看这个提示意思是用户名或密码无效，那么问题来了，明明没数错啊，为什么？</p>
+<p>前提：如果你的 GitHub 账户开启了二步验证，请直接前往<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="noopener">Creating a personal access token for the command line</a>按照提示操作，即可解决。</p>
+<h2 id="自定义-index-html-插入内容"><a href="#自定义-index-html-插入内容" class="headerlink" title="自定义 index.html 插入内容"></a>自定义 <code>index.html</code> 插入内容</h2><p><code>html-webpack-plugin</code> 插件对应的数据。它包括两部分：</p>
+<p><code>htmlWebpackPlugin.files</code> : 此次html-webpack-plugin插件配置的chunk和抽取的css样式。该files值其实是webpack的stats对象的 <code>assetsByChunkName</code> 属性代表的值，该值是插件配置的chunk块对应的按照 <code>webpackConfig.output.filename</code> 映射的值。例如对应上面配置插件各个属性配置项例子中生成的数据格式如下：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token property">"htmlWebpackPlugin"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">"files"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"css"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"inex.css"</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"js"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"common.js"</span><span class="token punctuation">,</span> <span class="token string">"index.js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"chunks"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"common"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"entry"</span><span class="token operator">:</span> <span class="token string">"common.js"</span><span class="token punctuation">,</span>
+        <span class="token property">"css"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"index.css"</span> <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"index"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"entry"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
+        <span class="token property">"css"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"index.css"</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样，就可以是用如下模板引擎来动态输出script脚本：</p>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">for</span> <span class="token attr-name">(var</span> <span class="token attr-name">chunk</span> <span class="token attr-name">in</span> <span class="token attr-name">htmlWebpackPlugin.files.chunks)</span> <span class="token attr-name">{</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
+&lt;script type="text/javascript" src="&lt;%=htmlWebpackPlugin.files.chunks[chunk].entry %><span class="token script language-javascript">"<span class="token operator">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">}</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>htmlWebpackPlugin.options</code>: 传递给插件的配置项，具体的配置项如上面插件配置项小节所描述的 —— <em>参见相关链接</em>。</p>
+<h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p><strong><a href="https://github.com/jkchao/typescript-book-chinese" target="_blank" rel="noopener">《深入理解 TypeScript》</a></strong></p>
+<ol>
+<li><a href="https://github.com/jkchao/typescript-book-chinese/pull/19" target="_blank" rel="noopener">Fix typo #19</a></li>
+<li><a href="https://github.com/jkchao/typescript-book-chinese/pull/31" target="_blank" rel="noopener">Fix README commits link #31</a></li>
+<li><a href="https://github.com/jkchao/typescript-book-chinese/pull/37" target="_blank" rel="noopener">Fix typo #37</a></li>
+<li><a href="https://github.com/jkchao/typescript-book-chinese/pull/39" target="_blank" rel="noopener">Fix typo #39</a></li>
+<li><a href="https://github.com/jkchao/typescript-book-chinese/pull/40" target="_blank" rel="noopener">Fix typo #40</a></li>
+</ol>
+<p><strong><a href="https://github.com/zhongsp/TypeScript" target="_blank" rel="noopener">《TypeScript 使用手册》</a></strong></p>
+<ol>
+<li><a href="https://github.com/zhongsp/TypeScript/pull/228" target="_blank" rel="noopener">Update Advanced Types.md &amp; Enums.md #228</a></li>
+<li><a href="https://github.com/zhongsp/TypeScript/pull/229" target="_blank" rel="noopener">Update Breaking changes in TypeScript 2.6 and TypeScript 2.7 #229</a></li>
+<li><a href="https://github.com/zhongsp/TypeScript/pull/234" target="_blank" rel="noopener">Update Breaking changes in TypeScript 2.8 #234</a></li>
+</ol>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter" target="_blank" rel="noopener">TypeScript React Starter</a></li>
+<li><a href="https://github.com/Microsoft/TypeScript-Vue-Starter#typescript-vue-starter" target="_blank" rel="noopener">TypeScript Vue Starter</a></li>
+<li><a href="https://github.com/Microsoft/TypeScript-Node-Starter#typescript-node-starter" target="_blank" rel="noopener">TypeScript Node Starter</a></li>
+<li><a href="https://stackoverflow.com/questions/36148639/webpack-not-able-to-import-images-using-express-and-angular2-in-typescript/36151803#36151803" target="_blank" rel="noopener">webpack not able to import images( using express and angular2 in typescript)</a></li>
+<li><a href="http://www.cnblogs.com/stone-lyl/p/9542126.html" target="_blank" rel="noopener">Vue 中使用 typescript</a></li>
+<li><a href="https://www.jianshu.com/p/cd475fee2794" target="_blank" rel="noopener">在Vue中使用TypeScript</a></li>
+<li><a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/" target="_blank" rel="noopener">Creating a personal access token for the command line</a></li>
+<li><a href="http://www.cnblogs.com/wonyun/p/6030090.html" target="_blank" rel="noopener">html-webpack-plugin详解</a></li>
+</ul>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2018/12/01/%E4%BA%8C%E8%BF%9BTypeScript/" title="二进TypeScript">https://zongzi531.com/2018/12/01/%E4%BA%8C%E8%BF%9BTypeScript/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/01/01/%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode-js/">
+        上一篇<br>［书单推荐］《深入浅出Node.js》
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/11/24/vueconf-hangzhou-2018/">
+        下一篇<br>VUE·CONF HANGZHOU 2018
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?1923783"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2018/12/01/二进TypeScript/';
+        this.page.identifier = '/2018/12/01/二进TypeScript/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>
