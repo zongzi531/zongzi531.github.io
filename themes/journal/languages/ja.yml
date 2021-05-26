@@ -1,0 +1,21 @@
+share: "シェア"
+prev: "前のページへ"
+next: "次のページへ"
+prev_post: "前の記事"
+next_post: "次の記事"
+Home: "ホーム"
+Albums: "アルバム"
+Categories: "カテゴリー"
+Archive: "記事一覧"
+Tags: "タグ"
+Comments: "コメント"
+page_n_of_n: "第 %d/%d ページ"
+CommentsDisabled: "この記事にはコメントできません"
+Commuting: "通勤那点事"
+Nihongonokona: "日本語のコーナー"
+copyright:
+  author: Post author
+  link: Post link
+  license_title: Copyright Notice
+  license_content: 'All articles in this blog are licensed under
+    <a href="%s" rel="external nofollow" target="_blank">%s</a> unless stating additionally.'

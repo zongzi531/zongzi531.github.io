@@ -1,0 +1,65 @@
+<% include _include/variables.ejs %>
+<%
+config.__title = __('Archive') +
+        (is_month() ? (": " + page.year + "/" + page.month) : is_year() ? (": " + page.year) : "")
+        + " - " + config.title
+%>
+<% include _include/head.ejs %>
+<% include _include/container_head.ejs %>
+<% include _include/single_column_head.ejs %>
+<% include _include/side_nav.ejs %>
+<% include _include/extra_nav.ejs %>
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <%
+        var groupTag = 0;
+        page.posts.each(function (item) {
+            var itemTag = is_month() ? date(item.date, 'YYYY/MM') : is_year() ? date(item.date, 'YYYY/MM') : date(item.date, 'YYYY');
+        %>
+        <% if(groupTag !== itemTag){ %>
+        <div class="post-item-wrapper post-item-wrapper-no-hover">
+            <div class="post-item post-item-no-gaps">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title  post-item-title-small">
+                        <% if(is_month()) { %>
+                        <a href="<%= config.root + 'archives/' + date(item.date, 'YYYY') %>"><%= date(item.date, 'YYYY') %></a> / <%= date(item.date, 'MM') %>
+                        <% } else { %>
+                        <a href="<%= config.root + 'archives/' + itemTag %>">
+                            <%= is_month() ? date(item.date, 'YYYY/MM') : is_year() ? date(item.date, 'YYYY / MM') : date(item.date, 'YYYY') %>
+                        </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <a href="<%= config.root + item.path %>" class="a-block">
+            <div class="post-item-wrapper">
+                <div class="post-item post-item-no-gaps">
+                    <div class="post-item-info-wrapper">
+                        <div class="post-item-title">
+                            <%= item.title %>
+                        </div>
+                        <div class="post-item-meta">
+                            <%= date(item.date, "YYYY-MM-DD") %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <%
+            groupTag = groupTag !== itemTag ? itemTag : groupTag;
+        });
+        %>
+    </div>
+    <% include _include/pagination.ejs %>
+
+    <% include _include/single_column_footer.ejs %>
+</div>
+
+<% include _include/container_tail.ejs %>
+
+<% include _include/tail.ejs %>

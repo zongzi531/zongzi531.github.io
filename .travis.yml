@@ -1,0 +1,23 @@
+sudo: false
+language: node_js
+node_js:
+  - 10 # use nodejs v10 LTS
+branches:
+  only:
+    - markdown # build master branch only
+cache:
+  directories:
+    - node_modules
+before_script:
+  - yarn install
+script:
+  - hexo clean
+  - hexo generate # generate static files
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  on:
+    branch: markdown
+  local-dir: public
