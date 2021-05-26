@@ -4,7 +4,7 @@ node_js:
   - 10 # use nodejs v10 LTS
 branches:
   only:
-    - markdown # build master branch only
+    - master # build master branch only
 cache:
   directories:
     - node_modules
@@ -19,5 +19,5 @@ deploy:
   github-token: $GH_TOKEN
   keep-history: true
   on:
-    branch: markdown
+    branch: master
   local-dir: public

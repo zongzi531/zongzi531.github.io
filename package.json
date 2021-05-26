@@ -2,10 +2,6 @@
   "name": "zongzi531.github.io",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "server": "hexo server",
-    "deploy": "hexo clean && hexo generate && hexo deploy"
-  },
   "hexo": {
     "version": "4.0.0"
   },
