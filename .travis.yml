@@ -9,6 +9,7 @@ cache:
   directories:
     - node_modules
 before_script:
+  - git clone https://github.com/zongzi531/hexo-theme-Journal.git themes/journal
   - yarn install
 script:
   - hexo clean

@@ -10,6 +10,5 @@ themes/next
 themes/next/*
 themes/landscape
 themes/landscape/*
-# themes/journal
-# themes/journal/*
-
+themes/journal
+themes/journal/*
