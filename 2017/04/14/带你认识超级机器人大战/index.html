@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>介绍———スーパーロボット大戦 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+スーパーロボット大戦
+中文名：超级机器人大战
+
+
+这款游戏充斥着我的童年，哪怕至今，我手里依然还有这款游戏...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?21872484">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2017/04/14/带你认识超级机器人大战/Banpresto.png')">
+                <div class="post-title">
+                    介绍———スーパーロボット大戦
+                    <div class="post-meta">
+                        <time datetime="2017-04-14T23:28:35.000Z" itemprop="datePublished">
+                            2017-04-14 23:28
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/GAME/'>GAME</a>, 
+                        
+                        <a href='/tags/超级机器人大战/'>超级机器人大战</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<h1 id="スーパーロボット大戦"><a href="#スーパーロボット大戦" class="headerlink" title="スーパーロボット大戦"></a>スーパーロボット大戦</h1><blockquote>
+<p>中文名：超级机器人大战</p>
+</blockquote>
+<p><img src="srw1sthdlogo.png" alt=""></p>
+<p>这款游戏充斥着我的童年，哪怕至今，我手里依然还有这款游戏。哈哈，但是因为生活、工作，并不会经常的像儿时那样玩起。但是我依然很喜欢，并且骄傲的提起，我玩过。心中只有几个字可以形容，那就是很好玩。也不讲这款游戏的历史了，因为那时我还很小很小。</p>
+<p>那么我来介绍下我一路怎么玩过来的吧！</p>
+<h2 id="スーパーロボット大戦A"><a href="#スーパーロボット大戦A" class="headerlink" title="スーパーロボット大戦A"></a>スーパーロボット大戦A</h2><blockquote>
+<p>超级机器人大战A 2001年9月21日 GBA </p>
+</blockquote>
+<p><img src="srwalogo.png" alt=""></p>
+<h2 id="スーパーロボット大戦R"><a href="#スーパーロボット大戦R" class="headerlink" title="スーパーロボット大戦R"></a>スーパーロボット大戦R</h2><blockquote>
+<p>超级机器人大战R 2002年8月2日 GBA</p>
+</blockquote>
+<p><img src="srwrlogo.png" alt=""></p>
+<h2 id="スーパーロボット大戦ORIGINAL-GENERATION"><a href="#スーパーロボット大戦ORIGINAL-GENERATION" class="headerlink" title="スーパーロボット大戦ORIGINAL GENERATION"></a>スーパーロボット大戦ORIGINAL GENERATION</h2><blockquote>
+<p>超级机器人大战OG 2002年11月22日 GBA</p>
+</blockquote>
+<p><img src="srwoglogo.png" alt=""></p>
+<h2 id="スーパーロボット大戦D"><a href="#スーパーロボット大戦D" class="headerlink" title="スーパーロボット大戦D"></a>スーパーロボット大戦D</h2><blockquote>
+<p>超级机器人大战D 2003年8月8日 GBA</p>
+</blockquote>
+<p><img src="srwdlogo.png" alt=""></p>
+<h2 id="スーパーロボット大戦ORIGINAL-GENERATION2"><a href="#スーパーロボット大戦ORIGINAL-GENERATION2" class="headerlink" title="スーパーロボット大戦ORIGINAL GENERATION2"></a>スーパーロボット大戦ORIGINAL GENERATION2</h2><blockquote>
+<p>超级机器人大战OG2 2005年2月3日 GBA</p>
+</blockquote>
+<p><img src="srwog2.png" alt=""></p>
+<h2 id="スーパーロボット大戦J"><a href="#スーパーロボット大戦J" class="headerlink" title="スーパーロボット大戦J"></a>スーパーロボット大戦J</h2><blockquote>
+<p>超级机器人大战J 2005年9月15日 GBA</p>
+</blockquote>
+<p><img src="srwj.png" alt=""></p>
+<h2 id="スーパーロボット大戦W"><a href="#スーパーロボット大戦W" class="headerlink" title="スーパーロボット大戦W"></a>スーパーロボット大戦W</h2><blockquote>
+<p>超级机器人大战W 2007年3月1日 DS</p>
+</blockquote>
+<p><img src="srww.png" alt=""></p>
+<h2 id="スーパーロボット大戦Z"><a href="#スーパーロボット大戦Z" class="headerlink" title="スーパーロボット大戦Z"></a>スーパーロボット大戦Z</h2><blockquote>
+<p>超级机器人大战Z 2008年9月25日 PS2</p>
+</blockquote>
+<p><img src="srwz.png" alt=""></p>
+<h2 id="第3次スーパーロボット大戦Z-時獄篇"><a href="#第3次スーパーロボット大戦Z-時獄篇" class="headerlink" title="第3次スーパーロボット大戦Z 時獄篇"></a>第3次スーパーロボット大戦Z 時獄篇</h2><blockquote>
+<p>第3次超级机器人大战Z 时狱篇 2014年4月10日 PS3/PSVita</p>
+</blockquote>
+<p><img src="srw3z.png" alt=""></p>
+<h2 id="第3次スーパーロボット大戦Z-天獄篇"><a href="#第3次スーパーロボット大戦Z-天獄篇" class="headerlink" title="第3次スーパーロボット大戦Z 天獄篇"></a>第3次スーパーロボット大戦Z 天獄篇</h2><blockquote>
+<p>第3次超级机器人大战Z 天狱篇 2015年4月2日 PS3/PSVita</p>
+</blockquote>
+<p><img src="srw3z2.png" alt=""></p>
+<h2 id="第3次スーパーロボット大戦Z-連獄篇"><a href="#第3次スーパーロボット大戦Z-連獄篇" class="headerlink" title="第3次スーパーロボット大戦Z 連獄篇"></a>第3次スーパーロボット大戦Z 連獄篇</h2><blockquote>
+<p>第3次超级机器人大战Z 连狱篇 2015年4月2日 PS3/PSVita（DD）</p>
+</blockquote>
+<p><img src="srw3z22.png" alt=""></p>
+<p>目前，玩到天狱篇，时狱篇完美成就、连狱篇拿到就通了。准备天狱篇拿到所有成就后，购置V。</p>
+<h2 id="スーパーロボット大戦V"><a href="#スーパーロボット大戦V" class="headerlink" title="スーパーロボット大戦V"></a>スーパーロボット大戦V</h2><blockquote>
+<p>超级机器人大战V 2017年2月23日 PS4/PSVita</p>
+</blockquote>
+<p><img src="srwvlogo.png" alt=""></p>
+<h1 id="一些人物的介绍"><a href="#一些人物的介绍" class="headerlink" title="一些人物的介绍"></a>一些人物的介绍</h1><h2 id="カティア・グリニャール"><a href="#カティア・グリニャール" class="headerlink" title="カティア・グリニャール"></a>カティア・グリニャール</h2><blockquote>
+<p>嘉蒂亚・格里涅尔</p>
+</blockquote>
+<p><img src="KatiaGrignarl.png" alt=""></p>
+<p>我电脑里就存了这么一张，那就她吧，她出场与スーパーロボット大戦J和ーパーロボット大戦V。新作中还是很期待的。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2017/04/14/%E5%B8%A6%E4%BD%A0%E8%AE%A4%E8%AF%86%E8%B6%85%E7%BA%A7%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A4%A7%E6%88%98/" title="介绍———スーパーロボット大戦">https://zongzi531.com/2017/04/14/%E5%B8%A6%E4%BD%A0%E8%AE%A4%E8%AF%86%E8%B6%85%E7%BA%A7%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A4%A7%E6%88%98/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2017/04/15/sublime-vue%E6%8F%92%E4%BB%B6/">
+        上一篇<br>Sublime Text 3 安装Vue语法高亮插件
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2017/04/13/%E7%90%86%E8%A7%A3javascript%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%80%BC/">
+        下一篇<br>理解Javascript基本类型值和引用类型值
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?41772209"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2017/04/14/带你认识超级机器人大战/';
+        this.page.identifier = '/2017/04/14/带你认识超级机器人大战/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

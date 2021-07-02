@@ -1,0 +1,580 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>浅析 jQuery （一） - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+经过之前博客提到的一些关于 jQuery 的事情，以及在设计模式中感受到 jQuery 的惊艳，我试着在...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?20441341">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2018/09/22/浅析jQuery（一）/jQuery.png')">
+                <div class="post-title">
+                    浅析 jQuery （一）
+                    <div class="post-meta">
+                        <time datetime="2018-09-22T00:51:18.000Z" itemprop="datePublished">
+                            2018-09-22 00:51
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/JavaScript/'>JavaScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/JavaScript/'>JavaScript</a>, 
+                        
+                        <a href='/tags/jQuery/'>jQuery</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>经过之前博客提到的一些关于 jQuery 的事情，以及在设计模式中感受到 jQuery 的惊艳，我试着在这个月阅读 jQuery 源码。</p>
+<p>其实从我开始学习 JavaScript 至工作至今，使用 jQuery 的是少之又少，对于其 API 的熟悉程度是极其的低，但是 jQuery 毕竟是那么流行的库，它又涵盖了那么多经典而又优雅的设计模式思想，所以值得我去阅读，学习。</p>
+<p>可能是我接触 JavaScript 比较晚吧，2016年8月，那时 Vue 已经兴起，我从那时起，我虽然很简单的实践了 jQuery ，但是我仍然把主要的精力花在了学习 Vue, React 这样的框架上。当然我还是很痴迷学习 JavaScript ，所以当学习到 JavaScript 设计模式时，我发现我需要从 jQuery 中汲取一些我想要的知识。</p>
+<p>那么动手起来，我 Clone 了 jQuery 3.3.1 版本，从此开始阅读起来。</p>
+</blockquote>
+<h2 id="关于-undefined-的奇淫技巧"><a href="#关于-undefined-的奇淫技巧" class="headerlink" title="关于 undefined 的奇淫技巧"></a>关于 undefined 的奇淫技巧</h2><p>虽然 jQuery 源码中并没有这样这块部分，但是我在阅读文章时，看到这个有意思的事情。好比说下面一段代码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">(</span>undefined <span class="token operator">=</span><span class="token operator">></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'undefined:'</span><span class="token punctuation">,</span> undefined<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token string">'TEST'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>你会发现在这个 IIFE 中 <code>undefined</code> 被声明成了变量，并且值也同时被改变了，那么当你需要将某些值与你认为的 <code>undefined</code> 去比较时，结果就会令人意想不到。</p>
+<p>奇淫技巧就在此出现了，直接看实现代码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> undefined<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'undefined:'</span><span class="token punctuation">,</span> undefined<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>window<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>点到为止，我相信你看到这段代码就能理解，如何防止 <code>undefined</code> 被覆盖的问题。</p>
+<p>总结一下：</p>
+<ol>
+<li><code>window</code> 和 <code>undefined</code> 都是为了减少变量查找所经过的 scope 作用域。当 <code>window</code> 通过传递给闭包内部之后，在闭包内部使用它的时候，可以把它当成一个局部变量，显然比原先在 <code>window</code> scope 下查找的时候要快一些。</li>
+<li><code>undefined</code> 也是同样的道理，其实这个 <code>undefined</code> 并不是 JavaScript 数据类型的 <code>undefined</code>，而是一个普普通通的变量名。只是因为没给它传递值，它的值就是 <code>undefined</code> ，<code>undefined</code> 并不是 JavaScript 的保留字。</li>
+</ol>
+<h2 id="jQuery-巧妙的把-new-给藏了起来"><a href="#jQuery-巧妙的把-new-给藏了起来" class="headerlink" title="jQuery 巧妙的把 new 给藏了起来"></a>jQuery 巧妙的把 new 给藏了起来</h2><p>首先，我们来介绍下 <code>new</code> 运算符</p>
+<p>创建一个用户自定义的对象需要两步：</p>
+<ol>
+<li>通过编写函数来定义对象类型。</li>
+<li>通过 <code>new</code> 来创建对象实例。</li>
+</ol>
+<p>创建一个对象类型，需要创建一个指定其名称和属性的函数；对象的属性可以指向其他对象，看下面的例子：</p>
+<p>当代码 <code>new Foo(...)</code> 执行时，会发生以下事情：</p>
+<ol>
+<li>一个继承自 <code>Foo.prototype</code> 的新对象被创建。</li>
+<li>使用指定的参数调用构造函数 <code>Foo</code> ，并将 <code>this</code> 绑定到新创建的对象。<code>new Foo</code> 等同于 <code>new Foo()</code>，也就是没有指定参数列表，<code>Foo</code> 不带任何参数调用的情况。</li>
+<li>由构造函数返回的对象就是 <code>new</code> 表达式的结果。如果构造函数没有显式返回一个对象，则使用步骤1创建的对象。（一般情况下，构造函数不返回值，但是用户可以选择主动返回对象，来覆盖正常的对象创建步骤）</li>
+</ol>
+<p>当你每次使用 <code>$(...)</code> 或者 <code>jQuery(...)</code> 时，返回的对象就是 jQuery 的实例， jQuery 实例的特征很明显，是类数组对象结构的。</p>
+<p>但是在创建 jQuery 实例的时候，开发者却不需要使用到 <code>new</code> 操作符，这是因为 jQuery 已经帮你把这一步给省略了，确实奇淫技巧。</p>
+<p>让我们来看一下相关核心源码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core.js</span>
+<span class="token keyword">var</span>
+  <span class="token operator">...</span>
+  <span class="token comment" spellcheck="true">// Define a local copy of jQuery</span>
+  jQuery <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// The jQuery object is actually just the init constructor 'enhanced'</span>
+    <span class="token comment" spellcheck="true">// Need init if jQuery is called (just allow error to be thrown if not included)</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>init</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token operator">...</span>
+
+jQuery<span class="token punctuation">.</span>fn <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  constructor<span class="token punctuation">:</span> jQuery<span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里你会发现，在调用 jQuery 函数时，返回的就是 <code>jQuery.fn.init</code> 函数使用 <code>new</code> 操作符实例化的实例。但是这里会牵扯到一个问题。 <code>jQuery.fn.init</code> 函数的实例并不会是 jQuery 函数的实例，是时候展示奇淫技巧的代码了：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core/init.js</span>
+<span class="token keyword">var</span> rootjQuery<span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+  init <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>init <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context<span class="token punctuation">,</span> root <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token operator">...</span>
+
+    <span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">makeArray</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Give the init function the jQuery prototype for later instantiation</span>
+init<span class="token punctuation">.</span>prototype <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里你会发现， <code>jQuery.fn.init.prototype</code> 是指向 <code>jQuery.prototype</code> 的，这就是他的过人之处，这样<code>jQuery.fn.init</code> 函数的实例就是 jQuery 函数的实例。</p>
+<h2 id="jQuery-extend-和-jQuery-fn-extend"><a href="#jQuery-extend-和-jQuery-fn-extend" class="headerlink" title="jQuery.extend 和 jQuery.fn.extend"></a>jQuery.extend 和 jQuery.fn.extend</h2><p><strong>jQuery.extend()</strong> : 将两个或更多对象的内容合并到第一个对象。</p>
+<p><strong>jQuery.fn.extend()</strong> : 一个对象的内容合并到jQuery的原型，以提供新的jQuery实例方法。</p>
+<p>在源码中，这两个函数指向的是同一个函数，但是为什么功能上会有差异呢，我们直接上核心源码部分：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core.js</span>
+jQuery<span class="token punctuation">.</span>extend <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>extend <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+
+  <span class="token comment" spellcheck="true">// Extend jQuery itself if only one argument is passed</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">===</span> length <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    target <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    i<span class="token operator">--</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token operator">...</span>
+
+  <span class="token comment" spellcheck="true">// Return the modified object</span>
+  <span class="token keyword">return</span> target<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>看到 <code>target = this;</code> 这段代码，你应该能明白，执行函数时 <code>this</code> 的指向。回顾 <code>jQuery.fn = jQuery.prototype</code>，我想你应该就能明白上面2个方法的解释为何会存在差异了。</p>
+<ol>
+<li>在 <strong>jQuery.extend()</strong> 中，<code>this</code> 的指向是 jQuery 对象（或者说是 jQuery 类），所以这里扩展在 jQuery 上；</li>
+<li>在 <strong>jQuery.fn.extend()</strong> 中，<code>this</code> 的指向是 fn 对象，前面有提到 <code>jQuery.fn = jQuery.prototype</code> ，也就是这里增加的是原型方法，也就是对象方法。</li>
+</ol>
+<h2 id="jQuery-的-链式调用-和-回溯处理"><a href="#jQuery-的-链式调用-和-回溯处理" class="headerlink" title="jQuery 的 链式调用 和 回溯处理"></a>jQuery 的 链式调用 和 回溯处理</h2><p>链式调用其实很好理解，就是返回当前实例，就是 <code>return this;</code> 这么简单。</p>
+<p>回溯处理却比这个有意思了，我们直接先上源码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core.js</span>
+jQuery<span class="token punctuation">.</span>fn <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+
+  <span class="token comment" spellcheck="true">// Take an array of elements and push it onto the stack</span>
+  <span class="token comment" spellcheck="true">// (returning the new matched element set)</span>
+  pushStack<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> elems <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// Build a new jQuery matched element set</span>
+    <span class="token keyword">var</span> ret <span class="token operator">=</span> jQuery<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> elems <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Add the old object onto the stack (as a reference)</span>
+    ret<span class="token punctuation">.</span>prevObject <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Return the newly-formed element set</span>
+    <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token operator">...</span>
+
+  eq<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> i <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> len <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">,</span>
+      j <span class="token operator">=</span> <span class="token operator">+</span>i <span class="token operator">+</span> <span class="token punctuation">(</span> i <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">?</span> len <span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">pushStack</span><span class="token punctuation">(</span> j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> j <span class="token operator">&lt;</span> len <span class="token operator">?</span> <span class="token punctuation">[</span> <span class="token keyword">this</span><span class="token punctuation">[</span> j <span class="token punctuation">]</span> <span class="token punctuation">]</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  end<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>prevObject <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在 jQuery 中凡是改变 jQuery 类数组的操作，都会调用 <code>pushStack</code> 方法，而回溯处理当然也是建立在 <code>pushStack</code> 方法之上的，因为在执行 <code>pushStack</code> 方法时，有这么一行代码 <code>ret.prevObject = this;</code>，它就是实现回溯处理的根源。</p>
+<p>可以说是相当的精妙，总结下来就是：</p>
+<ul>
+<li>jQuery 链式调用：<code>return this;</code></li>
+<li>jQuery 增栈处理：<code>return this.pushStack(...);</code></li>
+<li>jQuery 回溯处理：<code>return this.prevObject;</code></li>
+</ul>
+<hr>
+<p>虽然，我把 jQuery 3.3.1 版本 初略的读完了，但是写到这里发现 jQuery 还有很多内容没有提到，我也还暂时没有很好的理解透彻，暂时先到这里，我把标题改成了《浅析jQuery（一）》，希望可以激励到我。还有就是关于剩余的部分，可以先查阅相关链接。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://api.jquery.com/" target="_blank" rel="noopener">jQuery API</a></li>
+<li><a href="https://www.jquery123.com/" target="_blank" rel="noopener">jQuery API 中文文档</a></li>
+<li><a href="https://github.com/chokcoco/jQuery-" target="_blank" rel="noopener">[chokcoco/jQuery-] jQuery- v1.10.2 源码解读</a></li>
+<li><a href="http://www.imooc.com/learn/172" target="_blank" rel="noopener">[慕课网] jQuery源码解析（架构与依赖模块）</a></li>
+<li><a href="http://www.imooc.com/learn/222" target="_blank" rel="noopener">[慕课网] jQuery源码解析（DOM与核心模块）</a></li>
+<li><a href="http://www.cnblogs.com/aaronjs/p/3279314.html" target="_blank" rel="noopener">jQuery源码分析系列 - 【艾伦】 - 博客园</a></li>
+<li><a href="https://github.com/JsAaron/jQuery" target="_blank" rel="noopener">jQuery架构设计与实现（2.1.4版本）</a></li>
+<li><a href="https://github.com/zongzi531/read-jquery" target="_blank" rel="noopener">zongzi531/read-jquery</a></li>
+</ul>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2018/09/22/%E6%B5%85%E6%9E%90jQuery%EF%BC%88%E4%B8%80%EF%BC%89/" title="浅析 jQuery （一）">https://zongzi531.com/2018/09/22/%E6%B5%85%E6%9E%90jQuery%EF%BC%88%E4%B8%80%EF%BC%89/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2018/10/09/2018-%E7%A7%8B/">
+        上一篇<br>2018 / 秋
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/09/19/%E5%8F%82%E5%8A%A0FCC%E4%B8%8A%E6%B5%B7%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%BE%A4%E7%BA%BF%E4%B8%8BMeetup/">
+        下一篇<br>参加FCC上海前端技术群线下Meetup
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?80143422"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2018/09/22/浅析jQuery（一）/';
+        this.page.identifier = '/2018/09/22/浅析jQuery（一）/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

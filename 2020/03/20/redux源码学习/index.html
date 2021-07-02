@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Redux 源码学习 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+想着对 React 生态更深入的学习，况且 React 源码内容也不多的情况，来读一下他的源码内容。目前...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?70107702">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2020/03/20/redux源码学习/pic.png')">
+                <div class="post-title">
+                    Redux 源码学习
+                    <div class="post-meta">
+                        <time datetime="2020-03-20T20:25:06.000Z" itemprop="datePublished">
+                            2020-03-20 20:25
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/React/'>React</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/React/'>React</a>, 
+                        
+                        <a href='/tags/Redux/'>Redux</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p>想着对 React 生态更深入的学习，况且 React 源码内容也不多的情况，来读一下他的源码内容。<br>目前 Redux 已经是 TypeScript 版本的源码，我正在阅读的则是 <code>4.0.4</code> 版本代码。</p>
+</blockquote>
+<p>很显然，可以看到这和 React 仓库一样，同样使用了 rollup 打包工具，也验证了 rollup 在开发库类仓库的优势，毕竟大厂都在用嘛。</p>
+<p>我们先来看到 <code>package.json</code> ：</p>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"redux"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"4.0.4"</span><span class="token punctuation">,</span>
+  <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"lib/redux.js"</span><span class="token punctuation">,</span>
+  <span class="token property">"unpkg"</span><span class="token operator">:</span> <span class="token string">"dist/redux.js"</span><span class="token punctuation">,</span>
+  <span class="token property">"module"</span><span class="token operator">:</span> <span class="token string">"es/redux.js"</span><span class="token punctuation">,</span>
+  <span class="token property">"types"</span><span class="token operator">:</span> <span class="token string">"types/index.d.ts"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我省略了大部分内容，可以看到开发团队针对不同使用场景，对外提供包对应的路径，比如使用 TypeScript 时，对应的则是 <code>types/index.d.ts</code> ，或者使用 ES6 模块化引入时则是 <code>es/redux.js</code> 。值得我们学习。</p>
+<p>接下来，我们看到源码部分，整个源码学习内容，将围绕着 <code>src</code> 进行， <code>utils</code> 下的内容即一些简单的工具， <code>types</code> 下则是一些类型的定义。</p>
+<p>示例代码中我会移除并省略掉一些逻辑代码和 TypeScript 相关的函数重载代码，以及一些我认为不那么重要的代码，即只展现我想要说明的内容。</p>
+<p>那么我们先来看到 <code>createStore</code> 函数吧。</p>
+<h2 id="createStore"><a href="#createStore" class="headerlink" title="createStore"></a>createStore</h2><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> createStore<span class="token operator">&lt;</span>
+  S<span class="token punctuation">,</span>
+  A <span class="token keyword">extends</span> <span class="token class-name">Action</span><span class="token punctuation">,</span>
+  Ext <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  StateExt <span class="token operator">=</span> never
+<span class="token operator">></span><span class="token punctuation">(</span>
+  reducer<span class="token punctuation">:</span> Reducer<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> A<span class="token operator">></span><span class="token punctuation">,</span>
+  preloadedState<span class="token operator">?</span><span class="token punctuation">:</span> PreloadedState<span class="token operator">&lt;</span>S<span class="token operator">></span> <span class="token operator">|</span> StoreEnhancer<span class="token operator">&lt;</span>Ext<span class="token punctuation">,</span> StateExt<span class="token operator">></span><span class="token punctuation">,</span>
+  enhancer<span class="token operator">?</span><span class="token punctuation">:</span> StoreEnhancer<span class="token operator">&lt;</span>Ext<span class="token punctuation">,</span> StateExt<span class="token operator">></span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> Store<span class="token operator">&lt;</span>ExtendState<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> StateExt<span class="token operator">></span><span class="token punctuation">,</span> A<span class="token punctuation">,</span> StateExt<span class="token punctuation">,</span> Ext<span class="token operator">></span> <span class="token operator">&amp;</span> Ext <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 接受的 reducer</span>
+  <span class="token keyword">let</span> currentReducer <span class="token operator">=</span> reducer
+  <span class="token comment" spellcheck="true">// 预加载 state</span>
+  <span class="token keyword">let</span> currentState <span class="token operator">=</span> preloadedState as S
+  <span class="token comment" spellcheck="true">// 订阅队列</span>
+  <span class="token keyword">let</span> currentListeners<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token comment" spellcheck="true">// 下一个订阅队列，看起来更像是订阅队列的副本，下面我会来介绍他和订阅队列的不解之谜</span>
+  <span class="token keyword">let</span> nextListeners <span class="token operator">=</span> currentListeners
+  <span class="token comment" spellcheck="true">// 检查并创建这个副本的函数</span>
+  <span class="token keyword">function</span> <span class="token function">ensureCanMutateNextListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextListeners <span class="token operator">===</span> currentListeners<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">// 拷贝到一个新的数组引用，可以理解为 [...currentListeners] 使得 nextListeners !== currentListeners</span>
+      nextListeners <span class="token operator">=</span> currentListeners<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 获得 state</span>
+  <span class="token keyword">function</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> S <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> currentState as S
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 订阅函数</span>
+  <span class="token keyword">function</span> <span class="token function">subscribe</span><span class="token punctuation">(</span>listener<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">ensureCanMutateNextListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 操作订阅队列副本，与 currentListeners 之间不受影响</span>
+    nextListeners<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>listener<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 返回取消订阅函数</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">ensureCanMutateNextListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token comment" spellcheck="true">// 同样的效果</span>
+      <span class="token keyword">const</span> index <span class="token operator">=</span> nextListeners<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>listener<span class="token punctuation">)</span>
+      nextListeners<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+      currentListeners <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 看到这里你是不是会想，创建这个副本的目的是什么？</span>
+    <span class="token comment" spellcheck="true">// 官方给到的解释：This prevents any bugs around consumers calling subscribe/unsubscribe in the middle of a dispatch.</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// dispatch 函数</span>
+  <span class="token keyword">function</span> <span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">:</span> A<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    currentState <span class="token operator">=</span> <span class="token function">currentReducer</span><span class="token punctuation">(</span>currentState<span class="token punctuation">,</span> action<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 遍历通知订阅队列，将 currentListeners 赋值为“最新”的队列</span>
+    <span class="token keyword">const</span> listeners <span class="token operator">=</span> <span class="token punctuation">(</span>currentListeners <span class="token operator">=</span> nextListeners<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> listeners<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> listener <span class="token operator">=</span> listeners<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+      <span class="token function">listener</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> action
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 替换 reducer 函数</span>
+  <span class="token keyword">function</span> replaceReducer<span class="token operator">&lt;</span>NewState<span class="token punctuation">,</span> NewActions <span class="token keyword">extends</span> <span class="token class-name">A</span><span class="token operator">></span><span class="token punctuation">(</span>
+    nextReducer<span class="token punctuation">:</span> Reducer<span class="token operator">&lt;</span>NewState<span class="token punctuation">,</span> NewActions<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> Store<span class="token operator">&lt;</span>ExtendState<span class="token operator">&lt;</span>NewState<span class="token punctuation">,</span> StateExt<span class="token operator">></span><span class="token punctuation">,</span> NewActions<span class="token punctuation">,</span> StateExt<span class="token punctuation">,</span> Ext<span class="token operator">></span> <span class="token operator">&amp;</span> Ext <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 更新 reducer</span>
+    <span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token punctuation">(</span>currentReducer as unknown<span class="token punctuation">)</span> as Reducer<span class="token operator">&lt;</span>
+      NewState<span class="token punctuation">,</span>
+      NewActions
+    <span class="token operator">></span><span class="token punctuation">)</span> <span class="token operator">=</span> nextReducer
+    <span class="token comment" spellcheck="true">// 同初始化功能一致，即生成 currentState ，下面代码中会提及</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token punctuation">:</span> ActionTypes<span class="token punctuation">.</span>REPLACE <span class="token punctuation">}</span> as A<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>store as unknown<span class="token punctuation">)</span> as Store<span class="token operator">&lt;</span>
+      ExtendState<span class="token operator">&lt;</span>NewState<span class="token punctuation">,</span> StateExt<span class="token operator">></span><span class="token punctuation">,</span>
+      NewActions<span class="token punctuation">,</span>
+      StateExt<span class="token punctuation">,</span>
+      Ext
+    <span class="token operator">></span> <span class="token operator">&amp;</span>
+      Ext
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 初始化，生成 currentState ，即调用 getState 函数返回的内容， ActionTypes.INIT 即可以理解为私有类型，不会影响到你自己写的 reducer 毕竟里面包含了随机数...</span>
+  <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token punctuation">:</span> ActionTypes<span class="token punctuation">.</span>INIT <span class="token punctuation">}</span> as A<span class="token punctuation">)</span>
+  <span class="token comment" spellcheck="true">// 暴露的 store 对象</span>
+  <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    dispatch<span class="token punctuation">:</span> dispatch as Dispatch<span class="token operator">&lt;</span>A<span class="token operator">></span><span class="token punctuation">,</span>
+    subscribe<span class="token punctuation">,</span>
+    getState<span class="token punctuation">,</span>
+    replaceReducer<span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// 观察者方法这里不做解读，可以理解为对 subscribe 的封装</span>
+    <span class="token punctuation">[</span>$$observable<span class="token punctuation">]</span><span class="token punctuation">:</span> observable
+  <span class="token punctuation">}</span> as unknown<span class="token punctuation">)</span> as Store<span class="token operator">&lt;</span>ExtendState<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> StateExt<span class="token operator">></span><span class="token punctuation">,</span> A<span class="token punctuation">,</span> StateExt<span class="token punctuation">,</span> Ext<span class="token operator">></span> <span class="token operator">&amp;</span> Ext
+  <span class="token keyword">return</span> store
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么到此，我们看到了整个 <code>createStore</code> 函数的实现过程以及返回的内容。</p>
+<p>这里我来简单的代过 <code>compose</code> 函数，也是业界的常用实现，不是很明白其功能的同学可以简单看到这段代码即可：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token punctuation">(</span>funcs as <span class="token punctuation">:</span> <span class="token keyword">Function</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token function">b</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>接下来，我们来看看 <code>combineReducers</code> 的实现，你可以把这个函数理解为对 <code>reducer</code> 的合并，当然函数名就是这个意思。</p>
+<h2 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h2><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">combineReducers</span><span class="token punctuation">(</span>reducers<span class="token punctuation">:</span> ReducersMapObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> reducerKeys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>reducers<span class="token punctuation">)</span>
+  <span class="token comment" spellcheck="true">// 用于 combination 函数中使用所需，收集的有效 reducers</span>
+  <span class="token keyword">const</span> finalReducers<span class="token punctuation">:</span> ReducersMapObject <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> reducerKeys<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> key <span class="token operator">=</span> reducerKeys<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> reducers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      finalReducers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> reducers<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// 收集的 keys</span>
+  <span class="token keyword">const</span> finalReducerKeys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>finalReducers<span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">combination</span><span class="token punctuation">(</span>
+    state<span class="token punctuation">:</span> StateFromReducersMapObject<span class="token operator">&lt;</span><span class="token keyword">typeof</span> reducers<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    action<span class="token punctuation">:</span> AnyAction
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> hasChanged <span class="token operator">=</span> <span class="token keyword">false</span>
+    <span class="token comment" spellcheck="true">// 新的 state</span>
+    <span class="token keyword">const</span> nextState<span class="token punctuation">:</span> StateFromReducersMapObject<span class="token operator">&lt;</span><span class="token keyword">typeof</span> reducers<span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// 遍历 keys</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> finalReducerKeys<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> key <span class="token operator">=</span> finalReducerKeys<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+      <span class="token keyword">const</span> reducer <span class="token operator">=</span> finalReducers<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+      <span class="token keyword">const</span> previousStateForKey <span class="token operator">=</span> state<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+      <span class="token comment" spellcheck="true">// 从遍历中更新 state</span>
+      <span class="token keyword">const</span> nextStateForKey <span class="token operator">=</span> <span class="token function">reducer</span><span class="token punctuation">(</span>previousStateForKey<span class="token punctuation">,</span> action<span class="token punctuation">)</span>
+      nextState<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> nextStateForKey
+      hasChanged <span class="token operator">=</span> hasChanged <span class="token operator">||</span> nextStateForKey <span class="token operator">!==</span> previousStateForKey
+    <span class="token punctuation">}</span>
+    hasChanged <span class="token operator">=</span>
+      hasChanged <span class="token operator">||</span> finalReducerKeys<span class="token punctuation">.</span>length <span class="token operator">!==</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">.</span>length
+    <span class="token comment" spellcheck="true">// 返回 state 或新的 state</span>
+    <span class="token keyword">return</span> hasChanged <span class="token operator">?</span> nextState <span class="token punctuation">:</span> state
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在我们看完 <code>reducer</code> 的组合工具函数后，我们来看到绑定执行上下文的语法糖函数 <code>bindActionCreators</code> 。</p>
+<h2 id="bindActionCreators"><a href="#bindActionCreators" class="headerlink" title="bindActionCreators"></a>bindActionCreators</h2><p>实现代码很少，即绑定执行上下文环境 <code>this</code> 。具体使用场景，可以看到官网 API 文档 <a href="https://redux.js.org/api/bindactioncreators#bindactioncreatorsactioncreators-dispatch" target="_blank" rel="noopener">bindActionCreators(actionCreators, dispatch)</a> ，那么直接看到源码：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> bindActionCreator<span class="token operator">&lt;</span>A <span class="token keyword">extends</span> <span class="token class-name">AnyAction</span> <span class="token operator">=</span> AnyAction<span class="token operator">></span><span class="token punctuation">(</span>
+  actionCreator<span class="token punctuation">:</span> ActionCreator<span class="token operator">&lt;</span>A<span class="token operator">></span><span class="token punctuation">,</span>
+  dispatch<span class="token punctuation">:</span> Dispatch
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">dispatch</span><span class="token punctuation">(</span>actionCreator<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">bindActionCreators</span><span class="token punctuation">(</span>
+  actionCreators<span class="token punctuation">:</span> ActionCreator<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token operator">|</span> ActionCreatorsMapObject<span class="token punctuation">,</span>
+  dispatch<span class="token punctuation">:</span> Dispatch
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> actionCreators <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">bindActionCreator</span><span class="token punctuation">(</span>actionCreators<span class="token punctuation">,</span> dispatch<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">const</span> boundActionCreators<span class="token punctuation">:</span> ActionCreatorsMapObject <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> actionCreators<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> actionCreator <span class="token operator">=</span> actionCreators<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> actionCreator <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      boundActionCreators<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">bindActionCreator</span><span class="token punctuation">(</span>actionCreator<span class="token punctuation">,</span> dispatch<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> boundActionCreators
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后，我们来看到中间件函数 <code>applyMiddleware</code> 。</p>
+<h2 id="applyMiddleware"><a href="#applyMiddleware" class="headerlink" title="applyMiddleware"></a>applyMiddleware</h2><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">applyMiddleware</span><span class="token punctuation">(</span>
+  <span class="token operator">...</span>middlewares<span class="token punctuation">:</span> Middleware<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> StoreEnhancer<span class="token operator">&lt;</span><span class="token keyword">any</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>createStore<span class="token punctuation">:</span> StoreCreator<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&lt;</span>S<span class="token punctuation">,</span> A <span class="token keyword">extends</span> <span class="token class-name">AnyAction</span><span class="token operator">></span><span class="token punctuation">(</span>
+    reducer<span class="token punctuation">:</span> Reducer<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> A<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>args<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span>
+    <span class="token keyword">let</span> dispatch<span class="token punctuation">:</span> Dispatch <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'...'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">const</span> middlewareAPI<span class="token punctuation">:</span> MiddlewareAPI <span class="token operator">=</span> <span class="token punctuation">{</span>
+      getState<span class="token punctuation">:</span> store<span class="token punctuation">.</span>getState<span class="token punctuation">,</span>
+      dispatch<span class="token punctuation">:</span> <span class="token punctuation">(</span>action<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">const</span> chain <span class="token operator">=</span> middlewares<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>middleware <span class="token operator">=</span><span class="token operator">></span> <span class="token function">middleware</span><span class="token punctuation">(</span>middlewareAPI<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">// 对 store.dispatch 进行改写，将其包装在中间件的最后一层，以实现中间件的功能</span>
+    dispatch <span class="token operator">=</span> compose<span class="token operator">&lt;</span><span class="token keyword">typeof</span> dispatch<span class="token operator">></span><span class="token punctuation">(</span><span class="token operator">...</span>chain<span class="token punctuation">)</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>dispatch<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>store<span class="token punctuation">,</span>
+      dispatch
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>OK， Redux 源码学习完了，是不是没看够，确实！</p>
+<p>这才是精妙的库设计，简洁的代码实现强大的功能，那么这次没过瘾没关系，下次我们来品一品 Redux 是如何和 React 结合在一起的吧。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2020/03/20/redux%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" title="Redux 源码学习">https://zongzi531.com/2020/03/20/redux%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2020/03/23/react-redux%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">
+        上一篇<br>React Redux 源码学习
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2020/03/01/%E7%96%AB%E6%83%85%E4%B8%AD%E7%9A%84%E4%BA%8C%E6%9C%88/">
+        下一篇<br>疫情中的二月
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?66553007"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2020/03/20/redux源码学习/';
+        this.page.identifier = '/2020/03/20/redux源码学习/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>其他 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="小哈公社
+甲骨文中国研发中心裁员已定，首批裁员补偿为N+6
+
+翰墨云烟
+你在欢度五一，我却被无限期下岗
+
+FENe...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?65772024">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item active" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item active" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        
+        <div class="post-item-wrapper post-item-wrapper-no-hover">
+            <div class="post-item post-item-no-gaps">
+                <div class="post-item-info-wrapper">
+                    <div class="post-item-title  post-item-title-small">
+                        <a href="/commuting/">通勤那点事</a> / 其他
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+
+        <div class="post">
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h3 id="小哈公社"><a href="#小哈公社" class="headerlink" title="小哈公社"></a>小哈公社</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/JQf3naf_e-8XVYcx1RQsfw" target="_blank" rel="noopener">甲骨文中国研发中心裁员已定，首批裁员补偿为N+6</a></li>
+</ul>
+<h3 id="翰墨云烟"><a href="#翰墨云烟" class="headerlink" title="翰墨云烟"></a>翰墨云烟</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/p514jaJ3ZzvERLTXF2EFyA" target="_blank" rel="noopener">你在欢度五一，我却被无限期下岗</a></li>
+</ul>
+<h3 id="FENews"><a href="#FENews" class="headerlink" title="FENews"></a>FENews</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/OzfhR5N7IQlmrDI-2LUcJQ" target="_blank" rel="noopener">「译」Orinoco: V8的垃圾回收器</a></li>
+<li><a href="https://mp.weixin.qq.com/s/qjTlvyZhY_6qjvEMbD5NJw" target="_blank" rel="noopener">React 新特性：调度系统</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-jkmCrNe35qD5vUizuv16g" target="_blank" rel="noopener">JavaScript 的工作原理：Shadow DOM 的内部结构以及如何构建可封装的组件</a></li>
+<li><a href="https://mp.weixin.qq.com/s/QtZ0E94Wv0vxLUPP3us-Vg" target="_blank" rel="noopener">TypeScript 2.9+ 的几个知识点</a></li>
+<li><a href="https://mp.weixin.qq.com/s/PoTNtTsiRmes0J666BWasQ" target="_blank" rel="noopener">JavaScript 的工作原理：在 CSS 和 JS 动画的引擎下如何优化他们的表现</a></li>
+</ul>
+<h3 id="知乎"><a href="#知乎" class="headerlink" title="知乎"></a>知乎</h3><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/47684983" target="_blank" rel="noopener">React v16.7 “Hooks” - What to Expect</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/50781272" target="_blank" rel="noopener">今天在VueConf杭州上的闪电分享</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/51017778" target="_blank" rel="noopener">Deno (Ryan Dahl 2018年11月台北JSDC演讲PPT翻译版)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/54182787" target="_blank" rel="noopener">TypeScript Type-Level Programming</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/37098539" target="_blank" rel="noopener">为 Luy 实现 React Fiber 架构</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/65409226" target="_blank" rel="noopener">What’s New in JavaScript</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/34520943" target="_blank" rel="noopener">如何开发一个可爱的CLI（一）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/35013393" target="_blank" rel="noopener">如何开发一个可爱的CLI（二）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/112223727" target="_blank" rel="noopener">网页上用 Rust 渲染十万个待办事项有多快？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/343552059" target="_blank" rel="noopener">2020 前端技术发展回顾</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/370499228" target="_blank" rel="noopener">建立元数据驱动的前端架构</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/155668322" target="_blank" rel="noopener">日本人为你讲解“ちゃんと”“きちんと”“しっかり”的区别</a></li>
+</ul>
+<h3 id="清醒贪心记"><a href="#清醒贪心记" class="headerlink" title="清醒贪心记"></a>清醒贪心记</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/bIMdOVsT-fMIYcWoeZyLWA" target="_blank" rel="noopener">我被问过最多的问题，“如何找到终生热爱的事业”？</a></li>
+</ul>
+<h3 id="前端桃园"><a href="#前端桃园" class="headerlink" title="前端桃园"></a>前端桃园</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/O1n7_t4izdmpvn2mFrB-kg" target="_blank" rel="noopener">每个前端工程师都应该了解的图片知识(长文建议收藏)</a></li>
+<li><a href="https://mp.weixin.qq.com/s/_jAW4Z3VR-uW0AEnjHgAEw" target="_blank" rel="noopener">详解 React 16 的 Diff 策略</a></li>
+<li><a href="https://mp.weixin.qq.com/s/dONYc-Y96baiXBXpwh1w3A" target="_blank" rel="noopener">Deep In React之浅谈 React Fiber 架构(一)</a></li>
+<li><a href="https://mp.weixin.qq.com/s/XR3-3MNCYY2pg6yVwVQohQ" target="_blank" rel="noopener">别再说虚拟 DOM 快了，要被打脸的</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cz5DBpqFiadL4IQofiWY3A" target="_blank" rel="noopener">深入理解虚拟 DOM，它真的不快</a></li>
+<li><a href="https://mp.weixin.qq.com/s/4RXN6DSzULH-tEIFUZXp4Q" target="_blank" rel="noopener">为什么现在面试总是面试造火箭？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/WwKwX6HzT5HHxsGyx1YM1Q" target="_blank" rel="noopener">浅谈React性能优化的方向</a></li>
+<li><a href="https://mp.weixin.qq.com/s/NM8Izjly4GcpYGzNQQXeTA" target="_blank" rel="noopener">深入理解Node.js 进程与线程(8000长文彻底搞懂)</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Xz-epni42TCjkuw-6vzWRw" target="_blank" rel="noopener">来来来，尝试一下 React 18 ！</a></li>
+<li><a href="https://mp.weixin.qq.com/s/UPhZwjaHHwrVHMYfxajq7A" target="_blank" rel="noopener">Esbuild 为什么那么快</a></li>
+</ul>
+<h3 id="也许在扯淡"><a href="#也许在扯淡" class="headerlink" title="也许在扯淡"></a>也许在扯淡</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/txrQT-fmrWdRNpJ8zEEFMw" target="_blank" rel="noopener">一些图片相关的知识</a></li>
+</ul>
+<h3 id="玩转VS-Code"><a href="#玩转VS-Code" class="headerlink" title="玩转VS Code"></a>玩转VS Code</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/Lo3Oq5fBtHv15RIkGhr3Yw" target="_blank" rel="noopener">Web Template Studio 发布！在 VS Code 中轻松创建 Web 应用</a></li>
+</ul>
+<h3 id="code秘密花园"><a href="#code秘密花园" class="headerlink" title="code秘密花园"></a>code秘密花园</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/kHLSb6GW9X7OqRA5gOmAGQ" target="_blank" rel="noopener">探秘 flex 上下文中神奇的自动 margin</a></li>
+<li><a href="https://mp.weixin.qq.com/s/8-243xANopfa7-2wnQITcw" target="_blank" rel="noopener">新的跨域策略：使用COOP、COEP为浏览器创建更安全的环境</a></li>
+<li><a href="https://mp.weixin.qq.com/s/6fDoKE2bayKXvI5re-gfOg" target="_blank" rel="noopener">Chrome 83 发布，支持直接读写本地文件！新的跨域策略!</a></li>
+<li><a href="https://mp.weixin.qq.com/s/RxnXBNV5AK9TdkdmenYXiw" target="_blank" rel="noopener">聊一下 Chrome 新增的可信类型（Trusted types）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/sXxTGG28fSDoZDWKdIrPAQ" target="_blank" rel="noopener">2020 全球 JavaScript 现状调查报告</a></li>
+</ul>
+<h3 id="前端发动机"><a href="#前端发动机" class="headerlink" title="前端发动机"></a>前端发动机</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/VrBT-Fob15nNtGe_grqMhw" target="_blank" rel="noopener">从头到脚撸一个多人视频聊天 — WebRTC 实战（一）</a></li>
+</ul>
+<h3 id="语雀"><a href="#语雀" class="headerlink" title="语雀"></a>语雀</h3><ul>
+<li><a href="https://www.yuque.com/w3ctech/front-end-performance-checklist-2019" target="_blank" rel="noopener">前端性能优化の备忘录 2019 版</a></li>
+<li><a href="https://www.yuque.com/itchina110/goodfe/nzdclr" target="_blank" rel="noopener">1个div，CSS也可以实现酷炫效果</a></li>
+<li><a href="https://www.yuque.com/robinson/css-trip" target="_blank" rel="noopener">CSS-trip</a></li>
+<li><a href="https://www.yuque.com/itchina110/goodfe/xga7rc" target="_blank" rel="noopener">《精通CSS》第3版，抢先看！</a></li>
+<li><a href="https://www.yuque.com/itchina110/goodfe/xczbgl" target="_blank" rel="noopener">Facebook 对前端工程师的要求是啥？一起来看看</a></li>
+<li><a href="https://www.yuque.com/ysfe/ykx/fedhb" target="_blank" rel="noopener">前端开发者手册2019</a></li>
+<li><a href="https://www.yuque.com/iscott/uuzxk4/avsr1r" target="_blank" rel="noopener">杭州 P7+/P8 前端可去公司排名</a></li>
+<li><a href="https://www.yuque.com/zaotalk/nt" target="_blank" rel="noopener">早早聊带你逛大会</a></li>
+</ul>
+<h3 id="前端圈"><a href="#前端圈" class="headerlink" title="前端圈"></a>前端圈</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/aDxnkFdA0JxAqoPptn67YQ" target="_blank" rel="noopener">JavaScript性能开销之2019</a></li>
+</ul>
+<h3 id="高级前端进阶"><a href="#高级前端进阶" class="headerlink" title="高级前端进阶"></a>高级前端进阶</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/IDh1JK7F6gFoF7kUD9PjqA" target="_blank" rel="noopener">【进阶 6-7 期】浅出篇 | 7 个角度吃透 Lodash 防抖节流原理</a></li>
+<li><a href="https://mp.weixin.qq.com/s/_qp4JDDwWwliEBr1IXKd8g" target="_blank" rel="noopener">点满 webpack 技能点，让你的打包速度提效 90%</a></li>
+<li><a href="https://mp.weixin.qq.com/s/SG9ZYIivbpbXOOTlal9Akw" target="_blank" rel="noopener">Vue + Koa从零打造一个H5页面可视化编辑器——Quark-h5</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xt5iFGfz_54Z4txMDserdA" target="_blank" rel="noopener">一篇文章上手Vue3中新增的API</a></li>
+</ul>
+<h3 id="前端技术优选"><a href="#前端技术优选" class="headerlink" title="前端技术优选"></a>前端技术优选</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/LCNEDfv_yfuE2wBMlxaOCw" target="_blank" rel="noopener">「2019 JSConf.Asia - 尤雨溪」在框架设计中寻求平衡</a></li>
+<li><a href="https://mp.weixin.qq.com/s/xtyus5XiWNtGWp5YU2CNpQ" target="_blank" rel="noopener">2020 年你必须知道的 React 库</a></li>
+</ul>
+<h3 id="架构师之巅"><a href="#架构师之巅" class="headerlink" title="架构师之巅"></a>架构师之巅</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/8WeSDfa7z48VBV_hLqdsOA" target="_blank" rel="noopener">理解HTTP幂等性</a></li>
+</ul>
+<h3 id="极客时间-winter-重学前端"><a href="#极客时间-winter-重学前端" class="headerlink" title="极客时间 - winter 重学前端"></a>极客时间 - winter 重学前端</h3><ul>
+<li><a href="https://time.geekbang.org/column/article/928bfa855fe6c1d7a2757266487c31ed/share" target="_blank" rel="noopener">开篇词 | 从今天起，重新理解前端</a></li>
+<li><a href="https://time.geekbang.org/column/article/4b26a85a2f794cf96fed02f626c8499a/share" target="_blank" rel="noopener">明确你的前端学习路线与方法</a></li>
+<li><a href="https://time.geekbang.org/column/article/99a3d778d39c433c680573499b2dfd63/share" target="_blank" rel="noopener">列一份前端知识架构图</a></li>
+<li><a href="https://time.geekbang.org/column/article/d013941493bf16885952b9df04c88dec/share" target="_blank" rel="noopener">JavaScript类型：关于类型，有哪些你不知道的细节？</a></li>
+<li><a href="https://time.geekbang.org/column/article/40f1d6b749edb13aa1fed6e0c85b87df/share" target="_blank" rel="noopener">JavaScript对象：面向对象还是基于对象？</a></li>
+<li><a href="https://time.geekbang.org/column/article/87f0f2c6e24d981b55c084b3b83f329e/share" target="_blank" rel="noopener">JavaScript对象：我们真的需要模拟类吗？</a></li>
+<li><a href="https://time.geekbang.org/column/article/36de82cb8fd5a1e2c3c0cdde552165e5/share" target="_blank" rel="noopener">JavaScript对象：你知道全部的对象分类吗？</a></li>
+<li><a href="https://time.geekbang.org/column/article/93d860d19e781d65507e0975c46eb5ba/share" target="_blank" rel="noopener">JavaScript执行（一）：Promise里的代码为什么比setTimeout先执行？</a></li>
+<li><a href="https://time.geekbang.org/column/article/cfdbd93ec0ac3d7ba002c3d6a6e9202b/share" target="_blank" rel="noopener">JavaScript执行（二）：闭包和执行上下文到底是怎么回事？</a></li>
+<li><a href="https://time.geekbang.org/column/article/5343ebc510efd3f039ca1ef870746617/share" target="_blank" rel="noopener">JavaScript执行（三）：你知道现在有多少种函数吗？</a></li>
+<li><a href="https://time.geekbang.org/column/article/41c321ddf0affea71781bdc58fef01e3/share" target="_blank" rel="noopener">JavaScript执行（四）：try里面放return，finally还会执行吗？</a></li>
+</ul>
+<h3 id="张鑫旭-鑫空间-鑫生活"><a href="#张鑫旭-鑫空间-鑫生活" class="headerlink" title="张鑫旭-鑫空间-鑫生活"></a>张鑫旭-鑫空间-鑫生活</h3><ul>
+<li><a href="https://www.zhangxinxu.com/wordpress/2014/10/currentcolor-css3-powerful-css-keyword/" target="_blank" rel="noopener">currentColor-CSS3超高校级好用CSS变量</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/" target="_blank" rel="noopener">CSS深入理解vertical-align和line-height的基友关系</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2015/06/about-letter-x-of-css/" target="_blank" rel="noopener">字母’x’在CSS世界中的角色和故事</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2011/03/displayinline-blocktext-alignjustify%e4%b8%8b%e5%88%97%e8%a1%a8%e7%9a%84%e4%b8%a4%e7%ab%af%e5%af%b9%e9%bd%90%e5%b8%83%e5%b1%80/" target="_blank" rel="noopener">display:inline-block/text-align:justify下列表的两端对齐布局</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2010/01/css-float%e6%b5%ae%e5%8a%a8%e7%9a%84%e6%b7%b1%e5%85%a5%e7%a0%94%e7%a9%b6%e3%80%81%e8%af%a6%e8%a7%a3%e5%8f%8a%e6%8b%93%e5%b1%95%e4%b8%80/" target="_blank" rel="noopener">CSS float浮动的深入研究、详解及拓展(一)</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2010/11/%e6%8b%9c%e6%8b%9c%e4%ba%86%e6%b5%ae%e5%8a%a8%e5%b8%83%e5%b1%80-%e5%9f%ba%e4%ba%8edisplayinline-block%e7%9a%84%e5%88%97%e8%a1%a8%e5%b8%83%e5%b1%80/" target="_blank" rel="noopener">拜拜了,浮动布局-基于display:inline-block的列表布局</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2009/11/css%e8%a1%8c%e9%ab%98line-height%e7%9a%84%e4%b8%80%e4%ba%9b%e6%b7%b1%e5%85%a5%e7%90%86%e8%a7%a3%e5%8f%8a%e5%ba%94%e7%94%a8/" target="_blank" rel="noopener">css行高line-height的一些深入理解及应用</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2010/01/css-float%e6%b5%ae%e5%8a%a8%e7%9a%84%e6%b7%b1%e5%85%a5%e7%a0%94%e7%a9%b6%e3%80%81%e8%af%a6%e8%a7%a3%e5%8f%8a%e6%8b%93%e5%b1%95%e4%ba%8c/" target="_blank" rel="noopener">CSS float浮动的深入研究、详解及拓展(二)</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2010/08/%e7%bd%91%e9%a1%b5%e5%88%b6%e4%bd%9c%e8%be%85%e5%8a%a9%e5%b7%a5%e5%85%b7-jquery%e6%a0%87%e5%b0%ba%e5%8f%82%e8%80%83%e7%ba%bf%e6%8f%92%e4%bb%b6/" target="_blank" rel="noopener">网页制作辅助工具-jQuery标尺参考线插件</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2009/08/%e5%a4%a7%e5%b0%8f%e4%b8%8d%e5%9b%ba%e5%ae%9a%e7%9a%84%e5%9b%be%e7%89%87%e3%80%81%e5%a4%9a%e8%a1%8c%e6%96%87%e5%ad%97%e7%9a%84%e6%b0%b4%e5%b9%b3%e5%9e%82%e7%9b%b4%e5%b1%85%e4%b8%ad/" target="_blank" rel="noopener">大小不固定的图片、多行文字的水平垂直居中</a></li>
+</ul>
+<h3 id="Node全栈"><a href="#Node全栈" class="headerlink" title="Node全栈"></a>Node全栈</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/-CLEXb_-xkm43dqKSJbFCQ" target="_blank" rel="noopener">前端工程师的技术进阶点在哪里?</a></li>
+</ul>
+<h3 id="topgeek"><a href="#topgeek" class="headerlink" title="topgeek"></a>topgeek</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/zWPjfHiYxx0HH9lE99Yijw" target="_blank" rel="noopener">一个程序员的成长之路 - 剖析别人，总结自己</a></li>
+</ul>
+<h3 id="UC国际技术"><a href="#UC国际技术" class="headerlink" title="UC国际技术"></a>UC国际技术</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/k-icCIEOHkGmV-cBJ0HUGQ" target="_blank" rel="noopener">React 官方发布性能分析插件Profiler</a></li>
+<li><a href="https://mp.weixin.qq.com/s/e-IC588SZPJK2QRBm3KuHA" target="_blank" rel="noopener">2019年前端面试都聊啥？一起来看看</a></li>
+<li><a href="https://mp.weixin.qq.com/s/52n5RB0Kf5wSKuNPs_LYZQ" target="_blank" rel="noopener">一文让你轻松掌握 HTTPS</a></li>
+</ul>
+<h3 id="简书"><a href="#简书" class="headerlink" title="简书"></a>简书</h3><ul>
+<li><a href="https://www.jianshu.com/p/e24d676060c1" target="_blank" rel="noopener">前端工程师学习Nginx入门篇</a></li>
+<li><a href="https://www.jianshu.com/p/81ef7e7094e8" target="_blank" rel="noopener">圣杯布局和双飞翼布局的理解与思考</a></li>
+</ul>
+<h3 id="gitbooks"><a href="#gitbooks" class="headerlink" title="gitbooks"></a>gitbooks</h3><ul>
+<li><a href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/" target="_blank" rel="noopener">JS 函数式编程指南</a></li>
+</ul>
+<h3 id="justjavac"><a href="#justjavac" class="headerlink" title="justjavac"></a>justjavac</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/IaOWxG0XLvn2znvvP1dmwA" target="_blank" rel="noopener">月下载量千万的 npm 包被黑客篡改，Vue 开发者可能正在遭受攻击</a></li>
+</ul>
+<h3 id="彬彬有理"><a href="#彬彬有理" class="headerlink" title="彬彬有理"></a>彬彬有理</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/MTqOQ5kBYdAV-k1xJ4AS6Q" target="_blank" rel="noopener">和三观一致的人谈恋爱，真的很可爱</a></li>
+</ul>
+<h3 id="OhBoyDaily"><a href="#OhBoyDaily" class="headerlink" title="OhBoyDaily"></a>OhBoyDaily</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/VE7FxgQtD8AwXe_BmeH1yg" target="_blank" rel="noopener">请珍惜那个对你好的天蝎座</a></li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a><em>其他</em></h3><ul>
+<li><a href="http://liyu1981.github.io/what-is-CRDT/" target="_blank" rel="noopener">谈谈CRDT</a></li>
+<li><a href="https://overreacted.io/zh-hans/things-i-dont-know-as-of-2018/" target="_blank" rel="noopener">聊聊 2018 年我所不了解的技术</a></li>
+</ul>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><ul>
+<li><a href="https://github.com/vuejs/vue-cli/issues/1363" target="_blank" rel="noopener">How to enable Istanbul code coverage for the mocha plugin? #1363</a></li>
+</ul>
+<h3 id="GoPro"><a href="#GoPro" class="headerlink" title="GoPro"></a>GoPro</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/rqEUwBswabZZoY_8jMKVdA" target="_blank" rel="noopener">来自 GoPro 资深创意总监的史上最详细 HERO7 教学 &lt;上&gt;</a></li>
+<li><a href="https://mp.weixin.qq.com/s/alCtqqccjyuqhBmi2N1lZA" target="_blank" rel="noopener">用 GoPro 拍摄星轨，就是这么简单</a></li>
+</ul>
+<h3 id="前端大全"><a href="#前端大全" class="headerlink" title="前端大全"></a>前端大全</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/2VKN51Xn2B5byfCp67Wsvw" target="_blank" rel="noopener">React Router v5发布，更好地支持React 16</a></li>
+<li><a href="https://mp.weixin.qq.com/s/7di8WG9xSc_TAh1zbls4zQ" target="_blank" rel="noopener">GraphQL-前端开发的利剑与桥梁</a></li>
+</ul>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/l8qGkZt5oUwdxKbbd6GoCA" target="_blank" rel="noopener">【译】ES10功能完全指南</a></li>
+</ul>
+<h3 id="掘金"><a href="#掘金" class="headerlink" title="掘金"></a>掘金</h3><ul>
+<li><a href="https://juejin.im/post/5c74d4b9e51d4512c37ea03b" target="_blank" rel="noopener">我在淘宝做前端的这三年 — 第一年</a></li>
+<li><a href="https://juejin.im/post/5df1e312f265da33d039d06d" target="_blank" rel="noopener">面试完50个人后我写下这篇总结</a></li>
+<li><a href="https://juejin.im/post/5e200ee86fb9a02fdd38986d" target="_blank" rel="noopener">从零实现一套属于自己的UI框架-发布到npm</a></li>
+<li><a href="https://juejin.im/post/5bb6c5195188255c9e02e6f3" target="_blank" rel="noopener">[译] 什么是模块化 CSS？</a></li>
+<li><a href="https://juejin.cn/post/6968647527239254029" target="_blank" rel="noopener">百度：如何从流程上设计可持续维护的组件</a></li>
+</ul>
+<h3 id="InfoQ"><a href="#InfoQ" class="headerlink" title="InfoQ"></a>InfoQ</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/lf55_ujbhOx4i3PrdCwihg" target="_blank" rel="noopener">2019年大前端技术趋势深度解读</a></li>
+</ul>
+<h3 id="图灵教育"><a href="#图灵教育" class="headerlink" title="图灵教育"></a>图灵教育</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/MNl1omFUg4-Dm0_LQVNt6w" target="_blank" rel="noopener">CSS捡屎记</a></li>
+</ul>
+<h3 id="有赞"><a href="#有赞" class="headerlink" title="有赞"></a>有赞</h3><ul>
+<li><a href="https://tech.youzan.com/react-fiber/" target="_blank" rel="noopener">浅谈React 16中的Fiber机制</a></li>
+<li><a href="https://mp.weixin.qq.com/s/dyYCdLRk74W8TjHMMZmHaA" target="_blank" rel="noopener">头发一掉一大把！用它洗一洗，秃到头顶的发际线慢慢回来了！</a></li>
+</ul>
+<h3 id="美团技术团队"><a href="#美团技术团队" class="headerlink" title="美团技术团队"></a>美团技术团队</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/j_8_kSQ4BrYR-UzIEIEIbw" target="_blank" rel="noopener">美团开源Logan Web：前端日志在Web端的实现</a></li>
+</ul>
+<h3 id="邵逸夫医院"><a href="#邵逸夫医院" class="headerlink" title="邵逸夫医院"></a>邵逸夫医院</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/2xCq_iQlQJt4Vl_KFh2PBg" target="_blank" rel="noopener">癌细胞的自述：世界那么大，想出去看看</a></li>
+</ul>
+<h3 id="杭州现代外语专修学校"><a href="#杭州现代外语专修学校" class="headerlink" title="杭州现代外语专修学校"></a>杭州现代外语专修学校</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/siraK-FLGnvlXHAnXu4KJw" target="_blank" rel="noopener">行かなければならない理由——ジブリ美術館見学感想（初上班作文）</a></li>
+</ul>
+<h3 id="九十年代的码农"><a href="#九十年代的码农" class="headerlink" title="九十年代的码农"></a>九十年代的码农</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/HFb9MohJWp4fZnxYiS1emw" target="_blank" rel="noopener">理解 ECMAScript 规范（一）</a></li>
+</ul>
+<h3 id="LeicaCamera徕卡相机"><a href="#LeicaCamera徕卡相机" class="headerlink" title="LeicaCamera徕卡相机"></a>LeicaCamera徕卡相机</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/Jlud_KLu2tKmDLmLxKDGRQ" target="_blank" rel="noopener">实用构图技巧：最简单也最困难！</a></li>
+</ul>
+<h3 id="程序员成长指北"><a href="#程序员成长指北" class="headerlink" title="程序员成长指北"></a>程序员成长指北</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/y_gPdEZ0lRdquxqRd_7kPQ" target="_blank" rel="noopener">基于 Vue 技术栈的微前端方案实践</a></li>
+<li><a href="https://mp.weixin.qq.com/s/z1FxacYYtTch1AofBcOfOg" target="_blank" rel="noopener">插件式可扩展架构设计心得(干货)</a></li>
+</ul>
+<h3 id="人民网"><a href="#人民网" class="headerlink" title="人民网"></a>人民网</h3><ul>
+<li><a href="http://politics.people.com.cn/n1/2020/0313/c1001-31631336.html" target="_blank" rel="noopener">2019年美国侵犯人权报告</a></li>
+</ul>
+<h3 id="SegmentFault"><a href="#SegmentFault" class="headerlink" title="SegmentFault"></a>SegmentFault</h3><ul>
+<li><a href="https://segmentfault.com/a/1190000015597029" target="_blank" rel="noopener">不要再问我跨域的问题了</a></li>
+<li><a href="https://mp.weixin.qq.com/s/4N1887jlKuzTg8-081QrPw" target="_blank" rel="noopener">浅探 Web Worker 与 JavaScript 沙箱</a></li>
+<li><a href="https://segmentfault.com/a/1190000016126079" target="_blank" rel="noopener">30 分钟理解 CORB 是什么</a></li>
+</ul>
+<h3 id="哔哩哔哩"><a href="#哔哩哔哩" class="headerlink" title="哔哩哔哩"></a>哔哩哔哩</h3><ul>
+<li><a href="https://www.bilibili.com/video/av21376839?p=1" target="_blank" rel="noopener">【计算机科学速成课】[40集全/精校] - Crash Course Computer Science</a></li>
+</ul>
+<h3 id="歪码行空"><a href="#歪码行空" class="headerlink" title="歪码行空"></a>歪码行空</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/B76OGbU44fqjRLQfl9ec6g" target="_blank" rel="noopener">CSS实现背景图片右侧定位的5种小技巧</a></li>
+<li><a href="https://mp.weixin.qq.com/s/8dA1H-GOM9bDFkI0zRCckA" target="_blank" rel="noopener">讲讲 js 的内存泄漏、如何监控和分析</a></li>
+</ul>
+<h3 id="前端劝退师"><a href="#前端劝退师" class="headerlink" title="前端劝退师"></a>前端劝退师</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/MQues_aqTBeQ_6g8uVT9Tw" target="_blank" rel="noopener">抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…</a></li>
+</ul>
+<h3 id="网页设计精选"><a href="#网页设计精选" class="headerlink" title="网页设计精选"></a>网页设计精选</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/DYdob8KQUbd6GcyREsJGzg" target="_blank" rel="noopener">初学者如何快速上手数据可视化设计</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Zwlzv-xmSt7Z-U-9HkF_2A" target="_blank" rel="noopener">以Ant Design为例来说说B端设计的基本套路</a></li>
+<li><a href="https://mp.weixin.qq.com/s/On0oE3VLq2B4CWZNAbzRAQ" target="_blank" rel="noopener">数据可视化大屏案例分析</a></li>
+</ul>
+<h3 id="Alibaba-F2E"><a href="#Alibaba-F2E" class="headerlink" title="Alibaba F2E"></a>Alibaba F2E</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/Y94UZ_AOK3HoVh9GJPYEjw" target="_blank" rel="noopener"><strong>前端之未来</strong></a></li>
+<li><a href="https://mp.weixin.qq.com/s/YzbAPM0dxQTmkiEtrjhPNw" target="_blank" rel="noopener">前端智能化 2020 年中总结和反思</a></li>
+<li><a href="https://mp.weixin.qq.com/s/UjBPDJabLnVn-Zeozf5U4w" target="_blank" rel="noopener">ECMAScript 双月报告：TC39 11月会议提案进度汇总</a></li>
+<li><a href="https://mp.weixin.qq.com/s/m5kBSTYg95qHHOaZn1NV0g" target="_blank" rel="noopener">前端响应式编程与实时计算：从 RxJS 到 Flink</a></li>
+<li><a href="https://mp.weixin.qq.com/s/9lL2ytPUPzVtfj0lIEIxFg" target="_blank" rel="noopener">CodeReview 下一代：基于 KAITIAN 的纯前端 CR IDE</a></li>
+<li><a href="https://mp.weixin.qq.com/s/9fv4719rsxwrr5oimoUnZg" target="_blank" rel="noopener">逻辑编排在优酷可视化搭建中的实践 - 逻辑与Runtime</a></li>
+<li><a href="https://mp.weixin.qq.com/s/zP1K-K4FjeS5gaILFk2ySg" target="_blank" rel="noopener">狼叔：聊聊 Node.js</a></li>
+<li><a href="https://mp.weixin.qq.com/s/aRGiDMAqWMiCWqy0s5be7A" target="_blank" rel="noopener">盒马跨端设计系统 ReX Design For OS</a></li>
+<li><a href="https://mp.weixin.qq.com/s/B2gfoxnPo0P0dY1DaIjehQ" target="_blank" rel="noopener">玉伯：开源有带给我什么</a></li>
+</ul>
+<h3 id="个推技术学院"><a href="#个推技术学院" class="headerlink" title="个推技术学院"></a>个推技术学院</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/uT4_NVEdTw6o9XddJDUwJA" target="_blank" rel="noopener">个推图可视化应用实践</a></li>
+<li><a href="https://mp.weixin.qq.com/s/fRwiKhAyNU-DM7ZChiAVxA" target="_blank" rel="noopener">又炫又酷又炸的数据可视化前端开发揭秘（上篇）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/RGx12nqgGKPdKR2Wg5MTGw" target="_blank" rel="noopener">又炫又酷又炸的数据可视化前端开发揭秘（下篇）</a></li>
+<li><a href="https://mp.weixin.qq.com/s/cQHJf8Ru4PuvkoaiNgoqLQ" target="_blank" rel="noopener">数据可视化：浅谈热力图如何在前端实现</a></li>
+<li><a href="https://mp.weixin.qq.com/s/y2AK6HkKjXwQt57c1UI2lA" target="_blank" rel="noopener">数据可视化之下发图实践</a></li>
+</ul>
+<h3 id="全栈修仙之路"><a href="#全栈修仙之路" class="headerlink" title="全栈修仙之路"></a>全栈修仙之路</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/VsuPz2DC0DjtEzWqC0tJXA" target="_blank" rel="noopener">Deno bytes 模块全解析</a></li>
+</ul>
+<h3 id="前端宇宙"><a href="#前端宇宙" class="headerlink" title="前端宇宙"></a>前端宇宙</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/DJrUZz5ifJZW2ouaL5OqrA" target="_blank" rel="noopener">尤大 4 天前发在 GitHub 上的 vue-lit 是啥？</a></li>
+</ul>
+<h3 id="印记中文"><a href="#印记中文" class="headerlink" title="印记中文"></a>印记中文</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/sh7rcv6hdhYfWr1bv_ssbg" target="_blank" rel="noopener">阔别两年，webpack 5 正式发布了！</a></li>
+<li><a href="https://mp.weixin.qq.com/s/ku1BCxQ1lVv1-9XJy56TsA" target="_blank" rel="noopener">React v17.0 正式发布！</a></li>
+<li><a href="https://mp.weixin.qq.com/s/Rayq5J3Z156r4EO2Q1uEew" target="_blank" rel="noopener">关于 JavaScript Object.keys() 排序问题的探索</a></li>
+</ul>
+<h3 id="凹凸实验室"><a href="#凹凸实验室" class="headerlink" title="凹凸实验室"></a>凹凸实验室</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/sC0IP4hw08SdPL-3o9zgsw" target="_blank" rel="noopener">node.js 沙盒逃逸分析</a></li>
+</ul>
+<h3 id="N闹W"><a href="#N闹W" class="headerlink" title="N闹W"></a>N闹W</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/s3wKetfPlUUlStOB8LdSzA" target="_blank" rel="noopener">重机宿舍拆迁前，我们做了回马冬梅</a></li>
+</ul>
+<h3 id="中改1978"><a href="#中改1978" class="headerlink" title="中改1978"></a>中改1978</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/NPn5zhY_mgsbGZ_JBYEUFw" target="_blank" rel="noopener">突发！四部门约谈马云，不可言说太细</a></li>
+</ul>
+<h3 id="AlibabaDesign"><a href="#AlibabaDesign" class="headerlink" title="AlibabaDesign"></a>AlibabaDesign</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/cYGZfQn-pIzDTqoELVdpjw" target="_blank" rel="noopener">B-Design： 呼吸视觉</a></li>
+<li><a href="https://mp.weixin.qq.com/s/UDNeOcp--7-n66-rKj2dwg" target="_blank" rel="noopener">体验设计度量，看这一篇就够了（上篇）</a></li>
+</ul>
+<h3 id="雷神众测"><a href="#雷神众测" class="headerlink" title="雷神众测"></a>雷神众测</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/0YDXUbJuKue01H9w35xf-A" target="_blank" rel="noopener">一种针对Webpack等前端打包工具构建的网站的自动化测试思路（附开源项目）</a></li>
+</ul>
+<h3 id="安全内参"><a href="#安全内参" class="headerlink" title="安全内参"></a>安全内参</h3><ul>
+<li><a href="https://www.secrss.com/articles/26811" target="_blank" rel="noopener">物联网安全体系研究</a></li>
+</ul>
+<h3 id="jQuery之家"><a href="#jQuery之家" class="headerlink" title="jQuery之家"></a>jQuery之家</h3><ul>
+<li><a href="http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201506182064.html" target="_blank" rel="noopener">SVG基础 | SVG Viewport、View Box和preserveAspectRatio</a></li>
+</ul>
+<h3 id="360技术"><a href="#360技术" class="headerlink" title="360技术"></a>360技术</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/wQ3eoY6qUwukhB5UZ8BDRg" target="_blank" rel="noopener">浅谈linux IO</a></li>
+</ul>
+<h3 id="劳动者的法"><a href="#劳动者的法" class="headerlink" title="劳动者的法"></a>劳动者的法</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/wKR26uFnJfc5czOHktPYJA" target="_blank" rel="noopener">被离职，你该做些什么保护自己？</a></li>
+</ul>
+<h3 id="于航-曜彤-Jason-Yu"><a href="#于航-曜彤-Jason-Yu" class="headerlink" title="于航 (曜彤 / Jason Yu)"></a>于航 (曜彤 / Jason Yu)</h3><ul>
+<li><a href="https://yhspy.com/2021/02/10/2020-%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93%EF%BC%88Jason-Yu%EF%BC%89/" target="_blank" rel="noopener">2020 年度总结（Jason Yu）</a></li>
+</ul>
+<h3 id="余博伦"><a href="#余博伦" class="headerlink" title="余博伦"></a>余博伦</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/crTKRz48oAtMYNV_rwx_9A" target="_blank" rel="noopener">天长地久有时尽 牛市是否无绝期</a></li>
+</ul>
+<h3 id="互联网产品设计"><a href="#互联网产品设计" class="headerlink" title="互联网产品设计"></a>互联网产品设计</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/C8NsK3FG9mcnE53DpV93yg" target="_blank" rel="noopener">最全的设计规范和适配总结</a></li>
+</ul>
+<h3 id="政采云前端团队"><a href="#政采云前端团队" class="headerlink" title="政采云前端团队"></a>政采云前端团队</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/lIJGhMjYJ6kaIoSmZn_oww" target="_blank" rel="noopener">前端异常的捕获与处理</a></li>
+</ul>
+<h3 id="信安之路"><a href="#信安之路" class="headerlink" title="信安之路"></a>信安之路</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/-PWyPlsZr0PLQ4fFGRvZkA" target="_blank" rel="noopener">JavaScript 函数劫持攻击原理</a></li>
+</ul>
+<h3 id="CSDN"><a href="#CSDN" class="headerlink" title="CSDN"></a>CSDN</h3><ul>
+<li><a href="https://blog.csdn.net/Taobaojishu/article/details/112386442" target="_blank" rel="noopener">大型 Web 应用插件化架构探索</a></li>
+</ul>
+<h3 id="博客园"><a href="#博客园" class="headerlink" title="博客园"></a>博客园</h3><ul>
+<li><a href="https://www.cnblogs.com/sskyy/p/6496287.html" target="_blank" rel="noopener">前端服务化——页面搭建工具的死与生</a></li>
+</ul>
+<h3 id="趣谈前端"><a href="#趣谈前端" class="headerlink" title="趣谈前端"></a>趣谈前端</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/EDu5Rj9qlRLIWjc0djrlEw" target="_blank" rel="noopener">低代码开发平台核心功能设计——组件自定义交互实现</a></li>
+</ul>
+<h3 id="淘系前端团队"><a href="#淘系前端团队" class="headerlink" title="淘系前端团队"></a>淘系前端团队</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/pMaZ5mQDxpL_aTPD71jLyg" target="_blank" rel="noopener">智能设计生产的色彩详解和应用</a></li>
+<li><a href="https://mp.weixin.qq.com/s/5XiY9JnN-XjQfzS9AbF4cg" target="_blank" rel="noopener">我所理解的 Hooks API</a></li>
+</ul>
+<h3 id="前端瓶子君"><a href="#前端瓶子君" class="headerlink" title="前端瓶子君"></a>前端瓶子君</h3><ul>
+<li><a href="https://mp.weixin.qq.com/s/4OY2j4mxD5qcXF_zb4NtrA" target="_blank" rel="noopener">阿里妈妈又做了新工具，帮你把 Vue2 代码改成 Vue3 的</a></li>
+</ul>
+
+                </div>
+            </div>
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?57868420"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/commuting/其他.html';
+        this.page.identifier = '/commuting/其他.html';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>
