@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>《进阶 TypeScript 之初见泛型》 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+链接
+
+大家晚上好，特别为大家做这次分享，因为现在几个团队都开始使用 TypeScript 了，那么除了...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?2664344">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+            <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    《进阶 TypeScript 之初见泛型》
+                    <div class="post-meta">
+                        <time datetime="2021-08-20T09:28:10.000Z" itemprop="datePublished">
+                            2021-08-20 09:28
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Share/'>Share</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/TypeScript/'>TypeScript</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<a id="more"></a>
+
+<blockquote>
+<p><a href="https://github.com/zongzi531/daily-learning/blob/master/share/%E8%BF%9B%E9%98%B6%20TypeScript%20%E4%B9%8B%E5%88%9D%E8%A7%81%E6%B3%9B%E5%9E%8B.pdf" target="_blank" rel="noopener">链接</a></p>
+</blockquote>
+<p>大家晚上好，特别为大家做这次分享，因为现在几个团队都开始使用 TypeScript 了，那么除了在日常的 TypeScript 基础使用外，我想给大家带来一些 TypeScript 的进阶使用，那么本次为大家分享有关泛型的进阶入门技巧。</p>
+<p>那我们现在就从为什么会有泛型来说什么是泛型，让我们看到这段代码，我们定义了一个 <code>identity</code> 函数，他用来处理 <code>number</code> 类型的数据，并返回 <code>number</code> 类型的数据。再来看到下一段代码，当这个函数要处理另外的类型的时候，我们不得不定义另外的类型，比如在 <code>number</code> 的基础上添加 <code>string | Array&lt;string&gt;</code> 等等类型，当然这里可以用到函数重载的概念，不过我这里要硬生生的引出泛型。</p>
+<p>最后我们来看到这段代码，我们可以在使用的时候借助 TypeScript 的类型推断自动来使用，或者说我们可以传入类型来定义我们想要的类型，比如 <code>identity&lt;boolean&gt;(true)</code> ，这就是泛型。</p>
+<p>我给大家摘抄了官方提供的全局泛型，见 <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html" target="_blank" rel="noopener">Utility Types</a> 。</p>
+<p>官方提供的这些泛型可以说使用起来非常的方便，并且大家在日常开发当中也用到了许多，那么如何自己书写泛型呢？从这里开始将是本次分享的重点。</p>
+<p>我们来看到例子1，这里的 <code>isString</code> 并没有 <code>typeof value === &#39;string&#39;</code> 来的好用，因为 <code>isString</code> 不能进行类型推断，有同学可能会说，我在下面对 <code>el</code> 使用断言，从代码运行上来说，这确实没什么问题。但是既然使用了 TypeScript ，就应该让类型推断变的更自然，而不是用断言来解决问题，这样和写 JavaScript 又有什么区别呢？那么其实很简单，我们将函数返回的 <code>boolean</code> 修改成 <code>value is string</code> 这样就可以实现类型推断了。</p>
+<p>是不是很有趣，再进阶一步讲，我们是不是可以将这个 <code>isString</code> 函数改造一下，是他变成一个更通用的泛型。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">declare</span> <span class="token keyword">function</span> isSomething <span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">:</span> value is T
+
+<span class="token keyword">const</span> num <span class="token operator">=</span> <span class="token function">isSomething</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// isSomething&lt;number></span>
+<span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token function">isSomething</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// isSomething&lt;string></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>非常的妙是不是。再来看到例子2，假设我们要写一个样式对象，但是我们需要自己考虑兼容性，比如会加入前缀 <code>webkit</code> ，那么我们自然会一个个把他们写出来，但是在维护类型的时候会带来很多繁琐的问题，比如说我修改 <code>flex</code> 的类型时，我还需要顺带修改 <code>webkit</code> 前缀的对应的类型，当这种场景变得多又复杂时，代码的维护成本就会逐渐提升。</p>
+<p>那么当然是有办法解决解决这样的问题的，首先我们需要利用一些手段将 <code>flex</code> 转换成 <code>webkitFlex</code> ，然后将 <code>interface</code> 的 key 换成我们想要的内容。</p>
+<p>到目前为止，我们已经可以实现 key 的替换，但是原来的 key 却不见了，所以我们这里需要借助 <code>| P</code> 来完成，来实现我们的需求。到目前为止我们已经完成了我们想要的，我们再来进阶一步讲，把问题变得有趣，我们这里希望经过转换后， <code>lineHeight</code> 是不会加 <code>webkit</code> 前缀的，怎么实现呢。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token string">'lineHeight'</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Capitalize<span class="token operator">&lt;</span>K<span class="token operator">></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样，我们就可以实现新的需求，当然了这里还是可以结合例子1进行进阶。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type ExcludeWebkitKey <span class="token operator">=</span> <span class="token string">'lineHeight'</span> <span class="token operator">|</span> <span class="token string">'something you need.'</span>
+type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token punctuation">,</span> E <span class="token operator">=</span> ExcludeWebkitKey<span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token class-name">E</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Capitalize<span class="token operator">&lt;</span>K<span class="token operator">></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>哈哈，是不是也非常的有趣。确实，就是这么有趣。</p>
+<p>那么我们来看到例子3，我们如何可以在 <code>methods</code> 下的方法中获得到 <code>data</code> 返回的类型呢，我这边摘抄了官网的例子，大家可以看一下。</p>
+<p>其实我们的例子和官网的区别就是官网是个对象，而我们是个函数，我们只要把 <code>D</code> 修改成 <code>() =&gt; D</code> 就可以了。</p>
+<p>那么本次的分享就到这里，后面我也会尝试总结更多的技巧分享到大家。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2021/08/20/%E8%BF%9B%E9%98%B6TypeScript%E4%B9%8B%E5%88%9D%E8%A7%81%E6%B3%9B%E5%9E%8B/" title="《进阶 TypeScript 之初见泛型》">https://zongzi531.com/2021/08/20/%E8%BF%9B%E9%98%B6TypeScript%E4%B9%8B%E5%88%9D%E8%A7%81%E6%B3%9B%E5%9E%8B/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2021/08/01/%E6%8C%81%E7%BB%AD%E6%8C%BA%E8%BF%9B/">
+        下一篇<br>持续挺进
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" href="https://github.com/zongzi531" target="_blank" rel="noopener" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" href="https://www.zhihu.com/people/zongzi531/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"></a>
+        <a title="力扣" href="https://leetcode-cn.com/u/zongzi0531/" target="_blank" rel="noopener" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?73508388"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2021/08/20/进阶TypeScript之初见泛型/';
+        this.page.identifier = '/2021/08/20/进阶TypeScript之初见泛型/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>
