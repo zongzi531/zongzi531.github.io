@@ -41,3 +41,8 @@ title: 番組
 - **『 夢中さ、きみに。 』** 全 5 话
 - **『 ガンダムビルドリアル 』** 第 1 话
 - **『 イニシャル・ディー First Stage 』** 第 6 话
+- **『 新世紀エヴァンゲリオン 』** 第 2 话
+
+## 加藤 恵（かとう めぐみ）
+
+![katou_megumi__lawson](/images/yande.re__786798__katou_megumi__lawson__misaki_kurehito__saenai_heroine_no_sodatekata.jpg)
