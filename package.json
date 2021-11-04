@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "4.0.0"
+    "version": "5.4.0"
+  },
+  "scripts": {
+    "s": "hexo server",
+    "c": "hexo clean",
+    "g": "hexo generate",
+    "build": "yarn c && yarn g"
   },
   "dependencies": {
     "hexo": "5.4.0",
