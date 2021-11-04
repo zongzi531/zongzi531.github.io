@@ -1396,7 +1396,7 @@ hexo-cli@^3.0.0:
     resolve "^1.11.0"
     tildify "^2.0.0"
 
-hexo-deployer-git@^2.0.0:
+hexo-deployer-git@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/hexo-deployer-git/-/hexo-deployer-git-2.0.0.tgz#54d20a038676eb828c989c17a775d26c3e26fc01"
   integrity sha512-YwEwZNmqYxq7VXM92uyay8HcPF/BqROhfnySnv5Gf5BpH1FXY8Suu9kxjv+8x5np7YRUH8WVyxWprwd4W16kdA==
@@ -1408,7 +1408,7 @@ hexo-deployer-git@^2.0.0:
     moment "^2.18.0"
     swig-templates "^2.0.2"
 
-hexo-filter-emoji@^2.1.0:
+hexo-filter-emoji@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/hexo-filter-emoji/-/hexo-filter-emoji-2.1.0.tgz#0ad9c79fef11193b21ec0b6125af35c8fe66d734"
   integrity sha512-FbsHnQhlByK2H40qa76joXMSccP3GPS0mKmGwlFvjO82GdMJH+JSYU//+9NrCse+WTPlvX5SP1MTw2UVNRjhZA==
@@ -1417,7 +1417,7 @@ hexo-filter-emoji@^2.1.0:
     random-ua "0.0.6"
     request "2.88.0"
 
-hexo-filter-mathjax@^0.1.2:
+hexo-filter-mathjax@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/hexo-filter-mathjax/-/hexo-filter-mathjax-0.1.2.tgz#dba2d6502317a60d1bec67f4b83744d9c7c6c487"
   integrity sha512-PbCpZ6D8sma+cTXzt/Kz2bVorOKQcWIXwE2ZmuB9HuKh25Cv3K0qc1DnISq5/4XhJOvqdnjNUvsuiB9T8/gCTQ==
@@ -1451,14 +1451,14 @@ hexo-fs@^2.0.0:
     escape-string-regexp "^2.0.0"
     graceful-fs "^4.1.11"
 
-hexo-generator-archive@^1.0.0:
+hexo-generator-archive@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hexo-generator-archive/-/hexo-generator-archive-1.0.0.tgz#ad2afb12232a65e2f8608fc1ca3f19162fb63786"
   integrity sha512-24TeanDGpMBUIq37DHpSESQbeN6ssZ06edsGSI76tN4Yit50TgsgzP5g5DSu0yJk0jUtHJntysWE8NYAlFXibA==
   dependencies:
     hexo-pagination "1.0.0"
 
-hexo-generator-category-enhance@^0.1.6:
+hexo-generator-category-enhance@0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/hexo-generator-category-enhance/-/hexo-generator-category-enhance-0.1.6.tgz#9a935244c522d7edb91672c17cc4bc1d7c7290e5"
   integrity sha512-f4wrK1/JeigBrIyDI7AYndEH7eLQmAkhQsXp3p/Sb/dvk+9ukTX2ad6CH6rP4kC6uj4K8Zmjk54/9klaJDuFaQ==
@@ -1466,28 +1466,28 @@ hexo-generator-category-enhance@^0.1.6:
     hexo-pagination "0.0.2"
     object-assign "^4.0.1"
 
-hexo-generator-category@^1.0.0:
+hexo-generator-category@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hexo-generator-category/-/hexo-generator-category-1.0.0.tgz#cd2a2b03eb326da3ef821d6e29408488cc132eb5"
   integrity sha512-kmtwT1SHYL2ismbGnYQXNtqLFSeTdtHNbJIqno3LKROpCK8ybST5QVXF1bZI9LkFcXV/H8ilt8gfg4/dNNcQQQ==
   dependencies:
     hexo-pagination "1.0.0"
 
-hexo-generator-feed@^2.0.0:
+hexo-generator-feed@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/hexo-generator-feed/-/hexo-generator-feed-2.0.0.tgz#339a1483e50630096ad51602c6c4981f66cedc21"
   integrity sha512-HlbIgKSZF+gopgmzgHd7kTxzGEDydqe7iQ7TZ6u1ojOUU9fkG+XYmE8AYklsXeol3xnSDO1FZ8ZPaAmT2o3B6A==
   dependencies:
     nunjucks "^3.0.0"
 
-hexo-generator-index@^1.0.0:
+hexo-generator-index@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hexo-generator-index/-/hexo-generator-index-1.0.0.tgz#8c9f157dcfa0af4f8417f77a4eb5b3831f69a719"
   integrity sha512-L25MdZ7e5ar/F8lIW+zBNNlA4f5A8CBUOYi1IQZCgL3wPVW+AWn66RSM5UVBAbiw5yxDeTHdk0sJYXbhSBaOFQ==
   dependencies:
     hexo-pagination "1.0.0"
 
-hexo-generator-tag@^1.0.0:
+hexo-generator-tag@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hexo-generator-tag/-/hexo-generator-tag-1.0.0.tgz#54ec23de9409c75584ea81e36057a59031b022f1"
   integrity sha512-JDoB2T1EncRlyGSjuAhkGxRfKkN8tq0i8tFlk9I4q2L6iYxPaUnFenhji0oxufTADC16/IchuPjmMk//dt8Msg==
@@ -1521,7 +1521,7 @@ hexo-pagination@1.0.0:
   resolved "https://registry.yarnpkg.com/hexo-pagination/-/hexo-pagination-1.0.0.tgz#c9c0ca3665267b9e9d0a89fc3edcaf3276907dc1"
   integrity sha512-miEVFgxchPr2qNWxw0JWpJ9R/Yaf7HjHBZVjvCCcqfbsLyYtCvIfJDxcEwz1sDOC/fLzYPqNnhUI73uNxBHRSA==
 
-hexo-prism-plugin@^2.3.0:
+hexo-prism-plugin@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/hexo-prism-plugin/-/hexo-prism-plugin-2.3.0.tgz#63e2d5d604dc0d89b3f55a4db344f96fe689cca6"
   integrity sha512-jn8aSVwo8odrZpf2qgETiZeO6cR7D7uDvljHD+CQqWOP97e8LvYAwaFlEvTgJwwKSERZbI5RlwtTOX7CDjz1Mw==
@@ -1532,14 +1532,14 @@ hexo-prism-plugin@^2.3.0:
     prism-themes "^1.0.0"
     prismjs "^1.6.0"
 
-hexo-renderer-ejs@^1.0.0:
+hexo-renderer-ejs@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hexo-renderer-ejs/-/hexo-renderer-ejs-1.0.0.tgz#43c4de49eeae224036a457df860eb1c14c68b4b4"
   integrity sha512-O925i69FG4NYO62oWORcPhRZZX0sPx1SXGKUS5DaR/lzajyiXH5i2sqnkj0ya0rNLXIy/D7Xmt7WbFyuQx/kKQ==
   dependencies:
     ejs "^2.6.1"
 
-hexo-renderer-marked@^2.0.0:
+hexo-renderer-marked@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/hexo-renderer-marked/-/hexo-renderer-marked-2.0.0.tgz#458540b014141e7cf72145a82ec591be359cdba1"
   integrity sha512-+LMjgPkJSUAOlWYHJnBXxUHwGqemGNlK/I+JNO4zA5rEHWNWZ9wNAZKd5g0lEVdMAZzAV54gCylXGURgMO4IAw==
@@ -1548,7 +1548,7 @@ hexo-renderer-marked@^2.0.0:
     marked "^0.7.0"
     strip-indent "^3.0.0"
 
-hexo-renderer-stylus@^1.1.0:
+hexo-renderer-stylus@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hexo-renderer-stylus/-/hexo-renderer-stylus-1.1.0.tgz#7a0a107bcf4b74fdf88f28da2db47b8dc9e208e5"
   integrity sha512-aXfMuro2aQOvpM5pyPEModAPvqYi73VN4t37vGMQCbT0QTmw8YohEmUpO/G/1k6j88ong6344v+A0xrpUGQRnQ==
@@ -1556,7 +1556,7 @@ hexo-renderer-stylus@^1.1.0:
     nib "^1.1.2"
     stylus "^0.54.5"
 
-hexo-server@^1.0.0:
+hexo-server@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hexo-server/-/hexo-server-1.0.0.tgz#af89fcc0a07740ad2a7f33d1d003889aab22927e"
   integrity sha512-eSY+a5oiGCG/3T6FrdrNRBkttMLJkM+oitY6ZMFowjcBiG2VNEhQmfWUDOykfvApZs4wPYBb//uXD/58tfe3mA==
@@ -1594,7 +1594,7 @@ hexo-util@^1.0.0, hexo-util@^1.4.0:
     html-entities "^1.2.1"
     striptags "^3.1.1"
 
-hexo@^4.0.0:
+hexo@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/hexo/-/hexo-4.0.0.tgz#5b54dfd65bce3d45ba3178e2fbadddf6b5751cc2"
   integrity sha512-woVSeutGyFDLdE3UWJsZWw18KboFSsmmcxuivuLJPQ0pqLLz4zar07BG/YQXgVaXzR1jQ7Hurbx1gGZj5Z7y2w==
