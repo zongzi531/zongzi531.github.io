@@ -1387,13 +1387,13 @@ hexo-cli@^3.0.0:
     resolve "^1.11.0"
     tildify "^2.0.0"
 
-hexo-deployer-git@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/hexo-deployer-git/-/hexo-deployer-git-2.0.0.tgz#54d20a038676eb828c989c17a775d26c3e26fc01"
-  integrity sha512-YwEwZNmqYxq7VXM92uyay8HcPF/BqROhfnySnv5Gf5BpH1FXY8Suu9kxjv+8x5np7YRUH8WVyxWprwd4W16kdA==
+hexo-deployer-git@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/hexo-deployer-git/-/hexo-deployer-git-2.1.0.tgz#2e72f05d7b318dbe29929d156ea13f9132354ff1"
+  integrity sha512-0rx8YVd1UrwD9vUzIPrB7mljLdcmUv0zRj3MAMCBxY7HqI2RM5ZEV0uKxi34qB7LYA80BNl3FWHl2ghO/tKVTA==
   dependencies:
     bluebird "^3.5.0"
-    chalk "^2.4.1"
+    chalk "^3.0.0"
     hexo-fs "^2.0.0"
     hexo-util "^1.0.0"
     moment "^2.18.0"
