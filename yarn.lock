@@ -1399,14 +1399,12 @@ hexo-deployer-git@2.1.0:
     moment "^2.18.0"
     swig-templates "^2.0.2"
 
-hexo-filter-emoji@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/hexo-filter-emoji/-/hexo-filter-emoji-2.1.0.tgz#0ad9c79fef11193b21ec0b6125af35c8fe66d734"
-  integrity sha512-FbsHnQhlByK2H40qa76joXMSccP3GPS0mKmGwlFvjO82GdMJH+JSYU//+9NrCse+WTPlvX5SP1MTw2UVNRjhZA==
+hexo-filter-emoji@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/hexo-filter-emoji/-/hexo-filter-emoji-2.2.2.tgz#08920149b76c764ebe3226d3ef7c9fe18f254008"
+  integrity sha512-/RE4HB5OPucFiy3ynT0AAdGpIwioVRhn74IvoAfL8I23DJK5gTRBwUDcu+Gx+O+U1OUXfwX2AkJtXVtEGVftng==
   dependencies:
-    lodash "4.17.15"
-    random-ua "0.0.6"
-    request "2.88.0"
+    lodash "4.17.21"
 
 hexo-filter-mathjax@0.1.2:
   version "0.1.2"
@@ -2108,7 +2106,12 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
-lodash@4.17.15, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.15:
+lodash@4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.15:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -2870,11 +2873,6 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-random-ua@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/random-ua/-/random-ua-0.0.6.tgz#eb70901b72a4fe0b8d3ab752a6b25122e40c0ad7"
-  integrity sha1-63CQG3Kk/guNOrdSprJRIuQMCtc=
-
 randomatic@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"
@@ -2974,7 +2972,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@2.88.0, request@^2.87.0:
+request@^2.87.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
