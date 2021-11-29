@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>牛气冲天 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="荣获 2020 年度优秀员工">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?97429671">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2021/02/01/牛气冲天/pic1.jpeg')">
+                <div class="post-title">
+                    牛气冲天
+                    <div class="post-meta">
+                        <time datetime="2021-02-01T00:00:00.000Z" itemprop="datePublished">
+                            2021-02-01 00:00
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>荣获 2020 年度优秀员工</p>
+</blockquote>
+<h2 id="年度总结"><a href="#年度总结" class="headerlink" title="年度总结"></a>年度总结</h2><blockquote>
+<p>入职公司近 1 年时间，真的收获了许多，感谢所有帮助过我的大佬，感谢努力的自己。</p>
+</blockquote>
+<div style="text-align: center;">
+    <img src="pic2.png" width="50%">
+</div>
+
+<h3 id="业务交付"><a href="#业务交付" class="headerlink" title="业务交付"></a>业务交付</h3><p>完成基本的 B 端业务交付工作，包括开发、联调对接、缺陷修复、人员安排、项目管理、技术支持、新人培养。</p>
+<p>在这一年中，新接触了一些关于管理方面的工作，保障业务按时交付的情况下，也带着同事们一起提炼一些经验。</p>
+<p>比如和同事们一起提炼了 TypeScript 实践经验手册，供其他同事学习。</p>
+<p>再者就是下发给同事的抽象能力挑战，提供有效的指导，帮助同事在有限的时间内完成代码抽象及封装。</p>
+<h3 id="技术贡献"><a href="#技术贡献" class="headerlink" title="技术贡献"></a>技术贡献</h3><p>技术贡献一直是我在工作中自产的一些挑战任务，为了让工作更有挑战性。</p>
+<ul>
+<li>来自一些业务交付时所产生的挑战，包括对现有库的缺陷修复、新特性支持、定制特性支持。</li>
+<li>业务交付过程中解耦出的通用型组件库、 SDK 。</li>
+<li>在代码中运用合理的设计模式来抽象代码、优化代码设计，提供更易维护、更易阅读、更易使用的代码模块。</li>
+<li>参与微前端架构设计及调整，涉及开发、构建、 CI/CD （一件很有挑战的事）。</li>
+</ul>
+<h3 id="TypeScript-推进"><a href="#TypeScript-推进" class="headerlink" title="TypeScript 推进"></a>TypeScript 推进</h3><ul>
+<li>推进内部 TypeScript 使用</li>
+<li>总结 TypeScript 实践经验</li>
+</ul>
+<h3 id="标准代码风格"><a href="#标准代码风格" class="headerlink" title="标准代码风格"></a>标准代码风格</h3><p>因为经历了多个业务交付，发现不同业务的代码风格稍有不同，考虑到为了统一风格，则邀请多位同事一同讨论，抽离现有合理规则，定制内部标准。</p>
+<p>从而在年底发布内部标准代码风格，支持 JavaScript / TypeScript / Node / Vue 。</p>
+<p>学习 TC39 工作组记录会议纪要。</p>
+<h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>单元测试的编写附属于技术贡献时，以保证代码的稳定性。</p>
+<ul>
+<li>内部库的单元测试，保证覆盖率 70%+</li>
+<li>运用设计模式的抽象代码，提供单元测试</li>
+</ul>
+<h3 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h3><p>共计 2 场技术分享</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/zongzi531/daily-learning/blob/master/share/TypeScript%20%E7%BB%99%E6%88%91%E4%BB%AC%E5%B8%A6%E6%9D%A5%E4%BA%86%E4%BB%80%E4%B9%88.pdf">《TypeScript 给我们带来了什么》</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zongzi531/daily-learning/blob/master/share/%E8%BF%BD%E6%B1%82%E4%BC%98%E9%9B%85%E7%9A%84%E4%BB%A3%E7%A0%81.pdf">《追求优雅的代码》</a></li>
+</ol>
+<h3 id="人才招聘"><a href="#人才招聘" class="headerlink" title="人才招聘"></a>人才招聘</h3><p>负责部门实习生、社招岗位一二面。（面试 20 人左右，入围 5 人左右，具体记不清了，不重要）</p>
+<p>在面试过程中，我也在学习，从候选人的身上寻找自己的不足。</p>
+<p>比如在面试 CSS 方面，因为我 CSS 方面并不是特别的擅长，所以会需要资料和同事的协助。</p>
+<p>我也明白了，我需要如何系统的学习 CSS ，才能凸显我掌握了 CSS 。</p>
+<p>所以当在面试 CSS 相关的知识时，可以从各个 CSS Level 级别去阐述 CSS 特性。（这点很重要）</p>
+<p>当然，另外的就是前端的基础掌握程度。（这点也很重要）</p>
+<p>虽然面试很吃时间，但是或多或少是可以学习到不少东西的，要保持这种心态。</p>
+<h3 id="复盘"><a href="#复盘" class="headerlink" title="复盘"></a>复盘</h3><p>这一年，很不错！</p>
+<p>比较遗憾的是，没有足够的时间去尝试：</p>
+<ul>
+<li>可视化</li>
+<li>工程化</li>
+<li>服务端</li>
+</ul>
+<p>对于未来的工作规划似乎又有了一些新的想法：</p>
+<ul>
+<li>继续拓展软件开发领域知识广度</li>
+<li>尝试可能性</li>
+<li>现在选择一条路走到底还早</li>
+</ul>
+<h2 id="工程化探索"><a href="#工程化探索" class="headerlink" title="工程化探索"></a>工程化探索</h2><p>恭喜同桌大佬进入蚂蚁金服，向大佬学习的心日益强烈！</p>
+<p>春节前除了保证业务的正常交付，开始交接工程化相关的项目，慢慢开始介入 CI/CD 相关工作。</p>
+<p>其实发现关于前端工程化 + CI 形成前端自动工程化与 CD 组合是一件很富有挑战性的工作。</p>
+<p>光前端工程化就有很多库、知识可以学习，非常的兴奋。</p>
+<p>CI/CD 则会与服务端的同学进行配合，同时又可以学习到服务端的相关知识，慢慢的对服务端也有更多的了解和认识。</p>
+<p>在维护 Webpack 插件时，利用 <a target="_blank" rel="noopener" href="https://github.com/zahorovskyi/webpack-dynamic-public-path">Dynamic Public Path Plugin</a> 的思路解决现有 <code>publicPath</code> 存在的问题。</p>
+<p>因为是一个微前端架构的 SPA 工程打包为多页面的工程思路，配合后端路由寻址，所以 <code>publicPath</code> 需要为动态，刚好这个开源的插件给我了灵感：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">WebpackDynamicPublicPath</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     *
+     * @param &amp;#123;Object&amp;#125; options
+     * @param &amp;#123;string&amp;#125; options.externalPublicPath - variable with new publicPath
+     * @param &amp;#123;Array&lt;string>&amp;#125; [options.chunkNames] - list of chuck names in which publicPath will be replaced,
+     * in case if parameter is not defined publicPath will be replaced for all chunks
+     */</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> options<span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>afterPlugins <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>afterPlugins<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>emit <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>afterPlugins<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>name<span class="token punctuation">:</span> <span class="token string">'WebpackDynamicPublicPath'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>afterPlugins<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapPromise</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>name<span class="token punctuation">:</span> <span class="token string">'WebpackDynamicPublicPath'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>emit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token function">afterPlugins</span><span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> compilation<span class="token punctuation">.</span>options<span class="token punctuation">.</span>output <span class="token operator">===</span> <span class="token string">'undefined'</span> <span class="token operator">||</span> <span class="token keyword">typeof</span> compilation<span class="token punctuation">.</span>options<span class="token punctuation">.</span>output<span class="token punctuation">.</span>publicPath <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'WebpackDynamicPublicPath: params missing - output.publicPath must be defined in webpack config (used only as placeholder, make it distinctive)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">===</span> <span class="token string">'undefined'</span> <span class="token operator">||</span> <span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>externalPublicPath <span class="token operator">===</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`WebpackDynamicPublicPath: params missing - externalPublicPath - name of global variable you want to use as publicPath.`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>publicPath <span class="token operator">=</span> <span class="token template-string"><span class="token string">`"$&amp;#123;compilation.options.output.publicPath&amp;#125;"`</span></span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token function">emit</span><span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> chunks <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>chunkNames <span class="token operator">?</span>
+            compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>chunk <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>chunkNames<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>chunk<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+            compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>chunks<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'WebpackDynamicPublicPath: chunks array for replacing publicPath is empty.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> fileNames <span class="token operator">=</span> chunks<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>
+            chunk <span class="token operator">=</span><span class="token operator">></span> chunk<span class="token punctuation">.</span>files<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>
+                file <span class="token operator">=</span><span class="token operator">></span> file<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex">/.*\.js/</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> replacePromises <span class="token operator">=</span> fileNames<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>fileName <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">replacePublicPath</span><span class="token punctuation">(</span>fileName<span class="token punctuation">,</span> compilation<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>replacePromises<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'WebpackDynamicPublicPath: publicPath replaced.'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * Replace publicPath
+     * @param &amp;#123;string&amp;#125; fileName
+     * @param &amp;#123;object&amp;#125; compilation
+     * @return &amp;#123;Promise&lt;any>&amp;#125;
+     */</span>
+    <span class="token function">replacePublicPath</span><span class="token punctuation">(</span>fileName<span class="token punctuation">,</span> compilation<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> source <span class="token operator">=</span> compilation<span class="token punctuation">.</span>assets<span class="token punctuation">[</span>fileName<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> publicPath <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>publicPath<span class="token punctuation">;</span>
+            <span class="token keyword">const</span> externalPublicPath <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>externalPublicPath<span class="token punctuation">;</span>
+
+            compilation<span class="token punctuation">.</span>assets<span class="token punctuation">[</span>fileName<span class="token punctuation">]</span><span class="token punctuation">.</span>source <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> source<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>publicPath<span class="token punctuation">,</span> externalPublicPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+            <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> WebpackDynamicPublicPath<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>源码很简单，我就复制过来凑凑字数，内部的细节我就不做展示，逻辑我在这里介绍一下。</p>
+<p>利用环境变量配置，提供公共的 <code>publicPath</code> 前缀，获取需要被拆分的页面模块名称，拼接特定的 <code>publicPath</code> 内容。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2021/02/01/%E7%89%9B%E6%B0%94%E5%86%B2%E5%A4%A9/" title="牛气冲天">https://zongzi531.com/2021/02/01/%E7%89%9B%E6%B0%94%E5%86%B2%E5%A4%A9/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2021/03/01/%E6%96%B0%E5%8A%A8%E5%8A%9B/">
+        上一篇<br>新动力
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2021/01/01/%E6%99%82%E9%96%93%E3%81%AF%E6%9C%AC%E5%BD%93%E3%81%AB%E6%97%A9%E3%81%84%E3%80%9C%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%91%E5%B9%B4%E3%81%A0%E3%80%9C/">
+        下一篇<br>時間は本当に早い〜２０２１年だ〜
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?22774281"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2021/02/01/牛气冲天/';
+        this.page.identifier = '/2021/02/01/牛气冲天/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

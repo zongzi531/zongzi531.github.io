@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>TypeScript 初学之路 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+To Do List一直是我学习框架开始的地方，最早写To Do List这个demo是在初学Vue的时...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?91673416">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    TypeScript 初学之路
+                    <div class="post-meta">
+                        <time datetime="2018-05-08T18:56:44.000Z" itemprop="datePublished">
+                            2018-05-08 18:56
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/TypeScript/'>TypeScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/TypeScript/'>TypeScript</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>To Do List一直是我学习框架开始的地方，最早写To Do List这个demo是在初学Vue的时候。<br>时间过得很快，在我学习React的时候，我直接将这个Vue demo进行了改写。<br>现在我重新将这个demo从JavaScript改写成TypeScript，在此分享一些学习总结。</p>
+</blockquote>
+<p>此次，仍然使用create-react-app脚手架创建React项目，按照TypeScript官网推荐，你可以使用以下命令完成项目创建。</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Install create-react-app</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> -g create-react-app
+
+<span class="token comment" spellcheck="true"># Create our new project</span>
+$ create-react-app my-app --scripts-version<span class="token operator">=</span>react-scripts-ts
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>更多详细操作可以参见<a target="_blank" rel="noopener" href="https://github.com/Microsoft/TypeScript-React-Starter">TypeScript-React-Starter</a>。</p>
+<h2 id="泛型参数"><a href="#泛型参数" class="headerlink" title="泛型参数"></a>泛型参数</h2><p>泛型参数类型是用来约束类的成员/方法参数类型。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> S <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> SS <span class="token operator">=</span> <span class="token keyword">any</span><span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">ComponentLifecycle</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token punctuation">,</span> SS<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">:</span> P<span class="token punctuation">,</span> context<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// We MUST keep setState() as a unified signature because it allows proper checking of the method return type.</span>
+    <span class="token comment" spellcheck="true">// See: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18365#issuecomment-351013257</span>
+    <span class="token comment" spellcheck="true">// Also, the ` | S` allows intellisense to not be dumbisense</span>
+    setState<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> S<span class="token operator">></span><span class="token punctuation">(</span>
+        state<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>prevState<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span>S<span class="token operator">></span><span class="token punctuation">,</span> props<span class="token punctuation">:</span> P<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>Pick<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> K<span class="token operator">></span> <span class="token operator">|</span> S <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>Pick<span class="token operator">&lt;</span>S<span class="token punctuation">,</span> K<span class="token operator">></span> <span class="token operator">|</span> S <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        callback<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span>
+    <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+
+    <span class="token function">forceUpdate</span><span class="token punctuation">(</span>callBack<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> ReactNode<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// React.Props&lt;T> is now deprecated, which means that the `children`</span>
+    <span class="token comment" spellcheck="true">// property is not available on `P` by default, even though you can</span>
+    <span class="token comment" spellcheck="true">// always pass children as variadic arguments to `createElement`.</span>
+    <span class="token comment" spellcheck="true">// In the future, if we can define its call signature conditionally</span>
+    <span class="token comment" spellcheck="true">// on the existence of `children` in `P`, then we should remove this.</span>
+    props<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> children<span class="token operator">?</span><span class="token punctuation">:</span> ReactNode <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token operator">></span> <span class="token operator">&amp;</span> Readonly<span class="token operator">&lt;</span>P<span class="token operator">></span><span class="token punctuation">;</span>
+    state<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span>S<span class="token operator">></span><span class="token punctuation">;</span>
+    context<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">;</span>
+    refs<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">[</span>key<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> ReactInstance
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>查看<code>Component</code>源码你会发现泛型参数<code>P</code>对应的就是<code>props</code>，泛型参数<code>S</code>对应的就是<code>state</code>。</p>
+<p>所以在写<code>class</code>组件时，都会以以下格式进行定义：</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>IPropTypes<span class="token punctuation">,</span> IStateTypes<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>来回顾一下，之前我们写React会使用<code>prop-types</code>来约束<code>props</code>的参数类型，但是现在我们可以放弃他，尽情发挥TypeScript的类型检查功能。</p>
+<p>我们可以使用接口来约束<code>props</code>的类型，这同样也受用于<code>state</code>。</p>
+<p>同样在写组件时，你会发现通用组件下会存在可选参数，那么写接口时就会使用到可选属性来解决这个问题。那么如果某些组件没有可选属性时候，你就不需要再使用<code>defaultProps</code>来设置<code>props</code>的默认值了，因为TypeScript的类型会直接抛出错误。</p>
+<p>接口也提供导出导入功能，方便我们在开发的时候共用接口或者继承接口。</p>
+<h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><p>期初我在定义数据类型的时候，不确定的我都会定义成<code>any</code>，当然我知道这很不优雅，也不是我的代码风格，所以我不会就此罢休。</p>
+<p>我尝试着去把所有的不确定都换成确定。想想如果将所有的数据类型都定义成<code>any</code>，那么就失去了TypeScript的类型检查功能了，非常糟糕。</p>
+<p>所以我在写泛型参数<code>props</code>和<code>state</code>时，如果存在没有属性的情况下，我会选择使用空对象类型<code>&#123;&#125;</code>，使得我的程序更可控。</p>
+<h2 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h2><p>在写到表单内容时，会有一些需要使用到<code>event</code>的地方，这次我使用了React提供的事件类型。</p>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">SyntheticEvent</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    bubbles<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     * A reference to the element on which the event listener is registered.
+     */</span>
+    currentTarget<span class="token punctuation">:</span> EventTarget <span class="token operator">&amp;</span> T<span class="token punctuation">;</span>
+    cancelable<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    defaultPrevented<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    eventPhase<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    isTrusted<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    nativeEvent<span class="token punctuation">:</span> Event<span class="token punctuation">;</span>
+    <span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token function">isDefaultPrevented</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token function">isPropagationStopped</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
+    <span class="token function">persist</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// If you thought this should be `EventTarget &amp; T`, see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/12239</span>
+    <span class="token comment" spellcheck="true">/**
+     * A reference to the element from which the event was originally dispatched.
+     * This might be a child element to the element on which the event listener is registered.
+     *
+     * @see currentTarget
+     */</span>
+    target<span class="token punctuation">:</span> EventTarget<span class="token punctuation">;</span>
+    timeStamp<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
+    type<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以上是<code>SyntheticEvent&lt;T&gt;</code>接口源码，React已经将原生事件需要部分进行了合成，在此基础上有更细化的接口：<code>FocusEvent&lt;T&gt;</code>、<code>ChangeEvent&lt;T&gt;</code>、<code>KeyboardEvent&lt;T&gt;</code>。</p>
+<p>这里必须要很强势的安利一波VSCode，他让我的TypeScript开发体验变得如此之优雅，让我能够更好的学习TypeScript。</p>
+<h2 id="TSLint"><a href="#TSLint" class="headerlink" title="TSLint"></a>TSLint</h2><p>代码舒适区这个问题，我选择适当的妥协，我选择适当的适应规则让我成长，而不是一味的寻找舒适区。</p>
+<p>列举一下这个demo中我配置的TSLint：</p>
+<ol>
+<li><code>&quot;semicolon&quot;: [true, &quot;never&quot;]</code>：一如既往，我选择不写分号。</li>
+<li><code>&quot;object-literal-sort-keys&quot;: false</code>：我关闭了短属性名提醒。</li>
+<li><code>&quot;ordered-imports&quot;: false</code>：我关闭了<code>import</code>的约束，使我可以导入CSS文件。</li>
+</ol>
+<p>但是比如定义接口时必须以大写字母<code>I</code>打头的这类约束我并没有关闭，我认为这些是需要我去适应的。</p>
+<h2 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h2><ol>
+<li><p>Issues <a target="_blank" rel="noopener" href="https://github.com/DefinitelyTyped/DefinitelyTyped/issues/25342">Duplicate identifier with @types/node 10.0</a>。</p>
+<p> 遇到此问题，之前我是将node版本降级至@types/<a href="mailto:&#110;&#x6f;&#x64;&#x65;&#x40;&#57;&#x2e;&#54;&#x2e;&#55;">&#110;&#x6f;&#x64;&#x65;&#x40;&#57;&#x2e;&#54;&#x2e;&#55;</a>，但是目前@types/<a href="mailto:&#x6e;&#x6f;&#100;&#101;&#64;&#49;&#48;&#x2e;&#48;&#46;&#x32;">&#x6e;&#x6f;&#100;&#101;&#64;&#49;&#48;&#x2e;&#48;&#46;&#x32;</a>已经修复该问题。</p>
+</li>
+<li><p>本demo会使用到react-dnd，但是使用TypeScript时，如果继续使用修饰器的写法，将无法继续进行下去。</p>
+<p> 我查阅Issues后选择退而求其次，使用高阶组件写法来解决此问题。<br> 相关Issues：<a target="_blank" rel="noopener" href="https://github.com/react-dnd/react-dnd/issues/782">#782</a> <a target="_blank" rel="noopener" href="https://github.com/react-dnd/react-dnd/issues/785">#785</a></p>
+</li>
+</ol>
+<hr>
+<p>本文中提及源码版本：**@types/<a href="mailto:&#114;&#x65;&#97;&#x63;&#x74;&#x40;&#x31;&#x36;&#46;&#x33;&#x2e;&#49;&#51;">&#114;&#x65;&#97;&#x63;&#x74;&#x40;&#x31;&#x36;&#46;&#x33;&#x2e;&#49;&#51;</a>**</p>
+<p>GitHub仓库： <a target="_blank" rel="noopener" href="https://github.com/zongzi531/react-to-do-list">zongzi531/react-to-do-list</a></p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2018/05/08/TypeScript%E5%88%9D%E5%AD%A6%E4%B9%8B%E8%B7%AF/" title="TypeScript 初学之路">https://zongzi531.com/2018/05/08/TypeScript%E5%88%9D%E5%AD%A6%E4%B9%8B%E8%B7%AF/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2018/06/10/%E8%B5%B0%E8%BF%9BCSS%E4%B8%96%E7%95%8C/">
+        上一篇<br>走进CSS世界
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/04/24/%E6%96%B0%E7%8E%AF%E5%A2%83-%E6%96%B0%E5%BC%80%E5%A7%8B/">
+        下一篇<br>新环境 新开始
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?77899624"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2018/05/08/TypeScript初学之路/';
+        this.page.identifier = '/2018/05/08/TypeScript初学之路/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

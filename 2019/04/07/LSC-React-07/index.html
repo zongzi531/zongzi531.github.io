@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>React 源码学习（七）：生命周期 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。在考虑到...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?53120013">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    React 源码学习（七）：生命周期
+                    <div class="post-meta">
+                        <time datetime="2019-04-07T10:04:50.000Z" itemprop="datePublished">
+                            2019-04-07 10:04
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/React-源码学习/'>React 源码学习</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/React/'>React</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。<br>在考虑到读哪个版本的时候，我想先接触到源码早期的思想可能会更轻松一些，最终我选择阅读 <code>0.3-stable</code> 。<br>那么接下来，我将从几个方面来解读这个版本的源码。</p>
+</blockquote>
+<ol>
+<li><a href="https://zongzi531.com/2019/04/01/LSC-React-01/">React 源码学习（一）：HTML 元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/02/LSC-React-02/">React 源码学习（二）：HTML 子元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/03/LSC-React-03/">React 源码学习（三）：CSS 样式及 DOM 属性</a></li>
+<li><a href="https://zongzi531.com/2019/04/04/LSC-React-04/">React 源码学习（四）：事务机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/05/LSC-React-05/">React 源码学习（五）：事件机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/06/LSC-React-06/">React 源码学习（六）：组件渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/07/LSC-React-07/">React 源码学习（七）：生命周期</a></li>
+<li><a href="https://zongzi531.com/2019/04/08/LSC-React-08/">React 源码学习（八）：组件更新</a></li>
+<li><a href="https://zongzi531.com/2019/12/18/LSC-React-09/">React 源码学习（九）：“脱胎换骨”</a></li>
+<li><a href="https://zongzi531.com/2019/12/19/LSC-React-10/">React 源码学习（十）：Fiber</a></li>
+<li><a href="https://zongzi531.com/2019/12/20/LSC-React-11/">React 源码学习（十一）：Scheduling</a></li>
+<li><a href="https://zongzi531.com/2019/12/21/LSC-React-12/">React 源码学习（十二）：Reconciliation</a></li>
+</ol>
+<p>那么关于生命周期， React 当中生命周期有 2 个。</p>
+<p>一个是组件的生命周期 <code>_lifeCycleState</code> ，另一个是复合生命周期 <code>_compositeLifeCycleState</code> 用于复合组件。</p>
+<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><p>那么关于组件的生命周期：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactComponent.js</span>
+<span class="token comment" spellcheck="true">/**
+ * Every React component is in one of these life cycles.
+ */</span>
+<span class="token keyword">var</span> ComponentLifeCycle <span class="token operator">=</span> <span class="token function">keyMirror</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">/**
+   * Mounted components have a DOM node representation and are capable of
+   * receiving new props.
+   */</span>
+  <span class="token comment" spellcheck="true">// 已挂载</span>
+  MOUNTED<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">/**
+   * Unmounted components are inactive and cannot receive new props.
+   */</span>
+  <span class="token comment" spellcheck="true">// 未挂载</span>
+  UNMOUNTED<span class="token punctuation">:</span> <span class="token keyword">null</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么我们来观测到， <code>ReactComponent</code> 和 <code>ReactCompositeComponent</code> 关于 <code>ComponentLifeCycle</code> 的状态变化：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactComponent.js</span>
+<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Mixin<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    getDOMNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取 DOM 节点时，组件必须为已挂载</span>
+      <span class="token function">invariant</span><span class="token punctuation">(</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ComponentLifeCycle<span class="token punctuation">.</span>MOUNTED<span class="token punctuation">,</span>
+        <span class="token string">'getDOMNode(): A component must be mounted to have a DOM node.'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    construct<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// All components start unmounted.</span>
+      <span class="token comment" spellcheck="true">// 实例化时，组件为未挂载</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">=</span> ComponentLifeCycle<span class="token punctuation">.</span>UNMOUNTED<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 挂载组件前检查组件应为未挂载</span>
+      <span class="token function">invariant</span><span class="token punctuation">(</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ComponentLifeCycle<span class="token punctuation">.</span>UNMOUNTED<span class="token punctuation">,</span>
+        <span class="token string">'mountComponent(%s, ...): Can only mount an unmounted component.'</span><span class="token punctuation">,</span>
+        rootID
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 挂载完后更新组件生命周期状态</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">=</span> ComponentLifeCycle<span class="token punctuation">.</span>MOUNTED<span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// Effectively: return '';</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    unmountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 卸载前检查组件应为已挂载</span>
+      <span class="token function">invariant</span><span class="token punctuation">(</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ComponentLifeCycle<span class="token punctuation">.</span>MOUNTED<span class="token punctuation">,</span>
+        <span class="token string">'unmountComponent(): Can only unmount a mounted component.'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 卸载完后更新组件生命周期状态</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">=</span> ComponentLifeCycle<span class="token punctuation">.</span>UNMOUNTED<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    receiveProps<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 更新 props 时，组件生命周期应为已挂载</span>
+      <span class="token function">invariant</span><span class="token punctuation">(</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ComponentLifeCycle<span class="token punctuation">.</span>MOUNTED<span class="token punctuation">,</span>
+        <span class="token string">'receiveProps(...): Can only update a mounted component.'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactCompositeComponent.js</span>
+<span class="token keyword">var</span> ReactCompositeComponentMixin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    ReactComponent<span class="token punctuation">.</span>Mixin<span class="token punctuation">.</span>mountComponent<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Unset `this._lifeCycleState` until after this method is finished.</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">=</span> ReactComponent<span class="token punctuation">.</span>LifeCycle<span class="token punctuation">.</span>UNMOUNTED<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">=</span> ReactComponent<span class="token punctuation">.</span>LifeCycle<span class="token punctuation">.</span>MOUNTED<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  replaceState<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>completeState<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新 state 时，组件生命周期必须为已挂载，或者复合组件生命周期为挂载中</span>
+    <span class="token function">invariant</span><span class="token punctuation">(</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ReactComponent<span class="token punctuation">.</span>LifeCycle<span class="token punctuation">.</span>MOUNTED <span class="token operator">||</span>
+      compositeLifeCycleState <span class="token operator">===</span> CompositeLifeCycle<span class="token punctuation">.</span>MOUNTING<span class="token punctuation">,</span>
+      <span class="token string">'replaceState(...): Can only update a mounted (or mounting) component.'</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  _bindAutoBindMethod<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>method<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">autoBound</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e<span class="token punctuation">,</span> tooMany<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 使用绑定上下文的方法时，组件生命周期必须为已挂载</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>component<span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ReactComponent<span class="token punctuation">.</span>LifeCycle<span class="token punctuation">.</span>MOUNTED<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> method<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>component<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="复合组件生命周期"><a href="#复合组件生命周期" class="headerlink" title="复合组件生命周期"></a>复合组件生命周期</h2><p>那么接下来，我们来看看复合生命周期以及其状态变化：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactCompositeComponent.js</span>
+<span class="token comment" spellcheck="true">/**
+ * `ReactCompositeComponent` maintains an auxiliary life cycle state in
+ * `this._compositeLifeCycleState` (which can be null).
+ *
+ * This is different from the life cycle state maintained by `ReactComponent` in
+ * `this._lifeCycleState`.
+ */</span>
+<span class="token keyword">var</span> CompositeLifeCycle <span class="token operator">=</span> <span class="token function">keyMirror</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">/**
+   * Components in the process of being mounted respond to state changes
+   * differently.
+   */</span>
+  <span class="token comment" spellcheck="true">// 挂载中</span>
+  MOUNTING<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">/**
+   * Components in the process of being unmounted are guarded against state
+   * changes.
+   */</span>
+  <span class="token comment" spellcheck="true">// 卸载中</span>
+  UNMOUNTING<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">/**
+   * Components that are mounted and receiving new props respond to state
+   * changes differently.
+   */</span>
+  <span class="token comment" spellcheck="true">// 更新 props</span>
+  RECEIVING_PROPS<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">/**
+   * Components that are mounted and receiving new state are guarded against
+   * additional state changes.
+   */</span>
+  <span class="token comment" spellcheck="true">// 更新 state</span>
+  RECEIVING_STATE<span class="token punctuation">:</span> <span class="token keyword">null</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> ReactCompositeComponentMixin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  construct<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 实例化时置空复合生命周期</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 挂载前设置复合生命周期为挂载中</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> CompositeLifeCycle<span class="token punctuation">.</span>MOUNTING<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 挂载完成后置空复合生命周期</span>
+    <span class="token comment" spellcheck="true">// Done with mounting, `setState` will now trigger UI changes.</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  unmountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 卸载开始时设置复合生命周期为卸载中</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> CompositeLifeCycle<span class="token punctuation">.</span>UNMOUNTING<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>componentWillUnmount<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">componentWillUnmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 经过生命周期函数 componentWillUnmount 后，置空复合生命周期</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  receiveProps<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新 props 时设置复合生命周期为更新 props</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> CompositeLifeCycle<span class="token punctuation">.</span>RECEIVING_PROPS<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>componentWillReceiveProps<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">componentWillReceiveProps</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 执行生命周期函数 componentWillReceiveProps 后，设置复合生命周期为更新 state</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> CompositeLifeCycle<span class="token punctuation">.</span>RECEIVING_STATE<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+    <span class="token comment" spellcheck="true">// 操作 state 更新相关后，置空复合生命周期</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  replaceState<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>completeState<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 更新 state</span>
+    <span class="token keyword">var</span> compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 仅限生命周期为挂载中或者复合生命周期为挂载中可以更新 state</span>
+    <span class="token function">invariant</span><span class="token punctuation">(</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">===</span> ReactComponent<span class="token punctuation">.</span>LifeCycle<span class="token punctuation">.</span>MOUNTED <span class="token operator">||</span>
+      compositeLifeCycleState <span class="token operator">===</span> CompositeLifeCycle<span class="token punctuation">.</span>MOUNTING<span class="token punctuation">,</span>
+      <span class="token string">'replaceState(...): Can only update a mounted (or mounting) component.'</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 仅限复合生命周期不为更新 state 或者不为卸载中</span>
+    <span class="token function">invariant</span><span class="token punctuation">(</span>
+      compositeLifeCycleState <span class="token operator">!==</span> CompositeLifeCycle<span class="token punctuation">.</span>RECEIVING_STATE <span class="token operator">&amp;&amp;</span>
+      compositeLifeCycleState <span class="token operator">!==</span> CompositeLifeCycle<span class="token punctuation">.</span>UNMOUNTING<span class="token punctuation">,</span>
+      <span class="token string">'replaceState(...): Cannot update while unmounting component or during '</span> <span class="token operator">+</span>
+      <span class="token string">'an existing state transition (such as within `render`).'</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_pendingState <span class="token operator">=</span> completeState<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Do not trigger a state transition if we are in the middle of mounting or</span>
+    <span class="token comment" spellcheck="true">// receiving props because both of those will already be doing this.</span>
+    <span class="token comment" spellcheck="true">// 如果我们正在安装或接收道具，请不要触发状态转换，因为这两个道具都已经在进行此操作了。</span>
+    <span class="token comment" spellcheck="true">// 仅限复合生命周期不为挂载中 或者不为更新 props</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>compositeLifeCycleState <span class="token operator">!==</span> CompositeLifeCycle<span class="token punctuation">.</span>MOUNTING <span class="token operator">&amp;&amp;</span>
+        compositeLifeCycleState <span class="token operator">!==</span> CompositeLifeCycle<span class="token punctuation">.</span>RECEIVING_PROPS<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 更新复合生命周期为更新 state</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> CompositeLifeCycle<span class="token punctuation">.</span>RECEIVING_STATE<span class="token punctuation">;</span>
+
+      <span class="token comment" spellcheck="true">// ... 执行更新相关操作</span>
+      <span class="token comment" spellcheck="true">// 置空复合生命周期</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_compositeLifeCycleState <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="生命周期函数方法"><a href="#生命周期函数方法" class="headerlink" title="生命周期函数方法"></a>生命周期函数方法</h2><p>那么到此，实现生命周期功能。那么让我们来看看那些生命周期的钩子都在哪里：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactCompositeComponent.js</span>
+<span class="token keyword">var</span> ReactCompositeComponentInterface <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  mixins<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  props<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_ONCE<span class="token punctuation">,</span>
+  getInitialState<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_ONCE<span class="token punctuation">,</span>
+  render<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_ONCE<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ==== Delegate methods ====</span>
+  <span class="token comment" spellcheck="true">// **一下内容为 Google 翻译**</span>
+  <span class="token comment" spellcheck="true">// 最初创建组件并即将安装时调用。 这可能有副作用，但必须在 `componentWillUnmount` 中清除此方法创建的任何外部订阅或数据。</span>
+  componentWillMount<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 在组件已装入并具有DOM表示形式时调用。 但是，无法保证DOM节点位于文档中。 在第一次装入（初始化和渲染）组件时，将此作为操作DOM的机会。</span>
+  componentDidMount<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 在组件接收新道具之前调用。 使用此作为通过使用 `this.setState` 更新状态来对prop转换作出反应的机会。 目前的道具是通过 `this.props` 访问的。</span>
+  <span class="token comment" spellcheck="true">// 注意：没有等效的 `componentWillReceiveState` 。传入的道具转换可能会导致状态改变，但情况恰恰相反。如果你需要它，你可能正在寻找 `componentWillUpdate` 。</span>
+  componentWillReceiveProps<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 在决定是否应该因接收新的道具和状态而更新组件时调用。 当您确定转换到新的道具和状态不需要更新组件时，可以将此作为 `return false` 的机会。</span>
+  shouldComponentUpdate<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_ONCE<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 由于从 `this.props` 和 `this.state` 转换为 `nextProps` 和 `nextState` 而导致组件即将更新时调用。使用此作为在更新发生之前执行准备的机会。</span>
+  <span class="token comment" spellcheck="true">// 注意：您**不能**在此方法中使用 `this.setState()`  。</span>
+  componentWillUpdate<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 更新组件的DOM表示时调用。 将此作为在更新组件时对DOM进行操作的机会。</span>
+  componentDidUpdate<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 当组件即将从其父组件中删除并销毁其DOM表示时调用。 使用此作为释放任何外部资源的机会。 注意：没有 `componentDidUnmount`  ，因为您的组件将被该点销毁。</span>
+  componentWillUnmount<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>DEFINE_MANY<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 到此</span>
+  updateComponent<span class="token punctuation">:</span> SpecPolicy<span class="token punctuation">.</span>OVERRIDE_BASE
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="生命周期图"><a href="#生命周期图" class="headerlink" title="生命周期图"></a>生命周期图</h2><p>来看一下生命周期图：</p>
+<p><img src="07-01.png" alt="生命周期图"></p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2019/04/07/LSC-React-07/" title="React 源码学习（七）：生命周期">https://zongzi531.com/2019/04/07/LSC-React-07/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/04/08/LSC-React-08/">
+        上一篇<br>React 源码学习（八）：组件更新
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/04/06/LSC-React-06/">
+        下一篇<br>React 源码学习（六）：组件渲染
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?47816992"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2019/04/07/LSC-React-07/';
+        this.page.identifier = '/2019/04/07/LSC-React-07/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

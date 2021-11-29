@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>［书单推荐］《深入浅出Node.js》 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。
+Node.js...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?1372989">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2019/01/01/书单推荐-深入浅出Node-js/Node.js_logo.svg')">
+                <div class="post-title">
+                    ［书单推荐］《深入浅出Node.js》
+                    <div class="post-meta">
+                        <time datetime="2019-01-01T22:11:43.000Z" itemprop="datePublished">
+                            2019-01-01 22:11
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/JavaScript/'>JavaScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/JavaScript/'>JavaScript</a>, 
+                        
+                        <a href='/tags/Node-js/'>Node.js</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<ul>
+<li><strong>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。</strong></li>
+<li><strong>Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。</strong></li>
+</ul>
+<p>2018年12月，2018年的最后一个月，我选择开始阅读《深入浅出Node.js》，在读完本书后，我找到印刷信息，看到第一版时间是2013年12月，也就是5年前。不得不说作者朴灵之强大。</p>
+<p>我也不想中规中矩的把书中的内容搬运出来记录在此，虽然说中规中矩的搬运过程是可以加深记忆的，但是我最后决定还是算了，毕竟这不如直接去看书或者网上冲浪来的更快些。那么为了写这篇博客，我还是得从书中搬运一些内容至此，OK，搬运就搬运吧，但是我仅参考了印刷信息及目录。当然我相信未来当我再次深入Node.js的时候，我任然能从中获得实践经验。</p>
+<p>首先来谈论下Node.js为何可以在后端领域崛起，看下近年来后端服务模型的变迁：</p>
+<ul>
+<li>石器时代：同步</li>
+<li>青铜时代：复制进程</li>
+<li>白银时代：多线程</li>
+<li>黄金时代：<strong>事件驱动</strong></li>
+</ul>
+<p>Node.js得以从后端领域崛起的原因之一是依靠事件驱动这一优点。</p>
+<p>我先来谈谈我对这4个时代的理解，可以说石器时代的服务端处理请求都是同步进行的，形象点理解就是，你在办理业务的时候需要排队等候。青铜时代为了解决这个问题使用了复制进程，就好比多窗口办理业务，大家在银行或者营业厅都有遇到过吧。白银时代多线程可以来说是一个质的飞跃，比如 Java 就是多线程的， JavaScript 就是单线程的，那么同样的，多线程也带来了一些复杂的问题，比如锁状态等……，利用 JavaScript 的单线程也就避免了锁状态等问题。黄金时代则是利用事件驱动，事件驱动讲通俗点可以理解成 <code>setTimeout</code> ，只不过 <code>setTimeout</code> 的第二参数 <code>delay</code> 是由毫秒数决定，而事件驱动则是由事件决定，你可以理解成当满足这个事件时，执行需要执行的函数，其实在浏览器环境中 <code>window.addEventListener</code> 也是一种。</p>
+<p>那么 Node.js 的非阻塞式 I/O 的模型充分利用了事件驱动发挥了其高效的性能。举个例子，当你在执行 I/O 操作时，如果代码阻塞，那么你后面的代码会受到阻塞，在进行大型 I/O 操作时会很严重的影响到你的程序效率。非阻塞式 I/O 的模型却不是这样，则采用回调的形式，来执行 I/O 操作完成后应该执行的代码。这种非阻塞的形式是非常的高效的。</p>
+<p>这些特点使得 Node.js 得以在后端领域崛起，并且这些特点能让你很深刻的感受异步编程，但是 Node.js 也同样存在着缺点，总之万物都有 Good Parts 和 Bad Parts，所以在认识万物时，都得充分的知道这两部分，值得学习的是要学会正面面对和接受 Bad Parts ，本书中写到了很多面对 Bad Parts 时提供的解决方案，这样就能更好的提升 Node.js 性能，将 Node.js 的性能发挥到极致。</p>
+<p>接下来谈论下 Bad Parts ，一定要说是 Bad Parts 吗？好像也不一定，因为它让你学到了更多的知识：</p>
+<p>首先要面对的问题是单线程，毕竟 Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。OK，那么单线程有什么问题呢？有个最致命的问题，一但线程出错，整个线程就会退出……捞不捞？说捞也捞，说不捞也不捞，要怪就怪开发没把抛异常写好，导致线程退出。单线程还有什么问题呢，你看，现在都是多核 CPU 单线程开着一个进程在跑， CPU 资源是不是浪费了，有一张很搞笑的图。</p>
+<p><img src="pic-1.jpg" alt="pic-1"></p>
+<p>那么如何利用起其他的核呢？ Node.js 提供了 child_process（子进程）的功能，你可以启动跟你服务器 CPU 内核数相同的进程来提供服务，来提升你的服务能力，关于进程自动重启，进程监听同一端口，负载均衡等等实践可以看书或自己尝试。</p>
+<p>再来需要面对的问题就是内存控制了，毕竟服务器也好，电脑也好，内存总是有限的。内存控制的主要手段有手动释放内存和自动的垃圾回收，手动释放内存其实就比较考验开发的基础。毕竟内存泄漏这个问题还是比较棘手的，泄漏了多了也就炸了。</p>
+<p>再者是一些常用的数据存在内存里面，用户量多了，内存一样爆，存数据库吗？也不行数据库存储毕竟也是异步的，也会出现很多意想不到的问题。社区现在一般都用 Redis 来解决，用于存放一些 Session 数据和常用数据，当然我记得书中还提及了其他的工具，当然这不重要，重要的是你要知道如何控制内存。</p>
+<p>来讲讲一个程序（服务端代码、前端代码、开源项目等等）是否健壮，这时候需要对程序本身进行测试，单元测试是其中必不可少的一部分。说到单元测试，我对我自己的玩具项目编写了单元测试代码，在编写单元测试的过程中我也发现，测试覆盖率报告同样也很重要，它能告诉我我的单元测试编写的是否全面，这时候你会发现 Travis CI ， Jenkins 这类自动化工具的重要性。它们可以帮你完成一些繁琐而又重复的事情，不止是在生成测试覆盖率报告上，还有打包部署等等功能，所以好好利用这些自动化工具能提高你的开发效率，当然测试是用来提高你的代码质量。同样的，除了单元测试还有性能测试的存在。当然在项目上线后，对项目进行预警、监控显得同样的重要，这里到头来还是会回归到一个问题，用户体验。</p>
+<p>当阅读完本书后，我才领略到后端领域如此之大，本书提及的内容如此之广泛，不仅是更了解了服务端，也对个工程化有了更多的认识和学习，也同样的，我需要花更多的时间去实践它们，所以我的 JavaScript 之路仍然在继续，在继续前行，脚下的砖也在慢慢的砌。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2019/01/01/%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode-js/" title="［书单推荐］《深入浅出Node.js》">https://zongzi531.com/2019/01/01/%E4%B9%A6%E5%8D%95%E6%8E%A8%E8%8D%90-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode-js/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/02/01/%E6%9D%A5%E6%99%9A%E4%BA%86%E7%9A%842018%E5%B9%B4%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
+        上一篇<br>来晚了的2018年年终总结
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/12/01/%E4%BA%8C%E8%BF%9BTypeScript/">
+        下一篇<br>二进TypeScript
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?2484785"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2019/01/01/书单推荐-深入浅出Node-js/';
+        this.page.identifier = '/2019/01/01/书单推荐-深入浅出Node-js/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

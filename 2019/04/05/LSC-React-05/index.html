@@ -1,0 +1,1095 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>React 源码学习（五）：事件机制 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。在考虑到...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?26397938">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    React 源码学习（五）：事件机制
+                    <div class="post-meta">
+                        <time datetime="2019-04-05T08:25:52.000Z" itemprop="datePublished">
+                            2019-04-05 08:25
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/React-源码学习/'>React 源码学习</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/React/'>React</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。<br>在考虑到读哪个版本的时候，我想先接触到源码早期的思想可能会更轻松一些，最终我选择阅读 <code>0.3-stable</code> 。<br>那么接下来，我将从几个方面来解读这个版本的源码。</p>
+</blockquote>
+<ol>
+<li><a href="https://zongzi531.com/2019/04/01/LSC-React-01/">React 源码学习（一）：HTML 元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/02/LSC-React-02/">React 源码学习（二）：HTML 子元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/03/LSC-React-03/">React 源码学习（三）：CSS 样式及 DOM 属性</a></li>
+<li><a href="https://zongzi531.com/2019/04/04/LSC-React-04/">React 源码学习（四）：事务机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/05/LSC-React-05/">React 源码学习（五）：事件机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/06/LSC-React-06/">React 源码学习（六）：组件渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/07/LSC-React-07/">React 源码学习（七）：生命周期</a></li>
+<li><a href="https://zongzi531.com/2019/04/08/LSC-React-08/">React 源码学习（八）：组件更新</a></li>
+<li><a href="https://zongzi531.com/2019/12/18/LSC-React-09/">React 源码学习（九）：“脱胎换骨”</a></li>
+<li><a href="https://zongzi531.com/2019/12/19/LSC-React-10/">React 源码学习（十）：Fiber</a></li>
+<li><a href="https://zongzi531.com/2019/12/20/LSC-React-11/">React 源码学习（十一）：Scheduling</a></li>
+<li><a href="https://zongzi531.com/2019/12/21/LSC-React-12/">React 源码学习（十二）：Reconciliation</a></li>
+</ol>
+<h2 id="React-事件"><a href="#React-事件" class="headerlink" title="React 事件"></a>React 事件</h2><p>我们先来看到整体逻辑图：</p>
+<p><img src="05-01.png" alt="事件机制"></p>
+<p>React 采用将事件挂载至 <code>document</code> 或者 <code>window</code> 上来实现顶级事件。接下来我们会一一来介绍事件的实现过程。</p>
+<h3 id="事件插件注入"><a href="#事件插件注入" class="headerlink" title="事件插件注入"></a>事件插件注入</h3><p>我们来回忆下， <code>ReactNativeComponent.js</code> 中 <code>_createOpenTagMarkup</code> 方法中的 <code>putListener</code> 函数和 <code>ReactMount.js</code> 中 <code>renderComponent</code> 方法中的 <code>prepareTopLevelEvents</code> 函数都是事件相关的方法，前者是生成 HTML 标记时，对符合要求的“键”进行注册事件，后者则是在执行 <code>React.renderComponent</code> 方法时进行准备顶级事件的过程。当然之前有一个内容没有提到，就是在 React 注入时，默认注入了事件插件排序顺序、实例操作函数、事件插件。那让我们直接先看到代码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactDefaultInjection.js</span>
+<span class="token keyword">function</span> <span class="token function">inject</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 注入模块，用于解析DOM层次结构和插件排序。</span>
+  <span class="token comment" spellcheck="true">// 这里是注入事件插件排序顺序</span>
+  EventPluginHub<span class="token punctuation">.</span>injection<span class="token punctuation">.</span><span class="token function">injectEventPluginOrder</span><span class="token punctuation">(</span>DefaultEventPluginOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 注入实例操作函数，用于事件传播</span>
+  EventPluginHub<span class="token punctuation">.</span>injection<span class="token punctuation">.</span><span class="token function">injectInstanceHandle</span><span class="token punctuation">(</span>ReactInstanceHandles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// 默认包含两个重要事件插件（而不必要求他们）。</span>
+  <span class="token comment" spellcheck="true">// 注入事件插件</span>
+  EventPluginHub<span class="token punctuation">.</span>injection<span class="token punctuation">.</span><span class="token function">injectEventPluginsByName</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token string">'SimpleEventPlugin'</span><span class="token punctuation">:</span> SimpleEventPlugin<span class="token punctuation">,</span>
+    <span class="token string">'EnterLeaveEventPlugin'</span><span class="token punctuation">:</span> EnterLeaveEventPlugin
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// 用于兼容 IE8 创建的复合组件，后续讲到组件的时候再做解读，但不对 `ReactDOMForm.js` 进行解读</span>
+  ReactDOM<span class="token punctuation">.</span>injection<span class="token punctuation">.</span><span class="token function">injectComponentClasses</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    form<span class="token punctuation">:</span> ReactDOMForm
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然你需要知道，这个 <code>inject</code> 函数时需要在 <code>React.js</code> 中引入并执行的。</p>
+<p>我们一步步往下看。先来看看 <code>DefaultEventPluginOrder.js</code> ：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// eventPlugins/DefaultEventPluginOrder.js</span>
+<span class="token keyword">var</span> DefaultEventPluginOrder <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>ResponderEventPlugin<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>SimpleEventPlugin<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>TapEventPlugin<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>EnterLeaveEventPlugin<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>AnalyticsEventPlugin<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>就是一个事件插件的默认顺序列表，使用 <code>EventPluginHub.injection.injectEventPluginOrder</code> 方法进行注入。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/EventPluginHub.js</span>
+<span class="token keyword">var</span> injection <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  EventPluginOrder<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  injectEventPluginOrder<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>InjectedEventPluginOrder<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    injection<span class="token punctuation">.</span>EventPluginOrder <span class="token operator">=</span> InjectedEventPluginOrder<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 这个方法稍后再做解读，因为 injectEventPluginsByName 方法也使用到了他</span>
+    injection<span class="token punctuation">.</span><span class="token function">_recomputePluginsList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>EventPluginHub.injection.injectInstanceHandle(ReactInstanceHandles);</code> 也是差不多的操作，他操作的是 <code>EventPropagators.js</code> 下的 <code>InstanceHandle</code> 。 <code>ReactInstanceHandles</code> 在后续事件相关中都会使用到。我们先来看看 <code>injectEventPluginsByName</code> 方法：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/EventPluginHub.js</span>
+<span class="token keyword">var</span> injection <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  injectEventPluginsByName<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>pluginsByName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 这里讲传入插件与已存插件进行合并</span>
+    injection<span class="token punctuation">.</span>pluginsByName <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>injection<span class="token punctuation">.</span>pluginsByName<span class="token punctuation">,</span> pluginsByName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    injection<span class="token punctuation">.</span><span class="token function">_recomputePluginsList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  pluginsByName<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 重新计算事件插件顺序列表</span>
+  _recomputePluginsList<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> injectPluginByName <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> PluginModule<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 查找插件顺序列表，不存在则抛出错误</span>
+      <span class="token keyword">var</span> pluginIndex <span class="token operator">=</span> injection<span class="token punctuation">.</span>EventPluginOrder<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">throwIf</span><span class="token punctuation">(</span>pluginIndex <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> ERRORS<span class="token punctuation">.</span>DEPENDENCY_ERROR <span class="token operator">+</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 对应的插件列表不存在的情况，则在对应索引赋值其对应的插件模块</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>injection<span class="token punctuation">.</span>plugins<span class="token punctuation">[</span>pluginIndex<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        injection<span class="token punctuation">.</span>plugins<span class="token punctuation">[</span>pluginIndex<span class="token punctuation">]</span> <span class="token operator">=</span> PluginModule<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 遍历其插件模块对应的抽象事件类型</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> eventName <span class="token keyword">in</span> PluginModule<span class="token punctuation">.</span>abstractEventTypes<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+          <span class="token keyword">var</span> eventType <span class="token operator">=</span> PluginModule<span class="token punctuation">.</span>abstractEventTypes<span class="token punctuation">[</span>eventName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">// 记录所有的注册名称</span>
+          <span class="token function">recordAllRegistrationNames</span><span class="token punctuation">(</span>eventType<span class="token punctuation">,</span> PluginModule<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 事件插件的默认顺序列表存在情况</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>injection<span class="token punctuation">.</span>EventPluginOrder<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// Else, do when plugin order injected</span>
+      <span class="token keyword">var</span> injectedPluginsByName <span class="token operator">=</span> injection<span class="token punctuation">.</span>pluginsByName<span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 遍历注入的插件</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> name <span class="token keyword">in</span> injectedPluginsByName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token function">injectPluginByName</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> injectedPluginsByName<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> registrationNames <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> registrationNamesArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">recordAllRegistrationNames</span><span class="token punctuation">(</span>eventType<span class="token punctuation">,</span> PluginModule<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> phaseName<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 从 eventType 获得 phasedRegistrationNames</span>
+  <span class="token keyword">var</span> phasedRegistrationNames <span class="token operator">=</span> eventType<span class="token punctuation">.</span>phasedRegistrationNames<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 查看相关源码可以发现，这里适用于 `SimpleEventPlugin`</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>phasedRegistrationNames<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 遍历 phasedRegistrationNames</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>phaseName <span class="token keyword">in</span> phasedRegistrationNames<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>phasedRegistrationNames<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>phaseName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 对应位置进行添加</span>
+      registrationNames<span class="token punctuation">[</span>phasedRegistrationNames<span class="token punctuation">[</span>phaseName<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> PluginModule<span class="token punctuation">;</span>
+      registrationNamesArr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>phasedRegistrationNames<span class="token punctuation">[</span>phaseName<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>eventType<span class="token punctuation">.</span>registrationName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 若注册名称在的情况，查看相关源码可以发现，这里适用于 `EnterLeaveEventPlugin`</span>
+    registrationNames<span class="token punctuation">[</span>eventType<span class="token punctuation">.</span>registrationName<span class="token punctuation">]</span> <span class="token operator">=</span> PluginModule<span class="token punctuation">;</span>
+    registrationNamesArr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>eventType<span class="token punctuation">.</span>registrationName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 看到源码项目结构或者事件插件的默认顺序列表你都会发现，有着 `ResponderEventPlugin`</span>
+  <span class="token comment" spellcheck="true">// `TapEventPlugin`, `AnalyticsEventPlugin` 的存在。</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>比较抽象对吧，因为这里操作的都是事件插件的默认顺序列表中的对象，我们接下来看到 <code>SimpleEventPlugin</code> 和 <code>EnterLeaveEventPlugin</code> 来做相应的解释：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// eventPlugins/SimpleEventPlugin.js</span>
+<span class="token keyword">var</span> SimpleEventPlugin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  abstractEventTypes<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Note: We do not allow listening to mouseOver events. Instead, use the</span>
+    <span class="token comment" spellcheck="true">// onMouseEnter/onMouseLeave created by `EnterLeaveEventPlugin`.</span>
+    <span class="token comment" spellcheck="true">// 这里提到 onMouseEnter/onMouseLeave 请查看到 `EnterLeaveEventPlugin.js`</span>
+    mouseDown<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 这是上面注册所有事件名称使用到的位置</span>
+      phasedRegistrationNames<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        bubbled<span class="token punctuation">:</span> <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>onMouseDown<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        captured<span class="token punctuation">:</span> <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>onMouseDownCapture<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// eventPlugins/EnterLeaveEventPlugin.js</span>
+<span class="token keyword">var</span> abstractEventTypes <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  mouseEnter<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>registrationName<span class="token punctuation">:</span> <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>onMouseEnter<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  mouseLeave<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>registrationName<span class="token punctuation">:</span> <span class="token function">keyOf</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>onMouseLeave<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么从中获取相应的对象如 <code>phasedRegistrationNames</code> 或是对应的标识 <code>registrationName</code>。</p>
+<h2 id="注册顶级事件"><a href="#注册顶级事件" class="headerlink" title="注册顶级事件"></a>注册顶级事件</h2><p>我们现在来看到 <code>ReactMount.js</code> 中 <code>renderComponent</code> 方法中的 <code>prepareTopLevelEvents</code> 函数：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactMount.js</span>
+<span class="token keyword">var</span> ReactMount <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  useTouchEvents<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  prepareTopLevelEvents<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>TopLevelCallbackCreator<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    ReactEvent<span class="token punctuation">.</span><span class="token function">ensureListening</span><span class="token punctuation">(</span>
+      <span class="token comment" spellcheck="true">// 用于控制是否使用 TouchEvents ， 默认为 false</span>
+      ReactMount<span class="token punctuation">.</span>useTouchEvents<span class="token punctuation">,</span>
+      TopLevelCallbackCreator
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是你可以调用 <code>React.initializeTouchEvents(true);</code> 来提前开启他，当然这是你需要使用到他的时候。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactEvent.js</span>
+<span class="token keyword">var</span> _isListening <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">ensureListening</span><span class="token punctuation">(</span>touchNotMouse<span class="token punctuation">,</span> TopLevelCallbackCreator<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>_isListening<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 赋值顶级回调创建者</span>
+    ReactEvent<span class="token punctuation">.</span>TopLevelCallbackCreator <span class="token operator">=</span> TopLevelCallbackCreator<span class="token punctuation">;</span>
+    <span class="token function">listenAtTopLevel</span><span class="token punctuation">(</span>touchNotMouse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 一个私有变量，用于控制 ensureListening 方法只执行一次</span>
+    _isListening <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">listenAtTopLevel</span><span class="token punctuation">(</span>touchNotMouse<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> mountAt <span class="token operator">=</span> document<span class="token punctuation">;</span>
+
+  <span class="token function">registerDocumentScrollListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">registerDocumentResizeListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">trapBubbledEvent</span><span class="token punctuation">(</span>topLevelTypes<span class="token punctuation">.</span>topMouseOver<span class="token punctuation">,</span> <span class="token string">'mouseover'</span><span class="token punctuation">,</span> mountAt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+  <span class="token comment" spellcheck="true">// TouchEvents 相关</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>touchNotMouse<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">trapBubbledEvent</span><span class="token punctuation">(</span>topLevelTypes<span class="token punctuation">.</span>topTouchStart<span class="token punctuation">,</span> <span class="token string">'touchstart'</span><span class="token punctuation">,</span> mountAt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// ...</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// ... 以及一些兼容相关，涉及使用到 `isEventSupported` 方法</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/EventConstants.js</span>
+<span class="token keyword">var</span> topLevelTypes <span class="token operator">=</span> <span class="token function">keyMirror</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  topBlur<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="捕获-冒泡事件监听"><a href="#捕获-冒泡事件监听" class="headerlink" title="捕获/冒泡事件监听"></a>捕获/冒泡事件监听</h3><p>上面代码直接完成顶级事件的监听，我们顺势来看看 <code>trapBubbledEvent</code> ，与之相关的还有 <code>trapCapturedEvent</code> ，分别是冒泡和捕获阶段：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactEvent.js</span>
+<span class="token keyword">function</span> <span class="token function">trapBubbledEvent</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> onWhat<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">listen</span><span class="token punctuation">(</span>
+    onWhat<span class="token punctuation">,</span>
+    handlerBaseName<span class="token punctuation">,</span>
+    ReactEvent<span class="token punctuation">.</span>TopLevelCallbackCreator<span class="token punctuation">.</span><span class="token function">createTopLevelCallback</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">trapCapturedEvent</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> onWhat<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">capture</span><span class="token punctuation">(</span>
+    onWhat<span class="token punctuation">,</span>
+    handlerBaseName<span class="token punctuation">,</span>
+    ReactEvent<span class="token punctuation">.</span>TopLevelCallbackCreator<span class="token punctuation">.</span><span class="token function">createTopLevelCallback</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">)</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其实从这里你就可以发现，不管是冒泡或者是捕获，我在 <code>document</code> 或者 <code>window</code> 这样的顶级对象上，都会先被捕获到，至于最后想到哪个方法或者函数，那么是由事件传播器控制，查找对应的回调注册表来完成功能。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/NormalizedEventListener.js</span>
+<span class="token keyword">function</span> <span class="token function">createNormalizedCallback</span><span class="token punctuation">(</span>cb<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>unfixedNativeEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">cb</span><span class="token punctuation">(</span><span class="token function">normalizeEvent</span><span class="token punctuation">(</span>unfixedNativeEvent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> NormalizedEventListener <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  listen<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    EventListener<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> <span class="token function">createNormalizedCallback</span><span class="token punctuation">(</span>cb<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  capture<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    EventListener<span class="token punctuation">.</span><span class="token function">capture</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> <span class="token function">createNormalizedCallback</span><span class="token punctuation">(</span>cb<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>normalizeEvent</code> 函数是一个补丁，这里不做解读。你可以直接忽略理解为 <code>cb(unfixedNativeEvent);</code> 。这里调用的又是另一个模块 <code>EventListener</code> ， <code>EventListener</code> 则的对原生浏览器 API 进行了封装。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// vendor/stubs/EventListener.js</span>
+<span class="token keyword">var</span> EventListener <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  listen<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>el<span class="token punctuation">.</span>addEventListener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      el<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>el<span class="token punctuation">.</span>attachEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      el<span class="token punctuation">.</span><span class="token function">attachEvent</span><span class="token punctuation">(</span><span class="token string">'on'</span> <span class="token operator">+</span> handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  capture<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>el<span class="token punctuation">,</span> handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>el<span class="token punctuation">.</span>addEventListener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      el<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>handlerBaseName<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="React-顶级事件回调方法"><a href="#React-顶级事件回调方法" class="headerlink" title="React 顶级事件回调方法"></a>React 顶级事件回调方法</h2><p>那么由此可以看出， <code>trapBubbledEvent</code> 在操作的其实就是 <code>addEventListener</code> API，唯独还没有解读的是 <code>ReactEvent.TopLevelCallbackCreator.createTopLevelCallback(topLevelType)</code> ，其实你会发现，从刚刚开始我都没有解读 <code>TopLevelCallbackCreator</code> ，那么我们现在就来聊聊：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactEventTopLevelCallback.js</span>
+<span class="token keyword">var</span> ReactEventTopLevelCallback <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 这里的 `topLevelType` 的值已经在 `listenAtTopLevel` 函数执行阶段就完成了赋值</span>
+  <span class="token comment" spellcheck="true">// 当 `addEventListener` 执行后，返回的是 `unfixedNativeEvent` 参数</span>
+  <span class="token comment" spellcheck="true">// 经过由 `normalizeEvent` 补丁处理后，返回 `fixedNativeEvent`</span>
+  createTopLevelCallback<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>fixedNativeEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 这个在之前也有提到过，当执行 React 调度事务时，将控制事件</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>_topLevelListenersEnabled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获得第一个 React DOM</span>
+      <span class="token keyword">var</span> renderedTarget <span class="token operator">=</span> ReactInstanceHandles<span class="token punctuation">.</span><span class="token function">getFirstReactDOM</span><span class="token punctuation">(</span>
+        fixedNativeEvent<span class="token punctuation">.</span>target
+      <span class="token punctuation">)</span> <span class="token operator">||</span> ExecutionEnvironment<span class="token punctuation">.</span>global<span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获得对应的 ID</span>
+      <span class="token keyword">var</span> renderedTargetID <span class="token operator">=</span> <span class="token function">getDOMNodeID</span><span class="token punctuation">(</span>renderedTarget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> event <span class="token operator">=</span> fixedNativeEvent<span class="token punctuation">;</span>
+      <span class="token keyword">var</span> target <span class="token operator">=</span> renderedTarget<span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 例如： ReactEvent.handleTopLevel('topClick', event, '.reactRoot[0]', target)</span>
+      ReactEvent<span class="token punctuation">.</span><span class="token function">handleTopLevel</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">,</span> event<span class="token punctuation">,</span> renderedTargetID<span class="token punctuation">,</span> target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="创建抽象事件及执行至销毁"><a href="#创建抽象事件及执行至销毁" class="headerlink" title="创建抽象事件及执行至销毁"></a>创建抽象事件及执行至销毁</h2><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactEvent.js</span>
+<span class="token keyword">function</span> <span class="token function">handleTopLevel</span><span class="token punctuation">(</span>
+    topLevelType<span class="token punctuation">,</span>
+    nativeEvent<span class="token punctuation">,</span>
+    renderedTargetID<span class="token punctuation">,</span>
+    renderedTarget<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 提取抽象事件，返回 AbstractEvents 实例</span>
+  <span class="token comment" spellcheck="true">// 这个抽象事件可能是 AbstractEvents 或者可能是 AbstractEvents[]</span>
+  <span class="token keyword">var</span> abstractEvents <span class="token operator">=</span> EventPluginHub<span class="token punctuation">.</span><span class="token function">extractAbstractEvents</span><span class="token punctuation">(</span>
+    topLevelType<span class="token punctuation">,</span>
+    nativeEvent<span class="token punctuation">,</span>
+    renderedTargetID<span class="token punctuation">,</span>
+    renderedTarget
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// The event queue being processed in the same cycle allows preventDefault.</span>
+  <span class="token comment" spellcheck="true">// 加入抽象事件队列</span>
+  EventPluginHub<span class="token punctuation">.</span><span class="token function">enqueueAbstractEvents</span><span class="token punctuation">(</span>abstractEvents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  EventPluginHub<span class="token punctuation">.</span><span class="token function">processAbstractEventQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/EventPluginHub.js</span>
+<span class="token keyword">var</span> extractAbstractEvents <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">,</span> nativeEvent<span class="token punctuation">,</span> renderedTargetID<span class="token punctuation">,</span> renderedTarget<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> abstractEvents<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 重新计算的 plugins 列表，就是执行 _recomputePluginsList 函数后的结果</span>
+  <span class="token keyword">var</span> plugins <span class="token operator">=</span> injection<span class="token punctuation">.</span>plugins<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> len <span class="token operator">=</span> plugins<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 遍历插件列表</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Not every plugin in the ordering may be loaded at runtime.</span>
+    <span class="token keyword">var</span> possiblePlugin <span class="token operator">=</span> plugins<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// possiblePlugin 存在的情况下执行</span>
+    <span class="token comment" spellcheck="true">// 这里的 extractAbstractEvents 方法是 possiblePlugin 的</span>
+    <span class="token comment" spellcheck="true">// 比如 SimpleEventPlugin.extractAbstractEvents 方法</span>
+    <span class="token comment" spellcheck="true">// 对 SimpleEventPlugin.extractAbstractEvents 或者是 EnterLeaveEventPlugin.extractAbstractEvents</span>
+    <span class="token comment" spellcheck="true">// 这里不做具体解读，但是需要提到的是，进过函数返回的内容是 AbstractEvent 的实例，他使用 PooledClass 注入过</span>
+    <span class="token comment" spellcheck="true">// 可以直接调用 getPooled 及 release 方法</span>
+    <span class="token keyword">var</span> extractedAbstractEvents <span class="token operator">=</span>
+      possiblePlugin <span class="token operator">&amp;&amp;</span>
+      possiblePlugin<span class="token punctuation">.</span><span class="token function">extractAbstractEvents</span><span class="token punctuation">(</span>
+        topLevelType<span class="token punctuation">,</span>
+        nativeEvent<span class="token punctuation">,</span>
+        renderedTargetID<span class="token punctuation">,</span>
+        renderedTarget
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 若最终这个返回值存在</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>extractedAbstractEvents<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 合并 abstractEvents 和 extractedAbstractEvents</span>
+      abstractEvents <span class="token operator">=</span> <span class="token function">accumulate</span><span class="token punctuation">(</span>abstractEvents<span class="token punctuation">,</span> extractedAbstractEvents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> abstractEvents<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> abstractEventQueue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> enqueueAbstractEvents <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>abstractEvents<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>abstractEvents<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 对这个抽象事件队列进行合并</span>
+    abstractEventQueue <span class="token operator">=</span> <span class="token function">accumulate</span><span class="token punctuation">(</span>abstractEventQueue<span class="token punctuation">,</span> abstractEvents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> processAbstractEventQueue <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> processingAbstractEventQueue <span class="token operator">=</span> abstractEventQueue<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 释放内存</span>
+  abstractEventQueue <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 若 processingAbstractEventQueue 是数组则遍历执行 executeDispatchesAndRelease 函数</span>
+  <span class="token comment" spellcheck="true">// 反之 executeDispatchesAndRelease(processingAbstractEventQueue)</span>
+  <span class="token function">forEachAccumulated</span><span class="token punctuation">(</span>processingAbstractEventQueue<span class="token punctuation">,</span> executeDispatchesAndRelease<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> executeDispatchesAndRelease <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获得对应的注册事件名称</span>
+    <span class="token keyword">var</span> PluginModule <span class="token operator">=</span> <span class="token function">getPluginModuleForAbstractEvent</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 比如获得了 SimpleEventPlugin.executeDispatch ，用于实现与默认实现相同，但在返回值为 false 时取消事件除外的功能</span>
+    <span class="token keyword">var</span> pluginExecuteDispatch <span class="token operator">=</span> PluginModule <span class="token operator">&amp;&amp;</span> PluginModule<span class="token punctuation">.</span>executeDispatch<span class="token punctuation">;</span>
+    EventPluginUtils<span class="token punctuation">.</span><span class="token function">executeDispatchesInOrder</span><span class="token punctuation">(</span>
+      abstractEvent<span class="token punctuation">,</span>
+      pluginExecuteDispatch <span class="token operator">||</span> EventPluginUtils<span class="token punctuation">.</span>executeDispatch
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 销毁抽象事件</span>
+    AbstractEvent<span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">getPluginModuleForAbstractEvent</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>registrationName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> registrationNames<span class="token punctuation">[</span>abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>registrationName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> phase <span class="token keyword">in</span> abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>phasedRegistrationNames<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>phasedRegistrationNames<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>phase<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> PluginModule <span class="token operator">=</span> registrationNames<span class="token punctuation">[</span>
+        abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>phasedRegistrationNames<span class="token punctuation">[</span>phase<span class="token punctuation">]</span>
+      <span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>PluginModule<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> PluginModule<span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="实例化抽象事件"><a href="#实例化抽象事件" class="headerlink" title="实例化抽象事件"></a>实例化抽象事件</h3><p>这里将对 <code>SimpleEventPlugin.extractAbstractEvents</code> 或者是 <code>EnterLeaveEventPlugin.extractAbstractEvents</code> 进行解读。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// eventPlugins/SimpleEventPlugin.js</span>
+<span class="token keyword">var</span> SimpleEventPlugin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 'topClick', event, '.reactRoot[0]', target</span>
+  extractAbstractEvents<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">,</span> nativeEvent<span class="token punctuation">,</span> renderedTargetID<span class="token punctuation">,</span> renderedTarget<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> data<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// SimpleEventPlugin.abstractEventTypes 的映射</span>
+    <span class="token keyword">var</span> abstractEventType <span class="token operator">=</span>
+      SimpleEventPlugin<span class="token punctuation">.</span>topLevelTypesToAbstract<span class="token punctuation">[</span>topLevelType<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>abstractEventType<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// ...</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 实例化 AbstractEvent</span>
+    <span class="token keyword">var</span> abstractEvent <span class="token operator">=</span> AbstractEvent<span class="token punctuation">.</span><span class="token function">getPooled</span><span class="token punctuation">(</span>
+      abstractEventType<span class="token punctuation">,</span>
+      renderedTargetID<span class="token punctuation">,</span>
+      topLevelType<span class="token punctuation">,</span>
+      nativeEvent<span class="token punctuation">,</span>
+      data
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 这里是个关键</span>
+    <span class="token comment" spellcheck="true">// 对捕获和冒泡分别进行派发这个 AbstractEvent 实例</span>
+    EventPropagators<span class="token punctuation">.</span><span class="token function">accumulateTwoPhaseDispatches</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> abstractEvent<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+SimpleEventPlugin<span class="token punctuation">.</span>topLevelTypesToAbstract <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  topMouseDown<span class="token punctuation">:</span>   SimpleEventPlugin<span class="token punctuation">.</span>abstractEventTypes<span class="token punctuation">.</span>mouseDown<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在 <code>EnterLeaveEventPlugin.js</code> 中， <code>extractAbstractEvents</code> 方法返回了 <code>[leave, enter]</code> 的 AbstractEvent 实例化，并且调用 <code>EventPropagators.accumulateEnterLeaveDispatches(leave, enter, fromID, toID);</code> 进行派发。</p>
+<p><code>EventPropagators.js</code> 相关的方法稍后做解读。</p>
+<p>那么在之前调用 <code>executeDispatchesAndRelease</code> 函数时，执行相应函数涉及到的函数如下：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/EventPluginUtils.js</span>
+<span class="token keyword">function</span> <span class="token function">executeDispatch</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> listener<span class="token punctuation">,</span> domID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// forEachEventDispatch 函数中对应的 cb(abstractEvent, dispatchListeners, dispatchIDs)</span>
+  <span class="token function">listener</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> domID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">executeDispatchesInOrder</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> executeDispatch<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">forEachEventDispatch</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> executeDispatch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  abstractEvent<span class="token punctuation">.</span>_dispatchListeners <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  abstractEvent<span class="token punctuation">.</span>_dispatchIDs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">forEachEventDispatch</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> cb<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 在初始化的时候，这两个内容都是被置为 null 的</span>
+  <span class="token comment" spellcheck="true">// 他们都在 EventPropagators 被赋值</span>
+  <span class="token comment" spellcheck="true">// 若存在的情况下，这就是你在元素上定义的事件回调及对应的 ID</span>
+  <span class="token keyword">var</span> dispatchListeners <span class="token operator">=</span> abstractEvent<span class="token punctuation">.</span>_dispatchListeners<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> dispatchIDs <span class="token operator">=</span> abstractEvent<span class="token punctuation">.</span>_dispatchIDs<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>dispatchListeners<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>
+      i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      i <span class="token operator">&lt;</span> dispatchListeners<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>abstractEvent<span class="token punctuation">.</span>isPropagationStopped<span class="token punctuation">;</span>
+      i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// Listeners and IDs are two parallel arrays that are always in sync.</span>
+      <span class="token function">cb</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> dispatchListeners<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> dispatchIDs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dispatchListeners<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">cb</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">,</span> dispatchListeners<span class="token punctuation">,</span> dispatchIDs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="抽象事件-AbstractEvent"><a href="#抽象事件-AbstractEvent" class="headerlink" title="抽象事件 AbstractEvent"></a>抽象事件 AbstractEvent</h3><p>大家对 <code>AbstractEvent</code> 的属性有些疑问，因为刚刚在提到的时候并没有提到 <code>AbstractEvent</code> 的实现。那么接下来解释下，这样能把全部都串联起来：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/AbstractEvent.js</span>
+<span class="token keyword">var</span> MAX_POOL_SIZE <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">AbstractEvent</span><span class="token punctuation">(</span>
+    abstractEventType<span class="token punctuation">,</span>
+    abstractTargetID<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// Allows the abstract target to differ from native.</span>
+    originatingTopLevelEventType<span class="token punctuation">,</span>
+    nativeEvent<span class="token punctuation">,</span>
+    data<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// SimpleEventPlugin.abstractEventTypes.click, .reactRoot[0]', 'topClick', event, data</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>type <span class="token operator">=</span> abstractEventType<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>abstractTargetID <span class="token operator">=</span> abstractTargetID <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>originatingTopLevelEventType <span class="token operator">=</span> originatingTopLevelEventType<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>nativeEvent <span class="token operator">=</span> nativeEvent<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>target <span class="token operator">=</span> nativeEvent <span class="token operator">&amp;&amp;</span> nativeEvent<span class="token punctuation">.</span>target<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_dispatchListeners <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_dispatchIDs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>isPropagationStopped <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+AbstractEvent<span class="token punctuation">.</span>poolSize <span class="token operator">=</span> MAX_POOL_SIZE<span class="token punctuation">;</span>
+
+AbstractEvent<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>destructor <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>target <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_dispatchListeners <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_dispatchIDs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+PooledClass<span class="token punctuation">.</span><span class="token function">addPoolingTo</span><span class="token punctuation">(</span>AbstractEvent<span class="token punctuation">,</span> PooledClass<span class="token punctuation">.</span>fiveArgumentPooler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="模拟捕获-冒泡（1）"><a href="#模拟捕获-冒泡（1）" class="headerlink" title="模拟捕获/冒泡（1）"></a>模拟捕获/冒泡（1）</h3><p>现在我们来看到刚刚忽略掉的 <code>EventPropagators.accumulateTwoPhaseDispatches</code> 和 <code>EventPropagators.accumulateEnterLeaveDispatches</code> 方法：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/EventPropagators.js</span>
+<span class="token keyword">function</span> <span class="token function">accumulateTwoPhaseDispatches</span><span class="token punctuation">(</span>abstractEvents<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">forEachAccumulated</span><span class="token punctuation">(</span>abstractEvents<span class="token punctuation">,</span> accumulateTwoPhaseDispatchesSingle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">accumulateTwoPhaseDispatchesSingle</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>abstractEvent <span class="token operator">&amp;&amp;</span> abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>phasedRegistrationNames<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获得 phasedRegistrationNames 对象</span>
+    injection<span class="token punctuation">.</span>InstanceHandle<span class="token punctuation">.</span><span class="token function">traverseTwoPhase</span><span class="token punctuation">(</span>
+      abstractEvent<span class="token punctuation">.</span>abstractTargetID<span class="token punctuation">,</span>
+      accumulateDirectionalDispatches<span class="token punctuation">,</span>
+      abstractEvent
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">accumulateEnterLeaveDispatches</span><span class="token punctuation">(</span>leave<span class="token punctuation">,</span> enter<span class="token punctuation">,</span> fromID<span class="token punctuation">,</span> toID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  injection<span class="token punctuation">.</span>InstanceHandle<span class="token punctuation">.</span><span class="token function">traverseEnterLeave</span><span class="token punctuation">(</span>
+    fromID<span class="token punctuation">,</span>
+    toID<span class="token punctuation">,</span>
+    accumulateDispatches<span class="token punctuation">,</span>
+    leave<span class="token punctuation">,</span>
+    enter
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">listenerAtPhase</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> abstractEvent<span class="token punctuation">,</span> propagationPhase<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 获取对应的注册名称</span>
+  <span class="token keyword">var</span> registrationName <span class="token operator">=</span>
+    abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>phasedRegistrationNames<span class="token punctuation">[</span>propagationPhase<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 这个 getListener 函数需要看到 CallbackRegistry.js 相关的方法</span>
+  <span class="token keyword">return</span> <span class="token function">getListener</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> registrationName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">accumulateDirectionalDispatches</span><span class="token punctuation">(</span>domID<span class="token punctuation">,</span> upwards<span class="token punctuation">,</span> abstractEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// domID = 当前 traverseParentPath 的 ID</span>
+  <span class="token comment" spellcheck="true">// upwards = true / false</span>
+  <span class="token keyword">var</span> phase <span class="token operator">=</span> upwards <span class="token operator">?</span> PropagationPhases<span class="token punctuation">.</span>bubbled <span class="token punctuation">:</span> PropagationPhases<span class="token punctuation">.</span>captured<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 获得对应的 cb</span>
+  <span class="token keyword">var</span> listener <span class="token operator">=</span> <span class="token function">listenerAtPhase</span><span class="token punctuation">(</span>domID<span class="token punctuation">,</span> abstractEvent<span class="token punctuation">,</span> phase<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 如果回调存在的情况下对 _dispatchListeners 和 _dispatchIDs 进行合并</span>
+    <span class="token comment" spellcheck="true">// 本身不存在的情况下，返回新的 listener 和 domID</span>
+    <span class="token comment" spellcheck="true">// 存在的情况下返回 listener[] 和 domID[]</span>
+    abstractEvent<span class="token punctuation">.</span>_dispatchListeners <span class="token operator">=</span>
+      <span class="token function">accumulate</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">.</span>_dispatchListeners<span class="token punctuation">,</span> listener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    abstractEvent<span class="token punctuation">.</span>_dispatchIDs <span class="token operator">=</span> <span class="token function">accumulate</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">.</span>_dispatchIDs<span class="token punctuation">,</span> domID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 也是同样</span>
+<span class="token keyword">function</span> <span class="token function">accumulateDispatches</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> ignoredDirection<span class="token punctuation">,</span> abstractEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>abstractEvent <span class="token operator">&amp;&amp;</span> abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>registrationName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> listener <span class="token operator">=</span> <span class="token function">getListener</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> abstractEvent<span class="token punctuation">.</span>type<span class="token punctuation">.</span>registrationName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      abstractEvent<span class="token punctuation">.</span>_dispatchListeners <span class="token operator">=</span>
+        <span class="token function">accumulate</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">.</span>_dispatchListeners<span class="token punctuation">,</span> listener<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      abstractEvent<span class="token punctuation">.</span>_dispatchIDs <span class="token operator">=</span> <span class="token function">accumulate</span><span class="token punctuation">(</span>abstractEvent<span class="token punctuation">.</span>_dispatchIDs<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="存储事件回调"><a href="#存储事件回调" class="headerlink" title="存储事件回调"></a>存储事件回调</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// event/CallbackRegistry.js</span>
+<span class="token comment" spellcheck="true">// 回调监听银行，用于存储各种 cb</span>
+<span class="token keyword">var</span> listenerBank <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> CallbackRegistry <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 加入 cb</span>
+  putListener<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> registrationName<span class="token punctuation">,</span> listener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> bankForRegistrationName <span class="token operator">=</span>
+      listenerBank<span class="token punctuation">[</span>registrationName<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token punctuation">(</span>listenerBank<span class="token punctuation">[</span>registrationName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bankForRegistrationName<span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> listener<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 获得 cb</span>
+  getListener<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> registrationName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> bankForRegistrationName <span class="token operator">=</span> listenerBank<span class="token punctuation">[</span>registrationName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> bankForRegistrationName <span class="token operator">&amp;&amp;</span> bankForRegistrationName<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 移除 cb</span>
+  deleteListener<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> registrationName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> bankForRegistrationName <span class="token operator">=</span> listenerBank<span class="token punctuation">[</span>registrationName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bankForRegistrationName<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">delete</span> bankForRegistrationName<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 清空所有</span>
+  __purge<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    listenerBank <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="模拟捕获-冒泡（2）"><a href="#模拟捕获-冒泡（2）" class="headerlink" title="模拟捕获/冒泡（2）"></a>模拟捕获/冒泡（2）</h3><p>这里所调用的 <code>injection.InstanceHandle</code> 下的方法其实就是 <code>ReactInstanceHandles</code> 的方法，回忆到在默认注入的时候，那么这里来看下：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactInstanceHandles.js</span>
+<span class="token keyword">var</span> ReactInstanceHandles <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  traverseTwoPhase<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>targetID<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> arg<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>targetID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 直接看到 traverseParentPath 函数</span>
+      <span class="token comment" spellcheck="true">// 比如:</span>
+      <span class="token comment" spellcheck="true">// .reactRoot[0].[3].0</span>
+      <span class="token comment" spellcheck="true">// 捕获阶段： .reactRoot[0] => .reactRoot[0].[3] => .reactRoot[0].[3].0</span>
+      <span class="token comment" spellcheck="true">// 冒泡阶段： .reactRoot[0].[3].0 => .reactRoot[0].[3] => .reactRoot[0]</span>
+      <span class="token comment" spellcheck="true">// 他里面是通过前后 '.' 来控制判断的</span>
+      <span class="token comment" spellcheck="true">// 具体就是那行 for 循环代码以及相关的操作函数</span>
+      <span class="token function">traverseParentPath</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> targetID<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> arg<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">traverseParentPath</span><span class="token punctuation">(</span>targetID<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> cb<span class="token punctuation">,</span> arg<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  traverseEnterLeave<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>leaveID<span class="token punctuation">,</span> enterID<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> upArg<span class="token punctuation">,</span> downArg<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取两个ID最近的共同祖先ID</span>
+    <span class="token keyword">var</span> longestCommonID <span class="token operator">=</span> ReactInstanceHandles<span class="token punctuation">.</span><span class="token function">getFirstCommonAncestorID</span><span class="token punctuation">(</span>
+      leaveID<span class="token punctuation">,</span>
+      enterID
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>longestCommonID <span class="token operator">!==</span> leaveID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">traverseParentPath</span><span class="token punctuation">(</span>leaveID<span class="token punctuation">,</span> longestCommonID<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> upArg<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>longestCommonID <span class="token operator">!==</span> enterID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">traverseParentPath</span><span class="token punctuation">(</span>longestCommonID<span class="token punctuation">,</span> enterID<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> downArg<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 在两个ID之间遍历父路径（向上或向下）。ID不能相同，并且它们之间必须存在父路径。</span>
+<span class="token comment" spellcheck="true">// 方法的作用因为比较抽象，我会举个例子在上面。</span>
+<span class="token keyword">function</span> <span class="token function">traverseParentPath</span><span class="token punctuation">(</span>start<span class="token punctuation">,</span> stop<span class="token punctuation">,</span> cb<span class="token punctuation">,</span> arg<span class="token punctuation">,</span> skipFirst<span class="token punctuation">,</span> skipLast<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  start <span class="token operator">=</span> start <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  stop <span class="token operator">=</span> stop <span class="token operator">||</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  <span class="token function">invariant</span><span class="token punctuation">(</span>
+    start <span class="token operator">!==</span> stop<span class="token punctuation">,</span>
+    <span class="token string">'traverseParentPath(...): Cannot traverse from and to the same ID, `%s`.'</span><span class="token punctuation">,</span>
+    start
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> ancestorID <span class="token operator">=</span> ReactInstanceHandles<span class="token punctuation">.</span><span class="token function">getFirstCommonAncestorID</span><span class="token punctuation">(</span>start<span class="token punctuation">,</span> stop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> traverseUp <span class="token operator">=</span> ancestorID <span class="token operator">===</span> stop<span class="token punctuation">;</span>
+  <span class="token function">invariant</span><span class="token punctuation">(</span>
+    traverseUp <span class="token operator">||</span> ancestorID <span class="token operator">===</span> start<span class="token punctuation">,</span>
+    <span class="token string">'traverseParentPath(%s, %s, ...): Cannot traverse from two IDs that do '</span> <span class="token operator">+</span>
+    <span class="token string">'not have a parent path.'</span><span class="token punctuation">,</span>
+    start<span class="token punctuation">,</span>
+    stop
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// Traverse from `start` to `stop` one depth at a time.</span>
+  <span class="token keyword">var</span> depth <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 通过 traverseUp 来控制是使用 parentID 函数还是 nextDescendantID 方法。</span>
+  <span class="token comment" spellcheck="true">// 就是从前往后取或者是从后往前取</span>
+  <span class="token keyword">var</span> traverse <span class="token operator">=</span> traverseUp <span class="token operator">?</span> parentID <span class="token punctuation">:</span> ReactInstanceHandles<span class="token punctuation">.</span>nextDescendantID<span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> id <span class="token operator">=</span> start<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* until break */</span><span class="token punctuation">;</span> id <span class="token operator">=</span> <span class="token function">traverse</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> stop<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>skipFirst <span class="token operator">||</span> id <span class="token operator">!==</span> start<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>skipLast <span class="token operator">||</span> id <span class="token operator">!==</span> stop<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">cb</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> traverseUp<span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">===</span> stop<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// Only break //after// visiting `stop`.</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token function">invariant</span><span class="token punctuation">(</span>
+      depth<span class="token operator">++</span> <span class="token operator">&lt;</span> MAX_TREE_DEPTH<span class="token punctuation">,</span>
+      <span class="token string">'traverseParentPath(%s, %s, ...): Detected an infinite loop while '</span> <span class="token operator">+</span>
+      <span class="token string">'traversing the React DOM ID tree. This may be due to malformed IDs: %s'</span><span class="token punctuation">,</span>
+      start<span class="token punctuation">,</span> stop
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后呢就是在 <code>ReactNativeComponent.js</code> 中 <code>_createOpenTagMarkup</code> 方法中的 <code>putListener</code> 函数，看过 <code>putListener</code> 函数就是用于存入回调函数的，在 <code>getListener</code> 获得则会去执行。</p>
+<p>那么到此为止，实现事件机制。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2019/04/05/LSC-React-05/" title="React 源码学习（五）：事件机制">https://zongzi531.com/2019/04/05/LSC-React-05/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/04/06/LSC-React-06/">
+        上一篇<br>React 源码学习（六）：组件渲染
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/04/04/LSC-React-04/">
+        下一篇<br>React 源码学习（四）：事务机制
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?50737924"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2019/04/05/LSC-React-05/';
+        this.page.identifier = '/2019/04/05/LSC-React-05/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

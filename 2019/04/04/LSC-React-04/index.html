@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>React 源码学习（四）：事务机制 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。在考虑到...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?99831869">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    React 源码学习（四）：事务机制
+                    <div class="post-meta">
+                        <time datetime="2019-04-04T00:01:36.000Z" itemprop="datePublished">
+                            2019-04-04 00:01
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/React-源码学习/'>React 源码学习</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/React/'>React</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>阅读源码成了今年的学习目标之一，在选择 Vue 和 React 之间，我想先阅读 React 。<br>在考虑到读哪个版本的时候，我想先接触到源码早期的思想可能会更轻松一些，最终我选择阅读 <code>0.3-stable</code> 。<br>那么接下来，我将从几个方面来解读这个版本的源码。</p>
+</blockquote>
+<ol>
+<li><a href="https://zongzi531.com/2019/04/01/LSC-React-01/">React 源码学习（一）：HTML 元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/02/LSC-React-02/">React 源码学习（二）：HTML 子元素渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/03/LSC-React-03/">React 源码学习（三）：CSS 样式及 DOM 属性</a></li>
+<li><a href="https://zongzi531.com/2019/04/04/LSC-React-04/">React 源码学习（四）：事务机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/05/LSC-React-05/">React 源码学习（五）：事件机制</a></li>
+<li><a href="https://zongzi531.com/2019/04/06/LSC-React-06/">React 源码学习（六）：组件渲染</a></li>
+<li><a href="https://zongzi531.com/2019/04/07/LSC-React-07/">React 源码学习（七）：生命周期</a></li>
+<li><a href="https://zongzi531.com/2019/04/08/LSC-React-08/">React 源码学习（八）：组件更新</a></li>
+<li><a href="https://zongzi531.com/2019/12/18/LSC-React-09/">React 源码学习（九）：“脱胎换骨”</a></li>
+<li><a href="https://zongzi531.com/2019/12/19/LSC-React-10/">React 源码学习（十）：Fiber</a></li>
+<li><a href="https://zongzi531.com/2019/12/20/LSC-React-11/">React 源码学习（十一）：Scheduling</a></li>
+<li><a href="https://zongzi531.com/2019/12/21/LSC-React-12/">React 源码学习（十二）：Reconciliation</a></li>
+</ol>
+<h2 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h2><p>我们需要直接看到事务的整个概念：</p>
+<blockquote>
+<p><strong>英文版请看源码，以下为 Google 翻译内容</strong></p>
+</blockquote>
+<p><code>Transaction</code> 创建一个黑盒子，它能够包装任何方法，以便在调用方法之前和之后维护某些不变量（即使在调用包装方法时抛出异常）。 实例化事务的人可以在创建时提供不变量的执行者。 <code>Transaction</code> 类本身将为您提供一个额外的自动不变量 - 任何事务实例在运行时不应该运行的不变量。您通常会创建一个 <code>Transaction</code> 的单个实例，以便多次重用，这可能用于包装多个不同的方法。包装器非常简单 - 它们只需要实现两种方法。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
+ * &lt;pre>
+ *                                 wrappers (创建时注入)
+ *                                      +        +
+ *                                      |        |
+ *                    +-----------------|--------|--------------+
+ *                    |                 v        |              |
+ *                    |      +---------------+   |              |
+ *                    |   +--|    wrapper1   |---|----+         |
+ *                    |   |  +---------------+   v    |         |
+ *                    |   |          +-------------+  |         |
+ *                    |   |     +----|   wrapper2  |--------+   |
+ *                    |   |     |    +-------------+  |     |   |
+ *                    |   |     |                     |     |   |
+ *                    |   v     v                     v     v   | wrapper
+ *                    | +---+ +---+   +---------+   +---+ +---+ | invariants
+ * perform(任何方法)   | |   | |   |   |         |   |   | |   | | maintained
+ * +----------------->|-|---|-|---|-->| 任何方法 |---|---|-|---|-|-------->
+ *                    | |   | |   |   |         |   |   | |   | |
+ *                    | |   | |   |   |         |   |   | |   | |
+ *                    | |   | |   |   |         |   |   | |   | |
+ *                    | +---+ +---+   +---------+   +---+ +---+ |
+ *                    |  initialize                    close    |
+ *                    +-----------------------------------------+
+ * &lt;/pre>
+ */</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>奖金：</p>
+<ul>
+<li>按方法名称和包装器索引报告时间度量标准。</li>
+</ul>
+<p>用例：</p>
+<ul>
+<li>在对帐之前/之后保留输入选择范围。即使出现意外错误也可以恢复选择。</li>
+<li>在重新排列DOM时停用事件，防止模糊/焦点，同时保证事后系统重新激活。</li>
+<li>在工作线程中进行协调后，将收集的DOM突变队列刷新到主UI线程。</li>
+<li>在呈现新内容后调用任何收集的 <code>componentDidRender</code> 回调。</li>
+<li>（未来用例）：包装 <code>ReactWorker</code> 队列的特定刷新以保留 <code>scrollTop</code>  （自动滚动感知DOM）。</li>
+<li>（未来用例）：DOM更新之前和之后的布局计算。</li>
+</ul>
+<p>事务性插件 API:</p>
+<ul>
+<li>具有返回任何预计算的 <code>initialize</code> 方法的模块。</li>
+<li>和一个接受预计算的 <code>close</code> 方法。当包装过程完成或失败时，调用 <code>close</code> 。</li>
+</ul>
+<h2 id="事务-Transaction"><a href="#事务-Transaction" class="headerlink" title="事务 Transaction"></a>事务 Transaction</h2><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// utils/Transaction.js</span>
+<span class="token keyword">var</span> Mixin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">/**
+   * 设置此实例，以便为收集指标做好准备。 这样做是为了使这个设置方法可以在已经初始化的实例上使用，
+   * 其方式是在重用时不消耗额外的内存。 如果您决定将此 mixin 的子类化为 "PooledClass" ，那么这将非常有用。
+   */</span>
+  reinitializeTransaction<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// this.getTransactionWrappers() 用于获取上面概念中的 wrappers</span>
+    <span class="token comment" spellcheck="true">// this.transactionWrappers 就是 wrappers</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>transactionWrappers <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getTransactionWrappers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化用于存储 initialize 时返回的内容的 this.wrapperInitData</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 时间方面，这里不做解读</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>methodInvocationTime <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperInitTimes<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperInitTimes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperInitTimes<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperCloseTimes<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperCloseTimes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperCloseTimes<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 初始化事务标记</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_isInTransaction <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  _isInTransaction<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  getTransactionWrappers<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  isInTransaction<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>_isInTransaction<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 在安全窗口内执行该功能。 将此用于顶级方法，这些方法会导致需要进行安全检查的大量计算/突变。</span>
+  perform<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>method<span class="token punctuation">,</span> scope<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e<span class="token punctuation">,</span> f<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">throwIf</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isInTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> DUAL_TRANSACTION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> memberStart <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 报错存储</span>
+    <span class="token keyword">var</span> err <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// method 返回内容</span>
+    <span class="token keyword">var</span> ret<span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 开始 initialize</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">initializeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// initialize 完成后调用 method</span>
+      ret <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>scope<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e<span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ie_requires_catch</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 抓报错，这里报错会被覆盖</span>
+      err <span class="token operator">=</span> ie_requires_catch<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> memberEnd <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>methodInvocationTime <span class="token operator">+</span><span class="token operator">=</span> <span class="token punctuation">(</span>memberEnd <span class="token operator">-</span> memberStart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 开始 close</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">closeAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">closeAllErr</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 抓报错，这里若前面存在报错，则取前面的报错</span>
+        err <span class="token operator">=</span> err <span class="token operator">||</span> closeAllErr<span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 抛出报错</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">throw</span> err<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 返回 method 执行结果</span>
+    <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  initializeAll<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 事务开始</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_isInTransaction <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> transactionWrappers <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>transactionWrappers<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> wrapperInitTimes <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperInitTimes<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> err <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 遍历 wrappers</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> transactionWrappers<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> initStart <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> wrapper <span class="token operator">=</span> transactionWrappers<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 执行 initialize ，并把返回值存入对应的 this.wrapperInitData[i]</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span>
+          wrapper<span class="token punctuation">.</span>initialize <span class="token operator">?</span> wrapper<span class="token punctuation">.</span>initialize<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">initErr</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        err <span class="token operator">=</span> err <span class="token operator">||</span> initErr<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// Remember the first error.</span>
+        <span class="token comment" spellcheck="true">// 有报错的话对应位置存入 Transaction.OBSERVED_ERROR</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> Transaction<span class="token punctuation">.</span>OBSERVED_ERROR<span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> curInitTime <span class="token operator">=</span> wrapperInitTimes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> initEnd <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        wrapperInitTimes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>curInitTime <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>initEnd <span class="token operator">-</span> initStart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 抛出错误</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">throw</span> err<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">/**
+   * 调用 `this.transactionWrappers.close[i]`  函数中的每一个，向它们传递
+   * `this.transactionWrappers.init[i]` 的相应返回值（对应于失败的初始值设定项的 `close`rs 将不被调用）。
+   */</span>
+  closeAll<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">throwIf</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isInTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> MISSING_TRANSACTION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> transactionWrappers <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>transactionWrappers<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> wrapperCloseTimes <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>timingMetrics<span class="token punctuation">.</span>wrapperCloseTimes<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> err <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> transactionWrappers<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> wrapper <span class="token operator">=</span> transactionWrappers<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">var</span> closeStart <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取 initialize 时对应的返回值</span>
+      <span class="token keyword">var</span> initData <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 返回值不等于 Transaction.OBSERVED_ERROR 时才执行 close</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>initData <span class="token operator">!==</span> Transaction<span class="token punctuation">.</span>OBSERVED_ERROR<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+          wrapper<span class="token punctuation">.</span>close <span class="token operator">&amp;&amp;</span> wrapper<span class="token punctuation">.</span>close<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> initData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">closeErr</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        err <span class="token operator">=</span> err <span class="token operator">||</span> closeErr<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// Remember the first error.</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> closeEnd <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> curCloseTime <span class="token operator">=</span> wrapperCloseTimes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        wrapperCloseTimes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>curCloseTime <span class="token operator">||</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>closeEnd <span class="token operator">-</span> closeStart<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 释放内存</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>wrapperInitData<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 事务关闭</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_isInTransaction <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 抛出错误</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">throw</span> err<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> Transaction <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Mixin<span class="token punctuation">:</span> Mixin<span class="token punctuation">,</span>
+  OBSERVED_ERROR<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="React-事务"><a href="#React-事务" class="headerlink" title="React 事务"></a>React 事务</h2><p>上面这段代码看完，我相信你对事务的整个概念已经有所了解，那么事务到底在处理什么的时候用到了呢？接下来就要揭晓本次同样重点的内容 React 调度事务， <code>ReactReconcileTransaction</code> ：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactReconcileTransaction.js</span>
+<span class="token comment" spellcheck="true">// 这个就是 React 调度事务的 wrappers</span>
+<span class="token keyword">var</span> TRANSACTION_WRAPPERS <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token comment" spellcheck="true">// 确保在可能的情况下，执行事务不会干扰选择范围（当前选定的文本输入）。</span>
+  <span class="token comment" spellcheck="true">// 通俗点讲就是，在 React 调度事务开始之时将选择的文本信息获取，再结束时还原选择信息。</span>
+  <span class="token comment" spellcheck="true">// 关于 Selection 的具体实现这里不做解读。</span>
+  SELECTION_RESTORATION<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 抑制由于高级别的DOM操作（如临时从DOM中删除文本输入）而可能无意中调度的事件（模糊/焦点）。</span>
+  <span class="token comment" spellcheck="true">// 通俗点讲就是，在 React 调度事务结束之前，抑制事件的传播。</span>
+  <span class="token comment" spellcheck="true">// 于 core/ReactEventTopLevelCallback.js 中 createTopLevelCallback 函数，关于 _topLevelListenersEnabled 的判断来抑制。</span>
+  <span class="token comment" spellcheck="true">// 事件控制，稍后做简单解读，但内容不会提及事件具体实现相关。</span>
+  EVENT_SUPPRESSION<span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 提供 `ReactOnDOMReady` 队列，用于在执行事务期间收集 `onDOMReady` 回调。</span>
+  ON_DOM_READY_QUEUEING
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">ReactReconcileTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 初始化事务</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">reinitializeTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 这里涉及到 PooledClass</span>
+  <span class="token comment" spellcheck="true">// 看到 ReactOnDOMReady 时末端也有这样一句话：</span>
+  <span class="token comment" spellcheck="true">// PooledClass.addPoolingTo(ReactOnDOMReady)</span>
+  <span class="token comment" spellcheck="true">// 调用 getPooled 方法其实就是 new</span>
+  <span class="token comment" spellcheck="true">// 具体在下面解读 PooledClass</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>reactOnDOMReady <span class="token operator">=</span> ReactOnDOMReady<span class="token punctuation">.</span><span class="token function">getPooled</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> Mixin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// reinitializeTransaction 方法中使用，用于获取 React 调度事务的 wrappers</span>
+  getTransactionWrappers<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 判断执行环境是否可以使用 DOM</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ExecutionEnvironment<span class="token punctuation">.</span>canUseDOM<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> TRANSACTION_WRAPPERS<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  getReactOnDOMReady<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>reactOnDOMReady<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 这里也牵扯到 PooledClass</span>
+  destructor<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// PooledClass 中 standardReleaser 方法</span>
+    ReactOnDOMReady<span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>reactOnDOMReady<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 释放内存，同样的，在 ReactOnDOMReady 中也进行了操作： this._queue = null</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>reactOnDOMReady <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token function">mixInto</span><span class="token punctuation">(</span>ReactReconcileTransaction<span class="token punctuation">,</span> Transaction<span class="token punctuation">.</span>Mixin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">mixInto</span><span class="token punctuation">(</span>ReactReconcileTransaction<span class="token punctuation">,</span> Mixin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 这是一个加入 PooledClass 的方法</span>
+PooledClass<span class="token punctuation">.</span><span class="token function">addPoolingTo</span><span class="token punctuation">(</span>ReactReconcileTransaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在看完 <code>ReactReconcileTransaction</code> 其实似懂非懂，没关系，接下来要依次解读 <code>PooledClass</code> ， <code>ReactOnDOMReady</code> 。</p>
+<h3 id="工具方法-PooledClass"><a href="#工具方法-PooledClass" class="headerlink" title="工具方法 PooledClass"></a>工具方法 PooledClass</h3><p>以下关于 <code>PooledClass</code> 仅解读一个参数的方法，其余多参数情况都是一样的。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// utils/PooledClass.js</span>
+<span class="token keyword">var</span> oneArgumentPooler <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>copyFieldsFrom<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 相当于执行 CopyConstructor.getPooled()</span>
+  <span class="token comment" spellcheck="true">// CopyConstructor 就是 addPoolingTo 传入的第一参数</span>
+  <span class="token keyword">var</span> Klass <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 一但执行过 release ， CopyConstructor.instancePool.length 才会大于 0</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>Klass<span class="token punctuation">.</span>instancePool<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 这个 instance 是做什么用的，相信看到 call ，你变会理解。</span>
+    <span class="token comment" spellcheck="true">// 用来绑定执行上下文。</span>
+    <span class="token keyword">var</span> instance <span class="token operator">=</span> Klass<span class="token punctuation">.</span>instancePool<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 这里不再进行实例化，而是以 instance 为执行上下文直接调用，并将其返回。</span>
+    Klass<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>instance<span class="token punctuation">,</span> copyFieldsFrom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 相当于直接 new CopyConstructor(copyFieldsFrom)</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Klass</span><span class="token punctuation">(</span>copyFieldsFrom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> standardReleaser <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> Klass <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 在 CopyConstructor.getPooled() 后，保存返回结果</span>
+  <span class="token comment" spellcheck="true">// 在 release 时作为参数传入，若存在 destructor 则执行。</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>instance<span class="token punctuation">.</span>destructor<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    instance<span class="token punctuation">.</span><span class="token function">destructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 长度未超过默认大小，则将 instance 推入数组</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>Klass<span class="token punctuation">.</span>instancePool<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> Klass<span class="token punctuation">.</span>poolSize<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    Klass<span class="token punctuation">.</span>instancePool<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>instance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 默认的大小</span>
+<span class="token keyword">var</span> DEFAULT_POOL_SIZE <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 默认的 getPooled 方法</span>
+<span class="token keyword">var</span> DEFAULT_POOLER <span class="token operator">=</span> oneArgumentPooler<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 直接在 CopyConstructor 上添加属性的方法，并返回 CopyConstructor</span>
+<span class="token keyword">var</span> addPoolingTo <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>CopyConstructor<span class="token punctuation">,</span> pooler<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> NewKlass <span class="token operator">=</span> CopyConstructor<span class="token punctuation">;</span>
+  NewKlass<span class="token punctuation">.</span>instancePool <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  NewKlass<span class="token punctuation">.</span>getPooled <span class="token operator">=</span> pooler <span class="token operator">||</span> DEFAULT_POOLER<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>NewKlass<span class="token punctuation">.</span>poolSize<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    NewKlass<span class="token punctuation">.</span>poolSize <span class="token operator">=</span> DEFAULT_POOL_SIZE<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  NewKlass<span class="token punctuation">.</span>release <span class="token operator">=</span> standardReleaser<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> NewKlass<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> PooledClass <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  addPoolingTo<span class="token punctuation">:</span> addPoolingTo<span class="token punctuation">,</span>
+  oneArgumentPooler<span class="token punctuation">:</span> oneArgumentPooler<span class="token punctuation">,</span>
+  twoArgumentPooler<span class="token punctuation">:</span> twoArgumentPooler<span class="token punctuation">,</span>
+  fiveArgumentPooler<span class="token punctuation">:</span> fiveArgumentPooler
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>要说 <code>PooledClass</code> 是做什么用的，具体我也还是没有 get 到，但是经过我的实践，在调用 <code>var c = CopyConstructor.getPooled()</code> 后，若在 <code>c</code> 上添加属性，如： <code>c.v = &#39;0.3&#39;</code> 。并且在调用 <code>CopyConstructor.release(c)</code> 这样的情况，在重新进行 <code>CopyConstructor.getPooled()</code> 时，这个 <code>v</code> 属性及值任然存在，当然前提是，你自己定义的 <code>destructor</code> 方法里不会销毁 <code>v</code> 的值。</p>
+<h3 id="React-DOM-准备完成后的执行队列"><a href="#React-DOM-准备完成后的执行队列" class="headerlink" title="React DOM 准备完成后的执行队列"></a>React DOM 准备完成后的执行队列</h3><p>那么现在我们来看下 <code>ReactOnDOMReady</code> ：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactOnDOMReady.js</span>
+<span class="token comment" spellcheck="true">// 初始化队列</span>
+<span class="token keyword">function</span> <span class="token function">ReactOnDOMReady</span><span class="token punctuation">(</span>initialCollection<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_queue <span class="token operator">=</span> initialCollection <span class="token operator">||</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token function">mixInto</span><span class="token punctuation">(</span>ReactOnDOMReady<span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 入队</span>
+  enqueue<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>component<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_queue <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 组件及回调</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>component<span class="token punctuation">:</span> component<span class="token punctuation">,</span> callback<span class="token punctuation">:</span> callback<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 执行队列</span>
+  notifyAll<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> queue <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 清空队列</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>_queue <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> l <span class="token operator">=</span> queue<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> l<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> component <span class="token operator">=</span> queue<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>component<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> callback <span class="token operator">=</span> queue<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>callback<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 回调传入组件，上下文绑定 component</span>
+        <span class="token comment" spellcheck="true">// 关于 getDOMNode 方法稍后解读（获得当前 component 的 node）</span>
+        callback<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>component<span class="token punctuation">,</span> component<span class="token punctuation">.</span><span class="token function">getDOMNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      queue<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 清空队列</span>
+  reset<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_queue <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// PooledClass.release 时候使用</span>
+  destructor<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 添加 PooledClass 方法</span>
+PooledClass<span class="token punctuation">.</span><span class="token function">addPoolingTo</span><span class="token punctuation">(</span>ReactOnDOMReady<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="和事务结合"><a href="#和事务结合" class="headerlink" title="和事务结合"></a>和事务结合</h3><p>这段代码很简单了， <code>ReactOnDOMReady</code> 就是一个执行队列。回顾到上面代码发现， React 调度事务在被初始化的时候，同样 <code>ReactOnDOMReady</code> 也被初始化，在调度事务执行 wrappers 的过程时， <code>ReactOnDOMReady</code> 被相继执行。这个具体的过程，你看到 <code>ON_DOM_READY_QUEUEING</code> 变会明白。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactReconcileTransaction.js</span>
+<span class="token keyword">var</span> ON_DOM_READY_QUEUEING <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 在 React 调度事务 initialize 时， ReactOnDOMReady 队列被重置。</span>
+  initialize<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>reactOnDOMReady<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// 在 React 调度事务 close 时， ReactOnDOMReady 队列被依次执行。</span>
+  close<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>reactOnDOMReady<span class="token punctuation">.</span><span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>同样的，在 React 调度事务执行 <code>release</code> 时， <code>ReactOnDOMReady</code> 也会执行 <code>release</code> 。</p>
+<h3 id="getDOMNode-方法"><a href="#getDOMNode-方法" class="headerlink" title="getDOMNode 方法"></a>getDOMNode 方法</h3><p>差点忘了提下， <code>getDOMNode</code> 方法是做什么用的，请直接看到源码：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactComponent.js</span>
+<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Mixin<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    getDOMNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 尝试获得 _rootNode</span>
+      <span class="token keyword">var</span> rootNode <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_rootNode<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>rootNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 尝试获得 _rootNodeID</span>
+        rootNode <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_rootNodeID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>rootNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">// TODO: Log the frequency that we reach this path.</span>
+          <span class="token comment" spellcheck="true">// 这里代码就不做详细解读了，反正就是为了获得对应的 Node ，一级级往下查找。</span>
+          rootNode <span class="token operator">=</span> ReactMount<span class="token punctuation">.</span><span class="token function">findReactRenderedDOMNodeSlow</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_rootNodeID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 对其进行赋值，用于下次查询。</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_rootNode <span class="token operator">=</span> rootNode<span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> rootNode<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="React-事务中的事件控制"><a href="#React-事务中的事件控制" class="headerlink" title="React 事务中的事件控制"></a>React 事务中的事件控制</h3><p>那么现在，我们来看到 <code>SELECTION_RESTORATION</code> ：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactReconcileTransaction.js</span>
+<span class="token keyword">var</span> EVENT_SUPPRESSION <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  initialize<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 获取 ReactEvent.isEnabled() 用于 close 时接收。</span>
+    <span class="token comment" spellcheck="true">// 其实就是 true</span>
+    <span class="token keyword">var</span> currentlyEnabled <span class="token operator">=</span> ReactEvent<span class="token punctuation">.</span><span class="token function">isEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 设置为 false</span>
+    ReactEvent<span class="token punctuation">.</span><span class="token function">setEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> currentlyEnabled<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// close 时设置为 true</span>
+  close<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>previouslyEnabled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    ReactEvent<span class="token punctuation">.</span><span class="token function">setEnabled</span><span class="token punctuation">(</span>previouslyEnabled<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么在这个真个 wrappers 执行过程，这个有什么用呢？ 这需要看到 <code>ReactEventTopLevelCallback</code> 的一段分支逻辑：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactEventTopLevelCallback.js</span>
+<span class="token keyword">var</span> ReactEventTopLevelCallback <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  createTopLevelCallback<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>topLevelType<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>fixedNativeEvent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// setEnabled 方法修改的就是 _topLevelListenersEnabled 的值。</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>_topLevelListenersEnabled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 直接掉过后续逻辑</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="回顾渲染-HTML-元素事务调度过程"><a href="#回顾渲染-HTML-元素事务调度过程" class="headerlink" title="回顾渲染 HTML 元素事务调度过程"></a>回顾渲染 HTML 元素事务调度过程</h3><p>那么到此，我们来回顾一下，之前说到的事务机制的运用是如何进行的，重新看到这段代码是不是会清晰了很多：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactComponent.js</span>
+<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  Mixin<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    mountComponentIntoNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> container<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 初始化 React 调度事务</span>
+      <span class="token keyword">var</span> transaction <span class="token operator">=</span> ReactComponent<span class="token punctuation">.</span>ReactReconcileTransaction<span class="token punctuation">.</span><span class="token function">getPooled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 进入 React 调度事务 wrappers 环节</span>
+      transaction<span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_mountComponentIntoNode<span class="token punctuation">,</span>
+        <span class="token keyword">this</span><span class="token punctuation">,</span>
+        rootID<span class="token punctuation">,</span>
+        container<span class="token punctuation">,</span>
+        transaction
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 销毁这个 React 调度事务</span>
+      ReactComponent<span class="token punctuation">.</span>ReactReconcileTransaction<span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 整个挂载方法结束</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里附一张此方法的图：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
+ * &lt;pre>
+ *                    TRANSACTION_WRAPPERS (ExecutionEnvironment.canUseDOM 为 true 的情况)
+ *                                       +                +     +
+ *                                       |                |     |
+ *                     +-----------------|----------------|-----|-------------------+
+ *                     |                 v                |     |                   |
+ *                     |      +-----------------------+   |     |                   |
+ *                     |   +--| SELECTION_RESTORATION |---|-----|---+               |
+ *                     |   |  +-----------------------+   v     |   |               |
+ *                     |   |             +-------------------+  |   |               |
+ *                     |   |     +-------| EVENT_SUPPRESSION |--|---|-----+         |
+ *                     |   |     |       +-------------------+  v   |     |         |
+ *                     |   |     |        +-----------------------+ |     |         |
+ *                     |   |     |     +--| ON_DOM_READY_QUEUEING |-|-----|-----+   |
+ *                     |   |     |     |  +-----------------------+ |     |     |   |
+ *                     |   |     |     |                            |     |     |   |
+ * perform(_mount      |   v     v     v                            v     v     v   | wrapper
+ *         Component   | +---+ +---+ +---+   +----------------+   +---+ +---+ +---+ | invariants
+ *         IntoNode)   | |   | |   | |   |   |                |   |   | |   | |   | | maintained
+ * +------------------>|-|---|-|---|-|---|-->|     _mount     |---|---|-|---|-|---|-|-------->
+ *                     | |   | |   | |   |   |    Component   |   |   | |   | |   | |
+ *                     | |   | |   | |   |   |    IntoNode    |   |   | |   | |   | |
+ *                     | |   | |   | |   |   |                |   |   | |   | |   | |
+ *                     | +---+ +---+ +---+   +----------------+   +---+ +---+ +---+ |
+ *                     |     initialize                                 close       |
+ *                     +------------------------------------------------------------+
+ * &lt;/pre>
+ */</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么至此，实现事务机制及 React 调度事务。</p>
+<hr>
+<h2 id="关于-Reconciler"><a href="#关于-Reconciler" class="headerlink" title="关于 Reconciler"></a>关于 Reconciler</h2><p><strong><a target="_blank" rel="noopener" href="https://reactjs.org/docs/codebase-overview.html#stack-reconciler">Stack Reconciler</a></strong></p>
+<p>我们知道浏览器渲染引擎是单线程的，在 React 15.x 版本及之前版本，计算组件树变更时将会阻塞整个线程，整个渲染过程是连续不中断完成的，而这时的其他任务都会被阻塞，如动画等，这可能会使用户感觉到明显卡顿，比如当你在访问某一网站时，输入某个搜索关键字，更优先的应该是交互反馈或动画效果，如果交互反馈延迟 200ms ，用户则会感觉较明显的卡顿，而数据响应晚200毫秒并没太大问题。这个版本的调和器可以称为栈调和器（ Stack Reconciler ），其调和算法大致过程见 <a target="_blank" rel="noopener" href="http://blog.codingplayboy.com/2016/10/27/react_diff/">React Diff 算法</a> 和 <a target="_blank" rel="noopener" href="https://reactjs.org/docs/implementation-notes.html">React Stack Reconciler 实现</a>。</p>
+<p>Stack Reconcilier 的主要缺陷就是不能暂停渲染任务，也不能切分任务，无法有效平衡组件更新渲染与动画相关任务间的执行顺序，即不能划分任务优先级，有可能导致重要任务卡顿，动画掉帧等问题。</p>
+<p><strong><a target="_blank" rel="noopener" href="https://reactjs.org/docs/codebase-overview.html#fiber-reconciler">Fiber Reconciler</a></strong></p>
+<p>React 16 版本提出了一个更先进的调和器，它允许渲染进程分段完成，而不必须一次性完成，中间可以返回至主进程控制执行其他任务。而这是通过计算部分组件树的变更，并暂停渲染更新，询问主进程是否有更高需求的绘制或者更新任务需要执行，这些高需求的任务完成后才开始渲染。这一切的实现是在代码层引入了一个新的数据结构 - Fiber 对象，每一个组件实例对应有一个 fiber 实例，此 fiber 实例负责管理组件实例的更新，渲染任务及与其他 fiber 实例的联系。</p>
+<p>这个新推出的调和器就叫做纤维调和器（ Fiber Reconciler ），它提供的新功能主要有：</p>
+<ol>
+<li>可切分，可中断任务；</li>
+<li>可重用各分阶段任务，且可以设置优先级；</li>
+<li>可以在父子组件任务间前进后退切换任务；</li>
+<li>render 方法可以返回多元素（即可以返回数组）；</li>
+<li>支持异常边界处理异常；</li>
+</ol>
+<blockquote>
+<p>参阅<a target="_blank" rel="noopener" href="http://blog.codingplayboy.com/2017/12/02/react_fiber">《React Fiber初探》</a></p>
+</blockquote>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2019/04/04/LSC-React-04/" title="React 源码学习（四）：事务机制">https://zongzi531.com/2019/04/04/LSC-React-04/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2019/04/05/LSC-React-05/">
+        上一篇<br>React 源码学习（五）：事件机制
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/04/03/LSC-React-03/">
+        下一篇<br>React 源码学习（三）：CSS 样式及 DOM 属性
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?50419187"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2019/04/04/LSC-React-04/';
+        this.page.identifier = '/2019/04/04/LSC-React-04/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

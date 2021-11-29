@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>一步一步向前走 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="时间来到了国庆，今年国庆和中秋可是一起的噢。想去日本旅游～">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?98155336">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2020/10/01/一步一步向前走/pic1.jpeg')">
+                <div class="post-title">
+                    一步一步向前走
+                    <div class="post-meta">
+                        <time datetime="2020-10-01T06:06:06.000Z" itemprop="datePublished">
+                            2020-10-01 06:06
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>「2017 年中秋，摄于日本东京台场」<br>时间来到了国庆，今年国庆和中秋可是一起的噢。想去日本旅游～</p>
+</blockquote>
+<h2 id="x1f4d4-日本語学習計画"><a href="#x1f4d4-日本語学習計画" class="headerlink" title="&#x1f4d4; 日本語学習計画"></a><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習計画</h2><p>截至目前《新版 中日交流标准日本语 初级上、下》完成第 9 单元学习。加油！</p>
+<h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong> <strong>学习进度停滞</strong></p>
+<p>简单尝试了 <code>Three.js</code> 做鼠标跟随。</p>
+<h5 id="2-可视化团队"><a href="#2-可视化团队" class="headerlink" title="2. 可视化团队"></a>2. 可视化团队</h5><p>9 月是参与可视化团队的第二个月，工作当然是比上个月更忙了，简单介绍一下这个月的工作内容，负责以下内容：</p>
+<ul>
+<li>平台整体代码重构工作：<ol>
+<li>脚手架迁移更新</li>
+<li>全面采用 TypeScript 开发</li>
+<li>平台运行时逻辑优化</li>
+<li>核心逻辑单元测试</li>
+</ol>
+</li>
+<li>等等其他支持</li>
+</ul>
+<p>脚手架迁移是一个新的尝试，从 Vue CLI 2 构建的项目迁移至 Vue CLI 4 进行构建，并同时将语言由 JavaScript 切换至 TypeScript 。我非常喜欢的工作内容，也是我在今年想做的一件事情，非常开心，很有动力。</p>
+<p>在代码迁移过程中，你会发现旧代码中 Lint 规则很多都是过时且不好的，虽然很多可以使用 <code>--fix</code> 进行修复，但是还是有很多代码需要手动修复，也就从这一点也发现了很多的不明显的 BUG 和多余的文件。</p>
+<p>在脚手架迁移的过程中，学习 Webpack chain 的使用方式，在同事的帮助下节省了不少学习成本，从一开始的抵触，到慢慢的接受，再到现在的习惯，回顾起来其实还是很清晰方便的。真香！</p>
+<p>当然了，由于一些依赖的升级，旧依赖没必要在新的环境中使用，也遇到了一些问题。比如 PostCSS 的使用问题，此次我才知道原来 <code>plugin</code> 是有顺序的，是线性执行的，也移除了一些旧的插件，使用 precss 来代替，非常的方便。</p>
+<p>在迁移完脚手架和 TypeScript 后，联系后端进行 CI/CD 的 TS 分支自动化部署测试，也相当的顺利，对 CI/CD 也有了更多的学习和认识，对 Docker 也有了些兴趣～</p>
+<p>在优化平台运行时逻辑时，需要充分为单元测试做考虑，比如我做了如下的优化手段，抽离挂载在 <code>Vue.prototype</code> 上的公共方法，将使用模块化的形式使用，这样的优点是更适合做单元测试，让函数更纯粹。</p>
+<p>对原有的 <code>mixins</code> 进行抽离，放弃使用这个危险的功能。由于目前还暂时不敢使用 Vue 3.0 版本，基于 Vue 2.0 我决定使用 <code>@vue/composition-api</code> 来代替 <code>mixins</code> ，这样的做的优点是不仅可以抽离出公共的逻辑，并且利于做单元测试，让逻辑更清晰。并且提前使用 <code>@vue/composition-api</code> 会让未来在迁移到 Vue 3.0 的过程变得轻松。</p>
+<p>当然还对 Vuex 做了类型约束，约束方式则参考<a target="_blank" rel="noopener" href="https://dev.to/3vilarthas/vuex-typescript-m4j">「 Vuex + TypeScript 」</a>，一个很不错的类型约束写法，由于目前使用的 Vuex 还是 3.x 版本，暂时未升级到 4.0 版本以上，所以在 Vue 文件中使用类型约束暂时还不行，需要后续再做尝试了……</p>
+<p>噢，对了。在迁移 <code>watch</code> 钩子的时候才从同事这里得知 Vue 2.x 中是有一个 <code>sync</code> 参数的，查阅资料发现在 Vue 3.0 是给开发者提供了文档说明，但是在 Vue 2.x 似乎没有，使用 <code>@vue/composition-api</code> 可以使用 <code>flush: &#39;sync&#39;</code> 来使用，但是使用 <code>vue-property-decorator</code> 的 <code>@Watch</code> 装饰器时却无法使用，查看源码发现就不支持，于是自己内部重新构建了一个支持 <code>sync</code> 的 <code>@Watch</code> 装饰器使用，并且给该仓库提了一个 PR<a target="_blank" rel="noopener" href="https://github.com/kaorun343/vue-property-decorator/pull/346">#346</a> 。</p>
+<p>截止国庆，重构的工作并没有完成，单元测试目前覆盖率仅 5 % ，平台运行时的逻辑优化也没有开始做，计划将运行时写的更优雅，使用类似于 React 事务的模式去合理的规划平台的运行时，让平台运行的更可控，加油，挑战设计模式！</p>
+<h5 id="3-文章推荐"><a href="#3-文章推荐" class="headerlink" title="3. 文章推荐"></a>3. 文章推荐</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Ti4LhQfqPH2sysg6RvU_BQ">【第2056期】蚂蚁金服@御术：比能力更重要的是你的底层操作系统</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9KKzu7f6E0dcWKXi-PQc8Q">【第2061期】「划线高亮」和「插入笔记」—— 不止是前端知识点</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/v6OSWMHRJR3AThtS-O5GdQ">【第2076期】阿里@风月：中医药大学毕业的业务女前端修炼之路</a></li>
+</ul>
+<h2 id="x1f3c7-锻炼身体"><a href="#x1f3c7-锻炼身体" class="headerlink" title="&#x1f3c7; 锻炼身体"></a><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</h2><p>重新开始恢复锻炼，感觉出出汗还是挺舒服的，当然也是防止肥胖。啊～肥胖，远离你！</p>
+<h2 id="新的规划"><a href="#新的规划" class="headerlink" title="新的规划"></a>新的规划</h2><p>也慢慢感觉到了自己想在新的一年的目标和规划：</p>
+<ul>
+<li>扎实前端相关知识基础（比较宽泛，需要罗列细节）</li>
+<li>更多的以产品经理角度思考问题，发现问题</li>
+<li>更多的以项目经理去沟通，学习沟通，锻炼沟通能力</li>
+<li>领域的深耕似乎还是迷茫，多去做尝试和选择</li>
+</ul>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2020/10/01/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%90%91%E5%89%8D%E8%B5%B0/" title="一步一步向前走">https://zongzi531.com/2020/10/01/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%90%91%E5%89%8D%E8%B5%B0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2020/11/01/%E5%85%A5%E7%A7%8B%E7%9A%84%E6%84%9F%E5%8F%97/">
+        上一篇<br>入秋的感受
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2020/09/01/%E8%84%B1%E7%A6%BB%E4%B8%9A%E5%8A%A1/">
+        下一篇<br>脱离业务
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?34319255"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2020/10/01/一步一步向前走/';
+        this.page.identifier = '/2020/10/01/一步一步向前走/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>

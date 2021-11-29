@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Webpack初学之路 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+
+之前可以说有简单学习过ruanyf/webpack-demos，但并没有很好的理解。然后学习了webpa...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?41399323">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    Webpack初学之路
+                    <div class="post-meta">
+                        <time datetime="2018-03-13T21:43:37.000Z" itemprop="datePublished">
+                            2018-03-13 21:43
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Tools/'>Tools</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Tools/'>Tools</a>, 
+                        
+                        <a href='/tags/Webpack/'>Webpack</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<blockquote>
+<p>之前可以说有简单学习过<a target="_blank" rel="noopener" href="https://github.com/ruanyf/webpack-demos">ruanyf/webpack-demos</a>，但并没有很好的理解。<br>然后学习了webpack 中文文档，但似乎任然是云里雾里。<br>那么为了更好的去理解webpack，所以我决定去改造老项目（机会来了 :)）。<br>故事从这里开始</p>
+</blockquote>
+<p>改造前结构：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">│  .gitignore
+│  app.js
+│  package.json
+│  index.html
+│
+├─css
+│    index.css
+│
+├─fonts
+│    index.ttf
+│
+├─img
+│    index.png
+│
+├─jade
+│    index.jade
+│
+└─js
+     index.js
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>老项目存在的问题：</p>
+<ol>
+<li>无浏览器缓存优化</li>
+<li>代码体积未压缩</li>
+<li>非模块化开发模式</li>
+<li>手动生成html文件</li>
+<li>文件目录复杂不清晰</li>
+</ol>
+<p>那么改造开始</p>
+<h2 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h2><p>类似于Vue或者React项目，入口文件一般只有一个index.js或者main.js文件，因为基本此类项目属于单页面应用。</p>
+<p>但是老项目却多数为多页面应用，那么入口文件会有多个，这么建议将入口文件设置成对象使用。</p>
+<p>使用对象的好处是，输出的时候可以使<code>[name]</code>动态获取<code>key</code>的值。</p>
+<p>我将js、jade、css文件统一归类至src文件目录下，将静态资源归类至static目录下。</p>
+<p>同时利用glob编写了一个符合此场景并且可以扩展的小工具<code>getArrayToSomething</code>，它可以帮我检索我需要的文件目录下所需的文件，并以数组的形式返回给我，并且我可以进行自定义的扩展或者改造。</p>
+<p>例如生成我想要的入口文件对象：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'src/**/**.js'</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>输出对象就相对容易配置许多，但是这里需要特别清楚<code>[chunkhash]</code>和<code>[hash]</code>的区别，因为这影响到浏览器缓存。</p>
+<ul>
+<li><p>用<code>[hash]</code>的话，由于每次使用 webpack 构建代码的时候，此 hash 字符串都会更新，因此相当于<strong>强制刷新浏览器缓存</strong>。</p>
+</li>
+<li><p>用<code>[chunkhash]</code>的话，则会根据具体 chunk 的内容来形成一个 hash 字符串来插入到文件名上；换句说， chunk 的内容不变，该 chunk 所对应生成出来的文件的文件名也不会变，由此，<strong>浏览器缓存便能得以继续利用</strong>。</p>
+</li>
+</ul>
+<h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><p>可以查看<a target="_blank" rel="noopener" href="https://doc.webpack-china.org/loaders/">Loaders</a>或者检索Github。</p>
+<p>这里值得一提的是，在引入一些非模块化的工具时，遇到的一些问题，查看源码你会发现它是一个立即执行函数（IIFE），并且最后会把方法最终暴露在window上。如：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>factory<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>$<span class="token punctuation">,</span> window<span class="token punctuation">,</span> undefined<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+  window<span class="token punctuation">.</span>API <span class="token operator">=</span> API<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此类工具并没有使用<code>module.exports</code>或者<code>export.default</code>暴露出接口。</p>
+<p>这使得此类工具引入后，方法并没有像预期的那样添加到全局，而是它自己的模块上下文中。</p>
+<p>解决方法可以参考《如何在 webpack 中引入未模块化的库，如 Zepto》或者一个我未实践过的<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000006887523">老式jQuery插件还不能丢，怎么兼容？</a>。</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/extract-text-webpack-plugin">ExtractTextWebpackPlugin</a></li>
+</ul>
+<p>Extract text from a bundle, or bundles, into a separate file.</p>
+<blockquote>
+<p>默认使用<code>css-loader</code>和<code>style-loader</code>将css样式插入至html中，但是重复的css对于多页面来说会产生不必要的重新加载和渲染，所以使用此插件解决问题。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://doc.webpack-china.org/plugins/commons-chunk-plugin/">CommonsChunkPlugin</a></li>
+</ul>
+<p>CommonsChunkPlugin 插件，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 chunk 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。</p>
+<blockquote>
+<p>我一般会选择抽离出<code>import</code>次数大于2次的js模块文件</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/jantimon/html-webpack-plugin">HtmlWebpackPlugin</a></li>
+</ul>
+<p>Plugin that simplifies creation of HTML files to serve your bundles</p>
+<blockquote>
+<p>因为是多页面应用，所以同样使用<code>getArrayToSomething</code>自定义返回<code>new HtmlWebpackPlugin()</code>数组列表</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/copy-webpack-plugin">CopyWebpackPlugin</a></li>
+</ul>
+<p>Copies individual files or entire directories to the build directory</p>
+<blockquote>
+<p>拷贝static目录文件</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://doc.webpack-china.org/plugins/hot-module-replacement-plugin/">HotModuleReplacementPlugin</a></li>
+</ul>
+<p>启用热替换模块(Hot Module Replacement)，也被称为 HMR。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://doc.webpack-china.org/plugins/named-modules-plugin/">NamedModulesPlugin</a></li>
+</ul>
+<p>当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://doc.webpack-china.org/plugins/no-emit-on-errors-plugin/">NoEmitOnErrorsPlugin</a></li>
+</ul>
+<p>在编译出现错误时，使用<code>NoEmitOnErrorsPlugin</code>来跳过输出阶段。这样可以确保输出资源不会包含错误。对于所有资源，统计资料(stat)的<code>emitted</code>标识都是<code>false</code>。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/johnagan/clean-webpack-plugin">CleanWebpackPlugin</a></li>
+</ul>
+<p>A webpack plugin to remove/clean your build folder(s) before building</p>
+<blockquote>
+<p>用于生产配置</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">UglifyjsWebpackPlugin</a></li>
+</ul>
+<p>This plugin uses UglifyJS v3 (<code>uglify-es</code>) to minify your JavaScript</p>
+<blockquote>
+<p>用于生产配置</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/NMFR/optimize-css-assets-webpack-plugin">OptimizeCssAssetsPlugin</a></li>
+</ul>
+<p>A Webpack plugin to optimize \ minimize CSS assets.</p>
+<blockquote>
+<p>用于生产配置</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/webpack-bundle-analyzer">BundleAnalyzerPlugin</a></li>
+</ul>
+<p>Visualize size of webpack output files with an interactive zoomable treemap.<br><img src="https://cloud.githubusercontent.com/assets/302213/20628702/93f72404-b338-11e6-92d4-9a365550a701.gif"></p>
+<h2 id="开发中-Server-DevServer"><a href="#开发中-Server-DevServer" class="headerlink" title="开发中 Server(DevServer)"></a>开发中 Server(DevServer)</h2><p>开发环境配置遇到的一个奇怪的坑。</p>
+<p>启用 webpack 的模块热替换特性：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">hot<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>Note that <code>webpack.HotModuleReplacementPlugin</code> is required to fully enable HMR. If <code>webpack</code> or <code>webpack-dev-server</code> are launched with the –hot option, this plugin will be added automatically, so you may not need to add this to your <code>webpack.config.js</code>. See the HMR concepts page for more information.</p>
+</blockquote>
+<p>在我没有手动引入<code>webpack.HotModuleReplacementPlugin</code>浏览器则会提示报错，引入后会导致我修改jade文件浏览器不会进行模块热替换。当我将<code>hot</code>属性移除，则一切恢复正常。（很奇怪）</p>
+<h2 id="webpack-merge"><a href="#webpack-merge" class="headerlink" title="webpack-merge"></a>webpack-merge</h2><p>开发环境(<em>development</em>)和生产环境(<em>production</em>)的构建目标差异很大。在开发环境中，我们需要具有强大的、具有实时重新加载(live reloading)或热模块替换(hot module replacement)能力的 source map 和 localhost server。而在生产环境中，我们的目标则转向于关注更小的 bundle，更轻量的 source map，以及更优化的资源，以改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写<strong>彼此独立的 webpack 配置</strong>。</p>
+<p>虽然，以上我们将生产环境和开发环境做了略微区分，但是，请注意，我们还是会遵循不重复原则(Don’t repeat yourself - DRY)，保留一个“通用”配置。为了将这些配置合并在一起，我们将使用一个名为<code>webpack-merge</code>的工具。通过“通用”配置，我们不必在环境特定(environment-specific)的配置中重复代码。</p>
+<hr>
+<p>改造后结构：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">│  .gitignore
+│  package.json
+│
+├─build
+│    untils.js
+│    webpack.base.conf.js
+│    webpack.dev.conf.js
+│    webpack.prod.conf.js
+│
+├─config
+│    index.js
+│
+├─src
+│  └─index
+│      index.jade
+│      index.js
+│
+└─static
+     .gitkeep
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Github仓库：<a target="_blank" rel="noopener" href="https://github.com/zongzi531/jade-webpack3">zongzi531/jade-webpack3</a></p>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://doc.webpack-china.org/">webpack 中文文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000006843916">webpack多页应用架构系列</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/isaacs/node-glob">glob</a></li>
+<li><a target="_blank" rel="noopener" href="https://sebastianblade.com/how-to-import-unmodular-library-like-zepto/">如何在 webpack 中引入未模块化的库，如 Zepto</a></li>
+</ul>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2018/03/13/webpack%E5%88%9D%E5%AD%A6%E4%B9%8B%E8%B7%AF/" title="Webpack初学之路">https://zongzi531.com/2018/03/13/webpack%E5%88%9D%E5%AD%A6%E4%B9%8B%E8%B7%AF/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2018/03/27/%E9%87%91%E4%B8%89%E9%93%B6%E5%9B%9B/">
+        上一篇<br>金三银四
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/02/23/%E6%96%B0%E5%B9%B4%E5%BC%80%E5%B7%A5%E5%89%8D%E4%B8%80%E8%AE%B0/">
+        下一篇<br>新年开工前一记
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2021 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?25570116"></script>
+
+
+<script>
+    var disqus_shortname = 'zongzi';
+    var disqus_config = function () {
+        this.page.url = 'https://zongzi531.com/2018/03/13/webpack初学之路/';
+        this.page.identifier = '/2018/03/13/webpack初学之路/';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.body || d.head).appendChild(s);
+    })();
+</script>
+
+
+</body>
+</html>
