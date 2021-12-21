@@ -1,0 +1,15 @@
+diff --git a/node_modules/hexo-prism-plugin/src/index.js b/node_modules/hexo-prism-plugin/src/index.js
+index ecf48be..6837ce6 100644
+--- a/node_modules/hexo-prism-plugin/src/index.js
++++ b/node_modules/hexo-prism-plugin/src/index.js
+@@ -10,7 +10,9 @@ const map = {
+   '&amp;': '&',
+   '&gt;': '>',
+   '&lt;': '<',
+-  '&quot;': '"'
++  '&quot;': '"',
++  '&#123;': '{',
++  '&#125;': '}'
+ };
+ 
+ const themeRegex = /^prism-(.*).css$/;

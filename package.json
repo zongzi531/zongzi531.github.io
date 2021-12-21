@@ -6,6 +6,7 @@
     "version": "5.4.0"
   },
   "scripts": {
+    "postinstall": "patch-package",
     "s": "hexo server",
     "c": "hexo clean",
     "g": "hexo generate",
@@ -27,5 +28,8 @@
     "hexo-renderer-marked": "4.1.0",
     "hexo-renderer-stylus": "2.0.1",
     "hexo-server": "2.0.0"
+  },
+  "devDependencies": {
+    "patch-package": "^6.4.7"
   }
 }
