@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?70209615">
+<link rel="stylesheet" href="/css/journal.css?45287417">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -381,77 +381,77 @@
 <h2 id="如何实现-HTML-元素的渲染"><a href="#如何实现-HTML-元素的渲染" class="headerlink" title="如何实现 HTML 元素的渲染"></a>如何实现 HTML 元素的渲染</h2><p>那么， React 是如何实现 HTML 元素的渲染呢？</p>
 <h3 id="工厂函数-objMapKeyVal-js"><a href="#工厂函数-objMapKeyVal-js" class="headerlink" title="工厂函数 objMapKeyVal.js"></a>工厂函数 objMapKeyVal.js</h3><p>objMapKeyVal 是个工厂函数，他最终会返回一个“键”与 <code>obj</code> 对应的对象“值”则是 <code>func</code> 的执行结果。</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// utils/objMapKeyVal.js</span>
-<span class="token keyword">function</span> <span class="token function">objMapKeyVal</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> func<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>obj<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">objMapKeyVal</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> func<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> ret <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> ret <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> key <span class="token keyword">in</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       ret<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> func<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> key<span class="token punctuation">,</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="创建-React-DOM-方法"><a href="#创建-React-DOM-方法" class="headerlink" title="创建 React.DOM.* 方法"></a>创建 React.DOM.* 方法</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactDOM.js</span>
 <span class="token comment" spellcheck="true">/**
  * 用于创建 DOM 组件的类，其原型连接 ReactNativeComponent
  */</span>
-<span class="token keyword">function</span> <span class="token function">createDOMComponentClass</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> omitClose<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> Constructor <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">createDOMComponentClass</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> omitClose<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> Constructor <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
   Constructor<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReactNativeComponent</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> omitClose<span class="token punctuation">)</span><span class="token punctuation">;</span>
   Constructor<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>constructor <span class="token operator">=</span> Constructor<span class="token punctuation">;</span>
 
-  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> children<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">var</span> ReactDOM <span class="token operator">=</span> <span class="token function">objMapKeyVal</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ReactDOM <span class="token operator">=</span> <span class="token function">objMapKeyVal</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// ...</span>
   <span class="token comment" spellcheck="true">// Danger: this gets monkeypatched! See ReactDOMForm for more info.</span>
   form<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   img<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// ...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> createDOMComponentClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> createDOMComponentClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>ReactDOM</code> 对象中的“键”并非包含目前所有的 HTML 元素，若你需要加入新的 HTML 元素，在此对象中添加即可。但，若你需要同时支持 <code>type=&quot;text/jsx&quot;</code> 的编写形式，则同时需要在 <code>JSXTransformer.js</code> 进行添加，以实现转换。</p>
 <p>在经过 <code>objMapKeyVal</code> 工厂函数的执行后， <code>ReactDOM</code> 得到的值已经并非是之前的布尔值，键值以 <code>tag, omitClose</code> 的形式作为参数供 <code>ReactNativeComponent</code> 进行实例化了。返回的则是接受 <code>props, children</code> 参数的函数，用于实例化这个 <code>Constructor</code> 。</p>
 <p>所以例子中是以 <code>props = null, children = &#39;Zong is learning the source code of React.&#39;</code> 的形式来接受的参数，并实例化 <code>Constructor</code> 。</p>
 <h3 id="原型-React-原生组件"><a href="#原型-React-原生组件" class="headerlink" title="原型 React 原生组件"></a>原型 React 原生组件</h3><p>当然，这里同样需要提到，<code>ReactNativeComponent</code> 实例化时操作了什么：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactNativeComponent.js</span>
-<span class="token keyword">function</span> <span class="token function">ReactNativeComponent</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> omitClose<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">ReactNativeComponent</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> omitClose<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>_tagOpen <span class="token operator">=</span> <span class="token string">'&lt;'</span> <span class="token operator">+</span> tag <span class="token operator">+</span> <span class="token string">' '</span><span class="token punctuation">;</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>_tagClose <span class="token operator">=</span> omitClose <span class="token operator">?</span> <span class="token string">''</span> <span class="token punctuation">:</span> <span class="token string">'&lt;/'</span> <span class="token operator">+</span> tag <span class="token operator">+</span> <span class="token string">'>'</span><span class="token punctuation">;</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>tagName <span class="token operator">=</span> tag<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>比如，键值对 <code>form: false</code> 返回的对象为：</p>
-<pre class="line-numbers language-json"><code class="language-json">ReactNativeComponent &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json">ReactNativeComponent <span class="token punctuation">{</span>
   <span class="token property">"_tagOpen"</span><span class="token operator">:</span> <span class="token string">"&lt;form "</span><span class="token punctuation">,</span>
   <span class="token property">"_tagClose"</span><span class="token operator">:</span> <span class="token string">"&lt;/form>"</span><span class="token punctuation">,</span>
   <span class="token property">"tagName"</span><span class="token operator">:</span> <span class="token string">"FORM"</span><span class="token punctuation">,</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="工具函数-混合"><a href="#工具函数-混合" class="headerlink" title="工具函数 - 混合"></a>工具函数 - 混合</h3><p>就这么点东西吗？当然不是，你需要注意到 <code>ReactNativeComponent.js</code> 末端的几行代码：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// utils/mixInto.js</span>
 <span class="token comment" spellcheck="true">/**
  * Simply copies properties to the prototype.
  */</span>
-<span class="token keyword">var</span> mixInto <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>constructor<span class="token punctuation">,</span> methodBag<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> mixInto <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>constructor<span class="token punctuation">,</span> methodBag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">var</span> methodName<span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span>methodName <span class="token keyword">in</span> methodBag<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>methodBag<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>methodName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>methodName <span class="token keyword">in</span> methodBag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>methodBag<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>methodName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">continue</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     constructor<span class="token punctuation">.</span>prototype<span class="token punctuation">[</span>methodName<span class="token punctuation">]</span> <span class="token operator">=</span> methodBag<span class="token punctuation">[</span>methodName<span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里依次将 3 个对象混合到 <code>ReactNativeComponent.prototype</code> 。</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactNativeComponent.js</span>
@@ -462,20 +462,20 @@
 <p><code>mixInto</code> 方法的功能其实就是 <code>Object.assign</code> 的功能，上方的代码也可以这样写： <code>Object.assign(ReactNativeComponent.prototype, ReactComponent.Mixin)</code> 。</p>
 <p>那么，接下来我们来看看 <code>this.construct(initialProps, children)</code> 这里到底做了什么，逆向寻找发现这个方法在 <code>ReactComponent.Mixin</code> 中。</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactComponent.js</span>
-<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  Mixin<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    construct<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-      <span class="token keyword">this</span><span class="token punctuation">.</span>props <span class="token operator">=</span> initialProps <span class="token operator">||</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> children <span class="token operator">!==</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token punctuation">{</span>
+  Mixin<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    construct<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>initialProps<span class="token punctuation">,</span> children<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>props <span class="token operator">=</span> initialProps <span class="token operator">||</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> children <span class="token operator">!==</span> <span class="token string">'undefined'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children <span class="token operator">=</span> children<span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       <span class="token comment" spellcheck="true">// Record the component responsible for creating this component.</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">[</span>OWNER<span class="token punctuation">]</span> <span class="token operator">=</span> ReactCurrentOwner<span class="token punctuation">.</span>current<span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// All components start unmounted.</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>_lifeCycleState <span class="token operator">=</span> ComponentLifeCycle<span class="token punctuation">.</span>UNMOUNTED<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="将-React-组件实例挂载至-DOM"><a href="#将-React-组件实例挂载至-DOM" class="headerlink" title="将 React 组件实例挂载至 DOM"></a>将 React 组件实例挂载至 DOM</h2><p>到此为止，我们改如何将这个实例渲染到 DOM 上呢？我们来看到这段代码：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// #examples</span>
@@ -491,22 +491,22 @@ React<span class="token punctuation">.</span><span class="token function">render
 
 <span class="token comment" spellcheck="true">/** Mapping from reactRoot DOM ID to React component instance. */</span>
 <span class="token comment" spellcheck="true">// React 组件实例基于 ReactRootID 的映射</span>
-<span class="token keyword">var</span> instanceByReactRootID <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> instanceByReactRootID <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">/** Mapping from reactRoot DOM ID to `container` nodes. */</span>
 <span class="token comment" spellcheck="true">// container 基于 ReactRootID 的映射</span>
-<span class="token keyword">var</span> containersByReactRootID <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> containersByReactRootID <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">/**
- * @param &amp;#123;DOMElement&amp;#125; container DOM element that may contain a React component.
- * @return &amp;#123;?string&amp;#125; A "reactRoot" ID, if a React component is rendered.
+ * @param {DOMElement} container DOM element that may contain a React component.
+ * @return {?string} A "reactRoot" ID, if a React component is rendered.
  */</span>
-<span class="token keyword">function</span> <span class="token function">getReactRootID</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">getReactRootID</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> container<span class="token punctuation">.</span>firstChild <span class="token operator">&amp;&amp;</span> container<span class="token punctuation">.</span>firstChild<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">var</span> ReactMount <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  renderComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>nextComponent<span class="token punctuation">,</span> container<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ReactMount <span class="token operator">=</span> <span class="token punctuation">{</span>
+  renderComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>nextComponent<span class="token punctuation">,</span> container<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 上面逻辑包含组件更新及事件注册</span>
     <span class="token comment" spellcheck="true">// 获得/生成 reactRootID</span>
     <span class="token keyword">var</span> reactRootID <span class="token operator">=</span> ReactMount<span class="token punctuation">.</span><span class="token function">registerContainer</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -515,48 +515,48 @@ React<span class="token punctuation">.</span><span class="token function">render
     <span class="token comment" spellcheck="true">// 调用组件自身方法</span>
     nextComponent<span class="token punctuation">.</span><span class="token function">mountComponentIntoNode</span><span class="token punctuation">(</span>reactRootID<span class="token punctuation">,</span> container<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> nextComponent<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  registerContainer<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  registerContainer<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 获得 reactRootID</span>
     <span class="token keyword">var</span> reactRootID <span class="token operator">=</span> <span class="token function">getReactRootID</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>reactRootID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>reactRootID<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 若存在的情况下确认 ID 是否为 "reactRoot" ID，否则返回 null</span>
       <span class="token comment" spellcheck="true">// If one exists, make sure it is a valid "reactRoot" ID.</span>
       reactRootID <span class="token operator">=</span> ReactInstanceHandles<span class="token punctuation">.</span><span class="token function">getReactRootIDFromNodeID</span><span class="token punctuation">(</span>reactRootID<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>reactRootID<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>reactRootID<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// No valid "reactRoot" ID found, create one.</span>
       <span class="token comment" spellcheck="true">// 若 ID 不存在，则返回新的 ID</span>
       reactRootID <span class="token operator">=</span> ReactInstanceHandles<span class="token punctuation">.</span><span class="token function">getReactRootID</span><span class="token punctuation">(</span>
         globalMountPointCounter<span class="token operator">++</span>
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment" spellcheck="true">// 映射 container</span>
     containersByReactRootID<span class="token punctuation">[</span>reactRootID<span class="token punctuation">]</span> <span class="token operator">=</span> container<span class="token punctuation">;</span>
     <span class="token keyword">return</span> reactRootID<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactInstanceHandles.js</span>
-<span class="token keyword">var</span> ReactInstanceHandles <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  getReactRootID<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mountPointCount<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ReactInstanceHandles <span class="token operator">=</span> <span class="token punctuation">{</span>
+  getReactRootID<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>mountPointCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token string">'.reactRoot['</span> <span class="token operator">+</span> mountPointCount <span class="token operator">+</span> <span class="token string">']'</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  getReactRootIDFromNodeID<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  getReactRootIDFromNodeID<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">var</span> regexResult <span class="token operator">=</span> <span class="token regex">/\.reactRoot\[[^\]]+\]/</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> regexResult <span class="token operator">&amp;&amp;</span> regexResult<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="将组件挂载至-DOM-节点方法"><a href="#将组件挂载至-DOM-节点方法" class="headerlink" title="将组件挂载至 DOM 节点方法"></a>将组件挂载至 DOM 节点方法</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactComponent.js</span>
-<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  Mixin<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ReactComponent <span class="token operator">=</span> <span class="token punctuation">{</span>
+  Mixin<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 组件生命周期和 ref 相关暂不做解读</span>
 
       <span class="token keyword">this</span><span class="token punctuation">.</span>_rootNodeID <span class="token operator">=</span> rootID<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    mountComponentIntoNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> container<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mountComponentIntoNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> container<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 这里牵扯到 React 事务，后续再做解读</span>
       <span class="token keyword">var</span> transaction <span class="token operator">=</span> ReactComponent<span class="token punctuation">.</span>ReactReconcileTransaction<span class="token punctuation">.</span><span class="token function">getPooled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// 本次讨论，你只需简单理解为：</span>
@@ -569,8 +569,8 @@ React<span class="token punctuation">.</span><span class="token function">render
         transaction
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
       ReactComponent<span class="token punctuation">.</span>ReactReconcileTransaction<span class="token punctuation">.</span><span class="token function">release</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    _mountComponentIntoNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> container<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    _mountComponentIntoNode<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> container<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 这里包含这一些时间计算，不做解读</span>
       <span class="token keyword">var</span> renderStart <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// markup 即为返回的 HTML 标记</span>
@@ -583,29 +583,29 @@ React<span class="token punctuation">.</span><span class="token function">render
       <span class="token comment" spellcheck="true">// the document when settings its `innerHTML`.</span>
       <span class="token comment" spellcheck="true">// 以下代码是用来判断 markup 需要被如何插入值 DOM 节点。</span>
       <span class="token keyword">var</span> parent <span class="token operator">=</span> container<span class="token punctuation">.</span>parentNode<span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>parent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>parent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">var</span> next <span class="token operator">=</span> container<span class="token punctuation">.</span>nextSibling<span class="token punctuation">;</span>
         parent<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span><span class="token punctuation">;</span>
         container<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> markup<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>next<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           parent<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>container<span class="token punctuation">,</span> next<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
           parent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         container<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> markup<span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       ReactMount<span class="token punctuation">.</span>totalInjectionTime <span class="token operator">+</span><span class="token operator">=</span> <span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> injectionStart<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="生成-Markup-标记"><a href="#生成-Markup-标记" class="headerlink" title="生成 Markup 标记"></a>生成 Markup 标记</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// core/ReactNativeComponent.js</span>
 <span class="token comment" spellcheck="true">// For quickly matching children type, to test if can be treated as content.</span>
-<span class="token keyword">var</span> CONTENT_TYPES <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token string">'string'</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">'number'</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> CONTENT_TYPES <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'string'</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">'number'</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-ReactNativeComponent<span class="token punctuation">.</span>Mixin <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+ReactNativeComponent<span class="token punctuation">.</span>Mixin <span class="token operator">=</span> <span class="token punctuation">{</span>
+  mountComponent<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     ReactComponent<span class="token punctuation">.</span>Mixin<span class="token punctuation">.</span>mountComponent<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> rootID<span class="token punctuation">,</span> transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 参数校验不做解读</span>
     <span class="token function">assertValidProps</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -615,60 +615,60 @@ ReactNativeComponent<span class="token punctuation">.</span>Mixin <span class="t
       <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_createContentMarkup</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span> <span class="token operator">+</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>_tagClose
     <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  _createOpenTagMarkup<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  _createOpenTagMarkup<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">var</span> ret <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_tagOpen<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 暂时不解读（事件注册/ CSS 样式/ DOM 属性）</span>
 
     <span class="token keyword">return</span> ret <span class="token operator">+</span> <span class="token string">' id="'</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_rootNodeID <span class="token operator">+</span> <span class="token string">'">'</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  _createContentMarkup<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  _createContentMarkup<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 这里忽略 dangerouslySetInnerHTML 的情况</span>
     <span class="token keyword">var</span> contentToUse <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>content <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>content <span class="token punctuation">:</span>
       CONTENT_TYPES<span class="token punctuation">[</span><span class="token keyword">typeof</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">]</span> <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children <span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> childrenToUse <span class="token operator">=</span> contentToUse <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>contentToUse <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>contentToUse <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// content == null 并且 children 为 string / number 的情况</span>
       <span class="token comment" spellcheck="true">// 直接返回 Zong is learning the source code of React.</span>
       <span class="token keyword">return</span> <span class="token function">escapeTextForBrowser</span><span class="token punctuation">(</span>contentToUse<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>childrenToUse <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>childrenToUse <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 多个 children 的情况</span>
       <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">mountMultiChild</span><span class="token punctuation">(</span>
         <span class="token function">flattenChildren</span><span class="token punctuation">(</span>childrenToUse<span class="token punctuation">)</span><span class="token punctuation">,</span>
         transaction
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// utils/escapeTextForBrowser.js</span>
-<span class="token keyword">var</span> ESCAPE_LOOKUP <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ESCAPE_LOOKUP <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token string">"&amp;"</span><span class="token punctuation">:</span> <span class="token string">"&amp;amp;"</span><span class="token punctuation">,</span>
   <span class="token string">">"</span><span class="token punctuation">:</span> <span class="token string">"&amp;gt;"</span><span class="token punctuation">,</span>
   <span class="token string">"&lt;"</span><span class="token punctuation">:</span> <span class="token string">"&amp;lt;"</span><span class="token punctuation">,</span>
   <span class="token string">"\""</span><span class="token punctuation">:</span> <span class="token string">"&amp;quot;"</span><span class="token punctuation">,</span>
   <span class="token string">"'"</span><span class="token punctuation">:</span> <span class="token string">"&amp;#x27;"</span><span class="token punctuation">,</span>
   <span class="token string">"/"</span><span class="token punctuation">:</span> <span class="token string">"&amp;#x2f;"</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">function</span> <span class="token function">escaper</span><span class="token punctuation">(</span>match<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">escaper</span><span class="token punctuation">(</span>match<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> ESCAPE_LOOKUP<span class="token punctuation">[</span>match<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">var</span> escapeTextForBrowser <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> escapeTextForBrowser <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">var</span> type <span class="token operator">=</span> <span class="token keyword">typeof</span> text<span class="token punctuation">;</span>
   <span class="token keyword">var</span> invalid <span class="token operator">=</span> type <span class="token operator">===</span> <span class="token string">'object'</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>text <span class="token operator">===</span> <span class="token string">''</span> <span class="token operator">||</span> invalid<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>text <span class="token operator">===</span> <span class="token string">''</span> <span class="token operator">||</span> invalid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'string'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">===</span> <span class="token string">'string'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> text<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/[&amp;>&lt;"'\/]/g</span><span class="token punctuation">,</span> escaper<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token string">''</span><span class="token operator">+</span>text<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/[&amp;>&lt;"'\/]/g</span><span class="token punctuation">,</span> escaper<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么到此为止，实现 HTML 元素渲染功能。</p>
 
@@ -739,7 +739,7 @@ ReactNativeComponent<span class="token punctuation">.</span>Mixin <span class="t
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?93880132"></script>
+<script src="/js/journal.js?48718780"></script>
 
 
 <script>

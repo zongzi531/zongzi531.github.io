@@ -23,7 +23,7 @@ To Do List一直是我学习框架开始的地方，最早写To Do List这个dem
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?86864023">
+<link rel="stylesheet" href="/css/journal.css?14591241">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -360,8 +360,8 @@ $ create-react-app my-app --scripts-version<span class="token operator">=</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>更多详细操作可以参见<a target="_blank" rel="noopener" href="https://github.com/Microsoft/TypeScript-React-Starter">TypeScript-React-Starter</a>。</p>
 <h2 id="泛型参数"><a href="#泛型参数" class="headerlink" title="泛型参数"></a>泛型参数</h2><p>泛型参数类型是用来约束类的成员/方法参数类型。</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> S <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> SS <span class="token operator">=</span> <span class="token keyword">any</span><span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">ComponentLifecycle</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token punctuation">,</span> SS<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> S <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> SS <span class="token operator">=</span> <span class="token keyword">any</span><span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">ComponentLifecycle</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token punctuation">,</span> SS<span class="token operator">></span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>P<span class="token punctuation">,</span> S<span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token keyword">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">:</span> P<span class="token punctuation">,</span> context<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// We MUST keep setState() as a unified signature because it allows proper checking of the method return type.</span>
@@ -380,17 +380,17 @@ $ create-react-app my-app --scripts-version<span class="token operator">=</span>
     <span class="token comment" spellcheck="true">// always pass children as variadic arguments to `createElement`.</span>
     <span class="token comment" spellcheck="true">// In the future, if we can define its call signature conditionally</span>
     <span class="token comment" spellcheck="true">// on the existence of `children` in `P`, then we should remove this.</span>
-    props<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> children<span class="token operator">?</span><span class="token punctuation">:</span> ReactNode <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token operator">></span> <span class="token operator">&amp;</span> Readonly<span class="token operator">&lt;</span>P<span class="token operator">></span><span class="token punctuation">;</span>
+    props<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span><span class="token punctuation">{</span> children<span class="token operator">?</span><span class="token punctuation">:</span> ReactNode <span class="token punctuation">}</span><span class="token operator">></span> <span class="token operator">&amp;</span> Readonly<span class="token operator">&lt;</span>P<span class="token operator">></span><span class="token punctuation">;</span>
     state<span class="token punctuation">:</span> Readonly<span class="token operator">&lt;</span>S<span class="token operator">></span><span class="token punctuation">;</span>
     context<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">;</span>
-    refs<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    refs<span class="token punctuation">:</span> <span class="token punctuation">{</span>
         <span class="token punctuation">[</span>key<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> ReactInstance
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>查看<code>Component</code>源码你会发现泛型参数<code>P</code>对应的就是<code>props</code>，泛型参数<code>S</code>对应的就是<code>state</code>。</p>
 <p>所以在写<code>class</code>组件时，都会以以下格式进行定义：</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>IPropTypes<span class="token punctuation">,</span> IStateTypes<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>IPropTypes<span class="token punctuation">,</span> IStateTypes<span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>来回顾一下，之前我们写React会使用<code>prop-types</code>来约束<code>props</code>的参数类型，但是现在我们可以放弃他，尽情发挥TypeScript的类型检查功能。</p>
 <p>我们可以使用接口来约束<code>props</code>的类型，这同样也受用于<code>state</code>。</p>
@@ -400,7 +400,7 @@ $ create-react-app my-app --scripts-version<span class="token operator">=</span>
 <p>我尝试着去把所有的不确定都换成确定。想想如果将所有的数据类型都定义成<code>any</code>，那么就失去了TypeScript的类型检查功能了，非常糟糕。</p>
 <p>所以我在写泛型参数<code>props</code>和<code>state</code>时，如果存在没有属性的情况下，我会选择使用空对象类型<code>&#123;&#125;</code>，使得我的程序更可控。</p>
 <h2 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h2><p>在写到表单内容时，会有一些需要使用到<code>event</code>的地方，这次我使用了React提供的事件类型。</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">SyntheticEvent</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">SyntheticEvent</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
     bubbles<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/**
      * A reference to the element on which the event listener is registered.
@@ -426,7 +426,7 @@ $ create-react-app my-app --scripts-version<span class="token operator">=</span>
     target<span class="token punctuation">:</span> EventTarget<span class="token punctuation">;</span>
     timeStamp<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
     type<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>以上是<code>SyntheticEvent&lt;T&gt;</code>接口源码，React已经将原生事件需要部分进行了合成，在此基础上有更细化的接口：<code>FocusEvent&lt;T&gt;</code>、<code>ChangeEvent&lt;T&gt;</code>、<code>KeyboardEvent&lt;T&gt;</code>。</p>
 <p>这里必须要很强势的安利一波VSCode，他让我的TypeScript开发体验变得如此之优雅，让我能够更好的学习TypeScript。</p>
@@ -440,14 +440,14 @@ $ create-react-app my-app --scripts-version<span class="token operator">=</span>
 <p>但是比如定义接口时必须以大写字母<code>I</code>打头的这类约束我并没有关闭，我认为这些是需要我去适应的。</p>
 <h2 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h2><ol>
 <li><p>Issues <a target="_blank" rel="noopener" href="https://github.com/DefinitelyTyped/DefinitelyTyped/issues/25342">Duplicate identifier with @types/node 10.0</a>。</p>
-<p> 遇到此问题，之前我是将node版本降级至@types/<a href="mailto:&#x6e;&#x6f;&#x64;&#101;&#64;&#57;&#46;&#54;&#46;&#55;">&#x6e;&#x6f;&#x64;&#101;&#64;&#57;&#46;&#54;&#46;&#55;</a>，但是目前@types/<a href="mailto:&#110;&#111;&#100;&#101;&#64;&#49;&#48;&#46;&#48;&#x2e;&#x32;">&#110;&#111;&#100;&#101;&#64;&#49;&#48;&#46;&#48;&#x2e;&#x32;</a>已经修复该问题。</p>
+<p> 遇到此问题，之前我是将node版本降级至@types/<a href="mailto:&#110;&#111;&#x64;&#x65;&#64;&#x39;&#46;&#x36;&#x2e;&#x37;">&#110;&#111;&#x64;&#x65;&#64;&#x39;&#46;&#x36;&#x2e;&#x37;</a>，但是目前@types/<a href="mailto:&#110;&#x6f;&#x64;&#101;&#x40;&#49;&#48;&#x2e;&#48;&#x2e;&#x32;">&#110;&#x6f;&#x64;&#101;&#x40;&#49;&#48;&#x2e;&#48;&#x2e;&#x32;</a>已经修复该问题。</p>
 </li>
 <li><p>本demo会使用到react-dnd，但是使用TypeScript时，如果继续使用修饰器的写法，将无法继续进行下去。</p>
 <p> 我查阅Issues后选择退而求其次，使用高阶组件写法来解决此问题。<br> 相关Issues：<a target="_blank" rel="noopener" href="https://github.com/react-dnd/react-dnd/issues/782">#782</a> <a target="_blank" rel="noopener" href="https://github.com/react-dnd/react-dnd/issues/785">#785</a></p>
 </li>
 </ol>
 <hr>
-<p>本文中提及源码版本：**@types/<a href="mailto:&#114;&#101;&#x61;&#99;&#116;&#64;&#x31;&#x36;&#x2e;&#51;&#46;&#x31;&#51;">&#114;&#101;&#x61;&#99;&#116;&#64;&#x31;&#x36;&#x2e;&#51;&#46;&#x31;&#51;</a>**</p>
+<p>本文中提及源码版本：**@types/<a href="mailto:&#114;&#x65;&#x61;&#99;&#x74;&#64;&#x31;&#x36;&#46;&#51;&#46;&#49;&#x33;">&#114;&#x65;&#x61;&#99;&#x74;&#64;&#x31;&#x36;&#46;&#51;&#46;&#49;&#x33;</a>**</p>
 <p>GitHub仓库： <a target="_blank" rel="noopener" href="https://github.com/zongzi531/react-to-do-list">zongzi531/react-to-do-list</a></p>
 
                 </div>
@@ -517,7 +517,7 @@ $ create-react-app my-app --scripts-version<span class="token operator">=</span>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?4894972"></script>
+<script src="/js/journal.js?16786996"></script>
 
 
 <script>

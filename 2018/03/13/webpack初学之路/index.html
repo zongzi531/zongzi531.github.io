@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?51323723">
+<link rel="stylesheet" href="/css/journal.css?53935181">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -389,10 +389,10 @@
 <p>我将js、jade、css文件统一归类至src文件目录下，将静态资源归类至static目录下。</p>
 <p>同时利用glob编写了一个符合此场景并且可以扩展的小工具<code>getArrayToSomething</code>，它可以帮我检索我需要的文件目录下所需的文件，并以数组的形式返回给我，并且我可以进行自定义的扩展或者改造。</p>
 <p>例如生成我想要的入口文件对象：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
   <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'src/**/**.js'</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// ...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>输出对象就相对容易配置许多，但是这里需要特别清楚<code>[chunkhash]</code>和<code>[hash]</code>的区别，因为这影响到浏览器缓存。</p>
 <ul>
@@ -403,12 +403,12 @@
 </ul>
 <h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><p>可以查看<a target="_blank" rel="noopener" href="https://doc.webpack-china.org/loaders/">Loaders</a>或者检索Github。</p>
 <p>这里值得一提的是，在引入一些非模块化的工具时，遇到的一些问题，查看源码你会发现它是一个立即执行函数（IIFE），并且最后会把方法最终暴露在window上。如：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>factory<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>factory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// ...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>$<span class="token punctuation">,</span> window<span class="token punctuation">,</span> undefined<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>$<span class="token punctuation">,</span> window<span class="token punctuation">,</span> undefined<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// ...</span>
   window<span class="token punctuation">.</span>API <span class="token operator">=</span> API<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此类工具并没有使用<code>module.exports</code>或者<code>export.default</code>暴露出接口。</p>
 <p>这使得此类工具引入后，方法并没有像预期的那样添加到全局，而是它自己的模块上下文中。</p>
@@ -585,7 +585,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?75286554"></script>
+<script src="/js/journal.js?98347137"></script>
 
 
 <script>

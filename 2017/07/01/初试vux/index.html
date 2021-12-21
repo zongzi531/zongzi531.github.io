@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?90997841">
+<link rel="stylesheet" href="/css/journal.css?45717463">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -357,9 +357,9 @@
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> vuxLoader <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'vux-loader'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> webpackConfig <span class="token operator">=</span> originalConfig <span class="token comment" spellcheck="true">// 原来的 module.exports 代码赋值给变量 webpackConfig</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> vuxLoader<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span>webpackConfig<span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> vuxLoader<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span>webpackConfig<span class="token punctuation">,</span> <span class="token punctuation">{</span>
   plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'vux-ui'</span><span class="token punctuation">,</span><span class="token string">'duplicate-style'</span><span class="token punctuation">]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h2><h3 id="编程式的导航"><a href="#编程式的导航" class="headerlink" title="编程式的导航"></a>编程式的导航</h3><h4 id="router-push-location"><a href="#router-push-location" class="headerlink" title="router.push(location)"></a><code>router.push(location)</code></h4><table>
 <thead>
@@ -374,11 +374,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </tr>
 </tbody></table>
 <h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>重定向也是通过 <code>routes</code> 配置来完成，下面例子是从 <code>/a</code> 重定向到 <code>/b</code>：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> path<span class="token punctuation">:</span> <span class="token string">'/a'</span><span class="token punctuation">,</span> redirect<span class="token punctuation">:</span> <span class="token string">'/b'</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span> path<span class="token punctuation">:</span> <span class="token string">'/a'</span><span class="token punctuation">,</span> redirect<span class="token punctuation">:</span> <span class="token string">'/b'</span> <span class="token punctuation">}</span>
   <span class="token punctuation">]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="XIcon"><a href="#XIcon" class="headerlink" title="XIcon"></a>XIcon</h2><p><strong>深坑！</strong></p>
 <p>根本不需要写这句：</p>
@@ -393,17 +393,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token keyword">import</span> vueg <span class="token keyword">from</span> <span class="token string">'vueg'</span>
 <span class="token keyword">import</span> <span class="token string">'vueg/css/transition-min.css'</span>
 
-<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
   duration<span class="token punctuation">:</span> <span class="token string">'0.3'</span><span class="token punctuation">,</span>
   firstEntryDisable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   firstEntryDuration<span class="token punctuation">:</span> <span class="token string">'.6'</span><span class="token punctuation">,</span>
   forwardAnim<span class="token punctuation">:</span> <span class="token string">'fadeInRight'</span><span class="token punctuation">,</span>
   backAnim<span class="token punctuation">:</span> <span class="token string">'fadeInLeft'</span><span class="token punctuation">,</span>
   sameDepthDisable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-  tabs<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>name<span class="token punctuation">:</span> <span class="token string">'Home'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>name<span class="token punctuation">:</span> <span class="token string">'OwnerInfo'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  tabs<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">'Home'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">'OwnerInfo'</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   tabsDisable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   disable<span class="token punctuation">:</span> <span class="token boolean">true</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>vueg<span class="token punctuation">,</span> router<span class="token punctuation">,</span> options<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -479,7 +479,7 @@ Vue<span class="token punctuation">.</span><span class="token function">use</spa
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?93317381"></script>
+<script src="/js/journal.js?57539455"></script>
 
 
 <script>

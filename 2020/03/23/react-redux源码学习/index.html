@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?49029403">
+<link rel="stylesheet" href="/css/journal.css?66754838">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -363,83 +363,83 @@
 <span class="token keyword">export</span> <span class="token keyword">const</span> setBatch <span class="token operator">=</span> newBatch <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>batch <span class="token operator">=</span> newBatch<span class="token punctuation">)</span>
 <span class="token keyword">export</span> <span class="token keyword">const</span> getBatch <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> batch
 <span class="token comment" spellcheck="true">// index.js</span>
-<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> setBatch <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'./utils/batch'</span>
-<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> unstable_batchedUpdates <span class="token keyword">as</span> batch <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'react-dom'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> setBatch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./utils/batch'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> unstable_batchedUpdates <span class="token keyword">as</span> batch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-dom'</span>
 
 <span class="token function">setBatch</span><span class="token punctuation">(</span>batch<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="Subscription"><a href="#Subscription" class="headerlink" title="Subscription"></a>Subscription</h2><p>从上面我们可以看出 React Redux 这里使用的更新模式并不是“普通”的执行函数，而是依赖于 React DOM 的批量更新，作为了解学习即可，可以增进一些自己的思路。现在，让我们来看到 <code>utils/Subscription.js</code> 的源码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createListenerCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createListenerCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 依赖于 React DOM 的批量更新</span>
   <span class="token keyword">const</span> batch <span class="token operator">=</span> <span class="token function">getBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
   <span class="token comment" spellcheck="true">// 监听器链表头和尾</span>
   <span class="token keyword">let</span> first <span class="token operator">=</span> <span class="token keyword">null</span>
   <span class="token keyword">let</span> last <span class="token operator">=</span> <span class="token keyword">null</span>
   <span class="token comment" spellcheck="true">// 典型的闭包结构</span>
-  <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 清空链表</span>
-    <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       first <span class="token operator">=</span> <span class="token keyword">null</span>
       last <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token comment" spellcheck="true">// 通知函数</span>
-    <span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 调用依赖于 React DOM 的批量更新</span>
-      <span class="token function">batch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">batch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token keyword">let</span> listener <span class="token operator">=</span> first
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           listener<span class="token punctuation">.</span><span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
           listener <span class="token operator">=</span> listener<span class="token punctuation">.</span>next
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token comment" spellcheck="true">// 获取监听器列表</span>
-    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">let</span> listeners <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
       <span class="token keyword">let</span> listener <span class="token operator">=</span> first
-      <span class="token keyword">while</span> <span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">while</span> <span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         listeners<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>listener<span class="token punctuation">)</span>
         listener <span class="token operator">=</span> listener<span class="token punctuation">.</span>next
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       <span class="token keyword">return</span> listeners
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token comment" spellcheck="true">// 订阅回调函数，添加至监听器链表</span>
-    <span class="token function">subscribe</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">subscribe</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">let</span> isSubscribed <span class="token operator">=</span> <span class="token boolean">true</span>
 
-      <span class="token keyword">let</span> listener <span class="token operator">=</span> <span class="token punctuation">(</span>last <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">let</span> listener <span class="token operator">=</span> <span class="token punctuation">(</span>last <span class="token operator">=</span> <span class="token punctuation">{</span>
         callback<span class="token punctuation">,</span>
         next<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
         prev<span class="token punctuation">:</span> last
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">.</span>prev<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">.</span>prev<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         listener<span class="token punctuation">.</span>prev<span class="token punctuation">.</span>next <span class="token operator">=</span> listener
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         first <span class="token operator">=</span> listener
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       <span class="token comment" spellcheck="true">// 返回取消订阅函数（典型的闭包结构）</span>
-      <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isSubscribed <span class="token operator">||</span> first <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span>
         isSubscribed <span class="token operator">=</span> <span class="token boolean">false</span>
         <span class="token comment" spellcheck="true">// 将加入的监听器移除</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           listener<span class="token punctuation">.</span>next<span class="token punctuation">.</span>prev <span class="token operator">=</span> listener<span class="token punctuation">.</span>prev
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
           last <span class="token operator">=</span> listener<span class="token punctuation">.</span>prev
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">.</span>prev<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>listener<span class="token punctuation">.</span>prev<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           listener<span class="token punctuation">.</span>prev<span class="token punctuation">.</span>next <span class="token operator">=</span> listener<span class="token punctuation">.</span>next
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
           first <span class="token operator">=</span> listener<span class="token punctuation">.</span>next
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Subscription</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> parentSub<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Subscription</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>store<span class="token punctuation">,</span> parentSub<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 初始化</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>store <span class="token operator">=</span> store
     <span class="token keyword">this</span><span class="token punctuation">.</span>parentSub <span class="token operator">=</span> parentSub
@@ -447,100 +447,100 @@
     <span class="token keyword">this</span><span class="token punctuation">.</span>listeners <span class="token operator">=</span> nullListeners
     <span class="token comment" spellcheck="true">// 绑定执行上下文</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>handleChangeWrapper <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>handleChangeWrapper<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 添加监听器回调</span>
-  <span class="token function">addNestedSub</span><span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">addNestedSub</span><span class="token punctuation">(</span>listener<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">trySubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>listeners<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>listener<span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 监听器通知</span>
-  <span class="token function">notifyNestedSubs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">notifyNestedSubs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>listeners<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 处理指定 API onStateChange</span>
-  <span class="token function">handleChangeWrapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>onStateChange<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">handleChangeWrapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>onStateChange<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">onStateChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 是否尝试过订阅</span>
-  <span class="token function">isSubscribed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">isSubscribed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">Boolean</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe<span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 订阅</span>
-  <span class="token function">trySubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">trySubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parentSub
         <span class="token operator">?</span> <span class="token keyword">this</span><span class="token punctuation">.</span>parentSub<span class="token punctuation">.</span><span class="token function">addNestedSub</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleChangeWrapper<span class="token punctuation">)</span>
         <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleChangeWrapper<span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// 创建监听器集合</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>listeners <span class="token operator">=</span> <span class="token function">createListenerCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 退订清除缓存</span>
-  <span class="token function">tryUnsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">tryUnsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>unsubscribe <span class="token operator">=</span> <span class="token keyword">null</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>listeners<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span>listeners <span class="token operator">=</span> nullListeners
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h2><p>上面是一个订阅器的简单实现，也是 <code>Provider</code> 组件触发更新的原理，那么话不多说，我们来看到 <code>components</code> 目录下 <code>Provider.js</code> 的相关源码：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> ReactReduxContext <span class="token operator">=</span> <span class="token comment" spellcheck="true">/*#__PURE__*/</span> React<span class="token punctuation">.</span><span class="token function">createContext</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
 
-<span class="token keyword">function</span> <span class="token function">Provider</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> store<span class="token punctuation">,</span> context<span class="token punctuation">,</span> children <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> contextValue <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">Provider</span><span class="token punctuation">(</span><span class="token punctuation">{</span> store<span class="token punctuation">,</span> context<span class="token punctuation">,</span> children <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> contextValue <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 实例化 Subscription</span>
     <span class="token keyword">const</span> subscription <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Subscription</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span>
     <span class="token comment" spellcheck="true">// API onStateChange 设置</span>
     subscription<span class="token punctuation">.</span>onStateChange <span class="token operator">=</span> subscription<span class="token punctuation">.</span>notifyNestedSubs
-    <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
       store<span class="token punctuation">,</span>
       subscription
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">]</span><span class="token punctuation">)</span>
   <span class="token comment" spellcheck="true">// Redux state 获取 API 调用 </span>
   <span class="token keyword">const</span> previousState <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> subscription <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> contextValue
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> subscription <span class="token punctuation">}</span> <span class="token operator">=</span> contextValue
     <span class="token comment" spellcheck="true">// 尝试订阅并创建监听器集合</span>
     subscription<span class="token punctuation">.</span><span class="token function">trySubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>previousState <span class="token operator">!==</span> store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>previousState <span class="token operator">!==</span> store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 若新旧 state 不一样则发起通知，执行监听器列表</span>
       subscription<span class="token punctuation">.</span><span class="token function">notifyNestedSubs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 清除副作用</span>
       subscription<span class="token punctuation">.</span><span class="token function">tryUnsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       subscription<span class="token punctuation">.</span>onStateChange <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>contextValue<span class="token punctuation">,</span> previousState<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>contextValue<span class="token punctuation">,</span> previousState<span class="token punctuation">]</span><span class="token punctuation">)</span>
   <span class="token comment" spellcheck="true">// 用户自定义 Context 优先</span>
   <span class="token keyword">const</span> Context <span class="token operator">=</span> context <span class="token operator">||</span> ReactReduxContext
   <span class="token comment" spellcheck="true">// contextValue 包含整个 Redux 实例和订阅器</span>
-  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Context<span class="token punctuation">.</span>Provider value<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>contextValue<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token operator">></span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>children<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token operator">&lt;</span><span class="token operator">/</span>Context<span class="token punctuation">.</span>Provider<span class="token operator">></span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Context<span class="token punctuation">.</span>Provider value<span class="token operator">=</span><span class="token punctuation">{</span>contextValue<span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>Context<span class="token punctuation">.</span>Provider<span class="token operator">></span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p>看到这里其实已经明白 <code>Provider</code> 组件的整个逻辑，即依据 <code>store</code> 或 <code>previousState</code> 的变化触发订阅退订的生命周期以及通知更新操作。那么再和 <code>connect</code> 高阶组件函数配合实现 React Redux 的功能。显然，到了这里我想大家都应该能猜到， <code>Provider</code> 组件用于注入 Redux 并控制逻辑，<code>connect</code> 高阶组件函数来处理用户想要的 <code>store</code> 以 <code>props</code> 的形式传入。我们先来看到 <code>connectAdvanced.js</code> 的源码吧（下面内容有些多，我陪你一点点看下去）：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">connectAdvanced</span><span class="token punctuation">(</span>
   <span class="token comment" spellcheck="true">/*
     选择器工厂函数（默认官方提供）作用是生成类似这样的代码内容：
-    export default connectAdvanced((dispatch, options) => (state, props) => (&amp;#123;
+    export default connectAdvanced((dispatch, options) => (state, props) => ({
       thing: state.things[props.thingId],
       saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
-    &amp;#125;))(YourComponent)
+    }))(YourComponent)
   */</span>
   selectorFactory<span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// 配置参数，官方已在 connect 进行封装（当然用户可以自己魔改），所以我们在使用的时候用的是 connect</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// the func used to compute this HOC's displayName from the wrapped component's displayName.</span>
     <span class="token comment" spellcheck="true">// probably overridden by wrapper functions such as connect()</span>
-    getDisplayName <span class="token operator">=</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`ConnectAdvanced($&amp;#123;name&amp;#125;)`</span></span><span class="token punctuation">,</span>
+    getDisplayName <span class="token operator">=</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`ConnectAdvanced(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)`</span></span><span class="token punctuation">,</span>
     <span class="token comment" spellcheck="true">// shown in error messages</span>
     <span class="token comment" spellcheck="true">// probably overridden by wrapper functions such as connect()</span>
     methodName <span class="token operator">=</span> <span class="token string">'connectAdvanced'</span><span class="token punctuation">,</span>
@@ -559,17 +559,17 @@
     context <span class="token operator">=</span> ReactReduxContext<span class="token punctuation">,</span>
     <span class="token comment" spellcheck="true">// additional options are passed through to the selectorFactory</span>
     <span class="token operator">...</span>connectOptions
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> Context <span class="token operator">=</span> context
   <span class="token comment" spellcheck="true">// 典型的 HOC 写法</span>
-  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">wrapWithConnect</span><span class="token punctuation">(</span>WrappedComponent<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">wrapWithConnect</span><span class="token punctuation">(</span>WrappedComponent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> wrappedComponentName <span class="token operator">=</span>
       WrappedComponent<span class="token punctuation">.</span>displayName <span class="token operator">||</span> WrappedComponent<span class="token punctuation">.</span>name <span class="token operator">||</span> <span class="token string">'Component'</span>
 
     <span class="token keyword">const</span> displayName <span class="token operator">=</span> <span class="token function">getDisplayName</span><span class="token punctuation">(</span>wrappedComponentName<span class="token punctuation">)</span>
     <span class="token comment" spellcheck="true">// 选择器工厂函数所需参数</span>
-    <span class="token keyword">const</span> selectorFactoryOptions <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> selectorFactoryOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span>connectOptions<span class="token punctuation">,</span>
       getDisplayName<span class="token punctuation">,</span>
       methodName<span class="token punctuation">,</span>
@@ -579,25 +579,25 @@
       displayName<span class="token punctuation">,</span>
       wrappedComponentName<span class="token punctuation">,</span>
       WrappedComponent
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment" spellcheck="true">// “ prue ”即一种模式，默认为开启。影响 Memo 相关内容，可以视做是一种性能优化</span>
-    <span class="token keyword">const</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> pure <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> connectOptions
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> pure <span class="token punctuation">}</span> <span class="token operator">=</span> connectOptions
     <span class="token keyword">const</span> usePureOnlyMemo <span class="token operator">=</span> pure <span class="token operator">?</span> useMemo <span class="token punctuation">:</span> callback <span class="token operator">=</span><span class="token operator">></span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token comment" spellcheck="true">// 函数组件 ConnectFunction</span>
-    <span class="token keyword">function</span> <span class="token function">ConnectFunction</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">ConnectFunction</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// props 分类</span>
-      <span class="token keyword">const</span> <span class="token punctuation">[</span>propsContext<span class="token punctuation">,</span> forwardedRef<span class="token punctuation">,</span> wrapperProps<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">const</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> forwardedRef<span class="token punctuation">,</span> <span class="token operator">...</span>wrapperProps <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> props
+      <span class="token keyword">const</span> <span class="token punctuation">[</span>propsContext<span class="token punctuation">,</span> forwardedRef<span class="token punctuation">,</span> wrapperProps<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span> forwardedRef<span class="token punctuation">,</span> <span class="token operator">...</span>wrapperProps <span class="token punctuation">}</span> <span class="token operator">=</span> props
         <span class="token keyword">return</span> <span class="token punctuation">[</span>props<span class="token punctuation">.</span>context<span class="token punctuation">,</span> forwardedRef<span class="token punctuation">,</span> wrapperProps<span class="token punctuation">]</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>props<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>props<span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// 选择默认 Context 或用户自己传入的 Context</span>
-      <span class="token keyword">const</span> ContextToUse <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> ContextToUse <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> propsContext <span class="token operator">&amp;&amp;</span>
           propsContext<span class="token punctuation">.</span>Consumer <span class="token operator">&amp;&amp;</span>
           <span class="token function">isContextConsumer</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>propsContext<span class="token punctuation">.</span>Consumer <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">)</span>
           <span class="token operator">?</span> propsContext
           <span class="token punctuation">:</span> Context
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>propsContext<span class="token punctuation">,</span> Context<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>propsContext<span class="token punctuation">,</span> Context<span class="token punctuation">]</span><span class="token punctuation">)</span>
 
       <span class="token keyword">const</span> contextValue <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span>ContextToUse<span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// 典型的鸭子模型辨认法</span>
@@ -609,11 +609,11 @@
         <span class="token function">Boolean</span><span class="token punctuation">(</span>contextValue<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">Boolean</span><span class="token punctuation">(</span>contextValue<span class="token punctuation">.</span>store<span class="token punctuation">)</span>
       <span class="token keyword">const</span> store <span class="token operator">=</span> didStoreComeFromProps <span class="token operator">?</span> props<span class="token punctuation">.</span>store <span class="token punctuation">:</span> contextValue<span class="token punctuation">.</span>store
       <span class="token comment" spellcheck="true">// props 选择器，对应源码为 finalPropsSelectorFactory 函数，可以理解为一个包装层</span>
-      <span class="token keyword">const</span> childPropsSelector <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> childPropsSelector <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token function">selectorFactory</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>dispatch<span class="token punctuation">,</span> selectorFactoryOptions<span class="token punctuation">)</span><span class="token comment" spellcheck="true">/* createChildSelector(store) */</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// 订阅器及通知函数创建</span>
-      <span class="token keyword">const</span> <span class="token punctuation">[</span>subscription<span class="token punctuation">,</span> notifyNestedSubs<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> <span class="token punctuation">[</span>subscription<span class="token punctuation">,</span> notifyNestedSubs<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>shouldHandleStateChanges<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">/* NO_SUBSCRIPTION_ARRAY */</span>
         <span class="token comment" spellcheck="true">// 实例化 Subscription</span>
         <span class="token keyword">const</span> subscription <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Subscription</span><span class="token punctuation">(</span>
@@ -625,55 +625,55 @@
           subscription
         <span class="token punctuation">)</span>
         <span class="token keyword">return</span> <span class="token punctuation">[</span>subscription<span class="token punctuation">,</span> notifyNestedSubs<span class="token punctuation">]</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">,</span> didStoreComeFromProps<span class="token punctuation">,</span> contextValue<span class="token punctuation">]</span><span class="token punctuation">)</span>
-      <span class="token comment" spellcheck="true">// Determine what &amp;#123;store, subscription&amp;#125; value should be put into nested context, if necessary,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">,</span> didStoreComeFromProps<span class="token punctuation">,</span> contextValue<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token comment" spellcheck="true">// Determine what {store, subscription} value should be put into nested context, if necessary,</span>
       <span class="token comment" spellcheck="true">// and memoize that value to avoid unnecessary context updates.</span>
-      <span class="token keyword">const</span> overriddenContextValue <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>didStoreComeFromProps<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> overriddenContextValue <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>didStoreComeFromProps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token keyword">return</span> contextValue
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
           <span class="token operator">...</span>contextValue<span class="token punctuation">,</span>
           subscription
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>didStoreComeFromProps<span class="token punctuation">,</span> contextValue<span class="token punctuation">,</span> subscription<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>didStoreComeFromProps<span class="token punctuation">,</span> contextValue<span class="token punctuation">,</span> subscription<span class="token punctuation">]</span><span class="token punctuation">)</span>
 
       <span class="token keyword">const</span> lastChildProps <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">const</span> lastWrapperProps <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span>wrapperProps<span class="token punctuation">)</span>
       <span class="token keyword">const</span> childPropsFromStoreUpdate <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">const</span> renderIsScheduled <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// 实际的 props</span>
-      <span class="token keyword">const</span> actualChildProps <span class="token operator">=</span> <span class="token function">usePureOnlyMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> actualChildProps <span class="token operator">=</span> <span class="token function">usePureOnlyMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>
           childPropsFromStoreUpdate<span class="token punctuation">.</span>current <span class="token operator">&amp;&amp;</span>
           wrapperProps <span class="token operator">===</span> lastWrapperProps<span class="token punctuation">.</span>current
-        <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token keyword">return</span> childPropsFromStoreUpdate<span class="token punctuation">.</span>current
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">// props 选择器，同包装层</span>
         <span class="token keyword">return</span> <span class="token function">childPropsSelector</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> wrapperProps<span class="token punctuation">)</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">,</span> wrapperProps<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">,</span> wrapperProps<span class="token punctuation">]</span><span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// Hook useEffect 或 useLayoutEffect</span>
-      <span class="token function">useIsomorphicLayoutEffect</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* captureWrapperProps */</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">useIsomorphicLayoutEffect</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* captureWrapperProps */</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 用于更新最新的 props 相关</span>
         lastWrapperProps<span class="token punctuation">.</span>current <span class="token operator">=</span> wrapperProps
         lastChildProps<span class="token punctuation">.</span>current <span class="token operator">=</span> actualChildProps
         renderIsScheduled<span class="token punctuation">.</span>current <span class="token operator">=</span> <span class="token boolean">false</span>
         <span class="token comment" spellcheck="true">// 根据条件通知</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>childPropsFromStoreUpdate<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>childPropsFromStoreUpdate<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           childPropsFromStoreUpdate<span class="token punctuation">.</span>current <span class="token operator">=</span> <span class="token keyword">null</span>
           <span class="token function">notifyNestedSubs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// Our re-subscribe logic only runs when the store/subscription setup changes</span>
-      <span class="token function">useIsomorphicLayoutEffect</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* subscribeUpdates */</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">useIsomorphicLayoutEffect</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* subscribeUpdates */</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>shouldHandleStateChanges<span class="token punctuation">)</span> <span class="token keyword">return</span>
 
         <span class="token keyword">let</span> didUnsubscribe <span class="token operator">=</span> <span class="token boolean">false</span>
         <span class="token comment" spellcheck="true">// 检查更新函数</span>
-        <span class="token keyword">const</span> checkForUpdates <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>didUnsubscribe<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> checkForUpdates <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>didUnsubscribe<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span>
           <span class="token keyword">const</span> latestStoreState <span class="token operator">=</span> store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
           <span class="token comment" spellcheck="true">// props 选择器（非包装层，可以理解为 impureFinalPropsSelector 函数，因为省略源码的关系，重名）</span>
           <span class="token keyword">let</span> newChildProps <span class="token operator">=</span> <span class="token function">childPropsSelector</span><span class="token punctuation">(</span>
@@ -681,52 +681,52 @@
             lastWrapperProps<span class="token punctuation">.</span>current
           <span class="token punctuation">)</span>
           <span class="token comment" spellcheck="true">// 如果 props 未变化，则此处无事可做 - 级联订阅更新</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>newChildProps <span class="token operator">===</span> lastChildProps<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>renderIsScheduled<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>newChildProps <span class="token operator">===</span> lastChildProps<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>renderIsScheduled<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
               <span class="token comment" spellcheck="true">// 通知</span>
               <span class="token function">notifyNestedSubs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-          <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">// props 变化，触发通知</span>
             lastChildProps<span class="token punctuation">.</span>current <span class="token operator">=</span> newChildProps
             childPropsFromStoreUpdate<span class="token punctuation">.</span>current <span class="token operator">=</span> newChildProps
             renderIsScheduled<span class="token punctuation">.</span>current <span class="token operator">=</span> <span class="token boolean">true</span>
-          <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">// 订阅 checkForUpdates</span>
         subscription<span class="token punctuation">.</span>onStateChange <span class="token operator">=</span> checkForUpdates
         subscription<span class="token punctuation">.</span><span class="token function">trySubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token comment" spellcheck="true">// 首次检查</span>
         <span class="token function">checkForUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token comment" spellcheck="true">// 取消订阅函数用于返回</span>
-        <span class="token keyword">const</span> unsubscribeWrapper <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> unsubscribeWrapper <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
           didUnsubscribe <span class="token operator">=</span> <span class="token boolean">true</span>
           subscription<span class="token punctuation">.</span><span class="token function">tryUnsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
           subscription<span class="token punctuation">.</span>onStateChange <span class="token operator">=</span> <span class="token keyword">null</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> unsubscribeWrapper
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">,</span> subscription<span class="token punctuation">,</span> childPropsSelector<span class="token comment" spellcheck="true">/* 包装层 */</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>store<span class="token punctuation">,</span> subscription<span class="token punctuation">,</span> childPropsSelector<span class="token comment" spellcheck="true">/* 包装层 */</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
       <span class="token keyword">const</span> renderedWrappedComponent <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span>
-        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&lt;</span>WrappedComponent <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">...</span>actualChildProps<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> ref<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>forwardedRef<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&lt;</span>WrappedComponent <span class="token punctuation">{</span><span class="token operator">...</span>actualChildProps<span class="token punctuation">}</span> ref<span class="token operator">=</span><span class="token punctuation">{</span>forwardedRef<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">,</span>
         <span class="token punctuation">[</span>forwardedRef<span class="token punctuation">,</span> WrappedComponent<span class="token punctuation">,</span> actualChildProps<span class="token punctuation">]</span>
       <span class="token punctuation">)</span>
 
-      <span class="token keyword">const</span> renderedChild <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> renderedChild <span class="token operator">=</span> <span class="token function">useMemo</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 性能优化标示，若为 false 则不重新渲染</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>shouldHandleStateChanges<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>shouldHandleStateChanges<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token keyword">return</span> <span class="token punctuation">(</span>
-            <span class="token operator">&lt;</span>ContextToUse<span class="token punctuation">.</span>Provider value<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>overriddenContextValue<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token operator">></span>
-              <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>renderedWrappedComponent<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token operator">&lt;</span>ContextToUse<span class="token punctuation">.</span>Provider value<span class="token operator">=</span><span class="token punctuation">{</span>overriddenContextValue<span class="token punctuation">}</span><span class="token operator">></span>
+              <span class="token punctuation">{</span>renderedWrappedComponent<span class="token punctuation">}</span>
             <span class="token operator">&lt;</span><span class="token operator">/</span>ContextToUse<span class="token punctuation">.</span>Provider<span class="token operator">></span>
           <span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
         <span class="token keyword">return</span> renderedWrappedComponent
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>ContextToUse<span class="token punctuation">,</span> renderedWrappedComponent<span class="token punctuation">,</span> overriddenContextValue<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>ContextToUse<span class="token punctuation">,</span> renderedWrappedComponent<span class="token punctuation">,</span> overriddenContextValue<span class="token punctuation">]</span><span class="token punctuation">)</span>
 
       <span class="token keyword">return</span> renderedChild
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">const</span> Connect <span class="token operator">=</span> pure <span class="token operator">?</span> React<span class="token punctuation">.</span><span class="token function">memo</span><span class="token punctuation">(</span>ConnectFunction<span class="token punctuation">)</span> <span class="token punctuation">:</span> ConnectFunction
     Connect<span class="token punctuation">.</span>WrappedComponent <span class="token operator">=</span> WrappedComponent
     Connect<span class="token punctuation">.</span>displayName <span class="token operator">=</span> displayName
@@ -734,8 +734,8 @@
     <span class="token comment" spellcheck="true">// 关于 hoistStatics 请查看： Copies non-react specific statics from a child component to a parent component.</span>
     <span class="token comment" spellcheck="true">// Similar to Object.assign, but with React static keywords blacklisted from being overridden.</span>
     <span class="token keyword">return</span> <span class="token function">hoistStatics</span><span class="token punctuation">(</span>Connect<span class="token punctuation">,</span> WrappedComponent<span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到这里， <code>connectAdvanced</code> 高阶组件函数的内容已阅读完，因为篇幅关系，我移除了部分代码，可能会导致理解不足，就像我在前面说的，这个高阶组件的功能就是如此，若大家想深入建议前往 Github 仓库查看，大部分内容是一些细节的处理。</p>
 <p>是不是觉得内容有些爆炸，有些多。确实有些，不如，先去喝杯水，上个洗手间，放松一下，我们再继续。</p>
@@ -748,37 +748,37 @@
 <li><code>whenMapDispatchToPropsIsObject</code> 传入识别为对象</li>
 </ol>
 <p>在了解过这个后，我们来回到源码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createConnect</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createConnect</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   connectHOC <span class="token operator">=</span> connectAdvanced<span class="token comment" spellcheck="true">/* HOC */</span><span class="token punctuation">,</span>
   mapStateToPropsFactories <span class="token operator">=</span> defaultMapStateToPropsFactories<span class="token punctuation">,</span>
   mapDispatchToPropsFactories <span class="token operator">=</span> defaultMapDispatchToPropsFactories<span class="token punctuation">,</span>
   mergePropsFactories <span class="token operator">=</span> defaultMergePropsFactories<span class="token punctuation">,</span>
   selectorFactory <span class="token operator">=</span> defaultSelectorFactory
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 看到这里是不是少许熟悉了一些</span>
   <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">connect</span><span class="token punctuation">(</span>
     mapStateToProps<span class="token punctuation">,</span>
     mapDispatchToProps<span class="token punctuation">,</span>
     mergeProps<span class="token punctuation">,</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       pure <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       areStatesEqual <span class="token operator">=</span> strictEqual<span class="token punctuation">,</span>
       areOwnPropsEqual <span class="token operator">=</span> shallowEqual<span class="token punctuation">,</span>
       areStatePropsEqual <span class="token operator">=</span> shallowEqual<span class="token punctuation">,</span>
       areMergedPropsEqual <span class="token operator">=</span> shallowEqual<span class="token punctuation">,</span>
       <span class="token operator">...</span>extraOptions
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 分别进行入参识别</span>
     <span class="token keyword">const</span> initMapStateToProps <span class="token operator">=</span> <span class="token function">match</span><span class="token punctuation">(</span>mapStateToProps<span class="token punctuation">,</span> mapStateToPropsFactories<span class="token punctuation">,</span> <span class="token string">'mapStateToProps'</span><span class="token punctuation">)</span>
     <span class="token keyword">const</span> initMapDispatchToProps <span class="token operator">=</span> <span class="token function">match</span><span class="token punctuation">(</span>mapDispatchToProps<span class="token punctuation">,</span> mapDispatchToPropsFactories<span class="token punctuation">,</span> <span class="token string">'mapDispatchToProps'</span><span class="token punctuation">)</span>
     <span class="token keyword">const</span> initMergeProps <span class="token operator">=</span> <span class="token function">match</span><span class="token punctuation">(</span>mergeProps<span class="token punctuation">,</span> mergePropsFactories<span class="token punctuation">,</span> <span class="token string">'mergeProps'</span><span class="token punctuation">)</span>
     <span class="token comment" spellcheck="true">// 对 connectAdvanced 的封装</span>
-    <span class="token keyword">return</span> <span class="token function">connectHOC</span><span class="token punctuation">(</span>selectorFactory<span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">connectHOC</span><span class="token punctuation">(</span>selectorFactory<span class="token punctuation">,</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// used in error messages</span>
       methodName<span class="token punctuation">:</span> <span class="token string">'connect'</span><span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// used to compute Connect's displayName from the wrapped component's displayName.</span>
-      getDisplayName<span class="token punctuation">:</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`Connect($&amp;#123;name&amp;#125;)`</span></span><span class="token punctuation">,</span>
+      getDisplayName<span class="token punctuation">:</span> name <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`Connect(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)`</span></span><span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// if mapStateToProps is falsy, the Connect component doesn't subscribe to store state changes</span>
       shouldHandleStateChanges<span class="token punctuation">:</span> <span class="token function">Boolean</span><span class="token punctuation">(</span>mapStateToProps<span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// passed through to selectorFactory</span>
@@ -792,18 +792,18 @@
       areMergedPropsEqual<span class="token punctuation">,</span>
       <span class="token comment" spellcheck="true">// any extra options args can override defaults of connect or connectAdvanced</span>
       <span class="token operator">...</span>extraOptions
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token comment" spellcheck="true">/*#__PURE__*/</span> <span class="token function">createConnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么到此，我们已经看完 <code>connect</code> 函数的内容。</p>
 <p>回到前面的内容，整个高阶组件函数是为了实现：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">connectAdvanced</span><span class="token punctuation">(</span><span class="token punctuation">(</span>dispatch<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> props<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">connectAdvanced</span><span class="token punctuation">(</span><span class="token punctuation">(</span>dispatch<span class="token punctuation">,</span> options<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> props<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
   thing<span class="token punctuation">:</span> state<span class="token punctuation">.</span>things<span class="token punctuation">[</span>props<span class="token punctuation">.</span>thingId<span class="token punctuation">]</span><span class="token punctuation">,</span>
   saveThing<span class="token punctuation">:</span> fields <span class="token operator">=</span><span class="token operator">></span> <span class="token function">dispatch</span><span class="token punctuation">(</span>actionCreators<span class="token punctuation">.</span><span class="token function">saveThing</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>thingId<span class="token punctuation">,</span> fields<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>YourComponent<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>YourComponent<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>类似于这样的代码，所以到目前为止是不是漏了点什么？是的，被你发现了。是 <code>selectorFactory</code> ：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">impureFinalPropsSelectorFactory</span><span class="token punctuation">(</span>
@@ -811,15 +811,15 @@
   mapDispatchToProps<span class="token punctuation">,</span>
   mergeProps<span class="token punctuation">,</span>
   dispatch
-<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">impureFinalPropsSelector</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> ownProps<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">impureFinalPropsSelector</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> ownProps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">mergeProps</span><span class="token punctuation">(</span>
       <span class="token function">mapStateToProps</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> ownProps<span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token function">mapDispatchToProps</span><span class="token punctuation">(</span>dispatch<span class="token punctuation">,</span> ownProps<span class="token punctuation">)</span><span class="token punctuation">,</span>
       ownProps
     <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我省略了大部分优化代码，很直观的理解就是过滤、合并最终你想要的 <code>props</code> 。剩下关于源码中 Hook 即是一些简单的封装，这里就不做解读了，很简单，如果感兴趣的话，请移步至 Github 仓库查看，那么这次的 React Redux 源码学习到此，感谢阅读至此！</p>
 
@@ -890,7 +890,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?37949918"></script>
+<script src="/js/journal.js?20598212"></script>
 
 
 <script>

@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?86001283">
+<link rel="stylesheet" href="/css/journal.css?10162557">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -362,52 +362,52 @@
  * rootReducer 即认为静态 reducer
  * asyncReducers 即认为需要合并的异步 reducer
  */</span>
-<span class="token keyword">const</span> createReducer <span class="token operator">=</span> asyncReducers <span class="token operator">=</span><span class="token operator">></span> <span class="token function">combineReducers</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> createReducer <span class="token operator">=</span> asyncReducers <span class="token operator">=</span><span class="token operator">></span> <span class="token function">combineReducers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   <span class="token operator">...</span>rootReducer<span class="token punctuation">,</span>
   <span class="token operator">...</span>asyncReducers
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// 暴露给外界的注入函数</span>
 <span class="token keyword">export</span> <span class="token keyword">let</span> injectReducer<span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> configureStore <span class="token operator">=</span> preloadedState <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> configureStore <span class="token operator">=</span> preloadedState <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>
     <span class="token function">combineReducers</span><span class="token punctuation">(</span>rootReducer<span class="token punctuation">)</span><span class="token punctuation">,</span>
     preloadedState<span class="token punctuation">,</span>
     middleware
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  store<span class="token punctuation">.</span>asyncReducers <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  store<span class="token punctuation">.</span>asyncReducers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// 注入函数</span>
-  injectReducer <span class="token operator">=</span> store<span class="token punctuation">.</span>injectReducer <span class="token operator">=</span> <span class="token punctuation">(</span>key<span class="token punctuation">,</span> asyncReducer<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>Object<span class="token punctuation">.</span>hasOwnProperty<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token keyword">return</span><span class="token punctuation">;</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  injectReducer <span class="token operator">=</span> store<span class="token punctuation">.</span>injectReducer <span class="token operator">=</span> <span class="token punctuation">(</span>key<span class="token punctuation">,</span> asyncReducer<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Object<span class="token punctuation">.</span>hasOwnProperty<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     
     <span class="token comment" spellcheck="true">// 赋值</span>
     store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> asyncReducer<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 合并 reducer 并调用 replaceReducer 方法更新</span>
     store<span class="token punctuation">.</span><span class="token function">replaceReducer</span><span class="token punctuation">(</span><span class="token function">createReducer</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
   <span class="token keyword">return</span> store<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> configureStore<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对原先的创建 <code>store</code> 过程进行了更新，暴露了 <code>injectReducer</code> 函数用于异步注入，结合 <code>import()</code> 就可以实现对 React 的代码分割，真是非常喜悦。</p>
 <p>那我们来看看怎么用：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> lazy <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> injectReducer <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'@/store/configureStore'</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> lazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> injectReducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/store/configureStore'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  Something<span class="token punctuation">:</span> <span class="token function">lazy</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* webpackChunkName: 'Something' */</span><span class="token string">'@/reducers/something'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  Something<span class="token punctuation">:</span> <span class="token function">lazy</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* webpackChunkName: 'Something' */</span><span class="token string">'@/reducers/something'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
       <span class="token function">injectReducer</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* webpackChunkName: 'Something' */</span><span class="token string">'@/containers/Something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>使用方法也特别简单，即动态导入后注入 reducer 即可，以实现代码分割。</p>
 <p>那么到此，相对实现了一个比较完善的 React + Redux 的代码分割解决方案，可以以页面维度，或者你想要的细度去控制代码分割的程度以应对项目的快迭代。</p>
@@ -479,7 +479,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?23189917"></script>
+<script src="/js/journal.js?77082726"></script>
 
 
 <script>

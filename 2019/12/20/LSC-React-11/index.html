@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?48137752">
+<link rel="stylesheet" href="/css/journal.css?21980968">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -415,22 +415,22 @@
   <span class="token keyword">typeof</span> performance <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> performance<span class="token punctuation">.</span>now <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>还是比较好理解的，同样通过名称和注释就能理解。接下来，让我们看到代码，先让我们看到 <code>flushFirstCallback</code> 函数：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">flushFirstCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">flushFirstCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 获取链表头，视为需要被执行回调函数的节点</span>
   <span class="token keyword">var</span> flushedNode <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">;</span>
   <span class="token comment" spellcheck="true">// 获取链表头的下一个节点</span>
   <span class="token keyword">var</span> next <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">===</span> next<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">===</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 若链表头（当前节点）与下一个节点相等的话，说明当前节点也是链表的最后一个节点，操作链表清空</span>
     firstCallbackNode <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
     next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 否则连接链表头的前一个节点和后一个节点</span>
     <span class="token comment" spellcheck="true">// 并将链表头的下一个节点更新为 firstCallbackNode 用做起始节点</span>
     <span class="token keyword">var</span> lastCallbackNode <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">.</span>previous<span class="token punctuation">;</span>
     firstCallbackNode <span class="token operator">=</span> lastCallbackNode<span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
     next<span class="token punctuation">.</span>previous <span class="token operator">=</span> lastCallbackNode<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 移除引用</span>
   flushedNode<span class="token punctuation">.</span>next <span class="token operator">=</span> flushedNode<span class="token punctuation">.</span>previous <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
 
@@ -444,79 +444,79 @@
   currentPriorityLevel <span class="token operator">=</span> priorityLevel<span class="token punctuation">;</span>
   currentExpirationTime <span class="token operator">=</span> expirationTime<span class="token punctuation">;</span>
   <span class="token keyword">var</span> continuationCallback<span class="token punctuation">;</span>
-  <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 尝试执行回调函数，并获取回调函数返回值，用于稍后操作</span>
     continuationCallback <span class="token operator">=</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 还原</span>
     currentPriorityLevel <span class="token operator">=</span> previousPriorityLevel<span class="token punctuation">;</span>
     currentExpirationTime <span class="token operator">=</span> previousExpirationTime<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 返回值依然是函数</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> continuationCallback <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> continuationCallback <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 创建循环双向链表节点，优先级和到期时间使用原回调函数值</span>
-    <span class="token keyword">var</span> continuationNode<span class="token punctuation">:</span> CallbackNode <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> continuationNode<span class="token punctuation">:</span> CallbackNode <span class="token operator">=</span> <span class="token punctuation">{</span>
       callback<span class="token punctuation">:</span> continuationCallback<span class="token punctuation">,</span>
       priorityLevel<span class="token punctuation">,</span>
       expirationTime<span class="token punctuation">,</span>
       next<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
       previous<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 若循环双向链表已被清空，则这个新节点则是第一个</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       firstCallbackNode <span class="token operator">=</span> continuationNode<span class="token punctuation">.</span>next <span class="token operator">=</span> continuationNode<span class="token punctuation">.</span>previous <span class="token operator">=</span> continuationNode<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 新节点被插入的位置（插入在之前）</span>
       <span class="token keyword">var</span> nextAfterContinuation <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// 遍历准备</span>
       <span class="token keyword">var</span> node <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// 仅遍历一次，再次遇到头时结束</span>
-      <span class="token keyword">do</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">do</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 直到被遍历到的节点到期时间大于等于重新创建回调节点的当前时间时，更新 nextAfterContinuation 值，然后退出循环</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>expirationTime <span class="token operator">>=</span> expirationTime<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>expirationTime <span class="token operator">>=</span> expirationTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token comment" spellcheck="true">// 当出现第一个遍历节点的到期时间大于或等于新节点的到期时间的时候，说明新节点需要被插入在之前</span>
           nextAfterContinuation <span class="token operator">=</span> node<span class="token punctuation">;</span>
           <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         node <span class="token operator">=</span> node<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!==</span> firstCallbackNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!==</span> firstCallbackNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token comment" spellcheck="true">// 遍历完都没有找到的话，那新节点就是最尾部的节点，所以新节点的后一个就是链表头</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>nextAfterContinuation <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>nextAfterContinuation <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         nextAfterContinuation <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>nextAfterContinuation <span class="token operator">===</span> firstCallbackNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>nextAfterContinuation <span class="token operator">===</span> firstCallbackNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 与上一个逻辑位置一样，只不过优先级是最高，而不是最低</span>
         firstCallbackNode <span class="token operator">=</span> continuationNode<span class="token punctuation">;</span>
         <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       <span class="token comment" spellcheck="true">// 插入新节点</span>
       <span class="token keyword">var</span> previous <span class="token operator">=</span> nextAfterContinuation<span class="token punctuation">.</span>previous<span class="token punctuation">;</span>
       previous<span class="token punctuation">.</span>next <span class="token operator">=</span> nextAfterContinuation<span class="token punctuation">.</span>previous <span class="token operator">=</span> continuationNode<span class="token punctuation">;</span>
       continuationNode<span class="token punctuation">.</span>next <span class="token operator">=</span> nextAfterContinuation<span class="token punctuation">;</span>
       continuationNode<span class="token punctuation">.</span>previous <span class="token operator">=</span> previous<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>flushFirstCallback</code> 函数的操作就是执行循环双向链表中到期时间最小（链表头）的回调函数，如果回调函数执行后依然有返回函数，则按照原先的优先级和到期时间重新按照到期时间的降序插入到循环双向链表中。接下来我们看到上面出现的 <code>ensureHostCallbackIsScheduled</code> 函数：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 当正在执行回调函数时，退出</span>
   <span class="token comment" spellcheck="true">// 通过检索源码可以总结出：</span>
   <span class="token comment" spellcheck="true">// - flushImmediateWork 中执行 flushFirstCallback(); 时，满足。</span>
   <span class="token comment" spellcheck="true">// - flushWork 中执行 flushFirstCallback(); 时，满足。</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>isExecutingCallback<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isExecutingCallback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token keyword">var</span> expirationTime <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">.</span>expirationTime<span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isHostCallbackScheduled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isHostCallbackScheduled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     isHostCallbackScheduled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 若当前正在主机回调，则取消，重置相关内容</span>
     <span class="token function">cancelHostCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 发起主机回调请求</span>
   <span class="token function">requestHostCallback</span><span class="token punctuation">(</span>flushWork<span class="token punctuation">,</span> expirationTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到目前为止，若已经正在执行主机回调，则先取消，最后再发起主机回调请求，有关主机回调相关，我们先来认识一下模块中的全局变量：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> scheduledHostCallback <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
@@ -535,27 +535,27 @@
 <span class="token keyword">var</span> activeFrameTime <span class="token operator">=</span> <span class="token number">33</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在认识完他们后，我们来看到 <code>requestHostCallback</code> 函数：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript">requestHostCallback <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>callback<span class="token punctuation">,</span> absoluteTimeout<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript">requestHostCallback <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>callback<span class="token punctuation">,</span> absoluteTimeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 更新至模块中的全局变量</span>
   scheduledHostCallback <span class="token operator">=</span> callback<span class="token punctuation">;</span>
   timeoutTime <span class="token operator">=</span> absoluteTimeout<span class="token punctuation">;</span>
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>isFlushingHostCallback <span class="token operator">||</span> absoluteTimeout <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>isFlushingHostCallback <span class="token operator">||</span> absoluteTimeout <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 消息通道发送消息，有关 Channel Messaging API</span>
     port<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>undefined<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isAnimationFrameScheduled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isAnimationFrameScheduled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 若没有安排动画帧则安排一个</span>
     isAnimationFrameScheduled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
     <span class="token function">requestAnimationFrameWithTimeout</span><span class="token punctuation">(</span>animationTick<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>OK ，读到这里也明白了 <code>requestHostCallback</code> 函数执行内容，将传入回调函数和超时时间更新至模块中的全局变量后，满足条件的情况下进入消息通道监听函数或者是请求动画帧，请求动画帧会涉及到 <code>window.requestAnimationFrame</code> API ，先让我们来看到 Channel Messaging API 相关的代码：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// We use the postMessage trick to defer idle work until after the repaint.</span>
 <span class="token keyword">var</span> channel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MessageChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 对应到 port.postMessage(undefined);</span>
 <span class="token keyword">var</span> port <span class="token operator">=</span> channel<span class="token punctuation">.</span>port2<span class="token punctuation">;</span>
-channel<span class="token punctuation">.</span>port1<span class="token punctuation">.</span>onmessage <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+channel<span class="token punctuation">.</span>port1<span class="token punctuation">.</span>onmessage <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 进入监听函数</span>
   isMessageEventScheduled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
   <span class="token comment" spellcheck="true">// 缓存</span>
@@ -569,37 +569,37 @@ channel<span class="token punctuation">.</span>port1<span class="token punctuati
 
   <span class="token keyword">var</span> didTimeout <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>frameDeadline <span class="token operator">-</span> currentTime <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>frameDeadline <span class="token operator">-</span> currentTime <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// There's no time left in this idle period. Check if the callback has</span>
     <span class="token comment" spellcheck="true">// a timeout and whether it's been exceeded.</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>prevTimeoutTime <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> prevTimeoutTime <span class="token operator">&lt;=</span> currentTime<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>prevTimeoutTime <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> prevTimeoutTime <span class="token operator">&lt;=</span> currentTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// Exceeded the timeout. Invoke the callback even though there's no</span>
       <span class="token comment" spellcheck="true">// time left.</span>
       didTimeout <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// 没有超时</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isAnimationFrameScheduled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isAnimationFrameScheduled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// 若没有安排动画帧则安排一个</span>
         isAnimationFrameScheduled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
         <span class="token function">requestAnimationFrameWithTimeout</span><span class="token punctuation">(</span>animationTick<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       <span class="token comment" spellcheck="true">// 还原</span>
       scheduledHostCallback <span class="token operator">=</span> prevScheduledCallback<span class="token punctuation">;</span>
       timeoutTime <span class="token operator">=</span> prevTimeoutTime<span class="token punctuation">;</span>
       <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 当前时间没有超过截止时间</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>prevScheduledCallback <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>prevScheduledCallback <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     isFlushingHostCallback <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// => flushWork(didTimeout);</span>
       <span class="token function">prevScheduledCallback</span><span class="token punctuation">(</span>didTimeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
       isFlushingHostCallback <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>flushWork</code> 函数我们稍后再提，我们先来看到已经出现了 2 次的 <code>requestAnimationFrameWithTimeout</code> 函数：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// 动画帧超时 100 ms</span>
@@ -609,21 +609,21 @@ channel<span class="token punctuation">.</span>port1<span class="token punctuati
 <span class="token keyword">var</span> rAFTimeoutID<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 关于 window.requestAnimationFrame 为了提高性能和电池寿命，因此在大多数浏览器里，当requestAnimationFrame() 运行在后台标签页或者隐藏的&lt;iframe> 里时，requestAnimationFrame() 会被暂停调用以提升性能和电池寿命。</span>
 <span class="token comment" spellcheck="true">// 所以 setTimeout 作为 requestAnimationFrame 的 fallback 方案。</span>
-<span class="token keyword">var</span> requestAnimationFrameWithTimeout <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  rAFID <span class="token operator">=</span> <span class="token function">localRequestAnimationFrame</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> requestAnimationFrameWithTimeout <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  rAFID <span class="token operator">=</span> <span class="token function">localRequestAnimationFrame</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// cancel the setTimeout</span>
     <span class="token function">localClearTimeout</span><span class="token punctuation">(</span>rAFTimeoutID<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">callback</span><span class="token punctuation">(</span>timestamp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  rAFTimeoutID <span class="token operator">=</span> <span class="token function">localSetTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  rAFTimeoutID <span class="token operator">=</span> <span class="token function">localSetTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// cancel the requestAnimationFrame</span>
     <span class="token function">localCancelAnimationFrame</span><span class="token punctuation">(</span>rAFID<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">callback</span><span class="token punctuation">(</span><span class="token function">getCurrentTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> ANIMATION_FRAME_TIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> ANIMATION_FRAME_TIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// requestAnimationFrameWithTimeout 中执行的 callback 函数： animationTick</span>
-<span class="token keyword">var</span> animationTick <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rafTime<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>scheduledHostCallback <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> animationTick <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>rafTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>scheduledHostCallback <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// Eagerly schedule the next animation callback at the beginning of the</span>
     <span class="token comment" spellcheck="true">// frame. If the scheduler queue is not empty at the end of the frame, it</span>
     <span class="token comment" spellcheck="true">// will continue flushing inside that callback. If the queue *is* empty,</span>
@@ -634,11 +634,11 @@ channel<span class="token punctuation">.</span>port1<span class="token punctuati
     <span class="token comment" spellcheck="true">// after that.</span>
     <span class="token comment" spellcheck="true">// 发起下一次动画帧，若 scheduledHostCallback 一直存在则无限发起</span>
     <span class="token function">requestAnimationFrameWithTimeout</span><span class="token punctuation">(</span>animationTick<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 没有待处理的工作，退出</span>
     isAnimationFrameScheduled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// rafTime 为 requestAnimationFrame 返回的时间戳或者 setTimeout 传入的当前时间戳</span>
   <span class="token comment" spellcheck="true">// 配合截止时间和每一帧时间（默认 33）计算下一帧时间</span>
   <span class="token keyword">var</span> nextFrameTime <span class="token operator">=</span> rafTime <span class="token operator">-</span> frameDeadline <span class="token operator">+</span> activeFrameTime<span class="token punctuation">;</span>
@@ -646,12 +646,12 @@ channel<span class="token punctuation">.</span>port1<span class="token punctuati
   <span class="token keyword">if</span> <span class="token punctuation">(</span>
     nextFrameTime <span class="token operator">&lt;</span> activeFrameTime <span class="token operator">&amp;&amp;</span>
     previousFrameTime <span class="token operator">&lt;</span> activeFrameTime
-  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextFrameTime <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextFrameTime <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// Defensive coding. We don't support higher frame rates than 120hz.</span>
       <span class="token comment" spellcheck="true">// If the calculated frame time gets lower than 8, it is probably a bug.</span>
       nextFrameTime <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment" spellcheck="true">// If one frame goes long, then the next one can be short to catch up.</span>
     <span class="token comment" spellcheck="true">// If two frames are short in a row, then that's an indication that we</span>
     <span class="token comment" spellcheck="true">// actually have a higher frame rate than what we're currently optimizing.</span>
@@ -661,125 +661,125 @@ channel<span class="token punctuation">.</span>port1<span class="token punctuati
     <span class="token comment" spellcheck="true">// missed frame deadlines.</span>
     activeFrameTime <span class="token operator">=</span>
       nextFrameTime <span class="token operator">&lt;</span> previousFrameTime <span class="token operator">?</span> previousFrameTime <span class="token punctuation">:</span> nextFrameTime<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     previousFrameTime <span class="token operator">=</span> nextFrameTime<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 更新截止时间</span>
   frameDeadline <span class="token operator">=</span> rafTime <span class="token operator">+</span> activeFrameTime<span class="token punctuation">;</span>
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isMessageEventScheduled<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>isMessageEventScheduled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 若没有进入消息通道则进入</span>
     isMessageEventScheduled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
     port<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>undefined<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么现在我们回到之前说先放一放的 <code>flushWork</code> 函数，就是在消息通道监听函数中尝试执行的 <code>prevScheduledCallback(didTimeout);</code> 代码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">flushWork</span><span class="token punctuation">(</span>didTimeout<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">flushWork</span><span class="token punctuation">(</span>didTimeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// Exit right away if we're currently paused</span>
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>enableSchedulerDebugging <span class="token operator">&amp;&amp;</span> isSchedulerPaused<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>enableSchedulerDebugging <span class="token operator">&amp;&amp;</span> isSchedulerPaused<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token comment" spellcheck="true">// 标记</span>
   isExecutingCallback <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
   <span class="token comment" spellcheck="true">// 缓存</span>
   <span class="token keyword">const</span> previousDidTimeout <span class="token operator">=</span> currentDidTimeout<span class="token punctuation">;</span>
   currentDidTimeout <span class="token operator">=</span> didTimeout<span class="token punctuation">;</span>
-  <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>didTimeout<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>didTimeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// Flush all the expired callbacks without yielding.</span>
       <span class="token keyword">while</span> <span class="token punctuation">(</span>
         firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span>
         <span class="token operator">!</span><span class="token punctuation">(</span>enableSchedulerDebugging <span class="token operator">&amp;&amp;</span> isSchedulerPaused<span class="token punctuation">)</span>
-      <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// TODO Wrap in feature flag</span>
         <span class="token comment" spellcheck="true">// Read the current time. Flush all the callbacks that expire at or</span>
         <span class="token comment" spellcheck="true">// earlier than that time. Then read the current time again and repeat.</span>
         <span class="token comment" spellcheck="true">// This optimizes for as few performance.now calls as possible.</span>
         <span class="token keyword">var</span> currentTime <span class="token operator">=</span> <span class="token function">getCurrentTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode<span class="token punctuation">.</span>expirationTime <span class="token operator">&lt;=</span> currentTime<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-          <span class="token keyword">do</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode<span class="token punctuation">.</span>expirationTime <span class="token operator">&lt;=</span> currentTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">do</span> <span class="token punctuation">{</span>
             <span class="token function">flushFirstCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>
+          <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>
             firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span>
             firstCallbackNode<span class="token punctuation">.</span>expirationTime <span class="token operator">&lt;=</span> currentTime <span class="token operator">&amp;&amp;</span>
             <span class="token operator">!</span><span class="token punctuation">(</span>enableSchedulerDebugging <span class="token operator">&amp;&amp;</span> isSchedulerPaused<span class="token punctuation">)</span>
           <span class="token punctuation">)</span><span class="token punctuation">;</span>
           <span class="token keyword">continue</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">break</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// Keep flushing callbacks until we run out of time in the frame.</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">do</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>enableSchedulerDebugging <span class="token operator">&amp;&amp;</span> isSchedulerPaused<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">do</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>enableSchedulerDebugging <span class="token operator">&amp;&amp;</span> isSchedulerPaused<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
-          <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
           <span class="token function">flushFirstCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">shouldYieldToHost</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">shouldYieldToHost</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 还原</span>
     isExecutingCallback <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
     currentDidTimeout <span class="token operator">=</span> previousDidTimeout<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// There's still work remaining. Request another callback.</span>
       <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       isHostCallbackScheduled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment" spellcheck="true">// Before exiting, flush all the immediate work that was scheduled.</span>
     <span class="token function">flushImmediateWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-shouldYieldToHost <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+shouldYieldToHost <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> frameDeadline <span class="token operator">&lt;=</span> <span class="token function">getCurrentTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>进入 <code>flushWork</code> 函数若发现已经超时，则将链表中所有已超时的回调函数任务都执行掉；若没有超时，则链表中任然存在回调函数任务，则发起主机请求，最后将所有优先级为 <code>ImmediatePriority</code> 的任务执行掉。让我们来看到 <code>flushImmediateWork</code> 函数：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">flushImmediateWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">flushImmediateWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>
     <span class="token comment" spellcheck="true">// Confirm we've exited the outer most event handler</span>
     currentEventStartTime <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span>
     firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span>
     firstCallbackNode<span class="token punctuation">.</span>priorityLevel <span class="token operator">===</span> ImmediatePriority
-  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     isExecutingCallback <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-      <span class="token keyword">do</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      <span class="token keyword">do</span> <span class="token punctuation">{</span>
         <span class="token function">flushFirstCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>
+      <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>
         <span class="token comment" spellcheck="true">// Keep flushing until there are no more immediate callbacks</span>
         firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span>
         firstCallbackNode<span class="token punctuation">.</span>priorityLevel <span class="token operator">===</span> ImmediatePriority
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
       isExecutingCallback <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// There's still work remaining. Request another callback.</span>
         <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
         isHostCallbackScheduled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里看到这段代码是不是会很轻松的理解他在做什么，是不是感觉忘了什么内容，来看一下  <code>cancelHostCallback</code> 函数在做什么：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript">cancelHostCallback <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript">cancelHostCallback <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   scheduledHostCallback <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
   isMessageEventScheduled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
   timeoutTime <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>很明显，是放弃正在执行的主机回调。到此为止，我们将调度过程已经解读完，你是不是会好奇，这个链表在哪里添加的呢？ OK ，那么下面我们开始解读模块暴露给外部的 API 方法：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_runWithPriority</span><span class="token punctuation">(</span>priorityLevel<span class="token punctuation">,</span> eventHandler<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">switch</span> <span class="token punctuation">(</span>priorityLevel<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_runWithPriority</span><span class="token punctuation">(</span>priorityLevel<span class="token punctuation">,</span> eventHandler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>priorityLevel<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">case</span> ImmediatePriority<span class="token punctuation">:</span>
     <span class="token keyword">case</span> UserBlockingPriority<span class="token punctuation">:</span>
     <span class="token keyword">case</span> NormalPriority<span class="token punctuation">:</span>
@@ -788,24 +788,24 @@ shouldYieldToHost <span class="token operator">=</span> <span class="token keywo
       <span class="token keyword">break</span><span class="token punctuation">;</span>
     <span class="token keyword">default</span><span class="token punctuation">:</span>
       priorityLevel <span class="token operator">=</span> NormalPriority<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token keyword">var</span> previousPriorityLevel <span class="token operator">=</span> currentPriorityLevel<span class="token punctuation">;</span>
   <span class="token keyword">var</span> previousEventStartTime <span class="token operator">=</span> currentEventStartTime<span class="token punctuation">;</span>
   currentPriorityLevel <span class="token operator">=</span> priorityLevel<span class="token punctuation">;</span>
   currentEventStartTime <span class="token operator">=</span> <span class="token function">getCurrentTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 执行传入回调</span>
     <span class="token keyword">return</span> <span class="token function">eventHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
     currentPriorityLevel <span class="token operator">=</span> previousPriorityLevel<span class="token punctuation">;</span>
     currentEventStartTime <span class="token operator">=</span> previousEventStartTime<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// Before exiting, flush all the immediate work that was scheduled.</span>
     <span class="token function">flushImmediateWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到 <code>unstable_runWithPriority</code> 函数是按照传入优先级为准正常执行传入回调，最后同样执行 <code>flushImmediateWork</code> 函数。</p>
 <ul>
@@ -817,7 +817,7 @@ shouldYieldToHost <span class="token operator">=</span> <span class="token keywo
 <li><code>unstable_getCurrentPriorityLevel</code> 则是获取 <code>currentPriorityLevel</code> 。</li>
 </ul>
 <p>简单的逻辑，我们一并概括了，接下来我们看到添加链表节点的函数， <code>unstable_scheduleCallback</code> 函数：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_scheduleCallback</span><span class="token punctuation">(</span>callback<span class="token punctuation">,</span> deprecated_options<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_scheduleCallback</span><span class="token punctuation">(</span>callback<span class="token punctuation">,</span> deprecated_options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">var</span> startTime <span class="token operator">=</span>
     currentEventStartTime <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">?</span> currentEventStartTime <span class="token punctuation">:</span> <span class="token function">getCurrentTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -826,12 +826,12 @@ shouldYieldToHost <span class="token operator">=</span> <span class="token keywo
     <span class="token keyword">typeof</span> deprecated_options <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">&amp;&amp;</span>
     deprecated_options <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span>
     <span class="token keyword">typeof</span> deprecated_options<span class="token punctuation">.</span>timeout <span class="token operator">===</span> <span class="token string">'number'</span>
-  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// FIXME: Remove this branch once we lift expiration times out of React.</span>
     expirationTime <span class="token operator">=</span> startTime <span class="token operator">+</span> deprecated_options<span class="token punctuation">.</span>timeout<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 根据当前优先级计算对应的到期时间</span>
-    <span class="token keyword">switch</span> <span class="token punctuation">(</span>currentPriorityLevel<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>currentPriorityLevel<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">case</span> ImmediatePriority<span class="token punctuation">:</span>
         expirationTime <span class="token operator">=</span> startTime <span class="token operator">+</span> IMMEDIATE_PRIORITY_TIMEOUT<span class="token punctuation">;</span>
         <span class="token keyword">break</span><span class="token punctuation">;</span>
@@ -847,82 +847,82 @@ shouldYieldToHost <span class="token operator">=</span> <span class="token keywo
       <span class="token keyword">case</span> NormalPriority<span class="token punctuation">:</span>
       <span class="token keyword">default</span><span class="token punctuation">:</span>
         expirationTime <span class="token operator">=</span> startTime <span class="token operator">+</span> NORMAL_PRIORITY_TIMEOUT<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token comment" spellcheck="true">// 创建新的回调节点</span>
-  <span class="token keyword">var</span> newNode <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> newNode <span class="token operator">=</span> <span class="token punctuation">{</span>
     callback<span class="token punctuation">,</span>
     priorityLevel<span class="token punctuation">:</span> currentPriorityLevel<span class="token punctuation">,</span>
     expirationTime<span class="token punctuation">,</span>
     next<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
     previous<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// Insert the new callback into the list, ordered first by expiration, then</span>
   <span class="token comment" spellcheck="true">// by insertion. So the new callback is inserted any other callback with</span>
   <span class="token comment" spellcheck="true">// equal expiration.</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>firstCallbackNode <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// This is the first callback in the list.</span>
     firstCallbackNode <span class="token operator">=</span> newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode<span class="token punctuation">.</span>previous <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
     <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 根据到期时间进行插入</span>
     <span class="token keyword">var</span> next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
     <span class="token keyword">var</span> node <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">;</span>
-    <span class="token keyword">do</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>expirationTime <span class="token operator">></span> expirationTime<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">do</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>expirationTime <span class="token operator">></span> expirationTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// The new callback expires before this one.</span>
         next <span class="token operator">=</span> node<span class="token punctuation">;</span>
         <span class="token keyword">break</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       node <span class="token operator">=</span> node<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!==</span> firstCallbackNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!==</span> firstCallbackNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">// 操作同 flushFirstCallback 中的部分代码</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// No callback with a later expiration was found, which means the new</span>
       <span class="token comment" spellcheck="true">// callback has the latest expiration in the list.</span>
       next <span class="token operator">=</span> firstCallbackNode<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> firstCallbackNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> firstCallbackNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// The new callback has the earliest expiration in the entire list.</span>
       firstCallbackNode <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
       <span class="token function">ensureHostCallbackIsScheduled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment" spellcheck="true">// 插入节点</span>
     <span class="token keyword">var</span> previous <span class="token operator">=</span> next<span class="token punctuation">.</span>previous<span class="token punctuation">;</span>
     previous<span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">.</span>previous <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
     newNode<span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
     newNode<span class="token punctuation">.</span>previous <span class="token operator">=</span> previous<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token keyword">return</span> newNode<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>既然有 <code>unstable_scheduleCallback</code> 函数进行插入，当然也有 <code>unstable_cancelCallback</code> 函数进行移除：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_cancelCallback</span><span class="token punctuation">(</span>callbackNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_cancelCallback</span><span class="token punctuation">(</span>callbackNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">var</span> next <span class="token operator">=</span> callbackNode<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// Already cancelled.</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> callbackNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">===</span> callbackNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// This is the only scheduled callback. Clear the list.</span>
     firstCallbackNode <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// Remove the callback from its position in the list.</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>callbackNode <span class="token operator">===</span> firstCallbackNode<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>callbackNode <span class="token operator">===</span> firstCallbackNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       firstCallbackNode <span class="token operator">=</span> next<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">var</span> previous <span class="token operator">=</span> callbackNode<span class="token punctuation">.</span>previous<span class="token punctuation">;</span>
     previous<span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
     next<span class="token punctuation">.</span>previous <span class="token operator">=</span> previous<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   callbackNode<span class="token punctuation">.</span>next <span class="token operator">=</span> callbackNode<span class="token punctuation">.</span>previous <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最后让我们来看到 <code>unstable_shouldYield</code> 函数：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_shouldYield</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">unstable_shouldYield</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>
     <span class="token comment" spellcheck="true">// 未超时</span>
     <span class="token operator">!</span>currentDidTimeout <span class="token operator">&amp;&amp;</span>
@@ -932,7 +932,7 @@ shouldYieldToHost <span class="token operator">=</span> <span class="token keywo
       <span class="token comment" spellcheck="true">// 或者帧到期时间已到</span>
       <span class="token function">shouldYieldToHost</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到此，我们已经解读完 React 调度机制，至于如何发挥调度机制的作用，我们就得看到协调了。</p>
 
@@ -1003,7 +1003,7 @@ shouldYieldToHost <span class="token operator">=</span> <span class="token keywo
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?10282517"></script>
+<script src="/js/journal.js?14066472"></script>
 
 
 <script>

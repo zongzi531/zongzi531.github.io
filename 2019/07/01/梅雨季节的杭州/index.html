@@ -25,7 +25,7 @@ React 源码阅读计划截止 6 月...">
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?37498302">
+<link rel="stylesheet" href="/css/journal.css?92025799">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -379,33 +379,33 @@ React 源码阅读计划截止 6 月...">
 
 <span class="token comment" spellcheck="true">// https://github.com/webpack/webpack/blob/c36966a2c996c873b372f46d383f40b7d706fa3b/lib/MainTemplate.js#L356</span>
 
-      <span class="token keyword">const</span> publicPath <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getPublicPath</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> publicPath <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getPublicPath</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         hash<span class="token punctuation">:</span> hash
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       buf<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       buf<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"// __webpack_public_path__"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      buf<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`$&amp;#123;this.requireFn&amp;#125;.p = $&amp;#123;JSON.stringify(publicPath)&amp;#125;;`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      buf<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>requireFn<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.p = </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>publicPath<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">return</span> Template<span class="token punctuation">.</span><span class="token function">asString</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看到呢， <code>__webpack_require__.p</code> 就是这个 <code>&quot;homepage&quot;</code> 字段，我在这里设置任何值都会被 <code>JSON.stringify</code> 转为 <code>String</code> 。说到这里以后，我们来说说为什么我们需要动态的 <code>publicPath</code> ，因为考虑到项目资源优化，不需要加载不必要页面的脚步或其他，所以需要进行 Code Spilting ，那么这条路发现被封锁死了，来找找其他路吧……，我们来看看 <code>jsonpScriptSrc</code> 函数是否可以通过某种手段进行修改：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// https://github.com/webpack/webpack/blob/acf2c2d4b19117aa6562ea6885da2dbfade369fc/lib/web/JsonpMainTemplatePlugin.js#L129</span>
 
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">needChunkOnDemandLoadingCode</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">needChunkOnDemandLoadingCode</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
           extraCode<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
             <span class="token string">""</span><span class="token punctuation">,</span>
             <span class="token string">"// script path function"</span><span class="token punctuation">,</span>
-            <span class="token string">"function jsonpScriptSrc(chunkId) &amp;#123;"</span><span class="token punctuation">,</span>
+            <span class="token string">"function jsonpScriptSrc(chunkId) {"</span><span class="token punctuation">,</span>
             Template<span class="token punctuation">.</span><span class="token function">indent</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
-              <span class="token template-string"><span class="token string">`return $&amp;#123;mainTemplate.requireFn&amp;#125;.p + $&amp;#123;getScriptSrcPath(
-                hash,
-                chunk,
-                "chunkId"
-              )&amp;#125;`</span></span>
+              <span class="token template-string"><span class="token string">`return </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>mainTemplate<span class="token punctuation">.</span>requireFn<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.p + </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">getScriptSrcPath</span><span class="token punctuation">(</span>
+                hash<span class="token punctuation">,</span>
+                chunk<span class="token punctuation">,</span>
+                <span class="token string">"chunkId"</span>
+              <span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
             <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">"&amp;#125;"</span>
+            <span class="token string">"}"</span>
           <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>很遗憾的是 Webpack 官方并不支持我的想法。看到上面代码中 <code>$&#123;mainTemplate.requireFn&#125;.p</code> 后面直接跟进 <code>getScriptSrcPath</code> 函数，我并没有办法在他们之间插入我想要的内容，难道我需要 fork 一份代码自己改吗？可能会带来不必要的麻烦。事情到了这里，我选择先避开这个问题，那么我不采用 Code Spilting 来优化我的项目，暂时跳过，先完成我的业务开发。同时我修改了 <a target="_blank" rel="noopener" href="https://github.com/zongzi531/react-echarts-map-china"><code>react-echarts-map-china</code></a> 项目中的 Dynamic Import 功能改为静态，带来的问题也接踵而至，使得编译打包后的代码体积很大。在将项目跑在测试环境时问题也暴露了，跟流水一样的带宽承受不了第一次的加载或者项目迭代更新……，会造成很大的麻烦。所以这个问题并不能避开，还是得硬着头皮解决，那么这时候我在想能不能在 Webpack 打包编译完成后的钩子中去检索 <code>__webpack_require__.p</code> 对应的 <code>&quot;homepage&quot;</code> 字段将其替换成我想要的动态功能呢？想使用 Plugin 来解决这个问题，自己造一个轮子吗？刚准备写的时候，发现强大的 NPM 社区有轮子 <a target="_blank" rel="noopener" href="https://github.com/zahorovskyi/webpack-dynamic-public-path">Dynamic Public Path Plugin</a> ，实现的目的就是刚刚上述的内容：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// before</span>
@@ -423,32 +423,32 @@ __webpack_require__<span class="token punctuation">.</span>p <span class="token 
 <li><a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/issues/4807">Using webpackChunkName with dynamic import changes chunk logic</a></li>
 </ul>
 <p>再来说说这次我代码分割的一些库的抽离，使用了 splitChunks 来操作：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> vendors <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> vendors <span class="token operator">=</span> <span class="token punctuation">{</span>
   antd<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'antd'</span><span class="token punctuation">,</span> <span class="token string">'@ant-design'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   echarts<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'echarts'</span><span class="token punctuation">,</span> <span class="token string">'zrender'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   mapchina<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'react-echarts-map-china'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   publicData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'publicData'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'src'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> generateVendorsCacheGroups <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> vendorsCacheGroups <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token punctuation">[</span>key<span class="token punctuation">,</span> <span class="token punctuation">[</span>val<span class="token punctuation">,</span> folder <span class="token operator">=</span> <span class="token string">'node_modules'</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token keyword">of</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>vendors<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    vendorsCacheGroups<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-      test<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`[\\/]$&amp;#123;folder&amp;#125;[\\/]($&amp;#123;val.join('|')&amp;#125;)[\\/]`</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token keyword">const</span> generateVendorsCacheGroups <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> vendorsCacheGroups <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token punctuation">[</span>key<span class="token punctuation">,</span> <span class="token punctuation">[</span>val<span class="token punctuation">,</span> folder <span class="token operator">=</span> <span class="token string">'node_modules'</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token keyword">of</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>vendors<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    vendorsCacheGroups<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+      test<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`[\\/]</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>folder<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">[\\/](</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>val<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'|'</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)[\\/]`</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
       name<span class="token punctuation">:</span> val<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'~'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
       chunks<span class="token punctuation">:</span> <span class="token string">'all'</span><span class="token punctuation">,</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token keyword">return</span> vendorsCacheGroups<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> cacheGroups <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> cacheGroups <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token operator">...</span><span class="token function">generateVendorsCacheGroups</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   cacheGroups<span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>来尽最大的可能来进行前端资源的优化。</p>
 <h2 id="Ant-Design-Cascader-级联选择之奇淫技巧"><a href="#Ant-Design-Cascader-级联选择之奇淫技巧" class="headerlink" title="Ant Design Cascader 级联选择之奇淫技巧"></a>Ant Design Cascader 级联选择之奇淫技巧</h2><p>在使用级联的时候，因为涉及到数据回填，比较特殊的是这个级联还是异步的，采用的不是直接遍历级联深度去请求接口并拼装树，而是把最底层的级联数据提升至顶层并设置禁止选择同时将其隐藏 DOM ，这样可以实现数据回填，并且不需要遍历请求接口，是一个不错的技巧。</p>
@@ -550,7 +550,7 @@ port 1234
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?72567597"></script>
+<script src="/js/journal.js?34813093"></script>
 
 
 <script>

@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?41013897">
+<link rel="stylesheet" href="/css/journal.css?83005696">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -341,14 +341,14 @@
                 <div class="post-body">
                     <h2 id="React-源码阅读计划"><a href="#React-源码阅读计划" class="headerlink" title="React 源码阅读计划"></a>React 源码阅读计划</h2><p>截止 11 月底，学习版 React 编写基本完成，很高兴终于基本把 16.8.6 版本进度完成，从 5 月至今已时过半年之久，陆陆续续算是把她完成了。（喝彩）</p>
 <p>来记录一下最近学习过程中遇到的问题，那么先来看到一段代码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ExampleApplication</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ExampleApplication</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token operator">&lt;</span>p<span class="token operator">></span>Example Application<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
   <span class="token operator">&lt;</span>ExampleApplication <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">,</span>
@@ -360,9 +360,9 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   current<span class="token punctuation">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
   workInProgress<span class="token punctuation">:</span> Fiber<span class="token punctuation">,</span>
   renderExpirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">switch</span> <span class="token punctuation">(</span>workInProgress<span class="token punctuation">.</span>tag<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> IndeterminateComponent<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// &lt;== 出乎意料的进入此分支</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>workInProgress<span class="token punctuation">.</span>tag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> IndeterminateComponent<span class="token punctuation">:</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">// &lt;== 出乎意料的进入此分支</span>
       <span class="token keyword">const</span> elementType <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>elementType<span class="token punctuation">;</span>
       <span class="token keyword">return</span> <span class="token function">mountIndeterminateComponent</span><span class="token punctuation">(</span>
         current<span class="token punctuation">,</span>
@@ -370,8 +370,8 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
         elementType<span class="token punctuation">,</span>
         renderExpirationTime<span class="token punctuation">,</span>
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> ClassComponent<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// &lt;== 为什么没有进入应该进入的分支？</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">case</span> ClassComponent<span class="token punctuation">:</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">// &lt;== 为什么没有进入应该进入的分支？</span>
       <span class="token keyword">const</span> Component <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>type<span class="token punctuation">;</span>
       <span class="token keyword">const</span> unresolvedProps <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>pendingProps<span class="token punctuation">;</span>
       <span class="token keyword">const</span> resolvedProps <span class="token operator">=</span>
@@ -385,19 +385,19 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
         resolvedProps<span class="token punctuation">,</span>
         renderExpirationTime<span class="token punctuation">,</span>
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">case</span> HostRoot<span class="token punctuation">:</span>
       <span class="token keyword">return</span> <span class="token function">updateHostRoot</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> workInProgress<span class="token punctuation">,</span> renderExpirationTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">case</span> HostComponent<span class="token punctuation">:</span>
       <span class="token keyword">return</span> <span class="token function">updateHostComponent</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> workInProgress<span class="token punctuation">,</span> renderExpirationTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我开始查找原因，直到我看到 <code>createFiberFromTypeAndProps</code> (<a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react-reconciler/src/ReactFiber.js#L450">ReactFiber.js</a>) 函数（已忽略无关代码）：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">shouldConstruct</span><span class="token punctuation">(</span>Component<span class="token punctuation">:</span> Function<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">shouldConstruct</span><span class="token punctuation">(</span>Component<span class="token punctuation">:</span> Function<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> prototype <span class="token operator">=</span> Component<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>prototype <span class="token operator">&amp;&amp;</span> prototype<span class="token punctuation">.</span>isReactComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createFiberFromTypeAndProps</span><span class="token punctuation">(</span>
   type<span class="token punctuation">:</span> any<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// React$ElementType</span>
@@ -406,7 +406,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   owner<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> Fiber<span class="token punctuation">,</span>
   mode<span class="token punctuation">:</span> TypeOfMode<span class="token punctuation">,</span>
   expirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> Fiber <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> Fiber <span class="token punctuation">{</span>
   <span class="token keyword">let</span> fiber<span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// 原来 IndeterminateComponent 是初始化 Fiber 时的初始 WorkTag </span>
@@ -416,15 +416,15 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   <span class="token keyword">let</span> resolvedType <span class="token operator">=</span> type<span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// 这里是 ClassComponent 需要进入的分支逻辑</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> type <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> type <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token comment" spellcheck="true">// 问题就出在我没有进入到这个分支， shouldConstruct 函数执行返回 false</span>
     <span class="token comment" spellcheck="true">// 导致完全跳过这里的逻辑判断，直接进入 createFiber 函数</span>
     <span class="token comment" spellcheck="true">// 上面准备了 shouldConstruct ，我相信看到源码的你，很容易就能发现问题所在</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldConstruct</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldConstruct</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       fiberTag <span class="token operator">=</span> ClassComponent<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
   fiber <span class="token operator">=</span> <span class="token function">createFiber</span><span class="token punctuation">(</span>fiberTag<span class="token punctuation">,</span> pendingProps<span class="token punctuation">,</span> key<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
   fiber<span class="token punctuation">.</span>elementType <span class="token operator">=</span> type<span class="token punctuation">;</span>
@@ -432,7 +432,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   fiber<span class="token punctuation">.</span>expirationTime <span class="token operator">=</span> expirationTime<span class="token punctuation">;</span>
 
   <span class="token keyword">return</span> fiber<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到这里，我发现了是因为校验 <code>isReactComponent</code> 失败才出现上述问题的，那么着手修复即可。我们在 <a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react/src/ReactBaseClasses.js#L31">ReactBaseClasses.js</a> 中加入 <code>Component.prototype.isReactComponent = &#123;&#125;;</code> 即可。</p>
 <p>在后续又遇到了一个很诡异的 <code>state</code> 丢失问题，我知道，我也很清楚肯定是我哪里代码漏写才导致的，我又开始了无尽的调试，考虑从类的 <code>constructor</code> 函数开始调试，其实可以直接看到 <code>constructClassInstance</code> (<a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react-reconciler/src/ReactFiberClassComponent.js#L583">ReactFiberClassComponent.js</a>) 函数（已忽略无关代码）：</p>
@@ -441,7 +441,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   ctor<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
   props<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
   renderExpirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> any <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> any <span class="token punctuation">{</span>
   <span class="token keyword">let</span> context <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
 
   <span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ctor</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -457,21 +457,21 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   <span class="token function">adoptClassInstance</span><span class="token punctuation">(</span>workInProgress<span class="token punctuation">,</span> instance<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">mountClassInstance</span><span class="token punctuation">(</span>
   workInProgress<span class="token punctuation">:</span> Fiber<span class="token punctuation">,</span>
   ctor<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
   newProps<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
   renderExpirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> instance <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>stateNode<span class="token punctuation">;</span>
   instance<span class="token punctuation">.</span>props <span class="token operator">=</span> newProps<span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// 由于上面那一行代码的丢失，导致这一步赋值操作永远为 null</span>
   instance<span class="token punctuation">.</span>state <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>memoizedState<span class="token punctuation">;</span>
   instance<span class="token punctuation">.</span>refs <span class="token operator">=</span> emptyRefsObject<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到此为止， <code>state</code> 丢失问题也得以解决，进入 <code>mountClassInstance</code> 函数其实就是在进入 <code>ClassComponent</code> 分支之后执行的代码，所以真的是环环相扣啊。</p>
 <p>遇到的问题也分享完了，那么接下来安排一下《React 源码学习》系列文章的后续章节内容（暂定）：</p>
@@ -489,9 +489,9 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// https://github.com/react-component/table/blob/6.4.0/src/ColGroup.js#L25</span>
 
   cols <span class="token operator">=</span> cols<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>
-    leafColumns<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>c <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-      <span class="token keyword">return</span> <span class="token operator">&lt;</span>col key<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>c<span class="token punctuation">.</span>key <span class="token operator">||</span> c<span class="token punctuation">.</span>dataIndex<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> style<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> width<span class="token punctuation">:</span> c<span class="token punctuation">.</span>width<span class="token punctuation">,</span> minWidth<span class="token punctuation">:</span> c<span class="token punctuation">.</span>width <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    leafColumns<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>c <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token operator">&lt;</span>col key<span class="token operator">=</span><span class="token punctuation">{</span>c<span class="token punctuation">.</span>key <span class="token operator">||</span> c<span class="token punctuation">.</span>dataIndex<span class="token punctuation">}</span> style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> width<span class="token punctuation">:</span> c<span class="token punctuation">.</span>width<span class="token punctuation">,</span> minWidth<span class="token punctuation">:</span> c<span class="token punctuation">.</span>width <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看到这里，我留下了眼泪，他只接受唯一一个样式参数 <code>width</code> ，我哭了，所以经过考虑，如果出现上述场景，我们考虑自动调整尾列宽度来修复此问题，借助 <code>ref</code> 来获取当前组件实际在屏幕中的宽度后进行补全计算，代码我就不贴了，因为很简单。</p>
@@ -564,7 +564,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?29924720"></script>
+<script src="/js/journal.js?21374348"></script>
 
 
 <script>

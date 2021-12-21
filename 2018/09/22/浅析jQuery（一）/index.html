@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?99213773">
+<link rel="stylesheet" href="/css/journal.css?9140843">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -361,9 +361,9 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>你会发现在这个 IIFE 中 <code>undefined</code> 被声明成了变量，并且值也同时被改变了，那么当你需要将某些值与你认为的 <code>undefined</code> 去比较时，结果就会令人意想不到。</p>
 <p>奇淫技巧就在此出现了，直接看实现代码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> undefined<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> undefined<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'undefined:'</span><span class="token punctuation">,</span> undefined<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">(</span>window<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>window<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>点到为止，我相信你看到这段代码就能理解，如何防止 <code>undefined</code> 被覆盖的问题。</p>
 <p>总结一下：</p>
@@ -391,31 +391,31 @@
 <span class="token keyword">var</span>
   <span class="token operator">...</span>
   <span class="token comment" spellcheck="true">// Define a local copy of jQuery</span>
-  jQuery <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  jQuery <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context <span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token comment" spellcheck="true">// The jQuery object is actually just the init constructor 'enhanced'</span>
     <span class="token comment" spellcheck="true">// Need init if jQuery is called (just allow error to be thrown if not included)</span>
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>init</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
 <span class="token operator">...</span>
 
-jQuery<span class="token punctuation">.</span>fn <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+jQuery<span class="token punctuation">.</span>fn <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token operator">...</span>
   constructor<span class="token punctuation">:</span> jQuery<span class="token punctuation">,</span>
   <span class="token operator">...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里你会发现，在调用 jQuery 函数时，返回的就是 <code>jQuery.fn.init</code> 函数使用 <code>new</code> 操作符实例化的实例。但是这里会牵扯到一个问题。 <code>jQuery.fn.init</code> 函数的实例并不会是 jQuery 函数的实例，是时候展示奇淫技巧的代码了：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core/init.js</span>
 <span class="token keyword">var</span> rootjQuery<span class="token punctuation">,</span>
   <span class="token operator">...</span>
-  init <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>init <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context<span class="token punctuation">,</span> root <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  init <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>init <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> context<span class="token punctuation">,</span> root <span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token operator">...</span>
 
     <span class="token keyword">return</span> jQuery<span class="token punctuation">.</span><span class="token function">makeArray</span><span class="token punctuation">(</span> selector<span class="token punctuation">,</span> <span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// Give the init function the jQuery prototype for later instantiation</span>
 init<span class="token punctuation">.</span>prototype <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">;</span>
@@ -425,20 +425,20 @@ init<span class="token punctuation">.</span>prototype <span class="token operato
 <p><strong>jQuery.fn.extend()</strong> : 一个对象的内容合并到jQuery的原型，以提供新的jQuery实例方法。</p>
 <p>在源码中，这两个函数指向的是同一个函数，但是为什么功能上会有差异呢，我们直接上核心源码部分：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core.js</span>
-jQuery<span class="token punctuation">.</span>extend <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>extend <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+jQuery<span class="token punctuation">.</span>extend <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>fn<span class="token punctuation">.</span>extend <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token operator">...</span>
 
   <span class="token comment" spellcheck="true">// Extend jQuery itself if only one argument is passed</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">===</span> length <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> i <span class="token operator">===</span> length <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     target <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
     i<span class="token operator">--</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token operator">...</span>
 
   <span class="token comment" spellcheck="true">// Return the modified object</span>
   <span class="token keyword">return</span> target<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看到 <code>target = this;</code> 这段代码，你应该能明白，执行函数时 <code>this</code> 的指向。回顾 <code>jQuery.fn = jQuery.prototype</code>，我想你应该就能明白上面2个方法的解释为何会存在差异了。</p>
 <ol>
@@ -448,12 +448,12 @@ jQuery<span class="token punctuation">.</span>extend <span class="token operator
 <h2 id="jQuery-的-链式调用-和-回溯处理"><a href="#jQuery-的-链式调用-和-回溯处理" class="headerlink" title="jQuery 的 链式调用 和 回溯处理"></a>jQuery 的 链式调用 和 回溯处理</h2><p>链式调用其实很好理解，就是返回当前实例，就是 <code>return this;</code> 这么简单。</p>
 <p>回溯处理却比这个有意思了，我们直接先上源码：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// jquery/src/core.js</span>
-jQuery<span class="token punctuation">.</span>fn <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+jQuery<span class="token punctuation">.</span>fn <span class="token operator">=</span> jQuery<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token operator">...</span>
 
   <span class="token comment" spellcheck="true">// Take an array of elements and push it onto the stack</span>
   <span class="token comment" spellcheck="true">// (returning the new matched element set)</span>
-  pushStack<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> elems <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  pushStack<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> elems <span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token comment" spellcheck="true">// Build a new jQuery matched element set</span>
     <span class="token keyword">var</span> ret <span class="token operator">=</span> jQuery<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> elems <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -463,20 +463,20 @@ jQuery<span class="token punctuation">.</span>fn <span class="token operator">=<
 
     <span class="token comment" spellcheck="true">// Return the newly-formed element set</span>
     <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token operator">...</span>
 
-  eq<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> i <span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  eq<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span> i <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">var</span> len <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length<span class="token punctuation">,</span>
       j <span class="token operator">=</span> <span class="token operator">+</span>i <span class="token operator">+</span> <span class="token punctuation">(</span> i <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">?</span> len <span class="token punctuation">:</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">pushStack</span><span class="token punctuation">(</span> j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> j <span class="token operator">&lt;</span> len <span class="token operator">?</span> <span class="token punctuation">[</span> <span class="token keyword">this</span><span class="token punctuation">[</span> j <span class="token punctuation">]</span> <span class="token punctuation">]</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 
-  end<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  end<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>prevObject <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token operator">...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 jQuery 中凡是改变 jQuery 类数组的操作，都会调用 <code>pushStack</code> 方法，而回溯处理当然也是建立在 <code>pushStack</code> 方法之上的，因为在执行 <code>pushStack</code> 方法时，有这么一行代码 <code>ret.prevObject = this;</code>，它就是实现回溯处理的根源。</p>
 <p>可以说是相当的精妙，总结下来就是：</p>
@@ -565,7 +565,7 @@ jQuery<span class="token punctuation">.</span>fn <span class="token operator">=<
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?31187460"></script>
+<script src="/js/journal.js?3256220"></script>
 
 
 <script>

@@ -25,7 +25,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?5933693">
+<link rel="stylesheet" href="/css/journal.css?5536478">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -360,7 +360,7 @@
 <h2 id="轻量级-domManip-函数"><a href="#轻量级-domManip-函数" class="headerlink" title="轻量级 domManip 函数"></a>轻量级 domManip 函数</h2><p>要说到 <code>domManip</code> 函数，相信读过 jQuery 源码的同学，都多多少少对这个函数有些印象。在之前的博客中，我有提到 jQuery html API 与 原生 innerHTML API 这一话题。</p>
 <p>考虑PAJAX方式替换页面内容，发现原生 innerHTML API替换DOM内容后，不会自动执行 <code>&lt;srcipt&gt;</code> 标签，但是jQuery html API实现了这一点。那时的我，很无奈的选择了引入了 jQuery，因为项目是基于 Vue 的，由于我的代码洁癖，我并不希望引入 jQuery。所以想着等读完 jQuery 源码后，尝试的去移除 jQuery，手写一个实现。</p>
 <p>首先实现执行 <code>script</code> 的函数，之前博客也有提到过，源码很简单：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> evalSrcipt <span class="token operator">=</span> text <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> evalSrcipt <span class="token operator">=</span> text <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 创建 script 标签</span>
   <span class="token keyword">const</span> s <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'script'</span><span class="token punctuation">)</span>
   <span class="token comment" spellcheck="true">// 将入参 text 也就是 JavaScript 语句塞入 script 标签中</span>
@@ -369,17 +369,17 @@
   document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
   <span class="token comment" spellcheck="true">// 将这个 script 标签从 body 中移除</span>
   document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后来实现一个轻量级 domManip 函数，我这里并没有 Sizzle CSS Selector Engine，所以我只对 <code>id</code> 下手，接下来请看源码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> domManipLight <span class="token operator">=</span> <span class="token punctuation">(</span>idNode<span class="token punctuation">,</span> text<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> domManipLight <span class="token operator">=</span> <span class="token punctuation">(</span>idNode<span class="token punctuation">,</span> text<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 获取入参 idNode 设置根节点</span>
   <span class="token keyword">const</span> root <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>idNode<span class="token punctuation">)</span>
 
   <span class="token comment" spellcheck="true">// 判断入参 text 是否为空，若为空直接将根节点置空</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>text <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>text <span class="token operator">===</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> root<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> text
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token comment" spellcheck="true">// 主角登场：document.createDocumentFragment()</span>
   <span class="token comment" spellcheck="true">// DocumentFragments 是DOM节点。它们不是主DOM树的一部分。通常的用例是创建文档片段，将元素附加到文档片段，然后将文档片段附加到DOM树。在DOM树中，文档片段被其所有的子元素所代替。</span>
@@ -396,16 +396,16 @@
   <span class="token comment" spellcheck="true">// 从文档片段的 div 标签下检索 script 标签</span>
   <span class="token keyword">const</span> srcipt <span class="token operator">=</span> div<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">'script'</span><span class="token punctuation">)</span>
   <span class="token comment" spellcheck="true">// 遍历文档片段的 div 标签下的 script 标签</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> i <span class="token keyword">of</span> srcipt<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> i <span class="token keyword">of</span> srcipt<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 判断若 script 标签存在 text 值，则直接调用 evalSrcipt 函数</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token punctuation">.</span>text<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token punctuation">.</span>text<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token function">evalSrcipt</span><span class="token punctuation">(</span>i<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
       <span class="token comment" spellcheck="true">// 判断另一种情况，若script 标签存在 src 属性，则 AJAX 请求该 src 属性值，将返回值传入 evalSrcipt 函数执行</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token punctuation">.</span>src<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token punctuation">.</span>src<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token function">AJAXGetPage</span><span class="token punctuation">(</span>i<span class="token punctuation">.</span>src<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>text <span class="token operator">=</span><span class="token operator">></span> <span class="token function">evalSrcipt</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="重新认识-change-事件和新认识-SyntheticEvent"><a href="#重新认识-change-事件和新认识-SyntheticEvent" class="headerlink" title="重新认识 change 事件和新认识 SyntheticEvent"></a>重新认识 change 事件和新认识 SyntheticEvent</h2><p>为什么会提到这一点呢，群里面聊起了 Vue 下的 <code>&lt;input&gt;</code> 标签的 <code>change</code> 事件。实践中，你会发现 <code>&lt;input&gt;</code> 标签的 <code>change</code> 事件并不会在每次元素值的更改而触发。那么问题也就来了，这和 <code>&lt;input&gt;</code> 标签的 <code>blur</code> 事件产生的效果真的好像。查阅 MDN 发现，与 <code>input</code> 事件不同，<code>change</code> 事件不一定会对元素值的每次更改触发。</p>
 <p>看到这点使我很惊讶，因为我回忆 <code>&lt;input&gt;</code> 标签的 <code>change</code> 事件在 React 中的表现并不是这样的，确实事实如此，React 中有一个很有意思的关键词出现了 <strong>SyntheticEvent</strong>。</p>
@@ -537,7 +537,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?48630751"></script>
+<script src="/js/journal.js?60968408"></script>
 
 
 <script>

@@ -25,7 +25,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?1873663">
+<link rel="stylesheet" href="/css/journal.css?97778339">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -373,37 +373,37 @@
 </blockquote>
 <p>对着那50行不到的源码，我竟是没看出什么原委，哎，能力还不够啊！</p>
 <p>最后，<code>.postcssrc.js</code> 配置如下：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token string">"postcss-import"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"postcss-url"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"postcss-aspect-ratio-mini"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"postcss-write-svg"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">"plugins"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"postcss-import"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"postcss-url"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"postcss-aspect-ratio-mini"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"postcss-write-svg"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       utf8<span class="token punctuation">:</span> <span class="token boolean">false</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"postcss-cssnext"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"postcss-px-to-viewport"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"postcss-cssnext"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"postcss-px-to-viewport"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       viewportWidth<span class="token punctuation">:</span> <span class="token number">375</span><span class="token punctuation">,</span>
       unitPrecision<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
       viewportUnit<span class="token punctuation">:</span> <span class="token string">'vw'</span><span class="token punctuation">,</span>
       minPixelValue<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
       mediaQuery<span class="token punctuation">:</span> <span class="token boolean">false</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"postcss-viewport-units"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"postcss-viewport-units"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       filterRule<span class="token punctuation">:</span> rule <span class="token operator">=</span><span class="token operator">></span> rule<span class="token punctuation">.</span>selector<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'::after'</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> rule<span class="token punctuation">.</span>selector<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'::before'</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> rule<span class="token punctuation">.</span>selector<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">':after'</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> rule<span class="token punctuation">.</span>selector<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">':before'</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    <span class="token string">"cssnano"</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"cssnano"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
       preset<span class="token punctuation">:</span> <span class="token string">'advanced'</span><span class="token punctuation">,</span>
       autoprefixer<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token string">"postcss-zindex"</span><span class="token punctuation">:</span> <span class="token boolean">false</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>来特别提一下<code>postcss-viewport-units</code>，找到 Viewport Units Buggyfill™ 你会发现<code>content</code>也会引起一定的副作用。比如<code>img</code>和伪元素<code>::before</code>(<code>:before</code>)或<code>::after</code>（<code>:after</code>）。在<code>img</code>中<code>content</code>会引起部分浏览器下，图片不会显示。这个时候需要全局添加：</p>
-<pre class="line-numbers language-css"><code class="language-css">img &amp;<span class="token hexcode">#123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">img </span><span class="token punctuation">{</span>
   <span class="token property">content</span><span class="token punctuation">:</span> normal <span class="token important">!important</span><span class="token punctuation">;</span>
-&amp;<span class="token hexcode">#125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>但是你会发现这还不够，类似 iconfont 也会同样受到这个副作用的影响，所以利用提供的接口设置过滤规则即可</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">const</span> filterRule <span class="token operator">=</span> rule <span class="token operator">=</span><span class="token operator">></span> rule<span class="token punctuation">.</span>selector<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'::after'</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span>
@@ -412,47 +412,47 @@ rule<span class="token punctuation">.</span>selector<span class="token punctuati
 rule<span class="token punctuation">.</span>selector<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">':before'</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="借助-WebUploader-实现秒传与断点续传"><a href="#借助-WebUploader-实现秒传与断点续传" class="headerlink" title="借助 WebUploader 实现秒传与断点续传"></a>借助 WebUploader 实现秒传与断点续传</h2><p>直接上源码了，重点部分我已经写下了相应的注释，关于用法的话可以去看官网以及 FAQ</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>$<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  WebUploader<span class="token punctuation">.</span>Uploader<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>$<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  WebUploader<span class="token punctuation">.</span>Uploader<span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token string">'before-send-file'</span><span class="token punctuation">:</span> <span class="token string">'beforeSendFile'</span><span class="token punctuation">,</span>
     <span class="token string">'before-send'</span><span class="token punctuation">:</span> <span class="token string">'beforeSend'</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    beforeSendFile<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    beforeSendFile<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">var</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">,</span>
           owner <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>owner<span class="token punctuation">,</span>
           deferred <span class="token operator">=</span> WebUploader<span class="token punctuation">.</span><span class="token function">Deferred</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-      owner<span class="token punctuation">.</span><span class="token function">md5File</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>md5<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      owner<span class="token punctuation">.</span><span class="token function">md5File</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>md5<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
           type<span class="token punctuation">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
           url<span class="token punctuation">:</span> <span class="token string">'./uploadCheck'</span><span class="token punctuation">,</span>
-          data<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+          data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
             md5<span class="token punctuation">:</span> md5
-          <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
           cache<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
           dataType<span class="token punctuation">:</span> <span class="token string">'json'</span><span class="token punctuation">,</span>
-          success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+          success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">// If file upload completed you need use `owner.skipFile( file )` to skip file uploading</span>
             <span class="token comment" spellcheck="true">// Otherwise, you need record uploading progress and something you need</span>
             deferred<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-          <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
       <span class="token keyword">return</span> deferred<span class="token punctuation">.</span><span class="token function">promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    beforeSend<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>block<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    beforeSend<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>block<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// You need get uploading progress and do something</span>
       <span class="token keyword">var</span> chunkCurr <span class="token operator">=</span> <span class="token string">'uploading progress'</span><span class="token punctuation">,</span>
           deferred <span class="token operator">=</span> WebUploader<span class="token punctuation">.</span><span class="token function">Deferred</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>block<span class="token punctuation">.</span>chunk <span class="token operator">&lt;</span> chunkCurr<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>block<span class="token punctuation">.</span>chunk <span class="token operator">&lt;</span> chunkCurr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         deferred<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       deferred<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token keyword">return</span> deferred<span class="token punctuation">.</span><span class="token function">promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-  <span class="token keyword">var</span> uploader <span class="token operator">=</span> WebUploader<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> uploader <span class="token operator">=</span> WebUploader<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     auto<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     swf<span class="token punctuation">:</span> <span class="token string">'./Uploader.swf'</span><span class="token punctuation">,</span>
     server<span class="token punctuation">:</span> <span class="token string">'./upload'</span><span class="token punctuation">,</span>
@@ -460,19 +460,19 @@ rule<span class="token punctuation">.</span>selector<span class="token punctuati
     chunked<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     threads<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
     chunkRetry<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-    formData<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    formData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">// ...</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-  uploader<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'uploadAccept'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>file<span class="token punctuation">,</span> response<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  uploader<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'uploadAccept'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>file<span class="token punctuation">,</span> response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// If upload failed you can `return false` stop uploading</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-  uploader<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'uploadSuccess'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>file<span class="token punctuation">,</span> response<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  uploader<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'uploadSuccess'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>file<span class="token punctuation">,</span> response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// Success do something</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>jQuery<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="《JavaScript设计模式》读后感"><a href="#《JavaScript设计模式》读后感" class="headerlink" title="《JavaScript设计模式》读后感"></a>《JavaScript设计模式》读后感</h2><p>此书首先介绍了一些关于设计模式的基础概念，其次开始从 JavaScript 介绍几种经典模式的实现</p>
 <ol>
@@ -497,12 +497,12 @@ rule<span class="token punctuation">.</span>selector<span class="token punctuati
 <p>种种迹象让我去读jQuery源码，所以我创建了一个 GitHub 仓库 <a target="_blank" rel="noopener" href="https://github.com/zongzi531/read-jquery">read-jquery</a>。</p>
 <h2 id="将-ToDo-List-部署至服务器"><a href="#将-ToDo-List-部署至服务器" class="headerlink" title="将 ToDo List 部署至服务器"></a>将 ToDo List 部署至服务器</h2><p>比较浪费的是，去年双11在阿里云买的一年的云服务器，放着大半年没动过，最近才想着把这个写好的服务放上去，不过之前呢也没啥好放的，毕竟没写过Node服务。</p>
 <p>服务器配置遇到的问题，就拿这个项目为例子，当我进入<code>/</code>路由的时候，是没有的问题，并且会自动跳转至<code>/signin</code>路由，内容也是同样可以显示的，但是如果我在<code>/signin</code>路由刷新页面时，浏览器去请求的是<code>/signin</code>路由下的html文件，就会出现服务器返回404的现象。那么解决办法就是使用：</p>
-<pre class="line-numbers language-conf"><code class="language-conf">server &#123;
+<pre class="line-numbers language-conf"><code class="language-conf">server {
   ...
-  location / &#123;
+  location / {
     try_files $uri /index.html
-  &#125;
-&#125;
+  }
+}
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么为什么会出现这样的情况呢，原因是 Browser history 是使用 React Router 的应用推荐的 history。它使用浏览器中的 History API 用于处理 URL，创建一个像 <code>example.com/some/path</code> 这样 <strong>真实的</strong> URL 。</p>
 <p>起初我这样配置nginx的时候，发现问题解决了，页面刷新不会出现404的现象，但是这时我发现，接口不会请求了。很糟糕，解决方案呢有两种，一种是重新配置nginx，但是如果页面路由多的话，会导致配置文件难维护，我不可能是说项目修改了，我还要重新去配一遍nginx，因为我这里接口的路由是跟页面路由同级的，那么另一种就是修改我的node服务，为接口都添加一层，比如<code>/getTodoList</code>改为<code>/api/getTodoList</code>，都统一改成<code>/api/..</code>这样，然后配置一遍nginx即可。当然在这个项目中我选择了第一种简单的，我暂时懒得改node服务，改改确实是小事，主要改完以后页面项目也要跟着一起改。</p>
@@ -592,7 +592,7 @@ rule<span class="token punctuation">.</span>selector<span class="token punctuati
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?77884058"></script>
+<script src="/js/journal.js?23693416"></script>
 
 
 <script>

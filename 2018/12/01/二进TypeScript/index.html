@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?6387584">
+<link rel="stylesheet" href="/css/journal.css?97553380">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -370,10 +370,10 @@ type Callback <span class="token operator">=</span> <span class="token punctuati
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>类型别名与其原始的类型完全一致；它们只是简单的替代名。接下来看看它与 <code>interface</code> 的不同之处。</p>
 <p>其一，接口创建了一个新的名字，可以在其它任何地方使用。 类型别名并不创建新名字—比如，错误信息就不会使用别名。 在下面的示例代码里，在编译器中将鼠标悬停在 <code>interfaced</code> 上，显示它返回的是 <code>Interface</code> ，但悬停在 <code>aliased</code> 上时，显示的却是对象字面量类型。</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript">type Alias <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> num<span class="token punctuation">:</span> <span class="token keyword">number</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token keyword">interface</span> <span class="token class-name">Interface</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type Alias <span class="token operator">=</span> <span class="token punctuation">{</span> num<span class="token punctuation">:</span> <span class="token keyword">number</span> <span class="token punctuation">}</span>
+<span class="token keyword">interface</span> <span class="token class-name">Interface</span> <span class="token punctuation">{</span>
     num<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">aliased</span><span class="token punctuation">(</span>arg<span class="token punctuation">:</span> Alias<span class="token punctuation">)</span><span class="token punctuation">:</span> Alias<span class="token punctuation">;</span>
 <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">interfaced</span><span class="token punctuation">(</span>arg<span class="token punctuation">:</span> Interface<span class="token punctuation">)</span><span class="token punctuation">:</span> Interface<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -382,11 +382,11 @@ type Callback <span class="token operator">=</span> <span class="token punctuati
 <h2 id="关于-keyof-关键字"><a href="#关于-keyof-关键字" class="headerlink" title="关于 keyof 关键字"></a>关于 <code>keyof</code> 关键字</h2><p>这个关键字就比较厉害了，我一读的时候根本就没有注意到！！！为什么没注意到其实也有一定的原因，那时阅读的是<a target="_blank" rel="noopener" href="https://www.tslang.cn/">《TypeScript中文网》</a>，在该网站中直接缺失 <code>&lt;T, K extends keyof T&gt;</code> 。气不气！！！而且没地方提PR……捞不捞！！！所以还是推荐阅读官网文档啦。</p>
 <p>二读时，我产生疑惑的位置在这里：</p>
 <h3 id="在泛型约束中使用类型参数"><a href="#在泛型约束中使用类型参数" class="headerlink" title="在泛型约束中使用类型参数"></a>在泛型约束中使用类型参数</h3><p>你可以声明一个类型参数，且它被另一个类型参数所约束。 比如，现在我们想要用属性名从对象里获取这个属性。 并且我们想要确保这个属性存在于对象 <code>obj</code> 上，因此我们需要在这两个类型之间使用约束。</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> getProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> getProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> c<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> d<span class="token punctuation">:</span> <span class="token number">4</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> c<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> d<span class="token punctuation">:</span> <span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// okay</span>
 <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// error: Argument of type 'm' isn't assignable to 'a' | 'b' | 'c' | 'd'.</span>
@@ -395,15 +395,15 @@ type Callback <span class="token operator">=</span> <span class="token punctuati
 <p>它在 TypeScript 2.1 被发布，称它为<strong>查找类型</strong>。</p>
 <p>在 JavaScript 中属性名称作为参数的API是相当普遍的，但是到目前为止还没有表达在那些API中出现的类型关系。</p>
 <p>输入索引类型查询或 <code>keyof</code> ，索引类型查询 <code>keyof T</code> 产生的类型是 <code>T</code> 的属性名称。 <code>keyof T</code> 的类型被认为是 <code>string</code> 的子类型。</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
     age<span class="token punctuation">:</span> <span class="token keyword">number</span><span class="token punctuation">;</span>
     location<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 type K1 <span class="token operator">=</span> keyof Person<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// "name" | "age" | "location"</span>
 type K2 <span class="token operator">=</span> keyof Person<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// "length" | "push" | "pop" | "concat" | ...</span>
-type K3 <span class="token operator">=</span> keyof <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token punctuation">[</span>x<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Person <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span>
+type K3 <span class="token operator">=</span> keyof <span class="token punctuation">{</span> <span class="token punctuation">[</span>x<span class="token punctuation">:</span> <span class="token keyword">string</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Person <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>与之相对应的是<em>索引访问类型</em>，也称为<em>查找类型</em>。在语法上，它们看起来像元素访问，但是写成类型：</p>
 <pre class="line-numbers language-typescript"><code class="language-typescript">type P1 <span class="token operator">=</span> Person<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span>
@@ -412,15 +412,15 @@ type P3 <span class="token operator">=</span> <span class="token keyword">string
 type P4 <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"push"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// (...items: string[]) => number</span>
 type P5 <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// string</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> getProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">function</span> getProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 推断类型是T[K]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">function</span> setProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">,</span> value<span class="token punctuation">:</span> T<span class="token punctuation">[</span>K<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> setProperty<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> K <span class="token keyword">extends</span> <span class="token class-name">keyof</span> T<span class="token operator">></span><span class="token punctuation">(</span>obj<span class="token punctuation">:</span> T<span class="token punctuation">,</span> key<span class="token punctuation">:</span> K<span class="token punctuation">,</span> value<span class="token punctuation">:</span> T<span class="token punctuation">[</span>K<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> foo<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> bar<span class="token punctuation">:</span> <span class="token string">"hello!"</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span> foo<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span> bar<span class="token punctuation">:</span> <span class="token string">"hello!"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// number</span>
 <span class="token keyword">let</span> bar <span class="token operator">=</span> <span class="token function">getProperty</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token string">"bar"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// string</span>
@@ -445,28 +445,28 @@ type App <span class="token operator">=</span> <span class="token punctuation">(
 <p>将之前申明的静态变量替换为枚举：</p>
 <pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/react-to-do-list/blob/master/src/config/index.ts</span>
 
-<span class="token keyword">export</span> <span class="token keyword">enum</span> COLOR <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">enum</span> COLOR <span class="token punctuation">{</span>
   DEFAULT <span class="token operator">=</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// ...</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ICOLOR</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ICOLOR</span> <span class="token punctuation">{</span>
   color<span class="token punctuation">:</span> COLOR
   flag<span class="token punctuation">:</span> COLORFLAG
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> type COLORS <span class="token operator">=</span> ICOLOR<span class="token punctuation">[</span><span class="token punctuation">]</span>
 
 <span class="token keyword">export</span> <span class="token keyword">const</span> COLORS<span class="token punctuation">:</span> COLORS <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> color<span class="token punctuation">:</span> COLOR<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">,</span> flag<span class="token punctuation">:</span> COLORFLAG<span class="token punctuation">.</span>ACTIVE <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> color<span class="token punctuation">:</span> COLOR<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">,</span> flag<span class="token punctuation">:</span> COLORFLAG<span class="token punctuation">.</span>ACTIVE <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token comment" spellcheck="true">// ...</span>
 <span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>更多的使用类型别名：</p>
 <pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/react-to-do-list/blob/master/src/interfaces/index.ts</span>
 
-<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> RouterProps <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'react-router'</span>
-<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> FormComponentProps <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'antd/lib/form'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> RouterProps <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-router'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> FormComponentProps <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'antd/lib/form'</span>
 
 <span class="token keyword">export</span> type AntdFormAndRouterProps <span class="token operator">=</span> FormComponentProps <span class="token operator">&amp;</span> RouterProps
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -479,39 +479,39 @@ type App <span class="token operator">=</span> <span class="token punctuation">(
  * &lt;/template>
  */</span>
 
-<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> Component<span class="token punctuation">,</span> Prop<span class="token punctuation">,</span> Emit<span class="token punctuation">,</span> Vue <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> Prop<span class="token punctuation">,</span> Emit<span class="token punctuation">,</span> Vue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span><span class="token punctuation">;</span>
 
 @Component
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Navigation</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Navigation</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
 
   <span class="token comment" spellcheck="true">// show 为组件外传入参数</span>
   <span class="token comment" spellcheck="true">// 因为 v-model 会直接修改值</span>
   <span class="token comment" spellcheck="true">// 所以我们定义一个 currentShow 的 getter 和 setter</span>
-  @<span class="token function">Prop</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token keyword">false</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+  @<span class="token function">Prop</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token keyword">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
   <span class="token keyword">private</span> show<span class="token operator">!</span><span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// getter 当然是获取外部传入的 show</span>
-  <span class="token keyword">private</span> <span class="token keyword">get</span> <span class="token function">currentShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>show<span class="token punctuation">;</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">get</span> <span class="token function">currentShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>show<span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
   <span class="token comment" spellcheck="true">// setter 因为没有办法 return ，所以这里我们只需一个内部方法 setCurrentShow 将 value 传入</span>
-  <span class="token keyword">private</span> <span class="token keyword">set</span> <span class="token function">currentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">set</span> <span class="token function">currentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setCurrentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
   <span class="token comment" spellcheck="true">// 这里使用 Emit decorator 在方法内使用 return 将 value 传出</span>
   <span class="token comment" spellcheck="true">// 这样在组件外就可以使用 @on-change 绑定方法， 方法内第一参数就是 value</span>
   @<span class="token function">Emit</span><span class="token punctuation">(</span><span class="token string">'on-change'</span><span class="token punctuation">)</span>
-  <span class="token keyword">private</span> <span class="token function">setCurrentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token function">setCurrentShow</span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> value<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 <code>.vue</code> 中 <code>import *.svg</code> 的解决方法：</p>
 <p>在 <code>shims-vue.d.ts</code> 中添加以下代码：</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">'*.svg'</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">'*.svg'</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> value<span class="token punctuation">:</span> <span class="token keyword">any</span><span class="token punctuation">;</span>
   <span class="token keyword">export</span> <span class="token keyword">default</span> value<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在使用 GitHub Pages 时遇到的问题，有关于 Vue CLI 3：</p>
 <p>部署应用包时的基本 URL。用法和 webpack 本身的 <code>output.publicPath</code> 一致，但是 Vue CLI 在一些其他地方也需要用到这个值，所以<strong>请始终使用 <code>baseUrl</code> 而不要直接修改 webpack 的 <code>output.publicPath</code></strong> 。</p>
@@ -528,37 +528,37 @@ type App <span class="token operator">=</span> <span class="token punctuation">(
 <p>这个值在开发环境下同样生效。如果你想把开发服务器架设在根路径，你可以使用一个条件式的值：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// https://github.com/zongzi531/vue-to-do-list/blob/master/vue.config.js</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   baseUrl<span class="token punctuation">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>NODE_ENV <span class="token operator">===</span> <span class="token string">'production'</span>
     <span class="token operator">?</span> <span class="token string">'/vue-to-do-list/'</span>
     <span class="token punctuation">:</span> <span class="token string">'/'</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="执行-git-push-u-origin-master-提示-remote-Invalid-username-or-password"><a href="#执行-git-push-u-origin-master-提示-remote-Invalid-username-or-password" class="headerlink" title="执行 git push -u origin master 提示 remote: Invalid username or password."></a>执行 <code>git push -u origin master</code> 提示 <code>remote: Invalid username or password.</code></h2><p>看这个提示意思是用户名或密码无效，那么问题来了，明明没数错啊，为什么？</p>
 <p>前提：如果你的 GitHub 账户开启了二步验证，请直接前往<a target="_blank" rel="noopener" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">Creating a personal access token for the command line</a>按照提示操作，即可解决。</p>
 <h2 id="自定义-index-html-插入内容"><a href="#自定义-index-html-插入内容" class="headerlink" title="自定义 index.html 插入内容"></a>自定义 <code>index.html</code> 插入内容</h2><p><code>html-webpack-plugin</code> 插件对应的数据。它包括两部分：</p>
 <p><code>htmlWebpackPlugin.files</code> : 此次html-webpack-plugin插件配置的chunk和抽取的css样式。该files值其实是webpack的stats对象的 <code>assetsByChunkName</code> 属性代表的值，该值是插件配置的chunk块对应的按照 <code>webpackConfig.output.filename</code> 映射的值。例如对应上面配置插件各个属性配置项例子中生成的数据格式如下：</p>
-<pre class="line-numbers language-json"><code class="language-json"><span class="token property">"htmlWebpackPlugin"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token property">"files"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-json"><code class="language-json"><span class="token property">"htmlWebpackPlugin"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">"files"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">"css"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"inex.css"</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token property">"js"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"common.js"</span><span class="token punctuation">,</span> <span class="token string">"index.js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"chunks"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-      <span class="token property">"common"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token property">"chunks"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"common"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token property">"entry"</span><span class="token operator">:</span> <span class="token string">"common.js"</span><span class="token punctuation">,</span>
         <span class="token property">"css"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">"index.css"</span> <span class="token punctuation">]</span>
-      &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-      <span class="token property">"index"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"index"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token property">"entry"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
         <span class="token property">"css"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"index.css"</span><span class="token punctuation">]</span>
-      &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-    &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-  &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样，就可以是用如下模板引擎来动态输出script脚本：</p>
-<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">for</span> <span class="token attr-name">(var</span> <span class="token attr-name">chunk</span> <span class="token attr-name">in</span> <span class="token attr-name">htmlWebpackPlugin.files.chunks)</span> <span class="token attr-name">&amp;#123;</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">for</span> <span class="token attr-name">(var</span> <span class="token attr-name">chunk</span> <span class="token attr-name">in</span> <span class="token attr-name">htmlWebpackPlugin.files.chunks)</span> <span class="token attr-name">{</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
 &lt;script type="text/javascript" src="&lt;%=htmlWebpackPlugin.files.chunks[chunk].entry %><span class="token script language-javascript">"<span class="token operator">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">&amp;#125;</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">}</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><code>htmlWebpackPlugin.options</code>: 传递给插件的配置项，具体的配置项如上面插件配置项小节所描述的 —— <em>参见相关链接</em>。</p>
 <h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p><strong><a target="_blank" rel="noopener" href="https://github.com/jkchao/typescript-book-chinese">《深入理解 TypeScript》</a></strong></p>
@@ -653,7 +653,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?63720420"></script>
+<script src="/js/journal.js?33643247"></script>
 
 
 <script>

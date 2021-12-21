@@ -25,7 +25,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?7899084">
+<link rel="stylesheet" href="/css/journal.css?68158623">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -368,11 +368,11 @@
 <p>非常的妙是不是。再来看到例子2，假设我们要写一个样式对象，但是我们需要自己考虑兼容性，比如会加入前缀 <code>webkit</code> ，那么我们自然会一个个把他们写出来，但是在维护类型的时候会带来很多繁琐的问题，比如说我修改 <code>flex</code> 的类型时，我还需要顺带修改 <code>webkit</code> 前缀的对应的类型，当这种场景变得多又复杂时，代码的维护成本就会逐渐提升。</p>
 <p>那么当然是有办法解决解决这样的问题的，首先我们需要利用一些手段将 <code>flex</code> 转换成 <code>webkitFlex</code> ，然后将 <code>interface</code> 的 key 换成我们想要的内容。</p>
 <p>到目前为止，我们已经可以实现 key 的替换，但是原来的 key 却不见了，所以我们这里需要借助 <code>| P</code> 来完成，来实现我们的需求。到目前为止我们已经完成了我们想要的，我们再来进阶一步讲，把问题变得有趣，我们这里希望经过转换后， <code>lineHeight</code> 是不会加 <code>webkit</code> 前缀的，怎么实现呢。</p>
-<pre class="line-numbers language-typescript"><code class="language-typescript">type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token string">'lineHeight'</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit$&amp;#123;Capitalize&lt;K>&amp;#125;`</span></span>
+<pre class="line-numbers language-typescript"><code class="language-typescript">type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token string">'lineHeight'</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Capitalize<span class="token operator">&lt;</span>K<span class="token operator">></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这样，我们就可以实现新的需求，当然了这里还是可以结合例子1进行进阶。</p>
 <pre class="line-numbers language-typescript"><code class="language-typescript">type ExcludeWebkitKey <span class="token operator">=</span> <span class="token string">'lineHeight'</span> <span class="token operator">|</span> <span class="token string">'something you need.'</span>
-type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token punctuation">,</span> E <span class="token operator">=</span> ExcludeWebkitKey<span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token class-name">E</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit$&amp;#123;Capitalize&lt;K>&amp;#125;`</span></span>
+type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token punctuation">,</span> E <span class="token operator">=</span> ExcludeWebkitKey<span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token class-name">E</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Capitalize<span class="token operator">&lt;</span>K<span class="token operator">></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>哈哈，是不是也非常的有趣。确实，就是这么有趣。</p>
 <p>那么我们来看到例子3，我们如何可以在 <code>methods</code> 下的方法中获得到 <code>data</code> 返回的类型呢，我这边摘抄了官网的例子，大家可以看一下。</p>
@@ -446,7 +446,7 @@ type WebkitKey<span class="token operator">&lt;</span>K <span class="token keywo
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?73216747"></script>
+<script src="/js/journal.js?78222354"></script>
 
 
 <script>
