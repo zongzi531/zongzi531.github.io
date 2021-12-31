@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2021-12-01T10:38:26.000Z</updated>
+  <updated>2022-01-01T13:13:21.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>２０２２年おめでとうございます</title>
+    <link href="https://zongzi531.com/2022/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%92%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
+    <id>https://zongzi531.com/2022/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%92%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
+    <published>2022-01-01T13:13:21.000Z</published>
+    <updated>2022-01-01T13:13:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>2021 年，负责内部组件库，TypeScript 进阶，工程化实践，接触低代码，核心架构设计，做技术分享等等。<br>2022 年，持续前进，明确目标。</p></blockquote><h2 id="回顾-2021-年"><a href="#回顾-2021-年" class="headerlink" title="回顾 2021 年"></a>回顾 2021 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">&#x1f469;&#xfe0f;&#x200d;&#x2764;&#xfe0f;&#x200d;&#x1f48b;&#xfe0f;&#x200d;&#x1f468;</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">&#x1f497;</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</strong> <code>微量</code></li><li><strong><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習文法・語彙</strong> <code>语法及词汇 第1页</code></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</strong> <code>持续进行</code></li><li><strong><span class="github-emoji" alias="hammer_and_wrench" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e0.png?v8">&#x1f6e0;</span> 学习前端自动化工程体系</strong> <code>持续进行</code></li><li>阅读 ECMA 标准 <code>6.2.4 The Reference Specification Type</code></li><li>学习 OKR</li></ul><h2 id="展望-2022-年"><a href="#展望-2022-年" class="headerlink" title="展望 2022 年"></a>展望 2022 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">&#x1f469;&#xfe0f;&#x200d;&#x2764;&#xfe0f;&#x200d;&#x1f48b;&#xfe0f;&#x200d;&#x1f468;</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">&#x1f497;</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習文法・語彙</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己知识体系</strong><ul><li>阅读 ECMA 标准</li><li>学习计算机图形学/可视化领域</li><li>实践 Three.js</li><li>学习服务端架构</li><li>学习产品思维</li></ul></li></ul><h2 id="持续进行"><a href="#持续进行" class="headerlink" title="持续进行"></a>持续进行</h2><ul><li>关注 ECMA 标准 / ECMAScript Next</li><li>关注前端发展趋势</li><li>关注 NPM 社区</li><li>关注 TypeScript</li><li>学习算法</li><li>学习 CSS</li><li>至少 2 场技术分享</li></ul><h2 id="优先级较低的规划"><a href="#优先级较低的规划" class="headerlink" title="优先级较低的规划"></a>优先级较低的规划</h2><ul><li>了解 JavaScript 在不同宿主环境下的表现</li><li>尝试实践渲染性能优化</li><li>尝试 Angular、Ember.js</li><li>尝试 Progressive Web Apps</li><li>尝试 WebAssembly</li><li>学习 Web Accessibility</li></ul><h2 id="x1f4da-建立自己知识体系"><a href="#x1f4da-建立自己知识体系" class="headerlink" title="&#x1f4da; 建立自己知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己知识体系</h2><p>怎么说呢，今年的学习其实较去年来说，变得缓慢了……</p><p>当然了，形成自己的知识体系必然重要，现在看来其实可以跑出「前端」这个范围，而是从一个更广更大的范围形成自己的知识体系。</p><p>我来一点点说明，从语言这个角度出发，我们需要具备对 ECMA 标准的认识，并且能够在宿主环境中找到可优化的方案，从而在 TC39 发起提案。</p><p>可以说是一条非常牛逼的道路，并且从中还会学习更底层的语言，对 JS 的认识会有大幅度提升，对宿主环境（V8）有着清晰的认识。</p><p>从样式的角度出发，也不乏是一个走的人不太多的道路，通过学习 CSS 规范并加以实践，形成自己对宿主环境表现的认知体系，不断总结，尝试更高阶的使用方式，掌握样式带来的渲染性能优化等等能力。</p><p>从计算机图形学、可视化这类角度出发，掌握图形学基础，也可以在「前端」以外的地方发力，比如做一款游戏是一件很有成就感的事情。</p><p>从服务端的角度则是后端技术，我也不太了解，总之这是一条路。</p><p>从技术架构这个角度出发，需要学会对每一种技术优劣形态的分析，并且能够在当前的场景下选择合适的解决方案，同样具备在未来 5 - 10 年可升级、并且含有兜底的技术方案，这条路需要具备大量的技术能力，当然还需要掌握最前沿的技术，不过各个角度都需要掌握最前沿的技术。</p><p>从项目的角度出发，需要能够负责项目的可行性、推进和落地的能力，同时需要具备能够对项目进行合理排期、风险把控等管理能力。对了，关于项目孵化的这块内容，同时需要具备商业价值的探索、立项、结合 OKR 形成核心目标，从痛点切入等等。</p><p>大概目前能想到的就是这些内容，这些角度可以同时并行，我认为不影响，只要你能力足够强大……</p><p>经过这一年，慢慢回顾其实发现自己做的最多的是关于逻辑相关的工作，会让自己觉得可能是擅长逻辑？缺乏思维创新和审美创新，当然这有可能是没有尝试过另外一块领域导致自己有这样的刻板印象，不过没什么关系，可以尝试学习一些专业的书籍以尝试看看。</p><p>不过还是需要进行大量的体验、学习、比对、总结和积累，才会形成自己的一套体系。</p><p>有一点其实我也慢慢想明白了，我想 Remote 远程办公。</p><p>这就是我这一年对职业的新看法，其实比去年来说，不会再聚焦于「前端」这个词，而是看的更多更广了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>想冲刺的Q4</title>
@@ -405,27 +426,6 @@
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>充实的七月</title>
-    <link href="https://zongzi531.com/2020/08/01/%E5%85%85%E5%AE%9E%E7%9A%84%E4%B8%83%E6%9C%88/"/>
-    <id>https://zongzi531.com/2020/08/01/%E5%85%85%E5%AE%9E%E7%9A%84%E4%B8%83%E6%9C%88/</id>
-    <published>2020-08-01T10:23:28.000Z</published>
-    <updated>2020-08-01T10:23:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>和我心爱的女朋友求婚了！<br>大成功！！！哈哈哈～</p></blockquote><h2 id="x1f4d4-日本語学習計画"><a href="#x1f4d4-日本語学習計画" class="headerlink" title="&#x1f4d4; 日本語学習計画"></a><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習計画</h2><p>还是老样子，截至目前《新版 中日交流标准日本语 初级上、下》第 7 单元的学习开始，当然只学了 2 课，可能要拖到下个月咯……</p><p>不过没关系，七月加入了王様（先生）的<a href="https://zongzi531.com/nihongonokona/index.html">「日本語のコーナー」</a>学习，非常感谢王様。</p><p>王様、ありがとうございます！お疲れ様です！明日はよろしくお願いします。</p><p>えと…コーナーのみんなさん、いしょに頑張りましょ！</p><p>目前，学习日语语法的优先级在学习课文之上，打好语法基础、拓展词汇才是长久之计。</p><p>日漫日剧现在看起来也比以前有了更多的情切感，毕竟简单的词汇已经可以听懂了。</p><p>頑張りましょ！</p><h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><p>月底时，公司内部组织架构调整，我没有被跟着公司产品线被分离出去，而是继续留在体验技术部，将参与可视化大屏的开发工作。未来的路，清晰且又模糊着……</p><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「几何（基本表示方法）」</strong></p><p>作业成果展示：</p><p><img src="https://raw.githubusercontent.com/zongzi531/daily-learning/master/GAMES101/Homework/Assignment3/Code/output-texture-bilinear.png" alt="作业三实现图例"></p><p>利用投影矩阵实现透视投影，通过插值算法计算纹理颜色的插值，结合 Blinn-Phong 模型和双线性插值纹理采样技术计算纹理颜色。实现源码请前往 <a href="https://github.com/zongzi531/daily-learning/tree/master/GAMES101/Homework">GAMES101/Homework</a> 仓库查看。</p><h5 id="2-接触内部自动化"><a href="#2-接触内部自动化" class="headerlink" title="2. 接触内部自动化"></a>2. 接触内部自动化</h5><p>拿到仓库的时候连依赖都装不起来，更别说跑了。不过公司的开发环境确实有些差劲。</p><ul><li>提示因 <code>hiredis</code> 编译失败引起的问题，查看 npm 可以看到需要基础环境，按照要求安装即可 <a href="https://www.npmjs.com/package/hiredis#install">hiredis#install</a> 。<ul><li><code>gcc</code> / <code>g++</code> 4.8 or newer.</li><li><code>python</code> 2.7 or any newer 2.x version. <code>python</code> 3.x is not supported.</li></ul></li><li>同时遇到 <code>node-gyp</code> 或 <code>node-gyp rebuild</code> 无法使用的情况，使用如下方式解决 <a href="https://www.npmjs.com/package/node-gyp#installation">node-gyp#installation</a> 。<ul><li><code>npm install --global --production windows-build-tools</code></li><li><code>npm config set msvs_version 2017</code></li></ul></li><li>安装 <code>node-gyp</code> 的过程中遇到需要下载其他包的情况（因为是内网环境，会提示 <code>network error</code> 。能体会有多差劲了吧），可以使用 <code>npm --disturl=你所需要的内网环境源地址</code> 来替换 <code>cli config</code> 中的 <code>disturl</code> 属性值来达成目的。</li><li>安装 <code>windows-build-tools</code> 提示需要下载 Python 2.7.15 版本<ul><li>下载离线包，安装并配置环境变量</li><li>完成上一步后提示下载 vs_BuildTools.exe 失败（原因可能也同于 Visual Studio ）</li></ul></li><li>执行安装依赖报有关 .NET Framework 2.0/4.0 的错误，<strong>未解决</strong>。<ul><li>猜测是由于没有安装 Visual Studio 导致（太难受了，正在打算从离线包的方式解决……）</li></ul></li></ul><p>仍然在排查问题当中……</p><h5 id="3-内部原型文档管理平台（兴趣小组）"><a href="#3-内部原型文档管理平台（兴趣小组）" class="headerlink" title="3. 内部原型文档管理平台（兴趣小组）"></a>3. 内部原型文档管理平台（兴趣小组）</h5><ol start="0"><li>需求、原型的讨论和确定（微前端应用）</li><li>完成开发框架的搭建（ Vue2.x + TypeScript ）</li><li>准备进入开发</li></ol><h2 id="x1f3c7-锻炼身体"><a href="#x1f3c7-锻炼身体" class="headerlink" title="&#x1f3c7; 锻炼身体"></a><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</h2><p>（好难坚持啊………………）加油！加油！！加油！！！太难了……</p><blockquote><p>写了半天，感觉好像也没那么充实嘛……（其实很充实）</p></blockquote>]]></content>
-    
-    
-    <summary type="html">和我心爱的女朋友求婚了！大成功！！！哈哈哈～</summary>
     
     
     
