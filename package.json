@@ -30,6 +30,6 @@
     "hexo-server": "2.0.0"
   },
   "devDependencies": {
-    "patch-package": "^6.4.7"
+    "patch-package": "6.4.7"
   }
 }
