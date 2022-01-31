@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-01-01T13:13:21.000Z</updated>
+  <updated>2022-02-01T17:01:10.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>虎虎生威</title>
+    <link href="https://zongzi531.com/2022/02/01/%E8%99%8E%E8%99%8E%E7%94%9F%E5%A8%81/"/>
+    <id>https://zongzi531.com/2022/02/01/%E8%99%8E%E8%99%8E%E7%94%9F%E5%A8%81/</id>
+    <published>2022-02-01T17:01:10.000Z</published>
+    <updated>2022-02-01T17:01:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>春节快乐！～</p><p>其实这一年下来发现，自己仍然在开发这个环境中打转，但是也很明显的发现自己的侧重方向发生了转变，首当其冲的是加强了自己对 TypeScript 的使用能力，通过对 TypeScript 的进阶挑战做题和帮助同事解决使用过程中遇到的高阶类型推导问题来提升这方面的能力，截止今年年初，部门内部 TypeScript 的使用率较去年有大幅度提升，从去年的 20% 的使用率到今年年初的近 80% 使用率，可以说同事们对 TypeScript 的接纳程度也越来越好了。</p><p>其次就是自己这一年在编译方面也有了更多的关注和实践，真实的接触了 AST 的部分结构，开发编译插件来提升同事们的开发体验和提供友好的同构产物，使用 AST 来处理补充代码、替换或移除代码、清除注释块中的代码等等场景……在有过这些铺垫后，当下，我会有想学习 Rust 的冲动。<a href="https://course.rs/">《Rust语言圣经(Rust教程 Rust Course)》</a>，这可能是我会学习的下一门编程语言（本来想说第二门的，但是我接触过的语言也有好几门，虽然用不到）。</p><p>业务交付的话就是基本的需求排期、功能开发、缺陷修复、功能自测工作了。</p><p>当然了，去年年中时候定下的中期目标仍然会一直伴随我</p><ul><li>35 岁前，有一份轻松快乐的副业</li><li>35 岁，打稳主业基础，尝试更多突破</li></ul><p>话说回来，春节前进行了几次 2022 年工作方向的汇报和讨论，对产品商业价值这一问题形成了一个很简单的认识，但是对如何寻找产品的切入点、寻找商业价值这一系列问题上，暂时还是无从下手，这也是我缺乏的能力，或许具备了某些方法论和商业眼光的话，或许就会出现好的机会。</p><h1 id="基础建设"><a href="#基础建设" class="headerlink" title="基础建设"></a>基础建设</h1><p>首先是微前端的支持工作，包含提供技术架构、技术支持、新特性支持和缺陷修复工作。在同事开发过程中不免会遇到一些写法造成当初架构未考虑到的情况，那么解决业务问题当然是第一位的，发布新特性支持和缺陷修复就成为了微前端架构的迭代路径。也同时在今年年中，依靠此技术架构构建的项目体积增长到了 100 多兆，并且自动化的时间也变得缓慢，解决此问题也刻不容缓，经过一些解决思路的整理，最终提升自动化时间和缩小项目的大小，性能提升近70% 。</p><p>差点忘了提，自动化的环节使用了动态构建平台，可以任意撮合各项目之间的子应用关系，组成一个新应用来复用开发。</p><p>再来就是基于 Vue3 的内部组件库开发工作，结合设计部门一起打造新的内部组件库，带着新的设计风格进入 beta 版本。</p><p>这一年，内部标准代码风格也进行了迭代，根据会议内容进行了相应的调整。</p><p>再一个就是低代码建设，也是今年的主要工作内容，工作相关的关键点在之前的博客中有提到，这里就不再提了。</p><h1 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h1><ul><li>《追求优雅的代码2》</li><li>《进阶 TypeScript 之初见泛型》</li><li>《现代 Web 应用的资源及网络优化分享》</li></ul><h1 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h1><ul><li><a href="https://github.com/element-plus/element-plus">element-plus</a> <a href="https://github.com/element-plus/element-plus/pull/1953">#1953</a> <a href="https://github.com/element-plus/element-plus/pull/1963">#1963</a> <a href="https://github.com/element-plus/element-plus/pull/1975">#1975</a> <a href="https://github.com/element-plus/element-plus/pull/2050">#2050</a></li><li><a href="https://github.com/element-plus/vite-plugin-element-plus">vite-plugin-element-plus</a> <a href="https://github.com/element-plus/vite-plugin-element-plus/pull/2">#2</a> <a href="https://github.com/element-plus/vite-plugin-element-plus/pull/5">#5</a></li><li><a href="https://github.com/type-challenges/type-challenges">type-challenges</a> <a href="https://github.com/type-challenges/type-challenges/pull/2158">#2158</a></li><li><a href="https://github.com/fczbkk/css-selector-generator">css-selector-generator</a> <a href="https://github.com/fczbkk/css-selector-generator/pull/132">#132</a></li></ul>]]></content>
+    
+    
+    <summary type="html">春节快乐！～</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>２０２２年おめでとうございます</title>
@@ -405,27 +426,6 @@
     
     
     <summary type="html">时间来到了国庆，今年国庆和中秋可是一起的噢。想去日本旅游～</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>脱离业务</title>
-    <link href="https://zongzi531.com/2020/09/01/%E8%84%B1%E7%A6%BB%E4%B8%9A%E5%8A%A1/"/>
-    <id>https://zongzi531.com/2020/09/01/%E8%84%B1%E7%A6%BB%E4%B8%9A%E5%8A%A1/</id>
-    <published>2020-09-01T10:31:09.000Z</published>
-    <updated>2020-09-01T10:31:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>8 月，正式脱离公司业务团队，参与可视化团队项目，为公司赋能。<br>可以说，脱离业务团队后，工作变得比以前更忙了，更充实了。（会议也变多了）<br>整个 8 月甚至 9 月被工作安排的满满当当的</p></blockquote><h2 id="x1f4d4-日本語学習計画"><a href="#x1f4d4-日本語学習計画" class="headerlink" title="&#x1f4d4; 日本語学習計画"></a><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">&#x1f4d4;</span> 日本語学習計画</h2><p>截至目前《新版 中日交流标准日本语 初级上、下》完成第 8 单元学习，由于第 7 单元的进度在上个月未完成，所以本月已加快进度学习。</p><p>「日本語のコーナー」学习停滞。当然了，还是非常王様给我带来了那么多的帮助，所以在恢复之前我还是会继续前行，继续加油（虽然恢复也是未知的）。</p><p>在此计划加快完成单元学习进度，学习语法基础，加油！</p><h2 id="x1f4da-建立自己的前端知识体系"><a href="#x1f4da-建立自己的前端知识体系" class="headerlink" title="&#x1f4da; 建立自己的前端知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">&#x1f4da;</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong></p><p>计划尽快完成学习进度，实战前端可视化领域。</p><p>希望本次计算机图形学可以让我更好的理解可视化领域。</p><h5 id="2-脱离业务"><a href="#2-脱离业务" class="headerlink" title="2. 脱离业务"></a>2. 脱离业务</h5><h6 id="1-「低代码执行器」开发"><a href="#1-「低代码执行器」开发" class="headerlink" title="1. 「低代码执行器」开发"></a>1. 「低代码执行器」开发</h6><blockquote><p>2020年11月 将「解释器」修改为「低代码执行器」，因为原名称含义并不贴切，关于「解释器」可以参阅维基百科解释。新名称则更符合更为贴切。</p></blockquote><p>负责内部可视化平台「星图」编辑器（节点编程） JavaScript 「低代码执行器」开发工作，「低代码执行器」实现对流程节点的触发、传递，执行、抛出功能，同时配套支持节点快照、错误捕获功能。</p><p>整个「低代码执行器」内部基于 RxJS 的 Subject 主题订阅实现，利用其多播的特性实现“一点触发、多点抛出”的传播特性，即一个观察者实例可以被多个观察者进行订阅。</p><p>「低代码执行器」内的执行即执行用户输入的低代码内容，利用节点池进行数据的传递并在规定条件下抛出。</p><p>起初编写代码使用 <code>switch</code> 进行编写，但是随着节点类型的增加，代码随之变得逐渐臃肿，逻辑复杂可读性差，为了避免更深化此问题，在紧迫的开发时间内挤出时间对「低代码执行器」进行彻底重构。</p><p>重构采用依赖<strong>注入</strong>的设计模式，将各个节点的环节逻辑进行抽象、剥离。</p><p>重构后，很明显可以看到「低代码执行器」的核心代码逻辑更为清晰，也让核心变得更为稳定；节点自身的逻辑也与外界互不干扰，并且也很容易支持新的节点注入。</p><p><em>设计模式的重要性就此体现了！</em></p><p>并且使用依赖注入的设计模式更好的支持了单元测试，让「低代码执行器」核心逻辑和节点更易测试、和排错。</p><p>关于节点快照和错误捕获功能，快照则基于队列实现，配合边（节点连接边）控制，在需要抛出时展示整个节点流向及快照，错误捕获也一同抛出。</p><h6 id="2-栈存取工具库开发"><a href="#2-栈存取工具库开发" class="headerlink" title="2. 栈存取工具库开发"></a>2. 栈存取工具库开发</h6><p>同时负责基于 IndexedDB 实现的栈存取工具库的开发工作，很不错的是目前公司的 TypeScript 仓库也非常多。考虑到发包的情况，直接就上 TypeScript 了，即实现一个完整的栈功能（回退方案支持 <code>localStorage</code> ），配套编写单元测试（测试覆盖率 100% ）。</p><blockquote><p>后续：和兄弟部门同事讨论关于 IndexedDB 存取性能问题、存储空间问题。可能会调整工具库的内部逻辑，不过需求暂时待审核。</p></blockquote><h5 id="3-文章推荐"><a href="#3-文章推荐" class="headerlink" title="3. 文章推荐"></a>3. 文章推荐</h5><ul><li><a href="https://mp.weixin.qq.com/s/42r-HqT8UOvQV-mLgkYHpA">【第2028期】What I’m thinking about: JS疲劳、招聘</a></li><li><a href="https://mp.weixin.qq.com/s/eQjKG6wrvt2zy-O5mF6F1g">如何写技术文章</a></li><li><a href="https://mp.weixin.qq.com/s/FHbHhjtfJOc2NPfge6xw2Q">【第2033期】核心稳定、易扩展——开放关闭原则（The Open-Closed Principle）</a><blockquote><p>摘抄：要知道，世界上没有一劳永逸的技术方案，也没有一成不变的业务可以取得成功。理想状态下，业务应当驱使着技术的进步，同时技术的进步也促使业务有更多的可能，二者应当呈现为一种相辅相成并充满活力的状态。</p></blockquote></li><li><a href="https://mp.weixin.qq.com/s/8-SMIe-9wdwsmxYwavhDdw">【第2042期】程序员如何把控自己的职业</a></li></ul><h2 id="x1f3c7-锻炼身体"><a href="#x1f3c7-锻炼身体" class="headerlink" title="&#x1f3c7; 锻炼身体"></a><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">&#x1f3c7;</span> 锻炼身体</h2><p>没坚持住……感觉整个 8 月都没锻炼……没法搞没法搞啊。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
     
     
     
