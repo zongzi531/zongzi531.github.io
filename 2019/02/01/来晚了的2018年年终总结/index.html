@@ -24,7 +24,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?17209400">
+<link rel="stylesheet" href="/css/journal.css?29493170">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -383,7 +383,7 @@
 <h2 id="初探单元测试"><a href="#初探单元测试" class="headerlink" title="初探单元测试"></a>初探单元测试</h2><p>受《深入浅出Node.js》影响，开始尝试对 Vue 和 React 版本的 To Do List 项目编写单元测试。在编写过程中感受比较明显的是 React 编写比 Vue 轻松许多，这反应着他们背后的社区对于单元测试方面的支持是否活跃，在实践过程中体验了 Travis CI ，也是感触颇深，感谢自动化集成工具为开发者带来的便利，这让我想到公司内部很多项目其实也可以借助这些工具去完成一些事情，比如系统发布，当然我在接触 Travis CI 的目的起初是为了实现 Coveralls 测试覆盖率的问题，当然最后我在 GitHub 上并没有实践成功。</p>
 <p>这次之后，我认为这些都是在 NPM 上发布包必须要经历的历程，有必要熟悉这整一套现代化前端流程，并且加以实践。</p>
 <p>再来说说单元测试的必要性？每个项目都一定需要单元测试吗？我认为并不是，对于敏捷开发或者小项目来说，我认为单元测试是不必要的，反而对于公司内部组件库，公用库，或者 Node.js 项目来说，单元测试是必要的，代码的健全影响着使用者，就像 NPM 上的库一样。同时，在多人维护时，单元测试代码也能起到保护原有业务逻辑的作用，使得代码并不会被改“偏”。但是项目最终是否需要编写单元测试，需要根据项目需求来决定。</p>
-<h2 id="Recycle-List-实践"><a href="#Recycle-List-实践" class="headerlink" title="Recycle List 实践"></a>Recycle List 实践</h2><p>在之前的 VueConf 中，有提到关于 Recycle List 的感念，回来之后秉承造轮子的理念，尝试自己写一个，在写完后发现网上其实有另一种说法叫做虚拟列表，并且社区已经有很多实现。这次编写，直接使用 TypeScript 来完成编写，当然这只是一个小轮子，很多方面都未考虑到，仅实现了基本功能。开发思路其实很简单，首先我得知道这个列表的高度，那么我默认则是获取这个组件父级的高度的 100% 这种情况，当遇到父级中包含其他兄弟节点时，我会重新计算其（这个组件的）高度，同时这个组件是有滚动功能的，那么这个组件有且仅有一个子节点，就是虚拟节点，他是一个真正有高度的节点，他的高度受他里面需要滚动的内容进行设置，一开始出于开发方便，我把内容写死的，通过计算来设置这个虚拟节点的高度，并且使用 <code>transform</code> 来实现虚拟节点内的节点位置跟踪，那么这个简易的虚拟列表也就实现了。再是我是想把 <code>children</code> （虚拟节点内的节点）实现自定义化，但是我始终都没办法在开始渲染 DOM 的时候知道 <code>children</code> 的高度，因为那个时候太晚了。在参考社区后，我选用开发者可以配置一个函数来求得子节点的高度，因为这涉及到我需要计算出虚拟节点总高度，最终实现了以上所述功能。具体源码可以参考 GitHub 仓库 <a target="_blank" rel="noopener" href="https://github.com/zongzi531/react-recycle-list">zongzi531/react-recycle-list</a>。</p>
+<h2 id="Recycle-List-实践"><a href="#Recycle-List-实践" class="headerlink" title="Recycle List 实践"></a>Recycle List 实践</h2><p>在之前的 VueConf 中，有提到关于 Recycle List 的感念，回来之后秉承造轮子的理念，尝试自己写一个，在写完后发现网上其实有另一种说法叫做虚拟列表，并且社区已经有很多实现。这次编写，直接使用 TypeScript 来完成编写，当然这只是一个小轮子，很多方面都未考虑到，仅实现了基本功能。开发思路其实很简单，首先我得知道这个列表的高度，那么我默认则是获取这个组件父级的高度的 100% 这种情况，当遇到父级中包含其他兄弟节点时，我会重新计算其（这个组件的）高度，同时这个组件是有滚动功能的，那么这个组件有且仅有一个子节点，就是虚拟节点，他是一个真正有高度的节点，他的高度受他里面需要滚动的内容进行设置，一开始出于开发方便，我把内容写死的，通过计算来设置这个虚拟节点的高度，并且使用 <code>transform</code> 来实现虚拟节点内的节点位置跟踪，那么这个简易的虚拟列表也就实现了。再是我是想把 <code>children</code> （虚拟节点内的节点）实现自定义化，但是我始终都没办法在开始渲染 DOM 的时候知道 <code>children</code> 的高度，因为那个时候太晚了。在参考社区后，我选用开发者可以配置一个函数来求得子节点的高度，因为这涉及到我需要计算出虚拟节点总高度，最终实现了以上所述功能。具体源码可以参考 GitHub 仓库 <a target="_blank" rel="noopener" href="https://github.com/zongzi531/react-recycle-list">zongzi531&#x2F;react-recycle-list</a>。</p>
 <h2 id="升级-Webpack-之路"><a href="#升级-Webpack-之路" class="headerlink" title="升级 Webpack 之路"></a>升级 Webpack 之路</h2><p>一月份接手维护 2 个 React 项目（PC端、移动端），空闲之余试着去升级 Webpack ，借助 <code>create-react-app</code> 之势，替换 2 个项目除业务逻辑（<code>/src</code>）部分，<code>&quot;react&quot;</code> 目前版本 <code>&quot;16.7.0&quot;</code> ，<code>&quot;webpack&quot;</code> 目前版本 <code>&quot;4.19.1&quot;</code> 。</p>
 <p>先来说说 PC 端的升级之路，由于 PC 端是前后端不分离模式，要配合后端模板渲染，所以执行 <code>eject</code> 。一如既往，上手先配置 <code>alias</code> ，配置 antd 按需加载，配置 <code>webpackDevServer.config.js</code> 中的 <code>proxy</code> 来代理使用后端同事的服务，当然也可以代理至本地，只不过代理至本地的话，我每次都得自己跑后端服务，运行 <code>mvn tomcat7:run</code> 或者 <code>mvn spring-boot:run</code> ，很麻烦而且联调的时候若后端代码调整我需要拉取新的代码再重新跑，所以最后选择开发时代理后端同事的服务。</p>
 <p>在配置好这些内容以后，项目跑起来，缺什么装什么、有什么警告按照提示消除、有什么报错解决什么报错。印象比较深的就是 React 16.3 生命周期中 <code>UNSAFE_</code> 的几个钩子的调整，具体可以阅读 <a target="_blank" rel="noopener" href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html">Update on Async Rendering</a>。很快开发环境已经完成升级，但是因为是前后端不分离项目，所以需要打包至后端对应的目录下，配合后端模板引擎，在配置 Webpack 时，判断 <code>isEnvProduction</code> 情况下，关闭 <code>inject</code> 属性来编写自定义 <code>index.html</code> 。这和之前 Webpack 3.x 产出的 <code>htmlWebpackPlugin</code> 的对象有所出入，具体你可以自己打印这个对象来看需要如何输出，我是这样输出的：</p>
@@ -511,7 +511,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 └─util  <span class="token comment" spellcheck="true"># 工具函数</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>开发过程中，会发现将视图和业务分的过于开，以至于维护成本提高。但是 Immutable.js 却给这个项目提供了很多便利。这与我之前写的项目结构还是有很大区别的，毕竟我只分 components （公共组件）与 views （视图）罢了。</p>
-<h2 id="体验-ECharts-地图穿梭"><a href="#体验-ECharts-地图穿梭" class="headerlink" title="体验 ECharts 地图穿梭"></a>体验 ECharts 地图穿梭</h2><p>因为我司业务本身就是全国性质的，考虑到后期数据需要覆盖到全国范围，一月初接到需求，需要拓展此功能，编写了一个地图穿梭功能，可以从中国地图钻入省份或直辖市，再进行回钻的功能，那么话不多说，下面直接展示核心代码：（地区资源直接可以从 GitHub 上下载 <a target="_blank" rel="noopener" href="https://github.com/apache/incubator-echarts/tree/master/map/json">apache/incubator-echarts</a>）</p>
+<h2 id="体验-ECharts-地图穿梭"><a href="#体验-ECharts-地图穿梭" class="headerlink" title="体验 ECharts 地图穿梭"></a>体验 ECharts 地图穿梭</h2><p>因为我司业务本身就是全国性质的，考虑到后期数据需要覆盖到全国范围，一月初接到需求，需要拓展此功能，编写了一个地图穿梭功能，可以从中国地图钻入省份或直辖市，再进行回钻的功能，那么话不多说，下面直接展示核心代码：（地区资源直接可以从 GitHub 上下载 <a target="_blank" rel="noopener" href="https://github.com/apache/incubator-echarts/tree/master/map/json">apache&#x2F;incubator-echarts</a>）</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">FlexGeoChinaMap</span> <span class="token punctuation">{</span>
   <span class="token function">constructor</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 绑定 echarts 实例</span>
@@ -698,7 +698,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?67365938"></script>
+<script src="/js/journal.js?97911430"></script>
 
 
 <script>

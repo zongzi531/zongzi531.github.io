@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?30586184">
+<link rel="stylesheet" href="/css/journal.css?49962793">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -562,12 +562,12 @@ router<span class="token punctuation">.</span><span class="token function">befor
 </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="Webpack-轻度调整"><a href="#Webpack-轻度调整" class="headerlink" title="Webpack 轻度调整"></a>Webpack 轻度调整</h2><p>vue-cli已经集成Webpack，执行<code>npm run build</code>后，想实现直接运行index.html即可运行页面。修改以下参数即可实现：</p>
-<p>build/utils.js</p>
+<p>build&#x2F;utils.js</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript">ExtractTextPlugin<span class="token punctuation">.</span><span class="token function">extract</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   publicPath<span class="token punctuation">:</span> <span class="token string">'../../'</span>  <span class="token comment" spellcheck="true">//  解决CSS样式导出路径问题</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>config/index.js</p>
+<p>config&#x2F;index.js</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript">build<span class="token punctuation">:</span> <span class="token punctuation">{</span>
   assetsPublicPath<span class="token punctuation">:</span> <span class="token string">'./'</span>  <span class="token comment" spellcheck="true">//  解决JS、CSS路径问题</span>
 <span class="token punctuation">}</span>
@@ -644,7 +644,7 @@ router<span class="token punctuation">.</span><span class="token function">befor
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?46805104"></script>
+<script src="/js/journal.js?23340740"></script>
 
 
 <script>

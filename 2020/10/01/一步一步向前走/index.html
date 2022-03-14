@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?48440712">
+<link rel="stylesheet" href="/css/journal.css?32975397">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -364,7 +364,7 @@
 <p>在代码迁移过程中，你会发现旧代码中 Lint 规则很多都是过时且不好的，虽然很多可以使用 <code>--fix</code> 进行修复，但是还是有很多代码需要手动修复，也就从这一点也发现了很多的不明显的 BUG 和多余的文件。</p>
 <p>在脚手架迁移的过程中，学习 Webpack chain 的使用方式，在同事的帮助下节省了不少学习成本，从一开始的抵触，到慢慢的接受，再到现在的习惯，回顾起来其实还是很清晰方便的。真香！</p>
 <p>当然了，由于一些依赖的升级，旧依赖没必要在新的环境中使用，也遇到了一些问题。比如 PostCSS 的使用问题，此次我才知道原来 <code>plugin</code> 是有顺序的，是线性执行的，也移除了一些旧的插件，使用 precss 来代替，非常的方便。</p>
-<p>在迁移完脚手架和 TypeScript 后，联系后端进行 CI/CD 的 TS 分支自动化部署测试，也相当的顺利，对 CI/CD 也有了更多的学习和认识，对 Docker 也有了些兴趣～</p>
+<p>在迁移完脚手架和 TypeScript 后，联系后端进行 CI&#x2F;CD 的 TS 分支自动化部署测试，也相当的顺利，对 CI&#x2F;CD 也有了更多的学习和认识，对 Docker 也有了些兴趣～</p>
 <p>在优化平台运行时逻辑时，需要充分为单元测试做考虑，比如我做了如下的优化手段，抽离挂载在 <code>Vue.prototype</code> 上的公共方法，将使用模块化的形式使用，这样的优点是更适合做单元测试，让函数更纯粹。</p>
 <p>对原有的 <code>mixins</code> 进行抽离，放弃使用这个危险的功能。由于目前还暂时不敢使用 Vue 3.0 版本，基于 Vue 2.0 我决定使用 <code>@vue/composition-api</code> 来代替 <code>mixins</code> ，这样的做的优点是不仅可以抽离出公共的逻辑，并且利于做单元测试，让逻辑更清晰。并且提前使用 <code>@vue/composition-api</code> 会让未来在迁移到 Vue 3.0 的过程变得轻松。</p>
 <p>当然还对 Vuex 做了类型约束，约束方式则参考<a target="_blank" rel="noopener" href="https://dev.to/3vilarthas/vuex-typescript-m4j">「 Vuex + TypeScript 」</a>，一个很不错的类型约束写法，由于目前使用的 Vuex 还是 3.x 版本，暂时未升级到 4.0 版本以上，所以在 Vue 文件中使用类型约束暂时还不行，需要后续再做尝试了……</p>
@@ -451,7 +451,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?75024249"></script>
+<script src="/js/journal.js?42069557"></script>
 
 
 <script>
