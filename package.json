@@ -13,7 +13,7 @@
     "build": "yarn c && yarn g"
   },
   "dependencies": {
-    "hexo": "6.0.0",
+    "hexo": "6.1.0",
     "hexo-deployer-git": "3.0.0",
     "hexo-filter-emoji": "2.2.2",
     "hexo-filter-mathjax": "0.8.0",
