@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-03-01T10:05:13.000Z</updated>
+  <updated>2022-04-01T10:05:50.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>初探 Rust</title>
+    <link href="https://zongzi531.com/2022/04/01/%E5%88%9D%E6%8E%A2rust/"/>
+    <id>https://zongzi531.com/2022/04/01/%E5%88%9D%E6%8E%A2rust/</id>
+    <published>2022-04-01T10:05:50.000Z</published>
+    <updated>2022-04-01T10:05:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>羡慕老婆先去三亚旅游～而我还在搬砖…</p><p>Rust 依靠着每天一些碎片时间来学习着，等着把基础知识学完成后，开始实践起来，争取写一些工具出来使用。</p><h2 id="低代码基础建设"><a href="#低代码基础建设" class="headerlink" title="低代码基础建设"></a>低代码基础建设</h2><p><strong>我们团队目前有 HC, 需要招从事低代码基础建设的开发人员…</strong></p><p>这个月主要完成的工作是基于团队内部的低代码协议，打通团队内两款低代码平台和工具的资产，比如组件、配置项等。</p><p>这也是当初编写协议的初衷，为了在早期建立起低代码相关的规范。实现自己的低代码引擎！</p><p>提供了一个运行时适配器工具，能够实现类似于微前端形式的不同 UI 框架的渲染 SDK ，同时为内部两款低代码平台和工具提供了 <code>preset</code> 适配。</p><p>再一个就是既然有运行时，那么就必然存在编译时的工具，当然了，编译适配器这么叫肯定不合理，那么我也找了开源社区中并没有像我们这样的可怕需求，就是使用 Vue3 开发，还得兼容 IE 11 。</p><p>对于这个需求来说，我基于 <code>unplugin</code> 实现了一款编译插件，可以将 Vue3 的 SFC 或者 TSX 文件编译成 Vue2 的编译结果，可以使用在 Vue2 环境下的降级兼容。参考了 <code>vue-loader</code> 、 <code>@vue/compiler-sfc</code> 、 <code>vue-template-compiler</code> 、 <code>vue-template-es2015-compiler</code> 、 <code>@vue/babel-preset-app</code> 等工具来实现。截止当前插件已实现基础的降级兼容能力，还有不少边界问题没有处理。</p><p>以 SFC 为例，对其内容进行解析，解析结果主要产出 <code>template</code> 、 <code>script</code> 、 <code>styles</code> 。</p><p><code>template</code> 会带有 <code>with(this) &#123; ...</code> 将其包装后编译成 <code>es2015</code> 后使用， <code>script</code> 则解析语言类型，若是 Typescript 则进入 Babel 处理后更新， <code>styles</code> 则会遍历处理，当然若语言是 <code>postcss</code> 则进行再处理，等等其他补丁操作。</p><p>最后生成 Vue2 编译结果以达成降级兼容。</p><p>那么今年也将主要发力低代码基础建设了，加油！</p><h2 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h2><p>绩效的调整，对未来的工作来说，即是机遇也是挑战。可以接触到更多的管理模式，对自己来说也是增加压力，达成目标，同样加油！</p><h2 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h2><p>这方面这个月主要集中在 Rust 书籍上的一些修正，既然认真阅读了，那也顺手帮忙修正了一些问题。</p><h2 id="内部建设"><a href="#内部建设" class="headerlink" title="内部建设"></a>内部建设</h2><p>其实非常喜欢开源这套协同工作流程，异步的方式去完成各自的目标。也是参考开源的这套协同流程，现在在内部的 Issues 和 PR 上面也有了不错的的进展。在内部 Wiki 上规范了开设 Issues 和 PR 的模板和要求，大家也能按照要求在上面反映和修复问题。内部组件库也进入了一个更好的迭代更新模式～</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：6.3.5 工作空间 Workspace (跳过 4 Rust 异步编程)</li></ul>]]></content>
+    
+    
+    <summary type="html">羡慕老婆先去三亚旅游～而我还在搬砖...</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>想旅游</title>
@@ -405,27 +426,6 @@
     
     
     <summary type="html">工作变得越来越忙，也越来越充实。生活也是，为了美好的未来而努力！</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>入秋的感受</title>
-    <link href="https://zongzi531.com/2020/11/01/%E5%85%A5%E7%A7%8B%E7%9A%84%E6%84%9F%E5%8F%97/"/>
-    <id>https://zongzi531.com/2020/11/01/%E5%85%A5%E7%A7%8B%E7%9A%84%E6%84%9F%E5%8F%97/</id>
-    <published>2020-11-01T10:19:23.000Z</published>
-    <updated>2020-11-01T10:19:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>感觉非常不喜欢这个季节，原因是因为昼夜温差太大，容易感冒（年纪大了，只能多穿些）。<br>对于早出晚归的我来说，出门必定得多穿些，然后到了中午下午就开始热了。<br>服装上面来说，会比较讨厌吧。<br>或许是，杭州的这个季节……</p></blockquote><h2 id="📔-日本語学習計画"><a href="#📔-日本語学習計画" class="headerlink" title="📔 日本語学習計画"></a><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">📔</span> 日本語学習計画</h2><p>截至目前《新版 中日交流标准日本语 初级上、下》完成第 10 单元学习。就现阶段存在的问题，词汇量远远不够，并且业余时间变少了。</p><h2 id="📚-建立自己的前端知识体系"><a href="#📚-建立自己的前端知识体系" class="headerlink" title="📚 建立自己的前端知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的前端知识体系</h2><h5 id="1-计算机图形学"><a href="#1-计算机图形学" class="headerlink" title="1. 计算机图形学"></a>1. 计算机图形学</h5><p>截止目前学习进度至：<strong>「材质与外观」</strong> <strong>学习进度停滞</strong></p><p>简单尝试了 <code>Three.js</code> 的几何。</p><h5 id="2-可视化团队"><a href="#2-可视化团队" class="headerlink" title="2. 可视化团队"></a>2. 可视化团队</h5><p>月底的月会上，我可算才知道我目前的岗位定位，属于技术预研团队，目前支持可视化团队工作。</p><p>接着上个月剩余的工作，完成核心单元测试覆盖率达 70% 以上，编写「平台专属调度器」，和一些类型订正修复。</p><p>回顾重构感受，重构过程确实痛苦，但是在订正类型的过程中会发现，你对平台的数据结构会变得越来越熟悉，毕竟每一个 <code>interface</code> 都是和同事一起整理出来的。</p><p>对不熟悉的函数方法，通过类型的帮助，也渐渐知道他们存在的目的以及用途。可以说 TypeScript 是越写越上瘾的，虽然在 Vue 2.x 环境下的开发体验并不是那么好，但是我已经尽可能的在为切换到 Vue 3 在做准备，比如抽离更多的方法函数、使用 <code>@vue/composition-api</code> 、等等。</p><p>关于「平台专属调度器」的开发工作，目前因为整个实现逻辑是我自己设计的，功能难免有些简单和片面，当前实现功能如下：</p><ol><li>以可视化平台组件为工作单元，实现同步挂载渲染和异步挂载渲染。</li><li>在同步挂载渲染模式下实现分组同步挂载功能。</li><li>基于目前「平台专属调度器」实现逻辑添加了一些基础的防御性代码。</li><li>支持工作单元优先级分配调整功能。</li></ol><p>目前「平台专属调度器」的功能还是属于试验性阶段，后续会为配合平台会做适当调整。</p><blockquote><p>补充一下关于「低代码执行器」 使用到的设计模式，观察者模式，依赖注入模式，模板方法模式。</p></blockquote><h5 id="3-技术分享"><a href="#3-技术分享" class="headerlink" title="3. 技术分享"></a>3. 技术分享</h5><p>在一次分享预演的会议上，同事们纷纷发表自己的意见，让我第一次感受到要想把分享讲好还是一门很重要的学问。</p><p>在制作分享前思考，分享时的听众是哪些群体，在制作时则要相应的转换表达方式，比如不能把对开发讲的技术内容生硬的讲给销售听等等。</p><p>建立在这个基础上后，可以罗列整个分享的大纲内容，围绕着大纲去展开更多的内容。</p><p>再一个是比如你在讲一些宣传类型的分享时，内容、用词应当积极向上，避免使用一些复面的词语，可以参考苹果官网的用词，真的特别装逼，这很苹果。</p><p>等等，我相信还有很多分享时的技巧，但是我现在还没有领悟到。</p><p>最后在月底，他组的领导邀请我做有关代码质量&#x2F;规范相关主题的技术分享，这算是我第二次做技术分享的机会，我毫不犹豫的接受了此次挑战，我希望可以把我学到的内容运用进去，敬请期待吧！</p><h2 id="🏇-锻炼身体"><a href="#🏇-锻炼身体" class="headerlink" title="🏇 锻炼身体"></a><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</h2><p>又开始松懈，惰性气质散发的淋漓精致啊！想……如何才能持续坚持，毕竟贵在坚持，好难！</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
     
     
     
