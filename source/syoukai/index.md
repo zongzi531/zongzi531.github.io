@@ -1,5 +1,6 @@
 ---
 title: 紹介
+featured_image: https://github.com/zongzi531/zongzi531/blob/master/banner.png?raw=true
 ---
 
 大家好，我是粽子。是一个想学**日语**的前端菜鸟，想记录一些学习路上的点滴，希望可以在巩固自己的同时帮助到需要帮助的同学。
