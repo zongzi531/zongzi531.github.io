@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-04-01T10:05:50.000Z</updated>
+  <updated>2022-05-01T08:38:10.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>核酸常态化</title>
+    <link href="https://zongzi531.com/2022/05/01/%E6%A0%B8%E9%85%B8%E5%B8%B8%E6%80%81%E5%8C%96/"/>
+    <id>https://zongzi531.com/2022/05/01/%E6%A0%B8%E9%85%B8%E5%B8%B8%E6%80%81%E5%8C%96/</id>
+    <published>2022-05-01T08:38:10.000Z</published>
+    <updated>2022-05-01T08:38:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>杭州市政府发布核酸常态化的通知，看出了杭州政府的抗疫决心，我们能做的就是理解和配合，加油杭州！</p><h2 id="PBC"><a href="#PBC" class="headerlink" title="PBC"></a>PBC</h2><p>Q2 开始正式执行 PBC 绩效考核，全称：Personal Business Commitment（个人绩效承诺）。整个 Q2 的工作内容也是围绕着低代码平台迭代、浏览器性能优化等工作进行开展，整个团队也按照一样的目标，分工去一起达成整个团队的 PBC 绩效考核。</p><h2 id="低代码基础建设"><a href="#低代码基础建设" class="headerlink" title="低代码基础建设"></a>低代码基础建设</h2><p>低代码平台也进入正式迭代阶段，除了前端侧业务级别的代码修改，还接触了 Node.js 服务端的业务代码修改。比如学习 <code>typeorm</code>, 编写 migration 文件等业务级别代码。</p><p>同时维护低代码平台配套物料开发 CLI 脚手架，包括能力扩展和缺陷修复。</p><p>以及内部 Webpack 插件能力扩展（布局嵌套功能等）。</p><p>说来说去，其实大部分都是业务级别的工作内容，接触到比较额外的内容就是写 Node.js 在实战中了。</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：10. Rust最佳实践</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：4.1 数值类型</li></ul><h2 id="短期规划"><a href="#短期规划" class="headerlink" title="短期规划"></a>短期规划</h2><p>发现内容有点少，那么来水一点短期规划吧。</p><p>从低代码角度，更多的是提升自己对业务的抽象能力，并且把产品落地落下来，是当前首要任务。</p><p>其二是学习 Rust ，其实已经发现学习了 Rust 后对 JavaScript 的看法也有些转变，也印证了我之前对 ECMA 规范的想法，如果想改进 ECMA ，必须从其他语言入手，寻找 JavaScript 缺少的地方等等。学习 Rust 对我自身的能力也是一种提升。</p><p>预计 5月，进入实践阶段。</p><p>5月还计划做的一件事情就是内部技术分享，本来计划着分享一篇《实现自己的 JavaScript 宏》的技术内容，也是受 Rust 的启发，想利用 AST 去实现一些有意思的内容，但是查阅了资料发现，还是需要去学习一些内容，但是我还是想把主题暂定在这个上面去做一些挑战和学习。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>初探 Rust</title>
@@ -412,27 +433,6 @@
     
     
     <category term="CSS" scheme="https://zongzi531.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>越来越忙，越来越充实</title>
-    <link href="https://zongzi531.com/2020/12/01/%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%BF%99%EF%BC%8C%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%85%85%E5%AE%9E/"/>
-    <id>https://zongzi531.com/2020/12/01/%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%BF%99%EF%BC%8C%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%85%85%E5%AE%9E/</id>
-    <published>2020-12-01T10:18:55.000Z</published>
-    <updated>2020-12-01T10:18:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>工作变得越来越忙，也越来越充实。生活也是，为了美好的未来而努力！<br>杭州入冬了，天冷咯～</p></blockquote><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：《新版 中日交流标准日本语 初级上、下》完成第 11 单元学习 <em>计划从明年开始，学习语法及词汇</em></li><li><strong>「计算机图形学」</strong>：材质与外观 <em>停滞</em></li><li><strong>「锻炼身体」</strong>：适当运动，基本保持在每周1～2次</li></ul><h2 id="📚-建立自己的前端知识体系"><a href="#📚-建立自己的前端知识体系" class="headerlink" title="📚 建立自己的前端知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的前端知识体系</h2><h5 id="1-可视化团队"><a href="#1-可视化团队" class="headerlink" title="1. 可视化团队"></a>1. 可视化团队</h5><p>于 11 月中旬正式负责物联网相关项目，可视化团队暂时告一段落，期间主要负责 V1.3.0 和 V1.4.0 相关的开发工作：</p><ol><li>低代码执行器，附日志调试</li><li>TypeScript 重构</li><li>平台专属调度器</li><li>基于 Hooks 感念的复用逻辑提炼</li><li>单元测试</li><li>司内 TypeScript 生态建设</li><li>组织发起 TypeScript Lint 规范讨论（<strong>后续计划落地司内 TypeScript 代码规范</strong>）</li><li>等等业务导向内容，及工具包开发及发布</li></ol><h5 id="2-体系拓展"><a href="#2-体系拓展" class="headerlink" title="2. 体系拓展"></a>2. 体系拓展</h5><ol><li>利用业余时间学习 CSS Grid 概念，并在物联网项目应用</li><li>学习有关 DevOps 概念，了解 K8s 和 Docker 的关系</li></ol><blockquote><p>结合自己 CSS 薄弱的问题，渐进式学习 CSS 知识并加以应用实践，同时学习软件开发行业整体的流程，深入敏捷开发，并借助工具加速，跳离前端岗位，延伸至整个行业，甚至企业产品的生命周期中的各个环节</p></blockquote><h5 id="3-技术分享"><a href="#3-技术分享" class="headerlink" title="3. 技术分享"></a>3. 技术分享</h5><p><a href="https://github.com/zongzi531/daily-learning/blob/master/share/%E8%BF%BD%E6%B1%82%E4%BC%98%E9%9B%85%E7%9A%84%E4%BB%A3%E7%A0%81.pdf">《追求优雅的代码》</a></p><p>这次分享较上次分享做了更多的准备，当然分享的效果也比之前要好了。只不过还有改进的地方，比如：卡顿或者停顿的时候，不要说类似于“我想想”的话，可以自然的喝口水这样。分享的素材和例子在平时也需要注意积累，因为短时间内可能不一定找到到合适的例子。还有就是需要注意分享内容不要太大，最好聚焦某一块内容进行分享，提供更多的干活之类的，不过这个还是要考虑到听众的群里再做定论，不过这个是一个很好的出发点。</p><p>计划未来每年至少做2次分享，锻炼和提升。</p><h5 id="4-文章推荐"><a href="#4-文章推荐" class="headerlink" title="4. 文章推荐"></a>4. 文章推荐</h5><ul><li><a href="https://mp.weixin.qq.com/s/YzbAPM0dxQTmkiEtrjhPNw">前端智能化 2020 年中总结和反思</a></li><li><a href="https://mp.weixin.qq.com/s/JoZRvjvyH1s-CyZU3olYww">【第2116期】Vue 3.0 Ref-sugar 提案真的是自寻死路吗？</a></li><li><a href="https://mp.weixin.qq.com/s/3Kkc_91U8bpRWQB7ZK342Q">【第2118期】前端安全生产在ICBU的探索与落地</a></li><li><a href="https://mp.weixin.qq.com/s/lI_Q9TClzoBUgYpaWDxSUw">【第2119期】浏览器端录制技术的探索与实践</a></li><li><a href="https://mp.weixin.qq.com/s/WJE7KgiOpPJMCpdcJdy30A">【第2121期】斗鱼关注人数爬取 ── 字体反爬的攻与防</a></li><li><a href="https://book.douban.com/subject/30243169/">《即兴演讲》</a></li><li><a href="https://mp.weixin.qq.com/s/ifLP36rFhYJsU2RCAi7OZQ">React 是如何工作的</a></li><li><a href="https://www.zhihu.com/question/405268183/answer/1328519761">如何看待React源码中调度优先级使用lane取代expirationTime？</a></li><li><a href="https://juejin.cn/post/6860275004597239815">React17新特性：启发式更新算法</a></li><li><a href="https://mp.weixin.qq.com/s/nJZk-0WtEW6C8mTeJCSUzQ">【第2133期】如何搭建一套 “无痕埋点” 体系？</a></li></ul>]]></content>
-    
-    
-    <summary type="html">工作变得越来越忙，也越来越充实。生活也是，为了美好的未来而努力！</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
     
   </entry>
   
