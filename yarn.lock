@@ -504,10 +504,10 @@ command-exists@^1.2.8:
   resolved "https://registry.yarnpkg.com/command-exists/-/command-exists-1.2.8.tgz#715acefdd1223b9c9b37110a149c6392c2852291"
   integrity sha512-PM54PkseWbiiD/mMsbvW351/u+dafwTJ0ye2qB60G1aGQP9j3xK2gmMDc+R34L3nDtx4qMCitXT75mkbkGJDLw==
 
-commander@>=7.0.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
-  integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
+commander@9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-9.2.0.tgz#6e21014b2ed90d8b7c9647230d8b7a94a4a419a9"
+  integrity sha512-e2i4wANQiSXgnrBlIatyHtP1odfUp0BbV5Y5nEGbxtIrStkEOAAzCUirvLBNXHLr7kwLvJl6V+4V3XV9x7Wd9w==
 
 commander@^5.1.0:
   version "5.1.0"
@@ -1260,12 +1260,12 @@ hexo-filter-emoji@2.2.2:
   dependencies:
     lodash "4.17.21"
 
-hexo-filter-mathjax@0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/hexo-filter-mathjax/-/hexo-filter-mathjax-0.8.0.tgz#6f60e91dcc3ecb55bf3a7d1d746959d6a4940b0b"
-  integrity sha512-mYghPfGtIyVuuFZW8BIPmPY/eUSKpuflflKLNhPMe/t0ZdInBPhbErXA8XDbfV6VIjIFqQ77HjlHQ4F7/S9EwQ==
+hexo-filter-mathjax@0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/hexo-filter-mathjax/-/hexo-filter-mathjax-0.8.1.tgz#4f9ca824b08c944cc7de0505997a4eb91d936d94"
+  integrity sha512-r2yJ0kck/RUeZsQk4Ilmx6CDTjsGK0vAjYG86A266Y2f3I2z2qLEWZTc8voNgJar85ca3JF2+2TXs3j1asewTw==
   dependencies:
-    mathjax-full "3.2.0"
+    mathjax-full "3.2.1"
 
 hexo-front-matter@^3.0.0:
   version "3.0.0"
@@ -1974,15 +1974,15 @@ math-random@^1.0.1:
   resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.4.tgz#5dd6943c938548267016d4e34f057583080c514c"
   integrity sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==
 
-mathjax-full@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/mathjax-full/-/mathjax-full-3.2.0.tgz#e53269842a943d4df10502937518991268996c5c"
-  integrity sha512-D2EBNvUG+mJyhn+M1C858k0f2Fc4KxXvbEX2WCMXroV10212JwfYqaBJ336ECBSz5X9L5LRoamxb7AJtg3KaJA==
+mathjax-full@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/mathjax-full/-/mathjax-full-3.2.1.tgz#5ee2f39cde11a74c1e6685fb3568a0b9c7a8a992"
+  integrity sha512-aUz9o16MGZdeiIBwZjAfUBTiJb7LRqzZEl1YOZ8zQMGYIyh1/nxRebxKxjDe9L+xcZCr2OHdzoFBMcd6VnLv9Q==
   dependencies:
     esm "^3.2.25"
     mhchemparser "^4.1.0"
     mj-context-menu "^0.6.1"
-    speech-rule-engine "^3.3.3"
+    speech-rule-engine "^4.0.6"
 
 mhchemparser@^4.1.0:
   version "4.1.1"
@@ -2939,14 +2939,14 @@ source-map@^0.7.3:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
-speech-rule-engine@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/speech-rule-engine/-/speech-rule-engine-3.3.3.tgz#781ed03cbcf3279f94d1d80241025ea954c6d571"
-  integrity sha512-0exWw+0XauLjat+f/aFeo5T8SiDsO1JtwpY3qgJE4cWt+yL/Stl0WP4VNDWdh7lzGkubUD9lWP4J1ASnORXfyQ==
+speech-rule-engine@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/speech-rule-engine/-/speech-rule-engine-4.0.6.tgz#325dfa4528f25f6aa52d44cf7ee158c7fc0c395d"
+  integrity sha512-Hqa4ywf7d3lX2YsnnE8BeEdqFyaTwPSyyVhVGWZlQw4XVh0NCijyVsMZD3I9HsG5JBuDXyRaMVVNZcGJlKbZxA==
   dependencies:
-    commander ">=7.0.0"
-    wicked-good-xpath "^1.3.0"
-    xmldom-sre "^0.1.31"
+    commander "9.2.0"
+    wicked-good-xpath "1.3.0"
+    xmldom-sre "0.1.31"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
@@ -3305,7 +3305,7 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
-wicked-good-xpath@^1.3.0:
+wicked-good-xpath@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/wicked-good-xpath/-/wicked-good-xpath-1.3.0.tgz#81b0e95e8650e49c94b22298fff8686b5553cf6c"
   integrity sha1-gbDpXoZQ5JyUsiKY//hoa1VTz2w=
@@ -3355,7 +3355,7 @@ xmlchars@^2.2.0:
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
-xmldom-sre@^0.1.31:
+xmldom-sre@0.1.31:
   version "0.1.31"
   resolved "https://registry.yarnpkg.com/xmldom-sre/-/xmldom-sre-0.1.31.tgz#10860d5bab2c603144597d04bf2c4980e98067f4"
   integrity sha512-f9s+fUkX04BxQf+7mMWAp5zk61pciie+fFLC9hX9UVvCeJQfNHRHXpeo5MPcR0EUf57PYLdt+ZO4f3Ipk2oZUw==
