@@ -16,7 +16,7 @@
     "hexo": "6.2.0",
     "hexo-deployer-git": "3.0.0",
     "hexo-filter-emoji": "2.2.2",
-    "hexo-filter-mathjax": "0.8.0",
+    "hexo-filter-mathjax": "0.8.1",
     "hexo-generator-archive": "1.0.0",
     "hexo-generator-category": "1.0.0",
     "hexo-generator-category-enhance": "0.1.6",
