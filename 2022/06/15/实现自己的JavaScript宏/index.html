@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>《实现自己的 JavaScript 宏》 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+宏（英语：Macro），是一种批量处理的称谓。
+之所以会想做这次分享一是因为想继续多的操作一些 AST 相...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?80506513">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2022 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper-text-only"
+                 style="background-image: url('')">
+                <div class="post-title">
+                    《实现自己的 JavaScript 宏》
+                    <div class="post-meta">
+                        <time datetime="2022-06-15T12:55:30.000Z" itemprop="datePublished">
+                            2022-06-15 12:55
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Share/'>Share</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/JavaScript/'>JavaScript</a>, 
+                        
+                        <a href='/tags/Babel/'>Babel</a>, 
+                        
+                        <a href='/tags/macro/'>macro</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<p><strong>宏</strong>（英语：Macro），是一种批量处理的称谓。</p>
+<p>之所以会想做这次分享一是因为想继续多的操作一些 AST 相关的知识，二是也是受到学习 Rust 的影响。</p>
+<h2 id="什么是宏"><a href="#什么是宏" class="headerlink" title="什么是宏"></a>什么是宏</h2><p>我觉得百科中这段解释比较合理：</p>
+<blockquote>
+<p>计算机科学里的宏是一种抽象（Abstraction），它根据一系列预定义的规则替换一定的文本模式。解释器或编译器在遇到宏时会自动进行这一模式替换。对于编译语言，宏展开在编译时发生，进行宏展开的工具常被称为宏展开器。宏这一术语也常常被用于许多类似的环境中，它们是源自宏展开的概念，这包括键盘宏和宏语言。绝大多数情况下，“宏”这个词的使用暗示着将小命令或动作转化为一系列指令。</p>
+<p>宏的用途在于自动化频繁使用的序列或者是获得一种更强大的抽象能力。</p>
+</blockquote>
+<p>当然，更多的解释可以前往百科中学习。</p>
+<h2 id="初识宏"><a href="#初识宏" class="headerlink" title="初识宏"></a>初识宏</h2><p>我最早知道宏的时候是在小学，那时候对宏其实产生了很大的恐惧，那时候流行的是宏病毒，以至于在学习 Office 软件时一直以来不敢接触里面的宏功能。</p>
+<blockquote>
+<p>在计算机技术的历史中，宏病毒（英语：Macro virus）是一种使得应用软件的相关应用文档内含有被称为宏的可执行代码的病毒。一个电子表格程序可能允许用户在一个文档中嵌入“宏命令”，使得某种操作得以自动运行；同样的操作也就可以将病毒嵌入电子表格来对用户的使用造成破坏。</p>
+</blockquote>
+<p>那时候的我，看到这些还是会感到惧怕，担心电脑因此中病毒……当然现在的我也不会去特意接触这些。</p>
+<h2 id="为什么-JavaScript-没有宏编程"><a href="#为什么-JavaScript-没有宏编程" class="headerlink" title="为什么 JavaScript 没有宏编程"></a>为什么 JavaScript 没有宏编程</h2><p>学习 JavaScript 至今，你会发现， JavaScript 没有宏编程的概念，我想其实这与 JavaScript 的运行环境有关系，当然 JavaScript 设计之初就没有设计宏的概念。</p>
+<p>我会认为在 JavaScript 中要想实现类似于宏编程的能力就是函数本身，可以自己实现一个具备抽象的函数处理方法，而宏编程则是向上面百科中提到的内容一样，是一种预定义的规则替换模式。</p>
+<h2 id="如何借助-Babel-实现自己的宏"><a href="#如何借助-Babel-实现自己的宏" class="headerlink" title="如何借助 Babel 实现自己的宏"></a>如何借助 Babel 实现自己的宏</h2><p>本文将不会侧重什么是 AST 、如何编写 AST 等知识，我们可以借助 Babel 提供的宏插件来按照要求实现自己的宏能力。</p>
+<p>我们会以 <a target="_blank" rel="noopener" href="https://github.com/kentcdodds/babel-plugin-macros">kentcdodds&#x2F;babel-plugin-macros</a> 提供的教程实现自己的宏。</p>
+<p>我们按照文档要求编写代码如下：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createMacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-plugin-macros'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createMacro</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> references<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// do something</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>并且，我们需要这样去使用：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// example</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> somemacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>
+
+somemacro<span class="token template-string"><span class="token string">`any your want`</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于使用 TypeScript 编写，为了提供更好的类型推导，我们需要在 <code>index.ts</code> 定义我们需要被导出的宏方法，并定义对应的逻辑即可。</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span>
+<span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> define<span class="token punctuation">:</span> <span class="token keyword">Function</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>目前，我设计的是想实现一个属于我自己的声明变量的宏。</p>
+<p>我期望实现的宏代码如下：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>
+
+define<span class="token template-string"><span class="token string">`
+  @a:1;
+  @b:2;
+  @c:'cde';
+  @d:"def";
+  @e:true;
+  @f:false;
+`</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最终经过 Babel 编译后的结果是：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// Compiled</span>
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> c <span class="token operator">=</span> <span class="token string">"cde"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token string">"def"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> e <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> f <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们需要从 <code>references</code> 对象中获取对应的宏名称使用：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createMacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-plugin-macros'</span>
+<span class="token keyword">import</span> transformDefine <span class="token keyword">from</span> <span class="token string">'./transforms/define'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createMacro</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> references<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 这里的 define 即我们期望使用的宏名称</span>
+  <span class="token function">transformDefine</span><span class="token punctuation">(</span>references<span class="token punctuation">.</span>define<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> define<span class="token punctuation">:</span> <span class="token keyword">Function</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接下来辛苦由 <code>transformDefine</code> 函数进行 AST 操作获得我们想要的结果。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，我们了解了什么是宏以及 JavaScript 该如何借助 Babel 实现自己的宏。</p>
+<p>其中的折腾劲十足，明明可以通过抽象一个函数得到的结果，我们非要绕这么大一圈。</p>
+<p>也并不是没有收获，我们收获上面的知识，很开心。</p>
+<p>可以查看 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@zong/js.macro">@zong&#x2F;js.macro</a> 学习 AST 处理操作。</p>
+<p>目前来看，我不仅实现了上面的静态宏使用方法，还实现了：</p>
+<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>
+
+<span class="token keyword">const</span> var1 <span class="token operator">=</span> <span class="token number">2</span>
+
+define<span class="token template-string"><span class="token string">`
+  @va:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;
+  @vb:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>var1<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;
+`</span></span>
+
+<span class="token comment" spellcheck="true">// Compiled</span>
+<span class="token keyword">const</span> var1 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> va <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> vb <span class="token operator">=</span> var1<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然，未来我还考虑加入更多的宏能力来锻炼 AST 处理能力。</p>
+<ol>
+<li>支持 <code>let</code> 声明 (<code>mut@</code>&#x2F;<code>@@</code>) ；</li>
+<li><code>;</code> 结尾为可选项；</li>
+<li>支持没有初始值；</li>
+<li>若没有初始值则必须以 <code>let</code> 进行声明的校验；</li>
+<li>初始值支持变量等其他 JavaScript 使用方式；</li>
+<li>ESLint 插件 —— 上下文声明变量重复检查；</li>
+</ol>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2022/06/15/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%AE%8F/" title="《实现自己的 JavaScript 宏》">https://zongzi531.com/2022/06/15/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%AE%8F/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/06/09/%E5%BD%93%E5%89%8D%E7%AB%AF%E6%8A%8A%E6%89%8B%E4%BC%B8%E5%90%91%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%81%9A%E8%B5%B7%E5%85%A8%E6%A0%88%E6%97%B6/">
+        下一篇<br>《当前端把手伸向后端，做起全栈时》
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2022 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?87914413"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
