@@ -54,7 +54,9 @@ options({
 })
 ```
 
-当然，你仔细观察源码可以发现，其他还可以在 `insert` 函数中获取到 `exported` 这个变量，至于是为什么，相信你去看下 `index.js` 便会明白。我们可以按照我们的需求，声明一下 `d.ts`：
+当然，你仔细观察源码可以发现，其他还可以在 `insert` 函数中获取到 `exported` 这个变量，至于是为什么，相信你去看下 `index.js` 便会明白。
+
+我们可以按照我们的需求，声明一下 `d.ts`：
 
 ```ts
 declare module '*.css?lazy' {
@@ -130,3 +132,5 @@ config.module.rule('css')
 不过这里针对 CSS Module 这种形式记得注意 `hash` 值是否能够保持一致，若你的 npm 包需要提供这类能力，可以将样式在构建产出时将 `hash` 值编译成一个非 CSS Module 的样式文件，然后进行引入使用即可。
 
 有关 `style-loader` 的源码可以[点击查看](https://github.com/webpack-contrib/style-loader/tree/master/src)。
+
+同理，在别的工程化工具下，也可以借助这个思路实现手动插入样式的需求～
