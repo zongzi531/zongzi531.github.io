@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?24440389">
+<link rel="stylesheet" href="/css/journal.css?59402526">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -355,7 +355,7 @@
 <p>说是一个轮播组件的确没错，但是这个组件是倾斜的（设计图我就不放了，我怕挨打）。</p>
 <p>我尽可能的用文字描述一下，类似<a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/carousel#qia-pian-hua">Element Carousel 走马灯</a>组件使用卡片化的效果，可透视至后方，椭圆的视觉效果，并且从上 45 度角向下看的视觉效果。</p>
 <p>我还是画个草图吧……</p>
-<p><img src="/pic2.png" alt="轮播组件"></p>
+<p><img src="/2021/03/01/%E6%96%B0%E5%8A%A8%E5%8A%9B/pic2.png" alt="轮播组件"></p>
 <p>起初我打算使用 <code>transform</code> 的旋转和变换实现透视圆形轮播，在外层使用 <code>perspective</code> 实现视角下沉，但是经过实践我发现这并不可行（或许是我的姿势有问题）。但是就算这个方式实现了，卡片的视角会有问题，因为使用了旋转，所以会有变短的效果。</p>
 <p>后来我发现其实可以只用 <code>transform</code> 来实现，卡片位置使用相对定位控制，那么如何让卡片位置形成这样的椭圆形呢，那就是使用三角函数<a target="_blank" rel="noopener" href="https://wuu.wikipedia.org/wiki/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0">[维基]</a>！</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Trig_functions_on_descartes.png" alt="三角函数"></p>
@@ -430,7 +430,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?62078810"></script>
+<script src="/js/journal.js?62724142"></script>
 
 
     <script src="https://giscus.app/client.js"

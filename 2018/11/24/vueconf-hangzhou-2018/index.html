@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?15615822">
+<link rel="stylesheet" href="/css/journal.css?77632701">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -692,14 +692,14 @@ window<span class="token punctuation">.</span><span class="token function">reque
 <iframe src="//player.bilibili.com/player.html?aid=37320192&cid=65592298&page=1" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
 <p>对 Electron 是有所耳闻，知道 VSCode 、 GitHub Desktop 是使用 Electron 开发的。借机先学习下 Electron 的原理：</p>
-<p><img src="/Electron-Vue-1.png" alt="Electron-Vue-1"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Electron-Vue-1.png" alt="Electron-Vue-1"></p>
 <h3 id="1-如何解耦业务逻辑"><a href="#1-如何解耦业务逻辑" class="headerlink" title="1.如何解耦业务逻辑"></a>1.如何解耦业务逻辑</h3><ul>
 <li>⻚⾯代码与业务逻辑混写，功能重复</li>
 <li>升级 Electron 框架，修改成本⼤</li>
 </ul>
 <p>单独封装一层 bridge 来解决 NodeAPI 或者 NativeAPI 的更新问题，当遇到 API 更新时，无需关注业务逻辑代码，只需关注 bridge 即可。</p>
 <h3 id="2-如何实现登录认证"><a href="#2-如何实现登录认证" class="headerlink" title="2.如何实现登录认证"></a>2.如何实现登录认证</h3><p>看不懂的时候就做个勤劳的搬运工吧</p>
-<p><img src="/Electron-Vue-2.png" alt="Electron-Vue-2"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Electron-Vue-2.png" alt="Electron-Vue-2"></p>
 <h3 id="3-如何完成签名、⾃动更新"><a href="#3-如何完成签名、⾃动更新" class="headerlink" title="3.如何完成签名、⾃动更新"></a>3.如何完成签名、⾃动更新</h3><p>在发布 Electron 应用时遇到的问题：</p>
 <ul>
 <li>⽤户每次都要重新下载</li>
@@ -713,7 +713,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 </ul>
 <p>提供一个<em>版本管理平台</em>来实现版本控制，添加灰度版本，得以控制版本更新，避免上述问题。除了灰度发布，还有指定⼈员发布，指定版本发布功能。</p>
 <h3 id="4-如何定位和收集问题"><a href="#4-如何定位和收集问题" class="headerlink" title="4.如何定位和收集问题"></a>4.如何定位和收集问题</h3><p>其实就是在应用中设置埋点，上报监控系统</p>
-<p><img src="/Electron-Vue-3.png" alt="Electron-Vue-3"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Electron-Vue-3.png" alt="Electron-Vue-3"></p>
 <hr>
 <p>比较值得一提的是 Electron 开发和 Web 开发差异</p>
 <table>
@@ -763,7 +763,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 <iframe src="//player.bilibili.com/player.html?aid=37464898&cid=65857401&page=1" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
 <p>多端统一方案背景介绍</p>
-<p><img src="/Hippy-Vue-1.png" alt="Hippy-Vue-1"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Hippy-Vue-1.png" alt="Hippy-Vue-1"></p>
 <p>Hippy SDK 采⽤三层设计，其中：</p>
 <ul>
 <li>JavaScript 层：提供业务代码运⾏时的前端上下⽂环境；</li>
@@ -771,7 +771,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 <li>Portable UI 层：提供基础 UI 组件与布局计算框架，并负责渲染⾄⽬标平台；</li>
 </ul>
 <p>Hippy Buffer：⼆进制传输协议，编解码性能更好。<br>X5 V8：X5 团队特供 V8 引擎。<br>Hippy Layout：iOS、Android 共享布局引擎，纯 C 开发，只有 50kb。</p>
-<p><img src="/Hippy-Vue-2.png" alt="Hippy-Vue-2"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Hippy-Vue-2.png" alt="Hippy-Vue-2"></p>
 <h2 id="应用多端统一的实践"><a href="#应用多端统一的实践" class="headerlink" title="应用多端统一的实践"></a>应用多端统一的实践</h2><blockquote>
 <p>演讲者：卓凌<br>阿里巴巴高级前端工程师，淘宝小程序核心开发者</p>
 <p>小程序应用技术如火如荼，越来越多的公司在打造自己的小程序应用，但小程序的平台也是各自不同，本主提将介绍基于 Vue 语法（Simple File Component）角度，包括 Rax 无线端应用同时支持运行在 weex 环境，淘宝小程序，支付宝小程序，微信小程序等，践行 Write Once, Run everywhere!</p>
@@ -780,7 +780,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 <iframe src="//player.bilibili.com/player.html?aid=37534477&cid=65980180&page=1" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
 <p>看起来多端统一方案都基本差不多，就是具体实现上有差异，接下来看看阿里的</p>
-<p><img src="/rax-1.png" alt="rax-1"><br><img src="/rax-2.png" alt="rax-2"><br><img src="/rax-3.png" alt="rax-3"><br><img src="/rax-4.png" alt="rax-4"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/rax-1.png" alt="rax-1"><br><img src="/2018/11/24/vueconf-hangzhou-2018/rax-2.png" alt="rax-2"><br><img src="/2018/11/24/vueconf-hangzhou-2018/rax-3.png" alt="rax-3"><br><img src="/2018/11/24/vueconf-hangzhou-2018/rax-4.png" alt="rax-4"></p>
 <p>介绍几个阿里已经开源的仓库：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/alibaba/rax/tree/master/packages/sfc2mp">sfc2mp</a></li>
@@ -820,7 +820,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 <blockquote>
 <p>“状态管理，等同于状态结构及其变化过程，你可以从描述状态⼊⼿，以某个时刻的状态为侧重点，淡化其变迁过程，也可以从变迁过程⼊⼿，侧重某个过程对数据的变动”</p>
 </blockquote>
-<p><img src="/Vue-SSR-1.png" alt="Vue-SSR-1"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Vue-SSR-1.png" alt="Vue-SSR-1"></p>
 <p>利用 Observable 实现：</p>
 <ul>
 <li>数据分发 filter</li>
@@ -828,7 +828,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 </ul>
 <p>很像在操作数组，然后以 Observable 的特性去实现响应式。</p>
 <p>Vue 帮我们解决了同步响应式， Observable 帮我们解决了异步响应式</p>
-<p><img src="/Vue-SSR-2.png" alt="Vue-SSR-2"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/Vue-SSR-2.png" alt="Vue-SSR-2"></p>
 <h2 id="how-CRDT-improves-Vue-apps"><a href="#how-CRDT-improves-Vue-apps" class="headerlink" title="how CRDT improves Vue apps"></a>how CRDT improves Vue apps</h2><blockquote>
 <p>演讲者：Andrey Sitnik<br>Evil Martians前端工程师，PostCSS、Autoprefixer作者</p>
 <p>What technologies could replace GraphQL in the future? How can we mix ideas from Vuex and long-standing ideas from the 80s to make the better user experience for our web applications?<br>Andrey Sitnik, the creator of Autoprefixer and PostCSS, will explain why I switched from making improvements to CSS tooling to pursuing CRDT ideas.</p>
@@ -837,7 +837,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
 <iframe src="//player.bilibili.com/player.html?aid=37324888&cid=65600614&page=1" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
 <p>看视频感觉大佬做的 slides 挺好懂的。大佬介绍了 CRDT 与其他 AJAX 的体验区别，猜测 CRDT 是趋势，但是这和 Vue 有什么关系，我在 slides 中也没看出来。 CRDT 的全称是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type">Conflict-free replicated data type</a> 。接下来我分享几张通俗易懂的 slides。</p>
-<p><img src="/crdt-1.png" alt="crdt-1"><br><img src="/crdt-2.png" alt="crdt-2"><br><img src="/crdt-3.png" alt="crdt-3"><br><img src="/crdt-4.png" alt="crdt-4"><br><img src="/crdt-5.png" alt="crdt-5"><br><img src="/crdt-6.png" alt="crdt-6"><br><img src="/crdt-7.png" alt="crdt-7"></p>
+<p><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-1.png" alt="crdt-1"><br><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-2.png" alt="crdt-2"><br><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-3.png" alt="crdt-3"><br><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-4.png" alt="crdt-4"><br><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-5.png" alt="crdt-5"><br><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-6.png" alt="crdt-6"><br><img src="/2018/11/24/vueconf-hangzhou-2018/crdt-7.png" alt="crdt-7"></p>
 
                 </div>
             </div>
@@ -906,7 +906,7 @@ window<span class="token punctuation">.</span><span class="token function">reque
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?85678683"></script>
+<script src="/js/journal.js?20614679"></script>
 
 
     <script src="https://giscus.app/client.js"

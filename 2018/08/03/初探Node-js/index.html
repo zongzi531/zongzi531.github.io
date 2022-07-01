@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?20262124">
+<link rel="stylesheet" href="/css/journal.css?15315706">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -338,10 +338,10 @@
 
 <p>7月计划学习Node.js，试着为react-to-do-list项目实现一个简单的后端服务。 &#x3D;&gt; 完成</p>
 <p>同时，公司项目经验分享：</p>
-<h2 id="巧用Autoprefixer自动管理CSS属性前缀"><a href="#巧用Autoprefixer自动管理CSS属性前缀" class="headerlink" title="巧用Autoprefixer自动管理CSS属性前缀"></a>巧用Autoprefixer自动管理CSS属性前缀</h2><p><img src="/pic1.png" alt="Autoprefixer logo"></p>
+<h2 id="巧用Autoprefixer自动管理CSS属性前缀"><a href="#巧用Autoprefixer自动管理CSS属性前缀" class="headerlink" title="巧用Autoprefixer自动管理CSS属性前缀"></a>巧用Autoprefixer自动管理CSS属性前缀</h2><p><img src="/2018/08/03/%E5%88%9D%E6%8E%A2Node-js/pic1.png" alt="Autoprefixer logo"></p>
 <p>公司移动端项目需要做兼容，首先JavaScript相关的兼容可以考虑使用<code>babel-polyfill</code>来解决。那么CSS自然就考虑到使用PostCSS Autoprefixer。</p>
 <p>举个例子：查看<a target="_blank" rel="noopener" href="https://caniuse.com/#search=transform"><code>CSS3 transform</code></a>属性会发现Android 4.2下可以使用<code>-webkit-</code>来实现<code>transform</code>，然后我将<code>Android &gt;= 4.2</code>加入至<code>browserslist</code>来使得Autoprefixer完成它的工作。</p>
-<h3 id="如何配置browserslist？"><a href="#如何配置browserslist？" class="headerlink" title="如何配置browserslist？"></a>如何配置browserslist？</h3><p><img src="/pic2.png" alt="browserslist logo"></p>
+<h3 id="如何配置browserslist？"><a href="#如何配置browserslist？" class="headerlink" title="如何配置browserslist？"></a>如何配置browserslist？</h3><p><img src="/2018/08/03/%E5%88%9D%E6%8E%A2Node-js/pic2.png" alt="browserslist logo"></p>
 <p>以下内容来自官网README</p>
 <h4 id="Full-List"><a href="#Full-List" class="headerlink" title="Full List"></a>Full List</h4><p>You can specify the browser and Node.js versions by queries (case insensitive):</p>
 <ul>
@@ -393,11 +393,11 @@
 <li><code>UCAndroid</code> or <code>and_uc</code> for UC Browser for Android.</li>
 </ul>
 <h2 id="遭遇前后端不分离项目的兼容性问题"><a href="#遭遇前后端不分离项目的兼容性问题" class="headerlink" title="遭遇前后端不分离项目的兼容性问题"></a>遭遇前后端不分离项目的兼容性问题</h2><p>当<code>&lt;canvas&gt;</code>标签遇上IE，CSS样式问题也就出来了。还好社区有个库是用来专门解决这个问题，当当当当！html5shiv了解一下。</p>
-<p><img src="/pic3.png" alt="Babel logo"></p>
+<p><img src="/2018/08/03/%E5%88%9D%E6%8E%A2Node-js/pic3.png" alt="Babel logo"></p>
 <p>因为项目已经完成，只做兼容性调整，那么临时选择的解决方案就是手动进行语法降级，手动语法降级好痛苦 :( ，相当于人工<code>babel-polyfill</code>（事后灵机一动，可以直接去Babel官网转换），所以后续我打算使用Webpack来支持前后端不分离项目，使用node工程化来提升开发体验。</p>
 <p>为了统一公司前后端不分离项目的CSS样式，同时解决兼容性方面的问题，此时Webpack就登场了。之前刚好在上一家公司写过一个Webpack多页面工具（基于Jade模板引擎 + jQuery技术栈），此次项目的特点前后端不分离，所以采用（HTML + 后端模板引擎Thymeleaf + Vue技术栈）来实现这个Webpack多页面工具。</p>
 <p>前后端不分离情况下，项目开发需要执行<code>mvn tomcat7:run</code>命令来启动（以下简称tomcat模式）。</p>
-<p><img src="/pic4.png" alt="Thymeleaf logo"></p>
+<p><img src="/2018/08/03/%E5%88%9D%E6%8E%A2Node-js/pic4.png" alt="Thymeleaf logo"></p>
 <p>简单介绍一下Thymeleaf模板引擎，展示一段示例代码：</p>
 <pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name"><span class="token namespace">th:</span>inline</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript">
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>window<span class="token punctuation">.</span>__th__<span class="token punctuation">)</span> <span class="token punctuation">{</span> window<span class="token punctuation">.</span>__th__ <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -448,7 +448,7 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>有关于<code>domManip</code>方法的浅析文章网上也有不少，可以搜索看看。</p>
 <p>可见jQuery是真的给力，确实需要找个时间读一读jQuery的源码，或者找个时间把这个方法剥离出来也是一个不错的选择。</p>
-<h3 id="开发模式改造"><a href="#开发模式改造" class="headerlink" title="开发模式改造"></a>开发模式改造</h3><p><img src="/pic5.png" alt="Webpack logo"></p>
+<h3 id="开发模式改造"><a href="#开发模式改造" class="headerlink" title="开发模式改造"></a>开发模式改造</h3><p><img src="/2018/08/03/%E5%88%9D%E6%8E%A2Node-js/pic5.png" alt="Webpack logo"></p>
 <p>起初我选择的是模块化开发模式，因为项目的文件采用PAJAX方式加载，可以理解为子页面单独加载的模式。</p>
 <p>所以，我会使用Webpack的<code>CommonsChunkPlugin</code>来提取共同模块，但是因为Chunk文件只会加载一次，若子页面重复加载，js文件会跳过执行，并不会渲染页面，我并不想发生这样的情况，查看Webpack源码<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/blob/master/lib/MainTemplate.js">webpack&#x2F;lib&#x2F;MainTemplate.js</a>你会发现，若该模块已被加载，Webpack则不会再次加载该模块。</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token operator">...</span>
@@ -583,7 +583,7 @@
   <span class="token operator">...</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p><img src="/pic6.png" alt="releases 3.7.2"></p>
+<h2 id="Pull-requests"><a href="#Pull-requests" class="headerlink" title="Pull requests"></a>Pull requests</h2><p><img src="/2018/08/03/%E5%88%9D%E6%8E%A2Node-js/pic6.png" alt="releases 3.7.2"></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design/releases/tag/3.7.2">releases 3.7.2</a></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design/pull/11421">ant-design #11421 fix: badge type error.</a></li>
@@ -672,7 +672,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?37989404"></script>
+<script src="/js/journal.js?81074405"></script>
 
 
     <script src="https://giscus.app/client.js"
