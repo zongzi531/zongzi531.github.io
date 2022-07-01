@@ -119,6 +119,10 @@ mathjax:
   cjk_char_width: 16
   svg: true
 
+marked:
+  prependRoot: true
+  postAsset: true
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
