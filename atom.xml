@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-06-22T12:30:18.000Z</updated>
+  <updated>2022-07-01T13:25:37.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>真的夏天来咯</title>
+    <link href="https://zongzi531.com/2022/07/01/%E7%9C%9F%E7%9A%84%E5%A4%8F%E5%A4%A9%E6%9D%A5%E5%92%AF/"/>
+    <id>https://zongzi531.com/2022/07/01/%E7%9C%9F%E7%9A%84%E5%A4%8F%E5%A4%A9%E6%9D%A5%E5%92%AF/</id>
+    <published>2022-07-01T13:25:37.000Z</published>
+    <updated>2022-07-01T13:25:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>本来还说着今年春天加班加的有点久，没想到夏天一转眼就来了，温度一下子也就上去了……</p><p>可以说是非常的炎热，没有空调不行啊！</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：6.1 字符串</li></ul><h2 id="低代码建设"><a href="#低代码建设" class="headerlink" title="低代码建设"></a>低代码建设</h2><p>本月主要负责画布编辑、渲染模块重构工作，并适配到平台以及开发 CLI，提供即插即用能力。</p><p>并且开始布局类似于阿里低代码引起的能力，设计整体引擎架构及软件生态等。</p><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>本月也主要负责可视化大屏渲染性能优化工作，分析当前可视化大屏在一些配置较差的设备环境下运行，会因一些交互或者大型 3D 组件产生的掉帧、卡顿现象。</p><p>利用将 JS 执行任务进行优先级划分的策略来减轻当用户产生交互或因大型 3D 组件执行 JS 产生的主线程阻塞情况。</p><p>思路大致借鉴 React Fiber 的思路来进行优化，优化效果在 6.1% ～ 36.5% 之间，从结果来看并不是很理想。</p><p>因为很不稳定，并且提升的性能也有限。</p><p>从此布局，需要重新设计组件规范，提供组件侧参与调度任务 API 能力。</p><p>同时对于渲染模块，需要具备运行策略的调度能力来实现稳定的性能优化。</p><p><img src="/pic2.png" alt="性能优化"></p><h2 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h2><ul><li><a href="https://github.com/zongzi531/daily-learning/blob/master/share/%E5%BD%93%E5%89%8D%E7%AB%AF%E6%8A%8A%E6%89%8B%E4%BC%B8%E5%90%91%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%81%9A%E8%B5%B7%E5%85%A8%E6%A0%88%E6%97%B6.pdf">《当前端把手伸向后端，做起全栈时》</a></li><li><a href="https://zongzi531.com/2022/06/15/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%AE%8F/">《实现自己的 JavaScript 宏》</a></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>借助 Webpack 实现样式手动插入</title>
@@ -420,27 +441,6 @@
     <updated>2021-05-01T15:15:37.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>提前完成了 17 年定下的 30 岁目标，也证明了当年离开浙商银行的正确决定。<br>的确，年轻的可能性很大！付出终归会有回报。</p></blockquote><h2 id="新目标"><a href="#新目标" class="headerlink" title="新目标"></a>新目标</h2><ul><li>35 岁前，有一份轻松快乐的副业</li><li>35 岁，打稳主业基础，尝试更多突破</li></ul><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：简单运动 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：5.2.3.4 ReturnIfAbrupt Shorthands</li><li><strong>「内部技术分享」</strong>：计划5月中旬 <strong>主题《追求优雅的代码之用设计模式让代码更优雅》</strong></li></ul><h2 id="TypeScript-进阶"><a href="#TypeScript-进阶" class="headerlink" title="TypeScript 进阶"></a>TypeScript 进阶</h2><p>有关 TypeScript 的面试问题，其实很难提问。因为自己掌握的也只是很浅的知识，为了更深入的理解 TypeScript ，所以我尝试开始做 <code>Type&lt;Challenge[]&gt;</code> 的题目，目前做到 medium 部分，确实在编写泛型层面有了简单的突破，计划将挑战尽快做完，做到更理解 TypeScript 。</p><h2 id="内部组件库阶段性感受"><a href="#内部组件库阶段性感受" class="headerlink" title="内部组件库阶段性感受"></a>内部组件库阶段性感受</h2><p>在使用过 PostCSS 来编写组件库后有个很明显的感受就是，它不像 Sass 这样更具备编程性， PostCSS 更像是 JavaScript 中的 polyfills 的角色，应该说更像是 Babel 的角色。</p><p>所以，从组件库开发的角度来说，PostCSS 和 Sass 更适合组合使用。</p><p>虽然说这次的技术方案只采用了 PostCSS ，并且开发体验并没有如此之好，不过这或许是更了解 PostCSS 的一次尝试，更有可能接触和编写 PostCSS Plugin 的一次机会。</p><p>PS：每天早上看 PR ，效率最高～</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>时光荏苒</title>
-    <link href="https://zongzi531.com/2021/04/01/%E6%97%B6%E5%85%89%E8%8D%8F%E8%8B%92/"/>
-    <id>https://zongzi531.com/2021/04/01/%E6%97%B6%E5%85%89%E8%8D%8F%E8%8B%92/</id>
-    <published>2021-04-01T09:30:25.000Z</published>
-    <updated>2021-04-01T09:30:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>这么快入职一周年了，其实我更想表达的是时间不够。<br>除了工作、生活、陪伴家人，自己的时间确确实实变少了，或许这就是长大了。<br>应该承担起更多的责任，加油吧～<br>本想说一堆废话，但是被我删掉了，所以加油继续努力即可，向前向上！</p></blockquote><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：简单运动 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：5.1.3 The Numeric String Grammar</li><li><strong>「内部技术分享」</strong>：计划5月中旬</li></ul><h2 id="内部技术贡献"><a href="#内部技术贡献" class="headerlink" title="内部技术贡献"></a>内部技术贡献</h2><ul><li>基于 Vue 3.0 + TypeScript 开发 Vue 组件库&#x2F;负责相关组件 PR 评审</li><li>微前端动态构建平台</li><li>专利发明</li></ul>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
