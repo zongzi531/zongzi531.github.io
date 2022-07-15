@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-07-01T13:25:37.000Z</updated>
+  <updated>2022-07-15T09:36:12.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微前端下 Webpack Runtime 遇坑记录</title>
+    <link href="https://zongzi531.com/2022/07/15/%E5%BE%AE%E5%89%8D%E7%AB%AF%E4%B8%8Bwebpack-runtime%E9%81%87%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <id>https://zongzi531.com/2022/07/15/%E5%BE%AE%E5%89%8D%E7%AB%AF%E4%B8%8Bwebpack-runtime%E9%81%87%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
+    <published>2022-07-15T09:36:12.000Z</published>
+    <updated>2022-07-15T09:36:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>故事发生在微前端的场景下，基于 single-spa 定制，在路由切换进行子应用交替时发生的情况。</p><p>举例说明， 有子应用 A 和子应用 B ， A 使用 Vue3 相关技术栈， B 使用 Vue2 相关技术栈。</p><p>默认情况下，第一次进入 A 或者第一次进入 B ，相应的内容都可以正常的载入，并且不会报错。</p><p>但是如果说是先进入 A ，再进入 B ，或者反之操作，会引起后者无法正常载入，并且可以从控制台查看到报错信息。</p><p>定位到的问题也非常诡异，检查 A 和 B 本身并没有什么问题会造成这样的情况。</p><p>尝试从 Webpack 的编译产物入手排查发现， Webpack Runtime 的代码中，有一个 <code>modules</code> 的对象，用于在加载模块时进行查询使用。</p><p>仔细来回切换发现， A 和 B 的 <code>modules</code> 在第一次进入时都很正常，但是进行切换后会发现 <code>modules</code> 出现了污染。</p><p>简单点来说就是 A 和 B 的 <code>modules</code> 意外的合并了……</p><p>仔细检查 Runtime 代码和翻阅 Webpack 文档发现，是因为 async chunk 引起此问题。</p><p>并且发现 A 和 B 的代码中的 <a href="https://www.webpackjs.com/configuration/output/#output-jsonpfunction"><code>jsonpFunction</code></a> 同名了，所以导致了此问题。</p><blockquote><p>只在 target 是 web 时使用，用于按需加载(load on-demand) chunk 的 JSONP 函数。</p><p>JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chunk(CommonsChunkPlugin, AggressiveSplittingPlugin)。</p><p>如果在同一网页中使用了多个（来自不同编译过程(compilation)的）webpack runtime，则需要修改此选项。</p><p>如果使用了 output.library 选项，library 名称时自动追加的。</p></blockquote><p>比较奇怪的是，明明 A 和 B 的构建配置已经设置了独立的 <code>library</code> 选项，但是还是造成了这么多困惑。</p><p>总之，问题得以解决，记录一下。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Webpack" scheme="https://zongzi531.com/categories/Webpack/"/>
+    
+    
+    <category term="webpack" scheme="https://zongzi531.com/tags/webpack/"/>
+    
+    <category term="micro" scheme="https://zongzi531.com/tags/micro/"/>
+    
+  </entry>
   
   <entry>
     <title>真的夏天来咯</title>
@@ -430,27 +453,6 @@
     
     
     <category term="JavaScript" scheme="https://zongzi531.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>The Next Target</title>
-    <link href="https://zongzi531.com/2021/05/01/the-next-target/"/>
-    <id>https://zongzi531.com/2021/05/01/the-next-target/</id>
-    <published>2021-05-01T15:15:37.000Z</published>
-    <updated>2021-05-01T15:15:37.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>提前完成了 17 年定下的 30 岁目标，也证明了当年离开浙商银行的正确决定。<br>的确，年轻的可能性很大！付出终归会有回报。</p></blockquote><h2 id="新目标"><a href="#新目标" class="headerlink" title="新目标"></a>新目标</h2><ul><li>35 岁前，有一份轻松快乐的副业</li><li>35 岁，打稳主业基础，尝试更多突破</li></ul><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：简单运动 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：5.2.3.4 ReturnIfAbrupt Shorthands</li><li><strong>「内部技术分享」</strong>：计划5月中旬 <strong>主题《追求优雅的代码之用设计模式让代码更优雅》</strong></li></ul><h2 id="TypeScript-进阶"><a href="#TypeScript-进阶" class="headerlink" title="TypeScript 进阶"></a>TypeScript 进阶</h2><p>有关 TypeScript 的面试问题，其实很难提问。因为自己掌握的也只是很浅的知识，为了更深入的理解 TypeScript ，所以我尝试开始做 <code>Type&lt;Challenge[]&gt;</code> 的题目，目前做到 medium 部分，确实在编写泛型层面有了简单的突破，计划将挑战尽快做完，做到更理解 TypeScript 。</p><h2 id="内部组件库阶段性感受"><a href="#内部组件库阶段性感受" class="headerlink" title="内部组件库阶段性感受"></a>内部组件库阶段性感受</h2><p>在使用过 PostCSS 来编写组件库后有个很明显的感受就是，它不像 Sass 这样更具备编程性， PostCSS 更像是 JavaScript 中的 polyfills 的角色，应该说更像是 Babel 的角色。</p><p>所以，从组件库开发的角度来说，PostCSS 和 Sass 更适合组合使用。</p><p>虽然说这次的技术方案只采用了 PostCSS ，并且开发体验并没有如此之好，不过这或许是更了解 PostCSS 的一次尝试，更有可能接触和编写 PostCSS Plugin 的一次机会。</p><p>PS：每天早上看 PR ，效率最高～</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
     
   </entry>
   
