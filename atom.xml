@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-09-01T13:18:57.000Z</updated>
+  <updated>2022-09-02T15:07:55.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>patch-package 遭私有源背刺</title>
+    <link href="https://zongzi531.com/2022/09/02/patch-package%E9%81%AD%E7%A7%81%E6%9C%89%E6%BA%90%E8%83%8C%E5%88%BA/"/>
+    <id>https://zongzi531.com/2022/09/02/patch-package%E9%81%AD%E7%A7%81%E6%9C%89%E6%BA%90%E8%83%8C%E5%88%BA/</id>
+    <published>2022-09-02T15:07:55.000Z</published>
+    <updated>2022-09-02T15:07:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>众所周知， <code>patch-package</code> 是一款很不错的打补丁工具包，虽然 <code>pnpm</code> 没法使用。</p><p>由于目前工作环境受限于私有源限制，想给某个包打补丁。</p><p>但是问题就是，因为私有源同步 npm 落后了，导致执行 <code>npx patch-package pkg_example</code> 失败。</p><p>报错提示：</p><pre class="line-numbers language-shell"><code class="language-shell">Error Couldn't find any versions for "..." that matches "^0.0.0"...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>而且看报错提示就是 npm 的执行过程的提示。</p><p>当然了，最简单的办法当然是私有源及时同步 npm 最新的依赖包版本。</p><p>但是，明明我打补丁，我并不关心依赖的关系，我只是想单纯的打补丁，能不能从本地打呢？</p><p>答案是：<strong>能！</strong></p><p>我们来看到源码：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// https://github.com/ds300/patch-package/blob/master/src/makePatch.ts</span><span class="token comment" spellcheck="true">// 删除部分代码</span><span class="token keyword">import</span> <span class="token punctuation">{</span> dirSync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"tmp"</span><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">makePatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 创建临时文件夹</span>  <span class="token keyword">const</span> tmpRepo <span class="token operator">=</span> <span class="token function">dirSync</span><span class="token punctuation">(</span><span class="token punctuation">{</span> unsafeCleanup<span class="token punctuation">:</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>  <span class="token keyword">const</span> tmpRepoPackagePath <span class="token operator">=</span> <span class="token function">join</span><span class="token punctuation">(</span>tmpRepo<span class="token punctuation">.</span>name<span class="token punctuation">,</span> packageDetails<span class="token punctuation">.</span>path<span class="token punctuation">)</span>  <span class="token keyword">const</span> tmpRepoNpmRoot <span class="token operator">=</span> tmpRepoPackagePath<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>    <span class="token number">0</span><span class="token punctuation">,</span>    <span class="token operator">-</span><span class="token template-string"><span class="token string">`/node_modules/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>packageDetails<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">.</span>length<span class="token punctuation">,</span>  <span class="token punctuation">)</span>  <span class="token keyword">const</span> tmpRepoPackageJsonPath <span class="token operator">=</span> <span class="token function">join</span><span class="token punctuation">(</span>tmpRepoNpmRoot<span class="token punctuation">,</span> <span class="token string">"package.json"</span><span class="token punctuation">)</span>    <span class="token keyword">if</span> <span class="token punctuation">(</span>packageManager <span class="token operator">===</span> <span class="token string">"yarn"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>      <span class="token comment" spellcheck="true">// 尝试使用 yarn 安装依赖</span>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>      <span class="token comment" spellcheck="true">// 尝试使用 npm 安装依赖</span>    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>那么我们就可以从这里展开操作，自己创建一个临时文件夹来代替 <code>tmp</code> 创建的临时文件夹路径，以此为出发点，在临时文件夹内手动安装依赖，并将安装动作取消。</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">const</span> tmpRepo <span class="token operator">=</span> <span class="token function">dirSync</span><span class="token punctuation">(</span><span class="token punctuation">{</span> unsafeCleanup<span class="token punctuation">:</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>tmpRepo<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token comment" spellcheck="true">// 你需要的本地文件夹路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>在完成这些操作后，我们就可以使用本地资源来打补丁了。</p><p><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="JavaScript" scheme="https://zongzi531.com/categories/JavaScript/"/>
+    
+    
+    <category term="patch-package" scheme="https://zongzi531.com/tags/patch-package/"/>
+    
+    <category term="npm" scheme="https://zongzi531.com/tags/npm/"/>
+    
+    <category term="registry" scheme="https://zongzi531.com/tags/registry/"/>
+    
+  </entry>
   
   <entry>
     <title>火焰山 - 杭州</title>
@@ -425,27 +450,6 @@
     
     
     <summary type="html">OKR工作法</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>油断中……</title>
-    <link href="https://zongzi531.com/2021/07/01/%E6%B2%B9%E6%96%AD%E4%B8%AD/"/>
-    <id>https://zongzi531.com/2021/07/01/%E6%B2%B9%E6%96%AD%E4%B8%AD/</id>
-    <published>2021-07-01T13:22:09.000Z</published>
-    <updated>2021-07-01T13:22:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：简单运动 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：6.1.7.3 Invariants of the Essential Internal Methods</li><li><strong>「<code>Type&lt;Challenge[]&gt;</code>」</strong>：651・Length of String 2</li></ul><p>这里其实得批评一下自己，日语的学习从今年年初开始就一直停滞不前，面对文法和词汇退缩了。ECMA 规范虽然有在阅读，但是进度还是太慢了，因为 6 月已过，规范却连一半都没读到。总体从任务来说，真的较去年太松散了！（虽然今年可能确实没多少时间做，给自己找借口中……）</p><h2 id="工程化的实践"><a href="#工程化的实践" class="headerlink" title="工程化的实践"></a>工程化的实践</h2><p>借助内部组件库的开发机会，包揽了构建和发布的工作，学习 ElementPlus 的构建代码（特别感谢鸡哥的耐心指导），采用多进程构建，并且结合自身组件库的需求，虽然同样采用 monorepo 的包管理方式，但是与 ElementPlus 不同的是每一个组件都进行独立的构建和发布，并非统一构建在根目录的 <code>es</code> 和 <code>lib</code> 下，而是构建在 <code>packages</code> 下组件们的 <code>es</code> 和 <code>lib</code> 下，并且进行了独立的依赖配置。</p><p>也遇到了与 ElementPlus 一样的问题，生成的 <code>d.ts</code> 文件存在路径问题，则按照上述的场景，重新编写了 <code>build:type</code> 的工程化代码。</p><p>同样的也提供了 ESM&#x2F;CJS&#x2F;UMD 的构建文件，并且因为上述的场景区别，重新编写了 <code>babel</code> 按需引入插件，实现以下 3 种按需引入方式：</p><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token comment" spellcheck="true">// 伪代码</span><span class="token keyword">import</span> ElementPlus<span class="token punctuation">,</span> <span class="token punctuation">{</span> ElButton<span class="token punctuation">,</span> locale <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span><span class="token keyword">import</span> ElSelect <span class="token keyword">from</span> <span class="token string">'@element-plus/select'</span><span class="token comment" spellcheck="true">// babel 转换后</span><span class="token keyword">import</span> ElementPlus<span class="token punctuation">,</span> <span class="token punctuation">{</span> ElButton<span class="token punctuation">,</span> locale <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span><span class="token keyword">import</span> ElSelect <span class="token keyword">from</span> <span class="token string">'@element-plus/select'</span><span class="token keyword">import</span> <span class="token string">'@element-plus/theme-chalk/lib/index.css'</span> <span class="token comment" spellcheck="true">// 全量</span><span class="token keyword">import</span> <span class="token string">'@element-plus/theme-chalk/lib/button.css'</span> <span class="token comment" spellcheck="true">// 仅 button</span><span class="token keyword">import</span> <span class="token string">'@element-plus/theme-chalk/lib/select.css'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>虽然说内部组件库的初版功能大体是参考 ElementPlus 的，不过会在未来让内部组件库变得更适合我司，并且计划推进组合式 API 来代替原来的二次封装业务组件。</p><p>在学习过程中接触到 esbuild ，可算是对性能有了新的认识，使用其构建会大大提升构建效率，可算是前端工程化里的一颗新新力量了，也同样计划在后期改善构建效率。</p><p>也同样的，对于内部组件库计划推广和实行更多的计划（当然这里就不会多说了）。</p><p>突然想起一点， ElementPlus 的 TypeScript 代码没有开启严格模式，真的改起来有点头疼，虽然我只是在这里说，没有去提 PR 。</p><h2 id="NO-CODE"><a href="#NO-CODE" class="headerlink" title="NO CODE"></a>NO CODE</h2><p>再来谈一谈零代码这个概念，内部成立了一个小组在推进零代码。并且这个零代码强就强在可以结合我们自己的微前端架构和微前端动态构建平台直出业务到业务。</p><p>用户可以简单的进行拖拽、组合等等一系列操作（反正不用写代码），组合出新的页面或页面集合，结合上述系统，直出到业务。</p><p>并且零代码的架构设计采用开放的插件模式，安全的沙箱模式等设计模式组成。</p><p>总之，正在开发中……</p><p>值得期待！</p><h2 id="📚-建立自己的前端知识体系"><a href="#📚-建立自己的前端知识体系" class="headerlink" title="📚 建立自己的前端知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的前端知识体系</h2><p>回到这个话题，虽然好几个月没有聊起过，但是从整体来说还是有在慢慢的推进，只不过文章开始提到的那些进度有些缓慢……希望可以在下半年抓起来（加油）！</p>]]></content>
-    
-    
-    <summary type="html">这里其实得批评一下自己，日语的学习从今年年初开始就开始停滞不前，面对文法和词汇退缩了。ECMA 规范虽然有...</summary>
     
     
     
