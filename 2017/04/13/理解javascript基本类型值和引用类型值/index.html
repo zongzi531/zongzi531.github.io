@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?77210177">
+<link rel="stylesheet" href="/css/journal.css?89782198">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -332,32 +332,32 @@
 
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>ECMAScript中有5种简单数据类型：<code>Undefined</code>、<code>Null</code>、<code>Boolean</code>、<code>Number</code>、<code>String</code>，和一种复杂数据类型：<code>Object</code>。相信大家都对这几个数据类型有所认识，那这边就不再赘述了。</p>
 <h2 id="基本类型值和引用类型值"><a href="#基本类型值和引用类型值" class="headerlink" title="基本类型值和引用类型值"></a>基本类型值和引用类型值</h2><p>首先，介绍下基本的概念，<strong>基本类型值</strong>是指简单的数据段，<strong>引用类型值</strong>是指那些可能由多个值构成的对象。</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> undefined<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//Undefined</span>
-<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//Null</span>
-<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//Boolean</span>
-<span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//Number</span>
-<span class="token keyword">let</span> e <span class="token operator">=</span> <span class="token string">"e"</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//String</span>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> undefined<span class="token punctuation">;</span> 	<span class="token comment" spellcheck="true">//Undefined</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//Null</span>
+<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//Boolean</span>
+<span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//Number</span>
+<span class="token keyword">let</span> e <span class="token operator">=</span> <span class="token string">"e"</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//String</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这5种数据类型是按照值访问的。</p>
 <p>那么什么是引用类型呢？看下面的代码</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">let</span> cat <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 cat<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"tom"</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>cat<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//tom</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>cat<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//tom</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>大家一定很好奇那基本类型值和引用类型值到底有什么区别呢？下面给大家举个例子：</p>
 <pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//基本类型值</span>
 <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span>
 b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//这时a的值是多少？</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//这时b的值是多少？</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//这时a的值是多少？</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//这时b的值是多少？</span>
 
 <span class="token comment" spellcheck="true">//引用类型值</span>
 <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span>
 y<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//这时x.a的值是多少？</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//这时y.a的值是多少？</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//这时x.a的值是多少？</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//这时y.a的值是多少？</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>先讲讲基本类型值的代码执行过程，<code>let a = 10;</code>的时候a的值是10，<code>let b = a;</code>执行之后，b的值也同样是10，虽然a和b的值相等，但是其实他们的值已经互相不影响了，不会影响到对方。所以当执行<code>b = 20;</code>的时候，a的值并不会受到改变。</p>
 <p>整个执行过程见下图解：</p>
@@ -449,7 +449,7 @@ z<span class="token punctuation">.</span>a <span class="token operator">=</span>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?4137439"></script>
+<script src="/js/journal.js?91830198"></script>
 
 
     <script src="https://giscus.app/client.js"
