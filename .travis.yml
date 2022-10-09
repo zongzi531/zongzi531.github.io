@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - 12 # use nodejs v12 LTS
+  - 14
 branches:
   only:
     - master # build master branch only
