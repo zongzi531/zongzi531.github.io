@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-10-01T09:57:06.000Z</updated>
+  <updated>2022-11-01T13:05:21.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【秋】良渚古城遗址公园</title>
+    <link href="https://zongzi531.com/2022/11/01/%E7%A7%8B-%E8%89%AF%E6%B8%9A%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80%E5%85%AC%E5%9B%AD/"/>
+    <id>https://zongzi531.com/2022/11/01/%E7%A7%8B-%E8%89%AF%E6%B8%9A%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80%E5%85%AC%E5%9B%AD/</id>
+    <published>2022-11-01T13:05:21.000Z</published>
+    <updated>2022-11-01T13:05:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>10月的周末和好友一起去了良渚古城遗址公园，这应该是第二次去这个公园了。而且回忆起来两次去都是秋天的时候，也不知道为什么，后面或许可以在其他的季节去看看。</p><p>不过现在哪里都是人，这点真的很烦，不喜欢人多的地方。明显感觉到这次去比上一次人多多了，停车场的车也比原来要多了。</p><p>大概是疫情的关系吧，大家都没什么地方可以去……</p><p>只能杭州周边玩玩，露露营什么的，确实蛮无聊的。</p><p>不过上周末，又去了 Live House 。参加万圣节活动，年轻的气氛顿时就上来了， High 的不行。</p><p>总之，很棒～</p><p>10月也因为国庆放假，所以工作日比较短。但是比较难受的是很忙……</p><p>工作内容没啥可说的，就还是继续低代码。</p><p>你要说有新的进展吗？也没有，要说没有吗？也有。</p><p>反正，持续寻找机会～</p><p>在单位中午也不太敢睡觉，因为天气转凉了，办公室的环境吧，容易感冒……</p><p>总之，吃好睡好，身体第一！</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>思考忙碌的意义</title>
@@ -436,27 +457,6 @@
     
     
     <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《进阶 TypeScript 之初见泛型》</title>
-    <link href="https://zongzi531.com/2021/08/20/%E8%BF%9B%E9%98%B6TypeScript%E4%B9%8B%E5%88%9D%E8%A7%81%E6%B3%9B%E5%9E%8B/"/>
-    <id>https://zongzi531.com/2021/08/20/%E8%BF%9B%E9%98%B6TypeScript%E4%B9%8B%E5%88%9D%E8%A7%81%E6%B3%9B%E5%9E%8B/</id>
-    <published>2021-08-20T09:28:10.000Z</published>
-    <updated>2021-08-20T09:28:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p><a href="https://github.com/zongzi531/daily-learning/blob/master/share/%E8%BF%9B%E9%98%B6%20TypeScript%20%E4%B9%8B%E5%88%9D%E8%A7%81%E6%B3%9B%E5%9E%8B.pdf">链接</a></p></blockquote><p>大家晚上好，特别为大家做这次分享，因为现在几个团队都开始使用 TypeScript 了，那么除了在日常的 TypeScript 基础使用外，我想给大家带来一些 TypeScript 的进阶使用，那么本次为大家分享有关泛型的进阶入门技巧。</p><p>那我们现在就从为什么会有泛型来说什么是泛型，让我们看到这段代码，我们定义了一个 <code>identity</code> 函数，他用来处理 <code>number</code> 类型的数据，并返回 <code>number</code> 类型的数据。再来看到下一段代码，当这个函数要处理另外的类型的时候，我们不得不定义另外的类型，比如在 <code>number</code> 的基础上添加 <code>string | Array&lt;string&gt;</code> 等等类型，当然这里可以用到函数重载的概念，不过我这里要硬生生的引出泛型。</p><p>最后我们来看到这段代码，我们可以在使用的时候借助 TypeScript 的类型推断自动来使用，或者说我们可以传入类型来定义我们想要的类型，比如 <code>identity&lt;boolean&gt;(true)</code> ，这就是泛型。</p><p>我给大家摘抄了官方提供的全局泛型，见 <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility Types</a> 。</p><p>官方提供的这些泛型可以说使用起来非常的方便，并且大家在日常开发当中也用到了许多，那么如何自己书写泛型呢？从这里开始将是本次分享的重点。</p><p>我们来看到例子1，这里的 <code>isString</code> 并没有 <code>typeof value === &#39;string&#39;</code> 来的好用，因为 <code>isString</code> 不能进行类型推断，有同学可能会说，我在下面对 <code>el</code> 使用断言，从代码运行上来说，这确实没什么问题。但是既然使用了 TypeScript ，就应该让类型推断变的更自然，而不是用断言来解决问题，这样和写 JavaScript 又有什么区别呢？那么其实很简单，我们将函数返回的 <code>boolean</code> 修改成 <code>value is string</code> 这样就可以实现类型推断了。</p><p>是不是很有趣，再进阶一步讲，我们是不是可以将这个 <code>isString</code> 函数改造一下，是他变成一个更通用的泛型。</p><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">declare</span> <span class="token keyword">function</span> isSomething <span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> T<span class="token punctuation">)</span><span class="token punctuation">:</span> value is T<span class="token keyword">const</span> num <span class="token operator">=</span> <span class="token function">isSomething</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// isSomething&lt;number></span><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token function">isSomething</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// isSomething&lt;string></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>非常的妙是不是。再来看到例子2，假设我们要写一个样式对象，但是我们需要自己考虑兼容性，比如会加入前缀 <code>webkit</code> ，那么我们自然会一个个把他们写出来，但是在维护类型的时候会带来很多繁琐的问题，比如说我修改 <code>flex</code> 的类型时，我还需要顺带修改 <code>webkit</code> 前缀的对应的类型，当这种场景变得多又复杂时，代码的维护成本就会逐渐提升。</p><p>那么当然是有办法解决解决这样的问题的，首先我们需要利用一些手段将 <code>flex</code> 转换成 <code>webkitFlex</code> ，然后将 <code>interface</code> 的 key 换成我们想要的内容。</p><p>到目前为止，我们已经可以实现 key 的替换，但是原来的 key 却不见了，所以我们这里需要借助 <code>| P</code> 来完成，来实现我们的需求。到目前为止我们已经完成了我们想要的，我们再来进阶一步讲，把问题变得有趣，我们这里希望经过转换后， <code>lineHeight</code> 是不会加 <code>webkit</code> 前缀的，怎么实现呢。</p><pre class="line-numbers language-typescript"><code class="language-typescript">type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token string">'lineHeight'</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Capitalize<span class="token operator">&lt;</span>K<span class="token operator">></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这样，我们就可以实现新的需求，当然了这里还是可以结合例子1进行进阶。</p><pre class="line-numbers language-typescript"><code class="language-typescript">type ExcludeWebkitKey <span class="token operator">=</span> <span class="token string">'lineHeight'</span> <span class="token operator">|</span> <span class="token string">'something you need.'</span>type WebkitKey<span class="token operator">&lt;</span>K <span class="token keyword">extends</span> <span class="token class-name">string</span><span class="token punctuation">,</span> E <span class="token operator">=</span> ExcludeWebkitKey<span class="token operator">></span> <span class="token operator">=</span> K <span class="token keyword">extends</span> <span class="token class-name">E</span> <span class="token operator">?</span> never <span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`webkit</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Capitalize<span class="token operator">&lt;</span>K<span class="token operator">></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>哈哈，是不是也非常的有趣。确实，就是这么有趣。</p><p>那么我们来看到例子3，我们如何可以在 <code>methods</code> 下的方法中获得到 <code>data</code> 返回的类型呢，我这边摘抄了官网的例子，大家可以看一下。</p><p>其实我们的例子和官网的区别就是官网是个对象，而我们是个函数，我们只要把 <code>D</code> 修改成 <code>() =&gt; D</code> 就可以了。</p><p>那么本次的分享就到这里，后面我也会尝试总结更多的技巧分享到大家。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Share" scheme="https://zongzi531.com/categories/Share/"/>
-    
-    
-    <category term="TypeScript" scheme="https://zongzi531.com/tags/TypeScript/"/>
     
   </entry>
   
