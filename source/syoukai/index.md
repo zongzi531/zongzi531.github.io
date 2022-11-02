@@ -11,6 +11,7 @@ featured_image: https://github.com/zongzi531/zongzi531/blob/master/banner.png?ra
 
 - [亿林](https://minemine.cc)
 - [三毛](https://jkchao.cn)
+- [欧雷](https://ourai.ws)
 
 ## 更新日志
 

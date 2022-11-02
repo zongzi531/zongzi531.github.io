@@ -10,6 +10,7 @@
 
 - [亿林](https://minemine.cc)
 - [三毛](https://jkchao.cn)
+- [欧雷](https://ourai.ws)
 
 ## 更新日志
 
