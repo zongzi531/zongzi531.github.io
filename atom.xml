@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2022-11-11T08:52:11.000Z</updated>
+  <updated>2022-12-01T09:25:17.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>和躺平说达咩</title>
+    <link href="https://zongzi531.com/2022/12/01/%E5%92%8C%E8%BA%BA%E5%B9%B3%E8%AF%B4%E8%BE%BE%E5%92%A9/"/>
+    <id>https://zongzi531.com/2022/12/01/%E5%92%8C%E8%BA%BA%E5%B9%B3%E8%AF%B4%E8%BE%BE%E5%92%A9/</id>
+    <published>2022-12-01T09:25:17.000Z</published>
+    <updated>2022-12-01T09:25:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>总是会感慨到，时间过的好快啊。</p><p>其实并不是，时间从来的都是一秒一秒的过，而度过一年后，在大脑中只有记忆的片段，拼凑在一起的时间很短暂，让你觉得时间过的好快啊。</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环、刘畊宏直播 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li><li><strong>「Rust 秘典（死灵书）」</strong>：3.1. 引用</li></ul><p>回顾前几个月或是前半年或者这一年，本质上自己学习了 Rust ，但是停滞了日语的学习，业余时间基本都在认真生活。</p><p>也不能算是没有收获吧，可以说是生活、工作平衡～ 均衡持续的发展才会健康～</p><p>比较遗憾的是，下半年投身于低代码建设，并没有太多时间研究性能问题，也将 Rust 的应用抛之脑后，准确的来说是没有找到很好的切入点。</p><p>计划 12 月为同事们做一次 Rust 入门的技术分享，希望可以拉起同事们对 Rust 的兴趣，可以形成一个小范围的学习群体，这样应该会更好的找到切入点吧。</p><p>马上也要进行年终总结，按照惯例进行回顾和展望。</p><p>也不难发现随着年纪的增长，记忆力和学习能力也在持续的进行弱化（在给自己的躺平找说辞）。当然，我还是会尽力而为！</p><p>职业定位也出现了微弱的转折，我自然是希望按照我理想状态进行发展，从原本只需要聚焦开发工作外进行了微弱的转变，我始终主张「专业技术经验不足不能轻易尝试管理岗位」这一观点。</p><p>目前除了聚焦开发外，会有机会从软件全局思考一些问题，并参与整体架构设计、里程碑设计等，从更高的角度来看问题。</p><p>这是我需要锻炼的内容。加上技术积累，这样才会让我在未来能够走的更远。</p><p>当然会有更多机会接触到管理大佬，看那些管理方法论，看就好了。</p><p>从自身发展来说，我不希望自己局限于前端，而是要从软件工程师或是工程师的角度来思考问题，把问题边界考虑的更广，想的更多，美其名曰「架构师」。</p><p>就工作来说是这样，平衡发展的另一边则是生活。</p><p>试着在把生活过的更好、更有意义、更有趣也是我需要学习和探索的。</p><p>感谢我的老婆，让我的生命充满了意义！</p><p>嘿嘿，甜一下～</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>svg 文件自动化转组件</title>
@@ -429,27 +450,6 @@
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>天还没凉快起来</title>
-    <link href="https://zongzi531.com/2021/10/09/%E5%A4%A9%E8%BF%98%E6%B2%A1%E5%87%89%E5%BF%AB%E8%B5%B7%E6%9D%A5/"/>
-    <id>https://zongzi531.com/2021/10/09/%E5%A4%A9%E8%BF%98%E6%B2%A1%E5%87%89%E5%BF%AB%E8%B5%B7%E6%9D%A5/</id>
-    <published>2021-10-09T13:32:03.000Z</published>
-    <updated>2021-10-09T13:32:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>讲道理，现在的气候真的太奇怪了，都 10 月份了，还这么热……</p><blockquote><p>摄于 20210912 06:43 酒店餐厅给老婆拍早餐</p></blockquote><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：简单运动 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</li></ul><p>我自己都不太看的下去了，任务进度停滞的问题很明显，但是其实也还好。毕竟 9 月是我和老婆的大喜日子，我们结婚咯！～</p><p>最近基本都在置办婚礼相关的事情，现在有了我们的家，当然要好好经营啦，毕竟家更重要！～</p><h2 id="最近的工作"><a href="#最近的工作" class="headerlink" title="最近的工作"></a>最近的工作</h2><p>除去基本的服务业务，主要精力就是在开发内部的低代码平台，作为核心开发目前主要负责整体插件系统设计与实现、逻辑编排功能设计与实现等核心功能实现和工作安排及进度推进。</p><p>当然了，还需要负责内部 UI 库的代码审查、缺陷修复和发布更新工作，期间还持续更新了内部标准代码风格。</p><h2 id="一些新思考"><a href="#一些新思考" class="headerlink" title="一些新思考"></a>一些新思考</h2><p>在 8 月底做了一次技术分享，因为对技术的掌握片面导致没有把技术讲透彻，被大佬指导了一番……</p><p>有关 C &#x2F; C# 的技术掌握自己确实欠缺（亏我在大学里还学过 C# ……）</p><p>包括在最近看到的一篇文章<a href="https://zhuanlan.zhihu.com/p/417534662">《用Rust锈化Vue Compiler》</a>，引用作者的一段回复：</p><blockquote><p>先学好TS理解现代编程语言的概念，然后学Rust（主要以clone和Rc为主）。再学习C语言和阅读C++的笑话集，之后可以学习Rust的生命周期部分</p></blockquote><p>其实可以想到，前端除了之前想到的几个路线，往广义上去思考其实往更深去学习，需要具备 C &#x2F; C++ 、计算机基础这类知识储备，不能狭隘的只停留在 JavaScript 上，因为从某些角度想虽然 JavaScript 能实现很多，但是仍然是被大佬们包装过的语言，如果要想更自由的去控制计算机，这条路线是一条可以深入并且长期发展的路线。</p><p>并且当未来发生某些变化时，具备如此底层的知识在切换技术栈时也会变得轻松。</p>]]></content>
-    
-    
-    <summary type="html">讲道理，现在的气候真的太奇怪了，都 10 月份了，还这么热……</summary>
     
     
     
