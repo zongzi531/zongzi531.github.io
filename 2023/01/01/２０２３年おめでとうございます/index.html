@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>２０２３年おめでとうございます - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+想先说的话疫情三年，国家保护我们免受新冠病毒的危害。
+12月初，国家开放了，我也很快的感染上了新冠病毒。
+...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?52620222">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/commuting/index.html">
+                        通勤那点事
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/commuting/index.html">
+                    通勤那点事
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2022 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2023/01/01/２０２３年おめでとうございます/pic1.jpeg')">
+                <div class="post-title">
+                    ２０２３年おめでとうございます
+                    <div class="post-meta">
+                        <time datetime="2023-01-01T09:31:09.000Z" itemprop="datePublished">
+                            2023-01-01 09:31
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<h2 id="想先说的话"><a href="#想先说的话" class="headerlink" title="想先说的话"></a>想先说的话</h2><p>疫情三年，国家保护我们免受新冠病毒的危害。</p>
+<p>12月初，国家开放了，我也很快的感染上了新冠病毒。</p>
+<p>在家和病毒战争的日子可以说是非常煎熬，毫不夸张的说这个病毒很可怕，免疫系统要与这个病毒战争好几个日日夜夜才能获得胜利。</p>
+<p>这不禁让人回想起，三年前的新冠病毒，以及当时的医疗、物资等环境，是多么的困难。</p>
+<p>我们唯有好好的补充、修养我们的身体，才对得起我们自己、我们的家人、我们的国家！</p>
+<p>生命如此脆弱，也是如此渺小，也是如此多姿多彩。</p>
+<p>唯有健康、快乐才能更好的享受生命，尽可能的让生命大放光彩！</p>
+<p>感谢老婆，是老婆一直在我的身边细心照顾我，还有我的家人们、朋友们，在身边鼓励、帮助我！</p>
+<h2 id="简单概要"><a href="#简单概要" class="headerlink" title="简单概要"></a>简单概要</h2><blockquote>
+<p>2022 年，业务支撑（含服务端入门）、低代码领域（协议、引擎、专利、工程化工具、运行时工具）、基础建设、构建性能优化、运行时渲染性能优化、技术分享、学习 Rust。<br>2023 年，深入 Rust、运行时性能优化。</p>
+</blockquote>
+<h2 id="回顾-2022-年"><a href="#回顾-2022-年" class="headerlink" title="回顾 2022 年"></a>回顾 2022 年</h2><ul>
+<li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li>
+<li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li>
+<li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong> <code>适量</code></li>
+<li><strong><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">📔</span> 日本語学習文法・語彙</strong> <code>语法及词汇 第1页</code></li>
+<li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong> <code>持续进行</code></li>
+<li><strong>学习 Rust</strong></li>
+<li><strong>初探低代码</strong></li>
+</ul>
+<h2 id="展望-2023-年"><a href="#展望-2023-年" class="headerlink" title="展望 2023 年"></a>展望 2023 年</h2><ul>
+<li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li>
+<li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li>
+<li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li>
+<li><strong><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">📔</span> 日本語学習文法・語彙</strong></li>
+<li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li>
+<li><strong>深入 Rust</strong></li>
+<li><strong>深入低代码</strong></li>
+</ul>
+<h2 id="展开说说"><a href="#展开说说" class="headerlink" title="展开说说"></a>展开说说</h2><p>首先来说一下当初定下的 35 岁第二目标，目前还在探索中……，加油吧！</p>
+<p>再来就是绩效考核从 OKR 变成了 PBC 的形式，怎么说呢，从目前体验 PBC 的感受下来，感觉没有 OKR 那么激励人，可能是因为 OKR 太过于模糊无法定量考核的可能吧。</p>
+<p>学习 Rust 的时候接触到了宏这个词，也借助 Babel 的力量简单实现了一个 demo ，也是一种不错的尝试。现在看来，其实可以使用这种宏的概念在低代码场景中，类似于 Excel 中的「函数」，可以由我们来定义一套简易的写法来帮助用户来完成程序开发，最终在编译阶段还原即可。</p>
+<p>性能优化的尝试，我更倾向于在浏览器运行时的实践，这两年的性能优化思路大多都是借鉴 React 的核心思想以及一些著名的设计模式，我想换个接入点，一是寻找到很合适有机会的地方，二是使用 WASM 技术来完成这些，不仅可以加深我在浏览器运行时上优化的经验，还可以加深我在 Rust 实践上的技巧，这也是我后面想去做的事情。</p>
+<p>发现人年纪上来之后，会多去想一些有关人活着的意义之类的话题，其实和年纪上来也没什么关系，无非是想让自己活的明白、通透一些罢了。这些，可能才是最有必要想清楚和做的事情了。</p>
+<p>对了，因为 12 月在家与新冠病毒战争的事情，我更加明确了远程办公的重要性！当然了，战争期间，我的领导、单位都很照顾我，我也很感动，我也会为团队，公司好好出一份我的力量！</p>
+<p>再来说说我的劣势吧，缺乏产品思维和商业思维。准确的说是没有完整的产品经历（ 0-1 ）和商业的洞察能力，不过现在接触的低代码领域可以说是从 0 开始的。</p>
+<p>这些是我需要补充的，在具备技术和视野的条件下，我才能从更高的角度来思考问题。</p>
+<p>技术好比是深度，不单单指开发侧的技术，也可以是产品设计、流程把控、人才管理储备等角度来谈。</p>
+<p>视野好比广度，指产品价值、商业价值或是产品方向等角度来谈。</p>
+<p>总之，还是比较虚幻的一个概念，但是我认为这是我往上提升所需要具备的能力。</p>
+<p>我希望我可以在低代码领域深耕，摸透，领悟出新的内容，来创新未来。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2023/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%93%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/" title="２０２３年おめでとうございます">https://zongzi531.com/2023/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%93%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/">
+        下一篇<br>《初探 Rust》
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2022 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?19306520"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
