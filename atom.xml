@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-01-01T09:31:09.000Z</updated>
+  <updated>2023-01-12T13:45:21.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chrome 浏览器性能排查指南</title>
+    <link href="https://zongzi531.com/2023/01/12/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/"/>
+    <id>https://zongzi531.com/2023/01/12/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/</id>
+    <published>2023-01-12T13:45:21.000Z</published>
+    <updated>2023-01-12T13:45:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h1 id="使用-Chrome-DevTools-Memory-排查问题"><a href="#使用-Chrome-DevTools-Memory-排查问题" class="headerlink" title="使用 Chrome DevTools Memory 排查问题"></a>使用 Chrome DevTools Memory 排查问题</h1><ol><li><p>打开 Chrome DevTools 选择「Memory」选项卡，可以现在 JavaScript VM instance 下实时观察 JavaScript 的内存变化。</p></li><li><p>那么我们结合 Chrome 任务管理器配合进行排查内存变化，通常浏览器会在空闲时间进行 GC 操作，如果存在内存泄露的话，可以从几次 GC 操作后发现内存是有上升，如果一直攀升并未得到正常下降的话，我们需要有规律的打印堆快照，并进行对比。</p></li><li><p>我们默认选择「Heap snapshot」打印堆快照，尝试打印 2-3 次 GC 操作后的堆快照信息，并选择「Comparison」与上一份快照或者其他快照进行比对，从中排查问题。</p></li><li><p>可以通过 #New 列和 #Deleted 列观察内存创建和销毁的数量，按照 #Delta 列进行降序排序，观察堆快照的使用情况从中排查问题。</p></li></ol><h1 id="常见案例"><a href="#常见案例" class="headerlink" title="常见案例"></a>常见案例</h1><h2 id="1-发现-closure-出现问题"><a href="#1-发现-closure-出现问题" class="headerlink" title="1. 发现 (closure) 出现问题"></a>1. 发现 (closure) 出现问题</h2><ol><li><p>比如轮询回调函数，未在调用结束后释放；</p></li><li><p>重复的事件监听，未释放过期的事件监听；</p></li><li><p>模块文件内容临时变量存储未被清理；</p></li></ol><h2 id="2-发现-array-出现问题"><a href="#2-发现-array-出现问题" class="headerlink" title="2. 发现 (array) 出现问题"></a>2. 发现 (array) 出现问题</h2><ol><li>比如 Vue 下的监听导致数组重复监听；</li></ol><h1 id="使用-Chrome-任务管理器协助排查问题"><a href="#使用-Chrome-任务管理器协助排查问题" class="headerlink" title="使用 Chrome 任务管理器协助排查问题"></a>使用 Chrome 任务管理器协助排查问题</h1><ol><li><p>点击 Chrome 右侧的「自定义及控制 Google Chrome」按钮，选择「更多工具」，打开「任务管理器」。</p></li><li><p>可以右键点击顶部表头对任务管理器表头进行筛选显示，如下图。</p></li></ol><p><img src="/2023/01/12/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/pic1.png"></p><ol start="3"><li>建议开启「内存占用空间」、「CPU」、「网络」、「GPU内存」、「JavaScript使用的内存」来观察当前 Chrome Tab 标签页的使用情况。</li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Performance" scheme="https://zongzi531.com/categories/Performance/"/>
+    
+    
+    <category term="Chrome" scheme="https://zongzi531.com/tags/Chrome/"/>
+    
+    <category term="Performance" scheme="https://zongzi531.com/tags/Performance/"/>
+    
+    <category term="浏览器" scheme="https://zongzi531.com/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+    <category term="Devtools" scheme="https://zongzi531.com/tags/Devtools/"/>
+    
+    <category term="性能优化" scheme="https://zongzi531.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>２０２３年おめでとうございます</title>
@@ -429,27 +458,6 @@
     
     
     <summary type="html">春节快乐！～</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>２０２２年おめでとうございます</title>
-    <link href="https://zongzi531.com/2022/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%92%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
-    <id>https://zongzi531.com/2022/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%92%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
-    <published>2022-01-01T13:13:21.000Z</published>
-    <updated>2022-01-01T13:13:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>2021 年，负责内部组件库，TypeScript 进阶，工程化实践，接触低代码，核心架构设计，做技术分享等等。<br>2022 年，持续前进，明确目标。</p></blockquote><h2 id="回顾-2021-年"><a href="#回顾-2021-年" class="headerlink" title="回顾 2021 年"></a>回顾 2021 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong> <code>微量</code></li><li><strong><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">📔</span> 日本語学習文法・語彙</strong> <code>语法及词汇 第1页</code></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的前端知识体系</strong> <code>持续进行</code></li><li><strong><span class="github-emoji" alias="hammer_and_wrench" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f6e0.png?v8">🛠</span> 学习前端自动化工程体系</strong> <code>持续进行</code></li><li>阅读 ECMA 标准 <code>6.2.4 The Reference Specification Type</code></li><li>学习 OKR</li></ul><h2 id="展望-2022-年"><a href="#展望-2022-年" class="headerlink" title="展望 2022 年"></a>展望 2022 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="notebook_with_decorative_cover" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d4.png?v8">📔</span> 日本語学習文法・語彙</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己知识体系</strong><ul><li>阅读 ECMA 标准</li><li>学习计算机图形学&#x2F;可视化领域</li><li>实践 Three.js</li><li>学习服务端架构</li><li>学习产品思维</li></ul></li></ul><h2 id="持续进行"><a href="#持续进行" class="headerlink" title="持续进行"></a>持续进行</h2><ul><li>关注 ECMA 标准 &#x2F; ECMAScript Next</li><li>关注前端发展趋势</li><li>关注 NPM 社区</li><li>关注 TypeScript</li><li>学习算法</li><li>学习 CSS</li><li>至少 2 场技术分享</li></ul><h2 id="优先级较低的规划"><a href="#优先级较低的规划" class="headerlink" title="优先级较低的规划"></a>优先级较低的规划</h2><ul><li>了解 JavaScript 在不同宿主环境下的表现</li><li>尝试实践渲染性能优化</li><li>尝试 Angular、Ember.js</li><li>尝试 Progressive Web Apps</li><li>尝试 WebAssembly</li><li>学习 Web Accessibility</li></ul><h2 id="📚-建立自己知识体系"><a href="#📚-建立自己知识体系" class="headerlink" title="📚 建立自己知识体系"></a><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己知识体系</h2><p>怎么说呢，今年的学习其实较去年来说，变得缓慢了……</p><p>当然了，形成自己的知识体系必然重要，现在看来其实可以跑出「前端」这个范围，而是从一个更广更大的范围形成自己的知识体系。</p><p>我来一点点说明，从语言这个角度出发，我们需要具备对 ECMA 标准的认识，并且能够在宿主环境中找到可优化的方案，从而在 TC39 发起提案。</p><p>可以说是一条非常牛逼的道路，并且从中还会学习更底层的语言，对 JS 的认识会有大幅度提升，对宿主环境（V8）有着清晰的认识。</p><p>从样式的角度出发，也不乏是一个走的人不太多的道路，通过学习 CSS 规范并加以实践，形成自己对宿主环境表现的认知体系，不断总结，尝试更高阶的使用方式，掌握样式带来的渲染性能优化等等能力。</p><p>从计算机图形学、可视化这类角度出发，掌握图形学基础，也可以在「前端」以外的地方发力，比如做一款游戏是一件很有成就感的事情。</p><p>从服务端的角度则是后端技术，我也不太了解，总之这是一条路。</p><p>从技术架构这个角度出发，需要学会对每一种技术优劣形态的分析，并且能够在当前的场景下选择合适的解决方案，同样具备在未来 5 - 10 年可升级、并且含有兜底的技术方案，这条路需要具备大量的技术能力，当然还需要掌握最前沿的技术，不过各个角度都需要掌握最前沿的技术。</p><p>从项目的角度出发，需要能够负责项目的可行性、推进和落地的能力，同时需要具备能够对项目进行合理排期、风险把控等管理能力。对了，关于项目孵化的这块内容，同时需要具备商业价值的探索、立项、结合 OKR 形成核心目标，从痛点切入等等。</p><p>大概目前能想到的就是这些内容，这些角度可以同时并行，我认为不影响，只要你能力足够强大……</p><p>经过这一年，慢慢回顾其实发现自己做的最多的是关于逻辑相关的工作，会让自己觉得可能是擅长逻辑？缺乏思维创新和审美创新，当然这有可能是没有尝试过另外一块领域导致自己有这样的刻板印象，不过没什么关系，可以尝试学习一些专业的书籍以尝试看看。</p><p>不过还是需要进行大量的体验、学习、比对、总结和积累，才会形成自己的一套体系。</p><p>有一点其实我也慢慢想明白了，我想 Remote 远程办公。</p><p>这就是我这一年对职业的新看法，其实比去年来说，不会再聚焦于「前端」这个词，而是看的更多更广了。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
     
     
     
