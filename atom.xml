@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-01-12T13:45:21.000Z</updated>
+  <updated>2023-02-01T08:25:32.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>兔飞猛进</title>
+    <link href="https://zongzi531.com/2023/02/01/%E5%85%94%E9%A3%9E%E7%8C%9B%E8%BF%9B/"/>
+    <id>https://zongzi531.com/2023/02/01/%E5%85%94%E9%A3%9E%E7%8C%9B%E8%BF%9B/</id>
+    <published>2023-02-01T08:25:32.000Z</published>
+    <updated>2023-02-01T08:25:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>回顾这一年，团队独立，新成员加入，完整规模的人员扩充，确实给我带来了不一样的体验。</p><blockquote><p>「逃走只会得到一样东西，前进的话就能得到两样东西」 ———— 機動戦士ガンダム 水星の魔女</p></blockquote><p>讲实话，这一年比前几年都要忙，因为团队的独立面临的压力都在我们身上，不会像之前那样有太多的时间学习技术，更多的是深入到业务层面做。</p><p>有幸的是，能被选择进入低代码这条赛道，能够有机会参与到产品设计中，有机会体会从 0 开始的过程，希望可以到达 1 ，也希望今年可以在业务层面取得不错的成绩。</p><p>虽然说技术的提升都来自于业务，但是我总是很贪心，总是希望像以前这样获得更多的技术。不过，抛开以前的想法，我也希望从现状中探索出更好的技术提升的方式，不仅能够在业务中深入，产品设计中深入，也能从中找到不错的技术提升方式，并且因为销售团队的加入，我也希望从销售方面学习些知识。</p><p>性能优化这块工作，我渴望接触更多。</p><p>关于副业，我只能说还在探索中，希望这份危机感一直伴随着我，我能够有所准备，以应对变化。</p><h1 id="基础建设"><a href="#基础建设" class="headerlink" title="基础建设"></a>基础建设</h1><ul><li>低代码引擎</li><li><a href="https://github.com/zongzi531/random-wasm">@zong&#x2F;random-wasm</a></li><li><a href="https://github.com/zongzi531/js.macro">@zong&#x2F;js.macro</a></li></ul><h1 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h1><ul><li>《当前端把手伸向后端，做起全栈时》</li><li>《实现自己的 JavaScript 宏》</li><li>《初探 Rust》</li></ul><h1 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h1><ul><li><p><a href="https://github.com/sunface/rust-course">sunface&#x2F;rust-course</a> <a href="https://github.com/sunface/rust-course/pull/387">#387</a> <a href="https://github.com/sunface/rust-course/pull/389">#389</a> <a href="https://github.com/sunface/rust-course/pull/394">#394</a> <a href="https://github.com/sunface/rust-course/pull/400">#400</a> <a href="https://github.com/sunface/rust-course/pull/401">#401</a> <a href="https://github.com/sunface/rust-course/pull/427">#427</a> <a href="https://github.com/sunface/rust-course/pull/429">#429</a> <a href="https://github.com/sunface/rust-course/pull/435">#435</a> <a href="https://github.com/sunface/rust-course/pull/471">#471</a> <a href="https://github.com/sunface/rust-course/pull/492">#492</a> <a href="https://github.com/sunface/rust-course/pull/514">#514</a> <a href="https://github.com/sunface/rust-course/pull/515">#515</a> <a href="https://github.com/sunface/rust-course/pull/516">#516</a> <a href="https://github.com/sunface/rust-course/pull/537">#537</a> <a href="https://github.com/sunface/rust-course/pull/548">#548</a> <a href="https://github.com/sunface/rust-course/pull/569">#569</a> <a href="https://github.com/sunface/rust-course/pull/570">#570</a> <a href="https://github.com/sunface/rust-course/pull/572">#572</a> <a href="https://github.com/sunface/rust-course/pull/575">#575</a> <a href="https://github.com/sunface/rust-course/pull/593">#593</a> <a href="https://github.com/sunface/rust-course/pull/602">#602</a> <a href="https://github.com/sunface/rust-course/pull/603">#603</a> <a href="https://github.com/sunface/rust-course/pull/643">#643</a> <a href="https://github.com/sunface/rust-course/pull/668">#668</a> <a href="https://github.com/sunface/rust-course/pull/670">#670</a> <a href="https://github.com/sunface/rust-course/pull/677">#677</a> <a href="https://github.com/sunface/rust-course/pull/688">#688</a> <a href="https://github.com/sunface/rust-course/pull/696">#696</a> <a href="https://github.com/sunface/rust-course/pull/697">#697</a> <a href="https://github.com/sunface/rust-course/pull/698">#698</a> <a href="https://github.com/sunface/rust-course/pull/699">#699</a> <a href="https://github.com/sunface/rust-course/pull/738">#738</a> <a href="https://github.com/sunface/rust-course/pull/787">#787</a> <a href="https://github.com/sunface/rust-course/pull/794">#794</a> <a href="https://github.com/sunface/rust-course/pull/804">#804</a> <a href="https://github.com/sunface/rust-course/pull/808">#808</a> <a href="https://github.com/sunface/rust-course/pull/815">#815</a> <a href="https://github.com/sunface/rust-course/pull/817">#817</a> <a href="https://github.com/sunface/rust-course/pull/820">#820</a> <a href="https://github.com/sunface/rust-course/pull/823">#823</a> <a href="https://github.com/sunface/rust-course/pull/829">#829</a> <a href="https://github.com/sunface/rust-course/pull/834">#834</a> <a href="https://github.com/sunface/rust-course/pull/842">#842</a> <a href="https://github.com/sunface/rust-course/pull/847">#847</a> <a href="https://github.com/sunface/rust-course/pull/861">#861</a> <a href="https://github.com/sunface/rust-course/pull/865">#865</a> <a href="https://github.com/sunface/rust-course/pull/868">#868</a> <a href="https://github.com/sunface/rust-course/pull/869">#869</a> <a href="https://github.com/sunface/rust-course/pull/928">#928</a></p></li><li><p><a href="https://github.com/element-plus/element-plus">element-plus&#x2F;element-plus</a> <a href="https://github.com/element-plus/element-plus/pull/6186">#6186</a></p></li><li><p><a href="https://github.com/antfu/case-police">antfu&#x2F;case-police</a> <a href="https://github.com/antfu/case-police/pull/107">#107</a></p></li><li><p><a href="https://github.com/sunface/rust-by-practice">sunface&#x2F;rust-by-practice</a> <a href="https://github.com/sunface/rust-by-practice/pull/209">#209</a> <a href="https://github.com/sunface/rust-by-practice/pull/257">#257</a> <a href="https://github.com/sunface/rust-by-practice/pull/296">#296</a> <a href="https://github.com/sunface/rust-by-practice/pull/297">#297</a> <a href="https://github.com/sunface/rust-by-practice/pull/298">#298</a></p></li><li><p><a href="https://github.com/ourairyu/persona">ourairyu&#x2F;persona</a> <a href="https://github.com/ourairyu/persona/pull/2">#2</a></p></li><li><p><a href="https://github.com/socketio/engine.io-client">socketio&#x2F;engine.io-client</a> <a href="https://github.com/socketio/engine.io-client/pull/699">#699</a></p></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>Chrome 浏览器性能排查指南</title>
@@ -437,27 +458,6 @@
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>虎虎生威</title>
-    <link href="https://zongzi531.com/2022/02/01/%E8%99%8E%E8%99%8E%E7%94%9F%E5%A8%81/"/>
-    <id>https://zongzi531.com/2022/02/01/%E8%99%8E%E8%99%8E%E7%94%9F%E5%A8%81/</id>
-    <published>2022-02-01T17:01:10.000Z</published>
-    <updated>2022-02-01T17:01:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>春节快乐！～</p><p>其实这一年下来发现，自己仍然在开发这个环境中打转，但是也很明显的发现自己的侧重方向发生了转变，首当其冲的是加强了自己对 TypeScript 的使用能力，通过对 TypeScript 的进阶挑战做题和帮助同事解决使用过程中遇到的高阶类型推导问题来提升这方面的能力，截止今年年初，部门内部 TypeScript 的使用率较去年有大幅度提升，从去年的 20% 的使用率到今年年初的近 80% 使用率，可以说同事们对 TypeScript 的接纳程度也越来越好了。</p><p>其次就是自己这一年在编译方面也有了更多的关注和实践，真实的接触了 AST 的部分结构，开发编译插件来提升同事们的开发体验和提供友好的同构产物，使用 AST 来处理补充代码、替换或移除代码、清除注释块中的代码等等场景……在有过这些铺垫后，当下，我会有想学习 Rust 的冲动。<a href="https://course.rs/">《Rust语言圣经(Rust教程 Rust Course)》</a>，这可能是我会学习的下一门编程语言（本来想说第二门的，但是我接触过的语言也有好几门，虽然用不到）。</p><p>业务交付的话就是基本的需求排期、功能开发、缺陷修复、功能自测工作了。</p><p>当然了，去年年中时候定下的中期目标仍然会一直伴随我</p><ul><li>35 岁前，有一份轻松快乐的副业</li><li>35 岁，打稳主业基础，尝试更多突破</li></ul><p>话说回来，春节前进行了几次 2022 年工作方向的汇报和讨论，对产品商业价值这一问题形成了一个很简单的认识，但是对如何寻找产品的切入点、寻找商业价值这一系列问题上，暂时还是无从下手，这也是我缺乏的能力，或许具备了某些方法论和商业眼光的话，或许就会出现好的机会。</p><h1 id="基础建设"><a href="#基础建设" class="headerlink" title="基础建设"></a>基础建设</h1><p>首先是微前端的支持工作，包含提供技术架构、技术支持、新特性支持和缺陷修复工作。在同事开发过程中不免会遇到一些写法造成当初架构未考虑到的情况，那么解决业务问题当然是第一位的，发布新特性支持和缺陷修复就成为了微前端架构的迭代路径。也同时在今年年中，依靠此技术架构构建的项目体积增长到了 100 多兆，并且自动化的时间也变得缓慢，解决此问题也刻不容缓，经过一些解决思路的整理，最终提升自动化时间和缩小项目的大小，性能提升近70% 。</p><p>差点忘了提，自动化的环节使用了动态构建平台，可以任意撮合各项目之间的子应用关系，组成一个新应用来复用开发。</p><p>再来就是基于 Vue3 的内部组件库开发工作，结合设计部门一起打造新的内部组件库，带着新的设计风格进入 beta 版本。</p><p>这一年，内部标准代码风格也进行了迭代，根据会议内容进行了相应的调整。</p><p>再一个就是低代码建设，也是今年的主要工作内容，工作相关的关键点在之前的博客中有提到，这里就不再提了。</p><h1 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h1><ul><li>《追求优雅的代码2》</li><li>《进阶 TypeScript 之初见泛型》</li><li>《现代 Web 应用的资源及网络优化分享》</li></ul><h1 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h1><ul><li><a href="https://github.com/element-plus/element-plus">element-plus</a> <a href="https://github.com/element-plus/element-plus/pull/1953">#1953</a> <a href="https://github.com/element-plus/element-plus/pull/1963">#1963</a> <a href="https://github.com/element-plus/element-plus/pull/1975">#1975</a> <a href="https://github.com/element-plus/element-plus/pull/2050">#2050</a></li><li><a href="https://github.com/element-plus/vite-plugin-element-plus">vite-plugin-element-plus</a> <a href="https://github.com/element-plus/vite-plugin-element-plus/pull/2">#2</a> <a href="https://github.com/element-plus/vite-plugin-element-plus/pull/5">#5</a></li><li><a href="https://github.com/type-challenges/type-challenges">type-challenges</a> <a href="https://github.com/type-challenges/type-challenges/pull/2158">#2158</a></li><li><a href="https://github.com/fczbkk/css-selector-generator">css-selector-generator</a> <a href="https://github.com/fczbkk/css-selector-generator/pull/132">#132</a></li></ul>]]></content>
-    
-    
-    <summary type="html">春节快乐！～</summary>
     
     
     
