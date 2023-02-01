@@ -32,8 +32,8 @@ jobs:
 
       - name: Generate Page
         run: |
-          hexo clean
-          hexo generate # generate static files
+          npx hexo clean
+          npx hexo generate # generate static files
 
   # Deploy job
   deploy:
