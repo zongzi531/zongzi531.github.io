@@ -15,8 +15,9 @@ featured_image: https://github.com/zongzi531/zongzi531/blob/master/banner.png?ra
 
 ## 更新日志
 
+- 2023年02月01日：~Travis CI~ 迁移至 GitHub Actions
 - 2022年04月15日：~Disqus~ 评论系统变更为 giscus 评论系统
-- 2021年05月26日：集成 Travis CI 解放双手
+- 2021年05月26日：集成 ~Travis CI~ 解放双手
 - 2020年12月21日：新增 License
 - 2020年07月01日：新增「日本語のコーナー」、调整「通勤那点事」以分组形式展示（未优化交互）
 - 2020年06月28日：将「关于」更名为「紹介」（读作syoukai）

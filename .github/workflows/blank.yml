@@ -35,7 +35,7 @@ jobs:
           npx hexo clean
           npx hexo generate # generate static files
 
-      - name: Deploy Pageß
+      - name: Deploy Page
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
