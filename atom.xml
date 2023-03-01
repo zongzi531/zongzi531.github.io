@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-02-01T08:25:32.000Z</updated>
+  <updated>2023-03-01T15:03:35.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>压力即机会</title>
+    <link href="https://zongzi531.com/2023/03/01/%E5%8E%8B%E5%8A%9B%E5%8D%B3%E6%9C%BA%E4%BC%9A/"/>
+    <id>https://zongzi531.com/2023/03/01/%E5%8E%8B%E5%8A%9B%E5%8D%B3%E6%9C%BA%E4%BC%9A/</id>
+    <published>2023-03-01T15:03:35.000Z</published>
+    <updated>2023-03-01T15:03:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>怎么说呢，最近半年是真的忙，压力也真实存在，有好有坏吧。</p><p>不说这个了，因为也改变不了环境，或许跳出环境，或许适应环境。</p><p>一看上面的话就充满了无奈，当然也有好的地方。</p><p>一是低代码引擎持续迭代，并且已经孵化了第三款应用，基于原有的自由布局模式和流式布局模式外，孵化了网格布局模式。</p><p>二是升级了原低代码组件开发脚手架，规范了协议、加载模式等内容。并且使用 Vite 等新前端技术来实现，可以说相比旧 Webpack 来说，体验大有提升。</p><p>不过 Vite 的非全量编译在第一次访问页面时会显得较为缓慢，不知道有没有可以优化的空间，后面有时间再看吧。</p><p>三是下班时间自己倒腾了一下 stable-diffusion ，确实乐趣无穷，目前来说已经在 Windows 和 MacOS 上尝试了安装和运行，虽然说官方有教程，不过第一次尝试过程中真的是频繁报错。</p><p>后续我也想是整理一个 stable-diffusion 安装、使用的简单教程，当然了，现在网上已经有很多教程，我想再深入学习一下。</p><p><img src="/2023/03/01/%E5%8E%8B%E5%8A%9B%E5%8D%B3%E6%9C%BA%E4%BC%9A/pic2.png"></p><p>四是因为工作原因接触到 Unity 技术以及相关渲染技术，因为工作原因暂时不多做介绍。</p><p>噢对了，月初部门组织团建，观影《流浪地球2》，讲道理这个爆米花和可乐是真的爽。</p><p>可见，未来科技确实会成为人类的好帮手～</p><p>没了，说完了，像是流水账。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>兔飞猛进</title>
@@ -437,27 +458,6 @@
     
     
     <summary type="html">羡慕老婆先去三亚旅游～而我还在搬砖...</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>想旅游</title>
-    <link href="https://zongzi531.com/2022/03/01/%E6%83%B3%E6%97%85%E6%B8%B8/"/>
-    <id>https://zongzi531.com/2022/03/01/%E6%83%B3%E6%97%85%E6%B8%B8/</id>
-    <published>2022-03-01T10:05:13.000Z</published>
-    <updated>2022-03-01T10:05:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>冬天渐渐过去了，天气渐渐的要暖和起来了，想计划着带老婆去三亚度个假，挑选一个天气晴朗的好日子出游。</p><p>春节过完年回来后，主要负责组织内低代码项目的基础协议编写，参考阿里提供的两份协议《阿里巴巴中后台前端物料规范》和《阿里巴巴中后台前端搭建协议规范》，并集合组织内两个低代码项目的架构，重新整理并编写两份贴合组织现有低代码项目的协议内容，以整合两个项目的基础架构和物料资源。</p><p>再一个就是在完成两份协议后，进行基础架构的设计和开发，正在进行中……</p><p>回到自身，在春节放假前其实已经想明白，要学习 Rust ，那么回来也没闲着，利用休息时间学习 Rust 知识，待学习完成后进入实践状态。</p><p>开源社区方面，这个月对多处 Rust 教程书写错误进行了修正，以及对 Element Plus 进行了一次类型修复。</p><p>要说能写在这里的内容，似乎还不如直接去看 Rust 教程或者我的 Github 主页。</p><p>其余的话就是对组织内的基础建设支持了。</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：3.2.1 闭包 Closure</li></ul><p>回到家其实一直有想学习日语的想法，但是白天消耗的精力实在太多了，还是看情况而定吧……当然了，要学的东西一样也不会少，加油吧。</p><p>话说回来，最近我的厨艺确实有了点提升，老婆经常夸我烧的菜好吃～因为上班的关系，老婆总会说“好想吃你做的菜”，嘿嘿～</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
     
     
     
