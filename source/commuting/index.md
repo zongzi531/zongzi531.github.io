@@ -11,7 +11,7 @@ no_comments: true
 >- 2019年11月24日，感受到需要建立前端知识图谱，系统学习。
 >- 2019年12月14日，记录一些工具站点
 >
->*更新时间：* **2023年02月01日**
+>*更新时间：* **2023年03月01日**
 
 ### 站点
 
@@ -27,3 +27,4 @@ no_comments: true
 - [Hackery, Math & Design — Acko.net](http://acko.net/)
 - [数据可视化工具目录](https://datavizcatalogue.com/ZH/index.html)
 - [type-challenges](https://github.com/type-challenges/type-challenges)
+- [Civitai | Stable Diffusion models, embeddings, hypernetworks and more](https://civitai.com/)
