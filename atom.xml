@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-03-01T15:03:35.000Z</updated>
+  <updated>2023-04-01T16:42:34.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通过机器学习释放生产力</title>
+    <link href="https://zongzi531.com/2023/04/01/%E9%80%9A%E8%BF%87%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%87%8A%E6%94%BE%E7%94%9F%E4%BA%A7%E5%8A%9B/"/>
+    <id>https://zongzi531.com/2023/04/01/%E9%80%9A%E8%BF%87%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%87%8A%E6%94%BE%E7%94%9F%E4%BA%A7%E5%8A%9B/</id>
+    <published>2023-04-01T16:42:34.000Z</published>
+    <updated>2023-04-01T16:42:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>最近一段时间网络上几乎任何地方都充斥着 AI 和人工智能的话题，也因为 ChatGPT 让我们思考，人工智能真的迎来了一个新的时代，虽然说自己只是一个切图仔，但是看到 ChatGPT 与传统搜索引擎的巨大差距，也感受到了自己所处的行业的危机感。</p><p>从某些角度来说，自己其实早就已经跳出了前端开发的工作岗位，虽然说目前的 Title 是前端开发，但是已经慢慢的从思想上开始变为从全局出发。</p><p>让我特别感兴趣的其实并不是 ChatGPT ，虽然 ChatGPT 的回答方式不是像搜索引擎那样的返回，但是我的兴趣点还是在 stable-diffusion 上。</p><p>其实不难发现，在未来，人工智能一定能辅助人类，释放更多生产力，一样的卷，人们要掌握的基本是利用人工智能工具来加速完成工作或事。</p><p>更多的人会使用 Prompt ，也为此，我计划着学习机器学习的课程，我希望自己可以知道机器学习、人工智能、神经网络的原理。</p><p>希望有机会可以在这个位置进行发力，做更有趣的事情。</p><p>互联网火起来的时候，人们都俗称「互联网+」，那么未来很有可能出现「AI+」。</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环、刘畊宏直播 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li><li><strong>「Rust 秘典（死灵书）」</strong>：3.1. 引用</li><li><strong>「Machine Learning 2022 Spring」</strong>：Lecture 1:Introduction of Deep Learning</li></ul><p>其实从任务进度来看也好，从年度规划来看也好，会发现我除了本身需要拓展的语言如日语、 Rust 之外，我还需要掌握机器学习相关的知识。</p><p>业务侧继续延伸低代码，也其实可以联想到「AI+LowCode」的交付场景。</p><p>虽然说想学习的内容越来越多了，但是毕竟精力有限，也不希望越来越卷。</p><p>或许在搞懂机器学习等技术后，语言的学习会成为必要的内容，而业务侧的概念只需要持续迭代精进即可吧。</p><p>对了，语言方面可能还需要简单学习 Python 。也是没想到要学的东西越来越多，也越来越卷。</p><h2 id="stable-diffusion"><a href="#stable-diffusion" class="headerlink" title="stable-diffusion"></a>stable-diffusion</h2><p>我对 AI 的兴趣点一定是始于图。生成妹纸！</p><blockquote><p>这是我第一张生成的图片</p></blockquote><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 16px; margin: 16px;">  <img src="pic1.png"></div><blockquote><p>这是我第二次生成的效果比较理想的图片，通过复制关键词在本地实现的效果还不错</p></blockquote><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 16px; margin: 16px;">  <img src="pic2.png">  <img src="pic3.png"></div><blockquote><p>这是我第一次尝试生成 JK</p></blockquote><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 16px; margin: 16px;">  <img src="pic4.png"></div><blockquote><p>这时候我学会了如何使用 lora 生成韩国脸妹纸</p></blockquote><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 16px; margin: 16px;">  <img src="pic5.png">  <img style="display: none;" src="pic6.png">  <img src="pic7.png">  <img src="pic8.png">  <img src="pic9.png">  <img src="pic10.png">  <img src="pic11.png">  <img src="pic12.png">  <img src="pic18.png">  <img src="pic19.png">  <img src="pic20.png">  <img src="pic21.png">  <img src="pic22.png">  <img src="pic23.png"></div><blockquote><p>这一批是我通过 ControlNet 实现的换装吧算是，同一个动作</p></blockquote><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 16px; margin: 16px;">  <img src="pic13.png">  <img src="pic14.png">  <img src="pic15.png">  <img src="pic16.png">  <img src="pic17.png"></div><p>我深陷在生成妹纸中……</p><p>振作！</p><p>但是我需要学习更多的是如何去生成建筑设计图、人物原型图等等，以及如何训练自己的模型。</p><p>掌握这些知识后，我就有希望可以自己独自完成游戏的开发，至于是什么类型的游戏虽然我现在还没有思路，但是我想借助 AI 的力量独自完成一款游戏的开发。</p><p>毕竟能开发出游戏，那是多么自豪的事情啊！</p><h2 id="Unity"><a href="#Unity" class="headerlink" title="Unity"></a>Unity</h2><p>其实在做大屏类的项目来说，也很容易发现，客户端的性能瓶颈，在当下那么多 3D 模型的场景下非常吃客户端的性能，于是正在探索云渲染技术的落地。</p><p>在开发过程中，其实已经同时担任了服务端、SDK的开发角色，同时负责于 Unity 同学进行通信等落地工作。</p><p>也算是比较有趣的一项内容。可以接触到 Signaling 、 WebRTC 、 DTLS 等信息。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>压力即机会</title>
@@ -437,27 +458,6 @@
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初探 Rust</title>
-    <link href="https://zongzi531.com/2022/04/01/%E5%88%9D%E6%8E%A2rust/"/>
-    <id>https://zongzi531.com/2022/04/01/%E5%88%9D%E6%8E%A2rust/</id>
-    <published>2022-04-01T10:05:50.000Z</published>
-    <updated>2022-04-01T10:05:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>羡慕老婆先去三亚旅游～而我还在搬砖…</p><p>Rust 依靠着每天一些碎片时间来学习着，等着把基础知识学完成后，开始实践起来，争取写一些工具出来使用。</p><h2 id="低代码基础建设"><a href="#低代码基础建设" class="headerlink" title="低代码基础建设"></a>低代码基础建设</h2><p><strong>我们团队目前有 HC, 需要招从事低代码基础建设的开发人员…</strong></p><p>这个月主要完成的工作是基于团队内部的低代码协议，打通团队内两款低代码平台和工具的资产，比如组件、配置项等。</p><p>这也是当初编写协议的初衷，为了在早期建立起低代码相关的规范。实现自己的低代码引擎！</p><p>提供了一个运行时适配器工具，能够实现类似于微前端形式的不同 UI 框架的渲染 SDK ，同时为内部两款低代码平台和工具提供了 <code>preset</code> 适配。</p><p>再一个就是既然有运行时，那么就必然存在编译时的工具，当然了，编译适配器这么叫肯定不合理，那么我也找了开源社区中并没有像我们这样的可怕需求，就是使用 Vue3 开发，还得兼容 IE 11 。</p><p>对于这个需求来说，我基于 <code>unplugin</code> 实现了一款编译插件，可以将 Vue3 的 SFC 或者 TSX 文件编译成 Vue2 的编译结果，可以使用在 Vue2 环境下的降级兼容。参考了 <code>vue-loader</code> 、 <code>@vue/compiler-sfc</code> 、 <code>vue-template-compiler</code> 、 <code>vue-template-es2015-compiler</code> 、 <code>@vue/babel-preset-app</code> 等工具来实现。截止当前插件已实现基础的降级兼容能力，还有不少边界问题没有处理。</p><p>以 SFC 为例，对其内容进行解析，解析结果主要产出 <code>template</code> 、 <code>script</code> 、 <code>styles</code> 。</p><p><code>template</code> 会带有 <code>with(this) &#123; ...</code> 将其包装后编译成 <code>es2015</code> 后使用， <code>script</code> 则解析语言类型，若是 Typescript 则进入 Babel 处理后更新， <code>styles</code> 则会遍历处理，当然若语言是 <code>postcss</code> 则进行再处理，等等其他补丁操作。</p><p>最后生成 Vue2 编译结果以达成降级兼容。</p><p>那么今年也将主要发力低代码基础建设了，加油！</p><h2 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h2><p>绩效的调整，对未来的工作来说，即是机遇也是挑战。可以接触到更多的管理模式，对自己来说也是增加压力，达成目标，同样加油！</p><h2 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h2><p>这方面这个月主要集中在 Rust 书籍上的一些修正，既然认真阅读了，那也顺手帮忙修正了一些问题。</p><h2 id="内部建设"><a href="#内部建设" class="headerlink" title="内部建设"></a>内部建设</h2><p>其实非常喜欢开源这套协同工作流程，异步的方式去完成各自的目标。也是参考开源的这套协同流程，现在在内部的 Issues 和 PR 上面也有了不错的的进展。在内部 Wiki 上规范了开设 Issues 和 PR 的模板和要求，大家也能按照要求在上面反映和修复问题。内部组件库也进入了一个更好的迭代更新模式～</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></li><li><strong>「计算机图形学」</strong>：材质与外观</li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：6.3.5 工作空间 Workspace (跳过 4 Rust 异步编程)</li></ul>]]></content>
-    
-    
-    <summary type="html">羡慕老婆先去三亚旅游～而我还在搬砖...</summary>
     
     
     
