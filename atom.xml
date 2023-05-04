@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-04-01T16:42:34.000Z</updated>
+  <updated>2023-05-04T13:43:48.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>初识机器学习</title>
+    <link href="https://zongzi531.com/2023/05/04/%E5%88%9D%E8%AF%86%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://zongzi531.com/2023/05/04/%E5%88%9D%E8%AF%86%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</id>
+    <published>2023-05-04T13:43:48.000Z</published>
+    <updated>2023-05-04T13:43:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>很明显， AI 一定会改变我们的生活方式、工作方式，并且是危险的。</p><p>因为从目前来看，需要 Web3 得到进一步发展，并且成为基础设施后， AI 才会相对变得不那么危险。</p><p>当然，我这里指的危险并不是 AI 自己的演化，而是某些企业基于 AI 的能力来深度定制千人千面。</p><p>毕竟目前处于 Web2 阶段，形成这样的局面很危险。</p><p>就像是「火影忍者」里的「无限月读」幻术一样，“让世上的人们沈浸在美好中，以此来结束世间的痛苦与战乱。”</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环、刘畊宏直播 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li><li><strong>「Rust 秘典（死灵书）」</strong>：3.1. 引用</li><li><strong>「Machine Learning 2022 Spring」</strong>：Lecture 8:Auto-encoder&#x2F; Anomaly Detection</li></ul><h2 id="stable-diffusion-安装指南"><a href="#stable-diffusion-安装指南" class="headerlink" title="stable-diffusion 安装指南"></a>stable-diffusion 安装指南</h2><p>当然不是复制官网的内容，也是借着可以在公司使用 RTX4090 的机会，在公司部署 stable-diffusion 。</p><p>受到网络的影响，所以总结一些其他安装思路。</p><p>但凡是安装出现问题，多数情况都是因为网络的影响所产生的，所以你懂的，根本的解决思路就是解决网络问题。</p><h3 id="安装-torch-1-13-1-cu117-cp310-cp310-win-amd64-whl-缓慢或者容易中断"><a href="#安装-torch-1-13-1-cu117-cp310-cp310-win-amd64-whl-缓慢或者容易中断" class="headerlink" title="安装 torch-1.13.1+cu117-cp310-cp310-win_amd64.whl 缓慢或者容易中断"></a>安装 torch-1.13.1+cu117-cp310-cp310-win_amd64.whl 缓慢或者容易中断</h3><p>可以使用其他下载工具把这个文件单独下载下来，然后进行手动安装。</p><p>需要注意的是，这里需要使用 <code>venv</code> 下的 <code>pip</code> 进行安装，可以尝试输入命令进行安装即可：</p><blockquote><p><a href="https://download.pytorch.org/whl/">https://download.pytorch.org/whl/</a> 这个地址下载起来确实有点吃力</p></blockquote><pre class="line-numbers language-shell"><code class="language-shell">.\venv\Scripts\pip.exe install .\torch-1.13.1+cu117-cp310-cp310-win_amd64.whl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="git-仓库拉取慢"><a href="#git-仓库拉取慢" class="headerlink" title="git 仓库拉取慢"></a>git 仓库拉取慢</h3><p>没什么特别的点，自行前往 Github 下载压缩包解压放到指定目录即可。</p><h3 id="其他安装报错"><a href="#其他安装报错" class="headerlink" title="其他安装报错"></a>其他安装报错</h3><p>如果遇到了如下提示内容，按照提示单独下载安装即可：</p><pre class="line-numbers language-shell"><code class="language-shell">stdout: Microsoft Visual C++ Redistributable is not installed, this may lead to the DLL load failure.It can be downloaded at https://aka.ms/vs/16/release/vc_redist.x64.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="Auto-GPT-安装指南"><a href="#Auto-GPT-安装指南" class="headerlink" title="Auto GPT 安装指南"></a>Auto GPT 安装指南</h2><p>也是比较扯，MacOS 里面自带了 Python 2.x ，导致需要手动区分使用。</p><p>首先你需要安装 Python 3.x 并且安装 <code>pip3</code> 。</p><p>将官方安装教程的 <code>pip</code> 修改成 <code>pip3</code> 来完成安装流程。</p><pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># pip install -r requirements.txt</span>pip3 <span class="token function">install</span> -r requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>比较奇怪的是，我运行会报错，所以我运行 <code>main.py</code> 来启动程序。</p><pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># python -m autogpt</span>python3 -m autogptpython3 scripts/main.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="混合云渲染"><a href="#混合云渲染" class="headerlink" title="混合云渲染"></a>混合云渲染</h2><p>只是依次尝试了 WebRTC 、Electron 和 Tauri 三个技术，没什么特别好说的，只是记录一下。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>通过机器学习释放生产力</title>
@@ -434,27 +455,6 @@
     <updated>2022-06-01T12:57:22.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>お任せとは、料理人に注文を委託するという日本料理の用語である。</p><p>おまかせスタイルを注文したお客様は、メニューに無いような料理が提供される事を期待して注文を行う。一般的にはアラカルトで注文した料理より値段の高い料理が提供される。</p><p>近年、日本料理の浸透とともに、この用語も浸透した。</p></blockquote><p>这个月是我们的结婚纪念日，同样的在这个月老婆也带我去尝试了お任せ～</p><p>很开心～～嘿嘿</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：4.1 数值类型</li></ul><h2 id="低代码建设"><a href="#低代码建设" class="headerlink" title="低代码建设"></a>低代码建设</h2><p>这个月主要负责画布和一些低代码业务侧的能力建设，画布新增功能可支持渲染父或子内容，因为原子组件的加入和考虑到画布未来能力的扩展，也正在进行画布的重构工作。</p><h2 id="JavaScript-Macro"><a href="#JavaScript-Macro" class="headerlink" title="JavaScript Macro"></a>JavaScript Macro</h2><p>受到 Rust 学习带来的影响，发现 JavaScript 没有宏这个概念，其实从某种角度来说 JavaScript 并不需要宏的存在，因为与其他语言有所区别，浏览器是包含编译和运行的。</p><p>当然了，我们想尝试和不需要并不冲突。</p><p>为了实现这个目标，并且更了解 AST，那么我就想着实现 JavaScript 宏看一看。</p><p>于是乎，我就创建了一个仓库开始折腾 <a href="https://github.com/zongzi531/js.macro">zongzi531&#x2F;js.macro</a> 。</p><blockquote><p>Macro in JavaScript powered by Babel.</p></blockquote><p>基于 Babel 提供的能力，利用操作 AST 来实现自己的 JavaScript 宏吧。</p><p>目前我的设想是可以声明变量，截止到儿童节（可能是我想端午节放假了吧……），只实现了一个很基础的能力。</p><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>define<span class="token template-string"><span class="token string">`  @a:1;  @b:2;`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>我的设计是：</p><ol><li><code>@</code> 等价于 <code>const</code> ；</li><li><code>@</code> 后为需要声明的变量名称；</li><li><code>:</code> 等价于 <code>=</code> ；</li><li><code>:</code> 后为变量的初始值；</li><li><code>;</code> 表示声明完成；</li></ol><p>最后代码经过 Babel 编译后得到的代码内容是：</p><pre class="line-numbers language-typescript"><code class="language-typescript"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>当然， <code>define</code> 宏目前功能还有很多局限性，我没有进行对应的处理。</p><p>后面计划实现的能力：</p><ol><li>支持 <code>let</code> 声明 (<code>mut@</code>&#x2F;<code>@@</code>) ；</li><li><code>;</code> 结尾为可选项；</li><li>支持没有初始值；</li><li>若没有初始值则必须以 <code>let</code> 进行声明的校验；</li><li>初始值支持变量等其他 JavaScript 使用方式；</li><li>ESLint 插件 —— 上下文声明变量重复检查；</li></ol><p>同时计划输出文章和内部分享。</p><p>马上端午节了，放假咯～跑</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>核酸常态化</title>
-    <link href="https://zongzi531.com/2022/05/01/%E6%A0%B8%E9%85%B8%E5%B8%B8%E6%80%81%E5%8C%96/"/>
-    <id>https://zongzi531.com/2022/05/01/%E6%A0%B8%E9%85%B8%E5%B8%B8%E6%80%81%E5%8C%96/</id>
-    <published>2022-05-01T08:38:10.000Z</published>
-    <updated>2022-05-01T08:38:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>杭州市政府发布核酸常态化的通知，看出了杭州政府的抗疫决心，我们能做的就是理解和配合，加油杭州！</p><h2 id="PBC"><a href="#PBC" class="headerlink" title="PBC"></a>PBC</h2><p>Q2 开始正式执行 PBC 绩效考核，全称：Personal Business Commitment（个人绩效承诺）。整个 Q2 的工作内容也是围绕着低代码平台迭代、浏览器性能优化等工作进行开展，整个团队也按照一样的目标，分工去一起达成整个团队的 PBC 绩效考核。</p><h2 id="低代码基础建设"><a href="#低代码基础建设" class="headerlink" title="低代码基础建设"></a>低代码基础建设</h2><p>低代码平台也进入正式迭代阶段，除了前端侧业务级别的代码修改，还接触了 Node.js 服务端的业务代码修改。比如学习 <code>typeorm</code>, 编写 migration 文件等业务级别代码。</p><p>同时维护低代码平台配套物料开发 CLI 脚手架，包括能力扩展和缺陷修复。</p><p>以及内部 Webpack 插件能力扩展（布局嵌套功能等）。</p><p>说来说去，其实大部分都是业务级别的工作内容，接触到比较额外的内容就是写 Node.js 在实战中了。</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：10. Rust最佳实践</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：4.1 数值类型</li></ul><h2 id="短期规划"><a href="#短期规划" class="headerlink" title="短期规划"></a>短期规划</h2><p>发现内容有点少，那么来水一点短期规划吧。</p><p>从低代码角度，更多的是提升自己对业务的抽象能力，并且把产品落地落下来，是当前首要任务。</p><p>其二是学习 Rust ，其实已经发现学习了 Rust 后对 JavaScript 的看法也有些转变，也印证了我之前对 ECMA 规范的想法，如果想改进 ECMA ，必须从其他语言入手，寻找 JavaScript 缺少的地方等等。学习 Rust 对我自身的能力也是一种提升。</p><p>预计 5月，进入实践阶段。</p><p>5月还计划做的一件事情就是内部技术分享，本来计划着分享一篇《实现自己的 JavaScript 宏》的技术内容，也是受 Rust 的启发，想利用 AST 去实现一些有意思的内容，但是查阅了资料发现，还是需要去学习一些内容，但是我还是想把主题暂定在这个上面去做一些挑战和学习。</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
