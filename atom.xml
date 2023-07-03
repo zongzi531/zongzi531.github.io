@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-06-01T08:20:55.000Z</updated>
+  <updated>2023-07-03T18:01:23.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>试着做一个「消消乐」吧</title>
+    <link href="https://zongzi531.com/2023/07/03/%E8%AF%95%E7%9D%80%E5%81%9A%E4%B8%80%E4%B8%AA%E6%B6%88%E6%B6%88%E4%B9%90%E5%90%A7/"/>
+    <id>https://zongzi531.com/2023/07/03/%E8%AF%95%E7%9D%80%E5%81%9A%E4%B8%80%E4%B8%AA%E6%B6%88%E6%B6%88%E4%B9%90%E5%90%A7/</id>
+    <published>2023-07-03T18:01:23.000Z</published>
+    <updated>2023-07-03T18:01:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月很高兴老婆抢到了五月天的演唱会门票，又去 High 了一把，真爽！</p><p>可是后半个月我却因为吃坏肚子，休息了好几天……</p><p>始终是怀疑是盒马的冷冻烤翅因为我没烤熟吃坏了肚子，非常难受……</p><p>生病使我更加的确信，健康的重要以及老婆的重要！</p><h2 id="碧蓝航线"><a href="#碧蓝航线" class="headerlink" title="碧蓝航线"></a>碧蓝航线</h2><p>陪伴了我好几年的黄油，决定退坑了！也愿碧蓝航线可以蒸蒸日上！</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环、刘畊宏直播 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li><li><strong>「Rust 秘典（死灵书）」</strong>：3.1. 引用</li><li><del><strong>「Machine Learning 2022 Spring」</strong>：Lecture 15:Meta Learning</del></li></ul><h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><p>来谈谈机器学习吧，学习完机器学习的课程，可以说只学了几根鸡毛，因为没有「环境」的关系，所以其实没办法真正涉猎到这个领域去，只是希望自己可以通过这次学习简单的认识到一些有关机器学习的内容，或许可以在将来，在其他的领域把这些概念融会贯通应用起来。</p><h2 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h2><p>Unity 在这个月也完成了基础课程的学习，对基础的界面有了浅显的认识，也学习了一个消消乐的课程，课程中提供的游戏模式有时间模式、障碍模式、剩余次数模式，还是比较经典的。</p><p>我想经过学习后，通过自己的理解（绝对不抄），实现一款消消乐的游戏。</p><p>我计划只先实现一个时间奖励模式，计划在国庆节前能完成。</p><p>话说回来，我去查了一下，如果上架苹果商店或者 Steam 商店是要交一笔费用的，想想还是算了，毕竟自己啥也不是。</p><p>再来就是这个消消乐的 UI 设计了，我打算使用 sd 来完成，所以我最近又抓起了 sd 来尝试把玩。</p><p>也希望能够算出让我满意的 UI 了，如果这一步没走通的话，我只能先用一些素的图片来撑场面了。</p><h2 id="低代码"><a href="#低代码" class="headerlink" title="低代码"></a>低代码</h2><p>工作方面还是主要负责低代码相关的研发，低代码调度器、低代码脚手架、低代码运行时性能优化</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>游戏梦</title>
@@ -440,31 +461,6 @@
     <category term="Babel" scheme="https://zongzi531.com/tags/Babel/"/>
     
     <category term="macro" scheme="https://zongzi531.com/tags/macro/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《当前端把手伸向后端，做起全栈时》</title>
-    <link href="https://zongzi531.com/2022/06/09/%E5%BD%93%E5%89%8D%E7%AB%AF%E6%8A%8A%E6%89%8B%E4%BC%B8%E5%90%91%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%81%9A%E8%B5%B7%E5%85%A8%E6%A0%88%E6%97%B6/"/>
-    <id>https://zongzi531.com/2022/06/09/%E5%BD%93%E5%89%8D%E7%AB%AF%E6%8A%8A%E6%89%8B%E4%BC%B8%E5%90%91%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%81%9A%E8%B5%B7%E5%85%A8%E6%A0%88%E6%97%B6/</id>
-    <published>2022-06-09T10:56:20.000Z</published>
-    <updated>2022-06-09T10:56:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p><a href="https://github.com/zongzi531/daily-learning/blob/master/share/%E5%BD%93%E5%89%8D%E7%AB%AF%E6%8A%8A%E6%89%8B%E4%BC%B8%E5%90%91%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%81%9A%E8%B5%B7%E5%85%A8%E6%A0%88%E6%97%B6.pdf">链接</a></p></blockquote><p>本次内容来自内部的一些课题分享，也非技术性的内容，只是浅谈一下作为前端如何“卷”起来罢了。</p><p>首先是我们都从事着前端开发的工作，也会每天和产品、设计、后端、测试、运维等产品生命周期内的成员们打交道。</p><p>那么什么被称作是“全栈”呢？</p><p>从知乎上我看到一句内容我挺赞同的，全栈就是一个通才，能够自己创建不平凡的应用程序。</p><p>很关键，其实会和你看到这次分享时的想法有点不太一样，只是在定义全栈这件事情的角度发生了变化。</p><p>从广义上来说，全栈就是一条龙服务，即用户提出了一个应用程序的需求，全栈能够独自设计并交付这个应用程序来满足用户的需求。</p><p>可以说是包揽了整个应用程序产品的生命周期，样样精通。</p><p>但是我们今天也不会讨论的这么广，那么回到正题。</p><p>从软件开发的角度来说，即前端+后端可以产出一个应用程序，前端也就是我们俗称的切图仔，也就是我；后端是我们俗称的业务仔。</p><p>那么有了如此浅显的认识后，我们该如何从前端出发，把手往后端伸过去，做起一个全栈开发工程师呢？</p><p>其实我们可以慢慢的伸过去，我们来回忆一下。</p><p>我们与后端交互频率最高的操作，那必定是 HTTP 请求，通俗宽泛一些的讲就是 AJAX 。</p><p>在工作多了其实会发现 RESTful 这种架构并没有真正意义上的方便我们的交互，它也有它的问题。</p><p>那么这时候喜欢“卷”的我们就设计了一套中间服务，美其名曰 BFF 。</p><p>其实 BFF 可以算是我们伸向后端的第一步，首先跟我们的后端同学分析现状，业务仔每次因为一个特殊的需求或者场景需要给我们增加一个 API 接口真的很心累，作为业务仔才不想关心这些呢。我们的后端同学表示只想专心于业务，那么我们“卷”的机会就出现了。</p><p>这时候后端同学通常会暴露出一些具备通用性且抽象的 API 接口，至于我们想如何使用，我们则在 BFF 进行自行定义，那么如果遇到上面的问题，我们也不需要苦苦的去求后端同学增加 API 接口，后端同学也可以跟切图仔说拜拜了。</p><p>当然了，BFF 中间的实现过程依然可以是 RESTful to RESTful 的形式，也可以是 GraphQL to RESTful 的形式，前者有后端控制，我们 BFF 只做中间的转换者。</p><p>慢慢的，你会发现后端没有心思来管业务，他们更多的会去关心一些底层的设计和性能问题，那我们就可以既是切图仔又是业务仔了，这时候的后端为我们提供可以是一些由后端给出的操作数据的接口、或者直接操作数据库的权限，那么这时候我们就是名副其实的业务仔了。</p><p>再慢慢的，我们就把手伸到那些底层的设计和性能问题时，后端就不复存在了……（开玩笑的）这是不可能的。</p><p>当然了，对于前端……啊呸！软件开发工程师来说，熟悉并掌握整个软件开发的细节，这时候就是全栈了！</p><p>自身能力也得到了提升，可以说是卷王之王！</p><p>当然了，我觉得接触后端不一定是要做个业务仔的，也可以从应用程序优化的角度着手。</p><p>比如我们前端常说的 SSR ，优化应用程序在客户端的启动时间，也会让你接触到后端的技术。</p><p>优化 DevOps 流程、缩短编译时间等等优化方向都会让你接触到后端技术，只是作为前端，其实身边有很多机会可以把手伸到后端去，所以大胆伸进去试一试吧！</p><p>当然从此发散出去，也可以把手伸向产品设计、视觉交互设计、软件测试、软件运维等各个环节中去……卷他们。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Share" scheme="https://zongzi531.com/categories/Share/"/>
-    
-    
-    <category term="前端" scheme="https://zongzi531.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-    <category term="后端" scheme="https://zongzi531.com/tags/%E5%90%8E%E7%AB%AF/"/>
-    
-    <category term="全栈" scheme="https://zongzi531.com/tags/%E5%85%A8%E6%A0%88/"/>
     
   </entry>
   
