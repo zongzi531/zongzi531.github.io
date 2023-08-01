@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-07-03T18:01:23.000Z</updated>
+  <updated>2023-08-01T09:09:25.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git多合一</title>
+    <link href="https://zongzi531.com/2023/08/01/git%E5%A4%9A%E5%90%88%E4%B8%80/"/>
+    <id>https://zongzi531.com/2023/08/01/git%E5%A4%9A%E5%90%88%E4%B8%80/</id>
+    <published>2023-08-01T09:09:25.000Z</published>
+    <updated>2023-08-01T09:09:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>我们都会遇到分支 Feature 合并的协作场景吧，接下来我将总结一个。</p><p>假设我们在某个 Feature 分支提交了许多 commit 信息，我们需要将近期研发的 Feature 合并至主分支，或者将近期的某部分 Feature 合并至主分支。</p><p>操作这个的前提是，需要团队养成平时研发时保持良好的纯净的 commit 信息习惯，我们只做 git 操作。</p><p>首先我们需要操作 <code>git rebase -i</code> 指令，将需要合并的 Feature 合成一条 commit 记录。</p><p>在此之后，我们需要修改此条 commit 记录的时间，可以执行 <code>date -R</code> 取得当前时间，如 <code>Tue, 01 Aug 2023 09:15:01 +0800</code> 。</p><p>然后通过 <code>git commit --amend --date=&quot;Tue, 01 Aug 2023 09:15:01 +0800&quot;</code> 命令修改提交时间。</p><p>记住此条 commit 的 hash 值后回到主分支操作 <code>git cherry-pick</code> 命令（如果有冲突请自行本地处理）。</p><blockquote><p>如果额外产生了一条 merge 信息，请尝试使用 <code>git cherry-pick -m</code> 进行解决。</p></blockquote><p>那么，现在就实现了分支 Feature 合并到主分支的纯净操作。</p><p>分支多条 commit 合一后，同步到主分支为一次 commit。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Git" scheme="https://zongzi531.com/categories/Git/"/>
+    
+    
+    <category term="Git" scheme="https://zongzi531.com/tags/Git/"/>
+    
+    <category term="git" scheme="https://zongzi531.com/tags/git/"/>
+    
+    <category term="rebase" scheme="https://zongzi531.com/tags/rebase/"/>
+    
+    <category term="commit" scheme="https://zongzi531.com/tags/commit/"/>
+    
+    <category term="cherry-pick" scheme="https://zongzi531.com/tags/cherry-pick/"/>
+    
+  </entry>
   
   <entry>
     <title>试着做一个「消消乐」吧</title>
@@ -436,31 +465,6 @@
     <category term="import" scheme="https://zongzi531.com/tags/import/"/>
     
     <category term="iframe" scheme="https://zongzi531.com/tags/iframe/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《实现自己的 JavaScript 宏》</title>
-    <link href="https://zongzi531.com/2022/06/15/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%AE%8F/"/>
-    <id>https://zongzi531.com/2022/06/15/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%AE%8F/</id>
-    <published>2022-06-15T12:55:30.000Z</published>
-    <updated>2022-06-15T12:55:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p><strong>宏</strong>（英语：Macro），是一种批量处理的称谓。</p><p>之所以会想做这次分享一是因为想继续多的操作一些 AST 相关的知识，二是也是受到学习 Rust 的影响。</p><h2 id="什么是宏"><a href="#什么是宏" class="headerlink" title="什么是宏"></a>什么是宏</h2><p>我觉得百科中这段解释比较合理：</p><blockquote><p>计算机科学里的宏是一种抽象（Abstraction），它根据一系列预定义的规则替换一定的文本模式。解释器或编译器在遇到宏时会自动进行这一模式替换。对于编译语言，宏展开在编译时发生，进行宏展开的工具常被称为宏展开器。宏这一术语也常常被用于许多类似的环境中，它们是源自宏展开的概念，这包括键盘宏和宏语言。绝大多数情况下，“宏”这个词的使用暗示着将小命令或动作转化为一系列指令。</p><p>宏的用途在于自动化频繁使用的序列或者是获得一种更强大的抽象能力。</p></blockquote><p>当然，更多的解释可以前往百科中学习。</p><h2 id="初识宏"><a href="#初识宏" class="headerlink" title="初识宏"></a>初识宏</h2><p>我最早知道宏的时候是在小学，那时候对宏其实产生了很大的恐惧，那时候流行的是宏病毒，以至于在学习 Office 软件时一直以来不敢接触里面的宏功能。</p><blockquote><p>在计算机技术的历史中，宏病毒（英语：Macro virus）是一种使得应用软件的相关应用文档内含有被称为宏的可执行代码的病毒。一个电子表格程序可能允许用户在一个文档中嵌入“宏命令”，使得某种操作得以自动运行；同样的操作也就可以将病毒嵌入电子表格来对用户的使用造成破坏。</p></blockquote><p>那时候的我，看到这些还是会感到惧怕，担心电脑因此中病毒……当然现在的我也不会去特意接触这些。</p><h2 id="为什么-JavaScript-没有宏编程"><a href="#为什么-JavaScript-没有宏编程" class="headerlink" title="为什么 JavaScript 没有宏编程"></a>为什么 JavaScript 没有宏编程</h2><p>学习 JavaScript 至今，你会发现， JavaScript 没有宏编程的概念，我想其实这与 JavaScript 的运行环境有关系，当然 JavaScript 设计之初就没有设计宏的概念。</p><p>我会认为在 JavaScript 中要想实现类似于宏编程的能力就是函数本身，可以自己实现一个具备抽象的函数处理方法，而宏编程则是向上面百科中提到的内容一样，是一种预定义的规则替换模式。</p><h2 id="如何借助-Babel-实现自己的宏"><a href="#如何借助-Babel-实现自己的宏" class="headerlink" title="如何借助 Babel 实现自己的宏"></a>如何借助 Babel 实现自己的宏</h2><p>本文将不会侧重什么是 AST 、如何编写 AST 等知识，我们可以借助 Babel 提供的宏插件来按照要求实现自己的宏能力。</p><p>我们会以 <a href="https://github.com/kentcdodds/babel-plugin-macros">kentcdodds&#x2F;babel-plugin-macros</a> 提供的教程实现自己的宏。</p><p>我们按照文档要求编写代码如下：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span><span class="token keyword">import</span> <span class="token punctuation">{</span> createMacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-plugin-macros'</span><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createMacro</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> references<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// do something</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>并且，我们需要这样去使用：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// example</span><span class="token keyword">import</span> <span class="token punctuation">{</span> somemacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>somemacro<span class="token template-string"><span class="token string">`any your want`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>由于使用 TypeScript 编写，为了提供更好的类型推导，我们需要在 <code>index.ts</code> 定义我们需要被导出的宏方法，并定义对应的逻辑即可。</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> define<span class="token punctuation">:</span> <span class="token keyword">Function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>目前，我设计的是想实现一个属于我自己的声明变量的宏。</p><p>我期望实现的宏代码如下：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>define<span class="token template-string"><span class="token string">`  @a:1;  @b:2;  @c:'cde';  @d:"def";  @e:true;  @f:false;`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>最终经过 Babel 编译后的结果是：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// Compiled</span><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span><span class="token keyword">const</span> c <span class="token operator">=</span> <span class="token string">"cde"</span><span class="token punctuation">;</span><span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token string">"def"</span><span class="token punctuation">;</span><span class="token keyword">const</span> e <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span><span class="token keyword">const</span> f <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>我们需要从 <code>references</code> 对象中获取对应的宏名称使用：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span><span class="token keyword">import</span> <span class="token punctuation">{</span> createMacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-plugin-macros'</span><span class="token keyword">import</span> transformDefine <span class="token keyword">from</span> <span class="token string">'./transforms/define'</span><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createMacro</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> references<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">// 这里的 define 即我们期望使用的宏名称</span>  <span class="token function">transformDefine</span><span class="token punctuation">(</span>references<span class="token punctuation">.</span>define<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> define<span class="token punctuation">:</span> <span class="token keyword">Function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>接下来辛苦由 <code>transformDefine</code> 函数进行 AST 操作获得我们想要的结果。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，我们了解了什么是宏以及 JavaScript 该如何借助 Babel 实现自己的宏。</p><p>其中的折腾劲十足，明明可以通过抽象一个函数得到的结果，我们非要绕这么大一圈。</p><p>也并不是没有收获，我们收获上面的知识，很开心。</p><p>可以查看 <a href="https://www.npmjs.com/package/@zong/js.macro">@zong&#x2F;js.macro</a> 学习 AST 处理操作。</p><p>目前来看，我不仅实现了上面的静态宏使用方法，还实现了：</p><pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span><span class="token keyword">const</span> var1 <span class="token operator">=</span> <span class="token number">2</span>define<span class="token template-string"><span class="token string">`  @va:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;  @vb:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>var1<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;`</span></span><span class="token comment" spellcheck="true">// Compiled</span><span class="token keyword">const</span> var1 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span><span class="token keyword">const</span> va <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">const</span> vb <span class="token operator">=</span> var1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>当然，未来我还考虑加入更多的宏能力来锻炼 AST 处理能力。</p><ol><li>支持 <code>let</code> 声明 (<code>mut@</code>&#x2F;<code>@@</code>) ；</li><li><code>;</code> 结尾为可选项；</li><li>支持没有初始值；</li><li>若没有初始值则必须以 <code>let</code> 进行声明的校验；</li><li>初始值支持变量等其他 JavaScript 使用方式；</li><li>ESLint 插件 —— 上下文声明变量重复检查；</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Share" scheme="https://zongzi531.com/categories/Share/"/>
-    
-    
-    <category term="JavaScript" scheme="https://zongzi531.com/tags/JavaScript/"/>
-    
-    <category term="Babel" scheme="https://zongzi531.com/tags/Babel/"/>
-    
-    <category term="macro" scheme="https://zongzi531.com/tags/macro/"/>
     
   </entry>
   
