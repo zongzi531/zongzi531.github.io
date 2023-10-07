@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-09-01T08:52:51.000Z</updated>
+  <updated>2023-10-07T07:30:33.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>鸽子王</title>
+    <link href="https://zongzi531.com/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/"/>
+    <id>https://zongzi531.com/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/</id>
+    <published>2023-10-07T07:30:33.000Z</published>
+    <updated>2023-10-07T07:30:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>「消消乐」的开发进度可以说是堪比龟速，主打一个慢，咕咕咕～</p><p>最近阅读了一下比较火的 Bun 的文档，当然还没读完。</p><p>和老婆一起做了几次提拉米苏，挺有趣的。</p><p>还干嘛了？</p><p>《异人之下》好看的呀批，推荐！</p><p>话说经过这个夏天，厨艺变强了一点……</p><p>再就是国庆去日本玩了趟～嘿嘿，开心～</p><p>水完了……</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>思考性能优化</title>
@@ -58,9 +79,9 @@
     <category term="Git" scheme="https://zongzi531.com/categories/Git/"/>
     
     
-    <category term="Git" scheme="https://zongzi531.com/tags/Git/"/>
-    
     <category term="git" scheme="https://zongzi531.com/tags/git/"/>
+    
+    <category term="Git" scheme="https://zongzi531.com/tags/Git/"/>
     
     <category term="rebase" scheme="https://zongzi531.com/tags/rebase/"/>
     
@@ -438,27 +459,6 @@
     <category term="webpack" scheme="https://zongzi531.com/tags/webpack/"/>
     
     <category term="micro" scheme="https://zongzi531.com/tags/micro/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>真的夏天来咯</title>
-    <link href="https://zongzi531.com/2022/07/01/%E7%9C%9F%E7%9A%84%E5%A4%8F%E5%A4%A9%E6%9D%A5%E5%92%AF/"/>
-    <id>https://zongzi531.com/2022/07/01/%E7%9C%9F%E7%9A%84%E5%A4%8F%E5%A4%A9%E6%9D%A5%E5%92%AF/</id>
-    <published>2022-07-01T13:25:37.000Z</published>
-    <updated>2022-07-01T13:25:37.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>本来还说着今年春天加班加的有点久，没想到夏天一转眼就来了，温度一下子也就上去了……</p><p>可以说是非常的炎热，没有空调不行啊！</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：6.1 字符串</li></ul><h2 id="低代码建设"><a href="#低代码建设" class="headerlink" title="低代码建设"></a>低代码建设</h2><p>本月主要负责画布编辑、渲染模块重构工作，并适配到平台以及开发 CLI，提供即插即用能力。</p><p>并且开始布局类似于阿里低代码引起的能力，设计整体引擎架构及软件生态等。</p><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>本月也主要负责可视化大屏渲染性能优化工作，分析当前可视化大屏在一些配置较差的设备环境下运行，会因一些交互或者大型 3D 组件产生的掉帧、卡顿现象。</p><p>利用将 JS 执行任务进行优先级划分的策略来减轻当用户产生交互或因大型 3D 组件执行 JS 产生的主线程阻塞情况。</p><p>思路大致借鉴 React Fiber 的思路来进行优化，优化效果在 6.1% ～ 36.5% 之间，从结果来看并不是很理想。</p><p>因为很不稳定，并且提升的性能也有限。</p><p>从此布局，需要重新设计组件规范，提供组件侧参与调度任务 API 能力。</p><p>同时对于渲染模块，需要具备运行策略的调度能力来实现稳定的性能优化。</p><p><img src="/2022/07/01/%E7%9C%9F%E7%9A%84%E5%A4%8F%E5%A4%A9%E6%9D%A5%E5%92%AF/pic2.png" alt="性能优化"></p><h2 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h2><ul><li><a href="https://github.com/zongzi531/daily-learning/blob/master/share/%E5%BD%93%E5%89%8D%E7%AB%AF%E6%8A%8A%E6%89%8B%E4%BC%B8%E5%90%91%E5%90%8E%E7%AB%AF%EF%BC%8C%E5%81%9A%E8%B5%B7%E5%85%A8%E6%A0%88%E6%97%B6.pdf">《当前端把手伸向后端，做起全栈时》</a></li><li><a href="https://zongzi531.com/2022/06/15/%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%AE%8F/">《实现自己的 JavaScript 宏》</a></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
     
   </entry>
   
