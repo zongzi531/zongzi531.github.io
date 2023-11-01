@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-10-07T07:30:33.000Z</updated>
+  <updated>2023-11-01T09:39:05.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>初入后端</title>
+    <link href="https://zongzi531.com/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/"/>
+    <id>https://zongzi531.com/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/</id>
+    <published>2023-11-01T09:39:05.000Z</published>
+    <updated>2023-11-01T09:39:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>国庆回来之后，开始从事服务端开发的工作，也在服务端同事的帮助下，快速的熟悉了服务端的搭建及开发。</p><p>从框架选型开始，我选择了一个较为成熟生态的 NestJS 服务端框架，数据库选用 postgresql 。</p><p>开发规范则也是按照 NestJS 推荐的最佳实践进行执行，从 <code>controllers</code> <code>entities</code> <code>services</code> <code>modules</code> <code>dtos</code> <code>filters</code> <code>interceptors</code> 到单元测试，都是按照推荐规范进行，也是感受了一波服务端的开发规范吧。</p><p>数据库从熟悉基础的 SQL 语言外，也尝试了 <code>typeorm</code> 的同步生成功能（当然，这是不推荐在生产使用的，但是在单元测试中我选择使用同步功能，以保证每个测试用例都可以纯净的执行），最后也是选用 SQL + migration 进行初始化的实现，当然也满足后期迭代的数据库迁移工作。</p><p>实现基础的 API 后也体验了使用 swagger 自动生成 API 文档的功能，感受还不错。</p><p>通过 redis 来记录用户登录状态，也是简单尝试了一把鉴权。</p><p>再来就是 CI 了，因为研发环境相当于是私有环境，部署环境不仅需要在私有环境上部署，还要在办公环境上部署，所以选型考虑使用 docker 来完成。</p><p>私有环境部署较为简单，利用 CI + docker 可以实现自动化，但是办公网环境的部署则需要将镜像 <code>docker push</code> 出来，进行手动部署。出于工作环境的限制，暂时这一步骤就考虑手动进行了。</p><p>环境的配置目前采用 dot 文件 + Dockerfile 参数实现，也可以在后期进行更自由的定制。</p><p>其余就是基础的 CRUD + 单元测试了，也是借此机会简单的熟悉了服务端研发的入门。</p><p>对了，有关鉴权 <code>token</code> 的生成，以及一些加解密算法，后续可以深入研究一下。</p><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>再来就是这个月负责了老低代码平台的性能优化问题，因为原有的业务还在持续交付，但是在交付环境的表现并不是特别的理想。</p><p>在部分情况下会出现卡顿，或者长时间运行后会卡顿的现象。</p><p>经过对交付项目的观察，也是发现了确实存在内存泄露的问题。</p><p>从而对老低代码平台进行性能排查，从平台侧、组件侧、框架侧（Vue 2.6、组件库）其实都能看到一些内存泄露的问题。</p><p>比较简单击破的其实是组件侧，虽然组件量大，但是代码逻辑相对较为简单，内存泄露的原因也比较好找，大多是闭包产生的内存泄露问题，其次就是全局变量、事件监听、监听对象外泄、意外报错等问题。</p><p>平台侧则较为复杂一些，需要了解分析平台渲染的运行时逻辑才能击破，检查平台自身、引用组件时、操作组件生命周期时产生不当的副作用或者未及时释放关联关系产生的内存泄露问题。</p><p>也存在着一些双向链表解除单边引起的内存泄露问题以及一些业务逻辑执行顺序不合理的地方。</p><p>再一个就是因为交付场景是在 Electron 里运行的，是不是可以使用 Electron 来进行定期手动 GC 释放，当然这个思路还没有尝试过。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>鸽子王</title>
@@ -436,29 +457,6 @@
     
     
     <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微前端下 Webpack Runtime 遇坑记录</title>
-    <link href="https://zongzi531.com/2022/07/15/%E5%BE%AE%E5%89%8D%E7%AB%AF%E4%B8%8Bwebpack-runtime%E9%81%87%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
-    <id>https://zongzi531.com/2022/07/15/%E5%BE%AE%E5%89%8D%E7%AB%AF%E4%B8%8Bwebpack-runtime%E9%81%87%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
-    <published>2022-07-15T09:36:12.000Z</published>
-    <updated>2022-07-15T09:36:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>故事发生在微前端的场景下，基于 single-spa 定制，在路由切换进行子应用交替时发生的情况。</p><p>举例说明， 有子应用 A 和子应用 B ， A 使用 Vue3 相关技术栈， B 使用 Vue2 相关技术栈。</p><p>默认情况下，第一次进入 A 或者第一次进入 B ，相应的内容都可以正常的载入，并且不会报错。</p><p>但是如果说是先进入 A ，再进入 B ，或者反之操作，会引起后者无法正常载入，并且可以从控制台查看到报错信息。</p><p>定位到的问题也非常诡异，检查 A 和 B 本身并没有什么问题会造成这样的情况。</p><p>尝试从 Webpack 的编译产物入手排查发现， Webpack Runtime 的代码中，有一个 <code>modules</code> 的对象，用于在加载模块时进行查询使用。</p><p>仔细来回切换发现， A 和 B 的 <code>modules</code> 在第一次进入时都很正常，但是进行切换后会发现 <code>modules</code> 出现了污染。</p><p>简单点来说就是 A 和 B 的 <code>modules</code> 意外的合并了……</p><p>仔细检查 Runtime 代码和翻阅 Webpack 文档发现，是因为 async chunk 引起此问题。</p><p>并且发现 A 和 B 的代码中的 <a href="https://www.webpackjs.com/configuration/output/#output-jsonpfunction"><code>jsonpFunction</code></a> 同名了，所以导致了此问题。</p><blockquote><p>只在 target 是 web 时使用，用于按需加载(load on-demand) chunk 的 JSONP 函数。</p><p>JSONP 函数用于异步加载(async load) chunk，或者拼接多个初始 chunk(CommonsChunkPlugin, AggressiveSplittingPlugin)。</p><p>如果在同一网页中使用了多个（来自不同编译过程(compilation)的）webpack runtime，则需要修改此选项。</p><p>如果使用了 output.library 选项，library 名称时自动追加的。</p></blockquote><p>比较奇怪的是，明明 A 和 B 的构建配置已经设置了独立的 <code>library</code> 选项，但是还是造成了这么多困惑。</p><p>总之，问题得以解决，记录一下。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Webpack" scheme="https://zongzi531.com/categories/Webpack/"/>
-    
-    
-    <category term="webpack" scheme="https://zongzi531.com/tags/webpack/"/>
-    
-    <category term="micro" scheme="https://zongzi531.com/tags/micro/"/>
     
   </entry>
   
