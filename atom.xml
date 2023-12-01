@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2023-11-01T09:39:05.000Z</updated>
+  <updated>2023-12-01T10:39:00.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>登山</title>
+    <link href="https://zongzi531.com/2023/12/01/%E7%99%BB%E5%B1%B1/"/>
+    <id>https://zongzi531.com/2023/12/01/%E7%99%BB%E5%B1%B1/</id>
+    <published>2023-12-01T10:39:00.000Z</published>
+    <updated>2023-12-01T10:39:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>也算不上是登山吧，哈哈哈！坐中巴车上山 15 分钟，路程非常山路，自己开车估计得半小时起码。</p><p>到了山顶感觉真好，山上有两棵很大的银杏树，去的时候叶子半绿半黄。</p><p>下山的时候是走下山的，走了差不多 1 个小时。</p><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>整个月的工作内容基本就是一个后端实习生了……</p><p>继续上个月的服务端功能，这个月学习了不少知识。</p><p>数据库本来只会使用 <code>typeorm</code> 进行简单的 API 调用，比如 <code>find</code> 之类的简单操作，对于需要聚合多张表的数据也是使用了比较拙劣的办法，查出一张表并根据这张表的关联 ID 进行遍历查询，最后进行聚合，后来经过后端大哥的提示，可以使用多表关联查询来实现，虽然过程中出现了一些 SQL 的报错是后端大哥帮忙给出的解决思路，但是自己对 SQL 的时候确实还是一片空白。</p><p>数据库备份则是通过 <code>pg_dump</code> 来进，还原则是通过 <code>psql</code> 进行，这些命令都依赖于 <code>postgresql-client</code> 这个库。</p><p>Docker 方面，一是将 GitLab Runner 从部署服务器上运行调整为 Docker 容器运行，以确保每个 <code>stage</code> 的执行过程足够纯粹。</p><p>也经历了 Docker 镜像启动时需要添加额外的 <code>hosts</code> 配置，解决 DNS 映射问题，以及自己打包依赖集合镜像。</p><p>因为要经历 Docker 镜像的推送，考虑通过登录服务器来操作，利用 <code>ssh-agent</code> 来实现免密登录服务器，以进行一系列操作，比如推送镜像、更新服务等。</p><p>特别需要一提的是挂载功能真的很好用。</p><p>NestJS 开启了日志功能，便于 API 调试，虽然没做持久化，但是可以直接进入容器查看日志，如果考虑做持久化的话，结合挂载功能实现即可，只不过需要额外考虑日志存储的上限，清除等逻辑。</p><p>并且在开发的过程中也发现了，起初数据库设计的不完全，结合数据库迁移 migration 对数据库进行了字段补充。</p><p>服务端的单元测试算是其中比较轻松的，连接测试数据库，保证每一个测试用例的纯净，根据业务场景编写单元测试。</p><p>部署过程中也为前端仓库添加 CI 、 Docker 镜像制作、自动化等工作，也同时配置了 Nginx 的配置文件，算是简单的尝试了一把。</p><p>不仅部署了前端，还针对各环境提供了测试和正式环境的部署，并且对正式环境关闭了端口映射，统一通过网关进行对外暴露（简单尝试了进入容器查询数据库数据）。</p><p>办公网环境同时还提供给前端同学可视化 Docker 操作界面 portainer 使用。</p><p>看似这个月的服务端学习过程比较顺利，但是我们原业务组的后端被“优化了”，我来接手原业务组 Node.js 侧的业务，还部分接手部署相关的工作。真的是挑战啊！</p><p>同时小组有打算尝试接入 AI 来辅助开发的意向，后续计划开始预研。</p><p>又能尝试新的事物咯！</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>初入后端</title>
@@ -426,27 +447,6 @@
     <updated>2022-09-01T13:18:57.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>本来想说，八月很热，都是 40 度的高温天气，结果八月底降温了，感觉比去年这个时候还要凉快一些。</p><p>不过还好，赶着八月底去山顶露营玩耍了一下。</p><p>今年夏天这么热，也不知道今年冬天会不会很冷。</p><p>这个月可以说是比较忙碌，都在处理低代码的工作，但是在忙碌之余，通过公司的课程学习了「绩效管理」相关的知识内容。</p><p>同时也在中午的时候学习了部分 <code>wasm-bindgen</code> 的知识，计划着把 Rust 实践起来，在能够较为熟练的掌握 Rust 时，为大家提供一些 Rust 的入门分享。</p><p>也在考虑要不上购买一些有关 Rust 的书籍和产品、商业相关的书籍学习。</p><p>暂时就这么多吧，散会！</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li></ul><h2 id="生活记忆"><a href="#生活记忆" class="headerlink" title="生活记忆"></a>生活记忆</h2><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpeg">  <img src="pic3.jpeg">  <div></div></div>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>为什么总是在下班的时候下雷阵雨</title>
-    <link href="https://zongzi531.com/2022/08/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E6%98%AF%E5%9C%A8%E4%B8%8B%E7%8F%AD%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8B%E9%9B%B7%E9%98%B5%E9%9B%A8/"/>
-    <id>https://zongzi531.com/2022/08/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E6%98%AF%E5%9C%A8%E4%B8%8B%E7%8F%AD%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8B%E9%9B%B7%E9%98%B5%E9%9B%A8/</id>
-    <published>2022-08-01T08:53:39.000Z</published>
-    <updated>2022-08-01T08:53:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>其实也是这几年慢慢的意识到，为什么杭州夏天的雷阵雨总是在下班的时候开始下，17:30 左右，真是糟糕透了！</p><p>每每到下班，就开始下雨！不开车湿鞋、开车路上堵。</p><p>今天刚好上网搜了一下，砖家说是：热力和动力因素共同导致。</p><p>砖业的我也不太懂，我理解的大致意思就是，下午的时候天气晴朗，地面很多的水气都升上去了，到下班的时间水气厚了就下雨了（可能也不是厚了，反正就是要下雨了），也真是好巧不巧……</p><p>反正就是这样吧……</p><h2 id="加藤-恵（かとう-めぐみ）"><a href="#加藤-恵（かとう-めぐみ）" class="headerlink" title="加藤 恵（かとう めぐみ）"></a>加藤 恵（かとう めぐみ）</h2><p>入手 劇場版「冴えない彼女の育てかた Fine」 加藤恵 メイドVer. 1&#x2F;7スケールフィギュア</p><p><img src="/2022/08/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E6%98%AF%E5%9C%A8%E4%B8%8B%E7%8F%AD%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8B%E9%9B%B7%E9%98%B5%E9%9B%A8/600_11878.jpg" alt="600_11878"></p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：12 类型转换</li></ul><p>有关 ECMA-262 的推进，似乎不是现在的重点，侧重发力 Rust 可能会是不错的选择，待第二语言熟悉后再回过头来看 ECMA 可能才是更好的选择，毕竟需要更多的积累才行。</p><p>也很明显的发现，前端这个领域 JavaScript 虽然占据了主导地位，但是很多底层的优化工作还是得放手交由其他更接近底层的语言去实现，比较有说服力的例子就是 swc 在工程化的的性能提升可见是非常明显了。</p><h2 id="低代码建设"><a href="#低代码建设" class="headerlink" title="低代码建设"></a>低代码建设</h2><p>引擎的设计与实现可谓是 Q3 的一部分工作内容，此次引擎开发采用的是文档、设计先行的工作模式。</p><p>在此期间锻炼了我的文档编写能力，虽然以前编写代码前都也会进行设计，但是没有落地到文档的习惯，不会把自己的设计思路落地成通熟易懂的文字的表达方式。</p><p>同事们只有在接触到我的代码才能大致理解是在做什么，但是并不能理解为什么这么做。</p><p>所以呢，此次会让我更好的学习如何简单、通熟易懂的表达，如何在编码前充分的设计可能性，这样不仅在工作交接、功能回顾的时候能够更高效，也能成为部门的知识沉淀（当然不止这些）。</p><p>引擎的设计更加考验的是抽象能力，也在不断的学习和汲取外部的知识，来提升自己的抽象能力，设计出更好更强大更通用的引擎能力。</p><p>想分享但是又不太好说，不过没关系。</p><p>我想着先把内部的文档写好，再来描述今天的这些也不迟。</p><h2 id="关于未来的焦虑"><a href="#关于未来的焦虑" class="headerlink" title="关于未来的焦虑"></a>关于未来的焦虑</h2><p>说是焦虑呢可能夸张了点，也没到焦虑的这个地步。只是说想提前对未来有些规划或者想法吧（虽然现在一点也想不到，只能定一个浅显的目标）。</p><p>期望还是如此，希望自己在 35 岁时有一份轻松的副业，这样能为自己的 35 岁有更多的保障吧，当然没有也没关系，身体健康才是最重要的。</p><p>毕竟人生无常，不过在这个环境下努力一下也是没关系的。</p><p>总之希望，身体健康、开心快乐，足矣！</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
