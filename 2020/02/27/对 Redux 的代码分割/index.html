@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?43780135">
+<link rel="stylesheet" href="/css/journal.css?56023354">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -42,7 +42,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -78,11 +78,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -203,11 +203,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -341,57 +341,12 @@
 <p>因为项目中仅使用了一个 <code>store</code> 来使用 Redux ，当里面出现一个细小的变化会导致整个 <code>store</code> 的打包 <code>hash</code> 值变化，从而影响到大部分被分割的 React 代码，包括很多并未做修改的文件。</p>
 <p>所以我开始着手对 Redux 进行代码分割，官方<a target="_blank" rel="noopener" href="https://redux.js.org/recipes/code-splitting/">《Code Splitting - Redux》</a>也提供了很好的支持。</p>
 <p>基于此，我开始修改项目中的代码， 依照官方的例子开始修改：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
- * rootReducer 即认为静态 reducer
- * asyncReducers 即认为需要合并的异步 reducer
- */</span>
-<span class="token keyword">const</span> createReducer <span class="token operator">=</span> asyncReducers <span class="token operator">=</span><span class="token operator">></span> <span class="token function">combineReducers</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token operator">...</span>rootReducer<span class="token punctuation">,</span>
-  <span class="token operator">...</span>asyncReducers
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * rootReducer 即认为静态 reducer</span></span><br><span class="line"><span class="comment"> * asyncReducers 即认为需要合并的异步 reducer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">createReducer</span> = <span class="keyword">async</span>Reducers =&gt; <span class="title function_">combineReducers</span>(&#123;</span><br><span class="line">  ...rootReducer,</span><br><span class="line">  ...asyncReducers</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 暴露给外界的注入函数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> injectReducer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">configureStore</span> = preloadedState =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> store = <span class="title function_">createStore</span>(</span><br><span class="line">    <span class="title function_">combineReducers</span>(rootReducer),</span><br><span class="line">    preloadedState,</span><br><span class="line">    middleware</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  store.<span class="property">asyncReducers</span> = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注入函数</span></span><br><span class="line">  injectReducer = store.<span class="property">injectReducer</span> = <span class="function">(<span class="params">key, asyncReducer</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Object</span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(store.<span class="property">asyncReducers</span>, key)) &#123; <span class="keyword">return</span>; &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 赋值</span></span><br><span class="line">    store.<span class="property">asyncReducers</span>[key] = asyncReducer;</span><br><span class="line">    <span class="comment">// 合并 reducer 并调用 replaceReducer 方法更新</span></span><br><span class="line">    store.<span class="title function_">replaceReducer</span>(<span class="title function_">createReducer</span>(store.<span class="property">asyncReducers</span>));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> store;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> configureStore;</span><br></pre></td></tr></table></figure>
 
-<span class="token comment" spellcheck="true">// 暴露给外界的注入函数</span>
-<span class="token keyword">export</span> <span class="token keyword">let</span> injectReducer<span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> configureStore <span class="token operator">=</span> preloadedState <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>
-    <span class="token function">combineReducers</span><span class="token punctuation">(</span>rootReducer<span class="token punctuation">)</span><span class="token punctuation">,</span>
-    preloadedState<span class="token punctuation">,</span>
-    middleware
-  <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  store<span class="token punctuation">.</span>asyncReducers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-  <span class="token comment" spellcheck="true">// 注入函数</span>
-  injectReducer <span class="token operator">=</span> store<span class="token punctuation">.</span>injectReducer <span class="token operator">=</span> <span class="token punctuation">(</span>key<span class="token punctuation">,</span> asyncReducer<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>Object<span class="token punctuation">.</span>hasOwnProperty<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    
-    <span class="token comment" spellcheck="true">// 赋值</span>
-    store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> asyncReducer<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 合并 reducer 并调用 replaceReducer 方法更新</span>
-    store<span class="token punctuation">.</span><span class="token function">replaceReducer</span><span class="token punctuation">(</span><span class="token function">createReducer</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>asyncReducers<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">return</span> store<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">export</span> <span class="token keyword">default</span> configureStore<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对原先的创建 <code>store</code> 过程进行了更新，暴露了 <code>injectReducer</code> 函数用于异步注入，结合 <code>import()</code> 就可以实现对 React 的代码分割，真是非常喜悦。</p>
 <p>那我们来看看怎么用：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> lazy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> injectReducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/store/configureStore'</span><span class="token punctuation">;</span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; lazy &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; injectReducer &#125; <span class="keyword">from</span> <span class="string">&#x27;@/store/configureStore&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title class_">Something</span>: <span class="title function_">lazy</span>(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &#x27;Something&#x27; */</span><span class="string">&#x27;@/reducers/something&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">injectReducer</span>(<span class="string">&#x27;something&#x27;</span>, res.<span class="property">default</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &#x27;Something&#x27; */</span><span class="string">&#x27;@/containers/Something&#x27;</span>);</span><br><span class="line">  &#125;),</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  Something<span class="token punctuation">:</span> <span class="token function">lazy</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* webpackChunkName: 'Something' */</span><span class="token string">'@/reducers/something'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token function">injectReducer</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* webpackChunkName: 'Something' */</span><span class="token string">'@/containers/Something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token operator">...</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>使用方法也特别简单，即动态导入后注入 reducer 即可，以实现代码分割。</p>
 <p>那么到此，相对实现了一个比较完善的 React + Redux 的代码分割解决方案，可以以页面维度，或者你想要的细度去控制代码分割的程度以应对项目的快迭代。</p>
 
@@ -462,7 +417,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?16283869"></script>
+<script src="/js/journal.js?50676254"></script>
 
 
     <script src="https://giscus.app/client.js"

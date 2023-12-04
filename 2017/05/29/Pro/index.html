@@ -26,7 +26,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?6785179">
+<link rel="stylesheet" href="/css/journal.css?48034022">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -46,7 +46,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -82,11 +82,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -207,11 +207,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -348,10 +348,8 @@
 <p>文件也迁移完了，软件也基本把能想到的都装好了。</p>
 <p>博客迁移因为<code>node_modules</code>笨重的原因，我都是迁移过来后<code>npm install</code>的。</p>
 <p>但是在启动本地<code>hexo server</code>的时候又报错了，天呐。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">{</span> <span class="token punctuation">[</span>Error: Cannot <span class="token function">find</span> module <span class="token string">'./build/Release/DTraceProviderBindings'</span><span class="token punctuation">]</span> code: <span class="token string">'MODULE_NOT_FOUND'</span> <span class="token punctuation">}</span>
-<span class="token punctuation">{</span> <span class="token punctuation">[</span>Error: Cannot <span class="token function">find</span> module <span class="token string">'./build/default/DTraceProviderBindings'</span><span class="token punctuation">]</span> code: <span class="token string">'MODULE_NOT_FOUND'</span> <span class="token punctuation">}</span>
-<span class="token punctuation">{</span> <span class="token punctuation">[</span>Error: Cannot <span class="token function">find</span> module <span class="token string">'./build/Debug/DTraceProviderBindings'</span><span class="token punctuation">]</span> code: <span class="token string">'MODULE_NOT_FOUND'</span> <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [Error: Cannot find module <span class="string">&#x27;./build/Release/DTraceProviderBindings&#x27;</span>] code: <span class="string">&#x27;MODULE_NOT_FOUND&#x27;</span> &#125;</span><br><span class="line">&#123; [Error: Cannot find module <span class="string">&#x27;./build/default/DTraceProviderBindings&#x27;</span>] code: <span class="string">&#x27;MODULE_NOT_FOUND&#x27;</span> &#125;</span><br><span class="line">&#123; [Error: Cannot find module <span class="string">&#x27;./build/Debug/DTraceProviderBindings&#x27;</span>] code: <span class="string">&#x27;MODULE_NOT_FOUND&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+
 <p>尝试了网上各种解决方法，都不行。当然出现这个问题应该是我直接<code>npm install</code>造成的，虽然<code>hexo</code>暂时并没有用到<code>dtrace-prodider</code>，但是对于有强迫症的我，看到报错真的很心烦。</p>
 <p>最后呢用最老实的方法，重新安装了<code>hexo-cli</code>、<code>hexo</code>、<code>hexo-util</code>，但是呢，没有办法启动<code>hexo server</code>，那么单独安装了<code>hexo server</code>以为成了，结果页面不会更新。</p>
 <p>怀着忐忑的心情按下了<code>npm install</code>，这下竟然好了……我也不知道为什么，好了……，然后查了下<code>npm list</code>发现没了<code>dtrace-prodider</code>，神奇！</p>
@@ -434,7 +432,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?52461435"></script>
+<script src="/js/journal.js?51102694"></script>
 
 
     <script src="https://giscus.app/client.js"

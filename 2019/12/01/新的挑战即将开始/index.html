@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?48143971">
+<link rel="stylesheet" href="/css/journal.css?72711234">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -38,7 +38,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -74,11 +74,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -199,11 +199,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -324,138 +324,18 @@
                 <div class="post-body">
                     <h2 id="React-源码阅读计划"><a href="#React-源码阅读计划" class="headerlink" title="React 源码阅读计划"></a>React 源码阅读计划</h2><p>截止 11 月底，学习版 React 编写基本完成，很高兴终于基本把 16.8.6 版本进度完成，从 5 月至今已时过半年之久，陆陆续续算是把她完成了。（喝彩）</p>
 <p>来记录一下最近学习过程中遇到的问题，那么先来看到一段代码：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">ExampleApplication</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token operator">&lt;</span>p<span class="token operator">></span>Example Application<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ExampleApplication</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Example Application<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">ExampleApplication</span> /&gt;</span></span>,</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;container&#x27;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
-ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>
-  <span class="token operator">&lt;</span>ExampleApplication <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">,</span>
-  document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'container'</span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们知道，上面代码中，我们定义了一个 <code>ClassComponent</code> 类组件，但是在进入 <code>beginWork</code> (<a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react-reconciler/src/ReactFiberBeginWork.js#L1893">ReactFiberBeginWork.js</a>) 函数时，她却跳进了 <code>IndeterminateComponent</code> 判断分支，而没有进入她应该进入的 <code>ClassComponent</code> 分支，这使得我很困惑，为什么会这样呢（已忽略无关代码）？</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">beginWork</span><span class="token punctuation">(</span>
-  current<span class="token punctuation">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-  workInProgress<span class="token punctuation">:</span> Fiber<span class="token punctuation">,</span>
-  renderExpirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token punctuation">{</span>
-  <span class="token keyword">switch</span> <span class="token punctuation">(</span>workInProgress<span class="token punctuation">.</span>tag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">case</span> IndeterminateComponent<span class="token punctuation">:</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">// &lt;== 出乎意料的进入此分支</span>
-      <span class="token keyword">const</span> elementType <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>elementType<span class="token punctuation">;</span>
-      <span class="token keyword">return</span> <span class="token function">mountIndeterminateComponent</span><span class="token punctuation">(</span>
-        current<span class="token punctuation">,</span>
-        workInProgress<span class="token punctuation">,</span>
-        elementType<span class="token punctuation">,</span>
-        renderExpirationTime<span class="token punctuation">,</span>
-      <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">case</span> ClassComponent<span class="token punctuation">:</span> <span class="token punctuation">{</span>    <span class="token comment" spellcheck="true">// &lt;== 为什么没有进入应该进入的分支？</span>
-      <span class="token keyword">const</span> Component <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>type<span class="token punctuation">;</span>
-      <span class="token keyword">const</span> unresolvedProps <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>pendingProps<span class="token punctuation">;</span>
-      <span class="token keyword">const</span> resolvedProps <span class="token operator">=</span>
-        workInProgress<span class="token punctuation">.</span>elementType <span class="token operator">===</span> Component
-          <span class="token operator">?</span> unresolvedProps
-          <span class="token punctuation">:</span> <span class="token function">resolveDefaultProps</span><span class="token punctuation">(</span>Component<span class="token punctuation">,</span> unresolvedProps<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">return</span> <span class="token function">updateClassComponent</span><span class="token punctuation">(</span>
-        current<span class="token punctuation">,</span>
-        workInProgress<span class="token punctuation">,</span>
-        Component<span class="token punctuation">,</span>
-        resolvedProps<span class="token punctuation">,</span>
-        renderExpirationTime<span class="token punctuation">,</span>
-      <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">case</span> HostRoot<span class="token punctuation">:</span>
-      <span class="token keyword">return</span> <span class="token function">updateHostRoot</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> workInProgress<span class="token punctuation">,</span> renderExpirationTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">case</span> HostComponent<span class="token punctuation">:</span>
-      <span class="token keyword">return</span> <span class="token function">updateHostComponent</span><span class="token punctuation">(</span>current<span class="token punctuation">,</span> workInProgress<span class="token punctuation">,</span> renderExpirationTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">beginWork</span>(<span class="params"></span></span><br><span class="line"><span class="params">  current: Fiber | <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">  workInProgress: Fiber,</span></span><br><span class="line"><span class="params">  renderExpirationTime: ExpirationTime,</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Fiber</span> | <span class="literal">null</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (workInProgress.<span class="property">tag</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">IndeterminateComponent</span>: &#123;    <span class="comment">// &lt;== 出乎意料的进入此分支</span></span><br><span class="line">      <span class="keyword">const</span> elementType = workInProgress.<span class="property">elementType</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">mountIndeterminateComponent</span>(</span><br><span class="line">        current,</span><br><span class="line">        workInProgress,</span><br><span class="line">        elementType,</span><br><span class="line">        renderExpirationTime,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">ClassComponent</span>: &#123;    <span class="comment">// &lt;== 为什么没有进入应该进入的分支？</span></span><br><span class="line">      <span class="keyword">const</span> <span class="title class_">Component</span> = workInProgress.<span class="property">type</span>;</span><br><span class="line">      <span class="keyword">const</span> unresolvedProps = workInProgress.<span class="property">pendingProps</span>;</span><br><span class="line">      <span class="keyword">const</span> resolvedProps =</span><br><span class="line">        workInProgress.<span class="property">elementType</span> === <span class="title class_">Component</span></span><br><span class="line">          ? unresolvedProps</span><br><span class="line">          : <span class="title function_">resolveDefaultProps</span>(<span class="title class_">Component</span>, unresolvedProps);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateClassComponent</span>(</span><br><span class="line">        current,</span><br><span class="line">        workInProgress,</span><br><span class="line">        <span class="title class_">Component</span>,</span><br><span class="line">        resolvedProps,</span><br><span class="line">        renderExpirationTime,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostRoot</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateHostRoot</span>(current, workInProgress, renderExpirationTime);</span><br><span class="line">    <span class="keyword">case</span> <span class="title class_">HostComponent</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">updateHostComponent</span>(current, workInProgress, renderExpirationTime);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>我开始查找原因，直到我看到 <code>createFiberFromTypeAndProps</code> (<a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react-reconciler/src/ReactFiber.js#L450">ReactFiber.js</a>) 函数（已忽略无关代码）：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">shouldConstruct</span><span class="token punctuation">(</span>Component<span class="token punctuation">:</span> Function<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> prototype <span class="token operator">=</span> Component<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>prototype <span class="token operator">&amp;&amp;</span> prototype<span class="token punctuation">.</span>isReactComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">shouldConstruct</span>(<span class="params">Component: <span class="built_in">Function</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> prototype = <span class="title class_">Component</span>.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">  <span class="keyword">return</span> !!(prototype &amp;&amp; prototype.<span class="property">isReactComponent</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createFiberFromTypeAndProps</span>(<span class="params"></span></span><br><span class="line"><span class="params">  type: any, <span class="comment">// React$ElementType</span></span></span><br><span class="line"><span class="params">  key: <span class="literal">null</span> | string,</span></span><br><span class="line"><span class="params">  pendingProps: any,</span></span><br><span class="line"><span class="params">  owner: <span class="literal">null</span> | Fiber,</span></span><br><span class="line"><span class="params">  mode: TypeOfMode,</span></span><br><span class="line"><span class="params">  expirationTime: ExpirationTime,</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">Fiber</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> fiber;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 原来 IndeterminateComponent 是初始化 Fiber 时的初始 WorkTag </span></span><br><span class="line">  <span class="comment">// 所以才会造成我上面产生的困惑</span></span><br><span class="line">  <span class="keyword">let</span> fiberTag = <span class="title class_">IndeterminateComponent</span>;</span><br><span class="line">  <span class="comment">// The resolved type is set if we know what the final type will be. I.e. it&#x27;s not lazy.</span></span><br><span class="line">  <span class="keyword">let</span> resolvedType = type;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这里是 ClassComponent 需要进入的分支逻辑</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> type === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 问题就出在我没有进入到这个分支， shouldConstruct 函数执行返回 false</span></span><br><span class="line">    <span class="comment">// 导致完全跳过这里的逻辑判断，直接进入 createFiber 函数</span></span><br><span class="line">    <span class="comment">// 上面准备了 shouldConstruct ，我相信看到源码的你，很容易就能发现问题所在</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">shouldConstruct</span>(type)) &#123;</span><br><span class="line">      fiberTag = <span class="title class_">ClassComponent</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fiber = <span class="title function_">createFiber</span>(fiberTag, pendingProps, key, mode);</span><br><span class="line">  fiber.<span class="property">elementType</span> = type;</span><br><span class="line">  fiber.<span class="property">type</span> = resolvedType;</span><br><span class="line">  fiber.<span class="property">expirationTime</span> = expirationTime;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fiber;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">createFiberFromTypeAndProps</span><span class="token punctuation">(</span>
-  type<span class="token punctuation">:</span> any<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// React$ElementType</span>
-  key<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> string<span class="token punctuation">,</span>
-  pendingProps<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
-  owner<span class="token punctuation">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> Fiber<span class="token punctuation">,</span>
-  mode<span class="token punctuation">:</span> TypeOfMode<span class="token punctuation">,</span>
-  expirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> Fiber <span class="token punctuation">{</span>
-  <span class="token keyword">let</span> fiber<span class="token punctuation">;</span>
-
-  <span class="token comment" spellcheck="true">// 原来 IndeterminateComponent 是初始化 Fiber 时的初始 WorkTag </span>
-  <span class="token comment" spellcheck="true">// 所以才会造成我上面产生的困惑</span>
-  <span class="token keyword">let</span> fiberTag <span class="token operator">=</span> IndeterminateComponent<span class="token punctuation">;</span>
-  <span class="token comment" spellcheck="true">// The resolved type is set if we know what the final type will be. I.e. it's not lazy.</span>
-  <span class="token keyword">let</span> resolvedType <span class="token operator">=</span> type<span class="token punctuation">;</span>
-
-  <span class="token comment" spellcheck="true">// 这里是 ClassComponent 需要进入的分支逻辑</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> type <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-    <span class="token comment" spellcheck="true">// 问题就出在我没有进入到这个分支， shouldConstruct 函数执行返回 false</span>
-    <span class="token comment" spellcheck="true">// 导致完全跳过这里的逻辑判断，直接进入 createFiber 函数</span>
-    <span class="token comment" spellcheck="true">// 上面准备了 shouldConstruct ，我相信看到源码的你，很容易就能发现问题所在</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldConstruct</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      fiberTag <span class="token operator">=</span> ClassComponent<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-  fiber <span class="token operator">=</span> <span class="token function">createFiber</span><span class="token punctuation">(</span>fiberTag<span class="token punctuation">,</span> pendingProps<span class="token punctuation">,</span> key<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  fiber<span class="token punctuation">.</span>elementType <span class="token operator">=</span> type<span class="token punctuation">;</span>
-  fiber<span class="token punctuation">.</span>type <span class="token operator">=</span> resolvedType<span class="token punctuation">;</span>
-  fiber<span class="token punctuation">.</span>expirationTime <span class="token operator">=</span> expirationTime<span class="token punctuation">;</span>
-
-  <span class="token keyword">return</span> fiber<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到这里，我发现了是因为校验 <code>isReactComponent</code> 失败才出现上述问题的，那么着手修复即可。我们在 <a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react/src/ReactBaseClasses.js#L31">ReactBaseClasses.js</a> 中加入 <code>Component.prototype.isReactComponent = &#123;&#125;;</code> 即可。</p>
 <p>在后续又遇到了一个很诡异的 <code>state</code> 丢失问题，我知道，我也很清楚肯定是我哪里代码漏写才导致的，我又开始了无尽的调试，考虑从类的 <code>constructor</code> 函数开始调试，其实可以直接看到 <code>constructClassInstance</code> (<a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/v16.8.6/packages/react-reconciler/src/ReactFiberClassComponent.js#L583">ReactFiberClassComponent.js</a>) 函数（已忽略无关代码）：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">constructClassInstance</span><span class="token punctuation">(</span>
-  workInProgress<span class="token punctuation">:</span> Fiber<span class="token punctuation">,</span>
-  ctor<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
-  props<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
-  renderExpirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> any <span class="token punctuation">{</span>
-  <span class="token keyword">let</span> context <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">constructClassInstance</span>(<span class="params"></span></span><br><span class="line"><span class="params">  workInProgress: Fiber,</span></span><br><span class="line"><span class="params">  ctor: any,</span></span><br><span class="line"><span class="params">  props: any,</span></span><br><span class="line"><span class="params">  renderExpirationTime: ExpirationTime,</span></span><br><span class="line"><span class="params"></span>): any &#123;</span><br><span class="line">  <span class="keyword">let</span> context = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title function_">ctor</span>(props, context);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 因为在学习时，我是直接跳过 __DEV__ 情况下的分支的</span></span><br><span class="line">  <span class="comment">// 所以不慎将下面这一行代码删除了</span></span><br><span class="line">  <span class="comment">// 这行代码中除了声明 state ，还有一步赋值操作</span></span><br><span class="line">  <span class="comment">// 就是对 workInProgress.memoizedState 值的赋值操作</span></span><br><span class="line">  <span class="keyword">const</span> state = (workInProgress.<span class="property">memoizedState</span> =</span><br><span class="line">    instance.<span class="property">state</span> !== <span class="literal">null</span> &amp;&amp; instance.<span class="property">state</span> !== <span class="literal">undefined</span></span><br><span class="line">      ? instance.<span class="property">state</span></span><br><span class="line">      : <span class="literal">null</span>);</span><br><span class="line">  <span class="title function_">adoptClassInstance</span>(workInProgress, instance);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">mountClassInstance</span>(<span class="params"></span></span><br><span class="line"><span class="params">  workInProgress: Fiber,</span></span><br><span class="line"><span class="params">  ctor: any,</span></span><br><span class="line"><span class="params">  newProps: any,</span></span><br><span class="line"><span class="params">  renderExpirationTime: ExpirationTime,</span></span><br><span class="line"><span class="params"></span>): <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> instance = workInProgress.<span class="property">stateNode</span>;</span><br><span class="line">  instance.<span class="property">props</span> = newProps;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 由于上面那一行代码的丢失，导致这一步赋值操作永远为 null</span></span><br><span class="line">  instance.<span class="property">state</span> = workInProgress.<span class="property">memoizedState</span>;</span><br><span class="line">  instance.<span class="property">refs</span> = emptyRefsObject;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ctor</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token comment" spellcheck="true">// 因为在学习时，我是直接跳过 __DEV__ 情况下的分支的</span>
-  <span class="token comment" spellcheck="true">// 所以不慎将下面这一行代码删除了</span>
-  <span class="token comment" spellcheck="true">// 这行代码中除了声明 state ，还有一步赋值操作</span>
-  <span class="token comment" spellcheck="true">// 就是对 workInProgress.memoizedState 值的赋值操作</span>
-  <span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">(</span>workInProgress<span class="token punctuation">.</span>memoizedState <span class="token operator">=</span>
-    instance<span class="token punctuation">.</span>state <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> instance<span class="token punctuation">.</span>state <span class="token operator">!==</span> undefined
-      <span class="token operator">?</span> instance<span class="token punctuation">.</span>state
-      <span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">adoptClassInstance</span><span class="token punctuation">(</span>workInProgress<span class="token punctuation">,</span> instance<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">mountClassInstance</span><span class="token punctuation">(</span>
-  workInProgress<span class="token punctuation">:</span> Fiber<span class="token punctuation">,</span>
-  ctor<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
-  newProps<span class="token punctuation">:</span> any<span class="token punctuation">,</span>
-  renderExpirationTime<span class="token punctuation">:</span> ExpirationTime<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> instance <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>stateNode<span class="token punctuation">;</span>
-  instance<span class="token punctuation">.</span>props <span class="token operator">=</span> newProps<span class="token punctuation">;</span>
-
-  <span class="token comment" spellcheck="true">// 由于上面那一行代码的丢失，导致这一步赋值操作永远为 null</span>
-  instance<span class="token punctuation">.</span>state <span class="token operator">=</span> workInProgress<span class="token punctuation">.</span>memoizedState<span class="token punctuation">;</span>
-  instance<span class="token punctuation">.</span>refs <span class="token operator">=</span> emptyRefsObject<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到此为止， <code>state</code> 丢失问题也得以解决，进入 <code>mountClassInstance</code> 函数其实就是在进入 <code>ClassComponent</code> 分支之后执行的代码，所以真的是环环相扣啊。</p>
 <p>遇到的问题也分享完了，那么接下来安排一下《React 源码学习》系列文章的后续章节内容（暂定）：</p>
 <ol>
@@ -469,14 +349,8 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
 <li>计划在新的一年逐步建立自己的前端知识体系，并进行不断完善和补全，从而全方面提升自己。</li>
 </ul>
 <h2 id="Ant-Design-Hank-小记"><a href="#Ant-Design-Hank-小记" class="headerlink" title="Ant Design Hank 小记"></a>Ant Design Hank 小记</h2><p>迭代过程中发现了一个 UI 样式的局限性，关于 Tabel 组件，官方提供了 <code>scroll</code> 属性可用于控制列宽，但是当我在列中配置 <code>fixed</code> 属性后，并且列的总宽度计算不及屏幕宽度时，就会出现 Table 撕裂现象，当然此情况是出现在 <code>3.15.2</code> 版本（我司目前固定为此版本），借此我能做的就是再此基础上打补丁，毕竟 fork 下来改不合适，要改的地方连锁反应太大， Tabel 组件 基于 <a target="_blank" rel="noopener" href="https://github.com/react-component/table"><code>rc-table</code></a> ，当然我是去看了源码的（已忽略无关代码）：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// https://github.com/react-component/table/blob/6.4.0/src/ColGroup.js#L25</span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/react-component/table/blob/6.4.0/src/ColGroup.js#L25</span></span><br><span class="line"></span><br><span class="line">  cols = cols.<span class="title function_">concat</span>(</span><br><span class="line">    leafColumns.<span class="title function_">map</span>(<span class="function"><span class="params">c</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">col</span> <span class="attr">key</span>=<span class="string">&#123;c.key</span> || <span class="attr">c.dataIndex</span>&#125; <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">width:</span> <span class="attr">c.width</span>, <span class="attr">minWidth:</span> <span class="attr">c.width</span> &#125;&#125; /&gt;</span></span>;</span><br><span class="line">    &#125;),</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
 
-  cols <span class="token operator">=</span> cols<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>
-    leafColumns<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>c <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> <span class="token operator">&lt;</span>col key<span class="token operator">=</span><span class="token punctuation">{</span>c<span class="token punctuation">.</span>key <span class="token operator">||</span> c<span class="token punctuation">.</span>dataIndex<span class="token punctuation">}</span> style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> width<span class="token punctuation">:</span> c<span class="token punctuation">.</span>width<span class="token punctuation">,</span> minWidth<span class="token punctuation">:</span> c<span class="token punctuation">.</span>width <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看到这里，我留下了眼泪，他只接受唯一一个样式参数 <code>width</code> ，我哭了，所以经过考虑，如果出现上述场景，我们考虑自动调整尾列宽度来修复此问题，借助 <code>ref</code> 来获取当前组件实际在屏幕中的宽度后进行补全计算，代码我就不贴了，因为很简单。</p>
 <h2 id="日语学习计划"><a href="#日语学习计划" class="headerlink" title="日语学习计划"></a>日语学习计划</h2><p>截止 11 月底，近 2 周没学习日语，决定在后期进行计划，固定时间学习日语。</p>
 
@@ -547,7 +421,7 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?61656685"></script>
+<script src="/js/journal.js?80222969"></script>
 
 
     <script src="https://giscus.app/client.js"

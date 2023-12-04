@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?86279027">
+<link rel="stylesheet" href="/css/journal.css?47318265">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -43,7 +43,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -79,11 +79,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -204,11 +204,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -353,77 +353,32 @@
 <h2 id="如何借助-Babel-实现自己的宏"><a href="#如何借助-Babel-实现自己的宏" class="headerlink" title="如何借助 Babel 实现自己的宏"></a>如何借助 Babel 实现自己的宏</h2><p>本文将不会侧重什么是 AST 、如何编写 AST 等知识，我们可以借助 Babel 提供的宏插件来按照要求实现自己的宏能力。</p>
 <p>我们会以 <a target="_blank" rel="noopener" href="https://github.com/kentcdodds/babel-plugin-macros">kentcdodds&#x2F;babel-plugin-macros</a> 提供的教程实现自己的宏。</p>
 <p>我们按照文档要求编写代码如下：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> createMacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-plugin-macros'</span>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; createMacro &#125; <span class="keyword">from</span> <span class="string">&#x27;babel-plugin-macros&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">createMacro</span>(<span class="function">(<span class="params">&#123; references, state, babel &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createMacro</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> references<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// do something</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>并且，我们需要这样去使用：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// example</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> somemacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="keyword">import</span> &#123; somemacro &#125; <span class="keyword">from</span> <span class="string">&#x27;@zong/js.macro&#x27;</span></span><br><span class="line"></span><br><span class="line">somemacro<span class="string">`any your want`</span></span><br></pre></td></tr></table></figure>
 
-somemacro<span class="token template-string"><span class="token string">`any your want`</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>由于使用 TypeScript 编写，为了提供更好的类型推导，我们需要在 <code>index.ts</code> 定义我们需要被导出的宏方法，并定义对应的逻辑即可。</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span>
-<span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> define<span class="token punctuation">:</span> <span class="token keyword">Function</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">declare</span> <span class="keyword">const</span> <span class="attr">define</span>: <span class="title class_">Function</span></span><br></pre></td></tr></table></figure>
+
 <p>目前，我设计的是想实现一个属于我自己的声明变量的宏。</p>
 <p>我期望实现的宏代码如下：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; define &#125; <span class="keyword">from</span> <span class="string">&#x27;@zong/js.macro&#x27;</span></span><br><span class="line"></span><br><span class="line">define<span class="string">`</span></span><br><span class="line"><span class="string">  @a:1;</span></span><br><span class="line"><span class="string">  @b:2;</span></span><br><span class="line"><span class="string">  @c:&#x27;cde&#x27;;</span></span><br><span class="line"><span class="string">  @d:&quot;def&quot;;</span></span><br><span class="line"><span class="string">  @e:true;</span></span><br><span class="line"><span class="string">  @f:false;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
 
-define<span class="token template-string"><span class="token string">`
-  @a:1;
-  @b:2;
-  @c:'cde';
-  @d:"def";
-  @e:true;
-  @f:false;
-`</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最终经过 Babel 编译后的结果是：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// Compiled</span>
-<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> c <span class="token operator">=</span> <span class="token string">"cde"</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token string">"def"</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> e <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> f <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Compiled</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> c = <span class="string">&quot;cde&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> d = <span class="string">&quot;def&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> e = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">const</span> f = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
 <p>我们需要从 <code>references</code> 对象中获取对应的宏名称使用：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// index.ts</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> createMacro <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'babel-plugin-macros'</span>
-<span class="token keyword">import</span> transformDefine <span class="token keyword">from</span> <span class="token string">'./transforms/define'</span>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; createMacro &#125; <span class="keyword">from</span> <span class="string">&#x27;babel-plugin-macros&#x27;</span></span><br><span class="line"><span class="keyword">import</span> transformDefine <span class="keyword">from</span> <span class="string">&#x27;./transforms/define&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">createMacro</span>(<span class="function">(<span class="params">&#123; references, state, babel &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 这里的 define 即我们期望使用的宏名称</span></span><br><span class="line">  <span class="title function_">transformDefine</span>(references.<span class="property">define</span>, state, babel)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">declare</span> <span class="keyword">const</span> <span class="attr">define</span>: <span class="title class_">Function</span></span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">createMacro</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span> references<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// 这里的 define 即我们期望使用的宏名称</span>
-  <span class="token function">transformDefine</span><span class="token punctuation">(</span>references<span class="token punctuation">.</span>define<span class="token punctuation">,</span> state<span class="token punctuation">,</span> babel<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> define<span class="token punctuation">:</span> <span class="token keyword">Function</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来辛苦由 <code>transformDefine</code> 函数进行 AST 操作获得我们想要的结果。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，我们了解了什么是宏以及 JavaScript 该如何借助 Babel 实现自己的宏。</p>
 <p>其中的折腾劲十足，明明可以通过抽象一个函数得到的结果，我们非要绕这么大一圈。</p>
 <p>也并不是没有收获，我们收获上面的知识，很开心。</p>
 <p>可以查看 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@zong/js.macro">@zong&#x2F;js.macro</a> 学习 AST 处理操作。</p>
 <p>目前来看，我不仅实现了上面的静态宏使用方法，还实现了：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> define <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@zong/js.macro'</span>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; define &#125; <span class="keyword">from</span> <span class="string">&#x27;@zong/js.macro&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> var1 = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">define<span class="string">`</span></span><br><span class="line"><span class="string">  @va:<span class="subst">$&#123;<span class="number">1</span>&#125;</span>;</span></span><br><span class="line"><span class="string">  @vb:<span class="subst">$&#123;var1&#125;</span>;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Compiled</span></span><br><span class="line"><span class="keyword">const</span> var1 = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> va = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> vb = var1;</span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">const</span> var1 <span class="token operator">=</span> <span class="token number">2</span>
-
-define<span class="token template-string"><span class="token string">`
-  @va:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;
-  @vb:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>var1<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;
-`</span></span>
-
-<span class="token comment" spellcheck="true">// Compiled</span>
-<span class="token keyword">const</span> var1 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> va <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> vb <span class="token operator">=</span> var1<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当然，未来我还考虑加入更多的宏能力来锻炼 AST 处理能力。</p>
 <ol>
 <li>支持 <code>let</code> 声明 (<code>mut@</code>&#x2F;<code>@@</code>) ；</li>
@@ -501,7 +456,7 @@ define<span class="token template-string"><span class="token string">`
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?48046250"></script>
+<script src="/js/journal.js?7708381"></script>
 
 
     <script src="https://giscus.app/client.js"

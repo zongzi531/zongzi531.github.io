@@ -25,7 +25,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?8260790">
+<link rel="stylesheet" href="/css/journal.css?42185299">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -45,7 +45,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -81,11 +81,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -206,11 +206,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -353,19 +353,14 @@
 </blockquote>
 <h2 id="界面优化"><a href="#界面优化" class="headerlink" title="界面优化"></a>界面优化</h2><h3 id="Bootstrap栅格系统"><a href="#Bootstrap栅格系统" class="headerlink" title="Bootstrap栅格系统"></a><a target="_blank" rel="noopener" href="http://v3.bootcss.com/css/#grid">Bootstrap栅格系统</a></h3><p>移除了之前固定的布局模式，调整为Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统。</p>
 <p>用法就是很无脑的这么一套</p>
-<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>row<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>.col-md-4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>.col-md-4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>col-md-4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>.col-md-4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;row&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-md-4&quot;</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="Bootstrap导航标签页"><a href="#Bootstrap导航标签页" class="headerlink" title="Bootstrap导航标签页"></a><a target="_blank" rel="noopener" href="http://v3.bootcss.com/components/#nav-tabs">Bootstrap导航标签页</a></h3><p>同样也是简单的一套，但是值得一提的是<code>border-bottom</code>的样式，我这里是使用Vue的数据控制<code>border-bottom</code>的样式。</p>
 <p>使用要的Vue技术是<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/api/#computed">computed</a>。</p>
 <p>因为直译就是计算，没错就是计算，这是Vue提供的一个极赞的解决方案，在这个项目里，判断<code>border-bottom</code>样式的显示事件存在着两种情况，很好的解决了问题。</p>
 <p>举个栗子：</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//判断当todo顶部菜单被点击或者todo列表内是否存在内容来控制border-bottom的显示</span>
-<span class="token string">'tabs-bottom'</span><span class="token punctuation">:</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>todoflag <span class="token operator">||</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>todos<span class="token punctuation">.</span>length
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断当todo顶部菜单被点击或者todo列表内是否存在内容来控制border-bottom的显示</span></span><br><span class="line"><span class="string">&#x27;tabs-bottom&#x27;</span>: !<span class="variable language_">this</span>.<span class="property">todoflag</span> || !<span class="variable language_">this</span>.<span class="property">todos</span>.<span class="property">length</span></span><br></pre></td></tr></table></figure>
+
 <p>感谢阅读至此。</p>
 <p><strong><a target="_blank" rel="noopener" href="https://github.com/zongzi531/vue-to-do-list">GitHub仓库地址</a></strong></p>
 
@@ -436,7 +431,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?43116864"></script>
+<script src="/js/journal.js?5644594"></script>
 
 
     <script src="https://giscus.app/client.js"

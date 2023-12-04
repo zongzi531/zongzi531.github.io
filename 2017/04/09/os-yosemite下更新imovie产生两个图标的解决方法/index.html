@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?30652314">
+<link rel="stylesheet" href="/css/journal.css?56306725">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -43,7 +43,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -79,11 +79,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -204,11 +204,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -337,12 +337,11 @@
 <p>虽然最后更新成功了，但是LaunchPad中却有2个iMovie的图标，并且删不掉，在LaunchPad中一直有一个下载中的空进度条，的确很不爽。</p>
 <p>那么下面有一个解决方法，可以尝试：</p>
 <p>1. 在<code>/private/var/folders/</code>目录下找到名字为<code>com.apple.dock.launchpad</code>的目录，删掉！</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">find</span> /private/var/folders/ -d -name <span class="token string">"com.apple.dock.launchpad"</span> -type d -exec <span class="token function">rm</span> -rf <span class="token string">'{}'</span> \<span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">### sudo 获取最高权限</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find /private/var/folders/ -d -name <span class="string">&quot;com.apple.dock.launchpad&quot;</span> -<span class="built_in">type</span> d -<span class="built_in">exec</span> <span class="built_in">rm</span> -rf <span class="string">&#x27;&#123;&#125;&#x27;</span> \;</span><br><span class="line"><span class="comment">### sudo 获取最高权限</span></span><br></pre></td></tr></table></figure>
+
 <p>2. 重启Dock</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">killall</span> Dock 
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall Dock </span><br></pre></td></tr></table></figure>
+
 <p>好了，多余的iMovie拜拜了。</p>
 
                 </div>
@@ -412,7 +411,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?9617299"></script>
+<script src="/js/journal.js?39858130"></script>
 
 
     <script src="https://giscus.app/client.js"

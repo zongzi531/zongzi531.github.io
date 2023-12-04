@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?10277283">
+<link rel="stylesheet" href="/css/journal.css?37070592">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -42,7 +42,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -78,11 +78,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -203,11 +203,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -345,77 +345,41 @@
 
 <h2 id="适配"><a href="#适配" class="headerlink" title="适配"></a>适配</h2><p>以下假定已经存在一个使用px单位，且完全适配320xp宽度手机的页面。</p>
 <h3 id="1-改变viewport的initial-scale的数值"><a href="#1-改变viewport的initial-scale的数值" class="headerlink" title="1.改变viewport的initial-scale的数值"></a>1.改变viewport的initial-scale的数值</h3><p>比如适配的目标的宽度为400px</p>
-<pre class="line-numbers language-css"><code class="language-css">initial-scale=<span class="token number">1.25</span> // <span class="token number">400</span>/<span class="token number">320</span>=<span class="token number">1.25</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initial-scale=<span class="number">1.25</span> // <span class="number">400</span>/<span class="number">320</span>=<span class="number">1.25</span></span><br></pre></td></tr></table></figure>
+
 <p>但这里有个缺点，就是得提前知道所适配的设备的尺寸,然后服务端根据userAgent来判断。</p>
-<pre class="line-numbers language-html"><code class="language-html">    &lt;% if(device === 1){ %>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width<span class="token punctuation">=</span>device-width,initial-scale<span class="token punctuation">=</span>1.0,maximum-scale<span class="token punctuation">=</span>2.0,user-scalable<span class="token punctuation">=</span>no<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">}</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
-    &lt;% if(device === 2){ %>         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width<span class="token punctuation">=</span>device-width,initial-scale<span class="token punctuation">=</span>1.5,maximum-scale<span class="token punctuation">=</span>2.0,user-scalable<span class="token punctuation">=</span>no<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">}</span> <span class="token attr-name">%</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if(device === 1)&#123; %&gt;         <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=no&quot;</span> /&gt;</span>     &lt;% &#125; %&gt;</span><br><span class="line">&lt;% if(device === 2)&#123; %&gt;         <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width,initial-scale=1.5,maximum-scale=2.0,user-scalable=no&quot;</span> /&gt;</span>     &lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+
 <p>或者使用js计算缩放比例 ,然后替换initial-scale的值</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> scale <span class="token operator">=</span>  screen<span class="token punctuation">.</span>width<span class="token operator">/</span><span class="token number">320</span><span class="token punctuation">,</span>
-    viewport <span class="token operator">=</span>  document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'meta[name=viewport]'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    viewport<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'content'</span><span class="token punctuation">,</span> viewport<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'content'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/(initial-scale)=[\d\.]?\d/</span><span class="token punctuation">,</span><span class="token string">'$1='</span><span class="token operator">+</span>scale<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scale =  screen.<span class="property">width</span>/<span class="number">320</span>,</span><br><span class="line">    viewport =  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;meta[name=viewport]&#x27;</span>);</span><br><span class="line">    viewport.<span class="title function_">setAttribute</span>(<span class="string">&#x27;content&#x27;</span>, viewport.<span class="title function_">getAttribute</span>(<span class="string">&#x27;content&#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/(initial-scale)=[\d\.]?\d/</span>,<span class="string">&#x27;$1=&#x27;</span>+scale));</span><br></pre></td></tr></table></figure>
+
 <p>但使用js会有滞后性，页面会多渲染一次，且会导致页面闪烁</p>
 <blockquote>
 <p>首屏渲染 -&gt; js改变initial-scale -&gt; 二次渲染，页面放大(闪烁)</p>
 </blockquote>
 <h3 id="2-替换px转而使用rem"><a href="#2-替换px转而使用rem" class="headerlink" title="2.替换px转而使用rem"></a>2.替换px转而使用rem</h3><p><img src="/2017/04/09/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%87%AA%E9%80%82%E5%BA%94%E5%8D%95%E4%BD%8D/pic2.png"></p>
 <p>设定父盒子的css为</p>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">父盒子</span><span class="token punctuation">{</span>
-  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">320</span>px<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">父盒子&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">320px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>设置根元素的font-size为屏幕的某个比例</p>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">html </span><span class="token punctuation">{</span>
-  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">16</span>px<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>那么父盒子的css为</p>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">父盒子</span><span class="token punctuation">{</span>
-  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">20</span>rem<span class="token punctuation">;</span> //换算为<span class="token number">320</span>px，充满屏幕宽度
-  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">10</span>rem<span class="token punctuation">;</span> //换算为<span class="token number">160</span>px，盒子比例达到<span class="token property">1</span><span class="token punctuation">:</span><span class="token number">1</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">父盒子&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">20rem</span>; //换算为<span class="number">320px</span>，充满屏幕宽度</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">10rem</span>; //换算为<span class="number">160px</span>，盒子比例达到<span class="number">1</span>:<span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>但是css的替换以及rem的计算还是比较繁琐的，这里建议使用sass的函数然后使用正则替换</p>
-<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token regex">/(\d+[\.\d+]?px)/g</span><span class="token punctuation">,</span><span class="token string">'rem($1)'</span><span class="token punctuation">)</span>
-$baiscRem<span class="token punctuation">:</span>320px <span class="token operator">/</span> <span class="token number">20</span> <span class="token comment" spellcheck="true">//这里假定为页面做20个等分 </span>
-@<span class="token keyword">function</span> <span class="token function">rem</span><span class="token punctuation">(</span>$px<span class="token punctuation">)</span> @<span class="token keyword">return</span> <span class="token punctuation">(</span>$px <span class="token operator">/</span> $basicRem<span class="token punctuation">)</span> <span class="token operator">*</span> 1rem 
-父盒子
-    width<span class="token punctuation">:</span> <span class="token function">rem</span><span class="token punctuation">(</span>320px<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="regexp">/(\d+[\.\d+]?px)/g</span>,<span class="string">&#x27;rem($1)&#x27;</span>)</span><br><span class="line"><span class="attr">$baiscRem</span>:320px / <span class="number">20</span> <span class="comment">//这里假定为页面做20个等分 </span></span><br><span class="line">@<span class="keyword">function</span> <span class="title function_">rem</span>(<span class="params">$px</span>) @<span class="keyword">return</span> ($px / $basicRem) * 1rem </span><br><span class="line">父盒子</span><br><span class="line">	<span class="attr">width</span>: <span class="title function_">rem</span>(320px);</span><br></pre></td></tr></table></figure>
+
 <p>然后，使用css @media查询，确定rem的值。这里就比较具体了，需要根据实际的业务需求来决定所要适配的设备尺寸</p>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/* media.css */</span> 
-<span class="token atrule"><span class="token rule">@media</span> screen and <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span>320px<span class="token punctuation">)</span> and <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span>320px<span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
-    <span class="token selector">html</span><span class="token punctuation">{</span>
-        <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">320</span> / <span class="token number">320</span> * $basicRem<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token atrule"><span class="token rule">@media</span> screen and <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span>400px<span class="token punctuation">)</span> and <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span>400px<span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
-    <span class="token selector">html</span><span class="token punctuation">{</span>
-        <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">400</span> / <span class="token number">320</span> * $basicRem<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* media.css */</span> </span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">320px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>:<span class="number">320px</span>) &#123;</span><br><span class="line">	<span class="selector-tag">html</span>&#123;</span><br><span class="line">		<span class="attribute">font-size</span>: <span class="number">320</span> / <span class="number">320</span> * $basicRem;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">400px</span>) <span class="keyword">and</span> (<span class="attribute">max-width</span>:<span class="number">400px</span>) &#123;</span><br><span class="line">	<span class="selector-tag">html</span>&#123;</span><br><span class="line">		<span class="attribute">font-size</span>: <span class="number">400</span> / <span class="number">320</span> * $basicRem;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>tips：如果不知道要兼容什么样的设备。可以再用户访问后，javascript收集该设备的相关信息，然后在服务端自动更新该文件的内容，加入新的@media规则。</p>
 </blockquote>
 <h3 id="3-关于vw，vh"><a href="#3-关于vw，vh" class="headerlink" title="3.关于vw，vh"></a>3.关于vw，vh</h3><p><img src="/2017/04/09/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E8%87%AA%E9%80%82%E5%BA%94%E5%8D%95%E4%BD%8D/pic3.png"></p>
 <p>宽高的1%，建议使用在各种布局的容器上，如上图的父盒子和子盒子。</p>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">父盒子 </span><span class="token punctuation">{</span>
-    <span class="token property">box-sizing</span><span class="token punctuation">:</span> border-box<span class="token punctuation">;</span>
-    <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">10</span>vw<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span>vw<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">50</span>vw<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">/* 妥妥的2:1比例 */</span>
-    <span class="token property">letter-spacing</span><span class="token punctuation">:</span> -<span class="token number">4</span>px<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/*消除行内元素的4px的空白间隔 */</span>
-<span class="token punctuation">}</span> 
-<span class="token selector">子盒子1,子盒子2 </span><span class="token punctuation">{</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span> <span class="token number">5</span>vw<span class="token punctuation">;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">30</span>vw<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">30</span>vw<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">/* 妥妥的1:1的比例 */</span>
-    <span class="token property">display</span><span class="token punctuation">:</span>inline-block <span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">父盒子 &#123;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">10vw</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">50vw</span>;  <span class="comment">/* 妥妥的2:1比例 */</span></span><br><span class="line">	<span class="attribute">letter-spacing</span>: -<span class="number">4px</span>; <span class="comment">/*消除行内元素的4px的空白间隔 */</span></span><br><span class="line">&#125; </span><br><span class="line">子盒子<span class="number">1</span>,子盒子<span class="number">2</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> <span class="number">5vw</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">30vw</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">30vw</span>;  <span class="comment">/* 妥妥的1:1的比例 */</span></span><br><span class="line">	<span class="attribute">display</span>:inline-block ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>相比rem，使用vw和wh是非常直观的，让其他人看到就能知道，该界面是以怎么样的结构进行布局，利于维护。</p>
 <p>但在具体深入到表现的地方，建议转而使用rem来配合。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中涉及的单位和元素较多，其实如果仅仅为了达成相同的页面效果，它们之间都可以相互替代。甚至使用最原始的px，配合js的计算，也能够做到相同的事情。</p>
@@ -488,7 +452,7 @@ $baiscRem<span class="token punctuation">:</span>320px <span class="token operat
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?83503607"></script>
+<script src="/js/journal.js?72235599"></script>
 
 
     <script src="https://giscus.app/client.js"

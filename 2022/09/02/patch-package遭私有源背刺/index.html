@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?67782517">
+<link rel="stylesheet" href="/css/journal.css?52407394">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -43,7 +43,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 <body>
@@ -79,11 +79,11 @@
                 
             
                 
-            
-                
                     <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
                         日本語のコーナー
                     </a>
+                
+            
                 
             
                 
@@ -204,11 +204,11 @@
             
         
             
-        
-            
                 <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
                     日本語のコーナー
                 </a>
+            
+        
             
         
             
@@ -339,39 +339,18 @@
 <p>由于目前工作环境受限于私有源限制，想给某个包打补丁。</p>
 <p>但是问题就是，因为私有源同步 npm 落后了，导致执行 <code>npx patch-package pkg_example</code> 失败。</p>
 <p>报错提示：</p>
-<pre class="line-numbers language-shell"><code class="language-shell">Error Couldn't find any versions for "..." that matches "^0.0.0"
-...
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error Couldn&#x27;t find any versions for &quot;...&quot; that matches &quot;^0.0.0&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
 <p>而且看报错提示就是 npm 的执行过程的提示。</p>
 <p>当然了，最简单的办法当然是私有源及时同步 npm 最新的依赖包版本。</p>
 <p>但是，明明我打补丁，我并不关心依赖的关系，我只是想单纯的打补丁，能不能从本地打呢？</p>
 <p>答案是：<strong>能！</strong></p>
 <p>我们来看到源码：</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token comment" spellcheck="true">// https://github.com/ds300/patch-package/blob/master/src/makePatch.ts</span>
-<span class="token comment" spellcheck="true">// 删除部分代码</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> dirSync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"tmp"</span>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/ds300/patch-package/blob/master/src/makePatch.ts</span></span><br><span class="line"><span class="comment">// 删除部分代码</span></span><br><span class="line"><span class="keyword">import</span> &#123; dirSync &#125; <span class="keyword">from</span> <span class="string">&quot;tmp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">makePatch</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 创建临时文件夹</span></span><br><span class="line">  <span class="keyword">const</span> tmpRepo = <span class="title function_">dirSync</span>(&#123; <span class="attr">unsafeCleanup</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">  <span class="keyword">const</span> tmpRepoPackagePath = <span class="title function_">join</span>(tmpRepo.<span class="property">name</span>, packageDetails.<span class="property">path</span>)</span><br><span class="line">  <span class="keyword">const</span> tmpRepoNpmRoot = tmpRepoPackagePath.<span class="title function_">slice</span>(</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    -<span class="string">`/node_modules/<span class="subst">$&#123;packageDetails.name&#125;</span>`</span>.<span class="property">length</span>,</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> tmpRepoPackageJsonPath = <span class="title function_">join</span>(tmpRepoNpmRoot, <span class="string">&quot;package.json&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (packageManager === <span class="string">&quot;yarn&quot;</span>) &#123;</span><br><span class="line">      <span class="comment">// 尝试使用 yarn 安装依赖</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 尝试使用 npm 安装依赖</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">makePatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// 创建临时文件夹</span>
-  <span class="token keyword">const</span> tmpRepo <span class="token operator">=</span> <span class="token function">dirSync</span><span class="token punctuation">(</span><span class="token punctuation">{</span> unsafeCleanup<span class="token punctuation">:</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
-  <span class="token keyword">const</span> tmpRepoPackagePath <span class="token operator">=</span> <span class="token function">join</span><span class="token punctuation">(</span>tmpRepo<span class="token punctuation">.</span>name<span class="token punctuation">,</span> packageDetails<span class="token punctuation">.</span>path<span class="token punctuation">)</span>
-  <span class="token keyword">const</span> tmpRepoNpmRoot <span class="token operator">=</span> tmpRepoPackagePath<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span>
-    <span class="token number">0</span><span class="token punctuation">,</span>
-    <span class="token operator">-</span><span class="token template-string"><span class="token string">`/node_modules/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>packageDetails<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">.</span>length<span class="token punctuation">,</span>
-  <span class="token punctuation">)</span>
-
-  <span class="token keyword">const</span> tmpRepoPackageJsonPath <span class="token operator">=</span> <span class="token function">join</span><span class="token punctuation">(</span>tmpRepoNpmRoot<span class="token punctuation">,</span> <span class="token string">"package.json"</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>packageManager <span class="token operator">===</span> <span class="token string">"yarn"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment" spellcheck="true">// 尝试使用 yarn 安装依赖</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token comment" spellcheck="true">// 尝试使用 npm 安装依赖</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么我们就可以从这里展开操作，自己创建一个临时文件夹来代替 <code>tmp</code> 创建的临时文件夹路径，以此为出发点，在临时文件夹内手动安装依赖，并将安装动作取消。</p>
-<pre class="line-numbers language-ts"><code class="language-ts"><span class="token keyword">const</span> tmpRepo <span class="token operator">=</span> <span class="token function">dirSync</span><span class="token punctuation">(</span><span class="token punctuation">{</span> unsafeCleanup<span class="token punctuation">:</span> <span class="token keyword">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
-tmpRepo<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token comment" spellcheck="true">// 你需要的本地文件夹路径</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tmpRepo = <span class="title function_">dirSync</span>(&#123; <span class="attr">unsafeCleanup</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">tmpRepo.<span class="property">name</span> = <span class="comment">// 你需要的本地文件夹路径</span></span><br></pre></td></tr></table></figure>
+
 <p>在完成这些操作后，我们就可以使用本地资源来打补丁了。</p>
 <p><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span></p>
 
@@ -442,7 +421,7 @@ tmpRepo<span class="token punctuation">.</span>name <span class="token operator"
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?42718484"></script>
+<script src="/js/journal.js?37612399"></script>
 
 
     <script src="https://giscus.app/client.js"
