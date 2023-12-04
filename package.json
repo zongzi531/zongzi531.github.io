@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "6.3.0"
+    "version": "7.0.0"
   },
   "scripts": {
     "postinstall": "patch-package",
@@ -27,7 +27,8 @@
     "hexo-renderer-ejs": "2.0.0",
     "hexo-renderer-marked": "6.2.0",
     "hexo-renderer-stylus": "3.0.0",
-    "hexo-server": "3.0.0"
+    "hexo-server": "3.0.0",
+    "hexo-tag-embed": "^1.0.0"
   },
   "devDependencies": {
     "patch-package": "8.0.0"

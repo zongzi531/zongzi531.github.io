@@ -1401,6 +1401,13 @@ hexo-server@3.0.0:
     picocolors "^1.0.0"
     serve-static "^1.14.1"
 
+hexo-tag-embed@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hexo-tag-embed/-/hexo-tag-embed-1.0.0.tgz#074b3cbfd7fd82b558a145764026689fa3d2aba2"
+  integrity sha512-jMTosxYsxrTi5bKgM9rO7ySAMyfLihbnSPRYzom/kwI5sMsSa1meYbP59y6fCrB8FdVpLNjj1mak2iyUZW1XhA==
+  dependencies:
+    hexo-util "^3.1.0"
+
 hexo-util@^2.0.0, hexo-util@^2.1.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hexo-util/-/hexo-util-2.5.0.tgz#de5635341116ba2563a789a0ebceb55a875221ad"
