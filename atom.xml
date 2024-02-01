@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-01-01T10:51:08.000Z</updated>
+  <updated>2024-02-01T13:35:11.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>龙行大运</title>
+    <link href="https://zongzi531.com/2024/02/01/%E9%BE%99%E8%A1%8C%E5%A4%A7%E8%BF%90/"/>
+    <id>https://zongzi531.com/2024/02/01/%E9%BE%99%E8%A1%8C%E5%A4%A7%E8%BF%90/</id>
+    <published>2024-02-01T13:35:11.000Z</published>
+    <updated>2024-02-01T13:35:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这一年可以说比去年更“精彩”，团队独立后，确实向前迈了一大步，但是由于市场环境的影响，团队最终被解散，部分成员出去成立了子公司，部分成员分布在了公司其他部门，部分成员离开了公司。</p><p>确实也慢慢接受了这些变化，虽然自己是喜欢变化的，但是这个变化确实有点“猛”。</p><p>低代码的业务确实也刚刚进入落地即将闭环的阶段，转而我开始从事基础建设，开始编写 Node.js ，开始尝试做运维的工作。</p><p>当然，这还是能让我从中学习到一些些产品的知识。</p><p>就眼下而已，其实做好手上事，持续积累即可，因为就算焦虑了也没用。</p><p>对了，关于性能优化，今年确实做了比较多的在浏览器上减少 JavaScript 的执行时间的相关优化工作。</p><p>这个月设计了 C2D 和 D2C 的架构，也不知道新年能不能就此有新的进展。</p><h1 id="基础建设"><a href="#基础建设" class="headerlink" title="基础建设"></a>基础建设</h1><ul><li>低代码引擎、低代码产品孵化</li><li>[Unity] <a href="https://github.com/zongzi531/make_fun">make_fun</a></li><li>Node.js 服务端研发</li></ul><h1 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h1><ul><li><p><a href="https://github.com/insightfuls/inquirer-tree-prompt">insightfuls&#x2F;inquirer-tree-prompt</a> <a href="https://github.com/insightfuls/inquirer-tree-prompt/pull/10">#10</a></p></li><li><p><a href="https://github.com/oven-sh/bun">oven-sh&#x2F;bun</a> <a href="https://github.com/oven-sh/bun/pull/5243">#5243</a> <a href="https://github.com/oven-sh/bun/pull/5250">#5250</a> <a href="https://github.com/oven-sh/bun/pull/5451">#5451</a></p></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>２０２４年おめでとうございます</title>
@@ -432,31 +453,6 @@
     
     
     <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>patch-package 遭私有源背刺</title>
-    <link href="https://zongzi531.com/2022/09/02/patch-package%E9%81%AD%E7%A7%81%E6%9C%89%E6%BA%90%E8%83%8C%E5%88%BA/"/>
-    <id>https://zongzi531.com/2022/09/02/patch-package%E9%81%AD%E7%A7%81%E6%9C%89%E6%BA%90%E8%83%8C%E5%88%BA/</id>
-    <published>2022-09-02T15:07:55.000Z</published>
-    <updated>2022-09-02T15:07:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>众所周知， <code>patch-package</code> 是一款很不错的打补丁工具包，虽然 <code>pnpm</code> 没法使用。</p><p>由于目前工作环境受限于私有源限制，想给某个包打补丁。</p><p>但是问题就是，因为私有源同步 npm 落后了，导致执行 <code>npx patch-package pkg_example</code> 失败。</p><p>报错提示：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error Couldn&#x27;t find any versions for &quot;...&quot; that matches &quot;^0.0.0&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>而且看报错提示就是 npm 的执行过程的提示。</p><p>当然了，最简单的办法当然是私有源及时同步 npm 最新的依赖包版本。</p><p>但是，明明我打补丁，我并不关心依赖的关系，我只是想单纯的打补丁，能不能从本地打呢？</p><p>答案是：<strong>能！</strong></p><p>我们来看到源码：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/ds300/patch-package/blob/master/src/makePatch.ts</span></span><br><span class="line"><span class="comment">// 删除部分代码</span></span><br><span class="line"><span class="keyword">import</span> &#123; dirSync &#125; <span class="keyword">from</span> <span class="string">&quot;tmp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">makePatch</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 创建临时文件夹</span></span><br><span class="line">  <span class="keyword">const</span> tmpRepo = <span class="title function_">dirSync</span>(&#123; <span class="attr">unsafeCleanup</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">  <span class="keyword">const</span> tmpRepoPackagePath = <span class="title function_">join</span>(tmpRepo.<span class="property">name</span>, packageDetails.<span class="property">path</span>)</span><br><span class="line">  <span class="keyword">const</span> tmpRepoNpmRoot = tmpRepoPackagePath.<span class="title function_">slice</span>(</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    -<span class="string">`/node_modules/<span class="subst">$&#123;packageDetails.name&#125;</span>`</span>.<span class="property">length</span>,</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> tmpRepoPackageJsonPath = <span class="title function_">join</span>(tmpRepoNpmRoot, <span class="string">&quot;package.json&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (packageManager === <span class="string">&quot;yarn&quot;</span>) &#123;</span><br><span class="line">      <span class="comment">// 尝试使用 yarn 安装依赖</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 尝试使用 npm 安装依赖</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>那么我们就可以从这里展开操作，自己创建一个临时文件夹来代替 <code>tmp</code> 创建的临时文件夹路径，以此为出发点，在临时文件夹内手动安装依赖，并将安装动作取消。</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tmpRepo = <span class="title function_">dirSync</span>(&#123; <span class="attr">unsafeCleanup</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">tmpRepo.<span class="property">name</span> = <span class="comment">// 你需要的本地文件夹路径</span></span><br></pre></td></tr></table></figure><p>在完成这些操作后，我们就可以使用本地资源来打补丁了。</p><p><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span><span class="github-emoji" alias="tada" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8">🎉</span></p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="JavaScript" scheme="https://zongzi531.com/categories/JavaScript/"/>
-    
-    
-    <category term="patch-package" scheme="https://zongzi531.com/tags/patch-package/"/>
-    
-    <category term="npm" scheme="https://zongzi531.com/tags/npm/"/>
-    
-    <category term="registry" scheme="https://zongzi531.com/tags/registry/"/>
     
   </entry>
   
