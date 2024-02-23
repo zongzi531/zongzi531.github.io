@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?9046783">
+<link rel="stylesheet" href="/css/journal.css?43957388">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -44,8 +44,7 @@
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -353,7 +352,56 @@
 <p>建议阅读<strong>了解更多</strong>来理解 Fiber ，或者阅读译文<a target="_blank" rel="noopener" href="https://juejin.im/post/5ddb722cf265da7e264736a0">《【翻译】React Fiber 架构》</a>了解。</p>
 </blockquote>
 <p>从数据结构来理解 Fiber ，他其实是一个链表数据结构，分别通过 <code>return</code> ， <code>child</code> ， <code>sibling</code> 连接着另一个 Fiber 。同样的也可以通过 <code>nextEffect</code> 通往下一个副作用 Fiber ，或是通过 <code>firstEffect</code> 或 <code>lastEffect</code> 跳转到第一个或最后一个副作用 Fiber 。接下来，让我们看到源码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> type <span class="title class_">Fiber</span> = &#123;|</span><br><span class="line">  <span class="comment">// Fiber 标签，用于判断 Fiber 类型</span></span><br><span class="line">  <span class="attr">tag</span>: <span class="title class_">WorkTag</span>,</span><br><span class="line">  <span class="comment">// 唯一标识</span></span><br><span class="line">  <span class="attr">key</span>: <span class="literal">null</span> | string,</span><br><span class="line">  <span class="comment">// 元素类型，协调时使用</span></span><br><span class="line">  <span class="comment">// 检索源码可以发现 elementType 有存在与 type 、 String 类型、 ReactSymbols 进行比较</span></span><br><span class="line">  <span class="attr">elementType</span>: any,</span><br><span class="line">  <span class="comment">// 类型</span></span><br><span class="line">  <span class="attr">type</span>: any,</span><br><span class="line">  <span class="comment">// 本地状态</span></span><br><span class="line">  <span class="attr">stateNode</span>: any,</span><br><span class="line">  <span class="comment">// 父级 Fiber</span></span><br><span class="line">  <span class="attr">return</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 单链列表树结构。</span></span><br><span class="line">  <span class="comment">// 子 Fiber</span></span><br><span class="line">  <span class="attr">child</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 兄弟 Fiber</span></span><br><span class="line">  <span class="attr">sibling</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 当前索引</span></span><br><span class="line">  <span class="attr">index</span>: number,</span><br><span class="line">  <span class="comment">// ref 引用支持 callback 函数或者 React.createRef</span></span><br><span class="line">  <span class="attr">ref</span>: <span class="literal">null</span> | ((<span class="function">(<span class="params">handle: mixed</span>) =&gt;</span> <span class="keyword">void</span>) &amp; &#123;<span class="attr">_stringRef</span>: ?string&#125;) | <span class="title class_">RefObject</span>,</span><br><span class="line">  <span class="comment">// 更新时等待的 props</span></span><br><span class="line">  <span class="attr">pendingProps</span>: any,</span><br><span class="line">  <span class="comment">// 创建时使用的 props</span></span><br><span class="line">  <span class="attr">memoizedProps</span>: any,</span><br><span class="line">  <span class="comment">// 更新队列，即协调时使用</span></span><br><span class="line">  <span class="attr">updateQueue</span>: <span class="title class_">UpdateQueue</span>&lt;any&gt; | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 创建时使用的 state</span></span><br><span class="line">  <span class="attr">memoizedState</span>: any,</span><br><span class="line">  <span class="comment">// 上下文以来链表结构</span></span><br><span class="line">  <span class="attr">contextDependencies</span>: <span class="title class_">ContextDependencyList</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 位域，描述有关 Fiber 及其子树的属性。例如， ConcurrentMode 标志指示子树是否应默认为异步。</span></span><br><span class="line">  <span class="comment">// 创建 Fiber 时，他将继承其父级的模式。可以在创建时设置其他标志，但是此后，该值应在 Fiber 的整个生命周期中保持不变，尤其是在创建其子 Fiber 之前。</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="title class_">TypeOfMode</span>,</span><br><span class="line">  <span class="comment">// 副作用标签</span></span><br><span class="line">  <span class="attr">effectTag</span>: <span class="title class_">SideEffectTag</span>,</span><br><span class="line">  <span class="comment">// 单链表列出了具有副作用的通往下一个 Fiber 的快速路径。</span></span><br><span class="line">  <span class="attr">nextEffect</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 该子树中具有副作用的第一个和最后一个 Fiber 。 当我们重用此 Fiber 中完成的工作时，这使我们可以重用链表的一部分。</span></span><br><span class="line">  <span class="attr">firstEffect</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">lastEffect</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">  <span class="comment">// 当前 Fiber 的到期时间，用于调度时排序使用，将到期时间越早的排在越前面进行执行。</span></span><br><span class="line">  <span class="attr">expirationTime</span>: <span class="title class_">ExpirationTime</span>,</span><br><span class="line">  <span class="comment">// 子的到期时间，用于快速确定子树是否没有挂起的更改。</span></span><br><span class="line">  <span class="attr">childExpirationTime</span>: <span class="title class_">ExpirationTime</span>,</span><br><span class="line">  <span class="comment">// WorkInProgress 存放处（双缓存技术）</span></span><br><span class="line">  <span class="attr">alternate</span>: <span class="title class_">Fiber</span> | <span class="literal">null</span>,</span><br><span class="line">|&#125;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> type Fiber <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token operator">|</span>
+  <span class="token comment">// Fiber 标签，用于判断 Fiber 类型</span>
+  <span class="token literal-property property">tag</span><span class="token operator">:</span> WorkTag<span class="token punctuation">,</span>
+  <span class="token comment">// 唯一标识</span>
+  <span class="token literal-property property">key</span><span class="token operator">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> string<span class="token punctuation">,</span>
+  <span class="token comment">// 元素类型，协调时使用</span>
+  <span class="token comment">// 检索源码可以发现 elementType 有存在与 type 、 String 类型、 ReactSymbols 进行比较</span>
+  <span class="token literal-property property">elementType</span><span class="token operator">:</span> any<span class="token punctuation">,</span>
+  <span class="token comment">// 类型</span>
+  <span class="token literal-property property">type</span><span class="token operator">:</span> any<span class="token punctuation">,</span>
+  <span class="token comment">// 本地状态</span>
+  <span class="token literal-property property">stateNode</span><span class="token operator">:</span> any<span class="token punctuation">,</span>
+  <span class="token comment">// 父级 Fiber</span>
+  <span class="token keyword">return</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 单链列表树结构。</span>
+  <span class="token comment">// 子 Fiber</span>
+  <span class="token literal-property property">child</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 兄弟 Fiber</span>
+  <span class="token literal-property property">sibling</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 当前索引</span>
+  <span class="token literal-property property">index</span><span class="token operator">:</span> number<span class="token punctuation">,</span>
+  <span class="token comment">// ref 引用支持 callback 函数或者 React.createRef</span>
+  <span class="token literal-property property">ref</span><span class="token operator">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">handle</span><span class="token operator">:</span> mixed</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">&#123;</span><span class="token literal-property property">_stringRef</span><span class="token operator">:</span> <span class="token operator">?</span>string<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token operator">|</span> RefObject<span class="token punctuation">,</span>
+  <span class="token comment">// 更新时等待的 props</span>
+  <span class="token literal-property property">pendingProps</span><span class="token operator">:</span> any<span class="token punctuation">,</span>
+  <span class="token comment">// 创建时使用的 props</span>
+  <span class="token literal-property property">memoizedProps</span><span class="token operator">:</span> any<span class="token punctuation">,</span>
+  <span class="token comment">// 更新队列，即协调时使用</span>
+  <span class="token literal-property property">updateQueue</span><span class="token operator">:</span> UpdateQueue<span class="token operator">&lt;</span>any<span class="token operator">></span> <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 创建时使用的 state</span>
+  <span class="token literal-property property">memoizedState</span><span class="token operator">:</span> any<span class="token punctuation">,</span>
+  <span class="token comment">// 上下文以来链表结构</span>
+  <span class="token literal-property property">contextDependencies</span><span class="token operator">:</span> ContextDependencyList <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 位域，描述有关 Fiber 及其子树的属性。例如， ConcurrentMode 标志指示子树是否应默认为异步。</span>
+  <span class="token comment">// 创建 Fiber 时，他将继承其父级的模式。可以在创建时设置其他标志，但是此后，该值应在 Fiber 的整个生命周期中保持不变，尤其是在创建其子 Fiber 之前。</span>
+  <span class="token literal-property property">mode</span><span class="token operator">:</span> TypeOfMode<span class="token punctuation">,</span>
+  <span class="token comment">// 副作用标签</span>
+  <span class="token literal-property property">effectTag</span><span class="token operator">:</span> SideEffectTag<span class="token punctuation">,</span>
+  <span class="token comment">// 单链表列出了具有副作用的通往下一个 Fiber 的快速路径。</span>
+  <span class="token literal-property property">nextEffect</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 该子树中具有副作用的第一个和最后一个 Fiber 。 当我们重用此 Fiber 中完成的工作时，这使我们可以重用链表的一部分。</span>
+  <span class="token literal-property property">firstEffect</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lastEffect</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token comment">// 当前 Fiber 的到期时间，用于调度时排序使用，将到期时间越早的排在越前面进行执行。</span>
+  <span class="token literal-property property">expirationTime</span><span class="token operator">:</span> ExpirationTime<span class="token punctuation">,</span>
+  <span class="token comment">// 子的到期时间，用于快速确定子树是否没有挂起的更改。</span>
+  <span class="token literal-property property">childExpirationTime</span><span class="token operator">:</span> ExpirationTime<span class="token punctuation">,</span>
+  <span class="token comment">// WorkInProgress 存放处（双缓存技术）</span>
+  <span class="token literal-property property">alternate</span><span class="token operator">:</span> Fiber <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+<span class="token operator">|</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>源码中依然会有一些难以理解的字段内容，但是没关系，相信在看完调度和调和，你会对 Fiber 有更深刻的理解，因为他贯穿在整个调和中。</p>
 <p>当然啦，也可以在 <a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/16.8.6/packages/react-reconciler/src/ReactFiber.js">ReactFiber.js</a> 中看到有关 Fiber 创建函数的内容，有兴趣可以点击查看。</p>
@@ -427,7 +475,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?93664399"></script>
+<script src="/js/journal.js?52178144"></script>
 
 
     <script src="https://giscus.app/client.js"

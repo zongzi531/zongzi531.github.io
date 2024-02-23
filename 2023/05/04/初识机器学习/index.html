@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?61855023">
+<link rel="stylesheet" href="/css/journal.css?20555990">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -44,8 +44,7 @@
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -355,19 +354,23 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://download.pytorch.org/whl/">https://download.pytorch.org/whl/</a> 这个地址下载起来确实有点吃力</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\venv\Scripts\pip.exe install .\torch-1.13.1+cu117-cp310-cp310-win_amd64.whl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.<span class="token punctuation">\</span>venv<span class="token punctuation">\</span>Scripts<span class="token punctuation">\</span>pip.exe <span class="token function">install</span> .<span class="token punctuation">\</span>torch-1.13.1+cu117-cp310-cp310-win_amd64.whl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="git-仓库拉取慢"><a href="#git-仓库拉取慢" class="headerlink" title="git 仓库拉取慢"></a>git 仓库拉取慢</h3><p>没什么特别的点，自行前往 Github 下载压缩包解压放到指定目录即可。</p>
 <h3 id="其他安装报错"><a href="#其他安装报错" class="headerlink" title="其他安装报错"></a>其他安装报错</h3><p>如果遇到了如下提示内容，按照提示单独下载安装即可：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stdout: Microsoft Visual C++ Redistributable is not installed, this may lead to the DLL load failure.</span><br><span class="line">It can be downloaded at https://aka.ms/vs/16/release/vc_redist.x64.exe</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">stdout: Microsoft Visual C++ Redistributable is not installed, this may lead to the DLL load failure.
+It can be downloaded at https://aka.ms/vs/16/release/vc_redist.x64.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="Auto-GPT-安装指南"><a href="#Auto-GPT-安装指南" class="headerlink" title="Auto GPT 安装指南"></a>Auto GPT 安装指南</h2><p>也是比较扯，MacOS 里面自带了 Python 2.x ，导致需要手动区分使用。</p>
 <p>首先你需要安装 Python 3.x 并且安装 <code>pip3</code> 。</p>
 <p>将官方安装教程的 <code>pip</code> 修改成 <code>pip3</code> 来完成安装流程。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pip install -r requirements.txt</span></span><br><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># pip install -r requirements.txt</span>
+pip3 <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>比较奇怪的是，我运行会报错，所以我运行 <code>main.py</code> 来启动程序。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python -m autogpt</span></span><br><span class="line">python3 -m autogpt</span><br><span class="line">python3 scripts/main.py</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># python -m autogpt</span>
+python3 <span class="token parameter variable">-m</span> autogpt
+python3 scripts/main.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="混合云渲染"><a href="#混合云渲染" class="headerlink" title="混合云渲染"></a>混合云渲染</h2><p>只是依次尝试了 WebRTC 、Electron 和 Tauri 三个技术，没什么特别好说的，只是记录一下。</p>
 
@@ -438,7 +441,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?13330556"></script>
+<script src="/js/journal.js?78898209"></script>
 
 
     <script src="https://giscus.app/client.js"

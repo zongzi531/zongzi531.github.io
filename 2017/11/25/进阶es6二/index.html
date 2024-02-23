@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?6742809">
+<link rel="stylesheet" href="/css/journal.css?81225526">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -44,8 +44,7 @@
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -339,7 +338,21 @@
 <h2 id="Vue-AMap"><a href="#Vue-AMap" class="headerlink" title="Vue-AMap"></a>Vue-AMap</h2><p>接触此组件并紧接着参加饿了么大前端秋季交流会后，对为主流框架提供现有其他服务组件的项目有了新的认识。详细可以查看<a href="http://zongzi531.com/2017/11/05/%E5%8F%82%E5%8A%A02017%E9%A5%BF%E4%BA%86%E4%B9%88%E5%A4%A7%E5%89%8D%E7%AB%AF%E7%A7%8B%E5%AD%A3%E4%BA%A4%E6%B5%81%E4%BC%9A/">《浅谈第三方服务与 Vue 的结合》</a></p>
 <p>这里浅谈下使用Vue-AMap的感受。地图业务基本是异步业务，我使用<code>Promise对象</code>和 <code>async函数</code>来完成我的业务需求。</p>
 <p>此外Vue-AMap提供<a target="_blank" rel="noopener" href="https://elemefe.github.io/vue-amap/#/zh-cn/introduction/init?id=promise">lazyAMapApiLoaderInstance.load</a>方法返回<code>Promise对象</code>为开发者带来便利。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * **代码实践**</span></span><br><span class="line"><span class="comment"> * locate 和 cloudSearchNearBy 函数传入AMap实例调用高德地图API并返回Promise对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> &#123; lazyAMapApiLoaderInstance &#125; <span class="keyword">from</span> <span class="string">&#x27;vue-amap&#x27;</span></span><br><span class="line"></span><br><span class="line">lazyAMapApiLoaderInstance.<span class="title function_">load</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">let</span> init = <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">locate</span>(<span class="title class_">AMap</span>).<span class="title function_">catch</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ...定位失败处理</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">cloudSearchNearBy</span>(<span class="title class_">AMap</span>, ...)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">init</span>()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * **代码实践**
+ * locate 和 cloudSearchNearBy 函数传入AMap实例调用高德地图API并返回Promise对象
+ */</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> lazyAMapApiLoaderInstance <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vue-amap'</span>
+
+lazyAMapApiLoaderInstance<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">let</span> <span class="token function-variable function">init</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">await</span> <span class="token function">locate</span><span class="token punctuation">(</span>AMap<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...定位失败处理</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token keyword">await</span> <span class="token function">cloudSearchNearBy</span><span class="token punctuation">(</span>AMap<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="团队开发"><a href="#团队开发" class="headerlink" title="团队开发"></a>团队开发</h2><p>项目C开发过程中更深刻体会到以下几点重要性：</p>
 <ol>
@@ -388,10 +401,24 @@
 <li><p>国内城市选择器: <a target="_blank" rel="noopener" href="https://github.com/zongzi531/ZGadget/blob/master/element/element-ui-Cascader-china-address-v3.js">element-ui 级联选择器 城市数据</a></p>
 </li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * HOW TO USE</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1.import ca from &#x27;./element-ui-Cascader-china-address-v3.js&#x27;</span></span><br><span class="line"><span class="comment"> * 2.&lt;el-cascader :options=&quot;ca&quot; ... &gt; ... &lt;/el-cascader&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * HOW TO USE
+ *
+ * 1.import ca from './element-ui-Cascader-china-address-v3.js'
+ * 2.&lt;el-cascader :options="ca" ... > ... &lt;/el-cascader>
+ */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h3><p>微信小程序目前似乎不支持ES6 Module，而是采用CommonJS模块加载方案。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方文档示例代码</span></span><br><span class="line"><span class="keyword">var</span> common = <span class="built_in">require</span>(<span class="string">&#x27;common.js&#x27;</span>)</span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">helloMINA</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    common.<span class="title function_">sayHello</span>(<span class="string">&#x27;MINA&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">goodbyeMINA</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    common.<span class="title function_">sayGoodbye</span>(<span class="string">&#x27;MINA&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 官方文档示例代码</span>
+<span class="token keyword">var</span> common <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'common.js'</span><span class="token punctuation">)</span>
+<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">helloMINA</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    common<span class="token punctuation">.</span><span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token string">'MINA'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">goodbyeMINA</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    common<span class="token punctuation">.</span><span class="token function">sayGoodbye</span><span class="token punctuation">(</span><span class="token string">'MINA'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>详细文档内容请参见<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/module.html">微信小程序-模块化</a></p>
 <h2 id="Key值"><a href="#Key值" class="headerlink" title="Key值"></a>Key值</h2><p>key必须在其兄弟节点中是唯一的，而非全局唯一。万不得已，你可以传递他们在数组中的索引作为key。若元素没有重排，该方法效果不错，但重排会使得其变慢。</p>
@@ -417,7 +444,24 @@
 <li><p>你<strong>不能直接改变</strong> store 中的状态。改变 store 中的状态的唯一途径就是<strong>显式地提交 (commit) mutation</strong>。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。</p>
 </li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果在模块化构建系统中，请确保在开头调用了 Vue.use(Vuex)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">  <span class="attr">state</span>: &#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">mutations</span>: &#123;</span><br><span class="line">    increment (state) &#123;</span><br><span class="line">      state.<span class="property">count</span>++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不优雅</span></span><br><span class="line">store.<span class="property">state</span>.<span class="property">count</span>++</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优雅</span></span><br><span class="line">store.<span class="title function_">commit</span>(<span class="string">&#x27;increment&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 如果在模块化构建系统中，请确保在开头调用了 Vue.use(Vuex)</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">state</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">count</span><span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">mutations</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">increment</span> <span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      state<span class="token punctuation">.</span>count<span class="token operator">++</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 不优雅</span>
+store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>count<span class="token operator">++</span>
+
+<span class="token comment">// 优雅</span>
+store<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'increment'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>那么优雅的使用Vuex就是：</p>
 <ul>
@@ -426,7 +470,21 @@
 </ul>
 <h3 id="element-ui-清空所有表单项的验证信息"><a href="#element-ui-清空所有表单项的验证信息" class="headerlink" title="element-ui 清空所有表单项的验证信息"></a>element-ui 清空所有表单项的验证信息</h3><p>在优雅的使用Vuex时，考虑到表单操作都要采用显式地提交 (commit) mutation来实现，通过element-ui提供的resetFields方法，会在Vuex严格模式下报错。</p>
 <p>查看源码会发现，可以单独提出一个清空所有表单项的验证信息的方法，实践如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* clearValidate 用于element-ui V1.4.10 clearValidate 方法，用于清空所有表单项的验证信息</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span>  &#123;<span class="type">Object</span>&#125; formName 传入this.$refs[formName]</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">clearValidate</span> (formName) &#123;</span><br><span class="line">  <span class="keyword">if</span> (formName) &#123;</span><br><span class="line">    <span class="keyword">let</span> fields = formName.<span class="property">fields</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> fields) &#123;</span><br><span class="line">      item.<span class="property">validateState</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">      item.<span class="property">validateMessage</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">      item.<span class="property">validateDisabled</span> = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+* clearValidate 用于element-ui V1.4.10 clearValidate 方法，用于清空所有表单项的验证信息
+* @param  &#123;Object&#125; formName 传入this.$refs[formName]
+* @return
+*/</span>
+<span class="token keyword">function</span> <span class="token function">clearValidate</span> <span class="token punctuation">(</span><span class="token parameter">formName</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>formName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> fields <span class="token operator">=</span> formName<span class="token punctuation">.</span>fields
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> item <span class="token keyword">of</span> fields<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      item<span class="token punctuation">.</span>validateState <span class="token operator">=</span> <span class="token string">''</span>
+      item<span class="token punctuation">.</span>validateMessage <span class="token operator">=</span> <span class="token string">''</span>
+      item<span class="token punctuation">.</span>validateDisabled <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>element-ui 2.0.0 已经新增此方法 <a target="_blank" rel="noopener" href="https://github.com/ElemeFE/element/pull/7623">#7623</a></p>
 <hr>
@@ -500,7 +558,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?59135359"></script>
+<script src="/js/journal.js?8513453"></script>
 
 
     <script src="https://giscus.app/client.js"

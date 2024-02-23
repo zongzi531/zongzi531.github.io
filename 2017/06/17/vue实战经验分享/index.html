@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?45378248">
+<link rel="stylesheet" href="/css/journal.css?26045385">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -44,8 +44,7 @@
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-material-oceanic.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -342,7 +341,17 @@
 <p>下面直接上配置：</p>
 <h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>配置<code>httpd.conf</code>文件<code>DocumentRoot</code>的引导路径即可。</p>
 <h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><p>Build生成的文件目录在<code>dist</code>下，那么这里以<code>dist</code>为例。我们把<code>dist</code>目录丢到<code>webapps</code>下，然后配置<code>conf/server.xml</code>：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span> <span class="attr">appBase</span>=<span class="string">&quot;webapps/dist&quot;</span> <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.valves.AccessLogValve&quot;</span> <span class="attr">directory</span>=<span class="string">&quot;logs&quot;</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">prefix</span>=<span class="string">&quot;localhost_access_log.&quot;</span> <span class="attr">suffix</span>=<span class="string">&quot;.txt&quot;</span> </span></span><br><span class="line"><span class="tag">	<span class="attr">pattern</span>=<span class="string">&quot;%h %l %u %t &quot;</span>%<span class="attr">r</span>&quot; %<span class="attr">s</span> %<span class="attr">b</span>&quot;/&gt;</span>  </span><br><span class="line">	</span><br><span class="line">    <span class="tag">&lt;<span class="name">Context</span> <span class="attr">path</span>=<span class="string">&quot;/dist&quot;</span> <span class="attr">reloadable</span>=<span class="string">&quot;true&quot;</span> <span class="attr">docBase</span>=<span class="string">&quot;/home/tomcat/webapps/dist&quot;</span> /&gt;</span>  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Host</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>localhost<span class="token punctuation">"</span></span> <span class="token attr-name">appBase</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>webapps/dist<span class="token punctuation">"</span></span> <span class="token attr-name">unpackWARs</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">autoDeploy</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Valve</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.apache.catalina.valves.AccessLogValve<span class="token punctuation">"</span></span> <span class="token attr-name">directory</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>logs<span class="token punctuation">"</span></span> 
+	<span class="token attr-name">prefix</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>localhost_access_log.<span class="token punctuation">"</span></span> <span class="token attr-name">suffix</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>.txt<span class="token punctuation">"</span></span> 
+	<span class="token attr-name">pattern</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>%h %l %u %t <span class="token punctuation">"</span></span><span class="token attr-name">%r"</span> <span class="token attr-name">%s</span> <span class="token attr-name">%b"</span><span class="token punctuation">/></span></span>  
+	
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Context</span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/dist<span class="token punctuation">"</span></span> <span class="token attr-name">reloadable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">docBase</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/home/tomcat/webapps/dist<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>  
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Host</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="Build生成的文件去掉map文件"><a href="#Build生成的文件去掉map文件" class="headerlink" title="Build生成的文件去掉map文件"></a>Build生成的文件去掉map文件</h2><p>想要做到这一步其实很简单，直接将<code>config/index.js</code>中的<code>productionSourceMap</code>设置为<code>false</code>即可。</p>
 <h3 id="那么问题来了，map文件到底是做什么用的呢？"><a href="#那么问题来了，map文件到底是做什么用的呢？" class="headerlink" title="那么问题来了，map文件到底是做什么用的呢？"></a>那么问题来了，map文件到底是做什么用的呢？</h3><p>简单说，Source map就是一个信息文件，里面储存着位置信息。也就是说，转换后的代码的每一个位置，所对应的转换前的位置。</p>
@@ -366,7 +375,30 @@
 <hr>
 <h3 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a><a target="_blank" rel="noopener" href="https://github.com/vuejs/vue-router">vue-router</a></h3><p>使用vue-router的想法很简单，因为需求方需要将一个页面放在不同地方，链接是带参数的，那么我想到的是用vue-router利用动态路由匹配来控制跳转链接的地址。</p>
 <h2 id="踩坑事件"><a href="#踩坑事件" class="headerlink" title="踩坑事件"></a>踩坑事件</h2><p>先简单的说下我遇到的问题：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">exampleData</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="attr">exampleMethods</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// example 1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> self = <span class="variable language_">this</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">          self.<span class="property">exampleData</span> = <span class="string">&#x27;example 1&#x27;</span></span><br><span class="line">        &#125;, <span class="number">3000</span>)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// example 2</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="property">exampleData</span> = <span class="string">&#x27;example 2&#x27;</span></span><br><span class="line">        &#125;, <span class="number">3000</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">exampleData</span><span class="token operator">:</span> <span class="token string">''</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">exampleMethods</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+      <span class="token comment">// example 1</span>
+
+        <span class="token keyword">let</span> self <span class="token operator">=</span> <span class="token keyword">this</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          self<span class="token punctuation">.</span>exampleData <span class="token operator">=</span> <span class="token string">'example 1'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span>
+
+      <span class="token comment">// example 2</span>
+
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>exampleData <span class="token operator">=</span> <span class="token string">'example 2'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>那么在调用<code>exampleMethods</code>方法后，<code>exampleData</code>的结果是什么呢？</p>
 <blockquote>
@@ -446,7 +478,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?5486447"></script>
+<script src="/js/journal.js?67872640"></script>
 
 
     <script src="https://giscus.app/client.js"
