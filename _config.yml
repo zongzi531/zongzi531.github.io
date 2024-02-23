@@ -46,11 +46,12 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
-highlight:
-  enable: false
+syntax_highlighter: prismjs
+prismjs:
+  preprocess: true
   line_number: true
-  auto_detect: false
-  tab_replace:
+  line_threshold: 0
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -94,11 +95,6 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: journal
-
-prism_plugin:
-  mode: 'preprocess'
-  theme: 'material-oceanic'
-  line_number: true 
 
 category_generator:
   per_page: 10
