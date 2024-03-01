@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-02-01T13:35:11.000Z</updated>
+  <updated>2024-03-01T10:13:11.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>年味鱼灯</title>
+    <link href="https://zongzi531.com/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/"/>
+    <id>https://zongzi531.com/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/</id>
+    <published>2024-03-01T10:13:11.000Z</published>
+    <updated>2024-03-01T10:13:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>春节过去了，又回归到了工作岗位上。</p><p>今年春节没有安排旅游，原因是发现今年出行的成本较以往变大了，所以暂时不考虑旅游。</p><p>春节假期这么长，考虑周边城市哪里晃一圈。</p><p>感觉现在的年味是没有小的时候那样热闹和开心，所以想着去感受一下其他地方的年味。</p><p>于是前往安徽北岸镇瞻淇村看一下鱼灯，感受下来确实很热闹也有年味。</p><p>和单纯的人多是不一样的感觉，是一种喜庆和开心的感觉，是一种文化的吸收。</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><p>回来也发现今年类似于这种非物质文化遗产都慢慢浮现出来，好像大家都开始关注起来了。</p><p>也借机会去逛了一下浙江省非物质文化遗产馆，了解和学习以前留下来的文化。</p><p>这个月呢，主要还是从事后端开发的工作，接触了域名泛解析和 PVUV 相关的研发内容。</p><p>对了，还尝试结合开源的 API 接入 Midjourney 。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>龙行大运</title>
@@ -422,27 +443,6 @@
     <updated>2022-11-01T13:05:21.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>10月的周末和好友一起去了良渚古城遗址公园，这应该是第二次去这个公园了。而且回忆起来两次去都是秋天的时候，也不知道为什么，后面或许可以在其他的季节去看看。</p><p>不过现在哪里都是人，这点真的很烦，不喜欢人多的地方。明显感觉到这次去比上一次人多多了，停车场的车也比原来要多了。</p><p>大概是疫情的关系吧，大家都没什么地方可以去……</p><p>只能杭州周边玩玩，露露营什么的，确实蛮无聊的。</p><p>不过上周末，又去了 Live House 。参加万圣节活动，年轻的气氛顿时就上来了， High 的不行。</p><p>总之，很棒～</p><p>10月也因为国庆放假，所以工作日比较短。但是比较难受的是很忙……</p><p>工作内容没啥可说的，就还是继续低代码。</p><p>你要说有新的进展吗？也没有，要说没有吗？也有。</p><p>反正，持续寻找机会～</p><p>在单位中午也不太敢睡觉，因为天气转凉了，办公室的环境吧，容易感冒……</p><p>总之，吃好睡好，身体第一！</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>思考忙碌的意义</title>
-    <link href="https://zongzi531.com/2022/10/01/%E6%80%9D%E8%80%83%E5%BF%99%E7%A2%8C%E7%9A%84%E6%84%8F%E4%B9%89/"/>
-    <id>https://zongzi531.com/2022/10/01/%E6%80%9D%E8%80%83%E5%BF%99%E7%A2%8C%E7%9A%84%E6%84%8F%E4%B9%89/</id>
-    <published>2022-10-01T09:57:06.000Z</published>
-    <updated>2022-10-01T09:57:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>其实会经常思考，人为什么要让自己忙碌起来，是因为清闲会让人觉得空虚吗？或者说是让人感觉度日如年吗？</p><p>感慨到如今的杭州已经不像小时候的杭州那样，让人觉得舒适，因为发展的很快。</p><p>虽然说城市发展快，我也可以选择继续原来的舒适，但是似乎我的性格不允许我这么做。</p><p>所以没有继续呆在原来的单位里，但是现在的这种忙碌会让我觉得，实在是太忙了。</p><p>让我似乎没有精力去或多或少的关注一些除了工作以外的事情，现在的我。</p><p>除了工作，家人几乎没有其他时间。</p><p>这让我觉得，其实并不是我想要的样子，我当然认为工作是必要的，只是这样的忙碌并不是我想要的样子，我只是想在忙碌和清闲中寻找一个适合自己的平衡点。</p><p>对于现在来说，忙碌和清闲的比例划分的确有点不健康。</p><p>虽然说忙碌并不是总有（似乎我在自我安慰或者是为现在的忙碌找推辞），但是我还是会想把这些平衡起来，我想追寻人活着正真的意义，而不是陷入在忙碌中，让自己的时间过的快一些，从而忘掉人活着的意义。</p><p>所以，“负能量”的内容就暂时提到这里。</p><p>未来，平衡忙碌和清闲也会成为我探索意义的基础，从而让我可以更好的感受到活着的意义。</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li></ul><p>再来说说任务进度可以说是停着没动了。</p><p>主要是暂时没有什么精力吧，最近。</p><p>最近主要是在忙着做低代码引擎，引擎这块工作基本完工，目前正在准备接入到现有平台。</p><p>另外一件事情就是职级答辩，比较认真的准备了，在准备过程中也正视了自己，回顾了自己。</p><p>也从现有的工作内容分析了未来自己的发展方向，但是现在回过头来看似乎感觉自己想的还是比较片面的，被工作内容所局限了。</p><p>所以自己未来的发展方向，现在看起来的确还是有点模糊。</p><p>深入技术这一点没错，只是怎么深入，从什么方向深入这点其实没有过思考，以及怎么结合自己擅长的领域去做深入，这时候就要问自己，自己擅长什么？</p><p>也通过一些 SWOT 分析出来自己的长处，不过这是真实的分析结果还是表象的分析结果呢，还得我自己再想一想。</p><p>再一个深入业务也没错，工作驱动我去做的内容，没问题。</p><p>只是，最后我需要通过深入业务后沉淀下来一些什么呢？</p><p>其实仔细分析下来，自己没有想清楚的问题还很多，确实有必要认真想一想，才会让自己未来的努力目标更清晰。</p><p>跑出局限，那么就当下的社会环境来说，怎么样给自己留一个备选方案会比较合适呢。</p><p>从「赛道」的角度来讲，是不是应该布局一些其他「赛道」来为自己的未来争取一些机会呢。</p><p>想一想吧～</p><p>为了有能力让我在意义中探索！</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
