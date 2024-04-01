@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-03-01T10:13:11.000Z</updated>
+  <updated>2024-04-01T13:27:12.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>赏花</title>
+    <link href="https://zongzi531.com/2024/04/01/%E8%B5%8F%E8%8A%B1/"/>
+    <id>https://zongzi531.com/2024/04/01/%E8%B5%8F%E8%8A%B1/</id>
+    <published>2024-04-01T13:27:12.000Z</published>
+    <updated>2024-04-01T13:27:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月依然是服务端身份，已经成功的交付了 Midjourney API 供公司内部使用，并且在公司内部已经开始尝试 AI 辅助编码，感觉公司整体方向已经在往 AI 靠了。</p><p>总结来说就是基本的服务端研发 + 运维，以及 API 代理工程师。</p><p>赏樱的时间到了，本来想着要是能去日本看樱花就好了，但是机票实在是太不实惠了，而且杭州的樱花也好多呢。</p><p>话不多说，来欣赏一下吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><p>还去了太子湾欣赏郁金香，也是美美哒～</p><p>一起欣赏一下吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic4.jpg">  <img src="pic5.jpg"></div><p>一起享受生活吧～哈哈</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>年味鱼灯</title>
@@ -432,27 +453,6 @@
     
     
     <category term="JavaScript" scheme="https://zongzi531.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【秋】良渚古城遗址公园</title>
-    <link href="https://zongzi531.com/2022/11/01/%E7%A7%8B-%E8%89%AF%E6%B8%9A%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80%E5%85%AC%E5%9B%AD/"/>
-    <id>https://zongzi531.com/2022/11/01/%E7%A7%8B-%E8%89%AF%E6%B8%9A%E5%8F%A4%E5%9F%8E%E9%81%97%E5%9D%80%E5%85%AC%E5%9B%AD/</id>
-    <published>2022-11-01T13:05:21.000Z</published>
-    <updated>2022-11-01T13:05:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>10月的周末和好友一起去了良渚古城遗址公园，这应该是第二次去这个公园了。而且回忆起来两次去都是秋天的时候，也不知道为什么，后面或许可以在其他的季节去看看。</p><p>不过现在哪里都是人，这点真的很烦，不喜欢人多的地方。明显感觉到这次去比上一次人多多了，停车场的车也比原来要多了。</p><p>大概是疫情的关系吧，大家都没什么地方可以去……</p><p>只能杭州周边玩玩，露露营什么的，确实蛮无聊的。</p><p>不过上周末，又去了 Live House 。参加万圣节活动，年轻的气氛顿时就上来了， High 的不行。</p><p>总之，很棒～</p><p>10月也因为国庆放假，所以工作日比较短。但是比较难受的是很忙……</p><p>工作内容没啥可说的，就还是继续低代码。</p><p>你要说有新的进展吗？也没有，要说没有吗？也有。</p><p>反正，持续寻找机会～</p><p>在单位中午也不太敢睡觉，因为天气转凉了，办公室的环境吧，容易感冒……</p><p>总之，吃好睡好，身体第一！</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
     
   </entry>
   
