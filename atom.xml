@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-06-01T13:36:33.000Z</updated>
+  <updated>2024-07-01T09:22:00.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原谅别人的错，解脱自己的苦</title>
+    <link href="https://zongzi531.com/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/"/>
+    <id>https://zongzi531.com/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/</id>
+    <published>2024-07-01T09:22:00.000Z</published>
+    <updated>2024-07-01T09:22:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>嘿，这个月基本就是在写业务，有空出来的时间学习了一下 embedding 相关的内容，虽然对其实现可以说是一无所知，但是对怎么使用有了一些浅显的理解（包括 Python 开发）。</p><p>可以想象一些应用场景吧。</p><p>对了，还因为紧急情况，写了一个 shell 脚本，用于运维部署（真好家伙，啥都干啊）。</p><p>另外，有什么境外旅游推荐么，悠闲的那种，非特种兵，非网红打卡。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>Here We Go!</title>
@@ -432,27 +453,6 @@
     
     
     <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《初探 Rust》</title>
-    <link href="https://zongzi531.com/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/"/>
-    <id>https://zongzi531.com/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/</id>
-    <published>2022-12-21T08:55:08.000Z</published>
-    <updated>2022-12-21T08:55:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>欠了好久的分享，本来想为大家分享 Rust 的一些基础，但是明显 Rust 的基础太多了，没法在一次分享里说完整，也不如文档来的全面，所以就简单的挑选几个小点来说一说。</p><p>以及如何使用 <code>cargo</code> 来初始化一个 Rust 项目，本来还想简单的聊一聊如何制作一个 WASM 包，但是考虑到知识点断层的问题，想想还是算了吧（反正我也是摘录网上的内容）。</p><p>总之，这次分享的目的是为了让你能够粗略简单的认识到 Rust 的 1% ，希望吧。</p><p>希望你可以提起兴趣学习剩下的 99% 的内容（当然不是通过我，而是我们一起）。</p><p>要说为什么要学习 Rust ，原因也比较简单，从工程师的角度，不应该只掌握一种语言，至少需要再掌握一门辅助，当然不一定要是 Rust ，也可以是 Go 或者 C++ 。</p><p>再来就是快吧，你要说 Rust 一定快吗？也不全是，但是在大部分场景下是快的。</p><p>当然也是“安全”的，所谓的安全其实也是相对的，就像冰山一样，你看的到的就是安全，看不到的只能自己去摸索了，就像你深入 Rust 一样，你会发现她很危险。</p><p>最后就是卷呗，这可是前端圈的名词，哈哈。</p><p>那我们简单认识一下 Rust 吧～</p><blockquote><p>以下内容基本参考<a href="https://course.rs/">《Rust语言圣经》</a></p></blockquote><h2 id="字符类型-char"><a href="#字符类型-char" class="headerlink" title="字符类型(char)"></a>字符类型(char)</h2><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/003.jpeg"></p><p>单引号表示的是字符类型，这和 <code>String</code> 类型有着区别，表示单个字符则使用单引号。</p><h2 id="布尔-bool"><a href="#布尔-bool" class="headerlink" title="布尔(bool)"></a>布尔(bool)</h2><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/004.jpeg"></p><p>布尔类型则是 <code>bool</code> ，并且可以显式的声明。</p><h2 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h2><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/005.jpeg"></p><p>整数类型和进制。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/006.jpeg"></p><p>浮点类型。</p><p>接下来试着创建自己的 World Hello 吧～</p><p>如何在电脑上安装 Rust 这里就不再赘述了，可以参考文档进行安装。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/008.jpeg"></p><p>我们执行 <code>cargo</code> 命令来初始化一个项目，类似于 <code>vue create world_hello</code> 或是 <code>create-react-app world_hello</code> 。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/009.jpeg"></p><p><code>Cargo.toml</code> 属于项目的信息文件，等同于 <code>package.json</code> 的作用，在安装过依赖后，也会生成一个 <code>Cargo.lock</code> 文件。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/010.jpeg"></p><p><code>run</code> 命令则是代表编译和运行。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/011.jpeg"></p><p><code>build</code> 命令则是代表编译，然后通过找到编译结果（可执行文件）来运行。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/012.jpeg"></p><p>让我们来简单修改一下 <code>main.rs</code> 文件吧。</p><p><img src="/2022/12/21/%E5%88%9D%E6%8E%A2rust%E5%88%86%E4%BA%AB/013.jpeg"></p><p>试着重新编译运行一下吧。</p><p>OK，那就简单的介绍了 Rust 的 1% ，一起加油吧～</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Share" scheme="https://zongzi531.com/categories/Share/"/>
-    
-    
-    <category term="Rust" scheme="https://zongzi531.com/tags/Rust/"/>
     
   </entry>
   
