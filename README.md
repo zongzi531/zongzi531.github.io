@@ -1,6 +1,7 @@
 # 紹介
 
-![travis-ci](https://travis-ci.com/zongzi531/zongzi531.github.io.svg?branch=markdown)
+![CI](https://github.com/zongzi531/zongzi531.github.io/actions/workflows/blank.yml/badge.svg)
+![pages-build-deployment](https://github.com/zongzi531/zongzi531.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
 
 大家好，我是粽子。是一个想学**日语**的前端菜鸟，想记录一些学习路上的点滴，希望可以在巩固自己的同时帮助到需要帮助的同学。
 
