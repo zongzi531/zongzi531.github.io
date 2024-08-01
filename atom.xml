@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-07-05T09:17:30.000Z</updated>
+  <updated>2024-08-01T08:39:09.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>初识 RAG</title>
+    <link href="https://zongzi531.com/2024/08/01/%E5%88%9D%E8%AF%86rag/"/>
+    <id>https://zongzi531.com/2024/08/01/%E5%88%9D%E8%AF%86rag/</id>
+    <published>2024-08-01T08:39:09.000Z</published>
+    <updated>2024-08-01T08:39:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>继上个月对 Sentence Transformers 框架下的 embedding 模型有了简单的尝试和使用后，现在对 RAG 有了简单的认识。</p><p>用一张图来解释最为合适不过了。</p><p><img src="/2024/08/01/%E5%88%9D%E8%AF%86rag/C1-2-RAG.png" alt="rag"></p><blockquote><p>图片来自 <a href="https://github.com/datawhalechina/llm-universe">llm-universe</a></p></blockquote><p>关于什么是 RAG 这里就不多做介绍了，其实回顾下来，可以发现 RAG 的流程中，还有很多的优化点，可以更好的优化 LLM 在回答问题过程中的幻觉问题。</p><p>例如：</p><ul><li>文件在解析过程中的清洗操作，包括不限于对不同类型的文件进行特殊处理，对图片视频音频等媒体资源进行识别转文字或向量化。</li><li>知识库场景下，对单文件整篇进行总结、多文件集合总结。</li></ul><blockquote><p>以上优化目的在于尽可能产生多的向量可能与 Query 进行匹配，丰富进入 LLM 时生成 prompt 的内容。</p></blockquote><ul><li>Query 也可以在向量化前，经过 LLM 生成相似的 Query 生成多个向量进行查询匹配的优化逻辑。</li><li>知识库场景下，对存在的数据进行自动化知识图谱生成，并且优化 Query 的向量化流程，以能够更好的匹配到问题的领域，避免越界的同类词汇出现的问题。</li><li>Query 的 Chat 场景对一些模糊内容可以提供一些交互式的引导，来辅助问答。</li></ul><p>我们也在尝试着使用 RAG 来研发一个新型的知识库，解决传统知识库需要问题内容强匹配的问题，期望提供一个更易用的知识库。</p><p>其实 RAG 完全不限于知识库的场景。</p><p>在辅助编程领域，可以结合自身的代码合集进行更精准的推荐，也可以避免一些技术过时的问题，等等。</p><p>同样的，在办公领域，可以结合自身的业务领域，实现类似自动生成 Word 、 PPT 、PDF 等文件。</p><p>总之，可以让 LLM 的回答更实时、更准确、更专业。</p><p>回过来想一下， RAG 其实也会演变成一个基座，在此基座上衍生产品。</p><p>比较疑惑的点是，目前对 LLM 了解的并不充分，可以明白 LLM 对自然语言的理解还不错，但是对一些数理化的内容，似乎并不擅长，是不是在 LLM 的过程中引导进行推理可以提升准确率呢……</p><p>所以 RAG 之路，还很长……</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+    <category term="RAG" scheme="https://zongzi531.com/tags/RAG/"/>
+    
+  </entry>
   
   <entry>
     <title>Sentence Transformers 使用介绍</title>
@@ -428,35 +451,6 @@
     
     
     <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chrome 浏览器性能排查指南</title>
-    <link href="https://zongzi531.com/2023/01/12/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/"/>
-    <id>https://zongzi531.com/2023/01/12/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/</id>
-    <published>2023-01-12T13:45:21.000Z</published>
-    <updated>2023-01-12T13:45:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h1 id="使用-Chrome-DevTools-Memory-排查问题"><a href="#使用-Chrome-DevTools-Memory-排查问题" class="headerlink" title="使用 Chrome DevTools Memory 排查问题"></a>使用 Chrome DevTools Memory 排查问题</h1><ol><li><p>打开 Chrome DevTools 选择「Memory」选项卡，可以现在 JavaScript VM instance 下实时观察 JavaScript 的内存变化。</p></li><li><p>那么我们结合 Chrome 任务管理器配合进行排查内存变化，通常浏览器会在空闲时间进行 GC 操作，如果存在内存泄露的话，可以从几次 GC 操作后发现内存是有上升，如果一直攀升并未得到正常下降的话，我们需要有规律的打印堆快照，并进行对比。</p></li><li><p>我们默认选择「Heap snapshot」打印堆快照，尝试打印 2-3 次 GC 操作后的堆快照信息，并选择「Comparison」与上一份快照或者其他快照进行比对，从中排查问题。</p></li><li><p>可以通过 #New 列和 #Deleted 列观察内存创建和销毁的数量，按照 #Delta 列进行降序排序，观察堆快照的使用情况从中排查问题。</p></li></ol><h1 id="常见案例"><a href="#常见案例" class="headerlink" title="常见案例"></a>常见案例</h1><h2 id="1-发现-closure-出现问题"><a href="#1-发现-closure-出现问题" class="headerlink" title="1. 发现 (closure) 出现问题"></a>1. 发现 (closure) 出现问题</h2><ol><li><p>比如轮询回调函数，未在调用结束后释放；</p></li><li><p>重复的事件监听，未释放过期的事件监听；</p></li><li><p>模块文件内容临时变量存储未被清理；</p></li></ol><h2 id="2-发现-array-出现问题"><a href="#2-发现-array-出现问题" class="headerlink" title="2. 发现 (array) 出现问题"></a>2. 发现 (array) 出现问题</h2><ol><li>比如 Vue 下的监听导致数组重复监听；</li></ol><h1 id="使用-Chrome-任务管理器协助排查问题"><a href="#使用-Chrome-任务管理器协助排查问题" class="headerlink" title="使用 Chrome 任务管理器协助排查问题"></a>使用 Chrome 任务管理器协助排查问题</h1><ol><li><p>点击 Chrome 右侧的「自定义及控制 Google Chrome」按钮，选择「更多工具」，打开「任务管理器」。</p></li><li><p>可以右键点击顶部表头对任务管理器表头进行筛选显示，如下图。</p></li></ol><p><img src="/2023/01/12/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%80%A7%E8%83%BD%E6%8E%92%E6%9F%A5%E6%8C%87%E5%8D%97/pic1.png"></p><ol start="3"><li>建议开启「内存占用空间」、「CPU」、「网络」、「GPU内存」、「JavaScript使用的内存」来观察当前 Chrome Tab 标签页的使用情况。</li></ol><h1 id="改善方案"><a href="#改善方案" class="headerlink" title="改善方案"></a>改善方案</h1><ol><li><p>养成良好的编码习惯</p></li><li><p>注重代码审查</p></li><li><p>沉淀最佳实践及排查指南</p></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Performance" scheme="https://zongzi531.com/categories/Performance/"/>
-    
-    
-    <category term="Chrome" scheme="https://zongzi531.com/tags/Chrome/"/>
-    
-    <category term="Performance" scheme="https://zongzi531.com/tags/Performance/"/>
-    
-    <category term="浏览器" scheme="https://zongzi531.com/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
-    
-    <category term="Devtools" scheme="https://zongzi531.com/tags/Devtools/"/>
-    
-    <category term="性能优化" scheme="https://zongzi531.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
