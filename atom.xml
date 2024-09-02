@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-08-01T08:39:09.000Z</updated>
+  <updated>2024-09-01T09:19:39.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RAG 生态探索</title>
+    <link href="https://zongzi531.com/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/"/>
+    <id>https://zongzi531.com/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/</id>
+    <published>2024-09-01T09:19:39.000Z</published>
+    <updated>2024-09-01T09:19:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>在对 RAG 有了简单认识之后，基于一些业务的场景，对 RAG 生态进行了一些探索。</p><p>网上有一张 RAG 生态的概括图，我认为不错。</p><p><img src="/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/rag-eco.png" alt="rag-ecosystem"></p><h2 id="图谱"><a href="#图谱" class="headerlink" title="图谱"></a>图谱</h2><p>在 RAG 工作流中，考虑通过图谱的概念，生成更全面的一些信息以提升问答的功能。</p><p>尝试微软开源的 GraphRAG 对文本（大文本、多文本）提取实体、关系，以在问答环节可以尝试一些逻辑或者总结性的路由流程。</p><p>图谱相较于切片，具有更强的逻辑性，并且信息链更为清晰，而切片却有冗余以及无法多内容关联的问题。</p><p>当然了，也可以使用支持大 tokens 的 LLM 进行总结或其他动作，只不过这样会重复的消耗大 tokens ，从资源层面是浪费的。</p><p>以下是 GraphRAG 索引步骤：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">⠋ GraphRAG Indexer ├── Loading Input <span class="token punctuation">(</span>text<span class="token punctuation">)</span>├── create_base_text_units├── create_base_extracted_entities├── create_final_covariates├── create_summarized_entities├── join_text_units_to_covariate_ids├── create_base_entity_graph├── create_final_entities├── create_final_nodes├── create_final_communities├── join_text_units_to_entity_ids├── create_final_relationships├── join_text_units_to_relationship_ids├── create_final_community_reports├── create_final_text_units├── create_base_documents└── create_final_documents🚀 All workflows completed successfully.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>目前， GraphRAG 对不同类型的文档进行索引时，需要人为为工具提供实体类型（考虑是不是能由 LLM 代替），以在索引时能够更好的分析提取实体和其之间的关系。</p><p>所以如果需要接入到现有的 RAG 流程，需要 Python 编程调整各节点逻辑，以适配 RAG 流程。</p><p>视觉效果：</p><p><img src="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/images/graph_example.png?raw=true" alt="graph_example"></p><blockquote><p>详细可<a href="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/README.md">查看</a></p></blockquote><h2 id="微调-Embeddings-模型尝试"><a href="#微调-Embeddings-模型尝试" class="headerlink" title="微调 Embeddings 模型尝试"></a>微调 Embeddings 模型尝试</h2><p>使用 <code>uniem</code> 工具对模型进行微调，分别尝试过对 <code>small</code> 、 <code>base</code> 、 <code>large</code> 进行不同的微调对比，可能是数据集选用的关系，效果并不是特别理想，并且在大数据集的微调场景下，微调时间较长，成本较大，所以暂缓。</p><p>最后直接选用 <code>bge-large-zh-v1.5</code> 为本地 Embeddings 模型。</p><h2 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h2><p>使用 Ragas 工具进行 RAG 流程评测。在使用此工具前，采用人工测试集进行评测，并且评测维度较为主观。</p><p>需要注意 ⚠️ ：在测试集生成和评测阶段，会大量消耗 LLM tokens ，请合理选择需要评测指标。</p><h3 id="评测指标"><a href="#评测指标" class="headerlink" title="评测指标"></a>评测指标</h3><table><thead><tr><th>指标名称</th><th>范围</th><th>含义</th></tr></thead><tbody><tr><td><code>context_precision</code> 上下文精度</td><td>(0,1)</td><td>值越大，表示 <code>ground_truth</code> 与 <code>contexts</code> 越相关。</td></tr><tr><td><code>faithfulness</code> 忠诚度&#x2F;可信度</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>contexts</code> 计算得出，值越大，表示 <code>answer</code> 更可信。</td></tr><tr><td><code>answer_relevancy</code> 答案相关性</td><td>(-1,1)</td><td>由 <code>answer</code> 、 <code>contexts</code> 与 <code>question</code> 计算得出，值越大，表示 <code>answer</code> 的相关性较好。</td></tr><tr><td><code>context_recall</code> 上下文召回</td><td>(0,1)</td><td>通过对 <code>ground_truth</code> 进行分解以验证是否可以归因于 <code>contexts</code> ，值越大，表示性能越好（避免反复尝试）。</td></tr><tr><td><code>context_entity_recall</code> 上下文实体召回</td><td>(0,1)</td><td>分别计算 <code>ground_truth</code> 和 <code>contexts</code> 的实体，使用其实体进行召回，值越大，表示性能越好（避免反复尝试）。</td></tr><tr><td><code>answer_similarity</code> 答案语义相似度</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 更相似。</td></tr><tr><td><code>answer_correctness</code> 答案正确性</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 一致性越高。</td></tr><tr><td><code>AspectCritique</code> 方面批评</td><td>-</td><td>用于评测 <code>answer</code> 的内容是否包含评测「方面」的内容，如有害性、恶意性、连贯性、正确性、简洁性</td></tr><tr><td><code>summarization_score</code> 总结分数</td><td>-</td><td>-</td></tr></tbody></table><hr><p>所以在不考虑 LLM tokens 的情况下，可以利用自动化评测工具来优化现在有的 RAG 应用，不限于 RAG 流程、Prompt 工程等，相较于人工测试集，可以说效率大大提升。</p><blockquote><p>详细可<a href="https://github.com/zongzi531/modular-rag/tree/main/evaluation/ragas">查看</a></p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+    <category term="RAG" scheme="https://zongzi531.com/tags/RAG/"/>
+    
+    <category term="GraphRAG" scheme="https://zongzi531.com/tags/GraphRAG/"/>
+    
+    <category term="Fine-tuning" scheme="https://zongzi531.com/tags/Fine-tuning/"/>
+    
+    <category term="Ragas" scheme="https://zongzi531.com/tags/Ragas/"/>
+    
+  </entry>
   
   <entry>
     <title>初识 RAG</title>
@@ -420,27 +449,6 @@
     <updated>2023-03-01T15:03:35.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>怎么说呢，最近半年是真的忙，压力也真实存在，有好有坏吧。</p><p>不说这个了，因为也改变不了环境，或许跳出环境，或许适应环境。</p><p>一看上面的话就充满了无奈，当然也有好的地方。</p><p>一是低代码引擎持续迭代，并且已经孵化了第三款应用，基于原有的自由布局模式和流式布局模式外，孵化了网格布局模式。</p><p>二是升级了原低代码组件开发脚手架，规范了协议、加载模式等内容。并且使用 Vite 等新前端技术来实现，可以说相比旧 Webpack 来说，体验大有提升。</p><p>不过 Vite 的非全量编译在第一次访问页面时会显得较为缓慢，不知道有没有可以优化的空间，后面有时间再看吧。</p><p>三是下班时间自己倒腾了一下 stable-diffusion ，确实乐趣无穷，目前来说已经在 Windows 和 MacOS 上尝试了安装和运行，虽然说官方有教程，不过第一次尝试过程中真的是频繁报错。</p><p>后续我也想是整理一个 stable-diffusion 安装、使用的简单教程，当然了，现在网上已经有很多教程，我想再深入学习一下。</p><p><img src="/2023/03/01/%E5%8E%8B%E5%8A%9B%E5%8D%B3%E6%9C%BA%E4%BC%9A/pic2.png"></p><p>四是因为工作原因接触到 Unity 技术以及相关渲染技术，因为工作原因暂时不多做介绍。</p><p>噢对了，月初部门组织团建，观影《流浪地球2》，讲道理这个爆米花和可乐是真的爽。</p><p>可见，未来科技确实会成为人类的好帮手～</p><p>没了，说完了，像是流水账。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>兔飞猛进</title>
-    <link href="https://zongzi531.com/2023/02/01/%E5%85%94%E9%A3%9E%E7%8C%9B%E8%BF%9B/"/>
-    <id>https://zongzi531.com/2023/02/01/%E5%85%94%E9%A3%9E%E7%8C%9B%E8%BF%9B/</id>
-    <published>2023-02-01T08:25:32.000Z</published>
-    <updated>2023-02-01T08:25:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>回顾这一年，团队独立，新成员加入，完整规模的人员扩充，确实给我带来了不一样的体验。</p><blockquote><p>「逃走只会得到一样东西，前进的话就能得到两样东西」 ———— 機動戦士ガンダム 水星の魔女</p></blockquote><p>讲实话，这一年比前几年都要忙，因为团队的独立面临的压力都在我们身上，不会像之前那样有太多的时间学习技术，更多的是深入到业务层面做。</p><p>有幸的是，能被选择进入低代码这条赛道，能够有机会参与到产品设计中，有机会体会从 0 开始的过程，希望可以到达 1 ，也希望今年可以在业务层面取得不错的成绩。</p><p>虽然说技术的提升都来自于业务，但是我总是很贪心，总是希望像以前这样获得更多的技术。不过，抛开以前的想法，我也希望从现状中探索出更好的技术提升的方式，不仅能够在业务中深入，产品设计中深入，也能从中找到不错的技术提升方式，并且因为销售团队的加入，我也希望从销售方面学习些知识。</p><p>性能优化这块工作，我渴望接触更多。</p><p>关于副业，我只能说还在探索中，希望这份危机感一直伴随着我，我能够有所准备，以应对变化。</p><h1 id="基础建设"><a href="#基础建设" class="headerlink" title="基础建设"></a>基础建设</h1><ul><li>低代码引擎</li><li><a href="https://github.com/zongzi531/random-wasm">@zong&#x2F;random-wasm</a></li><li><a href="https://github.com/zongzi531/js.macro">@zong&#x2F;js.macro</a></li></ul><h1 id="技术分享"><a href="#技术分享" class="headerlink" title="技术分享"></a>技术分享</h1><ul><li>《当前端把手伸向后端，做起全栈时》</li><li>《实现自己的 JavaScript 宏》</li><li>《初探 Rust》</li></ul><h1 id="开源贡献"><a href="#开源贡献" class="headerlink" title="开源贡献"></a>开源贡献</h1><ul><li><p><a href="https://github.com/sunface/rust-course">sunface&#x2F;rust-course</a> <a href="https://github.com/sunface/rust-course/pull/387">#387</a> <a href="https://github.com/sunface/rust-course/pull/389">#389</a> <a href="https://github.com/sunface/rust-course/pull/394">#394</a> <a href="https://github.com/sunface/rust-course/pull/400">#400</a> <a href="https://github.com/sunface/rust-course/pull/401">#401</a> <a href="https://github.com/sunface/rust-course/pull/427">#427</a> <a href="https://github.com/sunface/rust-course/pull/429">#429</a> <a href="https://github.com/sunface/rust-course/pull/435">#435</a> <a href="https://github.com/sunface/rust-course/pull/471">#471</a> <a href="https://github.com/sunface/rust-course/pull/492">#492</a> <a href="https://github.com/sunface/rust-course/pull/514">#514</a> <a href="https://github.com/sunface/rust-course/pull/515">#515</a> <a href="https://github.com/sunface/rust-course/pull/516">#516</a> <a href="https://github.com/sunface/rust-course/pull/537">#537</a> <a href="https://github.com/sunface/rust-course/pull/548">#548</a> <a href="https://github.com/sunface/rust-course/pull/569">#569</a> <a href="https://github.com/sunface/rust-course/pull/570">#570</a> <a href="https://github.com/sunface/rust-course/pull/572">#572</a> <a href="https://github.com/sunface/rust-course/pull/575">#575</a> <a href="https://github.com/sunface/rust-course/pull/593">#593</a> <a href="https://github.com/sunface/rust-course/pull/602">#602</a> <a href="https://github.com/sunface/rust-course/pull/603">#603</a> <a href="https://github.com/sunface/rust-course/pull/643">#643</a> <a href="https://github.com/sunface/rust-course/pull/668">#668</a> <a href="https://github.com/sunface/rust-course/pull/670">#670</a> <a href="https://github.com/sunface/rust-course/pull/677">#677</a> <a href="https://github.com/sunface/rust-course/pull/688">#688</a> <a href="https://github.com/sunface/rust-course/pull/696">#696</a> <a href="https://github.com/sunface/rust-course/pull/697">#697</a> <a href="https://github.com/sunface/rust-course/pull/698">#698</a> <a href="https://github.com/sunface/rust-course/pull/699">#699</a> <a href="https://github.com/sunface/rust-course/pull/738">#738</a> <a href="https://github.com/sunface/rust-course/pull/787">#787</a> <a href="https://github.com/sunface/rust-course/pull/794">#794</a> <a href="https://github.com/sunface/rust-course/pull/804">#804</a> <a href="https://github.com/sunface/rust-course/pull/808">#808</a> <a href="https://github.com/sunface/rust-course/pull/815">#815</a> <a href="https://github.com/sunface/rust-course/pull/817">#817</a> <a href="https://github.com/sunface/rust-course/pull/820">#820</a> <a href="https://github.com/sunface/rust-course/pull/823">#823</a> <a href="https://github.com/sunface/rust-course/pull/829">#829</a> <a href="https://github.com/sunface/rust-course/pull/834">#834</a> <a href="https://github.com/sunface/rust-course/pull/842">#842</a> <a href="https://github.com/sunface/rust-course/pull/847">#847</a> <a href="https://github.com/sunface/rust-course/pull/861">#861</a> <a href="https://github.com/sunface/rust-course/pull/865">#865</a> <a href="https://github.com/sunface/rust-course/pull/868">#868</a> <a href="https://github.com/sunface/rust-course/pull/869">#869</a> <a href="https://github.com/sunface/rust-course/pull/928">#928</a></p></li><li><p><a href="https://github.com/element-plus/element-plus">element-plus&#x2F;element-plus</a> <a href="https://github.com/element-plus/element-plus/pull/6186">#6186</a></p></li><li><p><a href="https://github.com/antfu/case-police">antfu&#x2F;case-police</a> <a href="https://github.com/antfu/case-police/pull/107">#107</a></p></li><li><p><a href="https://github.com/sunface/rust-by-practice">sunface&#x2F;rust-by-practice</a> <a href="https://github.com/sunface/rust-by-practice/pull/209">#209</a> <a href="https://github.com/sunface/rust-by-practice/pull/257">#257</a> <a href="https://github.com/sunface/rust-by-practice/pull/296">#296</a> <a href="https://github.com/sunface/rust-by-practice/pull/297">#297</a> <a href="https://github.com/sunface/rust-by-practice/pull/298">#298</a></p></li><li><p><a href="https://github.com/ourairyu/persona">ourairyu&#x2F;persona</a> <a href="https://github.com/ourairyu/persona/pull/2">#2</a></p></li><li><p><a href="https://github.com/socketio/engine.io-client">socketio&#x2F;engine.io-client</a> <a href="https://github.com/socketio/engine.io-client/pull/699">#699</a></p></li></ul>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>

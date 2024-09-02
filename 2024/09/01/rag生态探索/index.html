@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>RAG 生态探索 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+在对 RAG 有了简单认识之后，基于一些业务的场景，对 RAG 生态进行了一些探索。
+网上有一张 RAG ...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?25484342">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/reading_diary/index.html">
+                        読書日記
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/reading_diary/index.html">
+                    読書日記
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2024 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2024/09/01/rag生态探索/pic-1.jpg')">
+                <div class="post-title">
+                    RAG 生态探索
+                    <div class="post-meta">
+                        <time datetime="2024-09-01T09:19:39.000Z" itemprop="datePublished">
+                            2024-09-01 09:19
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>, 
+                        
+                        <a href='/tags/RAG/'>RAG</a>, 
+                        
+                        <a href='/tags/GraphRAG/'>GraphRAG</a>, 
+                        
+                        <a href='/tags/Fine-tuning/'>Fine-tuning</a>, 
+                        
+                        <a href='/tags/Ragas/'>Ragas</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<p>在对 RAG 有了简单认识之后，基于一些业务的场景，对 RAG 生态进行了一些探索。</p>
+<p>网上有一张 RAG 生态的概括图，我认为不错。</p>
+<p><img src="/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/rag-eco.png" alt="rag-ecosystem"></p>
+<h2 id="图谱"><a href="#图谱" class="headerlink" title="图谱"></a>图谱</h2><p>在 RAG 工作流中，考虑通过图谱的概念，生成更全面的一些信息以提升问答的功能。</p>
+<p>尝试微软开源的 GraphRAG 对文本（大文本、多文本）提取实体、关系，以在问答环节可以尝试一些逻辑或者总结性的路由流程。</p>
+<p>图谱相较于切片，具有更强的逻辑性，并且信息链更为清晰，而切片却有冗余以及无法多内容关联的问题。</p>
+<p>当然了，也可以使用支持大 tokens 的 LLM 进行总结或其他动作，只不过这样会重复的消耗大 tokens ，从资源层面是浪费的。</p>
+<p>以下是 GraphRAG 索引步骤：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">⠋ GraphRAG Indexer 
+├── Loading Input <span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+├── create_base_text_units
+├── create_base_extracted_entities
+├── create_final_covariates
+├── create_summarized_entities
+├── join_text_units_to_covariate_ids
+├── create_base_entity_graph
+├── create_final_entities
+├── create_final_nodes
+├── create_final_communities
+├── join_text_units_to_entity_ids
+├── create_final_relationships
+├── join_text_units_to_relationship_ids
+├── create_final_community_reports
+├── create_final_text_units
+├── create_base_documents
+└── create_final_documents
+🚀 All workflows completed successfully.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>目前， GraphRAG 对不同类型的文档进行索引时，需要人为为工具提供实体类型（考虑是不是能由 LLM 代替），以在索引时能够更好的分析提取实体和其之间的关系。</p>
+<p>所以如果需要接入到现有的 RAG 流程，需要 Python 编程调整各节点逻辑，以适配 RAG 流程。</p>
+<p>视觉效果：</p>
+<p><img src="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/images/graph_example.png?raw=true" alt="graph_example"></p>
+<blockquote>
+<p>详细可<a target="_blank" rel="noopener" href="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/README.md">查看</a></p>
+</blockquote>
+<h2 id="微调-Embeddings-模型尝试"><a href="#微调-Embeddings-模型尝试" class="headerlink" title="微调 Embeddings 模型尝试"></a>微调 Embeddings 模型尝试</h2><p>使用 <code>uniem</code> 工具对模型进行微调，分别尝试过对 <code>small</code> 、 <code>base</code> 、 <code>large</code> 进行不同的微调对比，可能是数据集选用的关系，效果并不是特别理想，并且在大数据集的微调场景下，微调时间较长，成本较大，所以暂缓。</p>
+<p>最后直接选用 <code>bge-large-zh-v1.5</code> 为本地 Embeddings 模型。</p>
+<h2 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h2><p>使用 Ragas 工具进行 RAG 流程评测。在使用此工具前，采用人工测试集进行评测，并且评测维度较为主观。</p>
+<p>需要注意 ⚠️ ：在测试集生成和评测阶段，会大量消耗 LLM tokens ，请合理选择需要评测指标。</p>
+<h3 id="评测指标"><a href="#评测指标" class="headerlink" title="评测指标"></a>评测指标</h3><table>
+<thead>
+<tr>
+<th>指标名称</th>
+<th>范围</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>context_precision</code> 上下文精度</td>
+<td>(0,1)</td>
+<td>值越大，表示 <code>ground_truth</code> 与 <code>contexts</code> 越相关。</td>
+</tr>
+<tr>
+<td><code>faithfulness</code> 忠诚度&#x2F;可信度</td>
+<td>(0,1)</td>
+<td>由 <code>answer</code> 与 <code>contexts</code> 计算得出，值越大，表示 <code>answer</code> 更可信。</td>
+</tr>
+<tr>
+<td><code>answer_relevancy</code> 答案相关性</td>
+<td>(-1,1)</td>
+<td>由 <code>answer</code> 、 <code>contexts</code> 与 <code>question</code> 计算得出，值越大，表示 <code>answer</code> 的相关性较好。</td>
+</tr>
+<tr>
+<td><code>context_recall</code> 上下文召回</td>
+<td>(0,1)</td>
+<td>通过对 <code>ground_truth</code> 进行分解以验证是否可以归因于 <code>contexts</code> ，值越大，表示性能越好（避免反复尝试）。</td>
+</tr>
+<tr>
+<td><code>context_entity_recall</code> 上下文实体召回</td>
+<td>(0,1)</td>
+<td>分别计算 <code>ground_truth</code> 和 <code>contexts</code> 的实体，使用其实体进行召回，值越大，表示性能越好（避免反复尝试）。</td>
+</tr>
+<tr>
+<td><code>answer_similarity</code> 答案语义相似度</td>
+<td>(0,1)</td>
+<td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 更相似。</td>
+</tr>
+<tr>
+<td><code>answer_correctness</code> 答案正确性</td>
+<td>(0,1)</td>
+<td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 一致性越高。</td>
+</tr>
+<tr>
+<td><code>AspectCritique</code> 方面批评</td>
+<td>-</td>
+<td>用于评测 <code>answer</code> 的内容是否包含评测「方面」的内容，如有害性、恶意性、连贯性、正确性、简洁性</td>
+</tr>
+<tr>
+<td><code>summarization_score</code> 总结分数</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<hr>
+<p>所以在不考虑 LLM tokens 的情况下，可以利用自动化评测工具来优化现在有的 RAG 应用，不限于 RAG 流程、Prompt 工程等，相较于人工测试集，可以说效率大大提升。</p>
+<blockquote>
+<p>详细可<a target="_blank" rel="noopener" href="https://github.com/zongzi531/modular-rag/tree/main/evaluation/ragas">查看</a></p>
+</blockquote>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/" title="RAG 生态探索">https://zongzi531.com/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2024/08/01/%E5%88%9D%E8%AF%86rag/">
+        下一篇<br>初识 RAG
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2024 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?68157147"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
