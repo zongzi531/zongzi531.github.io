@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>关于门户的架构思考 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+我负责 UED 门户项目整体的架构设计及服务端研发工作，在确定项目需求后，我使用「分层架构」设计了项目整体的架构...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?42524958">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/nihongonokona/index.html">
+                        日本語のコーナー
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/reading_diary/index.html">
+                        読書日記
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/nihongonokona/index.html">
+                    日本語のコーナー
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/reading_diary/index.html">
+                    読書日記
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        <div style="margin-bottom: 8px;">
+            <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+            <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+            <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+            <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+        </div>
+        &copy; 2017 - 2024 <a href="https://zongzi531.com">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2024/11/01/关于门户的架构思考/pic1.jpg')">
+                <div class="post-title">
+                    关于门户的架构思考
+                    <div class="post-meta">
+                        <time datetime="2024-11-01T08:33:35.000Z" itemprop="datePublished">
+                            2024-11-01 08:33
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Architecture/'>Architecture</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Architecture/'>Architecture</a>, 
+                        
+                        <a href='/tags/架构/'>架构</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <blockquote>
+<p>我负责 UED 门户项目整体的架构设计及服务端研发工作，<br>在确定项目需求后，我使用「分层架构」设计了项目整体的架构实现方式，设计系统自上而下分为应用层、业务层、服务层、数据层；<br>在面临多种的认证方式时，选用「适配器模式」解决认证方式差异的问题；<br>在解决 UED 门户需要获取应用操作记录的问题上，使用「观察者模式」，将通过向应用获取转变为应用上送以优化操作记录获取的方式，解耦功能；<br>并且从部署视角的角色选型「虚拟化技术」以保证部署的效率和稳定；</p>
+</blockquote>
+<!-- no node -->
+
+<span id="more"></span>
+
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>项目第一阶段已告一段，UED 门户项目，是我写 Node.js 开始第一次正式的、完整的参与到研发过程中的项目。</p>
+<p>从技术选型、架构设计逐一入手，是一次较为全面完整的项目体验。</p>
+<p>后续其他部门需要门户网站时，此项目即替换 Web 界面即可交付其他部门，已实现大体复用。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>UED 部门需要建立自己的门户网站，网站需要将现有的 UED 模块服务（原型设计稿、前端组件、设计资源、文档等）集成为一体，以提供一个统一设计资源规范、资源共建、学习成长为一体的门户网站。</p>
+<h2 id="项目要求"><a href="#项目要求" class="headerlink" title="项目要求"></a>项目要求</h2><ol>
+<li>用户的认证方式需要支持公司认证和独立认证，并且认证的用户角色分为用户和应用即「服务模块」</li>
+<li>门户需要收集接入应用中指定的操作记录或其他消息信息</li>
+<li>门户计划在多套环境下进行独立部署</li>
+</ol>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><p>架构设计采用「分层架构」，将门户分别为应用层、业务层、服务层、数据层。</p>
+<ul>
+<li>应用层包含 UED 门户自身对用户的 Web 界面以及需要集成进来的应用如：原型设计平台、组件平台、资源平台和文档平台等</li>
+<li>业务层包含 UED 门户提供的业务模块，包含：服务模块管理模块、用户角色权限管理模块、意见反馈模块和文章模块</li>
+<li>服务层包含认证服务、日志服务、订阅服务和资源服务</li>
+<li>数据层包含 PostgreSQL 、 Redis 、 MinIO</li>
+</ul>
+<h3 id="认证服务设计"><a href="#认证服务设计" class="headerlink" title="认证服务设计"></a>认证服务设计</h3><p>认证方式在设计之初存在两种，分别是接入公司的认证中心和实现自己独立的认证中心。可以见得，认证方式是在项目部署时就决定的内容，并且只存在认证服务内部的实现逻辑差异，所以需要保证认证服务对外一致即可。</p>
+<p>所以在设计时，选择以自己独立的认证中心为接口标准进行设计，设计认证标准抽象，让两种方式可以按照抽象进行实现。</p>
+<p>设计模式上，这里选择适配器（Adapter）设计模式，此模式的优点是：</p>
+<ol>
+<li>单一职责原则你可以将接口或数据转换代码从程序主要业务逻辑中分离。</li>
+</ol>
+<p>以保证每一种接入的认证方式都和程序主要业务逻辑无关，保证认证服务对外提供的接口和行为一致。</p>
+<ol start="2">
+<li>开闭原则。只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器。</li>
+</ol>
+<p>新增认证方式或则切换认证方式，都无需修改其他服务。</p>
+<p>缺点是：</p>
+<ol>
+<li>代码整体复杂度增加，因为你需要新增一系列接口和类。有时直接更改服务类使其与其他代码兼容会更简单。</li>
+</ol>
+<p>所以在认证模式开发的阶段，使用适配器设计模式会使得代码较无设计模式的情况下，更为复杂一些。但是在程序运行阶段对认证方式切换则无需更新程序即可完成，同时新增认证方式也不会修改到程序的其他业务逻辑。</p>
+<p>从程序质量属性的角度，保证了程序的可修改性。</p>
+<h3 id="订阅服务设计"><a href="#订阅服务设计" class="headerlink" title="订阅服务设计"></a>订阅服务设计</h3><p>如果按照传统的方式去一一对接各个应用中的操作记录或者消息信息，会使得 UED 门户的程序代码与接入的应用功能强耦合，为了解决这个问题。</p>
+<p>UED 门户提供订阅服务，采用观察者模式（Observer）来对接实现各个应用中的操作记录或者消息信息记录。</p>
+<p>通过向应用获取转变为应用上送以优化操作记录获取的方式，约定 UED 门户所需的消息主题，各个应用将需要上送的消息按照对应的主题上送至 UED 门户，由 UED 门户向用户进行展示。</p>
+<p>观察者模式的优点是：</p>
+<ol>
+<li>开闭原则。你无需修改发布者代码就能引入新的订阅者类</li>
+</ol>
+<p>即如果有新应用接入 UED 门户，保持同主题的推送消息，门户在无需进行修改的情况下，用户即可以获得新应用的消息内容。</p>
+<p>缺点是：</p>
+<ol>
+<li>订阅者的通知顺序是随机的</li>
+</ol>
+<p>目前从需求来看，通知的顺序并没有很重要，但如果要实现顺序可以在通知内容中添加时间戳，以应用上送的时间戳为基准，以此来解决消息顺序的问题。</p>
+<h3 id="部署视角"><a href="#部署视角" class="headerlink" title="部署视角"></a>部署视角</h3><p>从部署视角来看，项目需要在多套环境下进行部署，为了避免环境不一致引起的额外部署工作，所以选用虚拟化技术来完成项目部署。</p>
+<p>目前公司存在办公网和内网环境，两套环境分别需要部署正式和测试环境，在技术选型上，我对 Docker 和 Kubernetes 进行了对比。</p>
+<p>Docker 和 Kubernetes 都是虚拟化容器技术，以解决在任何计算机上部署你的项目，但是相比较而言。</p>
+<p>Docker 属于容器运行时技术，更适合单机运行或对资源要求较小的应用，而 Kubernetes 则属于一种容器编排工具，更适合集群运行或更大规模的应用。</p>
+<p>所以从部署视角来看，项目目前使用的用户对内，并且大部分都是研发侧的同学，同时在使用性能上并没有较高的并发需求，即最终选用 Docker 来完成部署工作更合适不过。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.com/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/" title="关于门户的架构思考">https://zongzi531.com/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2024/10/01/lowcode-grid-layout-rules/">
+        下一篇<br>低代码网格布局
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <div style="margin-bottom: 8px;">
+        <a title="GitHub" target="_blank" rel="noopener" href="https://github.com/zongzi531" style="margin: 0px 2px;"><svg height="16" width="16" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+        <a title="知乎" target="_blank" rel="noopener" href="https://www.zhihu.com/people/zongzi531/posts" style="margin: 0px 2px;"><img height="16" src="https://static.zhihu.com/static/favicon.ico"></a>
+        <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
+        <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
+    </div>
+    &copy; 2017 - 2024 <a href="https://zongzi531.com">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?12234617"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
