@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2024-11-01T08:33:35.000Z</updated>
+  <updated>2024-12-01T10:08:39.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>体验咖啡集市</title>
+    <link href="https://zongzi531.com/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/"/>
+    <id>https://zongzi531.com/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/</id>
+    <published>2024-12-01T10:08:39.000Z</published>
+    <updated>2024-12-01T10:08:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>趁着天冷前，刚好看到天目里有举办活动，而且是第二届咖啡集市，就去感受一下吧。</p><p>去的当天人还是蛮多的，不知道大家都是喜欢喝咖啡，还是大多数和我一样，去凑凑热闹的。</p><p>因为基本都没喝过，不像平时喝的咖啡，感觉摊主们都是拿了奖的高级咖啡师。</p><p>挺不错的，这样的活动。</p><p>这个月的工作基本是围绕着业务进行，低代码、VSCode 插件作用范围预研、IDEA 插件预研，等其他业务。</p><p>也通过一些以往的项目来整理关于架构的一些知识体系，让整个软件架构知识体系更加饱满（会是一个较为漫长的过程）。</p><p>大概就这么多。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>关于门户的架构思考</title>
@@ -441,27 +462,6 @@
     <updated>2023-06-01T08:20:55.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>AI 的热度从我这里开始降低了，一是能做的事情确实很少，只能尝试些末端的产物，比如说生图。</p><p>不过生图这块领域还得去玩一下训练，这毕竟和游戏梦有着关联。</p><p>机器学习学习起来的感觉就是，道理都听得懂，但是没法实践，受到了设备的限制吧算是，当然我只听了一些理论，到实践确实还是有很大距离的。</p><p>AI 先说到这里，为什么这次想说游戏梦。</p><p>其实，应该来说喜欢玩游戏的人，一定有着自己做游戏的想法，假如自己能做出一款游戏，不会觉得很酷嘛！</p><p>如果说自己做的游戏有人玩，并且玩的开心，自己也会非常开心！</p><p>到现在前端也做了 6 年之久了，虽然现在会的一些东西已经超出了前端范畴，但是仍然会觉得处在瓶颈期。</p><p>也虽然本意上就不希望自己过度工作，而是把自己的时间更多聚焦在生活。</p><p>说了这么多废话，我想表达什么呢？</p><p>我觉得现在机会出现了，因为工作出现 Unity 的关系，有大佬和我分享游戏相关的内容时，并且 AI 在未来能协助我的时候，我认为我需要开始学习游戏制作，尝试着梦想成真！</p><p>我也不介意我跳出前端这个圈子，我认为软件开发，语言只是达到目的的工具，而思想才是能够让自己更上一层楼的宝贵核心。</p><p>所以，我想制作游戏，我想让人玩我做的游戏！</p><p>光是想想就觉得很酷！鸡皮疙瘩起来了！</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环、刘畊宏直播 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li><li><strong>「Rust 秘典（死灵书）」</strong>：3.1. 引用</li><li><strong>「Machine Learning 2022 Spring」</strong>：Lecture 12:Reinforcement Learning</li></ul><p>工作方面仍然在参与云渲染、低代码建设（脚手架、开放式调度器）</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初识机器学习</title>
-    <link href="https://zongzi531.com/2023/05/04/%E5%88%9D%E8%AF%86%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://zongzi531.com/2023/05/04/%E5%88%9D%E8%AF%86%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</id>
-    <published>2023-05-04T13:43:48.000Z</published>
-    <updated>2023-05-04T13:43:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>很明显， AI 一定会改变我们的生活方式、工作方式，并且是危险的。</p><p>因为从目前来看，需要 Web3 得到进一步发展，并且成为基础设施后， AI 才会相对变得不那么危险。</p><p>当然，我这里指的危险并不是 AI 自己的演化，而是某些企业基于 AI 的能力来深度定制千人千面。</p><p>毕竟目前处于 Web2 阶段，形成这样的局面很危险。</p><p>就像是「火影忍者」里的「无限月读」幻术一样，“让世上的人们沈浸在美好中，以此来结束世间的痛苦与战乱。”</p><h2 id="任务进度"><a href="#任务进度" class="headerlink" title="任务进度"></a>任务进度</h2><ul><li><em><strong>「日本語学習計画」</strong>：语法及词汇 <strong>第1页</strong></em></li><li><em><strong>「计算机图形学」</strong>：材质与外观</em></li><li><strong>「锻炼身体」</strong>：步行、上楼梯、Just Dance、健身环、刘畊宏直播 <strong>待加强</strong></li><li><em><strong>「ECMA-262」</strong>：6.2.4 The Reference Specification Type</em></li><li><strong>「Rust语言圣经(Rust教程 Rust Course)」</strong>：11.5.1. 数据布局和基本操作</li><li><strong>「Rust By Practice( Rust 练习实践 )」</strong>：17.3. 深入生命周期</li><li><strong>「The <code>wasm-bindgen</code> Guide」</strong>：1.10. web-sys: Closures</li><li><strong>「Rust 秘典（死灵书）」</strong>：3.1. 引用</li><li><strong>「Machine Learning 2022 Spring」</strong>：Lecture 8:Auto-encoder&#x2F; Anomaly Detection</li></ul><h2 id="stable-diffusion-安装指南"><a href="#stable-diffusion-安装指南" class="headerlink" title="stable-diffusion 安装指南"></a>stable-diffusion 安装指南</h2><p>当然不是复制官网的内容，也是借着可以在公司使用 RTX4090 的机会，在公司部署 stable-diffusion 。</p><p>受到网络的影响，所以总结一些其他安装思路。</p><p>但凡是安装出现问题，多数情况都是因为网络的影响所产生的，所以你懂的，根本的解决思路就是解决网络问题。</p><h3 id="安装-torch-1-13-1-cu117-cp310-cp310-win-amd64-whl-缓慢或者容易中断"><a href="#安装-torch-1-13-1-cu117-cp310-cp310-win-amd64-whl-缓慢或者容易中断" class="headerlink" title="安装 torch-1.13.1+cu117-cp310-cp310-win_amd64.whl 缓慢或者容易中断"></a>安装 torch-1.13.1+cu117-cp310-cp310-win_amd64.whl 缓慢或者容易中断</h3><p>可以使用其他下载工具把这个文件单独下载下来，然后进行手动安装。</p><p>需要注意的是，这里需要使用 <code>venv</code> 下的 <code>pip</code> 进行安装，可以尝试输入命令进行安装即可：</p><blockquote><p><a href="https://download.pytorch.org/whl/">https://download.pytorch.org/whl/</a> 这个地址下载起来确实有点吃力</p></blockquote><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.<span class="token punctuation">\</span>venv<span class="token punctuation">\</span>Scripts<span class="token punctuation">\</span>pip.exe <span class="token function">install</span> .<span class="token punctuation">\</span>torch-1.13.1+cu117-cp310-cp310-win_amd64.whl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="git-仓库拉取慢"><a href="#git-仓库拉取慢" class="headerlink" title="git 仓库拉取慢"></a>git 仓库拉取慢</h3><p>没什么特别的点，自行前往 Github 下载压缩包解压放到指定目录即可。</p><h3 id="其他安装报错"><a href="#其他安装报错" class="headerlink" title="其他安装报错"></a>其他安装报错</h3><p>如果遇到了如下提示内容，按照提示单独下载安装即可：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">stdout: Microsoft Visual C++ Redistributable is not installed, this may lead to the DLL load failure.It can be downloaded at https://aka.ms/vs/16/release/vc_redist.x64.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h2 id="Auto-GPT-安装指南"><a href="#Auto-GPT-安装指南" class="headerlink" title="Auto GPT 安装指南"></a>Auto GPT 安装指南</h2><p>也是比较扯，MacOS 里面自带了 Python 2.x ，导致需要手动区分使用。</p><p>首先你需要安装 Python 3.x 并且安装 <code>pip3</code> 。</p><p>将官方安装教程的 <code>pip</code> 修改成 <code>pip3</code> 来完成安装流程。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># pip install -r requirements.txt</span>pip3 <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>比较奇怪的是，我运行会报错，所以我运行 <code>main.py</code> 来启动程序。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># python -m autogpt</span>python3 <span class="token parameter variable">-m</span> autogptpython3 scripts/main.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="混合云渲染"><a href="#混合云渲染" class="headerlink" title="混合云渲染"></a>混合云渲染</h2><p>只是依次尝试了 WebRTC 、Electron 和 Tauri 三个技术，没什么特别好说的，只是记录一下。</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
