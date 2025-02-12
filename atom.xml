@@ -6,7 +6,7 @@
   <link href="https://zongzi531.com/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.com/"/>
-  <updated>2025-02-06T08:33:56.000Z</updated>
+  <updated>2025-02-11T15:52:29.000Z</updated>
   <id>https://zongzi531.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>入门 ANTLR 4</title>
+    <link href="https://zongzi531.com/2025/02/11/%E5%85%A5%E9%97%A8antlr4/"/>
+    <id>https://zongzi531.com/2025/02/11/%E5%85%A5%E9%97%A8antlr4/</id>
+    <published>2025-02-11T15:52:29.000Z</published>
+    <updated>2025-02-11T15:52:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>最近因为业务需要，所以开始接触 ANTLR 4 语法解析器，在业务层面需要适配自己业务特征的 DSL 输入框。</p><p>调研了几种方向：</p><table><thead><tr><th>方案</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>纯纯的 <code>string</code> 解析</td><td>开发周期短，轻松</td><td>迭代成本高，容易推翻重做</td></tr><tr><td>Babel 解析</td><td>基于文本解析成 AST 语法树，通过 AST 来完成业务，迭代轻松</td><td>需要实现文本分词，浏览器环境使用为动态解析，存在性能损耗</td></tr><tr><td>ANTLR 4 解析</td><td>定义语法能够静态编译出对应代码，迭代轻松</td><td>需要学习 ANTLR 4 生态环境</td></tr></tbody></table><blockquote><p>结合业务场景的需要，考虑到未来的迭代可能，所以决定使用 ANTLR 4 解析方案。</p></blockquote><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>package.json</code> 所需依赖：</p><table><thead><tr><th>名称</th><th>版本</th><th>说明</th></tr></thead><tbody><tr><td><code>antlr4ng-cli</code></td><td><code>^1.0.7</code></td><td>将 ANTLR 4 编译为 TypeScript 文件的终端执行文件</td></tr><tr><td><code>antlr-format-cli</code></td><td><code>^1.2.1</code></td><td>美化 <code>*.g4</code> 格式</td></tr><tr><td><code>antlr4ng</code></td><td><code>2.0.11</code></td><td>ANTLR 4 在 JavaScript 运行时</td></tr><tr><td><code>antlr4-c3</code></td><td><code>3.3.7</code></td><td>ANTLR 4 代码补全包</td></tr></tbody></table><blockquote><p>使用 <code>antlr4ng-cli</code> 编译需要电脑安装 JDK ，我这里对应的 JDK 版本是 17.0.12。<br>编译脚本参考<a href="https://github.com/DTStack/dt-sql-parser/blob/main/scripts/antlr4.js">DTStack&#x2F;dt-sql-parser</a>。<br>仓库使用 <code>inquirer</code> 包进行多 DSL 编译，因为业务场景，我移除了此功能，只对指定的文件进行编译工作。</p></blockquote><h1 id="解析器"><a href="#解析器" class="headerlink" title="解析器"></a>解析器</h1><p>简单做个示例，实现变量比较的功能。</p><p>在对应的目录下创建 <code>XXLLexer.g4</code> 词法分析文件和 <code>XXLParser.g4</code> 解析文件。</p><pre class="line-numbers language-antlr" data-language="antlr"><code class="language-antlr">&#x2F;&#x2F; XXLLexer.g4&#x2F;&#x2F; ...lexer grammar XXLLexer;options &#123;    caseInsensitive&#x3D; true;&#125;EQUAL                  : &#39;&#x3D;&#x3D;&#39;;AND                    : &#39;AND&#39;;OR                     : &#39;OR&#39;;VALUE                  : (LETTER | DIGIT)+;SPACE                  : [ \t\r\n]+ -&gt; skip;fragment DIGIT         : [0-9];fragment LETTER        : [A-Za-z];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-antlr" data-language="antlr"><code class="language-antlr">&#x2F;&#x2F; XXLParser.g4&#x2F;&#x2F; ...parser grammar XXLParser;options &#123;    tokenVocab&#x3D; XXLLexer;    caseInsensitive&#x3D; true;    superClass&#x3D;ParserBase;&#125;@header &#123;import &#123; ParserBase &#125; from &#39;..&#x2F;ParserBase&#39;;&#125;program    : singleStatement (AND | OR)* singleStatement* EOF    ;singleStatement    : singleStatement (AND | OR) singleStatement    | equalStatement    ;equalStatement    : VALUE EQUAL VALUE    ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>最后支持的效果是：</p><ul><li><code>a == b</code></li><li><code>C1 == Z AND a == b</code></li></ul><p>解析器的类也基于业务做了调整，可以参考 dt-sql-parser 项目。<br>g4 语法学习请参考<a href="https://github.com/antlr/antlr4/blob/dev/doc/getting-started.md">Getting Started with ANTLR v4</a>。<br>语法参考<a href="https://github.com/antlr/grammars-v4">antlr&#x2F;grammars-v4</a>。</p><h1 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h1><p>可以自己基于解析器实现一个代码补全方法，创建的方法：</p><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> CandidatesCollection<span class="token punctuation">,</span> CodeCompletionCore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'antlr4-c3'</span><span class="token punctuation">;</span><span class="token comment">// ...</span><span class="token keyword">const</span> core <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CodeCompletionCore</span><span class="token punctuation">(</span>parserIns<span class="token comment">/* 解析器实例 */</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** * 设置需要匹配的规则 * 比如：singleStatement * 则设置： * protected preferredRules = new Set([ *   XXLParser.RULE_singleStatement, * ]); */</span>core<span class="token punctuation">.</span>preferredRules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>preferredRules<span class="token punctuation">;</span><span class="token comment">// 获得候选列表</span><span class="token keyword">const</span> candidates <span class="token operator">=</span> core<span class="token punctuation">.</span><span class="token function">collectCandidates</span><span class="token punctuation">(</span>caretTokenIndex<span class="token punctuation">,</span> c3Context<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>基于候选列表，可以提供一个体检舒适的 DSL 文本输入框，具备代码补全功能。</p><p>到此，算是浅尝了一下 ANTLR 4 ，能感受到的好处就是，当 DSL 产生迭代后，我基本只需要修改 g4 文件，重新编译即可。</p><p>非常的舒适～</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://zongzi531.com/categories/Tools/"/>
+    
+    
+    <category term="ANTLR" scheme="https://zongzi531.com/tags/ANTLR/"/>
+    
+    <category term="ANTLR 4" scheme="https://zongzi531.com/tags/ANTLR-4/"/>
+    
+    <category term="语法解析器" scheme="https://zongzi531.com/tags/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>蛇蛇如意</title>
@@ -443,35 +468,6 @@
     <category term="优化" scheme="https://zongzi531.com/tags/%E4%BC%98%E5%8C%96/"/>
     
     <category term="性能" scheme="https://zongzi531.com/tags/%E6%80%A7%E8%83%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git多合一</title>
-    <link href="https://zongzi531.com/2023/08/01/git%E5%A4%9A%E5%90%88%E4%B8%80/"/>
-    <id>https://zongzi531.com/2023/08/01/git%E5%A4%9A%E5%90%88%E4%B8%80/</id>
-    <published>2023-08-01T09:09:25.000Z</published>
-    <updated>2023-08-01T09:09:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>我们都会遇到分支 Feature 合并的协作场景吧，接下来我将总结一个。</p><p>假设我们在某个 Feature 分支提交了许多 commit 信息，我们需要将近期研发的 Feature 合并至主分支，或者将近期的某部分 Feature 合并至主分支。</p><p>操作这个的前提是，需要团队养成平时研发时保持良好的纯净的 commit 信息习惯，我们只做 git 操作。</p><p>首先我们需要操作 <code>git rebase -i</code> 指令，将需要合并的 Feature 合成一条 commit 记录。</p><p>操作后，可能会变成 <code>Detached HEAD</code> commit 记录，需要执行 <code>git branch [branch-name] [commit id]</code> 以创建新的分支。</p><p>在此之后，我们需要修改此条 commit 记录的时间，可以执行 <code>date -R</code> 取得当前时间，如 <code>Tue, 01 Aug 2023 09:15:01 +0800</code> 。</p><p>然后通过 <code>git commit --amend --date=&quot;Tue, 01 Aug 2023 09:15:01 +0800&quot;</code> 命令修改提交时间。</p><p>记住此条 commit 的 hash 值后回到主分支操作 <code>git cherry-pick</code> 命令（如果有冲突请自行本地处理）。</p><blockquote><p>如果额外产生了一条 merge 信息，请尝试使用 <code>git cherry-pick -m</code> 进行解决。</p></blockquote><p>待操作完成后，可以将操作过程中产生的额外本地分支移除，或是同步删除远端 Feature 。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#删除本地分支</span><span class="token function">git</span> branch <span class="token parameter variable">-d</span> <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span class="token comment">#删除远程分支</span><span class="token function">git</span> push origin <span class="token parameter variable">--delete</span> <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>那么，现在就实现了分支 Feature 合并到主分支的纯净操作。</p><p>分支多条 commit 合一后，同步到主分支为一次 commit。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Git" scheme="https://zongzi531.com/categories/Git/"/>
-    
-    
-    <category term="Git" scheme="https://zongzi531.com/tags/Git/"/>
-    
-    <category term="git" scheme="https://zongzi531.com/tags/git/"/>
-    
-    <category term="rebase" scheme="https://zongzi531.com/tags/rebase/"/>
-    
-    <category term="commit" scheme="https://zongzi531.com/tags/commit/"/>
-    
-    <category term="cherry-pick" scheme="https://zongzi531.com/tags/cherry-pick/"/>
     
   </entry>
   
