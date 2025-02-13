@@ -72,4 +72,4 @@ intro: '一次知难而上的尝试'
 
 ## 附：方案四
 
-[《svg 文件自动化转组件》](https://zongzi531.com/2022/11/11/svg%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BD%AC%E7%BB%84%E4%BB%B6/)
+[《svg 文件自动化转组件》](https://zongzi531.github.io/2022/11/11/svg%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BD%AC%E7%BB%84%E4%BB%B6/)

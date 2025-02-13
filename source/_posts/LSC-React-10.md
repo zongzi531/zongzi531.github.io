@@ -14,18 +14,18 @@ tags:
 > 继 `0.3-stable` （以下简称 v0.3）后，这里开始将解读 `16.8.6` （以下简称 v16.8.6）版本，此版本上标签于 2019 年 3 月 28 日。
 > 那么接下来，我将从几个方面来解读这个版本的源码。（目录含有 v0.3 ）
 
-1. [React 源码学习（一）：HTML 元素渲染](https://zongzi531.com/2019/04/01/LSC-React-01/)
-2. [React 源码学习（二）：HTML 子元素渲染](https://zongzi531.com/2019/04/02/LSC-React-02/)
-3. [React 源码学习（三）：CSS 样式及 DOM 属性](https://zongzi531.com/2019/04/03/LSC-React-03/)
-4. [React 源码学习（四）：事务机制](https://zongzi531.com/2019/04/04/LSC-React-04/)
-5. [React 源码学习（五）：事件机制](https://zongzi531.com/2019/04/05/LSC-React-05/)
-6. [React 源码学习（六）：组件渲染](https://zongzi531.com/2019/04/06/LSC-React-06/)
-7. [React 源码学习（七）：生命周期](https://zongzi531.com/2019/04/07/LSC-React-07/)
-8. [React 源码学习（八）：组件更新](https://zongzi531.com/2019/04/08/LSC-React-08/)
-9. [React 源码学习（九）：“脱胎换骨”](https://zongzi531.com/2019/12/18/LSC-React-09/)
-10. [React 源码学习（十）：Fiber](https://zongzi531.com/2019/12/19/LSC-React-10/)
-11. [React 源码学习（十一）：Scheduling](https://zongzi531.com/2019/12/20/LSC-React-11/)
-12. [React 源码学习（十二）：Reconciliation](https://zongzi531.com/2019/12/21/LSC-React-12/)
+1. [React 源码学习（一）：HTML 元素渲染](https://zongzi531.github.io/2019/04/01/LSC-React-01/)
+2. [React 源码学习（二）：HTML 子元素渲染](https://zongzi531.github.io/2019/04/02/LSC-React-02/)
+3. [React 源码学习（三）：CSS 样式及 DOM 属性](https://zongzi531.github.io/2019/04/03/LSC-React-03/)
+4. [React 源码学习（四）：事务机制](https://zongzi531.github.io/2019/04/04/LSC-React-04/)
+5. [React 源码学习（五）：事件机制](https://zongzi531.github.io/2019/04/05/LSC-React-05/)
+6. [React 源码学习（六）：组件渲染](https://zongzi531.github.io/2019/04/06/LSC-React-06/)
+7. [React 源码学习（七）：生命周期](https://zongzi531.github.io/2019/04/07/LSC-React-07/)
+8. [React 源码学习（八）：组件更新](https://zongzi531.github.io/2019/04/08/LSC-React-08/)
+9. [React 源码学习（九）：“脱胎换骨”](https://zongzi531.github.io/2019/12/18/LSC-React-09/)
+10. [React 源码学习（十）：Fiber](https://zongzi531.github.io/2019/12/19/LSC-React-10/)
+11. [React 源码学习（十一）：Scheduling](https://zongzi531.github.io/2019/12/20/LSC-React-11/)
+12. [React 源码学习（十二）：Reconciliation](https://zongzi531.github.io/2019/12/21/LSC-React-12/)
 
 ## 什么是 Fiber ？
 

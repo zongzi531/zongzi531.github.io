@@ -108,7 +108,7 @@ OK，页面自动更新了。
 2. React Templates
 3. React IDE
 
->安装步骤可以参考[Sublime Text 3 安装Vue语法高亮插件](http://zongzi531.com/2017/04/15/sublime-vue%E6%8F%92%E4%BB%B6/)
+>安装步骤可以参考[Sublime Text 3 安装Vue语法高亮插件](http://zongzi531.github.io/2017/04/15/sublime-vue%E6%8F%92%E4%BB%B6/)
 
 ## 来自原单位的同事的鼓励
 

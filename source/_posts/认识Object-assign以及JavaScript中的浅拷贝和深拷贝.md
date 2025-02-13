@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
->在[《理解Javascript基本类型值和引用类型值》](http://zongzi531.com/2017/04/13/%E7%90%86%E8%A7%A3javascript%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%80%BC/)的最后部分提到了`Object.assign`，其实`Object.assign`能实现的是**一层**深拷贝。并不能实现完全的深拷贝，所以在这里带大家重新认识`Object.assign`以及了解什么是**浅拷贝**和**深拷贝**。
+>在[《理解Javascript基本类型值和引用类型值》](http://zongzi531.github.io/2017/04/13/%E7%90%86%E8%A7%A3javascript%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%80%BC/)的最后部分提到了`Object.assign`，其实`Object.assign`能实现的是**一层**深拷贝。并不能实现完全的深拷贝，所以在这里带大家重新认识`Object.assign`以及了解什么是**浅拷贝**和**深拷贝**。
 
 ## 认识 Object.assign
 

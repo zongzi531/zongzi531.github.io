@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
-首先关于上一篇博客[《Vue实战经验分享》](http://zongzi531.com/2017/06/17/vue%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/)最后提到的问题进行解答，`exampleData`的结果是：`'example 1'`。
+首先关于上一篇博客[《Vue实战经验分享》](http://zongzi531.github.io/2017/06/17/vue%E5%AE%9E%E6%88%98%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/)最后提到的问题进行解答，`exampleData`的结果是：`'example 1'`。
 
 OK，那是什么样的业务场景会让我遇到这样的问题呢，当时我想将一段代码延迟执行，但是一开始我直接使用this，导致这句话并没有延迟执行。
 

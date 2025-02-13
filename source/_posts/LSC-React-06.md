@@ -15,18 +15,18 @@ tags:
 > 在考虑到读哪个版本的时候，我想先接触到源码早期的思想可能会更轻松一些，最终我选择阅读 `0.3-stable` 。
 > 那么接下来，我将从几个方面来解读这个版本的源码。
 
-1. [React 源码学习（一）：HTML 元素渲染](https://zongzi531.com/2019/04/01/LSC-React-01/)
-2. [React 源码学习（二）：HTML 子元素渲染](https://zongzi531.com/2019/04/02/LSC-React-02/)
-3. [React 源码学习（三）：CSS 样式及 DOM 属性](https://zongzi531.com/2019/04/03/LSC-React-03/)
-4. [React 源码学习（四）：事务机制](https://zongzi531.com/2019/04/04/LSC-React-04/)
-5. [React 源码学习（五）：事件机制](https://zongzi531.com/2019/04/05/LSC-React-05/)
-6. [React 源码学习（六）：组件渲染](https://zongzi531.com/2019/04/06/LSC-React-06/)
-7. [React 源码学习（七）：生命周期](https://zongzi531.com/2019/04/07/LSC-React-07/)
-8. [React 源码学习（八）：组件更新](https://zongzi531.com/2019/04/08/LSC-React-08/)
-9. [React 源码学习（九）：“脱胎换骨”](https://zongzi531.com/2019/12/18/LSC-React-09/)
-10. [React 源码学习（十）：Fiber](https://zongzi531.com/2019/12/19/LSC-React-10/)
-11. [React 源码学习（十一）：Scheduling](https://zongzi531.com/2019/12/20/LSC-React-11/)
-12. [React 源码学习（十二）：Reconciliation](https://zongzi531.com/2019/12/21/LSC-React-12/)
+1. [React 源码学习（一）：HTML 元素渲染](https://zongzi531.github.io/2019/04/01/LSC-React-01/)
+2. [React 源码学习（二）：HTML 子元素渲染](https://zongzi531.github.io/2019/04/02/LSC-React-02/)
+3. [React 源码学习（三）：CSS 样式及 DOM 属性](https://zongzi531.github.io/2019/04/03/LSC-React-03/)
+4. [React 源码学习（四）：事务机制](https://zongzi531.github.io/2019/04/04/LSC-React-04/)
+5. [React 源码学习（五）：事件机制](https://zongzi531.github.io/2019/04/05/LSC-React-05/)
+6. [React 源码学习（六）：组件渲染](https://zongzi531.github.io/2019/04/06/LSC-React-06/)
+7. [React 源码学习（七）：生命周期](https://zongzi531.github.io/2019/04/07/LSC-React-07/)
+8. [React 源码学习（八）：组件更新](https://zongzi531.github.io/2019/04/08/LSC-React-08/)
+9. [React 源码学习（九）：“脱胎换骨”](https://zongzi531.github.io/2019/12/18/LSC-React-09/)
+10. [React 源码学习（十）：Fiber](https://zongzi531.github.io/2019/12/19/LSC-React-10/)
+11. [React 源码学习（十一）：Scheduling](https://zongzi531.github.io/2019/12/20/LSC-React-11/)
+12. [React 源码学习（十二）：Reconciliation](https://zongzi531.github.io/2019/12/21/LSC-React-12/)
 
 ## React 组件渲染 React.createClass
 

@@ -90,7 +90,7 @@ y.a = 20;
 z.a = 30;
 ```
 
-了解更多可以查看[《认识Object.assign以及JavaScript中的浅拷贝和深拷贝》](http://zongzi531.com/2017/04/24/%E8%AE%A4%E8%AF%86Object-assign%E4%BB%A5%E5%8F%8AJavaScript%E4%B8%AD%E7%9A%84%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/)
+了解更多可以查看[《认识Object.assign以及JavaScript中的浅拷贝和深拷贝》](http://zongzi531.github.io/2017/04/24/%E8%AE%A4%E8%AF%86Object-assign%E4%BB%A5%E5%8F%8AJavaScript%E4%B8%AD%E7%9A%84%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/)
 
 相信通过这个例子和图解已经可以理解什么是基本类型值和引用类型值了吧！是不是很有趣！
 

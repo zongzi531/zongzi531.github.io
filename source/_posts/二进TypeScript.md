@@ -183,7 +183,7 @@ import { FormComponentProps } from 'antd/lib/form'
 export type AntdFormAndRouterProps = FormComponentProps & RouterProps
 ```
 
-## [Vue To Do List](https://zongzi531.com/vue-to-do-list)
+## [Vue To Do List](https://zongzi531.github.io/vue-to-do-list)
 
 使用 `Emit` 装饰器实现以前的 `this.$emit` 方法：
 

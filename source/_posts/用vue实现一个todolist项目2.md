@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
-这里较上一篇[《用Vue实现一个To Do List项目》](http://zongzi531.com/2017/06/02/%E7%94%A8vue%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAtodolist%E9%A1%B9%E7%9B%AE/)内容，做了一下更新：
+这里较上一篇[《用Vue实现一个To Do List项目》](http://zongzi531.github.io/2017/06/02/%E7%94%A8vue%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAtodolist%E9%A1%B9%E7%9B%AE/)内容，做了一下更新：
 
 * 增加颜色选择
 * 增加修改功能

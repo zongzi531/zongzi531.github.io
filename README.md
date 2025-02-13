@@ -15,6 +15,7 @@
 
 ## 更新日志
 
+- 2025年02月13日：计划停续[~https://zongzi531.com~](https://zongzi531.com)（每年涨价）
 - 2023年02月01日：~Travis CI~ 迁移至 GitHub Actions
 - 2022年04月15日：~Disqus~ 评论系统变更为 giscus 评论系统
 - 2021年05月26日：集成 ~Travis CI~ 解放双手
