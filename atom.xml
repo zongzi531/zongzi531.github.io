@@ -3,11 +3,11 @@
   <title>Zong</title>
   
   
-  <link href="https://zongzi531.com/atom.xml" rel="self"/>
+  <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
-  <link href="https://zongzi531.com/"/>
+  <link href="https://zongzi531.github.io/"/>
   <updated>2025-02-11T15:52:29.000Z</updated>
-  <id>https://zongzi531.com/</id>
+  <id>https://zongzi531.github.io/</id>
   
   <author>
     <name>Zong</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>入门 ANTLR 4</title>
-    <link href="https://zongzi531.com/2025/02/11/%E5%85%A5%E9%97%A8antlr4/"/>
-    <id>https://zongzi531.com/2025/02/11/%E5%85%A5%E9%97%A8antlr4/</id>
+    <link href="https://zongzi531.github.io/2025/02/11/%E5%85%A5%E9%97%A8antlr4/"/>
+    <id>https://zongzi531.github.io/2025/02/11/%E5%85%A5%E9%97%A8antlr4/</id>
     <published>2025-02-11T15:52:29.000Z</published>
     <updated>2025-02-11T15:52:29.000Z</updated>
     
@@ -30,21 +30,21 @@
     
     
     
-    <category term="Tools" scheme="https://zongzi531.com/categories/Tools/"/>
+    <category term="Tools" scheme="https://zongzi531.github.io/categories/Tools/"/>
     
     
-    <category term="ANTLR" scheme="https://zongzi531.com/tags/ANTLR/"/>
+    <category term="ANTLR" scheme="https://zongzi531.github.io/tags/ANTLR/"/>
     
-    <category term="ANTLR 4" scheme="https://zongzi531.com/tags/ANTLR-4/"/>
+    <category term="ANTLR 4" scheme="https://zongzi531.github.io/tags/ANTLR-4/"/>
     
-    <category term="语法解析器" scheme="https://zongzi531.com/tags/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90%E5%99%A8/"/>
+    <category term="语法解析器" scheme="https://zongzi531.github.io/tags/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>蛇蛇如意</title>
-    <link href="https://zongzi531.com/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/"/>
-    <id>https://zongzi531.com/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/</id>
+    <link href="https://zongzi531.github.io/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/"/>
+    <id>https://zongzi531.github.io/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/</id>
     <published>2025-02-06T08:33:56.000Z</published>
     <updated>2025-02-06T08:33:56.000Z</updated>
     
@@ -55,17 +55,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>２０２５年おめでとうございます</title>
-    <link href="https://zongzi531.com/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
-    <id>https://zongzi531.com/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
+    <link href="https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
+    <id>https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
     <published>2025-01-01T13:09:36.000Z</published>
     <updated>2025-01-01T13:09:36.000Z</updated>
     
@@ -76,17 +76,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>体验咖啡集市</title>
-    <link href="https://zongzi531.com/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/"/>
-    <id>https://zongzi531.com/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/</id>
+    <link href="https://zongzi531.github.io/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/"/>
+    <id>https://zongzi531.github.io/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/</id>
     <published>2024-12-01T10:08:39.000Z</published>
     <updated>2024-12-01T10:08:39.000Z</updated>
     
@@ -97,17 +97,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>关于门户的架构思考</title>
-    <link href="https://zongzi531.com/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/"/>
-    <id>https://zongzi531.com/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/</id>
+    <link href="https://zongzi531.github.io/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/"/>
+    <id>https://zongzi531.github.io/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/</id>
     <published>2024-11-01T08:33:35.000Z</published>
     <updated>2024-11-01T08:33:35.000Z</updated>
     
@@ -121,19 +121,19 @@
     
     
     
-    <category term="Architecture" scheme="https://zongzi531.com/categories/Architecture/"/>
+    <category term="Architecture" scheme="https://zongzi531.github.io/categories/Architecture/"/>
     
     
-    <category term="Architecture" scheme="https://zongzi531.com/tags/Architecture/"/>
+    <category term="Architecture" scheme="https://zongzi531.github.io/tags/Architecture/"/>
     
-    <category term="架构" scheme="https://zongzi531.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    <category term="架构" scheme="https://zongzi531.github.io/tags/%E6%9E%B6%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>低代码网格布局</title>
-    <link href="https://zongzi531.com/2024/10/01/lowcode-grid-layout-rules/"/>
-    <id>https://zongzi531.com/2024/10/01/lowcode-grid-layout-rules/</id>
+    <link href="https://zongzi531.github.io/2024/10/01/lowcode-grid-layout-rules/"/>
+    <id>https://zongzi531.github.io/2024/10/01/lowcode-grid-layout-rules/</id>
     <published>2024-10-01T08:33:20.000Z</published>
     <updated>2024-10-01T08:33:20.000Z</updated>
     
@@ -144,25 +144,25 @@
     
     
     
-    <category term="Lowcode" scheme="https://zongzi531.com/categories/Lowcode/"/>
+    <category term="Lowcode" scheme="https://zongzi531.github.io/categories/Lowcode/"/>
     
     
-    <category term="lowcode" scheme="https://zongzi531.com/tags/lowcode/"/>
+    <category term="lowcode" scheme="https://zongzi531.github.io/tags/lowcode/"/>
     
-    <category term="低代码" scheme="https://zongzi531.com/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/"/>
+    <category term="低代码" scheme="https://zongzi531.github.io/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/"/>
     
-    <category term="grid" scheme="https://zongzi531.com/tags/grid/"/>
+    <category term="grid" scheme="https://zongzi531.github.io/tags/grid/"/>
     
-    <category term="layout" scheme="https://zongzi531.com/tags/layout/"/>
+    <category term="layout" scheme="https://zongzi531.github.io/tags/layout/"/>
     
-    <category term="rules" scheme="https://zongzi531.com/tags/rules/"/>
+    <category term="rules" scheme="https://zongzi531.github.io/tags/rules/"/>
     
   </entry>
   
   <entry>
     <title>RAG 生态探索</title>
-    <link href="https://zongzi531.com/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/"/>
-    <id>https://zongzi531.com/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/</id>
+    <link href="https://zongzi531.github.io/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/"/>
+    <id>https://zongzi531.github.io/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/</id>
     <published>2024-09-01T09:19:39.000Z</published>
     <updated>2024-09-01T09:19:39.000Z</updated>
     
@@ -173,25 +173,25 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
-    <category term="RAG" scheme="https://zongzi531.com/tags/RAG/"/>
+    <category term="RAG" scheme="https://zongzi531.github.io/tags/RAG/"/>
     
-    <category term="GraphRAG" scheme="https://zongzi531.com/tags/GraphRAG/"/>
+    <category term="GraphRAG" scheme="https://zongzi531.github.io/tags/GraphRAG/"/>
     
-    <category term="Fine-tuning" scheme="https://zongzi531.com/tags/Fine-tuning/"/>
+    <category term="Fine-tuning" scheme="https://zongzi531.github.io/tags/Fine-tuning/"/>
     
-    <category term="Ragas" scheme="https://zongzi531.com/tags/Ragas/"/>
+    <category term="Ragas" scheme="https://zongzi531.github.io/tags/Ragas/"/>
     
   </entry>
   
   <entry>
     <title>初识 RAG</title>
-    <link href="https://zongzi531.com/2024/08/01/%E5%88%9D%E8%AF%86rag/"/>
-    <id>https://zongzi531.com/2024/08/01/%E5%88%9D%E8%AF%86rag/</id>
+    <link href="https://zongzi531.github.io/2024/08/01/%E5%88%9D%E8%AF%86rag/"/>
+    <id>https://zongzi531.github.io/2024/08/01/%E5%88%9D%E8%AF%86rag/</id>
     <published>2024-08-01T08:39:09.000Z</published>
     <updated>2024-08-01T08:39:09.000Z</updated>
     
@@ -202,19 +202,19 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
-    <category term="RAG" scheme="https://zongzi531.com/tags/RAG/"/>
+    <category term="RAG" scheme="https://zongzi531.github.io/tags/RAG/"/>
     
   </entry>
   
   <entry>
     <title>Sentence Transformers 使用介绍</title>
-    <link href="https://zongzi531.com/2024/07/05/sentence-transformer%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/"/>
-    <id>https://zongzi531.com/2024/07/05/sentence-transformer%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</id>
+    <link href="https://zongzi531.github.io/2024/07/05/sentence-transformer%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/"/>
+    <id>https://zongzi531.github.io/2024/07/05/sentence-transformer%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</id>
     <published>2024-07-05T09:17:30.000Z</published>
     <updated>2024-07-05T09:17:30.000Z</updated>
     
@@ -225,21 +225,21 @@
     
     
     
-    <category term="NLP" scheme="https://zongzi531.com/categories/NLP/"/>
+    <category term="NLP" scheme="https://zongzi531.github.io/categories/NLP/"/>
     
     
-    <category term="embeddings" scheme="https://zongzi531.com/tags/embeddings/"/>
+    <category term="embeddings" scheme="https://zongzi531.github.io/tags/embeddings/"/>
     
-    <category term="tutorial" scheme="https://zongzi531.com/tags/tutorial/"/>
+    <category term="tutorial" scheme="https://zongzi531.github.io/tags/tutorial/"/>
     
-    <category term="framework" scheme="https://zongzi531.com/tags/framework/"/>
+    <category term="framework" scheme="https://zongzi531.github.io/tags/framework/"/>
     
   </entry>
   
   <entry>
     <title>原谅别人的错，解脱自己的苦</title>
-    <link href="https://zongzi531.com/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/"/>
-    <id>https://zongzi531.com/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/</id>
+    <link href="https://zongzi531.github.io/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/"/>
+    <id>https://zongzi531.github.io/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/</id>
     <published>2024-07-01T09:22:00.000Z</published>
     <updated>2024-07-01T09:22:00.000Z</updated>
     
@@ -250,17 +250,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>Here We Go!</title>
-    <link href="https://zongzi531.com/2024/06/01/here-we-go/"/>
-    <id>https://zongzi531.com/2024/06/01/here-we-go/</id>
+    <link href="https://zongzi531.github.io/2024/06/01/here-we-go/"/>
+    <id>https://zongzi531.github.io/2024/06/01/here-we-go/</id>
     <published>2024-06-01T13:36:33.000Z</published>
     <updated>2024-06-01T13:36:33.000Z</updated>
     
@@ -271,17 +271,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>技术慢增长</title>
-    <link href="https://zongzi531.com/2024/05/01/%E6%8A%80%E6%9C%AF%E6%85%A2%E5%A2%9E%E9%95%BF/"/>
-    <id>https://zongzi531.com/2024/05/01/%E6%8A%80%E6%9C%AF%E6%85%A2%E5%A2%9E%E9%95%BF/</id>
+    <link href="https://zongzi531.github.io/2024/05/01/%E6%8A%80%E6%9C%AF%E6%85%A2%E5%A2%9E%E9%95%BF/"/>
+    <id>https://zongzi531.github.io/2024/05/01/%E6%8A%80%E6%9C%AF%E6%85%A2%E5%A2%9E%E9%95%BF/</id>
     <published>2024-05-01T13:07:10.000Z</published>
     <updated>2024-05-01T13:07:10.000Z</updated>
     
@@ -292,17 +292,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>赏花</title>
-    <link href="https://zongzi531.com/2024/04/01/%E8%B5%8F%E8%8A%B1/"/>
-    <id>https://zongzi531.com/2024/04/01/%E8%B5%8F%E8%8A%B1/</id>
+    <link href="https://zongzi531.github.io/2024/04/01/%E8%B5%8F%E8%8A%B1/"/>
+    <id>https://zongzi531.github.io/2024/04/01/%E8%B5%8F%E8%8A%B1/</id>
     <published>2024-04-01T13:27:12.000Z</published>
     <updated>2024-04-01T13:27:12.000Z</updated>
     
@@ -313,17 +313,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>年味鱼灯</title>
-    <link href="https://zongzi531.com/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/"/>
-    <id>https://zongzi531.com/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/</id>
+    <link href="https://zongzi531.github.io/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/"/>
+    <id>https://zongzi531.github.io/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/</id>
     <published>2024-03-01T10:13:11.000Z</published>
     <updated>2024-03-01T10:13:11.000Z</updated>
     
@@ -334,17 +334,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>龙行大运</title>
-    <link href="https://zongzi531.com/2024/02/01/%E9%BE%99%E8%A1%8C%E5%A4%A7%E8%BF%90/"/>
-    <id>https://zongzi531.com/2024/02/01/%E9%BE%99%E8%A1%8C%E5%A4%A7%E8%BF%90/</id>
+    <link href="https://zongzi531.github.io/2024/02/01/%E9%BE%99%E8%A1%8C%E5%A4%A7%E8%BF%90/"/>
+    <id>https://zongzi531.github.io/2024/02/01/%E9%BE%99%E8%A1%8C%E5%A4%A7%E8%BF%90/</id>
     <published>2024-02-01T13:35:11.000Z</published>
     <updated>2024-02-01T13:35:11.000Z</updated>
     
@@ -355,17 +355,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>２０２４年おめでとうございます</title>
-    <link href="https://zongzi531.com/2024/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%94%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
-    <id>https://zongzi531.com/2024/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%94%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
+    <link href="https://zongzi531.github.io/2024/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%94%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
+    <id>https://zongzi531.github.io/2024/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%94%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
     <published>2024-01-01T10:51:08.000Z</published>
     <updated>2024-01-01T10:51:08.000Z</updated>
     
@@ -376,17 +376,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>登山</title>
-    <link href="https://zongzi531.com/2023/12/01/%E7%99%BB%E5%B1%B1/"/>
-    <id>https://zongzi531.com/2023/12/01/%E7%99%BB%E5%B1%B1/</id>
+    <link href="https://zongzi531.github.io/2023/12/01/%E7%99%BB%E5%B1%B1/"/>
+    <id>https://zongzi531.github.io/2023/12/01/%E7%99%BB%E5%B1%B1/</id>
     <published>2023-12-01T10:39:00.000Z</published>
     <updated>2023-12-01T10:39:00.000Z</updated>
     
@@ -397,17 +397,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>初入后端</title>
-    <link href="https://zongzi531.com/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/"/>
-    <id>https://zongzi531.com/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/</id>
+    <link href="https://zongzi531.github.io/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/"/>
+    <id>https://zongzi531.github.io/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/</id>
     <published>2023-11-01T09:39:05.000Z</published>
     <updated>2023-11-01T09:39:05.000Z</updated>
     
@@ -418,17 +418,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>鸽子王</title>
-    <link href="https://zongzi531.com/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/"/>
-    <id>https://zongzi531.com/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/</id>
+    <link href="https://zongzi531.github.io/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/"/>
+    <id>https://zongzi531.github.io/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/</id>
     <published>2023-10-07T07:30:33.000Z</published>
     <updated>2023-10-07T07:30:33.000Z</updated>
     
@@ -439,17 +439,17 @@
     
     
     
-    <category term="Blog" scheme="https://zongzi531.com/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
     
     
-    <category term="Blog" scheme="https://zongzi531.com/tags/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
   <entry>
     <title>思考性能优化</title>
-    <link href="https://zongzi531.com/2023/09/01/%E6%80%9D%E8%80%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>https://zongzi531.com/2023/09/01/%E6%80%9D%E8%80%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</id>
+    <link href="https://zongzi531.github.io/2023/09/01/%E6%80%9D%E8%80%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>https://zongzi531.github.io/2023/09/01/%E6%80%9D%E8%80%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</id>
     <published>2023-09-01T08:52:51.000Z</published>
     <updated>2023-09-01T08:52:51.000Z</updated>
     
@@ -460,14 +460,14 @@
     
     
     
-    <category term="优化" scheme="https://zongzi531.com/categories/%E4%BC%98%E5%8C%96/"/>
+    <category term="优化" scheme="https://zongzi531.github.io/categories/%E4%BC%98%E5%8C%96/"/>
     
     
-    <category term="性能优化" scheme="https://zongzi531.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <category term="性能优化" scheme="https://zongzi531.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-    <category term="优化" scheme="https://zongzi531.com/tags/%E4%BC%98%E5%8C%96/"/>
+    <category term="优化" scheme="https://zongzi531.github.io/tags/%E4%BC%98%E5%8C%96/"/>
     
-    <category term="性能" scheme="https://zongzi531.com/tags/%E6%80%A7%E8%83%BD/"/>
+    <category term="性能" scheme="https://zongzi531.github.io/tags/%E6%80%A7%E8%83%BD/"/>
     
   </entry>
   

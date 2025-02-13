@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?65921575">
+<link rel="stylesheet" href="/css/journal.css?27483045">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -51,7 +51,7 @@
      v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
     <div class="drawer-content">
         <div class="drawer-menu">
-            <a class="a-block drawer-menu-item false" href="https://zongzi531.com">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
                 首页
             </a>
             
@@ -284,7 +284,7 @@
             <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
             <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
         </div>
-        &copy; 2017 - 2024 <a href="https://zongzi531.com">Zong</a>
+        &copy; 2017 - 2025 <a href="https://zongzi531.github.io">Zong</a>
     </div>
 </div>
 <div ref="extraContainer" class="extra-container">
@@ -337,7 +337,7 @@
 
 <span id="more"></span>
 
-<p>5月，天气忽冷忽热的，挺难受的，这个天气也挺容易感冒。近段时间，晚上会下楼运动🏃一下，主要是跳绳、拉伸、跑步、俯卧撑、哑铃这些运动。这个月月初的我还在肝游戏，但是发现这样有些浪费时间，于是决定利用通勤时间做点事情，那么最容易做到的就是阅读文章啦，刚好在博客中开设了一个<a href="https://zongzi531.com/reading_diary/">位置</a>来记录我阅读过得文章，以便后续查阅学习。</p>
+<p>5月，天气忽冷忽热的，挺难受的，这个天气也挺容易感冒。近段时间，晚上会下楼运动🏃一下，主要是跳绳、拉伸、跑步、俯卧撑、哑铃这些运动。这个月月初的我还在肝游戏，但是发现这样有些浪费时间，于是决定利用通勤时间做点事情，那么最容易做到的就是阅读文章啦，刚好在博客中开设了一个<a href="https://zongzi531.github.io/reading_diary/">位置</a>来记录我阅读过得文章，以便后续查阅学习。</p>
 <p>阅读 React 源码计划也在继续，当然遇到了一些困难，我准备慢慢的一一的克服他们，在阅读 <code>packages/react</code> 部分其实还是很好理解的，这与 <code>0.3</code> 中有很多的相似点，但是 <code>packages/react-dom</code> 时，会以为与之前也有很多相似之处，但是却恰恰相反，因为引入的 Fiber 数据结构。那么在此之前，我需要对这部分知识进行整理，讲实话牵扯的内容有些多。</p>
 <p>为了给自己一个缓冲区，所以我觉得先学习一些其他部分，来缓解缓解心情。这时候我选择看一下之前面试的时候了解到的 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/components-slots.html">Vue Slot</a> ，讲实话，这个月有小迭代之前写的 Vue 2.x 项目，但是由于长时间没有写 Vue 有点陌生，不过也很快适应过来了（毕竟可读性还算过得去）。让我们再回到 Vue Slot ，很巧的是，在通勤阅读的时候，有阅读到关于原生自己支持 Slot 的文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-jkmCrNe35qD5vUizuv16g">《JavaScript 的工作原理：Shadow DOM 的内部结构以及如何构建可封装的组件》</a>，这一系列的文章都是围绕着 Web Components 来讲述的，还是很值得一看的，同样的 Vue Slot 的设计灵感也是源于 <a target="_blank" rel="noopener" href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md">Web Components 规范草案</a>，刚好想到想找点轮子，借着 React 来实现 Slot ，其实 React 本身就含有这样的功能，就是对 <code>this.props.children</code> 稍作改造，就是插槽功能了。可以查看到我的项目 <a target="_blank" rel="noopener" href="https://github.com/zongzi531/react-slot-element">zongzi531&#x2F;react-slot-element</a> 或 <code>yarn add react-slot-element</code> 使用。</p>
 <p>再来说说通勤那点事吧，看了那么些文章，总得学到一些东西拿来总结总结吧。我如果把里面的东西全部照搬过来也不好，那么我就脱离着讲讲感受吧。先来说说关于 React 及其周边的学习，对于 Redux 有了更多的了解，以及 immutable 这个概念，比较幸运的是，我司的项目都使用了 Redux 的黄金搭档 Immutable.js ，使用起来还是非常的方便快捷的；对于 HOC 也有了跟多的学习和实践，比如上面的 react-slot-element 就是有包含 HOC 的实践；对于 Hook 有了浅显的认识；对 CSS 变量也有了新的学习，我司 PC 端项目是无需兼容旧版本浏览器的，也在跟换主题，封装组件时统一调整视窗高度等地方直接进行了实践，效果拔群，那种和 JavaScript 解耦的感觉很是美妙；对 Web Components 也有了新的认识；对一些前端周边的职位，职业发展规划等等。</p>
@@ -360,7 +360,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接: </strong>
-    <a href="https://zongzi531.com/2019/06/02/may/" title="May">https://zongzi531.com/2019/06/02/may/</a>
+    <a href="https://zongzi531.github.io/2019/06/02/may/" title="May">https://zongzi531.github.io/2019/06/02/may/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明: </strong>
@@ -401,7 +401,7 @@
         <a title="掘金" target="_blank" rel="noopener" href="https://juejin.im/user/58747cf2ac502e00646e3b8b/posts" style="margin: 0px 2px;"><img height="16" src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/favicon-32x32.png"></a>
         <a title="力扣" target="_blank" rel="noopener" href="https://leetcode-cn.com/u/zongzi0531/" style="margin: 0px 2px;"><img height="16" src="https://static.leetcode-cn.com/cn-assets/icons/favicon-32x32.png"></a>
     </div>
-    &copy; 2017 - 2024 <a href="https://zongzi531.com">Zong</a>
+    &copy; 2017 - 2025 <a href="https://zongzi531.github.io">Zong</a>
 </div>
 </div>
 
@@ -416,7 +416,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?88678448"></script>
+<script src="/js/journal.js?42509166"></script>
 
 
     <script src="https://giscus.app/client.js"
