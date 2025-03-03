@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-02-11T15:52:29.000Z</updated>
+  <updated>2025-03-03T09:32:36.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>赏花Ⅱ</title>
+    <link href="https://zongzi531.github.io/2025/03/03/%E8%B5%8F%E8%8A%B12/"/>
+    <id>https://zongzi531.github.io/2025/03/03/%E8%B5%8F%E8%8A%B12/</id>
+    <published>2025-03-03T09:32:36.000Z</published>
+    <updated>2025-03-03T09:32:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月基本上是在参与基础建设和低代码建设，计划低代码与 AI 适配。基本是在写 Prompt 。</p><p>月初的杭州一下子到了夏天的感觉，那就来赏赏梅花吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><hr><blockquote><p>“花气袭人知骤暖，鹊声穿树喜新晴。” —— 陆游 《村居书喜》</p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>入门 ANTLR 4</title>
@@ -443,31 +464,6 @@
     
     
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>思考性能优化</title>
-    <link href="https://zongzi531.github.io/2023/09/01/%E6%80%9D%E8%80%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>https://zongzi531.github.io/2023/09/01/%E6%80%9D%E8%80%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</id>
-    <published>2023-09-01T08:52:51.000Z</published>
-    <updated>2023-09-01T08:52:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>其实最近也是受到了一些文章的启发，所以文章的标题会取这个，也比较怪异吧。</p><p>说起来前端的性能优化其实就是从资源入手，从浏览器运行时入手。</p><p>当然了，如果网络层面也算的话，也可以从网络层面入手。</p><h1 id="资源优化"><a href="#资源优化" class="headerlink" title="资源优化"></a>资源优化</h1><p>比如对从项目业务的角度出发，分析编译代码，拆分业务场景时需要用到的代码，移除不必要的模块，本质是分析无用代码，并剔除。</p><p>同样的，可以抽离减少各模块中的公共依赖模块。</p><p>比如对用户上传的资源进行相应的压缩缓存，用户读取时加快页面的加载速度，减轻服务器的负担。</p><p>比如服务端接口的必要合并、网络请求的缓存以及服务间通信使用 gRPC 。</p><h1 id="运行时优化"><a href="#运行时优化" class="headerlink" title="运行时优化"></a>运行时优化</h1><p>比如将一些包含大量计算的逻辑交由 WebWorker 来执行，虽然说线程通信也同样存在着性能的开销，但是比起大量计算的逻辑来说，这些开销似乎也不算什么。</p><p>比如通过对页面渲染任务进行拆分，以保证重要的内容优先渲染的优化逻辑，从用户体验的角度来说会是一个不错的选择，但是会产生额外的渲染任务调度拆分的开销。</p><p>从火焰图其实也可以排查出业务中存在的不必要的 JS 执行时间，对应的将其进行优化，并且可以减少不必要的重新渲染页面逻辑。</p><p>在一些交互高频的操作场景下，可以考虑使用原生语法代替框架带来的性能损耗。</p><h1 id="无止境的优化"><a href="#无止境的优化" class="headerlink" title="无止境的优化"></a>无止境的优化</h1><p>其实让我比较纠结的就是，优化这件事件总是针对当下，而代码设计也总是针对未来，但是在团队开发的环境中，怎样可以避免因为业务迭代产生的优化失效？</p><p>如果说是需要通过人工的方式来持续的做这件事情的话，未免也太无止境了，会让人崩溃。</p><p>就算掌握了这些技巧，针对当前的版本来说是最优解，但是产品肯定会一直的迭代，而优化如何能够轻松的跟上迭代的步伐呢？</p><p>这是一个引人思考的问题，我也暂时还没解出来……</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="优化" scheme="https://zongzi531.github.io/categories/%E4%BC%98%E5%8C%96/"/>
-    
-    
-    <category term="性能优化" scheme="https://zongzi531.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-    <category term="优化" scheme="https://zongzi531.github.io/tags/%E4%BC%98%E5%8C%96/"/>
-    
-    <category term="性能" scheme="https://zongzi531.github.io/tags/%E6%80%A7%E8%83%BD/"/>
     
   </entry>
   
