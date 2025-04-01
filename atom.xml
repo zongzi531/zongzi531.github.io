@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-03-03T09:32:36.000Z</updated>
+  <updated>2025-04-01T11:18:39.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我不会开车</title>
+    <link href="https://zongzi531.github.io/2025/04/01/%E6%88%91%E4%B8%8D%E4%BC%9A%E5%BC%80%E8%BD%A6/"/>
+    <id>https://zongzi531.github.io/2025/04/01/%E6%88%91%E4%B8%8D%E4%BC%9A%E5%BC%80%E8%BD%A6/</id>
+    <published>2025-04-01T11:18:39.000Z</published>
+    <updated>2025-04-01T11:18:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>我拿了 C1 的驾照的今天，行驶里程有 6 万公里，但是细想，我并不会开车。</p><p>虽然我变道会打灯，也不开慢车，但是仔细一想我还是不会开车。</p><p>杭州道路上的车辆，就像是杭州社会的一个缩影，就算我遵守规则，努力不成为道路上给其他人添加麻烦的那个人，也一样很难避免给我造成麻烦的人。</p><p>我也在尽量的改变，不能说是包容其他车辆吧，只能说是尽量保证自己的安全，我希望自己能成为一个会开车的人。</p><p>我经常无法释怀道路上形形色色的驾驶员，会斥责他们的驾驶习惯多么不安全，可这又能怎么样呢，我也在这个道路中，我无法改变他们，我与他们较真，最后只会浪费我自己的精力。</p><p>可是我真的在这个漩涡中，很难脱离出来，我觉得自己是中式教育产出的一种人。</p><p>喜欢论对错，守规矩，有道德。可是这又怎么样呢，我依然不会开车。总有人会说小孩子才争对错，可大人的利弊不也是对错的一种形式吗？对错只不过是相对的，不同立场的。</p><p>记得刚开始开车的时候，我遇到右转汇入的车辆未观察直行车辆也未让行的时候，我会愤怒，我会鸣笛，可是那又怎么样呢？这样的车就是这样的行车风格，如同做事做人。后来我也想开了，当我看到这样不观察不减速的车辆，我会减速，我会让他们，我会觉得和他们较真，讲规则都是多余的，因为我们的认知不在一层。可我们却可以在同一条道路上行驶，而我却要比这样的车操更多的心，所以，凭什么？综合下来，我还会这样想，说明我不会开车。</p><p>再一次在道路缩减，二变一的时候，我明白要交替通行，当我感受到对方没有这个意识的时候，我会给油去争取我的路权，所谓的正确。可这又怎么样呢，最后刮蹭，直到交警判对方全责，对方才或多或少的意识到自己的问题，可是耽误的是我的时间，这时候我才明白，我和他也不在一个层次，我又得操更多的心，所以，凭什么？还是我不会开车。</p><p>我明白道路上不同层次的人，感谢道路上为我操心的人，谢谢你们的包容，让我可以安全到达目的地。</p><p>或许这就是社会，我想摆脱现在的漩涡，我想成为会开车的人。</p><p>所以怎么样才算是会开车的人呢？还是说我需要寻找一个适合自己的漩涡？或者说有没有风平浪静的海面？</p><p>值得思考。</p><p>回想起日本道路上的车辆，我会觉得杭州的道路上确实乱糟糟的，我也在对比，在寻找我心目中的正确，建立我自己的三观，试图寻找着我向往的社会。（没有说日本哪里都好，只是拿这个举个例子）</p><p>杭州真的变得没那么喜欢了。</p><p>到底是我变了，还是杭州变了，还是都变了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
+    <category term="感悟" scheme="https://zongzi531.github.io/tags/%E6%84%9F%E6%82%9F/"/>
+    
+    <category term="社会" scheme="https://zongzi531.github.io/tags/%E7%A4%BE%E4%BC%9A/"/>
+    
+    <category term="三观" scheme="https://zongzi531.github.io/tags/%E4%B8%89%E8%A7%82/"/>
+    
+    <category term="思考" scheme="https://zongzi531.github.io/tags/%E6%80%9D%E8%80%83/"/>
+    
+    <category term="杭州" scheme="https://zongzi531.github.io/tags/%E6%9D%AD%E5%B7%9E/"/>
+    
+  </entry>
   
   <entry>
     <title>赏花Ⅱ</title>
@@ -433,27 +464,6 @@
     <updated>2023-11-01T09:39:05.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>国庆回来之后，开始从事服务端开发的工作，也在服务端同事的帮助下，快速的熟悉了服务端的搭建及开发。</p><p>从框架选型开始，我选择了一个较为成熟生态的 NestJS 服务端框架，数据库选用 postgresql 。</p><p>开发规范则也是按照 NestJS 推荐的最佳实践进行执行，从 <code>controllers</code> <code>entities</code> <code>services</code> <code>modules</code> <code>dtos</code> <code>filters</code> <code>interceptors</code> 到单元测试，都是按照推荐规范进行，也是感受了一波服务端的开发规范吧。</p><p>数据库从熟悉基础的 SQL 语言外，也尝试了 <code>typeorm</code> 的同步生成功能（当然，这是不推荐在生产使用的，但是在单元测试中我选择使用同步功能，以保证每个测试用例都可以纯净的执行），最后也是选用 SQL + migration 进行初始化的实现，当然也满足后期迭代的数据库迁移工作。</p><p>实现基础的 API 后也体验了使用 swagger 自动生成 API 文档的功能，感受还不错。</p><p>通过 redis 来记录用户登录状态，也是简单尝试了一把鉴权。</p><p>再来就是 CI 了，因为研发环境相当于是私有环境，部署环境不仅需要在私有环境上部署，还要在办公环境上部署，所以选型考虑使用 docker 来完成。</p><p>私有环境部署较为简单，利用 CI + docker 可以实现自动化，但是办公网环境的部署则需要将镜像 <code>docker push</code> 出来，进行手动部署。出于工作环境的限制，暂时这一步骤就考虑手动进行了。</p><p>环境的配置目前采用 dot 文件 + Dockerfile 参数实现，也可以在后期进行更自由的定制。</p><p>其余就是基础的 CRUD + 单元测试了，也是借此机会简单的熟悉了服务端研发的入门。</p><p>对了，有关鉴权 <code>token</code> 的生成，以及一些加解密算法，后续可以深入研究一下。</p><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>再来就是这个月负责了老低代码平台的性能优化问题，因为原有的业务还在持续交付，但是在交付环境的表现并不是特别的理想。</p><p>在部分情况下会出现卡顿，或者长时间运行后会卡顿的现象。</p><p>经过对交付项目的观察，也是发现了确实存在内存泄露的问题。</p><p>从而对老低代码平台进行性能排查，从平台侧、组件侧、框架侧（Vue 2.6、组件库）其实都能看到一些内存泄露的问题。</p><p>比较简单击破的其实是组件侧，虽然组件量大，但是代码逻辑相对较为简单，内存泄露的原因也比较好找，大多是闭包产生的内存泄露问题，其次就是全局变量、事件监听、监听对象外泄、意外报错等问题。</p><p>平台侧则较为复杂一些，需要了解分析平台渲染的运行时逻辑才能击破，检查平台自身、引用组件时、操作组件生命周期时产生不当的副作用或者未及时释放关联关系产生的内存泄露问题。</p><p>也存在着一些双向链表解除单边引起的内存泄露问题以及一些业务逻辑执行顺序不合理的地方。</p><p>再一个就是因为交付场景是在 Electron 里运行的，是不是可以使用 Electron 来进行定期手动 GC 释放，当然这个思路还没有尝试过。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>鸽子王</title>
-    <link href="https://zongzi531.github.io/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/"/>
-    <id>https://zongzi531.github.io/2023/10/07/%E9%B8%BD%E5%AD%90%E7%8E%8B/</id>
-    <published>2023-10-07T07:30:33.000Z</published>
-    <updated>2023-10-07T07:30:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>「消消乐」的开发进度可以说是堪比龟速，主打一个慢，咕咕咕～</p><p>最近阅读了一下比较火的 Bun 的文档，当然还没读完。</p><p>和老婆一起做了几次提拉米苏，挺有趣的。</p><p>还干嘛了？</p><p>《异人之下》好看的呀批，推荐！</p><p>话说经过这个夏天，厨艺变强了一点……</p><p>再就是国庆去日本玩了趟～嘿嘿，开心～</p><p>水完了……</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
