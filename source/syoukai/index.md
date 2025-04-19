@@ -3,9 +3,7 @@ title: 紹介
 featured_image: https://github.com/zongzi531/zongzi531/blob/master/banner.png?raw=true
 ---
 
-大家好，我是粽子。是一个想学**日语**的前端菜鸟，想记录一些学习路上的点滴，希望可以在巩固自己的同时帮助到需要帮助的同学。
-
-> 皆さん、こんにちは、 Zong です。よろしくお願いします。
+皆さん、こんにちは、初めまして、私の名前粽子です。よろしくお願いします。
 
 ## 友情链接
 
@@ -15,6 +13,7 @@ featured_image: https://github.com/zongzi531/zongzi531/blob/master/banner.png?ra
 
 ## 更新日志
 
+- 2025年04月19日：归档仓库「読書日記」、「日本語のコーナー」。
 - 2025年04月18日：计划暂缓同步「読書日記」，新增「回顾」展示归档文章。
 - 2025年02月13日：计划停续[~https://zongzi531.com~](https://zongzi531.com)（每年涨价）
 - 2023年02月01日：~Travis CI~ 迁移至 GitHub Actions
