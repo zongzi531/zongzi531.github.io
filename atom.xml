@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-04-01T11:18:39.000Z</updated>
+  <updated>2025-05-01T07:33:28.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>再见，我的初代 MacBook Pro</title>
+    <link href="https://zongzi531.github.io/2025/05/01/byePro/"/>
+    <id>https://zongzi531.github.io/2025/05/01/byePro/</id>
+    <published>2025-05-01T07:33:28.000Z</published>
+    <updated>2025-05-01T07:33:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><blockquote><p>那么最后照一张照片吧，微笑🙂</p></blockquote><p>近 8 年的时间里，感谢你的陪伴，陪伴着我的代码技术成长，也感谢你提供的 Mac OS 系统，让我可以更轻易的进入代码世界，同时，谢谢你陪我一起奋战在职场的前线！</p><p>回看刚拥有你的时候，那时的我是如此的高兴，现在也是！</p><p>我不希望把你沉睡在家里，我想你也不想自己这样，所以，我们需要在此分别，向着未来发光发亮。</p><p>虽然现在要和你分别，但是我会带着你的意志和我一起继续前行！</p><p>我想你也会带着我的意志一起前行，毕竟我们 8 年的默契，一定会心有灵犀。</p><blockquote><p><a href="/2017/05/29/Pro/">入手 MacBook Pro</a></p></blockquote><p>当听到 Moscow 这首歌的时候，大脑的节奏和记忆一下子回到了 2017 年，感谢你在这么多人中选择了我，选择和我一起前往代码的世界。</p><p>我相信我们通过电子节奏的连接后，你也回到了 2017 年，我们第一次见面的时候，梦开始的地方。</p><blockquote><p>看了一下最近 2 个月的工作内容，基本是围绕着 AI 孵化产品。借助 AI 的能力，增强产品的能力。</p></blockquote><p>要说 AI 赋能吧，虽然说把 AI 转化成智能化的服务接入到业务中，但是感觉到成熟可信还需走一段较长的路程，虽然短而小的工具基本还是蛮稳定的，但是要上升到信任这个程度，感觉尚且还需要一段时间，至少我是这么认为的。</p><p>从接触 AI 到简单了解大模型，再到现在的 RAG 、 MCP 等等也好，其实能感受到 AI 的发展之快，但是总觉得要到真的普遍的落地（达成信任）的环节，还需要时间的考验。</p><p>不过，可以发现的是， AI 还是无法淘汰人，AI 只能做到帮助人，这个样子。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
+    <category term="MAC" scheme="https://zongzi531.github.io/categories/MAC/"/>
+    
+    
+    <category term="Apple" scheme="https://zongzi531.github.io/tags/Apple/"/>
+    
+    <category term="MAC OS" scheme="https://zongzi531.github.io/tags/MAC-OS/"/>
+    
+  </entry>
   
   <entry>
     <title>我不会开车</title>
@@ -443,27 +466,6 @@
     <updated>2023-12-01T10:39:00.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>也算不上是登山吧，哈哈哈！坐中巴车上山 15 分钟，路程非常山路，自己开车估计得半小时起码。</p><p>到了山顶感觉真好，山上有两棵很大的银杏树，去的时候叶子半绿半黄。</p><p>下山的时候是走下山的，走了差不多 1 个小时。</p><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>整个月的工作内容基本就是一个后端实习生了……</p><p>继续上个月的服务端功能，这个月学习了不少知识。</p><p>数据库本来只会使用 <code>typeorm</code> 进行简单的 API 调用，比如 <code>find</code> 之类的简单操作，对于需要聚合多张表的数据也是使用了比较拙劣的办法，查出一张表并根据这张表的关联 ID 进行遍历查询，最后进行聚合，后来经过后端大哥的提示，可以使用多表关联查询来实现，虽然过程中出现了一些 SQL 的报错是后端大哥帮忙给出的解决思路，但是自己对 SQL 的时候确实还是一片空白。</p><p>数据库备份则是通过 <code>pg_dump</code> 来进，还原则是通过 <code>psql</code> 进行，这些命令都依赖于 <code>postgresql-client</code> 这个库。</p><p>Docker 方面，一是将 GitLab Runner 从部署服务器上运行调整为 Docker 容器运行，以确保每个 <code>stage</code> 的执行过程足够纯粹。</p><p>也经历了 Docker 镜像启动时需要添加额外的 <code>hosts</code> 配置，解决 DNS 映射问题，以及自己打包依赖集合镜像。</p><p>因为要经历 Docker 镜像的推送，考虑通过登录服务器来操作，利用 <code>ssh-agent</code> 来实现免密登录服务器，以进行一系列操作，比如推送镜像、更新服务等。</p><p>特别需要一提的是挂载功能真的很好用。</p><p>NestJS 开启了日志功能，便于 API 调试，虽然没做持久化，但是可以直接进入容器查看日志，如果考虑做持久化的话，结合挂载功能实现即可，只不过需要额外考虑日志存储的上限，清除等逻辑。</p><p>并且在开发的过程中也发现了，起初数据库设计的不完全，结合数据库迁移 migration 对数据库进行了字段补充。</p><p>服务端的单元测试算是其中比较轻松的，连接测试数据库，保证每一个测试用例的纯净，根据业务场景编写单元测试。</p><p>部署过程中也为前端仓库添加 CI 、 Docker 镜像制作、自动化等工作，也同时配置了 Nginx 的配置文件，算是简单的尝试了一把。</p><p>不仅部署了前端，还针对各环境提供了测试和正式环境的部署，并且对正式环境关闭了端口映射，统一通过网关进行对外暴露（简单尝试了进入容器查询数据库数据）。</p><p>办公网环境同时还提供给前端同学可视化 Docker 操作界面 portainer 使用。</p><p>看似这个月的服务端学习过程比较顺利，但是我们原业务组的后端被“优化了”，我来接手原业务组 Node.js 侧的业务，还部分接手部署相关的工作。真的是挑战啊！</p><p>同时小组有打算尝试接入 AI 来辅助开发的意向，后续计划开始预研。</p><p>又能尝试新的事物咯！</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>初入后端</title>
-    <link href="https://zongzi531.github.io/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/"/>
-    <id>https://zongzi531.github.io/2023/11/01/%E5%88%9D%E5%85%A5%E5%90%8E%E7%AB%AF/</id>
-    <published>2023-11-01T09:39:05.000Z</published>
-    <updated>2023-11-01T09:39:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>国庆回来之后，开始从事服务端开发的工作，也在服务端同事的帮助下，快速的熟悉了服务端的搭建及开发。</p><p>从框架选型开始，我选择了一个较为成熟生态的 NestJS 服务端框架，数据库选用 postgresql 。</p><p>开发规范则也是按照 NestJS 推荐的最佳实践进行执行，从 <code>controllers</code> <code>entities</code> <code>services</code> <code>modules</code> <code>dtos</code> <code>filters</code> <code>interceptors</code> 到单元测试，都是按照推荐规范进行，也是感受了一波服务端的开发规范吧。</p><p>数据库从熟悉基础的 SQL 语言外，也尝试了 <code>typeorm</code> 的同步生成功能（当然，这是不推荐在生产使用的，但是在单元测试中我选择使用同步功能，以保证每个测试用例都可以纯净的执行），最后也是选用 SQL + migration 进行初始化的实现，当然也满足后期迭代的数据库迁移工作。</p><p>实现基础的 API 后也体验了使用 swagger 自动生成 API 文档的功能，感受还不错。</p><p>通过 redis 来记录用户登录状态，也是简单尝试了一把鉴权。</p><p>再来就是 CI 了，因为研发环境相当于是私有环境，部署环境不仅需要在私有环境上部署，还要在办公环境上部署，所以选型考虑使用 docker 来完成。</p><p>私有环境部署较为简单，利用 CI + docker 可以实现自动化，但是办公网环境的部署则需要将镜像 <code>docker push</code> 出来，进行手动部署。出于工作环境的限制，暂时这一步骤就考虑手动进行了。</p><p>环境的配置目前采用 dot 文件 + Dockerfile 参数实现，也可以在后期进行更自由的定制。</p><p>其余就是基础的 CRUD + 单元测试了，也是借此机会简单的熟悉了服务端研发的入门。</p><p>对了，有关鉴权 <code>token</code> 的生成，以及一些加解密算法，后续可以深入研究一下。</p><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>再来就是这个月负责了老低代码平台的性能优化问题，因为原有的业务还在持续交付，但是在交付环境的表现并不是特别的理想。</p><p>在部分情况下会出现卡顿，或者长时间运行后会卡顿的现象。</p><p>经过对交付项目的观察，也是发现了确实存在内存泄露的问题。</p><p>从而对老低代码平台进行性能排查，从平台侧、组件侧、框架侧（Vue 2.6、组件库）其实都能看到一些内存泄露的问题。</p><p>比较简单击破的其实是组件侧，虽然组件量大，但是代码逻辑相对较为简单，内存泄露的原因也比较好找，大多是闭包产生的内存泄露问题，其次就是全局变量、事件监听、监听对象外泄、意外报错等问题。</p><p>平台侧则较为复杂一些，需要了解分析平台渲染的运行时逻辑才能击破，检查平台自身、引用组件时、操作组件生命周期时产生不当的副作用或者未及时释放关联关系产生的内存泄露问题。</p><p>也存在着一些双向链表解除单边引起的内存泄露问题以及一些业务逻辑执行顺序不合理的地方。</p><p>再一个就是因为交付场景是在 Electron 里运行的，是不是可以使用 Electron 来进行定期手动 GC 释放，当然这个思路还没有尝试过。</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
