@@ -47,7 +47,7 @@ tags:
 
 还有就是我发布的时候遇到的问题`Failure: XXX is not a recognized Liquid tag.`  ， 记得 `hexo clean`一下，可能是因为以前Windows的数据导致上GitHub页面生成失败三次的。
 
-![](Pro/pic3.jpeg)
+![](pic3.jpeg)
 
 这样，基本的一台可以科学上网的MacBook躺在怀里了，我可以拿来撸代码了。
 
