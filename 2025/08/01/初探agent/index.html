@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>初探 Agent - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+这个月基本围绕着之前的 WebContainer 去实现一个 Agent ，也算是负责 Agent 核心开...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?22209356">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/archives/index.html">
+                        回顾
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/archives/index.html">
+                    回顾
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2017 - 2025 <a href="https://zongzi531.github.io">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2025/08/01/初探agent/pic1.jpg')">
+                <div class="post-title">
+                    初探 Agent
+                    <div class="post-meta">
+                        <time datetime="2025-08-01T17:31:29.000Z" itemprop="datePublished">
+                            2025-08-01 17:31
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/LLM/'>LLM</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/LLM/'>LLM</a>, 
+                        
+                        <a href='/tags/Agent/'>Agent</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node  -->
+
+<span id="more"></span>
+
+<p>这个月基本围绕着之前的 WebContainer 去实现一个 Agent ，也算是负责 Agent 核心开发了。</p>
+<p>Agent 的设计从最初简单的工具调用、冗长上下文演变成任务能够分模块执行，自由的编排各个任务的执行顺序（代码层面，非UI拖拽）。</p>
+<p>从原先一大坨业务固定的代码演变成各个任务只需关注自身和其上下文即可，这个月可算是从基本实现到升级解耦全做了个遍。</p>
+<p>目前设计的 Agent 架构信息如下：</p>
+<h2 id="Agent-架构设计图"><a href="#Agent-架构设计图" class="headerlink" title="Agent 架构设计图"></a>Agent 架构设计图</h2><p><img src="/2025/08/01/%E5%88%9D%E6%8E%A2agent/mermaid-diagram.png" alt="architecture"></p>
+<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TB
+    <span class="token keyword">subgraph</span> <span class="token string">"用户交互层"</span>
+        User<span class="token text string">[👤 用户]</span>
+        WebUI<span class="token text string">[🌐 Web界面]</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token keyword">subgraph</span> <span class="token string">"核心引擎层"</span>
+        MainEngine<span class="token text string">[🔄 主循环引擎]</span>
+        TaskScheduler<span class="token text string">[📋 任务调度器]</span>
+        TaskExecutor<span class="token text string">[⚡ 任务执行器]</span>
+        WaitHandler<span class="token text string">[⏳ 等待处理器]</span>
+        ExceptionHandler<span class="token text string">[🚨 异常处理器]</span>
+        Logger<span class="token text string">[📝 日志模块]</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token keyword">subgraph</span> <span class="token string">"会话处理层"</span>
+        SessionProcessor<span class="token text string">[💬 会话处理器]</span>
+        SessionRouter<span class="token text string">[🔀 会话路由]</span>
+        SSEOutput<span class="token text string">[📡 SSE流输出]</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token keyword">subgraph</span> <span class="token string">"工具管理层"</span>
+        ToolManager<span class="token text string">[🛠️ 工具管理器]</span>
+        ToolExecutor<span class="token text string">[⚙️ 工具执行]</span>
+        ParamValidator<span class="token text string">[✅ 参数验证]</span>
+        ExecutionOptimizer<span class="token text string">[🚀 执行优化]</span>
+        
+        <span class="token keyword">subgraph</span> <span class="token string">"具体工具"</span>
+            FileRWTool<span class="token text string">[📁 文件读写工具]</span>
+            FileSearchTool<span class="token text string">[🔍 文件搜索工具]</span>
+            FileDiffTool<span class="token text string">[📝 文件搜索替换/DIFF工具]</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token keyword">subgraph</span> <span class="token string">"知识管理层"</span>
+        RAG<span class="token text string">[🧠 RAG系统]</span>
+        KnowledgeProtocol<span class="token text string">[📚 知识维护协议规范]</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token keyword">subgraph</span> <span class="token string">"模型服务层"</span>
+        ModelManager<span class="token text string">[🤖 模型管理器]</span>
+        LLMService<span class="token text string">[🎯 大语言模型服务]</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token comment">%% 用户交互流</span>
+    User <span class="token arrow operator">--></span> WebUI
+    WebUI <span class="token arrow operator">--></span> SessionProcessor
+    
+    <span class="token comment">%% 会话处理流</span>
+    SessionProcessor <span class="token arrow operator">--></span> SessionRouter
+    SessionProcessor <span class="token arrow operator">--></span> SSEOutput
+    SessionRouter <span class="token arrow operator">--></span> MainEngine
+    
+    <span class="token comment">%% 主引擎内部流</span>
+    MainEngine <span class="token arrow operator">--></span> TaskScheduler
+    TaskScheduler <span class="token arrow operator">--></span> TaskExecutor
+    TaskExecutor <span class="token arrow operator">--></span> WaitHandler
+    TaskExecutor <span class="token arrow operator">--></span> ExceptionHandler
+    MainEngine <span class="token arrow operator">--></span> Logger
+    
+    <span class="token comment">%% 工具管理流</span>
+    TaskExecutor <span class="token arrow operator">--></span> ToolManager
+    ToolManager <span class="token arrow operator">--></span> ToolExecutor
+    ToolManager <span class="token arrow operator">--></span> ParamValidator
+    ToolManager <span class="token arrow operator">--></span> ExecutionOptimizer
+    
+    ToolExecutor <span class="token arrow operator">--></span> FileRWTool
+    ToolExecutor <span class="token arrow operator">--></span> FileSearchTool
+    ToolExecutor <span class="token arrow operator">--></span> FileDiffTool
+    
+    <span class="token comment">%% 知识和模型服务</span>
+    RAG <span class="token arrow operator">--></span> KnowledgeProtocol
+    TaskExecutor <span class="token arrow operator">--></span> ModelManager
+    TaskExecutor <span class="token arrow operator">--></span> RAG
+    ModelManager <span class="token arrow operator">--></span> LLMService
+    
+    <span class="token comment">%% 反馈流</span>
+    SSEOutput <span class="token arrow operator">--></span> WebUI
+    WaitHandler <span class="token arrow operator">--></span> SessionProcessor
+    ExceptionHandler <span class="token arrow operator">--></span> Logger
+    Logger <span class="token arrow operator">-.-></span> User
+    
+    <span class="token comment">%% 样式定义</span>
+    <span class="token keyword">classDef</span> userLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#e3f2fd<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#1976d2<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+    <span class="token keyword">classDef</span> coreLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#e8f5e8<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#388e3c<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+    <span class="token keyword">classDef</span> sessionLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#f3e5f5<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#7b1fa2<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+    <span class="token keyword">classDef</span> toolLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fff3e0<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#f57c00<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+    <span class="token keyword">classDef</span> knowledgeLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fce4ec<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#c2185b<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+    <span class="token keyword">classDef</span> modelLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#f1f8e9<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#689f38<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>
+    <span class="token keyword">classDef</span> toolItem <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fff8e1<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#ff8f00<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px</span>
+    
+    <span class="token keyword">class</span> User,WebUI userLayer
+    <span class="token keyword">class</span> MainEngine,TaskScheduler,TaskExecutor,WaitHandler,ExceptionHandler,Logger coreLayer
+    <span class="token keyword">class</span> SessionProcessor,SessionRouter,SSEOutput sessionLayer
+    <span class="token keyword">class</span> ToolManager,ToolExecutor,ParamValidator,ExecutionOptimizer toolLayer
+    <span class="token keyword">class</span> RAG,KnowledgeProtocol knowledgeLayer
+    <span class="token keyword">class</span> ModelManager,LLMService modelLayer
+    <span class="token keyword">class</span> FileRWTool,FileSearchTool,FileDiffTool toolItem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="架构层次说明"><a href="#架构层次说明" class="headerlink" title="架构层次说明"></a>架构层次说明</h2><h3 id="🔄-核心引擎层"><a href="#🔄-核心引擎层" class="headerlink" title="🔄 核心引擎层"></a>🔄 核心引擎层</h3><ul>
+<li><strong>主循环引擎</strong>: 整个Agent的核心控制器，协调各个模块的工作</li>
+<li><strong>任务调度器</strong>: 负责任务的排队、优先级管理和调度执行</li>
+<li><strong>任务执行器</strong>: 具体执行各种任务，包括工具调用和模型推理</li>
+<li><strong>等待处理器</strong>: 处理需要用户交互的场景，如确认、回复等</li>
+<li><strong>异常处理器</strong>: 统一的异常捕获和处理机制</li>
+<li><strong>日志模块</strong>: 记录系统运行状态和调试信息</li>
+</ul>
+<h3 id="💬-会话处理层"><a href="#💬-会话处理层" class="headerlink" title="💬 会话处理层"></a>💬 会话处理层</h3><ul>
+<li><strong>会话处理器</strong>: 管理用户会话的生命周期</li>
+<li><strong>会话路由</strong>: 根据请求类型路由到不同的处理逻辑</li>
+<li><strong>SSE流输出</strong>: 实现实时的流式响应输出</li>
+</ul>
+<h3 id="🛠️-工具管理层"><a href="#🛠️-工具管理层" class="headerlink" title="🛠️ 工具管理层"></a>🛠️ 工具管理层</h3><ul>
+<li><strong>工具管理器</strong>: 统一管理所有可用工具</li>
+<li><strong>工具执行</strong>: 安全地执行各种工具操作</li>
+<li><strong>参数验证</strong>: 确保工具调用参数的正确性</li>
+<li><strong>执行优化</strong>: 优化工具执行性能和资源使用</li>
+</ul>
+<h3 id="🧠-知识管理层"><a href="#🧠-知识管理层" class="headerlink" title="🧠 知识管理层"></a>🧠 知识管理层</h3><ul>
+<li><strong>RAG系统</strong>: 检索增强生成，提供上下文相关的知识</li>
+<li><strong>知识维护协议</strong>: 规范化的知识更新和维护机制</li>
+</ul>
+<h3 id="🤖-模型服务层"><a href="#🤖-模型服务层" class="headerlink" title="🤖 模型服务层"></a>🤖 模型服务层</h3><ul>
+<li><strong>模型管理器</strong>: 管理不同的AI模型实例</li>
+<li><strong>大语言模型服务</strong>: 提供统一的模型推理接口</li>
+</ul>
+<h2 id="数据流向"><a href="#数据流向" class="headerlink" title="数据流向"></a>数据流向</h2><ol>
+<li><strong>用户请求</strong>: 用户通过Web界面发起请求</li>
+<li><strong>会话处理</strong>: 会话处理器接收并路由请求</li>
+<li><strong>任务调度</strong>: 主循环引擎调度相应的任务</li>
+<li><strong>工具执行</strong>: 根据需要调用各种工具完成任务</li>
+<li><strong>模型推理</strong>: 利用大语言模型进行智能处理</li>
+<li><strong>结果返回</strong>: 通过SSE流实时返回处理结果</li>
+</ol>
+<p>这种架构设计实现了模块化、可扩展的Agent系统，各个组件职责清晰，便于维护和升级。</p>
+<p>可以说整个月是游走在 Agent 开发和 Prompt 调试之间，以开发、产品多重角色优化项目中。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.github.io/2025/08/01/%E5%88%9D%E6%8E%A2agent/" title="初探 Agent">https://zongzi531.github.io/2025/08/01/%E5%88%9D%E6%8E%A2agent/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2025/07/01/%E5%88%9D%E6%8E%A2webcontainer/">
+        下一篇<br>初探 WebContainer
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2017 - 2025 <a href="https://zongzi531.github.io">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?90803354"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
