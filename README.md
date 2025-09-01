@@ -28,7 +28,7 @@
 - 2019年05月05日：新增「通勤那点事」
 - 2018年11月29日：新增「Friends Links」，~Disqus~ 评论系统
 - 2018年11月28日：选用主题[~Icarus~](https://github.com/ppoffice/hexo-theme-icarus)
-- 2018年10月09日：开启HTTPS，访问博客变为[https://zongzi531.com](https://zongzi531.com)
+- 2018年10月09日：开启HTTPS，访问博客变为[~https://zongzi531.com~](https://zongzi531.com)
 - 2018年02月21日：选用主题[~PolarBear~](https://github.com/frostfan/hexo-theme-polarbear)
 - 2017年04月16日：使用域名[~http://zongzi531.com~](http://zongzi531.com)
 - 2017年04月06日：使用博客框架[Hexo](https://github.com/hexojs/hexo)，主题[~NexT~](https://github.com/iissnan/hexo-theme-next)，部署至GitHub
