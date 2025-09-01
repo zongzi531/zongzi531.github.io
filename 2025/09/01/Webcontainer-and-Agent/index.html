@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>加深 Webcontainer 和 Agent 的融合 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+简单点说，目前在做的是在浏览器内基于 Webcontainer 实现的 Agent 。（侧重在展示，并支持...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?60391478">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/archives/index.html">
+                        回顾
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/archives/index.html">
+                    回顾
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2017 - 2025 <a href="https://zongzi531.github.io">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2025/09/01/Webcontainer-and-Agent/pic1.jpg')">
+                <div class="post-title">
+                    加深 Webcontainer 和 Agent 的融合
+                    <div class="post-meta">
+                        <time datetime="2025-09-01T09:56:11.000Z" itemprop="datePublished">
+                            2025-09-01 09:56
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/JavaScript/'>JavaScript</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/WebContainer/'>WebContainer</a>, 
+                        
+                        <a href='/tags/LLM/'>LLM</a>, 
+                        
+                        <a href='/tags/Agent/'>Agent</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node  -->
+
+<span id="more"></span>
+
+<p>简单点说，目前在做的是在浏览器内基于 Webcontainer 实现的 Agent 。（侧重在展示，并支持代码修改）</p>
+<h2 id="重构-Webcontainer-封装"><a href="#重构-Webcontainer-封装" class="headerlink" title="重构 Webcontainer 封装"></a>重构 Webcontainer 封装</h2><p>发现同事之前写的代码对 Webcontainer 的 <code>spawn</code> 方法封装并没有很好的管控，不是单例级别的调用和销毁，多次调用会产生多个 <code>WebContainerProcess</code> 的泄露和污染。</p>
+<p>于是对 Webcontainer 的封装进行了重构，以更清晰的形式进行管理和使用。</p>
+<p>另外，在启动时，开启 <code>forwardPreviewErrors</code> 配置项，可以获得到更多的报错信息，以保证流程完整性。</p>
+<h3 id="Webcontainer-内运行的工程优化"><a href="#Webcontainer-内运行的工程优化" class="headerlink" title="Webcontainer 内运行的工程优化"></a>Webcontainer 内运行的工程优化</h3><p>之前在 Webcontainer 中使用的 Node.js 工程是基于 vite 脚手架的工程代码，并且专门写了一个 vite 插件来监控 vite 的 dev 编译流程。</p>
+<p>在此工程中充斥着一些与工程无关的业务逻辑，导致模型在修改代码的时候，可能会无意改动到关键位置，从而影响到正常的业务流程。</p>
+<p>在此背景下，也进行了优化，将大部分逻辑迁移到 Webcontainer 外层，通过 Webcontainer 提供的 <code>setPreviewScript</code> 方法进行注入，此过程中还接触到了一些 vite 编译态的代码风格。</p>
+<p>进行相应的兼容处理，从而让工程相对更为纯净，目前还无法将工程做的百分之百纯净（努力中）。</p>
+<p>也在模型和用户修改代码时，附加了校验代码，利用 Babel 对剩余的部分文件进行了必要的监管，以防止被意外修改，保证业务的完整性。</p>
+<h2 id="Agent-的流程完善"><a href="#Agent-的流程完善" class="headerlink" title="Agent 的流程完善"></a>Agent 的流程完善</h2><p>在 Agent 的流程上，基于原流程补充前端自校验代码流程。</p>
+<p>原流程模块有：模型路由、用户意图判断、图片解析、生成需求文档、生成UI设计文档、生成当前任务TODO清单、生成代码、校验代码等流程完善模块。</p>
+<p>前端自校验代码则是，通过通信的方式使得前端能够进行自主的校验检测，任务开始直至运行完成，会便利所有的前端路由。</p>
+<p>若期间产生报错信息，则进入到错误修复模式，待修复完成后重新进行前端自校验代码，直至没有错误产生。</p>
+<p>则代表完成此次任务。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/" title="加深 Webcontainer 和 Agent 的融合">https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2025/08/01/%E5%88%9D%E6%8E%A2agent/">
+        下一篇<br>初探 Agent
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2017 - 2025 <a href="https://zongzi531.github.io">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?84959666"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>

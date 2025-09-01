@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-08-01T17:31:29.000Z</updated>
+  <updated>2025-09-01T09:56:11.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>加深 Webcontainer 和 Agent 的融合</title>
+    <link href="https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/"/>
+    <id>https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/</id>
+    <published>2025-09-01T09:56:11.000Z</published>
+    <updated>2025-09-01T09:56:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><p>简单点说，目前在做的是在浏览器内基于 Webcontainer 实现的 Agent 。（侧重在展示，并支持代码修改）</p><h2 id="重构-Webcontainer-封装"><a href="#重构-Webcontainer-封装" class="headerlink" title="重构 Webcontainer 封装"></a>重构 Webcontainer 封装</h2><p>发现同事之前写的代码对 Webcontainer 的 <code>spawn</code> 方法封装并没有很好的管控，不是单例级别的调用和销毁，多次调用会产生多个 <code>WebContainerProcess</code> 的泄露和污染。</p><p>于是对 Webcontainer 的封装进行了重构，以更清晰的形式进行管理和使用。</p><p>另外，在启动时，开启 <code>forwardPreviewErrors</code> 配置项，可以获得到更多的报错信息，以保证流程完整性。</p><h3 id="Webcontainer-内运行的工程优化"><a href="#Webcontainer-内运行的工程优化" class="headerlink" title="Webcontainer 内运行的工程优化"></a>Webcontainer 内运行的工程优化</h3><p>之前在 Webcontainer 中使用的 Node.js 工程是基于 vite 脚手架的工程代码，并且专门写了一个 vite 插件来监控 vite 的 dev 编译流程。</p><p>在此工程中充斥着一些与工程无关的业务逻辑，导致模型在修改代码的时候，可能会无意改动到关键位置，从而影响到正常的业务流程。</p><p>在此背景下，也进行了优化，将大部分逻辑迁移到 Webcontainer 外层，通过 Webcontainer 提供的 <code>setPreviewScript</code> 方法进行注入，此过程中还接触到了一些 vite 编译态的代码风格。</p><p>进行相应的兼容处理，从而让工程相对更为纯净，目前还无法将工程做的百分之百纯净（努力中）。</p><p>也在模型和用户修改代码时，附加了校验代码，利用 Babel 对剩余的部分文件进行了必要的监管，以防止被意外修改，保证业务的完整性。</p><h2 id="Agent-的流程完善"><a href="#Agent-的流程完善" class="headerlink" title="Agent 的流程完善"></a>Agent 的流程完善</h2><p>在 Agent 的流程上，基于原流程补充前端自校验代码流程。</p><p>原流程模块有：模型路由、用户意图判断、图片解析、生成需求文档、生成UI设计文档、生成当前任务TODO清单、生成代码、校验代码等流程完善模块。</p><p>前端自校验代码则是，通过通信的方式使得前端能够进行自主的校验检测，任务开始直至运行完成，会便利所有的前端路由。</p><p>若期间产生报错信息，则进入到错误修复模式，待修复完成后重新进行前端自校验代码，直至没有错误产生。</p><p>则代表完成此次任务。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
+    <category term="JavaScript" scheme="https://zongzi531.github.io/categories/JavaScript/"/>
+    
+    
+    <category term="WebContainer" scheme="https://zongzi531.github.io/tags/WebContainer/"/>
+    
+    <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
+    
+    <category term="Agent" scheme="https://zongzi531.github.io/tags/Agent/"/>
+    
+  </entry>
   
   <entry>
     <title>初探 Agent</title>
@@ -451,27 +476,6 @@
     <updated>2024-04-01T13:27:12.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月依然是服务端身份，已经成功的交付了 Midjourney API 供公司内部使用，并且在公司内部已经开始尝试 AI 辅助编码，感觉公司整体方向已经在往 AI 靠了。</p><p>总结来说就是基本的服务端研发 + 运维，以及 API 代理工程师。</p><p>赏樱的时间到了，本来想着要是能去日本看樱花就好了，但是机票实在是太不实惠了，而且杭州的樱花也好多呢。</p><p>话不多说，来欣赏一下吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><p>还去了太子湾欣赏郁金香，也是美美哒～</p><p>一起欣赏一下吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic4.jpg">  <img src="pic5.jpg"></div><p>一起享受生活吧～哈哈</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>年味鱼灯</title>
-    <link href="https://zongzi531.github.io/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/"/>
-    <id>https://zongzi531.github.io/2024/03/01/%E5%B9%B4%E5%91%B3%E9%B1%BC%E7%81%AF/</id>
-    <published>2024-03-01T10:13:11.000Z</published>
-    <updated>2024-03-01T10:13:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>春节过去了，又回归到了工作岗位上。</p><p>今年春节没有安排旅游，原因是发现今年出行的成本较以往变大了，所以暂时不考虑旅游。</p><p>春节假期这么长，考虑周边城市哪里晃一圈。</p><p>感觉现在的年味是没有小的时候那样热闹和开心，所以想着去感受一下其他地方的年味。</p><p>于是前往安徽北岸镇瞻淇村看一下鱼灯，感受下来确实很热闹也有年味。</p><p>和单纯的人多是不一样的感觉，是一种喜庆和开心的感觉，是一种文化的吸收。</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><p>回来也发现今年类似于这种非物质文化遗产都慢慢浮现出来，好像大家都开始关注起来了。</p><p>也借机会去逛了一下浙江省非物质文化遗产馆，了解和学习以前留下来的文化。</p><p>这个月呢，主要还是从事后端开发的工作，接触了域名泛解析和 PVUV 相关的研发内容。</p><p>对了，还尝试结合开源的 API 接入 Midjourney 。</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
