@@ -22,7 +22,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?19857199">
+<link rel="stylesheet" href="/css/journal.css?99328706">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -42,7 +42,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 </head>
 <body>
 <div id="top"></div>
@@ -65,14 +65,14 @@
                 
             
                 
-                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
-                        紹介
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
                     </a>
                 
             
                 
-                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
-                        番組
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
                     </a>
                 
             
@@ -128,14 +128,14 @@
             
         
             
-                <a class="a-block nav-link-item false" href="/syoukai/index.html">
-                    紹介
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
                 </a>
             
         
             
-                <a class="a-block nav-link-item false" href="/bangumi/index.html">
-                    番組
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
                 </a>
             
         
@@ -234,7 +234,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>基本类型值就是保存了一个值。</strong></p>
 <p>那么引用类型值与基本类型值到底有什么区别呢？引用类型值实际保存的一个指针，那么这个指针指向存储在堆中的一个对象。</p>
 <p>提到<strong>堆</strong>，就能把<strong>栈</strong>扯进来，实际上基本类型值是保存在栈内存中的。</p>
-<p>再讲讲引用类型值的代码执行过程，<code>let x = &#123; a: 10 &#125;;</code>首先定义了一个x，a属性的值是10。其实在这里，<code>&#123; a: 10 &#125;;</code>是存放在堆内存中的，变量x保存的就是<code>&#123; a: 10 &#125;;</code>的指针地址，<code>let y = x;</code>执行了之后，变量y复制了变量x的指针地址。最后在执行<code>y.a = 20;</code>时，相当于把a属性的值改成了20，因此y.a发生改变时，x.a也同时发生了变化。当然啦，这里的a的值是保存在栈内存中的喔。</p>
+<p>再讲讲引用类型值的代码执行过程，<code>let x = { a: 10 };</code>首先定义了一个x，a属性的值是10。其实在这里，<code>{ a: 10 };</code>是存放在堆内存中的，变量x保存的就是<code>{ a: 10 };</code>的指针地址，<code>let y = x;</code>执行了之后，变量y复制了变量x的指针地址。最后在执行<code>y.a = 20;</code>时，相当于把a属性的值改成了20，因此y.a发生改变时，x.a也同时发生了变化。当然啦，这里的a的值是保存在栈内存中的喔。</p>
 <p>整个执行过程见下图解：</p>
 <p><img src="/2017/04/13/%E7%90%86%E8%A7%A3javascript%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%80%BC%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%80%BC/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%80%BC1.jpeg" alt="引用类型值"></p>
 <p>那么接下来就有个问题了，如何切断指针地址呢？那就是赋值一个空对象。</p>
@@ -312,7 +312,7 @@ z<span class="token punctuation">.</span>a <span class="token operator">=</span>
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?11694164"></script>
+<script src="/js/journal.js?82062432"></script>
 
 
     <script src="https://giscus.app/client.js"

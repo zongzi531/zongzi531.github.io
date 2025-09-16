@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?3842399">
+<link rel="stylesheet" href="/css/journal.css?4256452">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -38,7 +38,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 </head>
 <body>
 <div id="top"></div>
@@ -61,14 +61,14 @@
                 
             
                 
-                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
-                        紹介
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
                     </a>
                 
             
                 
-                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
-                        番組
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
                     </a>
                 
             
@@ -124,14 +124,14 @@
             
         
             
-                <a class="a-block nav-link-item false" href="/syoukai/index.html">
-                    紹介
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
                 </a>
             
         
             
-                <a class="a-block nav-link-item false" href="/bangumi/index.html">
-                    番組
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
                 </a>
             
         
@@ -204,7 +204,7 @@
 <p>再一个就是既然有运行时，那么就必然存在编译时的工具，当然了，编译适配器这么叫肯定不合理，那么我也找了开源社区中并没有像我们这样的可怕需求，就是使用 Vue3 开发，还得兼容 IE 11 。</p>
 <p>对于这个需求来说，我基于 <code>unplugin</code> 实现了一款编译插件，可以将 Vue3 的 SFC 或者 TSX 文件编译成 Vue2 的编译结果，可以使用在 Vue2 环境下的降级兼容。参考了 <code>vue-loader</code> 、 <code>@vue/compiler-sfc</code> 、 <code>vue-template-compiler</code> 、 <code>vue-template-es2015-compiler</code> 、 <code>@vue/babel-preset-app</code> 等工具来实现。截止当前插件已实现基础的降级兼容能力，还有不少边界问题没有处理。</p>
 <p>以 SFC 为例，对其内容进行解析，解析结果主要产出 <code>template</code> 、 <code>script</code> 、 <code>styles</code> 。</p>
-<p><code>template</code> 会带有 <code>with(this) &#123; ...</code> 将其包装后编译成 <code>es2015</code> 后使用， <code>script</code> 则解析语言类型，若是 Typescript 则进入 Babel 处理后更新， <code>styles</code> 则会遍历处理，当然若语言是 <code>postcss</code> 则进行再处理，等等其他补丁操作。</p>
+<p><code>template</code> 会带有 <code>with(this) { ...</code> 将其包装后编译成 <code>es2015</code> 后使用， <code>script</code> 则解析语言类型，若是 Typescript 则进入 Babel 处理后更新， <code>styles</code> 则会遍历处理，当然若语言是 <code>postcss</code> 则进行再处理，等等其他补丁操作。</p>
 <p>最后生成 Vue2 编译结果以达成降级兼容。</p>
 <p>那么今年也将主要发力低代码基础建设了，加油！</p>
 <h2 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h2><p>绩效的调整，对未来的工作来说，即是机遇也是挑战。可以接触到更多的管理模式，对自己来说也是增加压力，达成目标，同样加油！</p>
@@ -279,7 +279,7 @@
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?8648778"></script>
+<script src="/js/journal.js?57685800"></script>
 
 
     <script src="https://giscus.app/client.js"
