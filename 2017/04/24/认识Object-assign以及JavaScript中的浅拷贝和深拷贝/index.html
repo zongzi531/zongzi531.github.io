@@ -23,7 +23,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?57479746">
+<link rel="stylesheet" href="/css/journal.css?50728892">
 
 <link rel="icon" href="/images/favicon.ico">
 
@@ -43,7 +43,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
 </noscript>
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.0.0"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
 </head>
 <body>
 <div id="top"></div>
@@ -280,7 +280,7 @@ obj2<span class="token punctuation">.</span>a<span class="token punctuation">.</
 Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> source<span class="token punctuation">)</span>
 <span class="token comment">// &#123; a: &#123; b: 'hello' &#125; &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>上面代码中，<code>target</code>对象的<code>a</code>属性被<code>source</code>对象的<code>a</code>属性整个替换掉了，而不会得到<code>&#123; a: &#123; b: &#39;hello&#39;, d: &#39;e&#39; &#125; &#125;</code>的结果。这通常不是开发者想要的，需要特别小心。</p>
+<p>上面代码中，<code>target</code>对象的<code>a</code>属性被<code>source</code>对象的<code>a</code>属性整个替换掉了，而不会得到<code>{ a: { b: &#39;hello&#39;, d: &#39;e&#39; } }</code>的结果。这通常不是开发者想要的，需要特别小心。</p>
 <p>有一些函数库提供<code>Object.assign</code>的定制版本（比如Lodash的<code>_.defaultsDeep</code>方法），可以解决浅拷贝的问题，得到深拷贝的合并。</p>
 <p>注意，<code>Object.assign</code>可以用来处理数组，但是会把数组视为对象。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -400,7 +400,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
         integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
         integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?50962952"></script>
+<script src="/js/journal.js?17112947"></script>
 
 
     <script src="https://giscus.app/client.js"
