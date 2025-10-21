@@ -30,6 +30,6 @@
     "hexo-tag-embed": "^1.0.0"
   },
   "devDependencies": {
-    "patch-package": "8.0.0"
+    "patch-package": "8.0.1"
   }
 }
