@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-10-01T09:23:01.000Z</updated>
+  <updated>2025-11-01T19:06:33.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>漫步关西</title>
+    <link href="https://zongzi531.github.io/2025/11/01/%E6%BC%AB%E6%AD%A5%E5%85%B3%E8%A5%BF/"/>
+    <id>https://zongzi531.github.io/2025/11/01/%E6%BC%AB%E6%AD%A5%E5%85%B3%E8%A5%BF/</id>
+    <published>2025-11-01T19:06:33.000Z</published>
+    <updated>2025-11-01T19:06:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>仔细回想起来，其实对关西的了解只有京都和奈良。趁着这次假期，去关西其他地方玩一玩吧。</p><p>好好探一下关西地区，分享一下我拍的照片吧~</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg">  <img src="pic4.jpg">  <img src="pic5.jpg">  <img src="pic6.jpg">  <img src="pic7.jpg"></div>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>调优 Agent 和产品体验</title>
@@ -459,27 +480,6 @@
     <updated>2024-06-01T13:36:33.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>周末去了一趟 USJ ，对马里奥园区还是很满意的，非常 Nice ，好玩！</p><p>哈利波特园区的项目也不错，其他的项目中规中矩吧～</p><p>还是东迪情绪给得到位，当然马里奥园区也不差。</p><p>这个月中规中矩吧，VSCode 插件开发、服务端开发（Node.js&#x2F;Python）。</p><p>简单入门了一下 Python ，因为交接同事的项目里有两个 Python 工具，需要转成服务，那就简单学习了一下 Python 来迁移吧。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>技术慢增长</title>
-    <link href="https://zongzi531.github.io/2024/05/01/%E6%8A%80%E6%9C%AF%E6%85%A2%E5%A2%9E%E9%95%BF/"/>
-    <id>https://zongzi531.github.io/2024/05/01/%E6%8A%80%E6%9C%AF%E6%85%A2%E5%A2%9E%E9%95%BF/</id>
-    <published>2024-05-01T13:07:10.000Z</published>
-    <updated>2024-05-01T13:07:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月一半是服务端和运维的身份吧，另一半回到了从前的领域，开始接触 VSCode 插件开发，也算是一个分支积累吧。</p><p>当然了，其实换汤不换药，就是使用编程语言在给定的环境中实现功能罢了。</p><p>说是接触了有小半年服务端的研发及上线，其实最多也就是基本的一些 CRUD 和抽象罢了，以及踩了一些运维的坑。</p><p>深入服务端的路径确实太长，太黑。</p><p>以前想着的深入到 JS 规范中，似乎还是那么的遥远，其实还是缺乏系统性的计算机知识导致的。</p><p>所以，当下一步一个脚印还是没问题的。</p><p>OK，更多的时间还是得交给生活，享受生活～</p><blockquote><p>vscode logo, wallpaper, work space, office, lady –aspect 16:9 –v 6.0</p></blockquote>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
