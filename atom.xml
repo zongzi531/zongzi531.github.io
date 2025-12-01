@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-11-01T19:06:33.000Z</updated>
+  <updated>2025-12-01T19:53:39.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>追番之『鬼滅の刃』</title>
+    <link href="https://zongzi531.github.io/2025/12/01/kimetunoyaiba/"/>
+    <id>https://zongzi531.github.io/2025/12/01/kimetunoyaiba/</id>
+    <published>2025-12-01T19:53:39.000Z</published>
+    <updated>2025-12-01T19:53:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月受到老婆的影响，开始看之前一直没看的鬼灭之刃，包括最近有好多联名活动，也带着兴趣一同了解了一下。</p><p>挺喜欢番剧中的角色们，各个都有很鲜明的特色和自己独特的经历。</p><p>包括也去电影院看了最新的剧场版，感觉还不错（虽然国内是晚上映的）。</p><p>招式的名称也很中二，「全集中…… X之呼吸·Y之型 招式名」，哈哈。</p><p>同时也期待剩下的两部剧场版的内容。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>漫步关西</title>
@@ -459,27 +480,6 @@
     <updated>2024-07-01T09:22:00.000Z</updated>
     
     <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>嘿，这个月基本就是在写业务，有空出来的时间学习了一下 embedding 相关的内容，虽然对其实现可以说是一无所知，但是对怎么使用有了一些浅显的理解（包括 Python 开发）。</p><p>可以想象一些应用场景吧。</p><p>对了，还因为紧急情况，写了一个 shell 脚本，用于运维部署（真好家伙，啥都干啊）。</p><p>另外，有什么境外旅游推荐么，悠闲的那种，非特种兵，非网红打卡。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Here We Go!</title>
-    <link href="https://zongzi531.github.io/2024/06/01/here-we-go/"/>
-    <id>https://zongzi531.github.io/2024/06/01/here-we-go/</id>
-    <published>2024-06-01T13:36:33.000Z</published>
-    <updated>2024-06-01T13:36:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>周末去了一趟 USJ ，对马里奥园区还是很满意的，非常 Nice ，好玩！</p><p>哈利波特园区的项目也不错，其他的项目中规中矩吧～</p><p>还是东迪情绪给得到位，当然马里奥园区也不差。</p><p>这个月中规中矩吧，VSCode 插件开发、服务端开发（Node.js&#x2F;Python）。</p><p>简单入门了一下 Python ，因为交接同事的项目里有两个 Python 工具，需要转成服务，那就简单学习了一下 Python 来迁移吧。</p>]]></content>
     
     
     <summary type="html">&lt;!-- no node --&gt;</summary>
