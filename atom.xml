@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2025-12-01T19:53:39.000Z</updated>
+  <updated>2026-01-01T15:57:26.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>２０２６年おめでとうございます</title>
+    <link href="https://zongzi531.github.io/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
+    <id>https://zongzi531.github.io/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
+    <published>2026-01-01T15:57:26.000Z</published>
+    <updated>2026-01-01T15:57:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="低代码迭代"><a href="#低代码迭代" class="headerlink" title="低代码迭代"></a>低代码迭代</h2><h3 id="自提供-Agent-分析能力"><a href="#自提供-Agent-分析能力" class="headerlink" title="自提供 Agent 分析能力"></a>自提供 Agent 分析能力</h3><p>之前受业务牵连，Chat BI Agent 由业务后端实现，会导致逐渐定制化，并且无法横向发展。</p><p>考虑到这个背景，转为兼容升级自提供 Agent 能力，支持生成仪表盘、单个图表，对图表进行分析能力，同时暴露 MCP 生成仪表盘功能。</p><p>以加强低代码在仪表盘和报表（后续规划）场景领域的 AI 落地能力。</p><h3 id="网格布局计算优化"><a href="#网格布局计算优化" class="headerlink" title="网格布局计算优化"></a>网格布局计算优化</h3><p>在实际的使用过程中发现每个网格 <code>LayoutItem</code> 的 Gap 距离计算存在小概率交互差异问题，导致用户在使用过程中产生意外的困惑。</p><p>重新分析计算逻辑进行如下优化（前提条件：一行有 12 栅格）：</p><p>现状是，假设一行目前存在 2 个 <code>LayoutItem</code> ，并且设每个 <code>LayoutItem</code> 的宽度 <code>w</code> 为 <code>x</code> ，设一整行为 <code>width</code> 。</p><p>那么计算公式则得出： <code>width = 2x + 3Gap</code> 。看上去没有问题吧，我一开始也觉得没问题，但是当仔细设计会发现其实这个公式中的 <code>x</code> 的值包含了不属于 <code>LayoutItem</code> 的 Gap 距离在内，导致交互产生意外。</p><p>我们重新来看待这个问题，其实一行的宽度计算公式应该是如此，设每个 <code>LayoutItem</code> 的宽度为 <code>i</code> ，则整行宽度为 <code>width = 12i + 13Gap</code> 。</p><p>还是上面这个假设，假设一行存在 2 个 <code>LayoutItem</code> ，则最后得出的公式应该是 <code>width = 12i + 13Gap</code> ，但是在表述其中一个 <code>LayoutItem</code> 的宽度时。</p><p>公式应该是： <code>x = 6i + 5Gap</code> 。所以之前的问题就是 <code>x</code> 中包含了不需要参与计算的 5 个 Gap 距离。从而导致交互时出现意外结果。</p><h2 id="回顾-2025-年"><a href="#回顾-2025-年" class="headerlink" title="回顾 2025 年"></a>回顾 2025 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>Agent</strong></li><li><strong>架构</strong></li></ul><h2 id="展望-2026-年"><a href="#展望-2026-年" class="headerlink" title="展望 2026 年"></a>展望 2026 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>架构</strong></li><li><strong>AI</strong></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>追番之『鬼滅の刃』</title>
@@ -469,27 +490,6 @@
     <category term="tutorial" scheme="https://zongzi531.github.io/tags/tutorial/"/>
     
     <category term="framework" scheme="https://zongzi531.github.io/tags/framework/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原谅别人的错，解脱自己的苦</title>
-    <link href="https://zongzi531.github.io/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/"/>
-    <id>https://zongzi531.github.io/2024/07/01/%E5%8E%9F%E8%B0%85%E5%88%AB%E4%BA%BA%E7%9A%84%E9%94%99%EF%BC%8C%E8%A7%A3%E8%84%B1%E8%87%AA%E5%B7%B1%E7%9A%84%E8%8B%A6/</id>
-    <published>2024-07-01T09:22:00.000Z</published>
-    <updated>2024-07-01T09:22:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>嘿，这个月基本就是在写业务，有空出来的时间学习了一下 embedding 相关的内容，虽然对其实现可以说是一无所知，但是对怎么使用有了一些浅显的理解（包括 Python 开发）。</p><p>可以想象一些应用场景吧。</p><p>对了，还因为紧急情况，写了一个 shell 脚本，用于运维部署（真好家伙，啥都干啊）。</p><p>另外，有什么境外旅游推荐么，悠闲的那种，非特种兵，非网红打卡。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    
-    
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
   </entry>
   
