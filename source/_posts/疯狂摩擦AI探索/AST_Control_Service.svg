@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1523px" height="523px" version="1.1">
+  <defs>    
+    <!-- 阴影滤镜 -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+    
+    <!-- 主要颜色定义 -->
+    <style>
+      .node { stroke: #1890ff; stroke-width: 2; fill: #e6f7ff; }
+      .node-text { fill: #1890ff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500; }
+      .process-box { stroke: #52c41a; stroke-width: 2; fill: #f6ffed; }
+      .process-text { fill: #52c41a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500; }
+      .container { stroke: #d9d9d9; stroke-width: 1; fill: #fafafa; }
+      .container-text { fill: #595959; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; }
+      .arrow { stroke: #bfbfbf; stroke-width: 2; fill: #bfbfbf; }
+      .connection { stroke: #bfbfbf; stroke-width: 2; fill: none; stroke-dasharray: 4 4; }
+      .user-icon { stroke: #1668dc; stroke-width: 2; fill: #e6f4ff; }
+      .data-text { fill: #1f1f1f; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500; }
+      .title-text { fill: #1f1f1f; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold; font-size: 18px; }
+      .subtitle-text { fill: #595959; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500; font-size: 14px; }
+    </style>
+  </defs>
+  
+  <g>
+    <!-- 外部容器 - 业务产品部署环境 -->
+    <rect x="1041" y="101" width="480" height="380" rx="12" ry="12" fill="#ffffff" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <text x="1281" y="125" text-anchor="middle" class="container-text">业务产品部署环境</text>
+    
+    <!-- 内部容器 - 代理 -->
+    <rect x="401" y="281" width="320" height="200" rx="8" ry="8" fill="#ffffff" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <text x="561" y="305" text-anchor="middle" class="container-text">AST 服务</text>
+    
+    <!-- 内部容器 - 业务产品部署环境详情 -->
+    <rect x="1" y="241" width="320" height="240" rx="8" ry="8" fill="#ffffff" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <text x="161" y="265" text-anchor="middle" class="title-text">业务产品部署环境</text>
+    
+    <!-- 后端节点 -->
+    <path d="M 51 296 C 51 287.72 64.43 281 81 281 C 88.96 281 96.59 282.58 102.21 285.39 C 107.84 288.21 111 292.02 111 296 L 111 346 C 111 354.28 97.57 361 81 361 C 64.43 361 51 354.28 51 346 Z" class="node" filter="url(#shadow)"/>
+    <path d="M 111 296 C 111 304.28 97.57 311 81 311 C 64.43 311 51 304.28 51 296" fill="none" stroke="#1890ff" stroke-width="2"/>
+    <text x="81" y="330" text-anchor="middle" class="node-text" font-size="14px">后端服务</text>
+    
+    <!-- 其他服务节点 -->
+    <path d="M 131 386 C 131 377.72 144.43 371 161 371 C 168.96 371 176.59 372.58 182.21 375.39 C 187.84 378.21 191 382.02 191 386 L 191 436 C 191 444.28 177.57 451 161 451 C 144.43 451 131 444.28 131 436 Z" class="node" filter="url(#shadow)"/>
+    <path d="M 191 386 C 191 394.28 177.57 401 161 401 C 144.43 401 131 394.28 131 386" fill="none" stroke="#1890ff" stroke-width="2"/>
+    <text x="161" y="420" text-anchor="middle" class="node-text" font-size="14px">其他服务</text>
+    
+    <!-- 连接线：从前端服务到前端界面 -->
+    <path d="M 251 281 L 251 231 L 361 231 L 361 167.37" fill="none" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="4 4"/>
+    <path d="M 361 162.12 L 364.5 169.12 L 361 167.37 L 357.5 169.12 Z" class="arrow"/>
+    
+    <!-- 前端节点 -->
+    <path d="M 221 296 C 221 287.72 234.43 281 251 281 C 258.96 281 266.59 282.58 272.21 285.39 C 277.84 288.21 281 292.02 281 296 L 281 346 C 281 354.28 267.57 361 251 361 C 234.43 361 221 354.28 221 346 Z" class="node" filter="url(#shadow)"/>
+    <path d="M 281 296 C 281 304.28 267.57 311 251 311 C 234.43 311 221 304.28 221 296" fill="none" stroke="#1890ff" stroke-width="2"/>
+    <text x="251" y="330" text-anchor="middle" class="node-text" font-size="14px">前端服务</text>
+    
+    <!-- 连接线：从前端到代理 -->
+    <path d="M 281 321 L 441 361" class="connection"/>
+    
+    <!-- 前端Nodejs镜像 -->
+    <path d="M 441 336 C 441 327.72 454.43 321 471 321 C 478.96 321 486.59 322.58 492.21 325.39 C 497.84 328.21 501 332.02 501 336 L 501 386 C 501 394.28 487.57 401 471 401 C 454.43 401 441 394.28 441 386 Z" class="process-box" filter="url(#shadow)"/>
+    <path d="M 501 336 C 501 344.28 487.57 351 471 351 C 454.43 351 441 344.28 441 336" fill="none" stroke="#52c41a" stroke-width="2"/>
+    <text x="471" y="365" text-anchor="middle" class="process-text" font-size="12px">
+      <tspan x="471" dy="0">前端</tspan>
+      <tspan x="471" dy="14">Node.js</tspan>
+      <tspan x="471" dy="14">镜像</tspan>
+    </text>
+    
+    <!-- AST镜像 -->
+    <path d="M 621 336 C 621 327.72 634.43 321 651 321 C 667.57 321 681 327.72 681 336 L 681 386 C 681 394.28 667.57 401 651 401 C 634.43 401 621 394.28 621 386 Z" class="process-box" filter="url(#shadow)"/>
+    <path d="M 681 336 C 681 344.28 667.57 351 651 351 C 634.43 351 621 344.28 621 336" fill="none" stroke="#52c41a" stroke-width="2"/>
+    <text x="651" y="370" text-anchor="middle" class="process-text" font-size="12px">
+      <tspan x="651" dy="0">AST</tspan>
+      <tspan x="651" dy="14">镜像</tspan>
+    </text>
+    
+    <!-- 前端界面 -->
+    <rect x="1" y="101" width="720" height="60" rx="8" ry="8" fill="#ffffff" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <text x="361" y="135" text-anchor="middle" class="container-text" font-size="16px">前端界面</text>
+    
+    <!-- 获取文件连接 -->
+    <path d="M 501 348.5 L 614.63 348.5" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 619.88 348.5 L 612.88 352 L 614.63 348.5 L 612.88 345 Z" fill="#bfbfbf" stroke="#bfbfbf" stroke-width="2"/>
+    <text x="560" y="343" text-anchor="middle" class="data-text" font-size="12px">获取文件</text>
+    
+    <!-- 代理区域 -->
+    <rect x="401" y="201" width="320" height="30" rx="4" ry="4" fill="#ffffff" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <text x="561" y="221" text-anchor="middle" class="container-text" font-size="14px">代理</text>
+    
+    <!-- 更新文件连接 -->
+    <path d="M 621 373.5 L 507.37 373.5" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 502.12 373.5 L 509.12 370 L 507.37 373.5 L 509.12 377 Z" fill="#bfbfbf" stroke="#bfbfbf" stroke-width="2"/>
+    <text x="565" y="368" text-anchor="middle" class="data-text" font-size="12px">更新文件</text>
+    
+    <!-- 一同部署标签 -->
+    <text x="561" y="266" text-anchor="middle" class="subtitle-text">一同部署</text>
+    
+    <!-- 用户图标 (左) -->
+    <g transform="translate(332, 10) scale(0.08)" filter="url(#shadow)">
+      <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" class="user-icon" />
+    </g>
+    
+
+    
+    <!-- 连接线：代理到AST -->
+    <path d="M 641 281 L 641 237.37" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 641 232.12 L 644.5 239.12 L 641 237.37 L 637.5 239.12 Z" class="arrow"/>
+    
+    <!-- 连接线：前端界面到代理 -->
+    <path d="M 481 161 L 481 194.63" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 481 199.88 L 477.5 192.88 L 481 194.63 L 484.5 192.88 Z" class="arrow"/>
+    
+    <!-- 连接线：代理到代理层 -->
+    <path d="M 481 231 L 481 274.63" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 481 279.88 L 477.5 272.88 L 481 274.63 L 484.5 272.88 Z" class="arrow"/>
+    
+    <!-- 连接线：AST到前端界面 -->
+    <path d="M 641 201 L 640.46 167.37" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 640.38 162.12 L 643.99 169.06 L 640.46 167.37 L 636.99 169.17 Z" class="arrow"/>
+    
+    <!-- 文本说明：用户下载AST JSON -->
+    <text x="763" y="205" class="subtitle-text" font-size="14px">
+      <tspan x="763" dy="0">用户通过界面下载所需的 AST JSON</tspan>
+    </text>
+    
+    <!-- 用户图标 (右) -->
+    <g transform="translate(1258, 10) scale(0.08)" filter="url(#shadow)">
+      <path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" class="user-icon" />
+    </g>
+    
+    <!-- IDE处理流程 -->
+    <path d="M 1091 156 L 1141 156 L 1171 186 L 1171 256 L 1091 256 L 1091 156 Z" fill="#f0f0f0" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <path d="M 1141 156 L 1141 186 L 1171 186 Z" fill="none" stroke="none"/>
+    <path d="M 1141 156 L 1141 186 L 1171 186" stroke="none"/>
+    
+    <path d="M 1101 166 L 1151 166 L 1181 196 L 1181 266 L 1101 266 L 1101 166 Z" fill="#f0f0f0" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <path d="M 1151 166 L 1151 196 L 1181 196 Z" fill="none" stroke="none"/>
+    <path d="M 1151 166 L 1151 196 L 1181 196" stroke="none"/>
+    
+    <path d="M 1111 176 L 1161 176 L 1191 206 L 1191 276 L 1111 276 L 1111 176 Z" fill="#f0f0f0" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <path d="M 1161 176 L 1161 206 L 1191 206 Z" fill="none" stroke="none"/>
+    <path d="M 1161 176 L 1161 206 L 1191 206" stroke="none"/>
+    
+    <!-- 文本说明：IDE使用AI -->
+    <text x="1233" y="190" class="subtitle-text" font-size="14px">
+      <tspan x="1233" dy="0">通过 IDE 使用 AI 进行需求修改</tspan>
+      <tspan x="1233" dy="20">从而生成新的 AST JSON 文件</tspan>
+    </text>
+    
+    <!-- 编译流程 -->
+    <path d="M 800.77 310 L 800.77 320.5 L 761.5 281 L 800.77 241.5 L 800.77 252 L 961.23 252 L 961.23 241.5 L 1000.5 281 L 961.23 320.5 L 961.23 310 Z" fill="none" stroke="#bfbfbf" stroke-width="2" stroke-linejoin="round" filter="url(#shadow)"/>
+    
+    <!-- 文本说明：上传AST JSON -->
+    <text x="763" y="385" class="subtitle-text" font-size="14px">
+      <tspan x="763" dy="0">上传新的 AST JSON</tspan>
+      <tspan x="763" dy="20">等待编译 dist 文件，查看效果</tspan>
+      <tspan x="763" dy="20">选择新的 dist 文件，应用更改</tspan>
+    </text>
+    
+    <!-- dist文件管理 -->
+    <rect x="506" y="411" width="120" height="60" fill="#ffffff" stroke="#d9d9d9" stroke-width="1" filter="url(#shadow)"/>
+    <path d="M 518 411 L 518 471 M 614 411 L 614 471" stroke="#d9d9d9" stroke-width="1"/>
+    <text x="566" y="445" text-anchor="middle" class="container-text" font-size="14px">dist 文件管理</text>
+    
+    <!-- 业务代理连接 -->
+    <path d="M 321 301 L 396.64 220.64" fill="none" stroke="#bfbfbf" stroke-width="2"/>
+    <path d="M 400.23 216.81 L 397.98 224.31 L 396.64 220.64 L 392.89 219.51 Z" class="arrow"/>
+    <text x="374" y="245" text-anchor="middle" class="data-text" font-size="12px">业务代理</text>
+  </g>
+</svg>
