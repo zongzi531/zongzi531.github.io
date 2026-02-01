@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>疯狂摩擦 AI 探索 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+低代码还记得之前提到的低代码 Chat BI Agent 吧，在仪表盘的功能告一段落后，紧接着就需要实现报...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?92201308">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/archives/index.html">
+                        回顾
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/archives/index.html">
+                    回顾
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2026/02/01/疯狂摩擦AI探索/pic1.jpg')">
+                <div class="post-title">
+                    疯狂摩擦 AI 探索
+                    <div class="post-meta">
+                        <time datetime="2026-02-01T19:25:55.000Z" itemprop="datePublished">
+                            2026-02-01 19:25
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<h2 id="低代码"><a href="#低代码" class="headerlink" title="低代码"></a>低代码</h2><p>还记得之前提到的低代码 Chat BI Agent 吧，在仪表盘的功能告一段落后，紧接着就需要实现报告功能，在支持报告功能后就也可以使用 Chat BI Agent 做一些报告相关的 AI 辅助。</p>
+<p>通常可以做报告的生成、解析分析，让生成报告变得更智能快捷，让分析报告变得更结合数据。</p>
+<p>已经基于 Tiptap 开源编辑器引擎实现了 MVP 报告功能，通过对 Schema 进行操作以实现 AI 辅助，天然就形成了一个自然的转换。</p>
+<p>当然目前 MVP 报告功能还不足以提供更好的报告风格，比如背景图、水印、分页、纸张大小、占位替换符、逻辑控制符等能力。</p>
+<p>不过从目前来看，持续迭代是可以看到一个不错的效果的。</p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>通过对 WebContainer 运行的 Vite 插件进行迭代，支持在 <code>&lt;template&gt;</code> 标签的 DOM 上添加对应的文件路径信息，用于在外侧可以通过鼠标点选方式获得用户具体要修改的文件位置等信息。</p>
+<p>功能实现方式参考了 <a target="_blank" rel="noopener" href="https://github.com/zh-lx/code-inspector">code-inspector</a> 的源码。</p>
+<p>通过选择器 + 用户描述，可以让用户更加轻松的使用 AI 来达成想要的变更，并且避免在整体上下文中重复 Token 引起的误修改情况。</p>
+<p>另外在借鉴功能的时候，发现 <a target="_blank" rel="noopener" href="https://readdy.ai/">readdy.ai</a> 的选择器支持直接修改内容，这是一个不错的能力，因为有些修改并不需要再经过 AI ，因为这些修改过于简单。</p>
+<p>通过调研发现为 DOM 开启 <code>contenteditable</code> 属性即可实现，只不过目前从 readdy.ai 体验看来， readdy.ai 的实现更像是原子化的低代码结构，选中的节点并不是 DOM 节点。</p>
+<p>而我们内部的项目选择的则是 DOM 节点（源码级别的定位器），所以关于选中后可修改的文本能力在粒度上还需要更清晰明确的定义才好实现。</p>
+<h2 id="交付产物二次修改"><a href="#交付产物二次修改" class="headerlink" title="交付产物二次修改"></a>交付产物二次修改</h2><p>场景也比较特殊，是通过 AI 能力修改交付在现场的前端代码。</p>
+<p>分别实践了两种方案思路：</p>
+<p>一是研发一个 Chrome 插件，通过在现有项目中植入类似文件路径信息，结合 Chrome 插件选取功能，生成给 IDE 使用的提示词。通过 IDE 读取前端编译产物结合提示词对编译结果进行修改。</p>
+<p>二是提供一个配套服务，也是通过在现有项目中植入类似文件路径信息，提供对应路径模块的导出功能，将源码对应的 AST 对象导出，在 IDE 中进行修改，修改完成后通过服务的导入功能进行导入 AST 后编译成源码，再重新执行前端代码编译生成前端编译产物以达成修改。</p>
+<p><img src="/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/AST_Control_Service.svg" alt="AST_Control_Service"></p>
+<p>两者相对各有利弊，都需要在原项目上添加辅助插件以提供路径的生成，直接修改编译产物的好处就是快，但是相对 AST 来说产生错误的可能性更大（当然也不一定）。</p>
+<p>也是一种很特别的 AI 应用场景探索。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/" title="疯狂摩擦 AI 探索">https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/">
+        下一篇<br>２０２６年おめでとうございます
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?78623350"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>

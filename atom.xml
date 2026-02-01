@@ -6,7 +6,7 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   
   <link href="https://zongzi531.github.io/"/>
-  <updated>2026-01-01T15:57:26.000Z</updated>
+  <updated>2026-02-01T19:25:55.000Z</updated>
   <id>https://zongzi531.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>疯狂摩擦 AI 探索</title>
+    <link href="https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/"/>
+    <id>https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/</id>
+    <published>2026-02-01T19:25:55.000Z</published>
+    <updated>2026-02-01T19:25:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="低代码"><a href="#低代码" class="headerlink" title="低代码"></a>低代码</h2><p>还记得之前提到的低代码 Chat BI Agent 吧，在仪表盘的功能告一段落后，紧接着就需要实现报告功能，在支持报告功能后就也可以使用 Chat BI Agent 做一些报告相关的 AI 辅助。</p><p>通常可以做报告的生成、解析分析，让生成报告变得更智能快捷，让分析报告变得更结合数据。</p><p>已经基于 Tiptap 开源编辑器引擎实现了 MVP 报告功能，通过对 Schema 进行操作以实现 AI 辅助，天然就形成了一个自然的转换。</p><p>当然目前 MVP 报告功能还不足以提供更好的报告风格，比如背景图、水印、分页、纸张大小、占位替换符、逻辑控制符等能力。</p><p>不过从目前来看，持续迭代是可以看到一个不错的效果的。</p><h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>通过对 WebContainer 运行的 Vite 插件进行迭代，支持在 <code>&lt;template&gt;</code> 标签的 DOM 上添加对应的文件路径信息，用于在外侧可以通过鼠标点选方式获得用户具体要修改的文件位置等信息。</p><p>功能实现方式参考了 <a href="https://github.com/zh-lx/code-inspector">code-inspector</a> 的源码。</p><p>通过选择器 + 用户描述，可以让用户更加轻松的使用 AI 来达成想要的变更，并且避免在整体上下文中重复 Token 引起的误修改情况。</p><p>另外在借鉴功能的时候，发现 <a href="https://readdy.ai/">readdy.ai</a> 的选择器支持直接修改内容，这是一个不错的能力，因为有些修改并不需要再经过 AI ，因为这些修改过于简单。</p><p>通过调研发现为 DOM 开启 <code>contenteditable</code> 属性即可实现，只不过目前从 readdy.ai 体验看来， readdy.ai 的实现更像是原子化的低代码结构，选中的节点并不是 DOM 节点。</p><p>而我们内部的项目选择的则是 DOM 节点（源码级别的定位器），所以关于选中后可修改的文本能力在粒度上还需要更清晰明确的定义才好实现。</p><h2 id="交付产物二次修改"><a href="#交付产物二次修改" class="headerlink" title="交付产物二次修改"></a>交付产物二次修改</h2><p>场景也比较特殊，是通过 AI 能力修改交付在现场的前端代码。</p><p>分别实践了两种方案思路：</p><p>一是研发一个 Chrome 插件，通过在现有项目中植入类似文件路径信息，结合 Chrome 插件选取功能，生成给 IDE 使用的提示词。通过 IDE 读取前端编译产物结合提示词对编译结果进行修改。</p><p>二是提供一个配套服务，也是通过在现有项目中植入类似文件路径信息，提供对应路径模块的导出功能，将源码对应的 AST 对象导出，在 IDE 中进行修改，修改完成后通过服务的导入功能进行导入 AST 后编译成源码，再重新执行前端代码编译生成前端编译产物以达成修改。</p><p><img src="/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/AST_Control_Service.svg" alt="AST_Control_Service"></p><p>两者相对各有利弊，都需要在原项目上添加辅助插件以提供路径的生成，直接修改编译产物的好处就是快，但是相对 AST 来说产生错误的可能性更大（当然也不一定）。</p><p>也是一种很特别的 AI 应用场景探索。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
+  </entry>
   
   <entry>
     <title>２０２６年おめでとうございます</title>
@@ -465,31 +486,6 @@
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
     
     <category term="RAG" scheme="https://zongzi531.github.io/tags/RAG/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sentence Transformers 使用介绍</title>
-    <link href="https://zongzi531.github.io/2024/07/05/sentence-transformer%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/"/>
-    <id>https://zongzi531.github.io/2024/07/05/sentence-transformer%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</id>
-    <published>2024-07-05T09:17:30.000Z</published>
-    <updated>2024-07-05T09:17:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><blockquote><p>官网 <a href="https://www.sbert.net/index.html">SBERT.net</a></p></blockquote><p>有关于 Sentence Transformers 是什么，其官网都有介绍，那本篇博客将简单介绍此框架该如何使用。</p><p>Sentence Transformers 框架支持直接使用模型，也就是 <strong>Inference</strong> 。</p><p>另外可以使用此框架对模型进行微调（<strong>fine-tuning</strong>），从而训练（<strong>Training</strong>）属于自己的模型，当然我目前还没操作过。</p><p>安装教程请参照官网，这里接直接进入使用阶段。</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 引用框架及工具</span><span class="token keyword">from</span> sentence_transformers <span class="token keyword">import</span> SentenceTransformer<span class="token punctuation">,</span> util<span class="token comment"># 设置一些语句用于匹配</span>sentences <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"That is a happy dog"</span><span class="token punctuation">,</span> <span class="token string">"That is a very happy person"</span><span class="token punctuation">,</span> <span class="token string">"Today is a sunny day"</span><span class="token punctuation">]</span><span class="token comment"># 加载模型，这里使用的是官方模型，首次运行程序会从官网下载</span>model <span class="token operator">=</span> SentenceTransformer<span class="token punctuation">(</span><span class="token string">'sentence-transformers/all-MiniLM-L6-v2'</span><span class="token punctuation">)</span><span class="token comment"># 这是我想进行匹配的语句，从上面设置的语句中寻找最相似的</span>question <span class="token operator">=</span> <span class="token string">"That is a happy person"</span><span class="token comment"># 先将我想匹配的语句解析成向量数据</span>question_embeddings <span class="token operator">=</span> model<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>question<span class="token punctuation">)</span><span class="token comment"># 可以尝试打印出来看一下</span><span class="token comment"># print(question_embeddings)</span><span class="token comment"># 可以打印该向量数据的维度</span><span class="token comment"># print(question_embeddings.shape)</span><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"question is: &#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>question<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">for</span> sentence <span class="token keyword">in</span> sentences<span class="token punctuation">:</span>  <span class="token comment"># 对上面设置的语句们，解析成向量数据</span>  embeddings <span class="token operator">=</span> model<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>sentence<span class="token punctuation">)</span>  <span class="token comment"># 使用官方提供的数据计算两个向量的相似度</span>  sym <span class="token operator">=</span> <span class="token builtin">round</span><span class="token punctuation">(</span><span class="token builtin">float</span><span class="token punctuation">(</span>util<span class="token punctuation">.</span>pytorch_cos_sim<span class="token punctuation">(</span>question_embeddings<span class="token punctuation">,</span> embeddings<span class="token punctuation">)</span><span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"&#123;&#125; -> &#123;&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>sentence<span class="token punctuation">,</span> sym<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>运行这段 Python 脚本可以看到如下输出结果：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">question is: That is a happy personThat is a happy dog -<span class="token operator">></span> <span class="token number">0.69458</span>That is a very happy person -<span class="token operator">></span> <span class="token number">0.94292</span>Today is a sunny day -<span class="token operator">></span> <span class="token number">0.25688</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>看效果还不错吧，这时候是不是想试试看中文。我们可以使用官网 <a href="https://www.sbert.net/docs/sentence_transformer/pretrained_models.html#multilingual-models">Multilingual Models</a> 下的官方模型使用。</p><p>对中文都有所支持，我们调整一下 <code>sentences</code> 和 <code>question</code> 的内容，我这边使用的是 <code>distiluse-base-multilingual-cased-v1</code> 模型来运行，我们来看一下运行结果：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">question is: 我喜欢吃苹果我喜欢吃香蕉 -<span class="token operator">></span> <span class="token number">0.79271</span>我最喜欢苹果 -<span class="token operator">></span> <span class="token number">0.91433</span>今天买了一个苹果 -<span class="token operator">></span> <span class="token number">0.61951</span>我拥有一个苹果 -<span class="token operator">></span> <span class="token number">0.71284</span>儿子喜欢吃苹果 -<span class="token operator">></span> <span class="token number">0.73278</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>看到这个输出值，让人有点感觉“舒适”，在这个结果上，我们调整一下问题，在问题上加一个 <code>不</code>：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">question is: 我不喜欢吃苹果我喜欢吃香蕉 -<span class="token operator">></span> <span class="token number">0.69195</span>我最喜欢苹果 -<span class="token operator">></span> <span class="token number">0.82793</span>今天买了一个苹果 -<span class="token operator">></span> <span class="token number">0.58365</span>我拥有一个苹果 -<span class="token operator">></span> <span class="token number">0.64693</span>儿子喜欢吃苹果 -<span class="token operator">></span> <span class="token number">0.674</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>所以要想提升这个准确度，可能就是需要我们自己对模型进的微调了吧……</p><p>当然其实也可以借助大语言模型对整个工作流进行优化，以约束这里匹配出来的结果。</p><p>官网也有一个示例集 <a href="https://github.com/UKPLab/sentence-transformers/blob/master/examples">examples</a> ，可以在里面学习不少。</p><p>到这里，其实已经对 Sentence Transformers 框架在 Python 下的使用已经有了一个简单的认识，至于怎么结合自己的工作流，就要看自己的业务场景了。</p>]]></content>
-    
-    
-    <summary type="html">&lt;!-- no node --&gt;</summary>
-    
-    
-    
-    <category term="NLP" scheme="https://zongzi531.github.io/categories/NLP/"/>
-    
-    
-    <category term="embeddings" scheme="https://zongzi531.github.io/tags/embeddings/"/>
-    
-    <category term="tutorial" scheme="https://zongzi531.github.io/tags/tutorial/"/>
-    
-    <category term="framework" scheme="https://zongzi531.github.io/tags/framework/"/>
     
   </entry>
   
