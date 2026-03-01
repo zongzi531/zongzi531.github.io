@@ -1,399 +1,490 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Zong</title>
+  
+  
+  <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://zongzi531.github.io/"/>
+  <updated>2026-03-01T21:16:17.000Z</updated>
+  <id>https://zongzi531.github.io/</id>
+  
   <author>
     <name>Zong</name>
+    
   </author>
+  
   <generator uri="https://hexo.io/">Hexo</generator>
-  <id>https://zongzi531.github.io/</id>
-  <link href="https://zongzi531.github.io/" rel="alternate"/>
-  <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
-  <rights>All rights reserved 2026, Zong</rights>
-  <title>Zong</title>
-  <updated>2026-02-01T19:25:55.000Z</updated>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    <title>马到金来</title>
+    <link href="https://zongzi531.github.io/2026/03/01/%E9%A9%AC%E5%88%B0%E9%87%91%E6%9D%A5/"/>
+    <id>https://zongzi531.github.io/2026/03/01/%E9%A9%AC%E5%88%B0%E9%87%91%E6%9D%A5/</id>
+    <published>2026-03-01T21:16:17.000Z</published>
+    <updated>2026-03-01T21:16:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="交付产物二次修改"><a href="#交付产物二次修改" class="headerlink" title="交付产物二次修改"></a>交付产物二次修改</h2><p>继上个月进行持续迭代，方案二配套服务流程中的“导出 -&gt; IDE 修改 -&gt; 导入获得编译产物”将直接优化为“根据用户需求获得编译产物”。</p><p>通过内置 Agent 能力，将 IDE 修改流程全部隐藏在服务内，让用户更轻松的进行二次修改。</p><p>经过技术调研采用 <code>deepagents</code> 实现 Agent 相关能力。实现重点主要是文件系统沙箱 + AI 进行 AST 修改后输出结果。</p><p>在实现基础功后，为了选用较好的模型来落地，所以对模型进行过一些调试和测试，也很容易发现不同模型的最后呈现效果差异也很大。</p><p>目前打算使用 <code>kimi-k2.5</code> 进行进一步测试，不过在这里将测试过程中遇到的问题可以分享一下。</p><p>对接过程中会报错：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">&#123;</span>  name: <span class="token string">'Error'</span>,  cause: <span class="token punctuation">&#123;</span>    status: <span class="token number">400</span>,    headers: <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>,    requestID: null,    error: <span class="token punctuation">&#123;</span>      message: <span class="token string">'thinking is enabled but reasoning_content is missing in assistant tool call message at index 2'</span>,      type: <span class="token string">'invalid_request_error'</span>    <span class="token punctuation">&#125;</span>,    type: <span class="token string">'invalid_request_error'</span>  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>查阅了相关资料，社区因为考虑所以并没有处理这个问题，本着想提 PR 的思路尝试看看能不能解决。但是最后发现因为对 <code>@langchain</code> 相关生态了解较为浅显，所以暂时放弃提 PR 的操作。</p><p>最后决定通过补丁的方式进行解决此问题。</p><p>通过 <code>debugger</code> 能找到具体发起模型请求的位置是 <code>ChatOpenAICompletions</code> 类的 <code>_streamResponseChunks</code> 的方法，第一参数 <code>messages</code> 能获得当前请求的消息内容。</p><p>通过继承此函数实现 <code>reasoning_content</code> 字段补充，操作下去的你就会发现并没有这么轻松，因为在真实发起请求前会调用 <code>convertMessagesToCompletionsMessageParams</code> 进行格式化（<a href="https://github.com/langchain-ai/langchainjs/blob/main/libs/providers/langchain-openai/src/converters/completions.ts#L823">源码 completions.ts#L823</a>），并且没有修改空间。</p><p>不过幸运的是所有的参数在最后执行前会调用 <code>completionWithRetry</code> 我们可以通过复写此函数来进行格式重定义，并且观察源码发现 <code>options</code> 会进行透传，那就可以借助这个参数进行字段补充。</p><p>接下来是补丁内容：</p><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ChatOpenAICompletions <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@langchain/openai'</span><span class="token punctuation">;</span><span class="token keyword">interface</span> <span class="token class-name">HankOptionsAttr</span> <span class="token punctuation">&#123;</span>  reasoning_content<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">&#123;</span> index<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> reasoning_content<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">&#125;</span><span class="token operator">></span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token keyword">class</span> <span class="token class-name">HankChatOpenAICompletions</span> <span class="token keyword">extends</span> <span class="token class-name">ChatOpenAICompletions</span> <span class="token punctuation">&#123;</span>  async <span class="token operator">*</span><span class="token function">_streamResponseChunks</span><span class="token punctuation">(</span>messages<span class="token punctuation">,</span> options<span class="token punctuation">,</span> runManager<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token keyword">const</span> humanMessageIndex <span class="token operator">=</span> messages<span class="token punctuation">.</span><span class="token function">findIndex</span><span class="token punctuation">(</span>      <span class="token punctuation">(</span>message<span class="token punctuation">)</span> <span class="token operator">=></span> message<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'human'</span><span class="token punctuation">,</span>    <span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">const</span> humanMessage <span class="token operator">=</span> messages<span class="token punctuation">[</span>humanMessageIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token keyword">const</span> __hank__<span class="token operator">:</span> HankOptionsAttr <span class="token operator">=</span> <span class="token punctuation">&#123;</span>      reasoning_content<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>    <span class="token comment">// 步骤二：若最后的用户消息存在 reasoning_content 则表示之前收集成功</span>    <span class="token keyword">if</span> <span class="token punctuation">(</span>      humanMessageIndex <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span>      humanMessage<span class="token operator">?.</span>additional_kwargs<span class="token operator">?.</span>reasoning_content    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>      <span class="token comment">// 步骤二：尝试寻找需要补充 reasoning_content 字段的 Assistant Message</span>      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> messages<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">></span> humanMessageIndex<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        <span class="token keyword">const</span> message <span class="token operator">=</span> messages<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'ai'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>          __hank__<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>            index<span class="token operator">:</span> i<span class="token punctuation">,</span>            reasoning_content<span class="token operator">:</span>              humanMessage<span class="token operator">?.</span>additional_kwargs<span class="token operator">?.</span>reasoning_content<span class="token punctuation">,</span>          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">&#125;</span>      <span class="token punctuation">&#125;</span>    <span class="token punctuation">&#125;</span>    <span class="token comment">// 步骤三：将收集到的信息通过 options 进行透传</span>    options<span class="token punctuation">.</span>__hank__ <span class="token operator">=</span> __hank__<span class="token punctuation">;</span>    <span class="token comment">// 步骤一：尝试收集 reasoning_content</span>    <span class="token keyword">let</span> reasoning_content <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>    <span class="token keyword">const</span> chunks <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">_streamResponseChunks</span><span class="token punctuation">(</span>messages<span class="token punctuation">,</span> options<span class="token punctuation">,</span> runManager<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">const</span> chunk <span class="token keyword">of</span> chunks<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>      <span class="token keyword">const</span> delta <span class="token operator">=</span> <span class="token punctuation">(</span>chunk<span class="token punctuation">.</span>message<span class="token punctuation">.</span>additional_kwargs<span class="token punctuation">.</span>__raw_response <span class="token keyword">as</span> <span class="token builtin">any</span><span class="token punctuation">)</span>        <span class="token operator">?.</span>choices<span class="token operator">?.</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">?.</span>delta<span class="token punctuation">;</span>      <span class="token keyword">if</span> <span class="token punctuation">(</span>delta<span class="token operator">?.</span>reasoning_content<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        reasoning_content <span class="token operator">+=</span> delta<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">;</span>      <span class="token punctuation">&#125;</span>      <span class="token keyword">yield</span> chunk<span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>    <span class="token comment">// 步骤一：若 reasoning_content 存在则将其设置到最后一个用户消息内</span>    <span class="token keyword">if</span> <span class="token punctuation">(</span>humanMessageIndex <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> reasoning_content<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>      humanMessage<span class="token punctuation">.</span>additional_kwargs <span class="token operator">??=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>      humanMessage<span class="token punctuation">.</span>additional_kwargs<span class="token punctuation">.</span>reasoning_content <span class="token operator">=</span> reasoning_content<span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span>  <span class="token punctuation">&#125;</span>  <span class="token keyword">async</span> <span class="token function">completionWithRetry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> requestOptions<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>      <span class="token comment">// 步骤三：根据透传信息补充 reasoning_content</span>      <span class="token keyword">const</span> __hank__<span class="token operator">:</span> HankOptionsAttr <span class="token operator">=</span> requestOptions<span class="token operator">?.</span>__hank__ <span class="token operator">??</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token builtin">Array</span><span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>__hank__<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        __hank__<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>hank_rc<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>          request<span class="token punctuation">.</span>messages<span class="token punctuation">[</span>hank_rc<span class="token punctuation">.</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>reasoning_content <span class="token operator">=</span>            hank_rc<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">;</span>        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">&#125;</span>    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>    <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">completionWithRetry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> requestOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token keyword">const</span> agent <span class="token operator">=</span> <span class="token function">createDeepAgent</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>  model<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">ChatOpenAI</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>    completions<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">HankChatOpenAICompletions</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    <span class="token comment">// ...</span>  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// ...</span>  backend<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">SafeFileSystem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>通过上述补丁能力，能够成功将此类问题解决。</p><p>让我们愉快的进行后续的迭代调试吧。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><h2 id="低代码"><a href="#低代码" class="headerlink" title="低代码"></a>低代码</h2><p>还记得之前提到的低代码 Chat BI Agent 吧，在仪表盘的功能告一段落后，紧接着就需要实现报告功能，在支持报告功能后就也可以使用 Chat BI Agent 做一些报告相关的 AI 辅助。</p><p>通常可以做报告的生成、解析分析，让生成报告变得更智能快捷，让分析报告变得更结合数据。</p><p>已经基于 Tiptap 开源编辑器引擎实现了 MVP 报告功能，通过对 Schema 进行操作以实现 AI 辅助，天然就形成了一个自然的转换。</p><p>当然目前 MVP 报告功能还不足以提供更好的报告风格，比如背景图、水印、分页、纸张大小、占位替换符、逻辑控制符等能力。</p><p>不过从目前来看，持续迭代是可以看到一个不错的效果的。</p><h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>通过对 WebContainer 运行的 Vite 插件进行迭代，支持在 <code>&lt;template&gt;</code> 标签的 DOM 上添加对应的文件路径信息，用于在外侧可以通过鼠标点选方式获得用户具体要修改的文件位置等信息。</p><p>功能实现方式参考了 <a href="https://github.com/zh-lx/code-inspector">code-inspector</a> 的源码。</p><p>通过选择器 + 用户描述，可以让用户更加轻松的使用 AI 来达成想要的变更，并且避免在整体上下文中重复 Token 引起的误修改情况。</p><p>另外在借鉴功能的时候，发现 <a href="https://readdy.ai/">readdy.ai</a> 的选择器支持直接修改内容，这是一个不错的能力，因为有些修改并不需要再经过 AI ，因为这些修改过于简单。</p><p>通过调研发现为 DOM 开启 <code>contenteditable</code> 属性即可实现，只不过目前从 readdy.ai 体验看来， readdy.ai 的实现更像是原子化的低代码结构，选中的节点并不是 DOM 节点。</p><p>而我们内部的项目选择的则是 DOM 节点（源码级别的定位器），所以关于选中后可修改的文本能力在粒度上还需要更清晰明确的定义才好实现。</p><h2 id="交付产物二次修改"><a href="#交付产物二次修改" class="headerlink" title="交付产物二次修改"></a>交付产物二次修改</h2><p>场景也比较特殊，是通过 AI 能力修改交付在现场的前端代码。</p><p>分别实践了两种方案思路：</p><p>一是研发一个 Chrome 插件，通过在现有项目中植入类似文件路径信息，结合 Chrome 插件选取功能，生成给 IDE 使用的提示词。通过 IDE 读取前端编译产物结合提示词对编译结果进行修改。</p><p>二是提供一个配套服务，也是通过在现有项目中植入类似文件路径信息，提供对应路径模块的导出功能，将源码对应的 AST 对象导出，在 IDE 中进行修改，修改完成后通过服务的导入功能进行导入 AST 后编译成源码，再重新执行前端代码编译生成前端编译产物以达成修改。</p><p><img src="/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/AST_Control_Service.svg" alt="AST_Control_Service"></p><p>两者相对各有利弊，都需要在原项目上添加辅助插件以提供路径的生成，直接修改编译产物的好处就是快，但是相对 AST 来说产生错误的可能性更大（当然也不一定）。</p><p>也是一种很特别的 AI 应用场景探索。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/</id>
-    <link href="https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/"/>
-    <published>2026-02-01T19:25:55.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
+    
+  </entry>
+  
+  <entry>
     <title>疯狂摩擦 AI 探索</title>
+    <link href="https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/"/>
+    <id>https://zongzi531.github.io/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/</id>
+    <published>2026-02-01T19:25:55.000Z</published>
     <updated>2026-02-01T19:25:55.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="低代码"><a href="#低代码" class="headerlink" title="低代码"></a>低代码</h2><p>还记得之前提到的低代码 Chat BI Agent 吧，在仪表盘的功能告一段落后，紧接着就需要实现报告功能，在支持报告功能后就也可以使用 Chat BI Agent 做一些报告相关的 AI 辅助。</p><p>通常可以做报告的生成、解析分析，让生成报告变得更智能快捷，让分析报告变得更结合数据。</p><p>已经基于 Tiptap 开源编辑器引擎实现了 MVP 报告功能，通过对 Schema 进行操作以实现 AI 辅助，天然就形成了一个自然的转换。</p><p>当然目前 MVP 报告功能还不足以提供更好的报告风格，比如背景图、水印、分页、纸张大小、占位替换符、逻辑控制符等能力。</p><p>不过从目前来看，持续迭代是可以看到一个不错的效果的。</p><h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>通过对 WebContainer 运行的 Vite 插件进行迭代，支持在 <code>&lt;template&gt;</code> 标签的 DOM 上添加对应的文件路径信息，用于在外侧可以通过鼠标点选方式获得用户具体要修改的文件位置等信息。</p><p>功能实现方式参考了 <a href="https://github.com/zh-lx/code-inspector">code-inspector</a> 的源码。</p><p>通过选择器 + 用户描述，可以让用户更加轻松的使用 AI 来达成想要的变更，并且避免在整体上下文中重复 Token 引起的误修改情况。</p><p>另外在借鉴功能的时候，发现 <a href="https://readdy.ai/">readdy.ai</a> 的选择器支持直接修改内容，这是一个不错的能力，因为有些修改并不需要再经过 AI ，因为这些修改过于简单。</p><p>通过调研发现为 DOM 开启 <code>contenteditable</code> 属性即可实现，只不过目前从 readdy.ai 体验看来， readdy.ai 的实现更像是原子化的低代码结构，选中的节点并不是 DOM 节点。</p><p>而我们内部的项目选择的则是 DOM 节点（源码级别的定位器），所以关于选中后可修改的文本能力在粒度上还需要更清晰明确的定义才好实现。</p><h2 id="交付产物二次修改"><a href="#交付产物二次修改" class="headerlink" title="交付产物二次修改"></a>交付产物二次修改</h2><p>场景也比较特殊，是通过 AI 能力修改交付在现场的前端代码。</p><p>分别实践了两种方案思路：</p><p>一是研发一个 Chrome 插件，通过在现有项目中植入类似文件路径信息，结合 Chrome 插件选取功能，生成给 IDE 使用的提示词。通过 IDE 读取前端编译产物结合提示词对编译结果进行修改。</p><p>二是提供一个配套服务，也是通过在现有项目中植入类似文件路径信息，提供对应路径模块的导出功能，将源码对应的 AST 对象导出，在 IDE 中进行修改，修改完成后通过服务的导入功能进行导入 AST 后编译成源码，再重新执行前端代码编译生成前端编译产物以达成修改。</p><p><img src="/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/AST_Control_Service.svg" alt="AST_Control_Service"></p><p>两者相对各有利弊，都需要在原项目上添加辅助插件以提供路径的生成，直接修改编译产物的好处就是快，但是相对 AST 来说产生错误的可能性更大（当然也不一定）。</p><p>也是一种很特别的 AI 应用场景探索。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><h2 id="低代码迭代"><a href="#低代码迭代" class="headerlink" title="低代码迭代"></a>低代码迭代</h2><h3 id="自提供-Agent-分析能力"><a href="#自提供-Agent-分析能力" class="headerlink" title="自提供 Agent 分析能力"></a>自提供 Agent 分析能力</h3><p>之前受业务牵连，Chat BI Agent 由业务后端实现，会导致逐渐定制化，并且无法横向发展。</p><p>考虑到这个背景，转为兼容升级自提供 Agent 能力，支持生成仪表盘、单个图表，对图表进行分析能力，同时暴露 MCP 生成仪表盘功能。</p><p>以加强低代码在仪表盘和报表（后续规划）场景领域的 AI 落地能力。</p><h3 id="网格布局计算优化"><a href="#网格布局计算优化" class="headerlink" title="网格布局计算优化"></a>网格布局计算优化</h3><p>在实际的使用过程中发现每个网格 <code>LayoutItem</code> 的 Gap 距离计算存在小概率交互差异问题，导致用户在使用过程中产生意外的困惑。</p><p>重新分析计算逻辑进行如下优化（前提条件：一行有 12 栅格）：</p><p>现状是，假设一行目前存在 2 个 <code>LayoutItem</code> ，并且设每个 <code>LayoutItem</code> 的宽度 <code>w</code> 为 <code>x</code> ，设一整行为 <code>width</code> 。</p><p>那么计算公式则得出： <code>width = 2x + 3Gap</code> 。看上去没有问题吧，我一开始也觉得没问题，但是当仔细设计会发现其实这个公式中的 <code>x</code> 的值包含了不属于 <code>LayoutItem</code> 的 Gap 距离在内，导致交互产生意外。</p><p>我们重新来看待这个问题，其实一行的宽度计算公式应该是如此，设每个 <code>LayoutItem</code> 的宽度为 <code>i</code> ，则整行宽度为 <code>width = 12i + 13Gap</code> 。</p><p>还是上面这个假设，假设一行存在 2 个 <code>LayoutItem</code> ，则最后得出的公式应该是 <code>width = 12i + 13Gap</code> ，但是在表述其中一个 <code>LayoutItem</code> 的宽度时。</p><p>公式应该是： <code>x = 6i + 5Gap</code> 。所以之前的问题就是 <code>x</code> 中包含了不需要参与计算的 5 个 Gap 距离。从而导致交互时出现意外结果。</p><h2 id="回顾-2025-年"><a href="#回顾-2025-年" class="headerlink" title="回顾 2025 年"></a>回顾 2025 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>Agent</strong></li><li><strong>架构</strong></li></ul><h2 id="展望-2026-年"><a href="#展望-2026-年" class="headerlink" title="展望 2026 年"></a>展望 2026 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>架构</strong></li><li><strong>AI</strong></li></ul>]]>
-    </content>
-    <id>https://zongzi531.github.io/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
-    <link href="https://zongzi531.github.io/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
-    <published>2026-01-01T15:57:26.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
+    
+  </entry>
+  
+  <entry>
     <title>２０２６年おめでとうございます</title>
+    <link href="https://zongzi531.github.io/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
+    <id>https://zongzi531.github.io/2026/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
+    <published>2026-01-01T15:57:26.000Z</published>
     <updated>2026-01-01T15:57:26.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="低代码迭代"><a href="#低代码迭代" class="headerlink" title="低代码迭代"></a>低代码迭代</h2><h3 id="自提供-Agent-分析能力"><a href="#自提供-Agent-分析能力" class="headerlink" title="自提供 Agent 分析能力"></a>自提供 Agent 分析能力</h3><p>之前受业务牵连，Chat BI Agent 由业务后端实现，会导致逐渐定制化，并且无法横向发展。</p><p>考虑到这个背景，转为兼容升级自提供 Agent 能力，支持生成仪表盘、单个图表，对图表进行分析能力，同时暴露 MCP 生成仪表盘功能。</p><p>以加强低代码在仪表盘和报表（后续规划）场景领域的 AI 落地能力。</p><h3 id="网格布局计算优化"><a href="#网格布局计算优化" class="headerlink" title="网格布局计算优化"></a>网格布局计算优化</h3><p>在实际的使用过程中发现每个网格 <code>LayoutItem</code> 的 Gap 距离计算存在小概率交互差异问题，导致用户在使用过程中产生意外的困惑。</p><p>重新分析计算逻辑进行如下优化（前提条件：一行有 12 栅格）：</p><p>现状是，假设一行目前存在 2 个 <code>LayoutItem</code> ，并且设每个 <code>LayoutItem</code> 的宽度 <code>w</code> 为 <code>x</code> ，设一整行为 <code>width</code> 。</p><p>那么计算公式则得出： <code>width = 2x + 3Gap</code> 。看上去没有问题吧，我一开始也觉得没问题，但是当仔细设计会发现其实这个公式中的 <code>x</code> 的值包含了不属于 <code>LayoutItem</code> 的 Gap 距离在内，导致交互产生意外。</p><p>我们重新来看待这个问题，其实一行的宽度计算公式应该是如此，设每个 <code>LayoutItem</code> 的宽度为 <code>i</code> ，则整行宽度为 <code>width = 12i + 13Gap</code> 。</p><p>还是上面这个假设，假设一行存在 2 个 <code>LayoutItem</code> ，则最后得出的公式应该是 <code>width = 12i + 13Gap</code> ，但是在表述其中一个 <code>LayoutItem</code> 的宽度时。</p><p>公式应该是： <code>x = 6i + 5Gap</code> 。所以之前的问题就是 <code>x</code> 中包含了不需要参与计算的 5 个 Gap 距离。从而导致交互时出现意外结果。</p><h2 id="回顾-2025-年"><a href="#回顾-2025-年" class="headerlink" title="回顾 2025 年"></a>回顾 2025 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>Agent</strong></li><li><strong>架构</strong></li></ul><h2 id="展望-2026-年"><a href="#展望-2026-年" class="headerlink" title="展望 2026 年"></a>展望 2026 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>架构</strong></li><li><strong>AI</strong></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>这个月受到老婆的影响，开始看之前一直没看的鬼灭之刃，包括最近有好多联名活动，也带着兴趣一同了解了一下。</p><p>挺喜欢番剧中的角色们，各个都有很鲜明的特色和自己独特的经历。</p><p>包括也去电影院看了最新的剧场版，感觉还不错（虽然国内是晚上映的）。</p><p>招式的名称也很中二，「全集中…… X之呼吸·Y之型 招式名」，哈哈。</p><p>同时也期待剩下的两部剧场版的内容。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/12/01/kimetunoyaiba/</id>
-    <link href="https://zongzi531.github.io/2025/12/01/kimetunoyaiba/"/>
-    <published>2025-12-01T19:53:39.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
+    
+  </entry>
+  
+  <entry>
     <title>追番之『鬼滅の刃』</title>
+    <link href="https://zongzi531.github.io/2025/12/01/kimetunoyaiba/"/>
+    <id>https://zongzi531.github.io/2025/12/01/kimetunoyaiba/</id>
+    <published>2025-12-01T19:53:39.000Z</published>
     <updated>2025-12-01T19:53:39.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月受到老婆的影响，开始看之前一直没看的鬼灭之刃，包括最近有好多联名活动，也带着兴趣一同了解了一下。</p><p>挺喜欢番剧中的角色们，各个都有很鲜明的特色和自己独特的经历。</p><p>包括也去电影院看了最新的剧场版，感觉还不错（虽然国内是晚上映的）。</p><p>招式的名称也很中二，「全集中…… X之呼吸·Y之型 招式名」，哈哈。</p><p>同时也期待剩下的两部剧场版的内容。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>仔细回想起来，其实对关西的了解只有京都和奈良。趁着这次假期，去关西其他地方玩一玩吧。</p><p>好好探一下关西地区，分享一下我拍的照片吧~</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg">  <img src="pic4.jpg">  <img src="pic5.jpg">  <img src="pic6.jpg">  <img src="pic7.jpg"></div>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/11/01/%E6%BC%AB%E6%AD%A5%E5%85%B3%E8%A5%BF/</id>
-    <link href="https://zongzi531.github.io/2025/11/01/%E6%BC%AB%E6%AD%A5%E5%85%B3%E8%A5%BF/"/>
-    <published>2025-11-01T19:06:33.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
+    
+  </entry>
+  
+  <entry>
     <title>漫步关西</title>
+    <link href="https://zongzi531.github.io/2025/11/01/%E6%BC%AB%E6%AD%A5%E5%85%B3%E8%A5%BF/"/>
+    <id>https://zongzi531.github.io/2025/11/01/%E6%BC%AB%E6%AD%A5%E5%85%B3%E8%A5%BF/</id>
+    <published>2025-11-01T19:06:33.000Z</published>
     <updated>2025-11-01T19:06:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>仔细回想起来，其实对关西的了解只有京都和奈良。趁着这次假期，去关西其他地方玩一玩吧。</p><p>好好探一下关西地区，分享一下我拍的照片吧~</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg">  <img src="pic4.jpg">  <img src="pic5.jpg">  <img src="pic6.jpg">  <img src="pic7.jpg"></div>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="JavaScript" scheme="https://zongzi531.github.io/categories/JavaScript/"/>
-    <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
-    <category term="Agent" scheme="https://zongzi531.github.io/tags/Agent/"/>
-    <category term="优化" scheme="https://zongzi531.github.io/tags/%E4%BC%98%E5%8C%96/"/>
-    <content>
-      <![CDATA[<!-- no node  --><span id="more"></span><h2 id="调优-Agent"><a href="#调优-Agent" class="headerlink" title="调优 Agent"></a>调优 Agent</h2><p>这其实是一个漫长的过长，通过对 Agent 的调用进行记录，然后逐个回放 Agent 的 Prompt 消息以及上下文来进行优化，优化每一次模型调用和上下文流转的过程。</p><p>也没有什么特别的捷径，从完善 Prompt 到完善 Prompt ，书写 Good Case ，同时也要书写 Bad Case ，以避免出现过的错误。</p><p>不过目前的设计当中存在一些优化点还没有做，当 Agent 进入到生成代码时，目前采用的方式是 CoT 方式，虽然做优化也还是 CoT 的方式。</p><p>只不过目前的 CoT 较长，会消耗较多的不必要 Token ，计划根据 TODO 的内容，将 TODO 进行分块，然后逐个进行 CoT 执行。</p><p>对 TODO 进行分块，或许还会涉及到 Agent 具备记忆的能力，并且在做 TODO 分块时可以将任务拆分成项目活动图 (PERT) 来进行执行，可实现任务的并行执行，减少整体的执行时间。</p><p>或许这样 Token 会有所减少（不一定噢，也有可能 Token 差不多，但是费用降低），但是目前还未尝试（是一个比较值得挑战的尝试），而且在进行需求文档、UI设计文档都能尝试这样的思路进行。</p><p>另外一个，目前 Agent 其实对于用户表述“继续”这个关键词并没有很好的处理，因为大部分的任务都是以单次为节点完成的（或许单节点的任务完成是模型幻觉），不太会出现需要输入“继续”的场景，不过在用户使用过程中有用户出现了这样的逻辑交互，所以在一些边界逻辑上还需要一些补全或者备用方案（待思考）。</p><h2 id="调优产品体验"><a href="#调优产品体验" class="headerlink" title="调优产品体验"></a>调优产品体验</h2><p>从功能交互上，让用户觉得 AI 的思考过程更为透明，更能够被控制，在大部分环节将 Agent 的信息暴露给用户，并且给到用户决策和修改的权力，模仿市面上优秀的产品， UI 界面也随之跳转和变动，让用户感觉真的像是有个人在操作的这种体验感。</p><p>WebContainer 这一侧，也是让模型避免了一些不必要的植入代码读取，将内容都移入到了 Vite 插件内。</p><p>尽可能的优化工程的体积，并附加工程的说明（ <code>rules</code> ），让 Agent 执行时获得更准确的信息，让 Agent 明白如何修改代码。</p><p>以及一些产品侧的功能补充，让整个产品流程从普通用户到管理员都有相应的合理的操作空间。</p><p>因为产品计划在节前发版更新，所以更多的侧重在调优和打磨细节（生成效果）。</p><p>并且可以使用司内的组件库，让生成效果更轻松的符合司内 UI 设计标准。</p><p>再一个就是目前设计的对话任务是前台的任务模式，对话一但开始用户则不能离开当前对话界面，如果离开则会停止，这其实是在设计之初没有考虑到的，不过将 Agent 的任务放到后台处理也是比较轻松的事情，优化后，用户就可以后续再来查看生成的效果，而无需一定要停留在对话界面的问题。</p><p>所以持续打磨吧！~</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/10/01/%E8%B0%83%E4%BC%98Agent%E5%92%8C%E4%BA%A7%E5%93%81%E4%BD%93%E9%AA%8C/</id>
-    <link href="https://zongzi531.github.io/2025/10/01/%E8%B0%83%E4%BC%98Agent%E5%92%8C%E4%BA%A7%E5%93%81%E4%BD%93%E9%AA%8C/"/>
-    <published>2025-10-01T09:23:01.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node  -->]]>
-    </summary>
     <title>调优 Agent 和产品体验</title>
+    <link href="https://zongzi531.github.io/2025/10/01/%E8%B0%83%E4%BC%98Agent%E5%92%8C%E4%BA%A7%E5%93%81%E4%BD%93%E9%AA%8C/"/>
+    <id>https://zongzi531.github.io/2025/10/01/%E8%B0%83%E4%BC%98Agent%E5%92%8C%E4%BA%A7%E5%93%81%E4%BD%93%E9%AA%8C/</id>
+    <published>2025-10-01T09:23:01.000Z</published>
     <updated>2025-10-01T09:23:01.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><h2 id="调优-Agent"><a href="#调优-Agent" class="headerlink" title="调优 Agent"></a>调优 Agent</h2><p>这其实是一个漫长的过长，通过对 Agent 的调用进行记录，然后逐个回放 Agent 的 Prompt 消息以及上下文来进行优化，优化每一次模型调用和上下文流转的过程。</p><p>也没有什么特别的捷径，从完善 Prompt 到完善 Prompt ，书写 Good Case ，同时也要书写 Bad Case ，以避免出现过的错误。</p><p>不过目前的设计当中存在一些优化点还没有做，当 Agent 进入到生成代码时，目前采用的方式是 CoT 方式，虽然做优化也还是 CoT 的方式。</p><p>只不过目前的 CoT 较长，会消耗较多的不必要 Token ，计划根据 TODO 的内容，将 TODO 进行分块，然后逐个进行 CoT 执行。</p><p>对 TODO 进行分块，或许还会涉及到 Agent 具备记忆的能力，并且在做 TODO 分块时可以将任务拆分成项目活动图 (PERT) 来进行执行，可实现任务的并行执行，减少整体的执行时间。</p><p>或许这样 Token 会有所减少（不一定噢，也有可能 Token 差不多，但是费用降低），但是目前还未尝试（是一个比较值得挑战的尝试），而且在进行需求文档、UI设计文档都能尝试这样的思路进行。</p><p>另外一个，目前 Agent 其实对于用户表述“继续”这个关键词并没有很好的处理，因为大部分的任务都是以单次为节点完成的（或许单节点的任务完成是模型幻觉），不太会出现需要输入“继续”的场景，不过在用户使用过程中有用户出现了这样的逻辑交互，所以在一些边界逻辑上还需要一些补全或者备用方案（待思考）。</p><h2 id="调优产品体验"><a href="#调优产品体验" class="headerlink" title="调优产品体验"></a>调优产品体验</h2><p>从功能交互上，让用户觉得 AI 的思考过程更为透明，更能够被控制，在大部分环节将 Agent 的信息暴露给用户，并且给到用户决策和修改的权力，模仿市面上优秀的产品， UI 界面也随之跳转和变动，让用户感觉真的像是有个人在操作的这种体验感。</p><p>WebContainer 这一侧，也是让模型避免了一些不必要的植入代码读取，将内容都移入到了 Vite 插件内。</p><p>尽可能的优化工程的体积，并附加工程的说明（ <code>rules</code> ），让 Agent 执行时获得更准确的信息，让 Agent 明白如何修改代码。</p><p>以及一些产品侧的功能补充，让整个产品流程从普通用户到管理员都有相应的合理的操作空间。</p><p>因为产品计划在节前发版更新，所以更多的侧重在调优和打磨细节（生成效果）。</p><p>并且可以使用司内的组件库，让生成效果更轻松的符合司内 UI 设计标准。</p><p>再一个就是目前设计的对话任务是前台的任务模式，对话一但开始用户则不能离开当前对话界面，如果离开则会停止，这其实是在设计之初没有考虑到的，不过将 Agent 的任务放到后台处理也是比较轻松的事情，优化后，用户就可以后续再来查看生成的效果，而无需一定要停留在对话界面的问题。</p><p>所以持续打磨吧！~</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
     <category term="JavaScript" scheme="https://zongzi531.github.io/categories/JavaScript/"/>
-    <category term="WebContainer" scheme="https://zongzi531.github.io/tags/WebContainer/"/>
+    
+    
     <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
+    
     <category term="Agent" scheme="https://zongzi531.github.io/tags/Agent/"/>
-    <content>
-      <![CDATA[<!-- no node  --><span id="more"></span><p>简单点说，目前在做的是在浏览器内基于 Webcontainer 实现的 Agent 。（侧重在展示，并支持代码修改）</p><h2 id="重构-Webcontainer-封装"><a href="#重构-Webcontainer-封装" class="headerlink" title="重构 Webcontainer 封装"></a>重构 Webcontainer 封装</h2><p>发现同事之前写的代码对 Webcontainer 的 <code>spawn</code> 方法封装并没有很好的管控，不是单例级别的调用和销毁，多次调用会产生多个 <code>WebContainerProcess</code> 的泄露和污染。</p><p>于是对 Webcontainer 的封装进行了重构，以更清晰的形式进行管理和使用。</p><p>另外，在启动时，开启 <code>forwardPreviewErrors</code> 配置项，可以获得到更多的报错信息，以保证流程完整性。</p><h3 id="Webcontainer-内运行的工程优化"><a href="#Webcontainer-内运行的工程优化" class="headerlink" title="Webcontainer 内运行的工程优化"></a>Webcontainer 内运行的工程优化</h3><p>之前在 Webcontainer 中使用的 Node.js 工程是基于 vite 脚手架的工程代码，并且专门写了一个 vite 插件来监控 vite 的 dev 编译流程。</p><p>在此工程中充斥着一些与工程无关的业务逻辑，导致模型在修改代码的时候，可能会无意改动到关键位置，从而影响到正常的业务流程。</p><p>在此背景下，也进行了优化，将大部分逻辑迁移到 Webcontainer 外层，通过 Webcontainer 提供的 <code>setPreviewScript</code> 方法进行注入，此过程中还接触到了一些 vite 编译态的代码风格。</p><p>进行相应的兼容处理，从而让工程相对更为纯净，目前还无法将工程做的百分之百纯净（努力中）。</p><p>也在模型和用户修改代码时，附加了校验代码，利用 Babel 对剩余的部分文件进行了必要的监管，以防止被意外修改，保证业务的完整性。</p><h2 id="Agent-的流程完善"><a href="#Agent-的流程完善" class="headerlink" title="Agent 的流程完善"></a>Agent 的流程完善</h2><p>在 Agent 的流程上，基于原流程补充前端自校验代码流程。</p><p>原流程模块有：模型路由、用户意图判断、图片解析、生成需求文档、生成UI设计文档、生成当前任务TODO清单、生成代码、校验代码等流程完善模块。</p><p>前端自校验代码则是，通过通信的方式使得前端能够进行自主的校验检测，任务开始直至运行完成，会便利所有的前端路由。</p><p>若期间产生报错信息，则进入到错误修复模式，待修复完成后重新进行前端自校验代码，直至没有错误产生。</p><p>则代表完成此次任务。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/</id>
-    <link href="https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/"/>
-    <published>2025-09-01T09:56:11.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node  -->]]>
-    </summary>
+    
+    <category term="优化" scheme="https://zongzi531.github.io/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>加深 Webcontainer 和 Agent 的融合</title>
+    <link href="https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/"/>
+    <id>https://zongzi531.github.io/2025/09/01/Webcontainer-and-Agent/</id>
+    <published>2025-09-01T09:56:11.000Z</published>
     <updated>2025-09-01T09:56:11.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="LLM" scheme="https://zongzi531.github.io/categories/LLM/"/>
-    <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
-    <category term="Agent" scheme="https://zongzi531.github.io/tags/Agent/"/>
-    <content>
-      <![CDATA[<!-- no node  --><span id="more"></span><p>这个月基本围绕着之前的 WebContainer 去实现一个 Agent ，也算是负责 Agent 核心开发了。</p><p>Agent 的设计从最初简单的工具调用、冗长上下文演变成任务能够分模块执行，自由的编排各个任务的执行顺序（代码层面，非UI拖拽）。</p><p>从原先一大坨业务固定的代码演变成各个任务只需关注自身和其上下文即可，这个月可算是从基本实现到升级解耦全做了个遍。</p><p>目前设计的 Agent 架构信息如下：</p><h2 id="Agent-架构设计图"><a href="#Agent-架构设计图" class="headerlink" title="Agent 架构设计图"></a>Agent 架构设计图</h2><p><img src="/2025/08/01/%E5%88%9D%E6%8E%A2agent/mermaid-diagram.png" alt="architecture"></p><pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TB    <span class="token keyword">subgraph</span> <span class="token string">"用户交互层"</span>        User<span class="token text string">[👤 用户]</span>        WebUI<span class="token text string">[🌐 Web界面]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"核心引擎层"</span>        MainEngine<span class="token text string">[🔄 主循环引擎]</span>        TaskScheduler<span class="token text string">[📋 任务调度器]</span>        TaskExecutor<span class="token text string">[⚡ 任务执行器]</span>        WaitHandler<span class="token text string">[⏳ 等待处理器]</span>        ExceptionHandler<span class="token text string">[🚨 异常处理器]</span>        Logger<span class="token text string">[📝 日志模块]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"会话处理层"</span>        SessionProcessor<span class="token text string">[💬 会话处理器]</span>        SessionRouter<span class="token text string">[🔀 会话路由]</span>        SSEOutput<span class="token text string">[📡 SSE流输出]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"工具管理层"</span>        ToolManager<span class="token text string">[🛠️ 工具管理器]</span>        ToolExecutor<span class="token text string">[⚙️ 工具执行]</span>        ParamValidator<span class="token text string">[✅ 参数验证]</span>        ExecutionOptimizer<span class="token text string">[🚀 执行优化]</span>                <span class="token keyword">subgraph</span> <span class="token string">"具体工具"</span>            FileRWTool<span class="token text string">[📁 文件读写工具]</span>            FileSearchTool<span class="token text string">[🔍 文件搜索工具]</span>            FileDiffTool<span class="token text string">[📝 文件搜索替换/DIFF工具]</span>        <span class="token keyword">end</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"知识管理层"</span>        RAG<span class="token text string">[🧠 RAG系统]</span>        KnowledgeProtocol<span class="token text string">[📚 知识维护协议规范]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"模型服务层"</span>        ModelManager<span class="token text string">[🤖 模型管理器]</span>        LLMService<span class="token text string">[🎯 大语言模型服务]</span>    <span class="token keyword">end</span>        <span class="token comment">%% 用户交互流</span>    User <span class="token arrow operator">--></span> WebUI    WebUI <span class="token arrow operator">--></span> SessionProcessor        <span class="token comment">%% 会话处理流</span>    SessionProcessor <span class="token arrow operator">--></span> SessionRouter    SessionProcessor <span class="token arrow operator">--></span> SSEOutput    SessionRouter <span class="token arrow operator">--></span> MainEngine        <span class="token comment">%% 主引擎内部流</span>    MainEngine <span class="token arrow operator">--></span> TaskScheduler    TaskScheduler <span class="token arrow operator">--></span> TaskExecutor    TaskExecutor <span class="token arrow operator">--></span> WaitHandler    TaskExecutor <span class="token arrow operator">--></span> ExceptionHandler    MainEngine <span class="token arrow operator">--></span> Logger        <span class="token comment">%% 工具管理流</span>    TaskExecutor <span class="token arrow operator">--></span> ToolManager    ToolManager <span class="token arrow operator">--></span> ToolExecutor    ToolManager <span class="token arrow operator">--></span> ParamValidator    ToolManager <span class="token arrow operator">--></span> ExecutionOptimizer        ToolExecutor <span class="token arrow operator">--></span> FileRWTool    ToolExecutor <span class="token arrow operator">--></span> FileSearchTool    ToolExecutor <span class="token arrow operator">--></span> FileDiffTool        <span class="token comment">%% 知识和模型服务</span>    RAG <span class="token arrow operator">--></span> KnowledgeProtocol    TaskExecutor <span class="token arrow operator">--></span> ModelManager    TaskExecutor <span class="token arrow operator">--></span> RAG    ModelManager <span class="token arrow operator">--></span> LLMService        <span class="token comment">%% 反馈流</span>    SSEOutput <span class="token arrow operator">--></span> WebUI    WaitHandler <span class="token arrow operator">--></span> SessionProcessor    ExceptionHandler <span class="token arrow operator">--></span> Logger    Logger <span class="token arrow operator">-.-></span> User        <span class="token comment">%% 样式定义</span>    <span class="token keyword">classDef</span> userLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#e3f2fd<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#1976d2<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> coreLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#e8f5e8<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#388e3c<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> sessionLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#f3e5f5<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#7b1fa2<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> toolLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fff3e0<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#f57c00<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> knowledgeLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fce4ec<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#c2185b<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> modelLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#f1f8e9<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#689f38<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> toolItem <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fff8e1<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#ff8f00<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px</span>        <span class="token keyword">class</span> User,WebUI userLayer    <span class="token keyword">class</span> MainEngine,TaskScheduler,TaskExecutor,WaitHandler,ExceptionHandler,Logger coreLayer    <span class="token keyword">class</span> SessionProcessor,SessionRouter,SSEOutput sessionLayer    <span class="token keyword">class</span> ToolManager,ToolExecutor,ParamValidator,ExecutionOptimizer toolLayer    <span class="token keyword">class</span> RAG,KnowledgeProtocol knowledgeLayer    <span class="token keyword">class</span> ModelManager,LLMService modelLayer    <span class="token keyword">class</span> FileRWTool,FileSearchTool,FileDiffTool toolItem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="架构层次说明"><a href="#架构层次说明" class="headerlink" title="架构层次说明"></a>架构层次说明</h2><h3 id="🔄-核心引擎层"><a href="#🔄-核心引擎层" class="headerlink" title="🔄 核心引擎层"></a>🔄 核心引擎层</h3><ul><li><strong>主循环引擎</strong>: 整个Agent的核心控制器，协调各个模块的工作</li><li><strong>任务调度器</strong>: 负责任务的排队、优先级管理和调度执行</li><li><strong>任务执行器</strong>: 具体执行各种任务，包括工具调用和模型推理</li><li><strong>等待处理器</strong>: 处理需要用户交互的场景，如确认、回复等</li><li><strong>异常处理器</strong>: 统一的异常捕获和处理机制</li><li><strong>日志模块</strong>: 记录系统运行状态和调试信息</li></ul><h3 id="💬-会话处理层"><a href="#💬-会话处理层" class="headerlink" title="💬 会话处理层"></a>💬 会话处理层</h3><ul><li><strong>会话处理器</strong>: 管理用户会话的生命周期</li><li><strong>会话路由</strong>: 根据请求类型路由到不同的处理逻辑</li><li><strong>SSE流输出</strong>: 实现实时的流式响应输出</li></ul><h3 id="🛠️-工具管理层"><a href="#🛠️-工具管理层" class="headerlink" title="🛠️ 工具管理层"></a>🛠️ 工具管理层</h3><ul><li><strong>工具管理器</strong>: 统一管理所有可用工具</li><li><strong>工具执行</strong>: 安全地执行各种工具操作</li><li><strong>参数验证</strong>: 确保工具调用参数的正确性</li><li><strong>执行优化</strong>: 优化工具执行性能和资源使用</li></ul><h3 id="🧠-知识管理层"><a href="#🧠-知识管理层" class="headerlink" title="🧠 知识管理层"></a>🧠 知识管理层</h3><ul><li><strong>RAG系统</strong>: 检索增强生成，提供上下文相关的知识</li><li><strong>知识维护协议</strong>: 规范化的知识更新和维护机制</li></ul><h3 id="🤖-模型服务层"><a href="#🤖-模型服务层" class="headerlink" title="🤖 模型服务层"></a>🤖 模型服务层</h3><ul><li><strong>模型管理器</strong>: 管理不同的AI模型实例</li><li><strong>大语言模型服务</strong>: 提供统一的模型推理接口</li></ul><h2 id="数据流向"><a href="#数据流向" class="headerlink" title="数据流向"></a>数据流向</h2><ol><li><strong>用户请求</strong>: 用户通过Web界面发起请求</li><li><strong>会话处理</strong>: 会话处理器接收并路由请求</li><li><strong>任务调度</strong>: 主循环引擎调度相应的任务</li><li><strong>工具执行</strong>: 根据需要调用各种工具完成任务</li><li><strong>模型推理</strong>: 利用大语言模型进行智能处理</li><li><strong>结果返回</strong>: 通过SSE流实时返回处理结果</li></ol><p>这种架构设计实现了模块化、可扩展的Agent系统，各个组件职责清晰，便于维护和升级。</p><p>可以说整个月是游走在 Agent 开发和 Prompt 调试之间，以开发、产品多重角色优化项目中。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/08/01/%E5%88%9D%E6%8E%A2agent/</id>
-    <link href="https://zongzi531.github.io/2025/08/01/%E5%88%9D%E6%8E%A2agent/"/>
-    <published>2025-08-01T17:31:29.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node  -->]]>
-    </summary>
-    <title>初探 Agent</title>
-    <updated>2025-08-01T17:31:29.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><p>简单点说，目前在做的是在浏览器内基于 Webcontainer 实现的 Agent 。（侧重在展示，并支持代码修改）</p><h2 id="重构-Webcontainer-封装"><a href="#重构-Webcontainer-封装" class="headerlink" title="重构 Webcontainer 封装"></a>重构 Webcontainer 封装</h2><p>发现同事之前写的代码对 Webcontainer 的 <code>spawn</code> 方法封装并没有很好的管控，不是单例级别的调用和销毁，多次调用会产生多个 <code>WebContainerProcess</code> 的泄露和污染。</p><p>于是对 Webcontainer 的封装进行了重构，以更清晰的形式进行管理和使用。</p><p>另外，在启动时，开启 <code>forwardPreviewErrors</code> 配置项，可以获得到更多的报错信息，以保证流程完整性。</p><h3 id="Webcontainer-内运行的工程优化"><a href="#Webcontainer-内运行的工程优化" class="headerlink" title="Webcontainer 内运行的工程优化"></a>Webcontainer 内运行的工程优化</h3><p>之前在 Webcontainer 中使用的 Node.js 工程是基于 vite 脚手架的工程代码，并且专门写了一个 vite 插件来监控 vite 的 dev 编译流程。</p><p>在此工程中充斥着一些与工程无关的业务逻辑，导致模型在修改代码的时候，可能会无意改动到关键位置，从而影响到正常的业务流程。</p><p>在此背景下，也进行了优化，将大部分逻辑迁移到 Webcontainer 外层，通过 Webcontainer 提供的 <code>setPreviewScript</code> 方法进行注入，此过程中还接触到了一些 vite 编译态的代码风格。</p><p>进行相应的兼容处理，从而让工程相对更为纯净，目前还无法将工程做的百分之百纯净（努力中）。</p><p>也在模型和用户修改代码时，附加了校验代码，利用 Babel 对剩余的部分文件进行了必要的监管，以防止被意外修改，保证业务的完整性。</p><h2 id="Agent-的流程完善"><a href="#Agent-的流程完善" class="headerlink" title="Agent 的流程完善"></a>Agent 的流程完善</h2><p>在 Agent 的流程上，基于原流程补充前端自校验代码流程。</p><p>原流程模块有：模型路由、用户意图判断、图片解析、生成需求文档、生成UI设计文档、生成当前任务TODO清单、生成代码、校验代码等流程完善模块。</p><p>前端自校验代码则是，通过通信的方式使得前端能够进行自主的校验检测，任务开始直至运行完成，会便利所有的前端路由。</p><p>若期间产生报错信息，则进入到错误修复模式，待修复完成后重新进行前端自校验代码，直至没有错误产生。</p><p>则代表完成此次任务。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
     <category term="JavaScript" scheme="https://zongzi531.github.io/categories/JavaScript/"/>
-    <category term="Web" scheme="https://zongzi531.github.io/tags/Web/"/>
+    
+    
     <category term="WebContainer" scheme="https://zongzi531.github.io/tags/WebContainer/"/>
-    <category term="Container" scheme="https://zongzi531.github.io/tags/Container/"/>
-    <content>
-      <![CDATA[<!-- no node  --><span id="more"></span><p>因为需要结合 AI 的关系，对 WebContainer 进行学习，其实官方的文档比较完整，很容易入手，并应用到项目当中。</p><p>但是在使用的过程中会遇到一些问题，因为时间的关系也没有特别花精力去解决。</p><p>在 WebContainer 加载项目时，可以使用 <code>FileSystemTree</code> 来直接挂载项目，官方也非常贴心的提供了 Node.js 的 <code>@webcontainer/snapshot</code> 包来向浏览器推送流，让浏览器更轻松的进行挂载。</p><p>在实践的过程中，我并没有尝试推送的时候带有 <code>node_modules</code> 目录，而是直接在浏览器进行 <code>install</code> 来完成依赖的安装。</p><p>非常棒的是，在第一次安装后（带有缓存的情况）再次安装时，并不会发起网络请求，而是结合浏览器缓存，非常的快。</p><p>简单尝试过使用 <code>@webcontainer/api</code> 的 <code>export</code> 来导出 <code>node_modules</code> 的 <code>FileSystemTree</code> 的信息，但是并没有得到较好的效果。也是因为时间关系，暂时没有在第一次加载这块有更好的实践。</p><p>希望后续有时间对这块能有一个较好的优化效果，嘿嘿。</p><p>并且，当项目“较大”时，就算使用 Vite 来进行启动也会非常的缓慢，这在用户体验上其实是致命的，当然了，我选择一种避开的方式，来优化启动的速度，有了一些显著的效果。</p><p>同时，结合 AI 的使用，可以让用户只需与 AI 对话，即可完成项目的开发，算是一种较为新奇的体验吧。</p><p>当然了，重点还是后续的优化，以给用户提供更好的体验。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/07/01/%E5%88%9D%E6%8E%A2webcontainer/</id>
-    <link href="https://zongzi531.github.io/2025/07/01/%E5%88%9D%E6%8E%A2webcontainer/"/>
-    <published>2025-07-01T19:09:55.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node  -->]]>
-    </summary>
-    <title>初探 WebContainer</title>
-    <updated>2025-07-01T19:09:55.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="LLM" scheme="https://zongzi531.github.io/categories/LLM/"/>
+    
     <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
-    <content>
-      <![CDATA[<!-- no node  --><span id="more"></span><blockquote><p>大模型的应用环节！</p></blockquote><p>其实硬要说有什么技术含量也没有，一直在 prompt 工程上玩转罢了。</p><p>一个简易的 NL2SQL ，只需要把用户的问题，和数据库的表结构，给到大模型生成 SQL 就可以了。</p><p>然后再通过返回的 SQL 去查询数据库，就可以得到结果即可。</p><p>当然这是单次的查询，如果你的数据库信息很庞大，字段也很多，这时候就需要使用 RAG 来进行优化。</p><p>以减少上下文的长度。</p><p>那么肯定会有人好奇，生成的 SQL 会不会存在安全问题等等，那就不要直接生成 SQL ，而是生成一个 DSL 。</p><p>而这个 DSL 可以通过程序转成 SQL ，以保证查询的安全性。</p><p>同理 NL2SQL 在低代码的场景下，能生成低代码组件所需的配置信息，即实时获取数据的配置信息，同时依赖低代码规范，从而达成 NL2C ，来降低低代码平台的使用门槛。</p><p>从产品的角度，需要从准确性，简易的操作性，来改变用户的使用习惯，让用户相信大模型的能力。</p><p>结合产品的特点，制定合适友好的大模型路由即可。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/06/01/%E6%B5%85%E8%81%8ANL2SQL%E7%9A%84%E5%AE%9E%E6%88%98/</id>
-    <link href="https://zongzi531.github.io/2025/06/01/%E6%B5%85%E8%81%8ANL2SQL%E7%9A%84%E5%AE%9E%E6%88%98/"/>
-    <published>2025-06-01T09:56:31.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node  -->]]>
-    </summary>
+    
+    <category term="Agent" scheme="https://zongzi531.github.io/tags/Agent/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初探 Agent</title>
+    <link href="https://zongzi531.github.io/2025/08/01/%E5%88%9D%E6%8E%A2agent/"/>
+    <id>https://zongzi531.github.io/2025/08/01/%E5%88%9D%E6%8E%A2agent/</id>
+    <published>2025-08-01T17:31:29.000Z</published>
+    <updated>2025-08-01T17:31:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><p>这个月基本围绕着之前的 WebContainer 去实现一个 Agent ，也算是负责 Agent 核心开发了。</p><p>Agent 的设计从最初简单的工具调用、冗长上下文演变成任务能够分模块执行，自由的编排各个任务的执行顺序（代码层面，非UI拖拽）。</p><p>从原先一大坨业务固定的代码演变成各个任务只需关注自身和其上下文即可，这个月可算是从基本实现到升级解耦全做了个遍。</p><p>目前设计的 Agent 架构信息如下：</p><h2 id="Agent-架构设计图"><a href="#Agent-架构设计图" class="headerlink" title="Agent 架构设计图"></a>Agent 架构设计图</h2><p><img src="/2025/08/01/%E5%88%9D%E6%8E%A2agent/mermaid-diagram.png" alt="architecture"></p><pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TB    <span class="token keyword">subgraph</span> <span class="token string">"用户交互层"</span>        User<span class="token text string">[👤 用户]</span>        WebUI<span class="token text string">[🌐 Web界面]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"核心引擎层"</span>        MainEngine<span class="token text string">[🔄 主循环引擎]</span>        TaskScheduler<span class="token text string">[📋 任务调度器]</span>        TaskExecutor<span class="token text string">[⚡ 任务执行器]</span>        WaitHandler<span class="token text string">[⏳ 等待处理器]</span>        ExceptionHandler<span class="token text string">[🚨 异常处理器]</span>        Logger<span class="token text string">[📝 日志模块]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"会话处理层"</span>        SessionProcessor<span class="token text string">[💬 会话处理器]</span>        SessionRouter<span class="token text string">[🔀 会话路由]</span>        SSEOutput<span class="token text string">[📡 SSE流输出]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"工具管理层"</span>        ToolManager<span class="token text string">[🛠️ 工具管理器]</span>        ToolExecutor<span class="token text string">[⚙️ 工具执行]</span>        ParamValidator<span class="token text string">[✅ 参数验证]</span>        ExecutionOptimizer<span class="token text string">[🚀 执行优化]</span>                <span class="token keyword">subgraph</span> <span class="token string">"具体工具"</span>            FileRWTool<span class="token text string">[📁 文件读写工具]</span>            FileSearchTool<span class="token text string">[🔍 文件搜索工具]</span>            FileDiffTool<span class="token text string">[📝 文件搜索替换/DIFF工具]</span>        <span class="token keyword">end</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"知识管理层"</span>        RAG<span class="token text string">[🧠 RAG系统]</span>        KnowledgeProtocol<span class="token text string">[📚 知识维护协议规范]</span>    <span class="token keyword">end</span>        <span class="token keyword">subgraph</span> <span class="token string">"模型服务层"</span>        ModelManager<span class="token text string">[🤖 模型管理器]</span>        LLMService<span class="token text string">[🎯 大语言模型服务]</span>    <span class="token keyword">end</span>        <span class="token comment">%% 用户交互流</span>    User <span class="token arrow operator">--></span> WebUI    WebUI <span class="token arrow operator">--></span> SessionProcessor        <span class="token comment">%% 会话处理流</span>    SessionProcessor <span class="token arrow operator">--></span> SessionRouter    SessionProcessor <span class="token arrow operator">--></span> SSEOutput    SessionRouter <span class="token arrow operator">--></span> MainEngine        <span class="token comment">%% 主引擎内部流</span>    MainEngine <span class="token arrow operator">--></span> TaskScheduler    TaskScheduler <span class="token arrow operator">--></span> TaskExecutor    TaskExecutor <span class="token arrow operator">--></span> WaitHandler    TaskExecutor <span class="token arrow operator">--></span> ExceptionHandler    MainEngine <span class="token arrow operator">--></span> Logger        <span class="token comment">%% 工具管理流</span>    TaskExecutor <span class="token arrow operator">--></span> ToolManager    ToolManager <span class="token arrow operator">--></span> ToolExecutor    ToolManager <span class="token arrow operator">--></span> ParamValidator    ToolManager <span class="token arrow operator">--></span> ExecutionOptimizer        ToolExecutor <span class="token arrow operator">--></span> FileRWTool    ToolExecutor <span class="token arrow operator">--></span> FileSearchTool    ToolExecutor <span class="token arrow operator">--></span> FileDiffTool        <span class="token comment">%% 知识和模型服务</span>    RAG <span class="token arrow operator">--></span> KnowledgeProtocol    TaskExecutor <span class="token arrow operator">--></span> ModelManager    TaskExecutor <span class="token arrow operator">--></span> RAG    ModelManager <span class="token arrow operator">--></span> LLMService        <span class="token comment">%% 反馈流</span>    SSEOutput <span class="token arrow operator">--></span> WebUI    WaitHandler <span class="token arrow operator">--></span> SessionProcessor    ExceptionHandler <span class="token arrow operator">--></span> Logger    Logger <span class="token arrow operator">-.-></span> User        <span class="token comment">%% 样式定义</span>    <span class="token keyword">classDef</span> userLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#e3f2fd<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#1976d2<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> coreLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#e8f5e8<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#388e3c<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> sessionLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#f3e5f5<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#7b1fa2<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> toolLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fff3e0<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#f57c00<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> knowledgeLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fce4ec<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#c2185b<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> modelLayer <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#f1f8e9<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#689f38<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>2px</span>    <span class="token keyword">classDef</span> toolItem <span class="token style"><span class="token property">fill</span><span class="token operator">:</span>#fff8e1<span class="token punctuation">,</span><span class="token property">stroke</span><span class="token operator">:</span>#ff8f00<span class="token punctuation">,</span><span class="token property">stroke-width</span><span class="token operator">:</span>1px</span>        <span class="token keyword">class</span> User,WebUI userLayer    <span class="token keyword">class</span> MainEngine,TaskScheduler,TaskExecutor,WaitHandler,ExceptionHandler,Logger coreLayer    <span class="token keyword">class</span> SessionProcessor,SessionRouter,SSEOutput sessionLayer    <span class="token keyword">class</span> ToolManager,ToolExecutor,ParamValidator,ExecutionOptimizer toolLayer    <span class="token keyword">class</span> RAG,KnowledgeProtocol knowledgeLayer    <span class="token keyword">class</span> ModelManager,LLMService modelLayer    <span class="token keyword">class</span> FileRWTool,FileSearchTool,FileDiffTool toolItem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="架构层次说明"><a href="#架构层次说明" class="headerlink" title="架构层次说明"></a>架构层次说明</h2><h3 id="🔄-核心引擎层"><a href="#🔄-核心引擎层" class="headerlink" title="🔄 核心引擎层"></a>🔄 核心引擎层</h3><ul><li><strong>主循环引擎</strong>: 整个Agent的核心控制器，协调各个模块的工作</li><li><strong>任务调度器</strong>: 负责任务的排队、优先级管理和调度执行</li><li><strong>任务执行器</strong>: 具体执行各种任务，包括工具调用和模型推理</li><li><strong>等待处理器</strong>: 处理需要用户交互的场景，如确认、回复等</li><li><strong>异常处理器</strong>: 统一的异常捕获和处理机制</li><li><strong>日志模块</strong>: 记录系统运行状态和调试信息</li></ul><h3 id="💬-会话处理层"><a href="#💬-会话处理层" class="headerlink" title="💬 会话处理层"></a>💬 会话处理层</h3><ul><li><strong>会话处理器</strong>: 管理用户会话的生命周期</li><li><strong>会话路由</strong>: 根据请求类型路由到不同的处理逻辑</li><li><strong>SSE流输出</strong>: 实现实时的流式响应输出</li></ul><h3 id="🛠️-工具管理层"><a href="#🛠️-工具管理层" class="headerlink" title="🛠️ 工具管理层"></a>🛠️ 工具管理层</h3><ul><li><strong>工具管理器</strong>: 统一管理所有可用工具</li><li><strong>工具执行</strong>: 安全地执行各种工具操作</li><li><strong>参数验证</strong>: 确保工具调用参数的正确性</li><li><strong>执行优化</strong>: 优化工具执行性能和资源使用</li></ul><h3 id="🧠-知识管理层"><a href="#🧠-知识管理层" class="headerlink" title="🧠 知识管理层"></a>🧠 知识管理层</h3><ul><li><strong>RAG系统</strong>: 检索增强生成，提供上下文相关的知识</li><li><strong>知识维护协议</strong>: 规范化的知识更新和维护机制</li></ul><h3 id="🤖-模型服务层"><a href="#🤖-模型服务层" class="headerlink" title="🤖 模型服务层"></a>🤖 模型服务层</h3><ul><li><strong>模型管理器</strong>: 管理不同的AI模型实例</li><li><strong>大语言模型服务</strong>: 提供统一的模型推理接口</li></ul><h2 id="数据流向"><a href="#数据流向" class="headerlink" title="数据流向"></a>数据流向</h2><ol><li><strong>用户请求</strong>: 用户通过Web界面发起请求</li><li><strong>会话处理</strong>: 会话处理器接收并路由请求</li><li><strong>任务调度</strong>: 主循环引擎调度相应的任务</li><li><strong>工具执行</strong>: 根据需要调用各种工具完成任务</li><li><strong>模型推理</strong>: 利用大语言模型进行智能处理</li><li><strong>结果返回</strong>: 通过SSE流实时返回处理结果</li></ol><p>这种架构设计实现了模块化、可扩展的Agent系统，各个组件职责清晰，便于维护和升级。</p><p>可以说整个月是游走在 Agent 开发和 Prompt 调试之间，以开发、产品多重角色优化项目中。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
+    <category term="LLM" scheme="https://zongzi531.github.io/categories/LLM/"/>
+    
+    
+    <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
+    
+    <category term="Agent" scheme="https://zongzi531.github.io/tags/Agent/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初探 WebContainer</title>
+    <link href="https://zongzi531.github.io/2025/07/01/%E5%88%9D%E6%8E%A2webcontainer/"/>
+    <id>https://zongzi531.github.io/2025/07/01/%E5%88%9D%E6%8E%A2webcontainer/</id>
+    <published>2025-07-01T19:09:55.000Z</published>
+    <updated>2025-07-01T19:09:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><p>因为需要结合 AI 的关系，对 WebContainer 进行学习，其实官方的文档比较完整，很容易入手，并应用到项目当中。</p><p>但是在使用的过程中会遇到一些问题，因为时间的关系也没有特别花精力去解决。</p><p>在 WebContainer 加载项目时，可以使用 <code>FileSystemTree</code> 来直接挂载项目，官方也非常贴心的提供了 Node.js 的 <code>@webcontainer/snapshot</code> 包来向浏览器推送流，让浏览器更轻松的进行挂载。</p><p>在实践的过程中，我并没有尝试推送的时候带有 <code>node_modules</code> 目录，而是直接在浏览器进行 <code>install</code> 来完成依赖的安装。</p><p>非常棒的是，在第一次安装后（带有缓存的情况）再次安装时，并不会发起网络请求，而是结合浏览器缓存，非常的快。</p><p>简单尝试过使用 <code>@webcontainer/api</code> 的 <code>export</code> 来导出 <code>node_modules</code> 的 <code>FileSystemTree</code> 的信息，但是并没有得到较好的效果。也是因为时间关系，暂时没有在第一次加载这块有更好的实践。</p><p>希望后续有时间对这块能有一个较好的优化效果，嘿嘿。</p><p>并且，当项目“较大”时，就算使用 Vite 来进行启动也会非常的缓慢，这在用户体验上其实是致命的，当然了，我选择一种避开的方式，来优化启动的速度，有了一些显著的效果。</p><p>同时，结合 AI 的使用，可以让用户只需与 AI 对话，即可完成项目的开发，算是一种较为新奇的体验吧。</p><p>当然了，重点还是后续的优化，以给用户提供更好的体验。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
+    <category term="JavaScript" scheme="https://zongzi531.github.io/categories/JavaScript/"/>
+    
+    
+    <category term="Web" scheme="https://zongzi531.github.io/tags/Web/"/>
+    
+    <category term="WebContainer" scheme="https://zongzi531.github.io/tags/WebContainer/"/>
+    
+    <category term="Container" scheme="https://zongzi531.github.io/tags/Container/"/>
+    
+  </entry>
+  
+  <entry>
     <title>浅聊 NL2SQL 的实战</title>
+    <link href="https://zongzi531.github.io/2025/06/01/%E6%B5%85%E8%81%8ANL2SQL%E7%9A%84%E5%AE%9E%E6%88%98/"/>
+    <id>https://zongzi531.github.io/2025/06/01/%E6%B5%85%E8%81%8ANL2SQL%E7%9A%84%E5%AE%9E%E6%88%98/</id>
+    <published>2025-06-01T09:56:31.000Z</published>
     <updated>2025-06-01T09:56:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><blockquote><p>大模型的应用环节！</p></blockquote><p>其实硬要说有什么技术含量也没有，一直在 prompt 工程上玩转罢了。</p><p>一个简易的 NL2SQL ，只需要把用户的问题，和数据库的表结构，给到大模型生成 SQL 就可以了。</p><p>然后再通过返回的 SQL 去查询数据库，就可以得到结果即可。</p><p>当然这是单次的查询，如果你的数据库信息很庞大，字段也很多，这时候就需要使用 RAG 来进行优化。</p><p>以减少上下文的长度。</p><p>那么肯定会有人好奇，生成的 SQL 会不会存在安全问题等等，那就不要直接生成 SQL ，而是生成一个 DSL 。</p><p>而这个 DSL 可以通过程序转成 SQL ，以保证查询的安全性。</p><p>同理 NL2SQL 在低代码的场景下，能生成低代码组件所需的配置信息，即实时获取数据的配置信息，同时依赖低代码规范，从而达成 NL2C ，来降低低代码平台的使用门槛。</p><p>从产品的角度，需要从准确性，简易的操作性，来改变用户的使用习惯，让用户相信大模型的能力。</p><p>结合产品的特点，制定合适友好的大模型路由即可。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
+    <category term="LLM" scheme="https://zongzi531.github.io/categories/LLM/"/>
+    
+    
+    <category term="LLM" scheme="https://zongzi531.github.io/tags/LLM/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="MAC" scheme="https://zongzi531.github.io/categories/MAC/"/>
-    <category term="Apple" scheme="https://zongzi531.github.io/tags/Apple/"/>
-    <category term="MAC OS" scheme="https://zongzi531.github.io/tags/MAC-OS/"/>
-    <content>
-      <![CDATA[<!-- no node  --><span id="more"></span><blockquote><p>那么最后照一张照片吧，微笑🙂</p></blockquote><p>近 8 年的时间里，感谢你的陪伴，陪伴着我的代码技术成长，也感谢你提供的 Mac OS 系统，让我可以更轻易的进入代码世界，同时，谢谢你陪我一起奋战在职场的前线！</p><p>回看刚拥有你的时候，那时的我是如此的高兴，现在也是！</p><p>我不希望把你沉睡在家里，我想你也不想自己这样，所以，我们需要在此分别，向着未来发光发亮。</p><p>虽然现在要和你分别，但是我会带着你的意志和我一起继续前行！</p><p>我想你也会带着我的意志一起前行，毕竟我们 8 年的默契，一定会心有灵犀。</p><blockquote><p><a href="/2017/05/29/Pro/">入手 MacBook Pro</a></p></blockquote><p>当听到 Moscow 这首歌的时候，大脑的节奏和记忆一下子回到了 2017 年，感谢你在这么多人中选择了我，选择和我一起前往代码的世界。</p><p>我相信我们通过电子节奏的连接后，你也回到了 2017 年，我们第一次见面的时候，梦开始的地方。</p><blockquote><p>看了一下最近 2 个月的工作内容，基本是围绕着 AI 孵化产品。借助 AI 的能力，增强产品的能力。</p></blockquote><p>要说 AI 赋能吧，虽然说把 AI 转化成智能化的服务接入到业务中，但是感觉到成熟可信还需走一段较长的路程，虽然短而小的工具基本还是蛮稳定的，但是要上升到信任这个程度，感觉尚且还需要一段时间，至少我是这么认为的。</p><p>从接触 AI 到简单了解大模型，再到现在的 RAG 、 MCP 等等也好，其实能感受到 AI 的发展之快，但是总觉得要到真的普遍的落地（达成信任）的环节，还需要时间的考验。</p><p>不过，可以发现的是， AI 还是无法淘汰人，AI 只能做到帮助人，这个样子。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/05/01/byePro/</id>
-    <link href="https://zongzi531.github.io/2025/05/01/byePro/"/>
-    <published>2025-05-01T07:33:28.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node  -->]]>
-    </summary>
     <title>再见，我的初代 MacBook Pro</title>
+    <link href="https://zongzi531.github.io/2025/05/01/byePro/"/>
+    <id>https://zongzi531.github.io/2025/05/01/byePro/</id>
+    <published>2025-05-01T07:33:28.000Z</published>
     <updated>2025-05-01T07:33:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node  --><span id="more"></span><blockquote><p>那么最后照一张照片吧，微笑🙂</p></blockquote><p>近 8 年的时间里，感谢你的陪伴，陪伴着我的代码技术成长，也感谢你提供的 Mac OS 系统，让我可以更轻易的进入代码世界，同时，谢谢你陪我一起奋战在职场的前线！</p><p>回看刚拥有你的时候，那时的我是如此的高兴，现在也是！</p><p>我不希望把你沉睡在家里，我想你也不想自己这样，所以，我们需要在此分别，向着未来发光发亮。</p><p>虽然现在要和你分别，但是我会带着你的意志和我一起继续前行！</p><p>我想你也会带着我的意志一起前行，毕竟我们 8 年的默契，一定会心有灵犀。</p><blockquote><p><a href="/2017/05/29/Pro/">入手 MacBook Pro</a></p></blockquote><p>当听到 Moscow 这首歌的时候，大脑的节奏和记忆一下子回到了 2017 年，感谢你在这么多人中选择了我，选择和我一起前往代码的世界。</p><p>我相信我们通过电子节奏的连接后，你也回到了 2017 年，我们第一次见面的时候，梦开始的地方。</p><blockquote><p>看了一下最近 2 个月的工作内容，基本是围绕着 AI 孵化产品。借助 AI 的能力，增强产品的能力。</p></blockquote><p>要说 AI 赋能吧，虽然说把 AI 转化成智能化的服务接入到业务中，但是感觉到成熟可信还需走一段较长的路程，虽然短而小的工具基本还是蛮稳定的，但是要上升到信任这个程度，感觉尚且还需要一段时间，至少我是这么认为的。</p><p>从接触 AI 到简单了解大模型，再到现在的 RAG 、 MCP 等等也好，其实能感受到 AI 的发展之快，但是总觉得要到真的普遍的落地（达成信任）的环节，还需要时间的考验。</p><p>不过，可以发现的是， AI 还是无法淘汰人，AI 只能做到帮助人，这个样子。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node  --&gt;</summary>
+    
+    
+    
+    <category term="MAC" scheme="https://zongzi531.github.io/categories/MAC/"/>
+    
+    
+    <category term="Apple" scheme="https://zongzi531.github.io/tags/Apple/"/>
+    
+    <category term="MAC OS" scheme="https://zongzi531.github.io/tags/MAC-OS/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <category term="感悟" scheme="https://zongzi531.github.io/tags/%E6%84%9F%E6%82%9F/"/>
-    <category term="社会" scheme="https://zongzi531.github.io/tags/%E7%A4%BE%E4%BC%9A/"/>
-    <category term="三观" scheme="https://zongzi531.github.io/tags/%E4%B8%89%E8%A7%82/"/>
-    <category term="思考" scheme="https://zongzi531.github.io/tags/%E6%80%9D%E8%80%83/"/>
-    <category term="杭州" scheme="https://zongzi531.github.io/tags/%E6%9D%AD%E5%B7%9E/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>我拿了 C1 的驾照的今天，行驶里程有 6 万公里，但是细想，我并不会开车。</p><p>虽然我变道会打灯，也不开慢车，但是仔细一想我还是不会开车。</p><p>杭州道路上的车辆，就像是杭州社会的一个缩影，就算我遵守规则，努力不成为道路上给其他人添加麻烦的那个人，也一样很难避免给我造成麻烦的人。</p><p>我也在尽量的改变，不能说是包容其他车辆吧，只能说是尽量保证自己的安全，我希望自己能成为一个会开车的人。</p><p>我经常无法释怀道路上形形色色的驾驶员，会斥责他们的驾驶习惯多么不安全，可这又能怎么样呢，我也在这个道路中，我无法改变他们，我与他们较真，最后只会浪费我自己的精力。</p><p>可是我真的在这个漩涡中，很难脱离出来，我觉得自己是中式教育产出的一种人。</p><p>喜欢论对错，守规矩，有道德。可是这又怎么样呢，我依然不会开车。总有人会说小孩子才争对错，可大人的利弊不也是对错的一种形式吗？对错只不过是相对的，不同立场的。</p><p>记得刚开始开车的时候，我遇到右转汇入的车辆未观察直行车辆也未让行的时候，我会愤怒，我会鸣笛，可是那又怎么样呢？这样的车就是这样的行车风格，如同做事做人。后来我也想开了，当我看到这样不观察不减速的车辆，我会减速，我会让他们，我会觉得和他们较真，讲规则都是多余的，因为我们的认知不在一层。可我们却可以在同一条道路上行驶，而我却要比这样的车操更多的心，所以，凭什么？综合下来，我还会这样想，说明我不会开车。</p><p>再一次在道路缩减，二变一的时候，我明白要交替通行，当我感受到对方没有这个意识的时候，我会给油去争取我的路权，所谓的正确。可这又怎么样呢，最后刮蹭，直到交警判对方全责，对方才或多或少的意识到自己的问题，可是耽误的是我的时间，这时候我才明白，我和他也不在一个层次，我又得操更多的心，所以，凭什么？还是我不会开车。</p><p>我明白道路上不同层次的人，感谢道路上为我操心的人，谢谢你们的包容，让我可以安全到达目的地。</p><p>或许这就是社会，我想摆脱现在的漩涡，我想成为会开车的人。</p><p>所以怎么样才算是会开车的人呢？还是说我需要寻找一个适合自己的漩涡？或者说有没有风平浪静的海面？</p><p>值得思考。</p><p>回想起日本道路上的车辆，我会觉得杭州的道路上确实乱糟糟的，我也在对比，在寻找我心目中的正确，建立我自己的三观，试图寻找着我向往的社会。（没有说日本哪里都好，只是拿这个举个例子）</p><p>杭州真的变得没那么喜欢了。</p><p>到底是我变了，还是杭州变了，还是都变了。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/04/01/%E6%88%91%E4%B8%8D%E4%BC%9A%E5%BC%80%E8%BD%A6/</id>
-    <link href="https://zongzi531.github.io/2025/04/01/%E6%88%91%E4%B8%8D%E4%BC%9A%E5%BC%80%E8%BD%A6/"/>
-    <published>2025-04-01T11:18:39.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
     <title>我不会开车</title>
+    <link href="https://zongzi531.github.io/2025/04/01/%E6%88%91%E4%B8%8D%E4%BC%9A%E5%BC%80%E8%BD%A6/"/>
+    <id>https://zongzi531.github.io/2025/04/01/%E6%88%91%E4%B8%8D%E4%BC%9A%E5%BC%80%E8%BD%A6/</id>
+    <published>2025-04-01T11:18:39.000Z</published>
     <updated>2025-04-01T11:18:39.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>我拿了 C1 的驾照的今天，行驶里程有 6 万公里，但是细想，我并不会开车。</p><p>虽然我变道会打灯，也不开慢车，但是仔细一想我还是不会开车。</p><p>杭州道路上的车辆，就像是杭州社会的一个缩影，就算我遵守规则，努力不成为道路上给其他人添加麻烦的那个人，也一样很难避免给我造成麻烦的人。</p><p>我也在尽量的改变，不能说是包容其他车辆吧，只能说是尽量保证自己的安全，我希望自己能成为一个会开车的人。</p><p>我经常无法释怀道路上形形色色的驾驶员，会斥责他们的驾驶习惯多么不安全，可这又能怎么样呢，我也在这个道路中，我无法改变他们，我与他们较真，最后只会浪费我自己的精力。</p><p>可是我真的在这个漩涡中，很难脱离出来，我觉得自己是中式教育产出的一种人。</p><p>喜欢论对错，守规矩，有道德。可是这又怎么样呢，我依然不会开车。总有人会说小孩子才争对错，可大人的利弊不也是对错的一种形式吗？对错只不过是相对的，不同立场的。</p><p>记得刚开始开车的时候，我遇到右转汇入的车辆未观察直行车辆也未让行的时候，我会愤怒，我会鸣笛，可是那又怎么样呢？这样的车就是这样的行车风格，如同做事做人。后来我也想开了，当我看到这样不观察不减速的车辆，我会减速，我会让他们，我会觉得和他们较真，讲规则都是多余的，因为我们的认知不在一层。可我们却可以在同一条道路上行驶，而我却要比这样的车操更多的心，所以，凭什么？综合下来，我还会这样想，说明我不会开车。</p><p>再一次在道路缩减，二变一的时候，我明白要交替通行，当我感受到对方没有这个意识的时候，我会给油去争取我的路权，所谓的正确。可这又怎么样呢，最后刮蹭，直到交警判对方全责，对方才或多或少的意识到自己的问题，可是耽误的是我的时间，这时候我才明白，我和他也不在一个层次，我又得操更多的心，所以，凭什么？还是我不会开车。</p><p>我明白道路上不同层次的人，感谢道路上为我操心的人，谢谢你们的包容，让我可以安全到达目的地。</p><p>或许这就是社会，我想摆脱现在的漩涡，我想成为会开车的人。</p><p>所以怎么样才算是会开车的人呢？还是说我需要寻找一个适合自己的漩涡？或者说有没有风平浪静的海面？</p><p>值得思考。</p><p>回想起日本道路上的车辆，我会觉得杭州的道路上确实乱糟糟的，我也在对比，在寻找我心目中的正确，建立我自己的三观，试图寻找着我向往的社会。（没有说日本哪里都好，只是拿这个举个例子）</p><p>杭州真的变得没那么喜欢了。</p><p>到底是我变了，还是杭州变了，还是都变了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>这个月基本上是在参与基础建设和低代码建设，计划低代码与 AI 适配。基本是在写 Prompt 。</p><p>月初的杭州一下子到了夏天的感觉，那就来赏赏梅花吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><hr><blockquote><p>“花气袭人知骤暖，鹊声穿树喜新晴。” —— 陆游 《村居书喜》</p></blockquote>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/03/03/%E8%B5%8F%E8%8A%B12/</id>
-    <link href="https://zongzi531.github.io/2025/03/03/%E8%B5%8F%E8%8A%B12/"/>
-    <published>2025-03-03T09:32:36.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
+    
+    <category term="感悟" scheme="https://zongzi531.github.io/tags/%E6%84%9F%E6%82%9F/"/>
+    
+    <category term="社会" scheme="https://zongzi531.github.io/tags/%E7%A4%BE%E4%BC%9A/"/>
+    
+    <category term="三观" scheme="https://zongzi531.github.io/tags/%E4%B8%89%E8%A7%82/"/>
+    
+    <category term="思考" scheme="https://zongzi531.github.io/tags/%E6%80%9D%E8%80%83/"/>
+    
+    <category term="杭州" scheme="https://zongzi531.github.io/tags/%E6%9D%AD%E5%B7%9E/"/>
+    
+  </entry>
+  
+  <entry>
     <title>赏花Ⅱ</title>
+    <link href="https://zongzi531.github.io/2025/03/03/%E8%B5%8F%E8%8A%B12/"/>
+    <id>https://zongzi531.github.io/2025/03/03/%E8%B5%8F%E8%8A%B12/</id>
+    <published>2025-03-03T09:32:36.000Z</published>
     <updated>2025-03-03T09:32:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>这个月基本上是在参与基础建设和低代码建设，计划低代码与 AI 适配。基本是在写 Prompt 。</p><p>月初的杭州一下子到了夏天的感觉，那就来赏赏梅花吧～</p><div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 16px;">  <img src="pic2.jpg">  <img src="pic3.jpg"></div><hr><blockquote><p>“花气袭人知骤暖，鹊声穿树喜新晴。” —— 陆游 《村居书喜》</p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Tools" scheme="https://zongzi531.github.io/categories/Tools/"/>
-    <category term="ANTLR" scheme="https://zongzi531.github.io/tags/ANTLR/"/>
-    <category term="ANTLR 4" scheme="https://zongzi531.github.io/tags/ANTLR-4/"/>
-    <category term="语法解析器" scheme="https://zongzi531.github.io/tags/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90%E5%99%A8/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>最近因为业务需要，所以开始接触 ANTLR 4 语法解析器，在业务层面需要适配自己业务特征的 DSL 输入框。</p><p>调研了几种方向：</p><table><thead><tr><th>方案</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>纯纯的 <code>string</code> 解析</td><td>开发周期短，轻松</td><td>迭代成本高，容易推翻重做</td></tr><tr><td>Babel 解析</td><td>基于文本解析成 AST 语法树，通过 AST 来完成业务，迭代轻松</td><td>需要实现文本分词，浏览器环境使用为动态解析，存在性能损耗</td></tr><tr><td>ANTLR 4 解析</td><td>定义语法能够静态编译出对应代码，迭代轻松</td><td>需要学习 ANTLR 4 生态环境</td></tr></tbody></table><blockquote><p>结合业务场景的需要，考虑到未来的迭代可能，所以决定使用 ANTLR 4 解析方案。</p></blockquote><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>package.json</code> 所需依赖：</p><table><thead><tr><th>名称</th><th>版本</th><th>说明</th></tr></thead><tbody><tr><td><code>antlr4ng-cli</code></td><td><code>^1.0.7</code></td><td>将 ANTLR 4 编译为 TypeScript 文件的终端执行文件</td></tr><tr><td><code>antlr-format-cli</code></td><td><code>^1.2.1</code></td><td>美化 <code>*.g4</code> 格式</td></tr><tr><td><code>antlr4ng</code></td><td><code>2.0.11</code></td><td>ANTLR 4 在 JavaScript 运行时</td></tr><tr><td><code>antlr4-c3</code></td><td><code>3.3.7</code></td><td>ANTLR 4 代码补全包</td></tr></tbody></table><blockquote><p>使用 <code>antlr4ng-cli</code> 编译需要电脑安装 JDK ，我这里对应的 JDK 版本是 17.0.12。<br>编译脚本参考<a href="https://github.com/DTStack/dt-sql-parser/blob/main/scripts/antlr4.js">DTStack&#x2F;dt-sql-parser</a>。<br>仓库使用 <code>inquirer</code> 包进行多 DSL 编译，因为业务场景，我移除了此功能，只对指定的文件进行编译工作。</p></blockquote><h1 id="解析器"><a href="#解析器" class="headerlink" title="解析器"></a>解析器</h1><p>简单做个示例，实现变量比较的功能。</p><p>在对应的目录下创建 <code>XXLLexer.g4</code> 词法分析文件和 <code>XXLParser.g4</code> 解析文件。</p><pre class="line-numbers language-antlr" data-language="antlr"><code class="language-antlr">&#x2F;&#x2F; XXLLexer.g4&#x2F;&#x2F; ...lexer grammar XXLLexer;options &#123;    caseInsensitive&#x3D; true;&#125;EQUAL                  : &#39;&#x3D;&#x3D;&#39;;AND                    : &#39;AND&#39;;OR                     : &#39;OR&#39;;VALUE                  : (LETTER | DIGIT)+;SPACE                  : [ \t\r\n]+ -&gt; skip;fragment DIGIT         : [0-9];fragment LETTER        : [A-Za-z];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-antlr" data-language="antlr"><code class="language-antlr">&#x2F;&#x2F; XXLParser.g4&#x2F;&#x2F; ...parser grammar XXLParser;options &#123;    tokenVocab&#x3D; XXLLexer;    caseInsensitive&#x3D; true;    superClass&#x3D;ParserBase;&#125;@header &#123;import &#123; ParserBase &#125; from &#39;..&#x2F;ParserBase&#39;;&#125;program    : singleStatement (AND | OR)* singleStatement* EOF    ;singleStatement    : singleStatement (AND | OR) singleStatement    | equalStatement    ;equalStatement    : VALUE EQUAL VALUE    ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>最后支持的效果是：</p><ul><li><code>a == b</code></li><li><code>C1 == Z AND a == b</code></li></ul><p>解析器的类也基于业务做了调整，可以参考 dt-sql-parser 项目。<br>g4 语法学习请参考<a href="https://github.com/antlr/antlr4/blob/dev/doc/getting-started.md">Getting Started with ANTLR v4</a>。<br>语法参考<a href="https://github.com/antlr/grammars-v4">antlr&#x2F;grammars-v4</a>。</p><h1 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h1><p>可以自己基于解析器实现一个代码补全方法，创建的方法：</p><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> CandidatesCollection<span class="token punctuation">,</span> CodeCompletionCore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'antlr4-c3'</span><span class="token punctuation">;</span><span class="token comment">// ...</span><span class="token keyword">const</span> core <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CodeCompletionCore</span><span class="token punctuation">(</span>parserIns<span class="token comment">/* 解析器实例 */</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** * 设置需要匹配的规则 * 比如：singleStatement * 则设置： * protected preferredRules = new Set([ *   XXLParser.RULE_singleStatement, * ]); */</span>core<span class="token punctuation">.</span>preferredRules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>preferredRules<span class="token punctuation">;</span><span class="token comment">// 获得候选列表</span><span class="token keyword">const</span> candidates <span class="token operator">=</span> core<span class="token punctuation">.</span><span class="token function">collectCandidates</span><span class="token punctuation">(</span>caretTokenIndex<span class="token punctuation">,</span> c3Context<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>基于候选列表，可以提供一个体检舒适的 DSL 文本输入框，具备代码补全功能。</p><p>到此，算是浅尝了一下 ANTLR 4 ，能感受到的好处就是，当 DSL 产生迭代后，我基本只需要修改 g4 文件，重新编译即可。</p><p>非常的舒适～</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/02/11/%E5%85%A5%E9%97%A8antlr4/</id>
-    <link href="https://zongzi531.github.io/2025/02/11/%E5%85%A5%E9%97%A8antlr4/"/>
-    <published>2025-02-11T15:52:29.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
     <title>入门 ANTLR 4</title>
+    <link href="https://zongzi531.github.io/2025/02/11/%E5%85%A5%E9%97%A8antlr4/"/>
+    <id>https://zongzi531.github.io/2025/02/11/%E5%85%A5%E9%97%A8antlr4/</id>
+    <published>2025-02-11T15:52:29.000Z</published>
     <updated>2025-02-11T15:52:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>最近因为业务需要，所以开始接触 ANTLR 4 语法解析器，在业务层面需要适配自己业务特征的 DSL 输入框。</p><p>调研了几种方向：</p><table><thead><tr><th>方案</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>纯纯的 <code>string</code> 解析</td><td>开发周期短，轻松</td><td>迭代成本高，容易推翻重做</td></tr><tr><td>Babel 解析</td><td>基于文本解析成 AST 语法树，通过 AST 来完成业务，迭代轻松</td><td>需要实现文本分词，浏览器环境使用为动态解析，存在性能损耗</td></tr><tr><td>ANTLR 4 解析</td><td>定义语法能够静态编译出对应代码，迭代轻松</td><td>需要学习 ANTLR 4 生态环境</td></tr></tbody></table><blockquote><p>结合业务场景的需要，考虑到未来的迭代可能，所以决定使用 ANTLR 4 解析方案。</p></blockquote><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>package.json</code> 所需依赖：</p><table><thead><tr><th>名称</th><th>版本</th><th>说明</th></tr></thead><tbody><tr><td><code>antlr4ng-cli</code></td><td><code>^1.0.7</code></td><td>将 ANTLR 4 编译为 TypeScript 文件的终端执行文件</td></tr><tr><td><code>antlr-format-cli</code></td><td><code>^1.2.1</code></td><td>美化 <code>*.g4</code> 格式</td></tr><tr><td><code>antlr4ng</code></td><td><code>2.0.11</code></td><td>ANTLR 4 在 JavaScript 运行时</td></tr><tr><td><code>antlr4-c3</code></td><td><code>3.3.7</code></td><td>ANTLR 4 代码补全包</td></tr></tbody></table><blockquote><p>使用 <code>antlr4ng-cli</code> 编译需要电脑安装 JDK ，我这里对应的 JDK 版本是 17.0.12。<br>编译脚本参考<a href="https://github.com/DTStack/dt-sql-parser/blob/main/scripts/antlr4.js">DTStack&#x2F;dt-sql-parser</a>。<br>仓库使用 <code>inquirer</code> 包进行多 DSL 编译，因为业务场景，我移除了此功能，只对指定的文件进行编译工作。</p></blockquote><h1 id="解析器"><a href="#解析器" class="headerlink" title="解析器"></a>解析器</h1><p>简单做个示例，实现变量比较的功能。</p><p>在对应的目录下创建 <code>XXLLexer.g4</code> 词法分析文件和 <code>XXLParser.g4</code> 解析文件。</p><pre class="line-numbers language-antlr" data-language="antlr"><code class="language-antlr">&#x2F;&#x2F; XXLLexer.g4&#x2F;&#x2F; ...lexer grammar XXLLexer;options &#123;    caseInsensitive&#x3D; true;&#125;EQUAL                  : &#39;&#x3D;&#x3D;&#39;;AND                    : &#39;AND&#39;;OR                     : &#39;OR&#39;;VALUE                  : (LETTER | DIGIT)+;SPACE                  : [ \t\r\n]+ -&gt; skip;fragment DIGIT         : [0-9];fragment LETTER        : [A-Za-z];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-antlr" data-language="antlr"><code class="language-antlr">&#x2F;&#x2F; XXLParser.g4&#x2F;&#x2F; ...parser grammar XXLParser;options &#123;    tokenVocab&#x3D; XXLLexer;    caseInsensitive&#x3D; true;    superClass&#x3D;ParserBase;&#125;@header &#123;import &#123; ParserBase &#125; from &#39;..&#x2F;ParserBase&#39;;&#125;program    : singleStatement (AND | OR)* singleStatement* EOF    ;singleStatement    : singleStatement (AND | OR) singleStatement    | equalStatement    ;equalStatement    : VALUE EQUAL VALUE    ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>最后支持的效果是：</p><ul><li><code>a == b</code></li><li><code>C1 == Z AND a == b</code></li></ul><p>解析器的类也基于业务做了调整，可以参考 dt-sql-parser 项目。<br>g4 语法学习请参考<a href="https://github.com/antlr/antlr4/blob/dev/doc/getting-started.md">Getting Started with ANTLR v4</a>。<br>语法参考<a href="https://github.com/antlr/grammars-v4">antlr&#x2F;grammars-v4</a>。</p><h1 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h1><p>可以自己基于解析器实现一个代码补全方法，创建的方法：</p><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> CandidatesCollection<span class="token punctuation">,</span> CodeCompletionCore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'antlr4-c3'</span><span class="token punctuation">;</span><span class="token comment">// ...</span><span class="token keyword">const</span> core <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CodeCompletionCore</span><span class="token punctuation">(</span>parserIns<span class="token comment">/* 解析器实例 */</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** * 设置需要匹配的规则 * 比如：singleStatement * 则设置： * protected preferredRules = new Set([ *   XXLParser.RULE_singleStatement, * ]); */</span>core<span class="token punctuation">.</span>preferredRules <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>preferredRules<span class="token punctuation">;</span><span class="token comment">// 获得候选列表</span><span class="token keyword">const</span> candidates <span class="token operator">=</span> core<span class="token punctuation">.</span><span class="token function">collectCandidates</span><span class="token punctuation">(</span>caretTokenIndex<span class="token punctuation">,</span> c3Context<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>基于候选列表，可以提供一个体检舒适的 DSL 文本输入框，具备代码补全功能。</p><p>到此，算是浅尝了一下 ANTLR 4 ，能感受到的好处就是，当 DSL 产生迭代后，我基本只需要修改 g4 文件，重新编译即可。</p><p>非常的舒适～</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Tools" scheme="https://zongzi531.github.io/categories/Tools/"/>
+    
+    
+    <category term="ANTLR" scheme="https://zongzi531.github.io/tags/ANTLR/"/>
+    
+    <category term="ANTLR 4" scheme="https://zongzi531.github.io/tags/ANTLR-4/"/>
+    
+    <category term="语法解析器" scheme="https://zongzi531.github.io/tags/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90%E5%99%A8/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>发现自己的工作视角发生了转变，真正的从前端的视角脱离出来，上升到更全面的产品视角或者项目视角，考虑或者想做好的事情变得更多了。</p><p>这也是好事，因为视角的转变，从而影响到职业方向的转变。从而聚焦起来，把项目做的更好。</p><p>除了基础建设、去年还更多的参与到了项目也产品中去，感受和体会也会比较多吧。</p><p>当然还少不了 AI ，接触 RAG 相关的领域。</p><p>感受到了 AI 的飞速发展，和自己能力的有限。</p><p>所以，现在看来角色的视角转变确实还是蛮有意思的，或更深或更广。</p><p>新的一年，加油！</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/</id>
-    <link href="https://zongzi531.github.io/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/"/>
-    <published>2025-02-06T08:33:56.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
     <title>蛇蛇如意</title>
+    <link href="https://zongzi531.github.io/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/"/>
+    <id>https://zongzi531.github.io/2025/02/06/%E8%9B%87%E8%9B%87%E5%A6%82%E6%84%8F/</id>
+    <published>2025-02-06T08:33:56.000Z</published>
     <updated>2025-02-06T08:33:56.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>发现自己的工作视角发生了转变，真正的从前端的视角脱离出来，上升到更全面的产品视角或者项目视角，考虑或者想做好的事情变得更多了。</p><p>这也是好事，因为视角的转变，从而影响到职业方向的转变。从而聚焦起来，把项目做的更好。</p><p>除了基础建设、去年还更多的参与到了项目也产品中去，感受和体会也会比较多吧。</p><p>当然还少不了 AI ，接触 RAG 相关的领域。</p><p>感受到了 AI 的飞速发展，和自己能力的有限。</p><p>所以，现在看来角色的视角转变确实还是蛮有意思的，或更深或更广。</p><p>新的一年，加油！</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><h2 id="回顾-2024-年"><a href="#回顾-2024-年" class="headerlink" title="回顾 2024 年"></a>回顾 2024 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong> <code>适量</code></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong> <code>持续进行</code></li><li><strong>RAG</strong></li><li><strong>服务端</strong></li><li><strong>架构学习</strong></li></ul><h2 id="展望-2025-年"><a href="#展望-2025-年" class="headerlink" title="展望 2025 年"></a>展望 2025 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>架构</strong></li><li><strong>机器学习</strong></li></ul>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
-    <link href="https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
-    <published>2025-01-01T13:09:36.000Z</published>
-    <summary>元旦快乐</summary>
+    
+  </entry>
+  
+  <entry>
     <title>２０２５年おめでとうございます</title>
+    <link href="https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
+    <id>https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
+    <published>2025-01-01T13:09:36.000Z</published>
     <updated>2025-01-01T13:09:36.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><h2 id="回顾-2024-年"><a href="#回顾-2024-年" class="headerlink" title="回顾 2024 年"></a>回顾 2024 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong> <code>适量</code></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong> <code>持续进行</code></li><li><strong>RAG</strong></li><li><strong>服务端</strong></li><li><strong>架构学习</strong></li></ul><h2 id="展望-2025-年"><a href="#展望-2025-年" class="headerlink" title="展望 2025 年"></a>展望 2025 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>架构</strong></li><li><strong>机器学习</strong></li></ul>]]></content>
+    
+    
+    <summary type="html">元旦快乐</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>趁着天冷前，刚好看到天目里有举办活动，而且是第二届咖啡集市，就去感受一下吧。</p><p>去的当天人还是蛮多的，不知道大家都是喜欢喝咖啡，还是大多数和我一样，去凑凑热闹的。</p><p>因为基本都没喝过，不像平时喝的咖啡，感觉摊主们都是拿了奖的高级咖啡师。</p><p>挺不错的，这样的活动。</p><p>这个月的工作基本是围绕着业务进行，低代码、VSCode 插件作用范围预研、IDEA 插件预研，等其他业务。</p><p>也通过一些以往的项目来整理关于架构的一些知识体系，让整个软件架构知识体系更加饱满（会是一个较为漫长的过程）。</p><p>大概就这么多。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/</id>
-    <link href="https://zongzi531.github.io/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/"/>
-    <published>2024-12-01T10:08:39.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
+    
+  </entry>
+  
+  <entry>
     <title>体验咖啡集市</title>
+    <link href="https://zongzi531.github.io/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/"/>
+    <id>https://zongzi531.github.io/2024/12/01/%E4%BD%93%E9%AA%8C%E5%92%96%E5%95%A1%E9%9B%86%E5%B8%82/</id>
+    <published>2024-12-01T10:08:39.000Z</published>
     <updated>2024-12-01T10:08:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>趁着天冷前，刚好看到天目里有举办活动，而且是第二届咖啡集市，就去感受一下吧。</p><p>去的当天人还是蛮多的，不知道大家都是喜欢喝咖啡，还是大多数和我一样，去凑凑热闹的。</p><p>因为基本都没喝过，不像平时喝的咖啡，感觉摊主们都是拿了奖的高级咖啡师。</p><p>挺不错的，这样的活动。</p><p>这个月的工作基本是围绕着业务进行，低代码、VSCode 插件作用范围预研、IDEA 插件预研，等其他业务。</p><p>也通过一些以往的项目来整理关于架构的一些知识体系，让整个软件架构知识体系更加饱满（会是一个较为漫长的过程）。</p><p>大概就这么多。</p>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Architecture" scheme="https://zongzi531.github.io/categories/Architecture/"/>
-    <category term="Architecture" scheme="https://zongzi531.github.io/tags/Architecture/"/>
-    <category term="架构" scheme="https://zongzi531.github.io/tags/%E6%9E%B6%E6%9E%84/"/>
-    <content>
-      <![CDATA[<blockquote><p>我负责 UED 门户项目整体的架构设计及服务端研发工作，<br>在确定项目需求后，我使用「分层架构」设计了项目整体的架构实现方式，设计系统自上而下分为应用层、业务层、服务层、数据层；<br>在面临多种的认证方式时，选用「适配器模式」解决认证方式差异的问题；<br>在解决 UED 门户需要获取应用操作记录的问题上，使用「观察者模式」，将通过向应用获取转变为应用上送以优化操作记录获取的方式，解耦功能；<br>并且从部署视角的角色选型「虚拟化技术」以保证部署的效率和稳定；</p></blockquote><!-- no node --><span id="more"></span><h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>项目第一阶段已告一段，UED 门户项目，是我写 Node.js 开始第一次正式的、完整的参与到研发过程中的项目。</p><p>从技术选型、架构设计逐一入手，是一次较为全面完整的项目体验。</p><p>后续其他部门需要门户网站时，此项目即替换 Web 界面即可交付其他部门，已实现大体复用。</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>UED 部门需要建立自己的门户网站，网站需要将现有的 UED 模块服务（原型设计稿、前端组件、设计资源、文档等）集成为一体，以提供一个统一设计资源规范、资源共建、学习成长为一体的门户网站。</p><h2 id="项目要求"><a href="#项目要求" class="headerlink" title="项目要求"></a>项目要求</h2><ol><li>用户的认证方式需要支持公司认证和独立认证，并且认证的用户角色分为用户和应用即「服务模块」</li><li>门户需要收集接入应用中指定的操作记录或其他消息信息</li><li>门户计划在多套环境下进行独立部署</li></ol><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><p>架构设计采用「分层架构」，将门户分别为应用层、业务层、服务层、数据层。</p><ul><li>应用层包含 UED 门户自身对用户的 Web 界面以及需要集成进来的应用如：原型设计平台、组件平台、资源平台和文档平台等</li><li>业务层包含 UED 门户提供的业务模块，包含：服务模块管理模块、用户角色权限管理模块、意见反馈模块和文章模块</li><li>服务层包含认证服务、日志服务、订阅服务和资源服务</li><li>数据层包含 PostgreSQL 、 Redis 、 MinIO</li></ul><h3 id="认证服务设计"><a href="#认证服务设计" class="headerlink" title="认证服务设计"></a>认证服务设计</h3><p>认证方式在设计之初存在两种，分别是接入公司的认证中心和实现自己独立的认证中心。可以见得，认证方式是在项目部署时就决定的内容，并且只存在认证服务内部的实现逻辑差异，所以需要保证认证服务对外一致即可。</p><p>所以在设计时，选择以自己独立的认证中心为接口标准进行设计，设计认证标准抽象，让两种方式可以按照抽象进行实现。</p><p>设计模式上，这里选择适配器（Adapter）设计模式，此模式的优点是：</p><ol><li>单一职责原则你可以将接口或数据转换代码从程序主要业务逻辑中分离。</li></ol><p>以保证每一种接入的认证方式都和程序主要业务逻辑无关，保证认证服务对外提供的接口和行为一致。</p><ol start="2"><li>开闭原则。只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器。</li></ol><p>新增认证方式或则切换认证方式，都无需修改其他服务。</p><p>缺点是：</p><ol><li>代码整体复杂度增加，因为你需要新增一系列接口和类。有时直接更改服务类使其与其他代码兼容会更简单。</li></ol><p>所以在认证模式开发的阶段，使用适配器设计模式会使得代码较无设计模式的情况下，更为复杂一些。但是在程序运行阶段对认证方式切换则无需更新程序即可完成，同时新增认证方式也不会修改到程序的其他业务逻辑。</p><p>从程序质量属性的角度，保证了程序的可修改性。</p><h3 id="订阅服务设计"><a href="#订阅服务设计" class="headerlink" title="订阅服务设计"></a>订阅服务设计</h3><p>如果按照传统的方式去一一对接各个应用中的操作记录或者消息信息，会使得 UED 门户的程序代码与接入的应用功能强耦合，为了解决这个问题。</p><p>UED 门户提供订阅服务，采用观察者模式（Observer）来对接实现各个应用中的操作记录或者消息信息记录。</p><p>通过向应用获取转变为应用上送以优化操作记录获取的方式，约定 UED 门户所需的消息主题，各个应用将需要上送的消息按照对应的主题上送至 UED 门户，由 UED 门户向用户进行展示。</p><p>观察者模式的优点是：</p><ol><li>开闭原则。你无需修改发布者代码就能引入新的订阅者类</li></ol><p>即如果有新应用接入 UED 门户，保持同主题的推送消息，门户在无需进行修改的情况下，用户即可以获得新应用的消息内容。</p><p>缺点是：</p><ol><li>订阅者的通知顺序是随机的</li></ol><p>目前从需求来看，通知的顺序并没有很重要，但如果要实现顺序可以在通知内容中添加时间戳，以应用上送的时间戳为基准，以此来解决消息顺序的问题。</p><h3 id="部署视角"><a href="#部署视角" class="headerlink" title="部署视角"></a>部署视角</h3><p>从部署视角来看，项目需要在多套环境下进行部署，为了避免环境不一致引起的额外部署工作，所以选用虚拟化技术来完成项目部署。</p><p>目前公司存在办公网和内网环境，两套环境分别需要部署正式和测试环境，在技术选型上，我对 Docker 和 Kubernetes 进行了对比。</p><p>Docker 和 Kubernetes 都是虚拟化容器技术，以解决在任何计算机上部署你的项目，但是相比较而言。</p><p>Docker 属于容器运行时技术，更适合单机运行或对资源要求较小的应用，而 Kubernetes 则属于一种容器编排工具，更适合集群运行或更大规模的应用。</p><p>所以从部署视角来看，项目目前使用的用户对内，并且大部分都是研发侧的同学，同时在使用性能上并没有较高的并发需求，即最终选用 Docker 来完成部署工作更合适不过。</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/</id>
-    <link href="https://zongzi531.github.io/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/"/>
-    <published>2024-11-01T08:33:35.000Z</published>
-    <summary>
-      <![CDATA[<blockquote>
-<p>我负责 UED 门户项目整体的架构设计及服务端研发工作，<br>在确定项目需求后，我使用「分层架构」设计了项目整体的架构实现方式，设计系统自上而下分为应用层、业务层、服务层、数据层；<br>在面临多种的认证方式时，选用「适配器模式」解决认证方式差异的问题；<br>在解决 UED 门户需要获取应用操作记录的问题上，使用「观察者模式」，将通过向应用获取转变为应用上送以优化操作记录获取的方式，解耦功能；<br>并且从部署视角的角色选型「虚拟化技术」以保证部署的效率和稳定；</p>
-</blockquote>
-<!-- no node -->]]>
-    </summary>
     <title>关于门户的架构思考</title>
+    <link href="https://zongzi531.github.io/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/"/>
+    <id>https://zongzi531.github.io/2024/11/01/%E5%85%B3%E4%BA%8E%E9%97%A8%E6%88%B7%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E8%80%83/</id>
+    <published>2024-11-01T08:33:35.000Z</published>
     <updated>2024-11-01T08:33:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>我负责 UED 门户项目整体的架构设计及服务端研发工作，<br>在确定项目需求后，我使用「分层架构」设计了项目整体的架构实现方式，设计系统自上而下分为应用层、业务层、服务层、数据层；<br>在面临多种的认证方式时，选用「适配器模式」解决认证方式差异的问题；<br>在解决 UED 门户需要获取应用操作记录的问题上，使用「观察者模式」，将通过向应用获取转变为应用上送以优化操作记录获取的方式，解耦功能；<br>并且从部署视角的角色选型「虚拟化技术」以保证部署的效率和稳定；</p></blockquote><!-- no node --><span id="more"></span><h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>项目第一阶段已告一段，UED 门户项目，是我写 Node.js 开始第一次正式的、完整的参与到研发过程中的项目。</p><p>从技术选型、架构设计逐一入手，是一次较为全面完整的项目体验。</p><p>后续其他部门需要门户网站时，此项目即替换 Web 界面即可交付其他部门，已实现大体复用。</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>UED 部门需要建立自己的门户网站，网站需要将现有的 UED 模块服务（原型设计稿、前端组件、设计资源、文档等）集成为一体，以提供一个统一设计资源规范、资源共建、学习成长为一体的门户网站。</p><h2 id="项目要求"><a href="#项目要求" class="headerlink" title="项目要求"></a>项目要求</h2><ol><li>用户的认证方式需要支持公司认证和独立认证，并且认证的用户角色分为用户和应用即「服务模块」</li><li>门户需要收集接入应用中指定的操作记录或其他消息信息</li><li>门户计划在多套环境下进行独立部署</li></ol><h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><p>架构设计采用「分层架构」，将门户分别为应用层、业务层、服务层、数据层。</p><ul><li>应用层包含 UED 门户自身对用户的 Web 界面以及需要集成进来的应用如：原型设计平台、组件平台、资源平台和文档平台等</li><li>业务层包含 UED 门户提供的业务模块，包含：服务模块管理模块、用户角色权限管理模块、意见反馈模块和文章模块</li><li>服务层包含认证服务、日志服务、订阅服务和资源服务</li><li>数据层包含 PostgreSQL 、 Redis 、 MinIO</li></ul><h3 id="认证服务设计"><a href="#认证服务设计" class="headerlink" title="认证服务设计"></a>认证服务设计</h3><p>认证方式在设计之初存在两种，分别是接入公司的认证中心和实现自己独立的认证中心。可以见得，认证方式是在项目部署时就决定的内容，并且只存在认证服务内部的实现逻辑差异，所以需要保证认证服务对外一致即可。</p><p>所以在设计时，选择以自己独立的认证中心为接口标准进行设计，设计认证标准抽象，让两种方式可以按照抽象进行实现。</p><p>设计模式上，这里选择适配器（Adapter）设计模式，此模式的优点是：</p><ol><li>单一职责原则你可以将接口或数据转换代码从程序主要业务逻辑中分离。</li></ol><p>以保证每一种接入的认证方式都和程序主要业务逻辑无关，保证认证服务对外提供的接口和行为一致。</p><ol start="2"><li>开闭原则。只要客户端代码通过客户端接口与适配器进行交互，你就能在不修改现有客户端代码的情况下在程序中添加新类型的适配器。</li></ol><p>新增认证方式或则切换认证方式，都无需修改其他服务。</p><p>缺点是：</p><ol><li>代码整体复杂度增加，因为你需要新增一系列接口和类。有时直接更改服务类使其与其他代码兼容会更简单。</li></ol><p>所以在认证模式开发的阶段，使用适配器设计模式会使得代码较无设计模式的情况下，更为复杂一些。但是在程序运行阶段对认证方式切换则无需更新程序即可完成，同时新增认证方式也不会修改到程序的其他业务逻辑。</p><p>从程序质量属性的角度，保证了程序的可修改性。</p><h3 id="订阅服务设计"><a href="#订阅服务设计" class="headerlink" title="订阅服务设计"></a>订阅服务设计</h3><p>如果按照传统的方式去一一对接各个应用中的操作记录或者消息信息，会使得 UED 门户的程序代码与接入的应用功能强耦合，为了解决这个问题。</p><p>UED 门户提供订阅服务，采用观察者模式（Observer）来对接实现各个应用中的操作记录或者消息信息记录。</p><p>通过向应用获取转变为应用上送以优化操作记录获取的方式，约定 UED 门户所需的消息主题，各个应用将需要上送的消息按照对应的主题上送至 UED 门户，由 UED 门户向用户进行展示。</p><p>观察者模式的优点是：</p><ol><li>开闭原则。你无需修改发布者代码就能引入新的订阅者类</li></ol><p>即如果有新应用接入 UED 门户，保持同主题的推送消息，门户在无需进行修改的情况下，用户即可以获得新应用的消息内容。</p><p>缺点是：</p><ol><li>订阅者的通知顺序是随机的</li></ol><p>目前从需求来看，通知的顺序并没有很重要，但如果要实现顺序可以在通知内容中添加时间戳，以应用上送的时间戳为基准，以此来解决消息顺序的问题。</p><h3 id="部署视角"><a href="#部署视角" class="headerlink" title="部署视角"></a>部署视角</h3><p>从部署视角来看，项目需要在多套环境下进行部署，为了避免环境不一致引起的额外部署工作，所以选用虚拟化技术来完成项目部署。</p><p>目前公司存在办公网和内网环境，两套环境分别需要部署正式和测试环境，在技术选型上，我对 Docker 和 Kubernetes 进行了对比。</p><p>Docker 和 Kubernetes 都是虚拟化容器技术，以解决在任何计算机上部署你的项目，但是相比较而言。</p><p>Docker 属于容器运行时技术，更适合单机运行或对资源要求较小的应用，而 Kubernetes 则属于一种容器编排工具，更适合集群运行或更大规模的应用。</p><p>所以从部署视角来看，项目目前使用的用户对内，并且大部分都是研发侧的同学，同时在使用性能上并没有较高的并发需求，即最终选用 Docker 来完成部署工作更合适不过。</p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;我负责 UED 门户项目整体的架构设计及服务端研发工作，&lt;br&gt;在确定项目需求后，我使用「分层架构」设计了项目整体的架构实现方式，设计系统自上而下分为应用层、业务层、服务层、数据层；&lt;br&gt;在面临多种的认证方式时，选用「适配器模式」解决认证方式差异的问题；&lt;br&gt;在解决 UED 门户需要获取应用操作记录的问题上，使用「观察者模式」，将通过向应用获取转变为应用上送以优化操作记录获取的方式，解耦功能；&lt;br&gt;并且从部署视角的角色选型「虚拟化技术」以保证部署的效率和稳定；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Architecture" scheme="https://zongzi531.github.io/categories/Architecture/"/>
+    
+    
+    <category term="Architecture" scheme="https://zongzi531.github.io/tags/Architecture/"/>
+    
+    <category term="架构" scheme="https://zongzi531.github.io/tags/%E6%9E%B6%E6%9E%84/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Lowcode" scheme="https://zongzi531.github.io/categories/Lowcode/"/>
-    <category term="lowcode" scheme="https://zongzi531.github.io/tags/lowcode/"/>
-    <category term="低代码" scheme="https://zongzi531.github.io/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/"/>
-    <category term="grid" scheme="https://zongzi531.github.io/tags/grid/"/>
-    <category term="layout" scheme="https://zongzi531.github.io/tags/layout/"/>
-    <category term="rules" scheme="https://zongzi531.github.io/tags/rules/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>时隔一年，又重新参与低代码的建设，重新根据业务形态抽象网格布局逻辑。</p><p>那就来分享一下网格布局的实现逻辑。</p><h2 id="网格布局"><a href="#网格布局" class="headerlink" title="网格布局"></a>网格布局</h2><h3 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h3><p>设计将网格横向分为 <strong>12</strong> 列，并根据实际页面宽度（或者页面预设固定宽度）计算每列实际列宽，以作为 <code>w</code> 的单位映射值，即 <code>w</code> 最大为 <strong>12</strong>。</p><p>行高固定为 <strong>32</strong>px ，即 <code>h</code> 的单位映射值，不限制最大值。</p><p>格间间距为 <strong>16</strong>px 。</p><h3 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h3><h4 id="GridItem-网格项"><a href="#GridItem-网格项" class="headerlink" title="GridItem 网格项"></a><code>GridItem</code> 网格项</h4><p>此组件会体现在 <code>GridLayout</code> 下，会对业务组件或基础组件等进行包裹，以保证 <code>GridLayout</code> 在渲染时，对 <code>children</code> 各组件进行包裹。</p><p>并且，此组件自身无 <code>Schema</code> 配置信息，仅从被包裹 <code>Schema</code> 中获取 <code>size</code> 以呈现组件具体大小（实际大小），或者映射大小（网格单位，通过计算呈现实际大小）。</p><h4 id="GridLayout-网格容器"><a href="#GridLayout-网格容器" class="headerlink" title="GridLayout 网格容器"></a><code>GridLayout</code> 网格容器</h4><p>此组件为特殊内置组件（与业务组件或基础组件一致），具备 <code>Schema</code> 配置信息。</p><table><thead><tr><th>属性</th><th>备注</th><th>类型</th></tr></thead><tbody><tr><td><code>layouts</code></td><td><code>children</code> 中组件的位置信息</td><td><code>Array&lt;LayoutItem&gt;</code></td></tr></tbody></table><h6 id="相关类型"><a href="#相关类型" class="headerlink" title="相关类型"></a>相关类型</h6><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 设计参考 react-grid-layout 配置</span><span class="token keyword">interface</span> <span class="token class-name">LayoutItem</span> <span class="token punctuation">&#123;</span>  id<span class="token operator">:</span> <span class="token builtin">string</span>  x<span class="token operator">:</span> <span class="token builtin">number</span>  y<span class="token operator">:</span> <span class="token builtin">number</span>  w<span class="token operator">:</span> <span class="token builtin">number</span>  h<span class="token operator">:</span> <span class="token builtin">number</span>  gap<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token string">'top'</span> <span class="token operator">|</span> <span class="token string">'right'</span> <span class="token operator">|</span> <span class="token string">'bottom'</span> <span class="token operator">|</span> <span class="token string">'left'</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token operator">></span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="网格交互"><a href="#网格交互" class="headerlink" title="网格交互"></a>网格交互</h3><p>网格交互设计分为：插入、移动、大小调整、删除</p><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>获取环境信息</p><ul><li>是否选中组件</li><li><code>LayoutItem</code> 默认 <code>w</code> 为 6 ， <code>h</code> 为 6</li></ul><h5 id="点击插入"><a href="#点击插入" class="headerlink" title="点击插入"></a>点击插入</h5><ol><li>若未选中组件，则默认插入根 <code>GridLayout</code></li><li>更新 <code>GridLayout</code> 的 <code>layouts</code> 下 <code>LayoutItem</code> 数据至尾部（生成默认 <code>w</code> 和 <code>h</code> ）</li><li>布局计算</li><li>若选中组件，获得选中组件信息</li></ol><h6 id="选中-GridLayout"><a href="#选中-GridLayout" class="headerlink" title="选中 GridLayout"></a>选中 <code>GridLayout</code></h6><ol start="5"><li>更新 <code>GridLayout</code> 的 <code>layouts</code> 下 <code>LayoutItem</code> 数据至尾部（生成默认 <code>w</code> 和 <code>h</code> ）</li><li>布局计算</li></ol><h6 id="选中业务组件或基础组件"><a href="#选中业务组件或基础组件" class="headerlink" title="选中业务组件或基础组件"></a>选中业务组件或基础组件</h6><ol start="5"><li>获得选中组件 <code>parent</code></li><li>若是 <code>GridLayout</code> ，则更新 <code>GridLayout</code> 的 <code>layouts</code> 下 <code>LayoutItem</code> 数据至选中组件之后（生成默认 <code>w</code> 和 <code>h</code> ）</li><li>布局计算</li><li>若不是则默认插入，不执行网格布局逻辑</li></ol><h6 id="选中容器组件"><a href="#选中容器组件" class="headerlink" title="选中容器组件"></a>选中容器组件</h6><blockquote><p>容器组件为特殊组件，即业务组件或基础组件支持 <code>children</code> 渲染</p></blockquote><ol start="5"><li>默认插入，不执行网格布局逻辑</li></ol><h5 id="移动插入"><a href="#移动插入" class="headerlink" title="移动插入"></a>移动插入</h5><ol><li>获得鼠标落点（鼠标抬起位置）</li><li>获得落点组件信息</li><li>逻辑同「点击插入」时选中组件情况</li></ol><h4 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h4><ol><li>获得鼠标落点（鼠标抬起位置）</li><li>获得落点组件信息</li></ol><h6 id="落点-GridLayout"><a href="#落点-GridLayout" class="headerlink" title="落点 GridLayout"></a>落点 <code>GridLayout</code></h6><ol start="3"><li>检查落点 <code>GridLayout</code> 是否与当前移动组件的 <code>parent</code> 一致</li><li>若一致则更新对应 <code>layouts</code> 下 <code>LayoutItem</code> 数据至尾部</li><li>布局计算</li><li>若不一致则执行删除和插入（采用当前 <code>w</code> 和 <code>h</code> ）操作</li></ol><h6 id="落点业务组件或基础组件"><a href="#落点业务组件或基础组件" class="headerlink" title="落点业务组件或基础组件"></a>落点业务组件或基础组件</h6><ol start="3"><li>获得落点组件 <code>parent</code> 是否与当前移动组件的 <code>parent</code> 一致</li><li>若一致则交换对应 <code>layouts</code> 下 <code>LayoutItem</code> 数据（除了交换，也可以是插入，具体根据自身业务决定）</li><li>布局计算</li><li>若不一致则执行删除和插入（采用当前 <code>w</code> 和 <code>h</code> ）操作</li></ol><h6 id="落点容器组件"><a href="#落点容器组件" class="headerlink" title="落点容器组件"></a>落点容器组件</h6><blockquote><p>容器组件为特殊组件，即业务组件或基础组件支持 <code>children</code> 渲染</p></blockquote><ol start="3"><li>执行删除和插入（不执行网格布局逻辑）操作</li><li>布局计算</li></ol><h4 id="大小调整"><a href="#大小调整" class="headerlink" title="大小调整"></a>大小调整</h4><ol><li>获得鼠标 <code>x</code> 和 <code>y</code> 的偏移量（鼠标按下到鼠标抬起后获得）</li><li>根据当前组件 <code>Schema</code> 大小累加偏移量（四舍五入）计算组件新大小，即 <code>w</code> 和 <code>h</code> 的值</li><li>更新对应 <code>layouts</code> 下 <code>LayoutItem</code> 数据</li><li>布局计算</li></ol><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ol><li>移除组件 <code>Schema</code></li><li>移除对应 <code>layouts</code> 下 <code>LayoutItem</code> （若存在）</li><li>布局计算（若存在）</li></ol><h3 id="布局计算"><a href="#布局计算" class="headerlink" title="布局计算"></a>布局计算</h3><ol><li>获得 <code>layouts</code> 信息</li><li>依次基于 <code>w</code> 和 <code>h</code> 的值计算 <code>x</code> 和 <code>y</code> 位置</li><li>并且根据当前 <code>w</code> 、 <code>h</code> 、 <code>x</code> 和 <code>y</code> 的关系计算格间间距值</li><li>更新 <code>layouts</code> 信息（格间间距在渲染、位置阴影、选中框时进行累加，不影响原值）</li><li>渲染更新</li></ol><p>算法根据自身业务决定，可以使用二维数组进行占位计算，或是使用自然堆叠计算方式，或是其他。</p><table><thead><tr><th>算法 A</th><th>算法 B</th></tr></thead><tbody><tr><td><img src="/2024/10/01/lowcode-grid-layout-rules/algorithm-a.png" alt="algorithm-a"></td><td><img src="/2024/10/01/lowcode-grid-layout-rules/algorithm-b.png" alt="algorithm-b"></td></tr></tbody></table><h4 id="算法-A"><a href="#算法-A" class="headerlink" title="算法 A"></a>算法 A</h4><blockquote><p>依次遍历 <code>layouts</code> 以返回新的 <code>x</code> 和 <code>y</code> 位置</p></blockquote><ol><li>初始化锚点 <code>x</code> 和 <code>y</code> 位置 <code>(0, 0)</code> ，行内标和行标 <code>(0, 0)</code> ，缓存最大 <code>y</code> 为 0</li><li>依次遍历，记录前一次的缓存最大 <code>y</code> 位置（用于计算格间间距）</li><li>比较 <code>LayoutItem</code> 的 <code>x</code> 与 <code>w</code> 的和是否大于 <strong>12</strong></li><li>若小于等于，则更新当前 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 位置</li><li>同时更新锚点 <code>x</code> 的位置为当前 <code>LayoutItem</code> 的 <code>x</code> 与 <code>w</code> 的和</li><li>根据当前 <code>LayoutItem</code> 的 <code>y</code> 与 <code>h</code> 的和，缓存最大 <code>y</code> 位置（取最大值）</li><li>若大于，则表示溢出，重置锚点 <code>x</code> 为 0 ，将锚点 <code>y</code> 设置为缓存最大 <code>y</code></li><li>更新当前 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 位置</li><li>重复 5, 6</li><li>每计算出 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 位置后，比较前一次的缓存最大 <code>y</code> 位置和缓存最大 <code>y</code> 位置</li><li>若前一次的缓存最大 <code>y</code> 位置小于缓存最大 <code>y</code> 位置（说明换行过），增加行标，重置行内标为 0</li><li>反之则增加行内标</li><li>将当前行内标和行标与 <code>LayoutItem</code> 对应关联</li></ol><p>至此，已实现更新 <code>x</code> 和 <code>y</code> 位置，接下来结合行内标和行标信息来计算 <code>LayoutItem</code> 的格间间距。</p><blockquote><p>倒序遍历行内标和行标</p></blockquote><ol><li>设置第一次右间距存在标识为否，前一次行标为行内标和行标信息的最后一个值</li><li>倒序遍历，获得对应的行内标和行标</li><li>初始化 <code>LayoutItem</code> 对应的格间间距，左右上为 0 ，下为 1&#x2F;2 间距 8px</li><li>若前一次行标与当前行标不一致（意味着行变更），则重置第一次右间距存在标识为否</li><li>更新前一次行标为当前行标</li><li>若当前行标大于 1 ，则表示非第一行，设置格间间距上为 8px</li><li>若第一次右间距存在标识为是，或者当前对应的 <code>LayoutItem</code> 的 <code>x</code> 与 <code>w</code> 的和小于 <strong>12</strong> ，则设置格间间距右为 8px</li><li>若当前行内标大于 0 ，则设置格间间距左为 8px ，并将第一次右间距存在标识设置为是</li><li>更新格间间距至对应的 <code>LayoutItem</code></li></ol><h4 id="算法-B"><a href="#算法-B" class="headerlink" title="算法 B"></a>算法 B</h4><blockquote><p>依次遍历 <code>layouts</code> 以返回新的 <code>x</code> 和 <code>y</code> 位置</p></blockquote><ol><li>初始化空二维数组（记做标记空间），用于标记占位情况；<code>y</code> 标识用于记录需要延展的行数，初始为 0 ，以及上一次的 <code>y</code> 标识，同初始为 0</li><li>依次遍历，比较上一次的 <code>y</code> 标识与 <code>y</code> 标识加 <code>LayoutItem</code> 的 <code>h</code> ，取最大值更新上一次的 <code>y</code> 标识</li><li>使用上一次的 <code>y</code> 标识与标记空间长度比较，若大于 0 ，则批量生成行 <code>new Array(12).fill(null)</code></li><li>从 <code>(0, 0)</code> 标记位进行遍历（可优化至最左上角的一个 <code>null</code> 标记位），寻找 <code>null</code> 标记位</li><li>当找到 <code>null</code> 标记位后，以此标记位为起点，检查 <code>LayoutItem</code> 的 <code>w</code> 和 <code>h</code> 占位情况（以标记位为起点向右下检查 <code>LayoutItem</code> 的 <code>w</code> 和 <code>h</code> 长度，不能越界）</li><li>若均为 <code>null</code> 则更新标记空间，并更新 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 为当前标记位起点，同时更新 <code>y</code> 标识为当前标记位起点 <code>y</code> 与 <code>LayoutItem</code> 的 <code>h</code> 的和，中断此次标记位遍历，进入下一个 <code>LayoutItem</code> 遍历</li><li>反之寻找下一个 <code>null</code> 标记位起点</li></ol><p>至此，已实现更新 <code>x</code> 和 <code>y</code> 位置，接下来结合标记空间来计算 <code>LayoutItem</code> 的格间间距。</p><ol><li>遍历标记空间 4 条边，记录占用 <code>LayoutItem</code> 信息</li><li>依次遍历 <code>LayoutItem</code> 并初始化对应的格间间距，左右上下为 8px</li><li>检查占用信息，对 4 条边存在占用的方向格间间距设置为 0</li><li>更新格间间距至对应的 <code>LayoutItem</code></li></ol><h3 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h3><ol><li>组件选中框跟随组件一起移动</li><li>计算组件预计落点位置阴影</li><li>动态替换</li></ol>]]>
-    </content>
-    <id>https://zongzi531.github.io/2024/10/01/lowcode-grid-layout-rules/</id>
-    <link href="https://zongzi531.github.io/2024/10/01/lowcode-grid-layout-rules/"/>
-    <published>2024-10-01T08:33:20.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
     <title>低代码网格布局</title>
+    <link href="https://zongzi531.github.io/2024/10/01/lowcode-grid-layout-rules/"/>
+    <id>https://zongzi531.github.io/2024/10/01/lowcode-grid-layout-rules/</id>
+    <published>2024-10-01T08:33:20.000Z</published>
     <updated>2024-10-01T08:33:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>时隔一年，又重新参与低代码的建设，重新根据业务形态抽象网格布局逻辑。</p><p>那就来分享一下网格布局的实现逻辑。</p><h2 id="网格布局"><a href="#网格布局" class="headerlink" title="网格布局"></a>网格布局</h2><h3 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h3><p>设计将网格横向分为 <strong>12</strong> 列，并根据实际页面宽度（或者页面预设固定宽度）计算每列实际列宽，以作为 <code>w</code> 的单位映射值，即 <code>w</code> 最大为 <strong>12</strong>。</p><p>行高固定为 <strong>32</strong>px ，即 <code>h</code> 的单位映射值，不限制最大值。</p><p>格间间距为 <strong>16</strong>px 。</p><h3 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h3><h4 id="GridItem-网格项"><a href="#GridItem-网格项" class="headerlink" title="GridItem 网格项"></a><code>GridItem</code> 网格项</h4><p>此组件会体现在 <code>GridLayout</code> 下，会对业务组件或基础组件等进行包裹，以保证 <code>GridLayout</code> 在渲染时，对 <code>children</code> 各组件进行包裹。</p><p>并且，此组件自身无 <code>Schema</code> 配置信息，仅从被包裹 <code>Schema</code> 中获取 <code>size</code> 以呈现组件具体大小（实际大小），或者映射大小（网格单位，通过计算呈现实际大小）。</p><h4 id="GridLayout-网格容器"><a href="#GridLayout-网格容器" class="headerlink" title="GridLayout 网格容器"></a><code>GridLayout</code> 网格容器</h4><p>此组件为特殊内置组件（与业务组件或基础组件一致），具备 <code>Schema</code> 配置信息。</p><table><thead><tr><th>属性</th><th>备注</th><th>类型</th></tr></thead><tbody><tr><td><code>layouts</code></td><td><code>children</code> 中组件的位置信息</td><td><code>Array&lt;LayoutItem&gt;</code></td></tr></tbody></table><h6 id="相关类型"><a href="#相关类型" class="headerlink" title="相关类型"></a>相关类型</h6><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 设计参考 react-grid-layout 配置</span><span class="token keyword">interface</span> <span class="token class-name">LayoutItem</span> <span class="token punctuation">&#123;</span>  id<span class="token operator">:</span> <span class="token builtin">string</span>  x<span class="token operator">:</span> <span class="token builtin">number</span>  y<span class="token operator">:</span> <span class="token builtin">number</span>  w<span class="token operator">:</span> <span class="token builtin">number</span>  h<span class="token operator">:</span> <span class="token builtin">number</span>  gap<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token string">'top'</span> <span class="token operator">|</span> <span class="token string">'right'</span> <span class="token operator">|</span> <span class="token string">'bottom'</span> <span class="token operator">|</span> <span class="token string">'left'</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token operator">></span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="网格交互"><a href="#网格交互" class="headerlink" title="网格交互"></a>网格交互</h3><p>网格交互设计分为：插入、移动、大小调整、删除</p><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>获取环境信息</p><ul><li>是否选中组件</li><li><code>LayoutItem</code> 默认 <code>w</code> 为 6 ， <code>h</code> 为 6</li></ul><h5 id="点击插入"><a href="#点击插入" class="headerlink" title="点击插入"></a>点击插入</h5><ol><li>若未选中组件，则默认插入根 <code>GridLayout</code></li><li>更新 <code>GridLayout</code> 的 <code>layouts</code> 下 <code>LayoutItem</code> 数据至尾部（生成默认 <code>w</code> 和 <code>h</code> ）</li><li>布局计算</li><li>若选中组件，获得选中组件信息</li></ol><h6 id="选中-GridLayout"><a href="#选中-GridLayout" class="headerlink" title="选中 GridLayout"></a>选中 <code>GridLayout</code></h6><ol start="5"><li>更新 <code>GridLayout</code> 的 <code>layouts</code> 下 <code>LayoutItem</code> 数据至尾部（生成默认 <code>w</code> 和 <code>h</code> ）</li><li>布局计算</li></ol><h6 id="选中业务组件或基础组件"><a href="#选中业务组件或基础组件" class="headerlink" title="选中业务组件或基础组件"></a>选中业务组件或基础组件</h6><ol start="5"><li>获得选中组件 <code>parent</code></li><li>若是 <code>GridLayout</code> ，则更新 <code>GridLayout</code> 的 <code>layouts</code> 下 <code>LayoutItem</code> 数据至选中组件之后（生成默认 <code>w</code> 和 <code>h</code> ）</li><li>布局计算</li><li>若不是则默认插入，不执行网格布局逻辑</li></ol><h6 id="选中容器组件"><a href="#选中容器组件" class="headerlink" title="选中容器组件"></a>选中容器组件</h6><blockquote><p>容器组件为特殊组件，即业务组件或基础组件支持 <code>children</code> 渲染</p></blockquote><ol start="5"><li>默认插入，不执行网格布局逻辑</li></ol><h5 id="移动插入"><a href="#移动插入" class="headerlink" title="移动插入"></a>移动插入</h5><ol><li>获得鼠标落点（鼠标抬起位置）</li><li>获得落点组件信息</li><li>逻辑同「点击插入」时选中组件情况</li></ol><h4 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h4><ol><li>获得鼠标落点（鼠标抬起位置）</li><li>获得落点组件信息</li></ol><h6 id="落点-GridLayout"><a href="#落点-GridLayout" class="headerlink" title="落点 GridLayout"></a>落点 <code>GridLayout</code></h6><ol start="3"><li>检查落点 <code>GridLayout</code> 是否与当前移动组件的 <code>parent</code> 一致</li><li>若一致则更新对应 <code>layouts</code> 下 <code>LayoutItem</code> 数据至尾部</li><li>布局计算</li><li>若不一致则执行删除和插入（采用当前 <code>w</code> 和 <code>h</code> ）操作</li></ol><h6 id="落点业务组件或基础组件"><a href="#落点业务组件或基础组件" class="headerlink" title="落点业务组件或基础组件"></a>落点业务组件或基础组件</h6><ol start="3"><li>获得落点组件 <code>parent</code> 是否与当前移动组件的 <code>parent</code> 一致</li><li>若一致则交换对应 <code>layouts</code> 下 <code>LayoutItem</code> 数据（除了交换，也可以是插入，具体根据自身业务决定）</li><li>布局计算</li><li>若不一致则执行删除和插入（采用当前 <code>w</code> 和 <code>h</code> ）操作</li></ol><h6 id="落点容器组件"><a href="#落点容器组件" class="headerlink" title="落点容器组件"></a>落点容器组件</h6><blockquote><p>容器组件为特殊组件，即业务组件或基础组件支持 <code>children</code> 渲染</p></blockquote><ol start="3"><li>执行删除和插入（不执行网格布局逻辑）操作</li><li>布局计算</li></ol><h4 id="大小调整"><a href="#大小调整" class="headerlink" title="大小调整"></a>大小调整</h4><ol><li>获得鼠标 <code>x</code> 和 <code>y</code> 的偏移量（鼠标按下到鼠标抬起后获得）</li><li>根据当前组件 <code>Schema</code> 大小累加偏移量（四舍五入）计算组件新大小，即 <code>w</code> 和 <code>h</code> 的值</li><li>更新对应 <code>layouts</code> 下 <code>LayoutItem</code> 数据</li><li>布局计算</li></ol><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ol><li>移除组件 <code>Schema</code></li><li>移除对应 <code>layouts</code> 下 <code>LayoutItem</code> （若存在）</li><li>布局计算（若存在）</li></ol><h3 id="布局计算"><a href="#布局计算" class="headerlink" title="布局计算"></a>布局计算</h3><ol><li>获得 <code>layouts</code> 信息</li><li>依次基于 <code>w</code> 和 <code>h</code> 的值计算 <code>x</code> 和 <code>y</code> 位置</li><li>并且根据当前 <code>w</code> 、 <code>h</code> 、 <code>x</code> 和 <code>y</code> 的关系计算格间间距值</li><li>更新 <code>layouts</code> 信息（格间间距在渲染、位置阴影、选中框时进行累加，不影响原值）</li><li>渲染更新</li></ol><p>算法根据自身业务决定，可以使用二维数组进行占位计算，或是使用自然堆叠计算方式，或是其他。</p><table><thead><tr><th>算法 A</th><th>算法 B</th></tr></thead><tbody><tr><td><img src="/2024/10/01/lowcode-grid-layout-rules/algorithm-a.png" alt="algorithm-a"></td><td><img src="/2024/10/01/lowcode-grid-layout-rules/algorithm-b.png" alt="algorithm-b"></td></tr></tbody></table><h4 id="算法-A"><a href="#算法-A" class="headerlink" title="算法 A"></a>算法 A</h4><blockquote><p>依次遍历 <code>layouts</code> 以返回新的 <code>x</code> 和 <code>y</code> 位置</p></blockquote><ol><li>初始化锚点 <code>x</code> 和 <code>y</code> 位置 <code>(0, 0)</code> ，行内标和行标 <code>(0, 0)</code> ，缓存最大 <code>y</code> 为 0</li><li>依次遍历，记录前一次的缓存最大 <code>y</code> 位置（用于计算格间间距）</li><li>比较 <code>LayoutItem</code> 的 <code>x</code> 与 <code>w</code> 的和是否大于 <strong>12</strong></li><li>若小于等于，则更新当前 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 位置</li><li>同时更新锚点 <code>x</code> 的位置为当前 <code>LayoutItem</code> 的 <code>x</code> 与 <code>w</code> 的和</li><li>根据当前 <code>LayoutItem</code> 的 <code>y</code> 与 <code>h</code> 的和，缓存最大 <code>y</code> 位置（取最大值）</li><li>若大于，则表示溢出，重置锚点 <code>x</code> 为 0 ，将锚点 <code>y</code> 设置为缓存最大 <code>y</code></li><li>更新当前 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 位置</li><li>重复 5, 6</li><li>每计算出 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 位置后，比较前一次的缓存最大 <code>y</code> 位置和缓存最大 <code>y</code> 位置</li><li>若前一次的缓存最大 <code>y</code> 位置小于缓存最大 <code>y</code> 位置（说明换行过），增加行标，重置行内标为 0</li><li>反之则增加行内标</li><li>将当前行内标和行标与 <code>LayoutItem</code> 对应关联</li></ol><p>至此，已实现更新 <code>x</code> 和 <code>y</code> 位置，接下来结合行内标和行标信息来计算 <code>LayoutItem</code> 的格间间距。</p><blockquote><p>倒序遍历行内标和行标</p></blockquote><ol><li>设置第一次右间距存在标识为否，前一次行标为行内标和行标信息的最后一个值</li><li>倒序遍历，获得对应的行内标和行标</li><li>初始化 <code>LayoutItem</code> 对应的格间间距，左右上为 0 ，下为 1&#x2F;2 间距 8px</li><li>若前一次行标与当前行标不一致（意味着行变更），则重置第一次右间距存在标识为否</li><li>更新前一次行标为当前行标</li><li>若当前行标大于 1 ，则表示非第一行，设置格间间距上为 8px</li><li>若第一次右间距存在标识为是，或者当前对应的 <code>LayoutItem</code> 的 <code>x</code> 与 <code>w</code> 的和小于 <strong>12</strong> ，则设置格间间距右为 8px</li><li>若当前行内标大于 0 ，则设置格间间距左为 8px ，并将第一次右间距存在标识设置为是</li><li>更新格间间距至对应的 <code>LayoutItem</code></li></ol><h4 id="算法-B"><a href="#算法-B" class="headerlink" title="算法 B"></a>算法 B</h4><blockquote><p>依次遍历 <code>layouts</code> 以返回新的 <code>x</code> 和 <code>y</code> 位置</p></blockquote><ol><li>初始化空二维数组（记做标记空间），用于标记占位情况；<code>y</code> 标识用于记录需要延展的行数，初始为 0 ，以及上一次的 <code>y</code> 标识，同初始为 0</li><li>依次遍历，比较上一次的 <code>y</code> 标识与 <code>y</code> 标识加 <code>LayoutItem</code> 的 <code>h</code> ，取最大值更新上一次的 <code>y</code> 标识</li><li>使用上一次的 <code>y</code> 标识与标记空间长度比较，若大于 0 ，则批量生成行 <code>new Array(12).fill(null)</code></li><li>从 <code>(0, 0)</code> 标记位进行遍历（可优化至最左上角的一个 <code>null</code> 标记位），寻找 <code>null</code> 标记位</li><li>当找到 <code>null</code> 标记位后，以此标记位为起点，检查 <code>LayoutItem</code> 的 <code>w</code> 和 <code>h</code> 占位情况（以标记位为起点向右下检查 <code>LayoutItem</code> 的 <code>w</code> 和 <code>h</code> 长度，不能越界）</li><li>若均为 <code>null</code> 则更新标记空间，并更新 <code>LayoutItem</code> 的 <code>x</code> 和 <code>y</code> 为当前标记位起点，同时更新 <code>y</code> 标识为当前标记位起点 <code>y</code> 与 <code>LayoutItem</code> 的 <code>h</code> 的和，中断此次标记位遍历，进入下一个 <code>LayoutItem</code> 遍历</li><li>反之寻找下一个 <code>null</code> 标记位起点</li></ol><p>至此，已实现更新 <code>x</code> 和 <code>y</code> 位置，接下来结合标记空间来计算 <code>LayoutItem</code> 的格间间距。</p><ol><li>遍历标记空间 4 条边，记录占用 <code>LayoutItem</code> 信息</li><li>依次遍历 <code>LayoutItem</code> 并初始化对应的格间间距，左右上下为 8px</li><li>检查占用信息，对 4 条边存在占用的方向格间间距设置为 0</li><li>更新格间间距至对应的 <code>LayoutItem</code></li></ol><h3 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h3><ol><li>组件选中框跟随组件一起移动</li><li>计算组件预计落点位置阴影</li><li>动态替换</li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
+    <category term="Lowcode" scheme="https://zongzi531.github.io/categories/Lowcode/"/>
+    
+    
+    <category term="lowcode" scheme="https://zongzi531.github.io/tags/lowcode/"/>
+    
+    <category term="低代码" scheme="https://zongzi531.github.io/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/"/>
+    
+    <category term="grid" scheme="https://zongzi531.github.io/tags/grid/"/>
+    
+    <category term="layout" scheme="https://zongzi531.github.io/tags/layout/"/>
+    
+    <category term="rules" scheme="https://zongzi531.github.io/tags/rules/"/>
+    
   </entry>
+  
   <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <category term="RAG" scheme="https://zongzi531.github.io/tags/RAG/"/>
-    <category term="GraphRAG" scheme="https://zongzi531.github.io/tags/GraphRAG/"/>
-    <category term="Fine-tuning" scheme="https://zongzi531.github.io/tags/Fine-tuning/"/>
-    <category term="Ragas" scheme="https://zongzi531.github.io/tags/Ragas/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>在对 RAG 有了简单认识之后，基于一些业务的场景，对 RAG 生态进行了一些探索。</p><p>网上有一张 RAG 生态的概括图，我认为不错。</p><p><img src="/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/rag-eco.png" alt="rag-ecosystem"></p><h2 id="图谱"><a href="#图谱" class="headerlink" title="图谱"></a>图谱</h2><p>在 RAG 工作流中，考虑通过图谱的概念，生成更全面的一些信息以提升问答的功能。</p><p>尝试微软开源的 GraphRAG 对文本（大文本、多文本）提取实体、关系，以在问答环节可以尝试一些逻辑或者总结性的路由流程。</p><p>图谱相较于切片，具有更强的逻辑性，并且信息链更为清晰，而切片却有冗余以及无法多内容关联的问题。</p><p>当然了，也可以使用支持大 tokens 的 LLM 进行总结或其他动作，只不过这样会重复的消耗大 tokens ，从资源层面是浪费的。</p><p>以下是 GraphRAG 索引步骤：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">⠋ GraphRAG Indexer ├── Loading Input <span class="token punctuation">(</span>text<span class="token punctuation">)</span>├── create_base_text_units├── create_base_extracted_entities├── create_final_covariates├── create_summarized_entities├── join_text_units_to_covariate_ids├── create_base_entity_graph├── create_final_entities├── create_final_nodes├── create_final_communities├── join_text_units_to_entity_ids├── create_final_relationships├── join_text_units_to_relationship_ids├── create_final_community_reports├── create_final_text_units├── create_base_documents└── create_final_documents🚀 All workflows completed successfully.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>目前， GraphRAG 对不同类型的文档进行索引时，需要人为为工具提供实体类型（考虑是不是能由 LLM 代替），以在索引时能够更好的分析提取实体和其之间的关系。</p><p>所以如果需要接入到现有的 RAG 流程，需要 Python 编程调整各节点逻辑，以适配 RAG 流程。</p><p>视觉效果：</p><p><img src="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/images/graph_example.png?raw=true" alt="graph_example"></p><blockquote><p>详细可<a href="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/README.md">查看</a></p></blockquote><h2 id="微调-Embeddings-模型尝试"><a href="#微调-Embeddings-模型尝试" class="headerlink" title="微调 Embeddings 模型尝试"></a>微调 Embeddings 模型尝试</h2><p>使用 <code>uniem</code> 工具对模型进行微调，分别尝试过对 <code>small</code> 、 <code>base</code> 、 <code>large</code> 进行不同的微调对比，可能是数据集选用的关系，效果并不是特别理想，并且在大数据集的微调场景下，微调时间较长，成本较大，所以暂缓。</p><p>最后直接选用 <code>bge-large-zh-v1.5</code> 为本地 Embeddings 模型。</p><h2 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h2><p>使用 Ragas 工具进行 RAG 流程评测。在使用此工具前，采用人工测试集进行评测，并且评测维度较为主观。</p><p>需要注意 ⚠️ ：在测试集生成和评测阶段，会大量消耗 LLM tokens ，请合理选择需要评测指标。</p><h3 id="评测指标"><a href="#评测指标" class="headerlink" title="评测指标"></a>评测指标</h3><table><thead><tr><th>指标名称</th><th>范围</th><th>含义</th></tr></thead><tbody><tr><td><code>context_precision</code> 上下文精度</td><td>(0,1)</td><td>值越大，表示 <code>ground_truth</code> 与 <code>contexts</code> 越相关。</td></tr><tr><td><code>faithfulness</code> 忠诚度&#x2F;可信度</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>contexts</code> 计算得出，值越大，表示 <code>answer</code> 更可信。</td></tr><tr><td><code>answer_relevancy</code> 答案相关性</td><td>(-1,1)</td><td>由 <code>answer</code> 、 <code>contexts</code> 与 <code>question</code> 计算得出，值越大，表示 <code>answer</code> 的相关性较好。</td></tr><tr><td><code>context_recall</code> 上下文召回</td><td>(0,1)</td><td>通过对 <code>ground_truth</code> 进行分解以验证是否可以归因于 <code>contexts</code> ，值越大，表示性能越好（避免反复尝试）。</td></tr><tr><td><code>context_entity_recall</code> 上下文实体召回</td><td>(0,1)</td><td>分别计算 <code>ground_truth</code> 和 <code>contexts</code> 的实体，使用其实体进行召回，值越大，表示性能越好（避免反复尝试）。</td></tr><tr><td><code>answer_similarity</code> 答案语义相似度</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 更相似。</td></tr><tr><td><code>answer_correctness</code> 答案正确性</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 一致性越高。</td></tr><tr><td><code>AspectCritique</code> 方面批评</td><td>-</td><td>用于评测 <code>answer</code> 的内容是否包含评测「方面」的内容，如有害性、恶意性、连贯性、正确性、简洁性</td></tr><tr><td><code>summarization_score</code> 总结分数</td><td>-</td><td>-</td></tr></tbody></table><hr><p>所以在不考虑 LLM tokens 的情况下，可以利用自动化评测工具来优化现在有的 RAG 应用，不限于 RAG 流程、Prompt 工程等，相较于人工测试集，可以说效率大大提升。</p><blockquote><p>详细可<a href="https://github.com/zongzi531/modular-rag/tree/main/evaluation/ragas">查看</a></p></blockquote>]]>
-    </content>
-    <id>https://zongzi531.github.io/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/</id>
-    <link href="https://zongzi531.github.io/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/"/>
-    <published>2024-09-01T09:19:39.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
     <title>RAG 生态探索</title>
+    <link href="https://zongzi531.github.io/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/"/>
+    <id>https://zongzi531.github.io/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/</id>
+    <published>2024-09-01T09:19:39.000Z</published>
     <updated>2024-09-01T09:19:39.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
+    
+    <content type="html"><![CDATA[<!-- no node --><span id="more"></span><p>在对 RAG 有了简单认识之后，基于一些业务的场景，对 RAG 生态进行了一些探索。</p><p>网上有一张 RAG 生态的概括图，我认为不错。</p><p><img src="/2024/09/01/rag%E7%94%9F%E6%80%81%E6%8E%A2%E7%B4%A2/rag-eco.png" alt="rag-ecosystem"></p><h2 id="图谱"><a href="#图谱" class="headerlink" title="图谱"></a>图谱</h2><p>在 RAG 工作流中，考虑通过图谱的概念，生成更全面的一些信息以提升问答的功能。</p><p>尝试微软开源的 GraphRAG 对文本（大文本、多文本）提取实体、关系，以在问答环节可以尝试一些逻辑或者总结性的路由流程。</p><p>图谱相较于切片，具有更强的逻辑性，并且信息链更为清晰，而切片却有冗余以及无法多内容关联的问题。</p><p>当然了，也可以使用支持大 tokens 的 LLM 进行总结或其他动作，只不过这样会重复的消耗大 tokens ，从资源层面是浪费的。</p><p>以下是 GraphRAG 索引步骤：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">⠋ GraphRAG Indexer ├── Loading Input <span class="token punctuation">(</span>text<span class="token punctuation">)</span>├── create_base_text_units├── create_base_extracted_entities├── create_final_covariates├── create_summarized_entities├── join_text_units_to_covariate_ids├── create_base_entity_graph├── create_final_entities├── create_final_nodes├── create_final_communities├── join_text_units_to_entity_ids├── create_final_relationships├── join_text_units_to_relationship_ids├── create_final_community_reports├── create_final_text_units├── create_base_documents└── create_final_documents🚀 All workflows completed successfully.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>目前， GraphRAG 对不同类型的文档进行索引时，需要人为为工具提供实体类型（考虑是不是能由 LLM 代替），以在索引时能够更好的分析提取实体和其之间的关系。</p><p>所以如果需要接入到现有的 RAG 流程，需要 Python 编程调整各节点逻辑，以适配 RAG 流程。</p><p>视觉效果：</p><p><img src="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/images/graph_example.png?raw=true" alt="graph_example"></p><blockquote><p>详细可<a href="https://github.com/zongzi531/modular-rag/blob/main/index/graphrag/README.md">查看</a></p></blockquote><h2 id="微调-Embeddings-模型尝试"><a href="#微调-Embeddings-模型尝试" class="headerlink" title="微调 Embeddings 模型尝试"></a>微调 Embeddings 模型尝试</h2><p>使用 <code>uniem</code> 工具对模型进行微调，分别尝试过对 <code>small</code> 、 <code>base</code> 、 <code>large</code> 进行不同的微调对比，可能是数据集选用的关系，效果并不是特别理想，并且在大数据集的微调场景下，微调时间较长，成本较大，所以暂缓。</p><p>最后直接选用 <code>bge-large-zh-v1.5</code> 为本地 Embeddings 模型。</p><h2 id="评测"><a href="#评测" class="headerlink" title="评测"></a>评测</h2><p>使用 Ragas 工具进行 RAG 流程评测。在使用此工具前，采用人工测试集进行评测，并且评测维度较为主观。</p><p>需要注意 ⚠️ ：在测试集生成和评测阶段，会大量消耗 LLM tokens ，请合理选择需要评测指标。</p><h3 id="评测指标"><a href="#评测指标" class="headerlink" title="评测指标"></a>评测指标</h3><table><thead><tr><th>指标名称</th><th>范围</th><th>含义</th></tr></thead><tbody><tr><td><code>context_precision</code> 上下文精度</td><td>(0,1)</td><td>值越大，表示 <code>ground_truth</code> 与 <code>contexts</code> 越相关。</td></tr><tr><td><code>faithfulness</code> 忠诚度&#x2F;可信度</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>contexts</code> 计算得出，值越大，表示 <code>answer</code> 更可信。</td></tr><tr><td><code>answer_relevancy</code> 答案相关性</td><td>(-1,1)</td><td>由 <code>answer</code> 、 <code>contexts</code> 与 <code>question</code> 计算得出，值越大，表示 <code>answer</code> 的相关性较好。</td></tr><tr><td><code>context_recall</code> 上下文召回</td><td>(0,1)</td><td>通过对 <code>ground_truth</code> 进行分解以验证是否可以归因于 <code>contexts</code> ，值越大，表示性能越好（避免反复尝试）。</td></tr><tr><td><code>context_entity_recall</code> 上下文实体召回</td><td>(0,1)</td><td>分别计算 <code>ground_truth</code> 和 <code>contexts</code> 的实体，使用其实体进行召回，值越大，表示性能越好（避免反复尝试）。</td></tr><tr><td><code>answer_similarity</code> 答案语义相似度</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 更相似。</td></tr><tr><td><code>answer_correctness</code> 答案正确性</td><td>(0,1)</td><td>由 <code>answer</code> 与 <code>ground_truth</code> 计算得出，值越大，表示 <code>answer</code> 与 <code>ground_truth</code> 一致性越高。</td></tr><tr><td><code>AspectCritique</code> 方面批评</td><td>-</td><td>用于评测 <code>answer</code> 的内容是否包含评测「方面」的内容，如有害性、恶意性、连贯性、正确性、简洁性</td></tr><tr><td><code>summarization_score</code> 总结分数</td><td>-</td><td>-</td></tr></tbody></table><hr><p>所以在不考虑 LLM tokens 的情况下，可以利用自动化评测工具来优化现在有的 RAG 应用，不限于 RAG 流程、Prompt 工程等，相较于人工测试集，可以说效率大大提升。</p><blockquote><p>详细可<a href="https://github.com/zongzi531/modular-rag/tree/main/evaluation/ragas">查看</a></p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;!-- no node --&gt;</summary>
+    
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    
+    
     <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    
     <category term="RAG" scheme="https://zongzi531.github.io/tags/RAG/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><p>继上个月对 Sentence Transformers 框架下的 embedding 模型有了简单的尝试和使用后，现在对 RAG 有了简单的认识。</p><p>用一张图来解释最为合适不过了。</p><p><img src="/2024/08/01/%E5%88%9D%E8%AF%86rag/C1-2-RAG.png" alt="rag"></p><blockquote><p>图片来自 <a href="https://github.com/datawhalechina/llm-universe">llm-universe</a></p></blockquote><p>关于什么是 RAG 这里就不多做介绍了，其实回顾下来，可以发现 RAG 的流程中，还有很多的优化点，可以更好的优化 LLM 在回答问题过程中的幻觉问题。</p><p>例如：</p><ul><li>文件在解析过程中的清洗操作，包括不限于对不同类型的文件进行特殊处理，对图片视频音频等媒体资源进行识别转文字或向量化。</li><li>知识库场景下，对单文件整篇进行总结、多文件集合总结。</li></ul><blockquote><p>以上优化目的在于尽可能产生多的向量可能与 Query 进行匹配，丰富进入 LLM 时生成 prompt 的内容。</p></blockquote><ul><li>Query 也可以在向量化前，经过 LLM 生成相似的 Query 生成多个向量进行查询匹配的优化逻辑。</li><li>知识库场景下，对存在的数据进行自动化知识图谱生成，并且优化 Query 的向量化流程，以能够更好的匹配到问题的领域，避免越界的同类词汇出现的问题。</li><li>Query 的 Chat 场景对一些模糊内容可以提供一些交互式的引导，来辅助问答。</li></ul><p>我们也在尝试着使用 RAG 来研发一个新型的知识库，解决传统知识库需要问题内容强匹配的问题，期望提供一个更易用的知识库。</p><p>其实 RAG 完全不限于知识库的场景。</p><p>在辅助编程领域，可以结合自身的代码合集进行更精准的推荐，也可以避免一些技术过时的问题，等等。</p><p>同样的，在办公领域，可以结合自身的业务领域，实现类似自动生成 Word 、 PPT 、PDF 等文件。</p><p>总之，可以让 LLM 的回答更实时、更准确、更专业。</p><p>回过来想一下， RAG 其实也会演变成一个基座，在此基座上衍生产品。</p><p>比较疑惑的点是，目前对 LLM 了解的并不充分，可以明白 LLM 对自然语言的理解还不错，但是对一些数理化的内容，似乎并不擅长，是不是在 LLM 的过程中引导进行推理可以提升准确率呢……</p><p>所以 RAG 之路，还很长……</p>]]>
-    </content>
-    <id>https://zongzi531.github.io/2024/08/01/%E5%88%9D%E8%AF%86rag/</id>
-    <link href="https://zongzi531.github.io/2024/08/01/%E5%88%9D%E8%AF%86rag/"/>
-    <published>2024-08-01T08:39:09.000Z</published>
-    <summary>
-      <![CDATA[<!-- no node -->]]>
-    </summary>
-    <title>初识 RAG</title>
-    <updated>2024-08-01T08:39:09.000Z</updated>
+    
+    <category term="GraphRAG" scheme="https://zongzi531.github.io/tags/GraphRAG/"/>
+    
+    <category term="Fine-tuning" scheme="https://zongzi531.github.io/tags/Fine-tuning/"/>
+    
+    <category term="Ragas" scheme="https://zongzi531.github.io/tags/Ragas/"/>
+    
   </entry>
+  
 </feed>

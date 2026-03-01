@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>马到金来 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+交付产物二次修改继上个月进行持续迭代，方案二配套服务流程中的“导出 -&amp;gt; IDE 修改 -&amp;gt; ...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?1101273">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/archives/index.html">
+                        回顾
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/archives/index.html">
+                    回顾
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2026/03/01/马到金来/pic1.jpg')">
+                <div class="post-title">
+                    马到金来
+                    <div class="post-meta">
+                        <time datetime="2026-03-01T21:16:17.000Z" itemprop="datePublished">
+                            2026-03-01 21:16
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<h2 id="交付产物二次修改"><a href="#交付产物二次修改" class="headerlink" title="交付产物二次修改"></a>交付产物二次修改</h2><p>继上个月进行持续迭代，方案二配套服务流程中的“导出 -&gt; IDE 修改 -&gt; 导入获得编译产物”将直接优化为“根据用户需求获得编译产物”。</p>
+<p>通过内置 Agent 能力，将 IDE 修改流程全部隐藏在服务内，让用户更轻松的进行二次修改。</p>
+<p>经过技术调研采用 <code>deepagents</code> 实现 Agent 相关能力。实现重点主要是文件系统沙箱 + AI 进行 AST 修改后输出结果。</p>
+<p>在实现基础功后，为了选用较好的模型来落地，所以对模型进行过一些调试和测试，也很容易发现不同模型的最后呈现效果差异也很大。</p>
+<p>目前打算使用 <code>kimi-k2.5</code> 进行进一步测试，不过在这里将测试过程中遇到的问题可以分享一下。</p>
+<p>对接过程中会报错：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">&#123;</span>
+  name: <span class="token string">'Error'</span>,
+  cause: <span class="token punctuation">&#123;</span>
+    status: <span class="token number">400</span>,
+    headers: <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>,
+    requestID: null,
+    error: <span class="token punctuation">&#123;</span>
+      message: <span class="token string">'thinking is enabled but reasoning_content is missing in assistant tool call message at index 2'</span>,
+      type: <span class="token string">'invalid_request_error'</span>
+    <span class="token punctuation">&#125;</span>,
+    type: <span class="token string">'invalid_request_error'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查阅了相关资料，社区因为考虑所以并没有处理这个问题，本着想提 PR 的思路尝试看看能不能解决。但是最后发现因为对 <code>@langchain</code> 相关生态了解较为浅显，所以暂时放弃提 PR 的操作。</p>
+<p>最后决定通过补丁的方式进行解决此问题。</p>
+<p>通过 <code>debugger</code> 能找到具体发起模型请求的位置是 <code>ChatOpenAICompletions</code> 类的 <code>_streamResponseChunks</code> 的方法，第一参数 <code>messages</code> 能获得当前请求的消息内容。</p>
+<p>通过继承此函数实现 <code>reasoning_content</code> 字段补充，操作下去的你就会发现并没有这么轻松，因为在真实发起请求前会调用 <code>convertMessagesToCompletionsMessageParams</code> 进行格式化（<a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langchainjs/blob/main/libs/providers/langchain-openai/src/converters/completions.ts#L823">源码 completions.ts#L823</a>），并且没有修改空间。</p>
+<p>不过幸运的是所有的参数在最后执行前会调用 <code>completionWithRetry</code> 我们可以通过复写此函数来进行格式重定义，并且观察源码发现 <code>options</code> 会进行透传，那就可以借助这个参数进行字段补充。</p>
+<p>接下来是补丁内容：</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> ChatOpenAICompletions <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@langchain/openai'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">HankOptionsAttr</span> <span class="token punctuation">&#123;</span>
+  reasoning_content<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">&#123;</span> index<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span> reasoning_content<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">&#125;</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">HankChatOpenAICompletions</span> <span class="token keyword">extends</span> <span class="token class-name">ChatOpenAICompletions</span> <span class="token punctuation">&#123;</span>
+  async <span class="token operator">*</span><span class="token function">_streamResponseChunks</span><span class="token punctuation">(</span>messages<span class="token punctuation">,</span> options<span class="token punctuation">,</span> runManager<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> humanMessageIndex <span class="token operator">=</span> messages<span class="token punctuation">.</span><span class="token function">findIndex</span><span class="token punctuation">(</span>
+      <span class="token punctuation">(</span>message<span class="token punctuation">)</span> <span class="token operator">=></span> message<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'human'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> humanMessage <span class="token operator">=</span> messages<span class="token punctuation">[</span>humanMessageIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> __hank__<span class="token operator">:</span> HankOptionsAttr <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      reasoning_content<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token comment">// 步骤二：若最后的用户消息存在 reasoning_content 则表示之前收集成功</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>
+      humanMessageIndex <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span>
+      humanMessage<span class="token operator">?.</span>additional_kwargs<span class="token operator">?.</span>reasoning_content
+    <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 步骤二：尝试寻找需要补充 reasoning_content 字段的 Assistant Message</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> messages<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">></span> humanMessageIndex<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> message <span class="token operator">=</span> messages<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'ai'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          __hank__<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            index<span class="token operator">:</span> i<span class="token punctuation">,</span>
+            reasoning_content<span class="token operator">:</span>
+              humanMessage<span class="token operator">?.</span>additional_kwargs<span class="token operator">?.</span>reasoning_content<span class="token punctuation">,</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 步骤三：将收集到的信息通过 options 进行透传</span>
+    options<span class="token punctuation">.</span>__hank__ <span class="token operator">=</span> __hank__<span class="token punctuation">;</span>
+
+    <span class="token comment">// 步骤一：尝试收集 reasoning_content</span>
+    <span class="token keyword">let</span> reasoning_content <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> chunks <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">_streamResponseChunks</span><span class="token punctuation">(</span>messages<span class="token punctuation">,</span> options<span class="token punctuation">,</span> runManager<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">const</span> chunk <span class="token keyword">of</span> chunks<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">const</span> delta <span class="token operator">=</span> <span class="token punctuation">(</span>chunk<span class="token punctuation">.</span>message<span class="token punctuation">.</span>additional_kwargs<span class="token punctuation">.</span>__raw_response <span class="token keyword">as</span> <span class="token builtin">any</span><span class="token punctuation">)</span>
+        <span class="token operator">?.</span>choices<span class="token operator">?.</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">?.</span>delta<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>delta<span class="token operator">?.</span>reasoning_content<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        reasoning_content <span class="token operator">+=</span> delta<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token keyword">yield</span> chunk<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 步骤一：若 reasoning_content 存在则将其设置到最后一个用户消息内</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>humanMessageIndex <span class="token operator">!==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> reasoning_content<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      humanMessage<span class="token punctuation">.</span>additional_kwargs <span class="token operator">??=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      humanMessage<span class="token punctuation">.</span>additional_kwargs<span class="token punctuation">.</span>reasoning_content <span class="token operator">=</span> reasoning_content<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">async</span> <span class="token function">completionWithRetry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> requestOptions<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// 步骤三：根据透传信息补充 reasoning_content</span>
+      <span class="token keyword">const</span> __hank__<span class="token operator">:</span> HankOptionsAttr <span class="token operator">=</span> requestOptions<span class="token operator">?.</span>__hank__ <span class="token operator">??</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token builtin">Array</span><span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>__hank__<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        __hank__<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>hank_rc<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          request<span class="token punctuation">.</span>messages<span class="token punctuation">[</span>hank_rc<span class="token punctuation">.</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>reasoning_content <span class="token operator">=</span>
+            hank_rc<span class="token punctuation">.</span>reasoning_content<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">completionWithRetry</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> requestOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> agent <span class="token operator">=</span> <span class="token function">createDeepAgent</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  model<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">ChatOpenAI</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    completions<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">HankChatOpenAICompletions</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+  backend<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">SafeFileSystem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过上述补丁能力，能够成功将此类问题解决。</p>
+<p>让我们愉快的进行后续的迭代调试吧。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.github.io/2026/03/01/%E9%A9%AC%E5%88%B0%E9%87%91%E6%9D%A5/" title="马到金来">https://zongzi531.github.io/2026/03/01/%E9%A9%AC%E5%88%B0%E9%87%91%E6%9D%A5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2026/02/01/%E7%96%AF%E7%8B%82%E6%91%A9%E6%93%A6AI%E6%8E%A2%E7%B4%A2/">
+        下一篇<br>疯狂摩擦 AI 探索
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?19900061"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
