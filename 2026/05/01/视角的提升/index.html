@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>视角的提升 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+
+这个月继续着 Vibe Coding ，使用“古法”编程只占到了不到 1% 。可以说是少之又少。
+也想明白...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?26490304">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/archives/index.html">
+                        回顾
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/archives/index.html">
+                    回顾
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2026/05/01/视角的提升/pic1.jpg')">
+                <div class="post-title">
+                    视角的提升
+                    <div class="post-meta">
+                        <time datetime="2026-05-01T20:18:30.000Z" itemprop="datePublished">
+                            2026-05-01 20:18
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+
+<p>这个月继续着 Vibe Coding ，使用“古法”编程只占到了不到 1% 。可以说是少之又少。</p>
+<p>也想明白了一些事情，之前想着让 AI 做全链路 DevOps ，但是这似乎并不现实，抛开生成测试用例、生成对应的 E2E 测试脚本，就算 AI 能执行完全。</p>
+<p>我做为提出需求的人，也就是用户方，我同样需要验收这个需求。当然了，就目前我并没有很深入的去实践测试这个角色的 AI 能力。</p>
+<p>我更注重的是提出需求和验收需求。这也引出了为什么我会说我视角的提升。</p>
+<p>不难发现从今年开始，我的视角才真正的转变成架构师，就算之前我开始慢慢接触后端，就算我开始负责一个项目，但是我的视角依然会有些空白的地方，因为接触后端的部分只是为了像 Java 那样去实现，并没有很深度的思考为什么这么做。好就用，没有根据场景权衡利弊。</p>
+<p>但是现在不一样了，我沉浸在 Vibe Coding 中，享受着更高的视角来监督项目的发展。</p>
+<p>从中我获得了产品经理的角色，虽然没那么专业，但是我会很主动的去思考项目应该如何、如何才会有好的体验以及 PRD 落地。</p>
+<p>从中我获得了架构师的角色，从前我设计前端低代码引擎的架构、现在我设计 AI 应用的架构，从前端转向整个项目的架构设计（前端、后端，当然现在这个项目后端为主），将主流的、适合项目的架构模式应用到项目，和我产品这个角色进行权衡取舍，从而让项目更贴近目标和用户群体。</p>
+<p>这是我很真实且明显的感受，我能够从更高的视角来看待问题和解决问题。虽然项目主要还是以 TypeScript 作为开发语言来运行，但是我并不惧怕 Java 、 Python 等其他语言，可以通过 AI 的力量让我驾驭他们，毕竟语言之间是互通的。</p>
+<p>为什么会在开头还提到“古法”编程，是因为在一些特定的问题场景，逻辑的问题暴露的不是那么明显的时候（引入架构模式同样会带来副作用、我能接受它的利 <strong>对项目好</strong> ，当然也要接住它的弊 <strong>调试难、开发难</strong> ，毕竟不是银弹）， AI 并不能很好的找到问题的根源（当然也有可能是我用的模型烂），这时候需要人工的介入很必要，利用 Vibe Coding + “古法”的调试技术同样可以很好的复现问题场景，从而解决问题。</p>
+<p>我之所以会这么说是因为 Vibe Coding 确实释放了很多以前的编程时间，从而让我的视角能够聚焦更多的事情、让我能够更全面的审视项目。</p>
+<p>其实这样的好处确实还不止这一个，传统项目中的多种角色之间产生的沟通损耗，在当前项目中大大减少，几乎可以说是没有了。</p>
+<p>另外我总结了一点经验，关于文档的落地，其实不止于 PRD ，还需要我们架构师常提的 4+1 视图，从产品的角度描述项目应该如何，从架构师角度描述产品具体如何，从而让 AI 更好的理解项目最终如何。这也是能够让你更好的驾驭 Vibe Coding 成果的基础，同样在这个过程中你会跟深刻的理解这一切。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.github.io/2026/05/01/%E8%A7%86%E8%A7%92%E7%9A%84%E6%8F%90%E5%8D%87/" title="视角的提升">https://zongzi531.github.io/2026/05/01/%E8%A7%86%E8%A7%92%E7%9A%84%E6%8F%90%E5%8D%87/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2026/04/01/Vibe-Coding/">
+        下一篇<br>Vibe Coding
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?6131310"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
