@@ -723,10 +723,10 @@ hexo-filter-emoji@2.2.2:
   dependencies:
     lodash "4.17.21"
 
-hexo-filter-mathjax@0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/hexo-filter-mathjax/-/hexo-filter-mathjax-0.10.0.tgz#346ff4ff265d634138989b9cbdadf685ff587a2e"
-  integrity sha512-RvF3OtA89v6PO6+G5dOZlDIaDJX5dnNSeLmhurk59kHEjxotxJaqY6KMwowCZXXudY0cAoHJQhq3qYCtLYbX7g==
+hexo-filter-mathjax@0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/hexo-filter-mathjax/-/hexo-filter-mathjax-0.11.0.tgz#1f24b994aee1a87ea17348e468c32cff164e97b8"
+  integrity sha512-t/+uxNzHJuNUKUvUsNk/sDtTnakCpbm6VbO2Bfowokjoo147yG8sOjRPILM928WlwkpzHQjZA0Z/svU126BQNw==
   dependencies:
     "@mathjax/mathjax-mhchem-font-extension" "4.1.2"
     "@mathjax/src" "4.1.2"
