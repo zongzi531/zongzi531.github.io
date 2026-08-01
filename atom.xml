@@ -9,7 +9,25 @@
   <link href="https://zongzi531.github.io/atom.xml" rel="self"/>
   <rights>All rights reserved 2026, Zong</rights>
   <title>Zong</title>
-  <updated>2026-07-01T21:09:17.000Z</updated>
+  <updated>2026-08-01T21:03:29.000Z</updated>
+  <entry>
+    <author>
+      <name>Zong</name>
+    </author>
+    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
+    <content>
+      <![CDATA[<!-- no node --><span id="more"></span><blockquote><p>其实进入 Vibe Coding 后，除了审查代码、设计架构时，是研发身份。其他似乎都转向了产品设计，自己来掌握整个产品的动向。</p><p>本以为是从单纯的研发转向了架构，但实则是转向了小老板，拿 AI 当工人，吭哧吭哧的干。</p><p>因为 AI 的发展，成功的从专业型人才转变为复合型人才，这个转变在没有 AI 盛行的年代里，是一个很困难的事情（至少对我来说），而当下却变得轻而易举。</p></blockquote><p>摘录《维基百科》中部分对『 空 』的解释：</p><ul><li><strong>无</strong>，虚无，一无所有。</li><li><strong>空 (佛教)</strong>，佛教术语，诸法的空性义为非真实性。</li><li><strong>天空</strong>，大气层或太空可被天体表面的观测者看到的部分。</li><li><strong>真空</strong>，物理现象。</li><li><strong>以太</strong>，曾被假想的电磁波的传播介质。</li><li><strong>空集</strong>，不含任何元素的集合。</li><li><strong>空字串</strong>，不含任何字元的字元串。</li><li><strong>虚空 (佛教)</strong>，佛教所使用的基本术语。</li><li><strong>空 (物理)</strong></li></ul>]]>
+    </content>
+    <id>https://zongzi531.github.io/2026/08/01/%E7%A9%BA/</id>
+    <link href="https://zongzi531.github.io/2026/08/01/%E7%A9%BA/"/>
+    <published>2026-08-01T21:03:29.000Z</published>
+    <summary>
+      <![CDATA[<!-- no node -->]]>
+    </summary>
+    <title>空</title>
+    <updated>2026-08-01T21:03:29.000Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Zong</name>
@@ -366,21 +384,5 @@
     </summary>
     <title>蛇蛇如意</title>
     <updated>2025-02-06T08:33:56.000Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Zong</name>
-    </author>
-    <category term="Blog" scheme="https://zongzi531.github.io/categories/Blog/"/>
-    <category term="Blog" scheme="https://zongzi531.github.io/tags/Blog/"/>
-    <content>
-      <![CDATA[<!-- no node --><span id="more"></span><h2 id="回顾-2024-年"><a href="#回顾-2024-年" class="headerlink" title="回顾 2024 年"></a>回顾 2024 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong> <code>适量</code></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong> <code>持续进行</code></li><li><strong>RAG</strong></li><li><strong>服务端</strong></li><li><strong>架构学习</strong></li></ul><h2 id="展望-2025-年"><a href="#展望-2025-年" class="headerlink" title="展望 2025 年"></a>展望 2025 年</h2><ul><li><strong><span class="github-emoji" alias="couplekiss_man_woman" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f469-2764-1f48b-1f468.png?v8">👩️‍❤️‍💋️‍👨</span> 更爱老婆，和她开心幸福在一起</strong></li><li><strong><span class="github-emoji" alias="heartpulse" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f497.png?v8">💗</span> 更爱家人，祝家人身体健康，平平安安</strong></li><li><strong><span class="github-emoji" alias="horse_racing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3c7.png?v8">🏇</span> 锻炼身体</strong></li><li><strong><span class="github-emoji" alias="books" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4da.png?v8">📚</span> 建立自己的知识体系</strong></li><li><strong>架构</strong></li><li><strong>机器学习</strong></li></ul>]]>
-    </content>
-    <id>https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/</id>
-    <link href="https://zongzi531.github.io/2025/01/01/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%95%E5%B9%B4%E3%81%8A%E3%82%81%E3%81%A7%E3%81%A8%E3%81%86%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%99/"/>
-    <published>2025-01-01T13:09:36.000Z</published>
-    <summary>元旦快乐</summary>
-    <title>２０２５年おめでとうございます</title>
-    <updated>2025-01-01T13:09:36.000Z</updated>
   </entry>
 </feed>
