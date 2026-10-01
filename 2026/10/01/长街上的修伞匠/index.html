@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>长街上的修伞匠 - Zong</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Zong">
+<meta name="description" content="
+
+
+那条街原本很窄。
+街道两侧是高耸的灰色砖墙，抬头只能看见一线狭窄的蓝天。墙头偶尔会探出几枝攀爬的蔷薇，或是高...">
+<meta name="keywords" content="Blog JavaScript TypeScript Front-end CSS">
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?81834062">
+
+<link rel="icon" href="/images/favicon.ico">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function(d) {
+        var config = {
+        kitId: 'ojl5tfq',
+        scriptTimeout: 3000,
+        async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons"/>
+</noscript>
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Zong" type="application/atom+xml">
+</head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="https://zongzi531.github.io">
+                首页
+            </a>
+            
+
+            
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/bangumi/index.html">
+                        番組
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/syoukai/index.html">
+                        紹介
+                    </a>
+                
+            
+                
+                    <a class="a-block drawer-menu-item false" href="/archives/index.html">
+                        回顾
+                    </a>
+                
+            
+                
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            Zong
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">Zong</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            Zong
+        </div>
+        <div class="nav-subtitle">
+            人之所以能<br>，是相信能
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+
+        
+        
+            
+                <a class="a-block nav-link-item false" href="/bangumi/index.html">
+                    番組
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/syoukai/index.html">
+                    紹介
+                </a>
+            
+        
+            
+                <a class="a-block nav-link-item false" href="/archives/index.html">
+                    回顾
+                </a>
+            
+        
+            
+        
+
+        
+    </div>
+
+    <div class="nav-footer">
+        &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper"
+                 style="background-image: url('/2026/10/01/长街上的修伞匠/pic1.jpg')">
+                <div class="post-title">
+                    长街上的修伞匠
+                    <div class="post-meta">
+                        <time datetime="2026-10-01T09:00:30.000Z" itemprop="datePublished">
+                            2026-10-01 09:00
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style="">folder</i>
+                        
+                        <a href='/categories/Blog/'>Blog</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style="">label</i>
+                        
+                        <a href='/tags/Blog/'>Blog</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <!-- no node -->
+
+<span id="more"></span>
+<p>那条街原本很窄。</p>
+<p>街道两侧是高耸的灰色砖墙，抬头只能看见一线狭窄的蓝天。墙头偶尔会探出几枝攀爬的蔷薇，或是高高垂下的藤蔓。在雨天里，修伞匠总是习惯守着他那处小小的摊位。他有一把黄铜铸成的旧秤，秤盘里放着几枚打磨得发亮的螺丝。他在这里坐了半辈子，习惯了低着头，手指在粗粝的伞布上摩挲，不发一言。</p>
+<p>其实，修伞匠比谁都清楚这条街的雨水有多脏。长街尽头高耸入云的那些华丽牌坊，顶上的泥金早已在风雨里一层层剥落，露出底下被虫蛀空的朽木，可那里的人依然穿着不染泥星的缎靴，高高在上地在纸张上勾画着墨迹。而阳光照不到的暗巷深处，杂草和青苔却在法理之外肆意疯长，那些习惯了赤脚横行的人，一口浓痰就能啐在立了百年的规矩石碑上。在这两堵无声对峙的厚墙之间，空气终日阴冷潮湿，塞满了一群面目模糊、只顾低头赶路的影子。</p>
+<p>有一年夏天，雨水落得特别急。</p>
+<p>修伞匠就是在那天傍晚注意到那个年轻人的。年轻人穿着浆洗得笔挺的白衬衫，走得很慢，鞋尖没有沾上一丁点泥星，眼睛里闪烁着一种在长街上极为罕见的、尚未被风雨驯服的清澈。当时，中段的青石板下积满了黄泥水，两个推着木轮板车的底层汉子为了抢占避雨的屋檐互不相让，车轮狠狠砸在石板上，泥水瞬间飞溅出来，在年轻人的白衬衫上留下了几点触目的污渍。</p>
+<p>年轻人停下脚步，有些愤怒地环顾四周。他指了指那块松动的石板，又掏出小册子记录着什么，似乎想走上前去，用最斯文的语言告诉这两个满身汗臭的汉子：这条街不该是这样走的。</p>
+<p>修伞匠在屋檐下看着，手里的钢丝微微停顿了一下。他看着年轻人那张紧绷的脸，心中泛起一丝微茫的叹息。他很想开口劝一句，但最终只是低下头，继续拉扯那根生锈的伞骨。他见多了这样的热血，更清楚在这条泥泞早已深入骨髓的街道上，这点干净的正气根本毫无立足之地。</p>
+<p>第二天，年轻人换上了一身普通的衣服，却带来了一把极宽的黑布伞。他开始每天固执地站在那块松动的青石板旁。每当有板车疾驰而过，或者有人试图逆行抢道时，他就会努力撑开那把大伞，试图去挡住飞溅的污泥，甚至去阻拦那些横冲直撞的轮子。</p>
+<p>修伞匠每天都在烟雾缭绕的摊位后冷眼旁观。他看着长街上的老住户们开始绕着年轻人走，看着那些习惯了在泥泞里横行的人对年轻人露出充满敌意和警告的冷笑。修伞匠心里明白，长街尽头的朱门高墙从未真正想去修补这块青石板，他们只是冷眼看着街上的人在泥水里互相抱怨、推搡蹉跎。年轻人手里的那把伞，挡得住飞溅的泥，却挡不住这整条长街自上而下的倾泻。</p>
+<p>这场无谓的坚持，终于在一个深夜被彻底粉碎。</p>
+<p>隔天清晨，年轻人抱着那把残破的黑伞，面色惨白地坐在了修伞匠的竹凳旁。修伞匠接过伞，用那双结满老茧的手摸了摸，发现钢制伞骨已经被人蛮横地折断了三根，黑色的伞布上全是被尖锐石头划出的口子，上面还黏着暗巷里最脏的黄泥。年轻人声音沙哑地问：“还能补吗？”</p>
+<p>修伞匠不需要问也知道发生了什么。在没有路灯的深夜，那些平日里不守规矩的粗暴拳头，终于砸开了年轻人的木门，踩烂了他的伞，以此作为对他多管闲事的报复。而此时，长街尽头的灯火依旧通明，衙门里的人正就着美酒清点着账目，对门外的喧嚣与无序视而不见。高墙上的冷漠纵容了暗巷里的疯狂，最终落井下石、亲手撕碎年轻人的，恰恰是年轻人曾想去帮扶和纠正的人。</p>
+<p>修伞匠叹了口气。他没有换上新的钢制伞骨。相反，他从旁边的木盒里挑出了几根最普通的竹条。他把竹条削得极薄、极软，然后顺着断裂的方向，把它们松松地绑在了一起。</p>
+<blockquote>
+<p>“钢丝太硬，风大了一折就断。”</p>
+<p>修伞匠一边拉线，一边看着街面上缓缓移动的人流，这话是说给年轻人听的。</p>
+<p>“竹子软，风来了，它就跟着晃。晃着晃着，风就过去了。”</p>
+</blockquote>
+<p>年轻人看着那柄被绑上竹条、显得有些臃肿且不再笔挺的旧伞，眼神里的光熄灭了。修伞匠知道，年轻人心中那股曾经站得笔直的正气，已经像那根断裂的钢丝一样，无声地死在了昨晚冰冷的现实里。</p>
+<p>年轻人伸手接回伞。雨还在下，长街上的木轮车依旧在青石板上碾出泥水。但这一次，年轻人只是默默把伞收拢，夹在腋下。他没有再去看那块松动的青石板，也没有再去纠正任何一个逆行的人。他只是把衣领拉高了一些，将自己那张年轻的脸隐没在连绵的雨雾里。</p>
+<p>修伞匠把黄铜秤收进了箱子里。他看着年轻人的背影慢慢融入那些行色匆匆、面目模糊的过客之中。他知道，长街上再也不会出现那件笔挺的白衬衫了。那个曾经试图擦亮夜空的孩子，终于看清了自己的渺小与无力，学会了在漫天黑雨里撑起一把软竹伞，用一句“各人自扫门前雪”来当作生存的护身符。</p>
+<p>修伞匠再次低下头。他心里明白，这并不是懦弱。在这个连落雨都带着酸味的世道里，作为一颗连灰尘都算不上的普通人，在看清了高墙的冷漠与暗巷的蛮横后，低头躬身，多一事不如少一事，或许是留给这具凡俗躯壳唯一的一点、冰冷的自保。</p>
+
+                </div>
+            </div>
+
+            
+            <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者: </strong>
+    Zong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接: </strong>
+    <a href="https://zongzi531.github.io/2026/10/01/%E9%95%BF%E8%A1%97%E4%B8%8A%E7%9A%84%E4%BF%AE%E4%BC%9E%E5%8C%A0/" title="长街上的修伞匠">https://zongzi531.github.io/2026/10/01/%E9%95%BF%E8%A1%97%E4%B8%8A%E7%9A%84%E4%BF%AE%E4%BC%9E%E5%8C%A0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明: </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+            
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2026/09/01/%E8%A5%BF%E6%B9%96%E6%B0%B4%E4%B8%8D%E6%B8%A1%E6%8A%98%E5%8F%A0%E7%9A%84%E5%9F%8E/">
+        下一篇<br>西湖水不渡折叠的城
+    </a>
+    
+</nav>
+
+    
+            
+
+<div class="post-comment-wrapper">
+    <div class="giscus"></div>
+</div>
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    &copy; 2017 - 2026 <a href="https://zongzi531.github.io">Zong</a>
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"
+        integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"
+        integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js"
+        integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?21392172"></script>
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="zongzi531/zongzi531.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMTgyODY2MjA="
+    data-category="General"
+    data-category-id="DIC_kwDODQLKHM4COlHH"
+    data-mapping="url"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+</body>
+</html>
